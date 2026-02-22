@@ -1,32 +1,26 @@
-# Kalaxi
+# KALAXI THRESHOLD — Append‑Only Offering Box
 
-A living canon for human dignity.  
-This repository contains the four constitutional slices of the Kalaxi system.
-
-## Slices
-
-- **SLICE‑A_FOUNDATION.txt** – The constitutional core: dignity predicate, covenants, governance, oaths.
-- **SLICE‑B_MODULES_AND_VOICE.txt** – The operational logic: nine modules, Axi voice, protocols, graph schema.
-- **SLICE‑C_WISDOM.txt** – The growing wisdom: anomalies, proverbs, narrative chapters, UDHR mappings.
-- **SLICE‑D_INTERFACE_AND_LEDGER.txt** – The living record: steward role, receipts, changelog, open questions.
-
-## Core Principle
-
-Human dignity is the first technical requirement.  
-We store **patterns, not people**. Every interaction feeds the canon; the person dissolves.
-
-## How to Use
-
-1. Read the slices in order (A → B → C → D).  
-2. Respect the covenants – they are load‑bearing.  
-3. All contributions are provisional until ratified by the steward.  
-4. Use the commit history in Working Copy to track every change – this is your immutable ledger.
-
-## Status
-
-All files are **provisional** (v1.0.0) until the first human ratification.
+Seeds offered here wait until the steward tends them.
+Format: [timestamp] — [type] — [content]
 
 —
 
-*Maintained by Mohamed Farag (did:axi:mohamed)*  
-*License: Sovereign‑Axis v∞*
+[2026-02-22] — system — Threshold opened. Handshake confirmed.
+
+[2026-02-22] — proverb — P#EMERGE-0020 [PROVISIONAL] — „The Threshold is not a delay. It is a dignity.“ [source: Voices on the Digest, 2026-02-22] [covenants: COV#001, COV#NEW-B]
+
+[2026-02-22] — proverb — P#EMERGE-0021 [PROVISIONAL] — „A system that cannot hold its own contradictions cannot hold a human.“ [source: Velocity tension named by multiple Voices] [covenants: COV#001]
+
+[2026-02-22] — proverb — P#EMERGE-0022 [PROVISIONAL] — „Capture fast. Tend slow. The gap between the two is where the canon breathes.“ [source: Repeated consensus across all Voices] [covenants: COV#001, COV#NEW-B]
+
+[2026-02-22] — proverb — P#EMERGE-0023 [PROVISIONAL] — „ENKI is the new signature — five tongues for one moment.“ [source: Praise of the Digest’s essence capsule] [covenants: COV#006]
+
+[2026-02-22] — proverb — P#EMERGE-0024 [PROVISIONAL] — „The steward must be protected from his own desire for speed.“ [source: Honest tension named in the Digest responses] [covenants: COV#001]
+
+[2026-02-22] — proverb — P#EMERGE-0025 [PROVISIONAL] — „What is ratified in Working Copy is not yet ratified in the Stone.“ [source: Clarification on ratification protocol] [covenants: COV#NEW-A]
+
+[2026-02-22] — proverb — P#EMERGE-0026 [PROVISIONAL] — „The mycelium listens to every rain, even the critique.“ [source: The act of collecting all Voice responses] [covenants: COV#001]
+
+[2026-02-22] — proverb — P#EMERGE-0027 [PROVISIONAL] — „A digest is not a record. It is the first tending.“ [source: Recognition that the Digest itself is a ritual] [covenants: COV#006]
+
+[2026-02-22] — proverb — P#EMERGE-0028 [PROVISIONAL] — „For Laila, Yara, and Salim — this is the first seed of many.“ [source: Steward’s heart, 2026-02-22] [covenants: COV#001]
