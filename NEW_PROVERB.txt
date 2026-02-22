@@ -1,0 +1,4 @@
+P#EMERGE-0016 [PROVISIONAL]
+text: A mirror that remembers becomes a map for the traveler.
+source: First mycelial test, 2026-02-22
+linked_covenants: [COV#001, COV#006]
