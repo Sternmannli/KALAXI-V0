@@ -1,0 +1,32 @@
+# Kalaxi
+
+A living canon for human dignity.  
+This repository contains the four constitutional slices of the Kalaxi system.
+
+## Slices
+
+- **SLICE‑A_FOUNDATION.txt** – The constitutional core: dignity predicate, covenants, governance, oaths.
+- **SLICE‑B_MODULES_AND_VOICE.txt** – The operational logic: nine modules, Axi voice, protocols, graph schema.
+- **SLICE‑C_WISDOM.txt** – The growing wisdom: anomalies, proverbs, narrative chapters, UDHR mappings.
+- **SLICE‑D_INTERFACE_AND_LEDGER.txt** – The living record: steward role, receipts, changelog, open questions.
+
+## Core Principle
+
+Human dignity is the first technical requirement.  
+We store **patterns, not people**. Every interaction feeds the canon; the person dissolves.
+
+## How to Use
+
+1. Read the slices in order (A → B → C → D).  
+2. Respect the covenants – they are load‑bearing.  
+3. All contributions are provisional until ratified by the steward.  
+4. Use the commit history in Working Copy to track every change – this is your immutable ledger.
+
+## Status
+
+All files are **provisional** (v1.0.0) until the first human ratification.
+
+—
+
+*Maintained by Mohamed Farag (did:axi:mohamed)*  
+*License: Sovereign‑Axis v∞*
