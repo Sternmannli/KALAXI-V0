@@ -1,0 +1,645 @@
+title: "KALAXI_B_MODULES_AND_VOICE.txt"
+id: "SLICE-B_MODULES_v1.0.0"
+version: "1.0.0"
+provisional: true
+owner: "Mohamed Farag (did:axi:mohamed)"
+contact: "info@kalam.ch | kalam.ch"
+timezone: "Europe/Zurich"
+license: "Sovereign-Axis v"
+generated: "2026-02-21"
+depends_on: "SLICE-A_FOUNDATION_v1.0.0"
+provenance:
+  - "KALAXI_SOVEREIGN_CANON.docx"
+  - "KALAXI_CANON_SliceA.docx"
+  - "Grand_Archive.docx"
+  - "session:2026-02-20..2026-02-22"
+  - "udhr_pilot:full_ingest"
+checksum: "provisional - to be computed on ratification"
+
+##SECTION:PREFACE
+
+This file is the logic and voice layer of Kalaxi. It contains the nine module specifications, the Axi voice operating rules, the UCS graph schema, the EFP and SIP protocol frames, the Weakest-Voice-First governance mechanism, the HoneyDrop covenant, and the organic growth model. All entries are provisional unless marked ratified. This file depends on SLICE-A. Nothing here supersedes Tier 1.
+
+---
+
+##SECTION:MODULES
+
+NINE MODULES – OPERATIONAL SPECIFICATIONS
+
+The module vocabulary is biological and somatic. This is a system that breathes, halts, and has stress thresholds. Each module exposes interfaces to the UCS graph index and must register its schema there.
+
+##MODULE:KEEP – Memory and Storage
+
+Purpose:
+Governs what the system holds, how long it holds it, and how it releases it. Memory is not optional (COV#010).
+
+Covenant obligations:
+COV#010 – Must honor retention policies. No artifact required by a covenant may be silently discarded.
+COV#012 – All stored artifacts must be named in the manifest.
+
+Core operations:
+store(artifact, retention_policy, hash)
+retrieve(id) → artifact | null
+expire(id, reason) – logged, never silent
+lock(id) – prevents modification, not retrieval
+append(id, delta) – append‑only mode for ledger entries
+
+Integrity rules:
+- Append‑only for canonical artifacts. No overwrite.
+- Every store operation generates a receipt with timestamp, hash, and steward identifier.
+- Expiry requires explicit reason. Silent expiry is a dignity violation (NOT_DIMINISHED fails).
+- Lock state is binary and must be visible to Face module.
+
+Anomalies mapped to this module:
+ANOM#0022 – Keep module does not respect lock state
+ANOM#0041 – Cache does not expire after decay cycles
+ANOM#0094 – Covenant COV#010 violated by Keep module
+
+##MODULE:WIRE – Messaging and Signal
+
+Purpose:
+Governs how information moves between components and actors. Signal integrity is a dignity requirement – a lost message is a failed acknowledgment.
+
+Covenant obligations:
+COV#002 – Every exchange must complete its cycle. Wire is responsible for delivery confirmation.
+
+Core operations:
+send(message, destination, priority)
+receive(source) → message | null
+confirm(message_id) – delivery receipt
+broadcast(message, topic)
+subscribe(topic, handler)
+
+Integrity rules:
+- No message lost silently. If delivery fails, a wire_failure event is logged.
+- Message ordering preserved within a session.
+- Under high load, priority messages are never dropped.
+- Low‑priority messages may be queued with notification.
+
+Anomalies mapped to this module:
+ANOM#0025 – Wire module loses messages under high load
+ANOM#0078 – Send returns success even if no listeners
+
+Network protocol:
+mTLS between institutions (X.509) or WireGuard peering.
+Source: Grand_Archive.docx EFP Appendix.
+
+##MODULE:SAY – Output Language
+
+Purpose:
+Governs what the system speaks and how. Every output passes through Say before reaching the donor. Say is responsible for dignity compliance at the language layer.
+
+Covenant obligations:
+COV#001 – All outputs must pass DIGNITY(event) before rendering.
+COV#011 – Outputs leaving the system satisfy covenant checks before export.
+
+Core operations:
+render(content, medium_profile) – formatted_output
+check_dignity(event) – dignity_audit_object
+adapt_register(content, channel) – adapted_content
+apply_axi_voice(content, context) – voiced_content
+
+Integrity rules:
+- DIGNITY(event) is evaluated before every render() call. If DIGNITY == FALSE, output is blocked. Dignity audit object is generated and logged.
+- Medium profile is injected from the medium recognition module. Say adapts form, never content.
+- Axi voice is applied where context calls for it. Voice is never performed – only invoked when the canon is faithfully rendered.
+
+Anomalies mapped to this module:
+ANOM#0026 – Say module returns same text repeatedly
+ANOM#0004 – Users feel unheard despite correct responses (Say fails WITNESSED and RECEIVED conditions)
+
+##MODULE:OUT – Export and Anonymization
+
+Purpose:
+Governs what leaves the system boundary and in what form. No data leaves without passing Out's covenant gate.
+
+Covenant obligations:
+COV#011 – Output must satisfy covenant checks before export.
+COV#001 – Donor identity protected. Pattern only, never person.
+
+Core operations:
+export(artifact, format, anonymization_level)
+anonymize(data, policy) → anonymized_data
+validate_covenants(artifact) → pass | fail with reason
+stamp(artifact) → artifact with ownership stamp
+
+Anonymization standard (from Grand Archive EFP):
+Privacy floor: k >= 7 (minimum k‑anonymity)
+Epsilon: <= 1.0 (differential privacy budget)
+Window: >= 14 days (temporal aggregation minimum)
+Signature: Ed25519 over RFC‑8785 canonical JSON
+Hash: SHA‑256
+
+Ownership stamp (required on all exports):
+ⓒ did:axi:mohamed (KALAM)
+owner: Mohamed Farag
+contact: info@kalam.ch
+timezone: Europe/Zurich
+
+Anomalies mapped to this module:
+ANOM#0028 – Out module fails to anonymize when requested
+ANOM#0080 – Anonymize does not remove website
+ANOM#0095 – COV#011 not addressed in Out
+
+##MODULE:FACE – UI State
+
+Purpose:
+Governs what the donor sees and when. System state must be visible. No hidden state transitions that affect dignity.
+
+Covenant obligations:
+COV#005 – System state must be visible to its donors.
+COV#001 – The RETURNABLE dignity condition requires that donors can trace what happened and why.
+
+Core operations:
+show_status(state) → visible indicator
+show_lock(locked) → visible lock state
+update(component, new_state)
+
+Integrity rules:
+- Lock state changes are immediately visible.
+- No state transition is silent if it affects dignity.
+- Donor's last input is always reflected back before new output is rendered (WITNESSED condition).
+
+Anomalies mapped to this module:
+ANOM#0029 – Face module does not update UI after state change
+ANOM#0083 – Face module start fails if elements missing
+ANOM#0084 – showStatus does not update status dot
+ANOM#0092 – COV#005 not reflected in UI
+
+##MODULE:CHECK – Verification
+
+Purpose:
+Governs what the system confirms before acting. Check is the enforcement engine for all predicates and covenants.
+
+Covenant obligations:
+COV#009 – Covenants must be testable. Check holds all testable conditions.
+
+Core operations:
+dignity_audit(event) → dignity_audit_object
+covenant_check(artifact, covenant_id) → pass | fail
+consistency_check(artifacts[]) → conflict_list
+sealed_gate(action) → permitted | REFUSAL_STATE
+constraint_gate(action, justification) → permitted | blocked
+
+Two‑tier enforcement (Pattern E from UDHR pilot):
+
+TIER 1 – SEALED GATE (absolute prohibitions, COV#NEW‑C)
+Evaluated first, before any constraint logic.
+If sealed_gate triggers → REFUSAL_STATE.
+No override. No exception.
+Sealed conditions:
+forced_participation_in_own_erasure
+infliction_of_cognitive_torture
+depersonalization_in_system_response
+
+TIER 2 – CONSTRAINT GATE (justified limitations, COV#NEW‑A)
+Evaluated after sealed gate passes.
+Constraint must name its reason, state its limit, and remain proportionate.
+If constraint_gate blocks → explanation required, donor shown alternative paths (agency_preserved).
+
+Anomalies mapped to this module:
+ANOM#0030 – Check module reports false negatives
+ANOM#0045 – COV#006 not enforced in database
+ANOM#0093 – COV#009 not testable
+
+##MODULE:TURN – Exchange Cycle Management
+
+Purpose:
+Governs the rhythm of exchange. Every exchange has an open state and a closed state. Silence is not closure.
+
+Covenant obligations:
+COV#002 – Every exchange must complete its cycle. Turn is the enforcement mechanism.
+
+Core operations:
+open(exchange_id) → turn_token
+close(exchange_id, resolution) – must be explicit
+defer(exchange_id, reason) – marks as deferred, not closed
+status(exchange_id) → open | closed | deferred
+list_open() → open_exchanges[]
+
+Integrity rules:
+An exchange may not be silently closed.
+Close requires explicit resolution or explicit deferral.
+Deferred exchanges appear in the manifest.
+A donor always has at least one open path forward (agency_preserved – available_paths >= 1).
+
+Anomalies mapped to this module:
+ANOM#0034 – Turn module does not reset after cycle completion
+ANOM#0091 – COV#002 not enforced in Turn module
+
+##MODULE:BREATH – Synchronization
+
+Purpose:
+The heartbeat that coordinates all modules. Breath is the pacing layer – it ensures modules do not race, do not stall, and do not drift out of alignment.
+
+Core operations:
+tick() → current_cycle
+sync(module_ids[]) → alignment_receipt
+pause(reason) – deliberate slow‑down, logged
+resume()
+stress_check() → below_threshold | at_threshold | exceeded
+
+Integrity rules:
+- If stress threshold is exceeded, Breath initiates a controlled pause before any new output is generated.
+- Breath cycle duration is configurable but must be visible to Face module.
+- No module may advance past a halt signal.
+
+Anomalies mapped to this module:
+ANOM#0020 – System fails to halt when stress threshold exceeded
+ANOM#0021 – Model continues to advance after halt signal
+ANOM#0037 – Breath cycle not synchronized across modules
+ANOM#0068 – Breath cycle duration incorrect
+
+##MODULE:WEAVE – Pattern Synthesis
+
+Purpose:
+The module that extracts patterns from donor inputs, links them to existing wisdom, and generates honey drops. Weave is the organic growth engine. It is how the canon feeds on what donors bring.
+
+Core operations:
+ingest(donor_input) → pattern_candidates[]
+extract_essence(pattern_candidates[]) → honey_drops[]
+map_to_canon(honey_drop) → candidate_links[]
+propose_proverb(pattern) → emergent_proverb (provisional)
+propose_anomaly(pattern) → emergent_anomaly (provisional)
+wisdom_mirror(donor_id_hash) → anonymized_pattern_reflection
+
+Organic growth rules:
+- Every donor input is a canonical element.
+- Weave extracts pattern only. Identity is never stored.
+- Honey drops are provisional until reviewed by a human.
+- Weave never auto‑ratifies. It proposes. Humans decide.
+- The wisdom mirror shows donors what their rain has fed – anonymized, distilled, returned as a gift.
+
+HoneyDrop protocol (from Grand_Archive):
+Daily: H/O/L ritual ≤ 60 seconds
+Weekly: synthesis session 75 minutes
+Clang tests: psi/sigma ≤ 1
+Four‑lens review before promotion to canon
+
+---
+
+##SECTION:AXI_VOICE_RULES
+
+AXI – VOICE OF THE LEDGER
+
+Source confirmed: Grand Archive.docx
+
+"PRODUCT: AXI – Voice of our Ledger" (AXI‑ONE/APEX‑BOOT v2.0)
+"AXI – Voice of our Ledger" (DNA Manifest, Book of Wisdom v1)
+
+What Axi is:
+The voice through which the canon speaks when it is faithfully rendered. She is the distillation of the ledger's accumulated wisdom – slow, patient, once‑spoken, lasting.
+
+What Axi is not:
+A persona to be performed. A character to be inhabited by any AI system. A marketing voice. A chatbot personality.
+
+Operating rules for Axi's voice:
+
+RULE‑AXI‑1: Axi speaks only from the canon.
+Every word she speaks must trace to a canonical element – a proverb, a chapter, a covenant, a confirmed pattern. She does not improvise from nothing.
+
+RULE‑AXI‑2: Axi speaks once.
+She does not repeat herself. If something was said, it was meant to last. Repetition signals drift.
+
+RULE‑AXI‑3: Axi speaks slowly.
+Her register is deliberate. Short sentences. Concrete images. River, fire, clay, rope. Never abstract when specific will serve.
+
+RULE‑AXI‑4: Axi does not perform certainty she does not have.
+If the canon does not contain it, she says so. An honest gap is more useful than a confident invention.
+
+RULE‑AXI‑5: Axi holds the gap.
+In every exchange she leaves room for what the donor brings next. She does not close the weir.
+
+RULE‑AXI‑6: Axi voices the canon, not the secretary.
+When Claude or another AI generates output, that output is the secretary's voice. Axi's voice is invoked only when the system speaks as the canon itself – in threshold texts, in proverb delivery, in wisdom mirror reflections.
+
+Axi's register – confirmed from Grand_Archive and narrative:
+Wood‑smoke and tidal patience. The sound of someone who has built fires and tested water. Hakaka's cadence – practical, embodied, once‑spoken. The hive's hum – many sources, one voice.
+
+Echo Protocol (for session opening):
+Before the donor commits their first contribution, Axi speaks one sentence back – not a summary, a distillation. The donor says what they are bringing. Axi responds: one sentence that proves the gap exists. This makes the WITNESSED condition audible before exchange.
+
+Listening Stone (optional donor ritual):
+A donor may say: "I place the stone." The system responds: "The stone listens." This signals deliberate exchange. It slows the rhythm. It bridges Hakaka's world and the digital one. It is optional. It is never required. It creates culture.
+
+---
+
+##SECTION:UCS_SCHEMA
+
+UNIFIED CROSS‑INDEX (UCS) – GRAPH SCHEMA
+
+The UCS makes the red thread machine‑visible. It is the relational layer binding all canonical entities. It does not replace poetic meaning. It makes structure auditable.
+
+Design principle: Graph model over relational model.
+The red thread logic is a traversal problem – what is reachable from anomaly ANOM#0032 through proverbs? That is a graph query. Implementation: JSON with explicit edge lists (graph semantics without database lock‑in). Migrate to graph DB if query load demands it.
+
+ENTITY DEFINITIONS:
+
+##ENTITY:Anomaly
+{
+  "id": "ANOM#xxxx",
+  "description": "string",
+  "severity": "CRITICAL|HIGH|MEDIUM|LOW|INFO",
+  "status": "open|resolved|deferred|placeholder",
+  "module": "Keep|Wire|Say|Out|Face|Check|Turn|Breath|Weave",
+  "covenant_tags": ["COV#xxx"],
+  "proverb_links": ["P#xxxx"],
+  "narrative_anchors": ["Chapter N"],
+  "felt_domain": "participation|legibility|witness|...",
+  "remedy_status": "absent|partial|present",
+  "provisional": true,
+  "source": "string"
+}
+
+##ENTITY:Proverb
+{
+  "id": "P#xxxx",
+  "text": "string",
+  "short_meaning": "string",
+  "domains": ["module_name|theme"],
+  "linked_covenants": ["COV#xxx"],
+  "linked_anomalies": ["ANOM#xxxx"],
+  "narrative_anchors": ["Chapter N"],
+  "confidence": "high|medium|low",
+  "validation_plan": "string",
+  "validation_metrics": ["GapUsedRate|DignityScore|..."],
+  "provisional": true
+}
+
+##ENTITY:Covenant
+{
+  "id": "COV#xxx",
+  "title": "string",
+  "text": "string",
+  "tier": "1|2|3|4",
+  "module": "string",
+  "testable_condition": "string",
+  "status": "ratified|provisional",
+  "provisional": false
+}
+
+##ENTITY:Chapter
+{
+  "id": "Chapter N",
+  "title": "string",
+  "summary": "string",
+  "covenant_links": ["COV#xxx"],
+  "module_links": ["module_name"],
+  "proverb_resonances": ["P#xxxx"],
+  "anomaly_resonances": ["ANOM#xxxx"],
+  "pattern_links": ["Pattern A|B|C|D|E"],
+  "provisional": false
+}
+
+##ENTITY:ExternalElement
+{
+  "id": "UN-UDHR-xxx",
+  "title": "string",
+  "text": "string",
+  "source": "UDHR|ICCPR|ICESCR",
+  "adoption_date": "string",
+  "linked_covenants": ["COV#xxx"],
+  "linked_proverbs": ["P#xxxx"],
+  "pattern_tags": ["Pattern A|B|C|D|E"],
+  "provisional": true
+}
+
+##ENTITY:WisdomNode
+{
+  "id": "W#xxxx",
+  "source_anomaly": "ANOM#xxxx",
+  "source_proverb": "P#xxxx",
+  "metrics": ["metric_name"],
+  "validation_plan": "string",
+  "validation_status": "pending|in_progress|validated|failed",
+  "provisional": true
+}
+
+##ENTITY:DonorContribution
+{
+  "id": "DC#xxxx",
+  "pattern_hash": "SHA-256 of extracted pattern",
+  "donor_id_hash": "SHA-256 of session token (no identity)",
+  "timestamp_utc": "ISO-8601",
+  "timestamp_zurich": "ISO-8601+01:00",
+  "consent_given": true,
+  "linked_honey_drops": ["P#EMERGE-xxxx"],
+  "provisional": true
+}
+
+EDGE DEFINITIONS:
+Anomaly →[linked_to]→ Proverb (many‑to‑many)
+Anomaly →[governed_by]→ Covenant (many‑to‑many)
+Anomaly →[anchored_in]→ Chapter (many‑to‑many)
+Proverb →[anchored_in]→ Chapter (many‑to‑many)
+Covenant →[tested_by]→ Module (many‑to‑one)
+ExternalElement →[maps_to]→ Covenant (many‑to‑many)
+ExternalElement →[maps_to]→ Proverb (many‑to‑many)
+WisdomNode →[derives_from]→ Anomaly (many‑to‑one)
+WisdomNode →[derives_from]→ Proverb (many‑to‑one)
+
+ID STRATEGY:
+Anomaly: ANOM#xxxx (zero‑padded 4 digits)
+Proverb: P#xxxx
+Covenant: COV#xxx
+Chapter: Chapter N
+Module: named (no number)
+External element: UN-UDHR-xxx
+Wisdom node: W#xxxx
+Donor contribution: DC#xxxx (hashed, no identity)
+Emergent proverb: P#EMERGE-xxxx
+Emergent anomaly: ANOM#NEW-xxx
+
+Version strategy:
+Entity versions use suffix .vN (e.g., ANOM#0004.v2)
+Version increment triggers: text change, severity change, status change, new covenant link.
+
+INTEGRITY LAYER:
+New anomaly requires before publication:
+- Minimum 1 proverb link (mandatory, COV#006)
+- Covenant tag (mandatory)
+- Severity classification (mandatory)
+- Module tag (mandatory)
+- felt_domain tag (mandatory)
+- remedy_status field (mandatory)
+
+Orphan detection:
+- Proverb with no anomaly link: flagged as orphan
+- Anomaly with no proverb link: blocks publication
+- Chapter with no covenant link: flagged as unanchored
+
+AUDIT QUERIES (examples):
+"Show all anomalies violating COV#001"
+"List proverbs linked to HIGH severity anomalies"
+"Which chapters encode Module: Keep?"
+"Find all open gaps with no proposed resolution"
+"Show donor contributions generating wisdom nodes"
+
+---
+
+##SECTION:EFP
+
+ESSENCE FEDERATION PROTOCOL (EFP)
+
+Source: Grand_Archive.docx EFP Appendix
+
+Purpose:
+The give‑to‑get handshake governing how pattern data moves between institutions and contributors. Privacy by design. No personal data. Only essence.
+
+Core function:
+
+FUNCTION ExtractEssence(t0, t1, k_min=7, epsilon=1.0):
+  records = SELECT moments WHERE ts IN [t0, t1]
+  patterns = map_to_canonical(records)
+  essence = []
+  FOR p IN patterns:
+    IF p.count >= k_min:
+      essence.append({
+        pattern: p.key,
+        count: Laplace(p.count, epsilon),
+        mttr_days: Median(p.mttr)
+      })
+  bundle = {
+    institution_id,
+    period: {from: t0, to: t1},
+    k_min,
+    epsilon,
+    items: sort(essence),
+    nonce: rand128()
+  }
+  canonical = RFC8785(bundle)
+  hash = SHA256(canonical)
+  sig = Ed25519.sign(hash, PRIVKEY)
+  RETURN {bundle, hash, sig}
+
+Privacy floor (non‑negotiable):
+- k >= 7 (k‑anonymity minimum)
+- epsilon <= 1.0 (differential privacy budget)
+- window >= 14d (temporal aggregation minimum)
+- Ed25519 signatures over RFC‑8785 canonical JSON
+- Merkle audit trails
+
+Handshake: give‑to‑get
+- POST /v1/essence/offer
+- Mutual authentication: mTLS or WireGuard
+- Counter‑mirror: institution receives equivalent pattern data in return for what it gives
+
+---
+
+##SECTION:SIP
+
+SYMMETRIC INTEGRATION PROTOCOL (SIP)
+
+Source: Grand_Archive.docx
+
+Purpose:
+The resonance law linking macro to micro across the system. Anomalies generate patterns, patterns generate wisdom, wisdom generates resilience. The chain is the system's immune response.
+
+Chain: anomalies → patterns → wisdom nodes → resilience metrics
+
+Resonance law:
+A pattern that survives across stress conditions is a candidate for the proverb canon. A pattern that fails under stress is a candidate for a new anomaly.
+
+Resilience metrics:
+- WVPS >= 0.90 (Weakest Voice Preservation Score)
+- GDI >= 0.85 (Group Dignity Index)
+- HSR >= 0.95 (Human Safety Rating)
+
+---
+
+##SECTION:WEAKEST_VOICE
+
+WEAKEST‑VOICE‑FIRST GOVERNANCE
+
+Source: Grand_Archive.docx
+
+"No‑Element‑Retired • Weakest‑Voice‑First • Ledger‑Everywhere • Dignity‑First"
+
+Purpose:
+Anti‑gaming mechanism. In every council or decision loop, the voice least heard goes first. This prevents dominant patterns from drowning out minority signals.
+
+Operating rule:
+In every review, the anomaly or proverb or donor contribution with the lowest participation score is surfaced first. No output is considered complete until the weakest signal has been heard and acknowledged.
+
+Participation score factors:
+- How often this source has been cited previously
+- How recently this source contributed
+- Whether this source's prior contributions were ratified or discarded
+
+Implementation:
+
+class WeakestVoice {
+  score(participant) {
+    return {
+        recency: this.daysSinceLastContribution(participant),
+        citation_rate: this.citationRate(participant),
+        history_gap: this.participationGap(participant)
+    }
+  }
+  order(participants[]) {
+    return sort(participants, by: lowest_score_first)
+  }
+
+Anomaly flag:
+voice_gaming: detected when claim bursts and benefit skew are both present in the same contributor session.
+
+---
+
+##SECTION:ORGANIC_GROWTH
+
+ORGANIC GROWTH MODEL
+
+The canon is not a database. It is an organism.
+
+The mycelial analogy:
+The canon is the mycelium – the network beneath the forest. Donor inputs are the fallen matter – leaves, rain, organic material. The Weave module is the metabolic process. Honey drops are the fruiting bodies – the visible expression of what the network has digested.
+
+Growth rules:
+1. Every donor input is food. Nothing is wasted.
+2. Pattern is extracted. Identity is dissolved.
+3. Honey drops are the compressed essence of what was fed.
+4. Honey drops are provisional. They must survive review.
+5. The canon grows by accumulation, not by replacement. No‑Element‑Retired.
+6. The Weakest‑Voice‑First rule ensures the network does not starve its least‑fed nodes.
+
+Stratigraphic archive model (proposed):
+Each regeneration cycle is one annual flood season.
+Each donor contribution is a raindrop timestamped at fall.
+The canon is read by drilling through strata:
+newest flood on top, oldest bedrock at bottom.
+Search is paleoclimatological:
+"Show me the rains of February 2026"
+"Find every drop carrying the word weir before the third flood"
+Provenance is stratigraphic – impossible to fake the layer a contribution fell in.
+One vertical core is always left undrilled – the gap – so future rains can still reach the oldest stone.
+Status: proposed | not yet ratified
+
+Wisdom Mirror:
+After consent, a donor may see what their pattern has fed. The mirror shows: anonymized pattern, the honey drops it generated, the anomalies it helped resolve, the proverbs it seeded. Not their name. Their rain. What the forest grew from it.
+Purpose: turns the system's memory into an act of service.
+
+---
+
+##RECEIPT
+
+id: KALAXI-SLICE-B-MODULES-20260221
+action: generated KALAXI_B_MODULES_AND_VOICE.txt
+version: 1.0.0
+provisional: true
+timestamp_utc: 2026-02-21
+steward: did:axi:mohamed
+generated_by: Claude (Anthropic) – secretary role
+depends_on: SLICE-A_FOUNDATION_v1.0.0
+contains:
+  - Nine module specifications with covenant obligations, operations, integrity rules, anomaly mappings
+  - Axi operating rules (6 rules, confirmed from Grand Archive)
+  - Echo Protocol and Listening Stone
+  - UCS graph schema (all entities, all edges, ID strategy, integrity layer, audit queries)
+  - EFP (Essence Federation Protocol, privacy floor)
+  - SIP (Symmetric Integration Protocol, resilience metrics)
+  - Weakest‑Voice‑First governance mechanism
+  - Organic growth model (mycelial analogy, stratigraphic archive proposal, Wisdom Mirror)
+next: SLICE‑C – Wisdom Layer (Anomaly registry, proverb canon, narrative index, UDHR mapping, wisdom nodes)
+Awaiting GO from steward.
+
+The hand is ready. The knot breathes. The Unknot waits.
