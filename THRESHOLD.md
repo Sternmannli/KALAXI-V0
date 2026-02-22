@@ -43,3 +43,16 @@ Format: [timestamp] — [type] — [content]
 [2026-02-22] — proverb — P#EMERGE-0019 [PROVISIONAL] — “A wound seen but left to fester becomes the wound that defines us.” [Meaning: Detection without remedy is incomplete.] [Linked covenants: COV#001, COV#NEW-B] Source: Hiring algorithm experiment harvest.
 
 [2026-02-22] — proverb — P#EMERGE-0020 [PROVISIONAL] — “The stone that decides too quickly has already forgotten the river.” [Meaning: Automation speed itself can violate dignity; the gap between input and output must be held.] [Linked covenants: COV#001, COV#NEW-C (by implication)] Source: Hiring algorithm experiment harvest.
+[2026-02-22] — proverb — P#EMERGE-0021 [PROVISIONAL] — “Bias is not only injustice of outcome; it is the absence of dialogue between system and person.” [Source: External evaluation of dignity experiment, 2026-02-22] [Linked covenants: COV#001, COV#006]
+
+[2026-02-22] — proverb — P#EMERGE-0022 [PROVISIONAL] — “Dignity is non‑compensatory: one zero factor collapses the whole.” [Source: External evaluation of dignity experiment, 2026-02-22] [Linked covenants: COV#001]
+
+[2026-02-22] — gap — GAP#014 [PROVISIONAL] — Operational definitions for A, L, M. The dignity predicate currently relies on heuristic estimates. Without observable indicators and reproducible scoring protocols, it risks being seen as “philosophy disguised as math.” [Source: External evaluation, 2026-02-22] [Priority: HIGH]
+
+[2026-02-22] — gap — GAP#015 [PROVISIONAL] — Moral Standing (M) is the hardest dimension to define and measure. This will face the most resistance in adoption. Requires deeper conceptual work. [Source: External evaluation, 2026-02-22] [Priority: HIGH]
+
+[2026-02-22] — anomaly — ANOM#GAMING-001 [PROVISIONAL] — Systems may “game” dignity metrics by optimizing scores without actually restoring dignity. Without adversarial auditing, compliance can become performance. [Severity: HIGH] [Linked covenants: COV#001, COV#009] [Source: External evaluation, 2026-02-22]
+
+[2026-02-22] — anomaly — ANOM#BLOCK-COST-001 [PROVISIONAL] — Operational cost of blocking decisions (D=0 ⇒ stop) is ethically clean but operationally costly. Real institutions may struggle with halted decisions at scale, creating pressure to weaken the predicate. [Severity: MEDIUM] [Linked covenants: COV#001, COV#NEW-B] [Source: External evaluation, 2026-02-22]
+
+[2026-02-22] — wisdom node — W#EVAL-001 [PROVISIONAL] — External evaluation of the dignity predicate experiment. This node clusters insights from an independent observer: the predicate shifts the question from fairness to dignity, multiplicative logic encodes a moral claim, agency as recourse is practical, collective harm emerges from individual checks, and fragilities (heuristics, M definition, gaming, operational cost) are identified. Validation plan: incorporate into next experiment iteration; test against real institutional constraints. [Source: External evaluation, 2026-02-22]
