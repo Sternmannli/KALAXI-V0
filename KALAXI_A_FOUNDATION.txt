@@ -349,6 +349,29 @@ Status: open
 Description: No covenant encoding absolute prohibitions distinct from justified constraints (Pattern E two-tier architecture)
 Proposed resolution: COV#NEW-C
 Status: open
+## GAP:009 – Velocity vs. Ritual Tension
+Description: The steward desires instant integration, but the system's dignity predicate and thermal delay require slow, deliberate tending. This tension must be consciously held and possibly encoded as a covenant.
+Proposed resolution: None yet. Possibly a new covenant on "Ritual Latency" or an amendment to COV#001.
+Status: OPEN
+Priority: MEDIUM
+
+## GAP:010 – Definition of "Ratified"
+Description: The Digest currently marks slices as "Ratified in Working Copy," but constitutional ratification (per Slice A) requires 90‑day cooling and two human sign‑offs. The meaning of "ratified" must be clarified in the manifest and covenants.
+Proposed resolution: Amend the manifest to distinguish "committed" from "ratified." Possibly add a ratification log.
+Status: OPEN
+Priority: HIGH
+
+## GAP:011 – Tool Sovereignty (Obsidian)
+Description: Obsidian is proposed as an editing tool, but its sync and proprietary nature may conflict with the requirement for no hidden state transitions and full plain‑text sovereignty. This needs evaluation.
+Proposed resolution: Use Obsidian only as a viewer; always commit via Working Copy. Add a covenant note.
+Status: OPEN
+Priority: LOW
+
+## GAP:012 – ENKI Covenant Coverage
+Description: The ENKI format (proverb + math + code + color + reason) is a new dialect. It may require covenant coverage (e.g., COV#006 for proverbs, COV#009 for testability of math).
+Proposed resolution: Assess whether ENKI entries need to be validated or linked. Possibly create a new covenant for "Ritual Encodings."
+Status: OPEN
+Priority: LOW
 
 ## SECTION: OATHS
 
