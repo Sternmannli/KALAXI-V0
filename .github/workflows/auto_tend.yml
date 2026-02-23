@@ -1,0 +1,32 @@
+name: Auto-Tend Threshold
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'THRESHOLD.md'
+
+jobs:
+  tend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run tending script
+        run: python .github/scripts/tend.py
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add KALAXI_A_FOUNDATION.txt KALAXI_C_WISDOM.txt THRESHOLD.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-tend: moved seeds from THRESHOLD.md"
+          git push
