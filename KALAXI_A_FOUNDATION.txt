@@ -1,6 +1,9 @@
 title: "KALAXI_A_FOUNDATION.txt"
 id: "SLICE-A_FOUNDATION_v1.0.0"
 version: "1.0.0"
+STATUS: ratified
+LAST_REVIEWED: 2026-02-23
+REVIEW_CYCLE: 12 months
 provisional: true
 owner: "Mohamed Farag (did:axi:mohamed)"
 contact: "info@kalam.ch | kalam.ch"
@@ -180,6 +183,35 @@ Narrative anchor: Chapter 54 candidate (The Sealed Door - the weir without a gap
 Tier: 1
 Status: Provisional | Awaiting ratification
 provisional: true
+## COV#NEW‑E – Canon Integrity Covenant [PROVISIONAL]
+
+**Text:**  
+No element enters the canonical slices (A, B, C, D) without passing through the Threshold, surviving the required thermal delay (minimum 7 days), and being explicitly ratified by the steward during a Tending Ritual. All canonical IDs must be unique, traceable, and recorded in `MANIFEST/ids.json` with full provenance (date, donor source, adversarial voice). Narrative and cosmological layers are structurally separated: the Hakaka story lives in `NARRATIVE/Hakaka_Complete.md`, badges in `NARRATIVE/Badges/`, and speculative reflections in `NARRATIVE/Cosmic_Reflections.md` (provisional, non‑binding). Proverbs may only be generated from observed patterns, never from speculation. Violations of this covenant are logged as CRITICAL anomalies and must be resolved before any further growth of the canon.
+
+**Tier:** 2  
+**Status:** Provisional  
+**Linked gaps:** GAP#017, GAP#018  
+**Linked covenants:** COV#001, COV#006
+
+
+## COV#NEW‑F – Amendment Protocol [PROVISIONAL]
+
+**Text:**  
+No canonical element is ever deleted. To change an existing entry, a new ID is created that supersedes the old. The supersession must be recorded in `MANIFEST/amendments.md` and in the `ids.json` entry (`supersedes` field). The old entry is marked `STATUS: superseded` and remains readable. For changes to Slices A, B, or D (constitutional), a dual‑key confirmation (steward + second signer) is required; the commit message must contain `CONFIRMATION: 2/2`.
+
+**Tier:** 2  
+**Status:** Provisional  
+**Linked covenants:** COV#NEW‑E
+
+
+## COV#NEW‑G – Steward Accountability Covenant [PROVISIONAL]
+
+**Text:**  
+The steward shall perform the Mirror Ritual before every Tending session, recording their state, fears, attachments, and blind spots in `STEWARD/mirror.md`. Any override of an automated recommendation (from `tend.py` or the Threshold Guardian) must be logged in `STEWARD/overrides.md` with rationale. Failure to complete the Mirror Ritual or to log overrides within the scheduled window triggers an automatic pause of new ratifications and logs a CRITICAL anomaly (ANOM#STEWARD‑FAILURE). The steward may schedule a sabbatical (recorded in `STEWARD/sabbatical.md`) during which the system operates in thermal‑delay‑only mode; no new seeds are moved to canon until the steward returns.
+
+**Tier:** 2  
+**Status:** Provisional  
+**Linked covenants:** COV#NEW‑E, COV#NEW‑F
 
 ## SECTION: DIGNITY_PREDICATE
 
