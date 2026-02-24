@@ -4,8 +4,8 @@
 import json
 from pathlib import Path
 from datetime import datetime
-from weaver.dignity_filter import check_dignity
-from weaver.confidence import compute_confidence, confidence_grade
+from dignity_filter import check_dignity
+from confidence import compute_confidence, confidence_grade
 
 ROOT = Path(__file__).parent.parent
 PATTERNS_FILE = ROOT / "MANIFEST" / "patterns.json"
