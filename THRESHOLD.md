@@ -56,3 +56,6 @@ Format: [timestamp] — [type] — [content]
 [2026-02-22] — anomaly — ANOM#BLOCK-COST-001 [PROVISIONAL] — Operational cost of blocking decisions (D=0 ⇒ stop) is ethically clean but operationally costly. Real institutions may struggle with halted decisions at scale, creating pressure to weaken the predicate. [Severity: MEDIUM] [Linked covenants: COV#001, COV#NEW-B] [Source: External evaluation, 2026-02-22]
 
 [2026-02-23] — proverb — P#EMERGE-0034 [PROVISIONAL] — "For Laila 🐬, Yara 🐯, and Salim 🐺 — may the river always remember your names." [source: Steward's heart, 2026-02-23] [linked_covenants: COV#001]
+[2026-02-24] — proverb — The machine proposes; the steward decides. The gap between them is where dignity lives. [SIGNED: Mohamed]
+[2026-02-24] — anomaly — ANOM#PATCH-REJECT [PROVISIONAL] – An external AI generated a constitutionally valid patch that violated the mirror ritual and thermal delay. The system correctly rejected it, proving the covenants are load‑bearing. [SIGNED: Mohamed]
+[2026-02-24] — gap — GAP#017 [PROVISIONAL] – Scaffolding vs. Seed. How to distinguish temporary test seeds from genuine offerings? Thermal delay alone is insufficient; intent must be made legible. Priority: MEDIUM.
