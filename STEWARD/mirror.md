@@ -1,4 +1,4 @@
-# Steward’s Mirror – [YYYY‑MM‑DD]
+# Steward’s Mirror – [YYYY-MM-DD]
 STATE: calm / tired / rushed / heavy
 FEAR: What am I afraid to canonise?
 ATTACHMENT: What am I too eager to canonise?
