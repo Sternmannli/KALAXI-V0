@@ -839,3 +839,10 @@ next: SLICE‑D – Ledger and Interface (heaviest, last). Changelog, manifest, 
 Awaiting GO from steward.
 
 The hand is ready. The knot breathes. The Unknot waits.
+
+[2026-02-24] CANONISED (signed-steward) -- P#EMERGE-2134
+[2026-02-24] — proverb — A test seed to verify the two‑tier system. [SIGNED: Mohamed]
+
+
+[2026-02-24] CANONISED (signed-steward) -- P#EMERGE-2135
+[2026-02-24] — proverb — A test seed for pattern detection. [TEST][2026-02-24] -- proverb -- This is a test of the signed seed system. [SIGNED: Mohamed]

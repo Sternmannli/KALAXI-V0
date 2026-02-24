@@ -1,10 +1,29 @@
 {
   "last_id": {
-    "P": 2133,
-    "ANOM": 512,
-    "GAP": 16,
+    "P": 2135,
+    "ANOM": 1100,
+    "GAP": 18,
     "W": 87,
     "COV": 14
   },
-  "entries": {}
+  "entries": {
+    "P#EMERGE-2134": {
+      "id": "P#EMERGE-2134",
+      "type": "proverb",
+      "status": "ratified",
+      "created": "2026-02-24T16:13:43.823949+00:00",
+      "provenance": "signed-steward",
+      "supersedes": null,
+      "hash": "0374ba063dc0a5812b26a217c648e3752fff75bd7977633e99717d5a48e4f317"
+    },
+    "P#EMERGE-2135": {
+      "id": "P#EMERGE-2135",
+      "type": "proverb",
+      "status": "ratified",
+      "created": "2026-02-24T16:13:43.825112+00:00",
+      "provenance": "signed-steward",
+      "supersedes": null,
+      "hash": "1e2f671109d2c7fd2962265ab6f0a410ad199f4cae7aeb4659f804f5d331820b"
+    }
+  }
 }
