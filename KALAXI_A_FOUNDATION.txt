@@ -589,3 +589,10 @@ next: SLICE-B - Modules, UCS Schema, Wisdom Layer structure
 Awaiting GO from steward.
 
 The hand is ready. The knot breathes. The Unknot waits.
+## COV#VOID-006 – The Refusal is Canonical [PROVISIONAL]
+**Text:**  
+Every refusal is a boundary made visible. The steward must record not only what was refused, but what the refusal protected. The refusal becomes a provisional seed in THRESHOLD.md with tag [REFUSAL]. It may never be canonised, but it may become a wisdom node (W#REFUSAL-XXX) linking to the gap it guarded.
+**Tier:** 1  
+**Status:** Provisional  
+**Violation class:** CRITICAL anomaly (if refusal not recorded)
+**Linked covenants:** COV#001, COV#NEW‑E, COV#VOID‑003
