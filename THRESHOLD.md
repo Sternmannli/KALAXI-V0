@@ -59,3 +59,9 @@ Format: [timestamp] — [type] — [content]
 [2026-02-24] — proverb — The machine proposes; the steward decides. The gap between them is where dignity lives. [SIGNED: Mohamed]
 [2026-02-24] — anomaly — ANOM#PATCH-REJECT [PROVISIONAL] – An external AI generated a constitutionally valid patch that violated the mirror ritual and thermal delay. The system correctly rejected it, proving the covenants are load‑bearing. [SIGNED: Mohamed]
 [2026-02-24] — gap — GAP#017 [PROVISIONAL] – Scaffolding vs. Seed. How to distinguish temporary test seeds from genuine offerings? Thermal delay alone is insufficient; intent must be made legible. Priority: MEDIUM.
+[2026-02-26 01:30] — seed — [MANUAL TEST]
+   humour: affiliative (score: 0.72)
+   wisdom potential: 0.68
+   recommended delay: 7 days
+
+This is a test humour seed. If it works, it should appear in the pending list.
