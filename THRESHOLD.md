@@ -65,3 +65,9 @@ Format: [timestamp] — [type] — [content]
    recommended delay: 7 days
 
 This is a test humour seed. If it works, it should appear in the pending list.
+[2026-02-26 01:30] -- seed -- [MANUAL TEST]
+   humour: affiliative (score: 0.72)
+   wisdom potential: 0.68
+   recommended delay: 7 days
+
+This is a test humour seed. If it works, it should appear in the pending list.
