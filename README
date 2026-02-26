@@ -30,3 +30,31 @@ All files are **provisional** (v1.0.0) until the first human ratification.
 
 *Maintained by Mohamed Farag (did:axi:mohamed)*  
 *License: Sovereign‑Axis v∞*
+## New Features Added (February 2026)
+
+### Five Pillar Detectors
+- `WEAVER/humour_detector.py` – Benign violation detection
+- `WEAVER/absurdity_detector.py` – Unresolvable contradiction detection
+- `WEAVER/obsession_detector.py` – Intrusive pattern detection
+- `WEAVER/love_detector.py` – Sternberg-based love component analysis
+- `WEAVER/proverb_compressor.py` – Cross-anomaly compression into proverbs
+
+### Unified Detector
+- `WEAVER/unified_pillar_detector.py` – Integrates all five pillars into one profile
+
+### Steward Interface
+- `WEAVER/tend.py` – Command-line tool to list, review, and ratify seeds in `THRESHOLD.md`
+  Usage:
+
+### Supporting Files
+- `WEAVER/requirements.txt` – Python dependencies
+- `WEAVER/hiring_simulation.py` – Example of dignity‑constrained hiring
+- `ABSURDITY_QUEUE.md` – Log of unresolvable absurd seeds
+- `WEAVER/echo_stone.py` – Witness logger for absurd seeds
+- `WEAVER/wisdom_mirror.py` – Generates personalised donor reflections
+- `PAPERS/` – Academic papers (GO4 source, RedTeam critique)
+
+### Mirror Ritual
+The steward must maintain `STEWARD/mirror.md` with a timestamped entry within the last 24 hours before running `tend.py --review`.
+
+For full documentation, see the constitutional slices (A–E).
