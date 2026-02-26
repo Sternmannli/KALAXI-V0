@@ -1,2 +1,800 @@
-% Placeholder for RedTeam critique LaTeX source.
-% Replace this with the actual content.
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{caption}
+
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+
+%% Reviewer comment box
+\mdfdefinestyle{attackframe}{
+  linecolor=red!60,
+  linewidth=1pt,
+  backgroundcolor=red!4,
+  innertopmargin=10pt,
+  innerbottommargin=10pt,
+  innerleftmargin=14pt,
+  innerrightmargin=14pt,
+  skipabove=10pt,
+  skipbelow=10pt
+}
+
+%% Defense box
+\mdfdefinestyle{defenseframe}{
+  linecolor=black!40,
+  linewidth=0.8pt,
+  backgroundcolor=black!3,
+  innertopmargin=8pt,
+  innerbottommargin=8pt,
+  innerleftmargin=12pt,
+  innerrightmargin=12pt,
+  skipabove=6pt,
+  skipbelow=6pt
+}
+
+\theoremstyle{definition}
+\newtheorem{attack}{Attack}[section]
+
+\title{\textbf{Adversarial Review: Kalaxi}\\\large
+  Internal Red-Team Critique of\\
+  \emph{``Kalaxi: A Constitutional Governance Architecture\\
+  for Dignity-Constrained Software Systems''}\\[0.5em]
+  \normalsize Phase V — Pre-Submission Stress Test}
+
+\author{
+  Prepared by: Voice (internal adversarial review)\\
+  For: Mohamed Farag, KALAM\\
+  \texttt{info@kalam.ch}
+}
+
+\date{February 2026}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+This document is an internal adversarial review of the Kalaxi arXiv manuscript.
+It is written from the perspective of a hostile but rigorous peer reviewer at a
+top-tier venue (FAccT, ICML, NeurIPS, or IEEE S\&P). Its purpose is to surface every
+weakness, inconsistency, overreach, and undefended claim before submission, so that
+the paper can be strengthened or the claims properly bounded. Each attack is followed
+by a recommended response — either a direct rebuttal, a paper revision, or an honest
+acknowledgment. Nothing is minimized. The paper is strong. This document makes it
+stronger.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Overview of Attack Surface}
+
+The paper has five primary attack surfaces:
+
+\begin{enumerate}
+\item \textbf{Mathematical formalism:} Is the dignity predicate actually a
+  well-defined mathematical object, or is it philosophy dressed in notation?
+\item \textbf{Novelty claims:} Does Kalaxi contribute anything genuinely new,
+  or is it a repackaging of existing governance frameworks?
+\item \textbf{Empirical vacuity:} The paper has no experimental results.
+  Is this a research paper or a design document?
+\item \textbf{Practical viability:} Would any real institution deploy this?
+  Is the architecture designed for the world that exists or a world that doesn't?
+\item \textbf{Internal consistency:} Does the paper contradict itself?
+  Are the theoretical claims coherent with the operational mechanisms?
+\end{enumerate}
+
+Each is attacked in turn. Severity ratings: \textbf{CRITICAL} (would cause rejection),
+\textbf{MAJOR} (would require major revision), \textbf{MINOR} (would require minor
+revision or clarification).
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Attack Surface 1: Mathematical Formalism}
+
+\begin{attack}[The predicate is not a predicate — CRITICAL]
+\label{att:notpredicate}
+The paper defines $\mathcal{D}(e) = A(e) \times L(e) \times M(e)$ and calls
+$A, L, M : \mathcal{E} \to \{0,1\}$ ``Boolean-valued functions.'' This notation
+implies they are computable. But the component definitions reveal they are not.
+
+``system\_reflects\_donor\_frame'' — how is this computed? What is a ``frame''?
+How does a machine determine that it has reflected it? ``emotional\_signal\_recognized''
+— this requires affect detection, a research problem with known unreliability across
+demographic groups. ``no\_reduction\_to\_error\_object'' — how does a machine detect
+that it has reduced a person to an error object? This is a social judgment requiring
+rich contextual understanding that no current NLP system reliably provides.
+
+\textbf{The paper claims a machine-evaluable predicate and then defines its components
+in terms that are not machine-evaluable. This is not formalism — it is the appearance
+of formalism.} The notation $A, L, M : \mathcal{E} \to \{0,1\}$ implies deterministic
+computability. The components named do not have deterministic implementations.
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (paper revision required):}
+This is the strongest attack and requires a direct response in the paper.
+The paper must distinguish between:
+(1) \emph{aspirational predicates} — the full philosophical definition;
+(2) \emph{current operational approximations} — the heuristic implementations
+in \texttt{dignity\_check.py};
+(3) \emph{the gap between them} — which is itself an anomaly in the registry
+(ANOM\#0004, GAP\#014, GAP\#015).
+
+Add a subsection: ``Predicate Approximation and Its Limits.'' State clearly: the
+Boolean formalization is a precision target, not a claim of current full
+computability. Current implementations are heuristic approximations. The gap
+between formalization and implementation is documented in the anomaly registry.
+This is not a weakness to hide — it is the architecture's honest acknowledgment
+of its frontier.
+
+\textbf{Key sentence to add:} ``The Boolean formalization defines what the system
+\emph{must} compute; current implementations approximate this via heuristics that
+are explicitly logged as open gaps (GAP\#014, GAP\#015). The predicate's precision
+is a research program, not a solved problem.''
+\end{mdframed}
+
+\begin{attack}[Non-compensability is trivially achievable by any veto — MAJOR]
+\label{att:veto}
+The paper presents non-compensability as a deep theoretical property motivated by
+deontological ethics. But any AND-gate has this property. Connecting it to Kant is
+motivated reasoning. A reviewer will note: ``The authors' formulation is equivalent
+to requiring that all three Boolean conditions be TRUE before proceeding. This is
+a logical AND. Every checklist system is 'non-compensatory' by this definition.
+The Kantian framing adds philosophical weight but no structural novelty.''
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (clarification required):}
+The reviewer is technically correct: the multiplicative form is equivalent to a
+logical AND over Boolean variables. The paper must be explicit about this and
+defend the choice on different grounds:
+
+The non-compensability claim is not about the Boolean structure per se, but about
+the \emph{choice of variables and the refusal to weight them}. Most governance
+systems implicitly weight factors (A matters more than M in urgent cases, etc.).
+Kalaxi refuses this weighting — all three conditions are equal in weight and any
+one zero halts the system. \emph{That} is the deontological claim: not that the
+logic is AND, but that the weights are equal and non-negotiable.
+
+Also strengthen: the paper should note that the equivalent claim in weighted-sum
+formulations would allow $A = 0, L = 1, M = 1, w_A = 0.2$ to produce a positive
+dignity score. Kalaxi's structure explicitly forbids this class of override.
+\end{mdframed}
+
+\begin{attack}[The damping model is a metaphor, not a model — MAJOR]
+\label{att:dampingmetaphor}
+Section V presents a second-order differential equation for normative state evolution.
+The paper gives no method for measuring $\omega_0$, $\zeta$, or $N(t)$ empirically.
+There is no operational definition of ``normative state.'' There is no evidence that
+governance dynamics actually follow second-order linear differential equations. The
+use of Eq.~(3) is scientism: the equation gives the appearance of rigor without
+delivering it.
+
+A reviewer in a control-theory track will write: ``The authors assert that their
+thermal delay implements critical damping ($\zeta \geq 1$) but provide no empirical
+measurement of the system's actual damping ratio, no method for measuring normative
+state $N(t)$, and no validation of the second-order linear model as an accurate
+description of governance dynamics. The analogy to control systems is suggestive
+but not substantiated.''
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (scope reduction required):}
+This attack is valid. The differential equation should either be substantiated
+or reframed. Recommended approach: reframe the control-theoretic analysis as
+an \emph{analogy} that motivates the design, not a formal model of it.
+
+Replace ``We model normative state evolution as a second-order system'' with
+``We draw on the intuition of second-order damping to motivate the thermal delay
+mechanism.'' Remove the differential equation from the main text; move it to an
+appendix clearly labeled ``Motivating Analogy.'' State explicitly: ``We do not
+claim that governance dynamics follow this differential equation, nor do we
+provide empirical measurements of $\omega_0$ or $\zeta$. The second-order model
+is a conceptual scaffold, not a validated empirical model.''
+
+This is not a defeat — it is precision. The thermal delay is justified by
+other arguments (the Zeno effect, the empirical observation of governance overshoot)
+that do not require the differential equation.
+\end{mdframed}
+
+\begin{attack}[The collective dignity formula is dimensionally inconsistent — MINOR]
+\label{att:collective}
+Equation~(2): $\mathcal{D}_\text{cohort} = \bar{D}(\mathcal{C},T) \times
+(1 - \sigma^2_\text{penalty}(\mathcal{C},T))$.
+
+If $\sigma^2_\text{penalty} > 1$, the collective dignity becomes negative, which
+is undefined. The paper does not specify the range of $\sigma^2_\text{penalty}$
+or how it is computed from the variance of $\{D(e)\}$. Since $D(e) \in \{0,1\}$,
+the variance of this Bernoulli distribution is $\bar{D}(1-\bar{D}) \leq 0.25$.
+If the penalty is simply the variance, the formula is well-defined. If it is a
+normalized or scaled version, this must be stated.
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (minor revision):}
+Specify the computation of $\sigma^2_\text{penalty}$ precisely. Recommended:
+define it as the normalized variance: $\sigma^2_\text{penalty} = 4 \cdot
+\text{Var}(\{D(e)\})$, which has range $[0,1]$ when $D(e) \in \{0,1\}$.
+This ensures $\mathcal{D}_\text{cohort} \in [0,1]$ and is well-defined.
+Add a single sentence to the paper specifying the normalization.
+\end{mdframed}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Attack Surface 2: Novelty Claims}
+
+\begin{attack}[This is just Value Sensitive Design with a Git wrapper — CRITICAL]
+\label{att:vsd}
+The paper's central claim is that it embeds governance into repository structure.
+But Value Sensitive Design \cite{friedman2006} already proposes embedding values
+into technical design. The NIST AI RMF \cite{nist2023} proposes governance
+throughout the AI lifecycle. Constitutional AI \cite{bai2022} embeds principles
+as training objectives. The EU AI Act \cite{euaiact2021} mandates governance
+documentation.
+
+A reviewer will ask: ``What does Kalaxi add that these frameworks do not already
+provide? The authors' answer — that Kalaxi makes governance `executable' via
+version control — is not clearly distinguished from existing approaches. GitHub
+Actions can enforce policy checks. Existing CI/CD pipelines already block merges
+on policy violations. What is genuinely new here?''
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (paper revision required):}
+This is the second strongest attack. The paper needs a sharper novelty statement.
+The genuine novelty claims are:
+
+\begin{enumerate}
+\item \textbf{The predicate is pre-output, not post-hoc.} VSD embeds values in
+  design process. NIST RMF embeds governance in documentation. Constitutional AI
+  embeds principles in training. Kalaxi's dignity gate fires \emph{before every
+  output is rendered} — it is an operational block, not a design commitment or a
+  training objective.
+
+\item \textbf{The thermal delay is an ethical primitive.} No existing governance
+  framework treats temporal delay as a first-class ethical mechanism. The Zeno
+  protection justification is novel.
+
+\item \textbf{The append-only proverb canon as governance artifact.} The
+  paremiologically-grounded wisdom layer — 3,333 proverbs linked to 1,100+
+  structured anomalies via a ratified UCS graph — has no precedent in governance
+  literature. It is not documentation. It is a growing normative knowledge base
+  with formal integrity constraints (COV\#006: every anomaly linked to a proverb).
+
+\item \textbf{The steward's mirror ritual as governance mechanism.} Self-reflexive
+  logging as a structural requirement for ratification authority is not present in
+  existing frameworks.
+\end{enumerate}
+
+Add a ``Novelty Clarification'' subsection in Related Work or Contributions that
+directly names these four distinctions and explains why each represents a structural
+advance over prior work.
+\end{mdframed}
+
+\begin{attack}[The Quantum Zeno analogy is not a contribution — MINOR]
+\label{att:zeno}
+The paper introduces the Quantum Zeno effect as a novel justification for thermal
+delay. A reviewer will note: ``The Quantum Zeno effect describes quantum measurement.
+Applying it to governance is an analogy, not a theoretical result. The authors
+provide no formal connection between quantum measurement collapse and normative
+seed maturation. This is an evocative metaphor that does not strengthen the
+technical argument.''
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (reframe as motivation):}
+Agree with the reviewer. In the final paper, reframe: ``The quantum Zeno effect
+provides an \emph{intuition} for why frequent observation can prevent development
+of a seed's full semantic potential, analogous to how measurement collapses quantum
+superposition.'' Do not claim this as a formal result. It is motivating intuition.
+The primary justification for thermal delay remains the control-theoretic damping
+argument and the empirical observation of governance overshoot — both stronger
+footing.
+\end{mdframed}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Attack Surface 3: Empirical Vacuity}
+
+\begin{attack}[There are no results — CRITICAL]
+\label{att:noresults}
+This is the most common and most damaging critique a systems/governance paper can
+receive. The paper proposes an architecture, formally describes it, and then
+describes an evaluation strategy. It does not report any evaluation results.
+
+At FAccT, NeurIPS, or ICML, papers without results are rejected. At IEEE venues,
+a system paper requires at minimum a feasibility demonstration. A reviewer will
+write: ``The authors describe an interesting architecture but provide no evidence
+that it functions as described. No case studies. No user studies. No simulations.
+No measurement of whether the dignity predicate actually blocks harmful outputs.
+No measurement of thermal delay's effect on governance stability. This is a design
+proposal, not a research paper.''
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (venue selection and framing):}
+This attack is decisive for venue selection. Three options:
+
+\textbf{Option A — Submit to a systems/design track} where the contribution
+is the architecture itself. Several venues accept this:
+\emph{CHI} (design contributions), \emph{CSCW} (socio-technical systems),
+\emph{IEEE Software} (architecture papers), \emph{SSRN} or \emph{arXiv}
+preprint as position paper.
+
+\textbf{Option B — Add a feasibility case study.} Use the hiring algorithm
+simulation already described in the paper. Run it. The THRESHOLD.md already
+contains ANOM\#PROXY-001, ANOM\#PROXY-CASCADE-001, and W\#HIRING-001. Deploy
+the dignity predicate on a labeled hiring dataset. Report REFUSAL\_STATE
+activation rates, cohort disparity before and after. Even a small simulation
+provides the ``results'' section the paper currently lacks.
+
+\textbf{Option C — Reframe as position/vision paper.} Some venues (FAccT,
+AIES) accept position papers that argue for a new approach without full
+experimental validation. Frame explicitly: ``This paper presents a new
+\emph{paradigm} for governance as infrastructure. We report implementation
+status and propose an evaluation agenda. Full empirical validation is future work.''
+This is the honest frame and is accepted at some venues.
+
+\textbf{Recommendation: Option B + C.} Add the hiring simulation (it is already
+half-designed in the anomaly registry) and frame as a position/vision paper with
+a proof-of-concept case study.
+\end{mdframed}
+
+\begin{attack}[The KPIs are not measurable as stated — MAJOR]
+\label{att:kpis}
+The paper lists KPIs including ``fraction of steward tending sessions recording
+a `pause' or `smile' response (target $\geq 30\%$).'' A `pause' is not a
+measurable unit. A `smile' requires a camera and facial recognition. These are
+not scientific KPIs. Similarly, ``steward surprise rate'' is entirely subjective.
+
+The paper's KPIs mix objective metrics (REFUSAL\_STATE activation rate, cohort
+D variance) with phenomenological observations (pause, smile) without
+distinguishing them or explaining how the latter are operationalized.
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (revision required):}
+Separate KPIs into two tiers:
+
+\textbf{Tier A — Objective, machine-measurable:} REFUSAL\_STATE activation
+rate; cohort D variance ($\sigma^2_\text{cohort}$); donor flag rate on
+humour seeds; thermal delay violation rate (seeds ratified before delay
+expired); override logging compliance rate.
+
+\textbf{Tier B — Qualitative, steward-assessed:} Proverb resonance
+(steward-reported, using a structured 5-point Likert scale rather than
+``pause or smile''); cross-anomaly compression quality (evaluated by
+steward against Lock Test criteria on a structured rubric).
+
+Remove the language about ``smile'' and ``pause'' from quantitative KPI
+lists. Retain them in the qualitative methodology section with explicit
+acknowledgment that they are phenomenological observations requiring a
+structured observation protocol, not automated metrics.
+\end{mdframed}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Attack Surface 4: Practical Viability}
+
+\begin{attack}[No real institution would deploy this — MAJOR]
+\label{att:noinstitution}
+The architecture requires: a single dedicated human (the steward) who performs
+a ritual reflection before every governance action; a 7--90 day delay before any
+normative update; a human who reads and ratifies every new proverb; an
+append-only repository that grows indefinitely; and a cultural foundation
+(Hakaka narrative, Swiss institutional context) that may not translate.
+
+A reviewer in governance or public policy will note: ``The steward model is
+incompatible with institutional realities. Healthcare systems, credit bureaus,
+and employment platforms process millions of decisions daily. A 7-day delay
+before any normative update, and a single human ratification authority, would
+paralyze operations. The paper addresses scalability as a limitation but does
+not provide a credible path to addressing it.''
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (scope clarification required):}
+The paper needs to be explicit about deployment scope. Kalaxi is not designed
+for high-frequency automated decision systems processing millions of transactions
+per minute. It is designed for:
+
+\begin{enumerate}
+\item \textbf{High-stakes, lower-frequency decisions} — hiring, benefit
+  allocation, educational assessment — where a 7-day normative update delay
+  is operationally acceptable.
+\item \textbf{Governance of the governance layer} — not the individual decisions
+  themselves but the normative framework within which those decisions are made.
+  The dignity predicate runs pre-output; the thermal delay governs updates to
+  the predicate, not the predicate's execution.
+\item \textbf{Institutional pilots} — Kalaxi's current deployment context is
+  educational and community governance settings in Switzerland, where the
+  steward model is feasible.
+\end{enumerate}
+
+Add to the paper: ``Kalaxi is not designed for high-frequency transactional
+systems. It targets governance of the normative framework within which
+decisions are made, not real-time evaluation of each decision. The dignity
+predicate runs pre-output; thermal delay governs updates to the predicate
+itself. In practice, normative updates to governance frameworks occur
+monthly or quarterly, making 7-day delays operationally acceptable in
+most target contexts.''
+\end{mdframed}
+
+\begin{attack}[The steward is a single point of failure with no true mitigation — MAJOR]
+\label{att:steward}
+The paper acknowledges the steward as a single point of failure and proposes a
+Council Ratification Extension as mitigation — but this is described as ``under
+development.'' The Mirror Ritual is a social obligation, not a technical
+enforcement. The Override Logging requires the steward to log their own
+violations, which is the governance equivalent of self-policing.
+
+A reviewer will note: ``The paper's principal-agent analysis correctly identifies
+moral hazard in the steward relationship but then proposes mitigations that are
+themselves vulnerable to the same hazard. A steward who chooses not to perform
+the Mirror Ritual can simply not perform it. A steward who makes an override can
+choose not to log it. The paper does not explain how these mitigations have
+technical enforcement.''
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (revision required):}
+This attack is partially valid. The paper should distinguish more carefully between
+\emph{social enforcement} and \emph{technical enforcement}:
+
+\textbf{Technically enforced:} The CI/CD gate described in Section VIII rejects
+commits to the canonical branch unless \texttt{mirror.md} has a timestamp within
+24 hours. This is machine-enforced, not social. The append-only audit means that
+\emph{if} the steward commits without a mirror entry, this absence is detectable
+in the audit trail. It is not invisible.
+
+\textbf{Socially enforced:} The \emph{quality} of the mirror entry is social.
+A steward who writes ``I am fine'' every day without genuine reflection satisfies
+the machine check but not the spirit.
+
+The honest position: ``Technical enforcement ensures the Mirror Ritual \emph{occurs};
+social accountability ensures it \emph{means something}. This is analogous to
+mandatory disclosure requirements in financial regulation — the requirement to
+disclose is technically enforced; the quality of disclosure is socially audited.''
+
+Add this distinction to the paper. It strengthens rather than weakens the argument.
+\end{mdframed}
+
+\begin{attack}[The cultural signature is a deployment barrier — MINOR]
+\label{att:cultural}
+The narrative foundation (Hakaka, Swiss context, particular proverb tradition)
+creates a cultural specificity that may limit adoption. A reviewer in a global
+or post-colonial computing context will flag: ``The system's legitimacy claim
+depends on donor recognition — people seeing themselves in the system. But the
+system's founding narrative, proverb tradition, and institutional context are
+culturally particular. A Kenyan healthcare system or a Brazilian educational
+platform may not find their experience reflected in a Swiss-contextured narrative
+about knot-tying ancestors. The claim to universality through the UDHR mapping
+requires stronger cross-cultural validation.''
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (acknowledgment):}
+This is a fair and important point. Do not minimize it. Add to the epistemic
+limitations section: ``The cultural signature of Kalaxi's founding narrative
+is a genuine barrier to universal adoption. We do not claim the Hakaka narrative
+is universal; we claim the \emph{structural pattern} it encodes — survival under
+constraint, dignity as the first requirement, anomaly as the system's most honest
+signal — is universal. The cross-cultural proverb recognition study proposed in
+Section~XII is designed specifically to test whether this structural pattern
+translates across cultural contexts. Until that data exists, the universality
+claim is theoretical.''
+\end{mdframed}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Attack Surface 5: Internal Consistency}
+
+\begin{attack}[The paper claims both deontological and consequentialist foundations — contradiction or confusion? — MAJOR]
+\label{att:ethics}
+Section VII argues that Kalaxi ``deliberately occupies both'' deontological and
+consequentialist traditions. A reviewer in philosophy of ethics will challenge:
+``Deontological and consequentialist ethics are not merely different emphases —
+they are systematically incompatible in cases of genuine conflict. If the sealed
+gate prohibits an action that would maximize aggregate welfare (the classic
+trolley-problem structure), the architecture is deontological, full stop. The
+claim to occupy both traditions simultaneously is incoherent unless the paper
+specifies exactly how conflicts between them are resolved.''
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (clarification required):}
+The paper needs to be precise about where the traditions apply and how conflicts
+are resolved:
+
+The sealed gate applies \emph{when the deontological constraint is triggered}.
+In that case, the constraint is absolute and no consequentialist override exists.
+The system is deontological in those cases.
+
+Within the space of actions that do not trigger the sealed gate, the system
+optimizes consequentially — it grows its wisdom canon toward better outcomes.
+
+The synthesis is not that both traditions apply simultaneously to the same
+decision. It is that different tiers of the architecture apply different ethical
+frameworks: Tier-1 (Stone) is deontological; within that floor, the system is
+consequentialist. This is Rawls's original structure: the priority of the right
+over the good, but within that priority, optimization toward the good.
+
+Revise Section VII to state this priority ordering explicitly: ``When sealed-gate
+conditions are triggered, the architecture is deontological and admits no
+consequentialist override. Within the space of actions not triggering the sealed
+gate, the architecture optimizes consequentially. The two traditions do not
+compete; they apply at different tiers.''
+\end{mdframed}
+
+\begin{attack}[The proverb canon is claimed as governance infrastructure but is not technically load-bearing — MAJOR]
+\label{att:provinfra}
+The paper claims the 3,333 proverbs are ``load-bearing infrastructure rather
+than decoration'' (citing COV\#006). But COV\#006 merely requires that every
+anomaly be \emph{linked to} a proverb. It does not specify how proverbs are
+\emph{used} in governance decisions. No module description shows proverbs
+being consulted at decision time. No mechanism routes a proverb to an output
+pathway. The proverb-anomaly link is a metadata annotation, not an operational
+dependency.
+
+A reviewer will write: ``The paper claims proverbs are operational infrastructure.
+But the module descriptions show that the dignity predicate, the Check module,
+and the Say module operate on Boolean conditions and covenant checks, not on
+proverbs. Proverbs appear to be documentation.''
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (revision or honest reframing):}
+This is a valid structural critique. Two options:
+
+\textbf{Option A — Strengthen the operational claim.} Add a mechanism by which
+proverbs are operationally consulted. The Weave module can be specified to use
+the proverb canon as a target space for cross-anomaly compression: a candidate
+proverb is evaluated against the existing canon for redundancy and resonance
+before being proposed. This makes the canon load-bearing in pattern synthesis.
+
+\textbf{Option B — Reframe honestly.} If proverbs are currently metadata
+annotations with a mandate for coverage (COV\#006) but not operational
+decision-making roles, say so. ``The proverb canon is \emph{normatively}
+load-bearing: every anomaly must be linked to a proverb that names its
+structural pattern, making the system's anomaly registry interpretable
+by humans rather than only by machines. The operational load-bearing role
+of proverbs in real-time decision-making is future work.''
+
+Recommended: Option A for the cross-anomaly compression mechanism
+(already specified), plus Option B's honest reframe for real-time
+decision-making.
+\end{mdframed}
+
+\begin{attack}[The append-only claim is not technically substantiated — MINOR]
+\label{att:appendonly}
+The paper claims append-only audit with Merkle-chained receipts. Git does not
+natively produce Merkle-chained receipts in the format described. Git's commit
+graph is a DAG with SHA-1/SHA-256 hashes, but the paper's description of
+``Merkle-chained receipts'' implies a specific data structure that is not described
+technically. A reviewer with systems security background will ask: ``What is
+the exact data structure of the Merkle-chained receipt? How are collisions
+prevented? What is the threat model for an attacker who has write access to
+the repository?''
+\end{attack}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Recommended Response (precision required):}
+Either (a) specify the Merkle chain structure in an appendix, or (b) replace
+``Merkle-chained'' with the accurate description: ``Git's native SHA-256 commit
+DAG, where each commit contains the hash of its parent, making the full history
+tamper-evident under standard Git security assumptions.''
+
+Also add: ``Under the assumption that the repository host (GitHub or equivalent)
+is trusted, the commit history is tamper-evident. Against an attacker with
+repository write access and the ability to force-push, the append-only guarantee
+is social rather than cryptographic.'' This is the honest scope of the security
+claim.
+\end{mdframed}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Summary: Priority Revision Checklist}
+
+\subsection*{Before Submission — Must Fix}
+
+\begin{enumerate}[label=\textbf{M\arabic*.},leftmargin=*]
+\item \textbf{Predicate computability.} Add ``Predicate Approximation and Its
+  Limits'' subsection. Distinguish aspiration from current implementation.
+  Cite GAP\#014 and GAP\#015 as the canonical self-criticism.
+  (Addresses Attack~\ref{att:notpredicate})
+
+\item \textbf{Novelty statement.} Add dedicated ``Novelty Clarification''
+  subsection in Related Work. State four distinct contributions vs.\ prior
+  work. Direct answer to VSD/NIST/Constitutional AI comparisons.
+  (Addresses Attack~\ref{att:vsd})
+
+\item \textbf{Empirical content.} Either add hiring simulation results or
+  reframe explicitly as position/vision paper with proof-of-concept.
+  Choose venue accordingly.
+  (Addresses Attack~\ref{att:noresults})
+
+\item \textbf{Damping model reframe.} Move differential equation to appendix
+  labeled ``Motivating Analogy.'' State explicitly: not a validated empirical
+  model. The thermal delay is justified by control-theoretic intuition and
+  the Zeno analogy, not by a fitted second-order system.
+  (Addresses Attack~\ref{att:dampingmetaphor})
+
+\item \textbf{Ethical framework priority ordering.} Revise Section VII to
+  state clearly: Tier-1 is deontological (no consequentialist override);
+  within Tier-1, the system is consequentialist. The traditions apply at
+  different tiers, not simultaneously to the same decision.
+  (Addresses Attack~\ref{att:ethics})
+
+\item \textbf{Deployment scope clarification.} Add explicit paragraph stating
+  that Kalaxi targets high-stakes, lower-frequency governance contexts, not
+  high-throughput transactional systems. Thermal delay applies to normative
+  updates, not to predicate execution.
+  (Addresses Attack~\ref{att:noinstitution})
+\end{enumerate}
+
+\subsection*{Should Fix — Strengthens the Paper}
+
+\begin{enumerate}[label=\textbf{S\arabic*.},leftmargin=*]
+\item \textbf{Proverb operational role.} Specify how the proverb canon is
+  operationally used in cross-anomaly compression. Add mechanism description.
+  (Addresses Attack~\ref{att:provinfra})
+
+\item \textbf{Steward enforcement distinction.} Distinguish technical
+  enforcement (CI gate) from social enforcement (quality of mirror entry).
+  Use financial disclosure analogy.
+  (Addresses Attack~\ref{att:steward})
+
+\item \textbf{Collective dignity formula.} Specify $\sigma^2_\text{penalty}$
+  normalization. One sentence.
+  (Addresses Attack~\ref{att:collective})
+
+\item \textbf{Non-compensability clarification.} Explain why AND-gate + equal
+  weights is deontologically meaningful, not just an AND-gate.
+  (Addresses Attack~\ref{att:veto})
+
+\item \textbf{KPI tier separation.} Separate objective metrics from
+  qualitative observations. Remove ``smile'' from quantitative KPI list.
+  (Addresses Attack~\ref{att:kpis})
+
+\item \textbf{Append-only security scope.} Specify Git SHA-256 DAG as the
+  actual mechanism. State the trust assumption (trusted repository host).
+  (Addresses Attack~\ref{att:appendonly})
+\end{enumerate}
+
+\subsection*{Acknowledge and Leave — Honest Limitations}
+
+\begin{enumerate}[label=\textbf{A\arabic*.},leftmargin=*]
+\item \textbf{Quantum Zeno reframe.} Present as motivating intuition,
+  not formal result.
+  (Addresses Attack~\ref{att:zeno})
+
+\item \textbf{Cultural signature.} Name explicitly in limitations. Propose
+  cross-cultural validation study. Do not minimize.
+  (Addresses Attack~\ref{att:cultural})
+\end{enumerate}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{What the Paper Does Well — Retain These}
+
+The adversarial review is complete. In fairness, here is what the paper does
+genuinely well and should not be changed under reviewer pressure:
+
+\begin{enumerate}
+\item \textbf{The epistemic limitations section.} It is unusual and valuable.
+  Most papers hide limitations; this one names them with precision and
+  connects them to the anomaly registry. Reviewers who notice this will
+  respect it.
+
+\item \textbf{The non-compensatory predicate as structural claim.} Despite
+  Attack~\ref{att:veto}'s correct observation, the equal-weight no-override
+  structure is a genuine policy commitment that most governance frameworks
+  do not make explicitly. It is worth defending.
+
+\item \textbf{The narrative foundation.} It is unusual. Some reviewers will
+  be hostile; others will find it memorable. It is part of the paper's
+  identity. The Acknowledgments section (``To Laila, Yara, and Salim'') is
+  one of the most humanizing acknowledgments in an AI governance paper and
+  should stay.
+
+\item \textbf{The formal properties appendix.} Properties 1--4 of the
+  dignity predicate are precisely stated and correct. The determinism and
+  transparency properties in particular are stronger claims than most
+  governance papers make.
+
+\item \textbf{The principal-agent analysis.} The two-level hierarchy
+  (donors $\to$ steward $\to$ modules) is clearly stated and the moral
+  hazard mitigations are concrete. This section is the paper's best
+  theoretical contribution.
+\end{enumerate}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Venue Recommendations}
+
+Based on this analysis:
+
+\begin{description}
+\item[\textbf{Optimal venue (no added results):}] \emph{FAccT 2027} (ACM Conference
+  on Fairness, Accountability, and Transparency) — Vision/Position paper track.
+  Or \emph{AIES 2026} (AAAI/ACM Conference on AI, Ethics, and Society). Both
+  accept system design papers with honest empirical limitations.
+
+\item[\textbf{Optimal venue (with hiring simulation):}] \emph{FAccT 2026}
+  full paper track, or \emph{CSCW 2026} (Computer-Supported Cooperative Work
+  and Social Computing). With a case study, the empirical gap closes enough
+  for a full paper submission.
+
+\item[\textbf{arXiv preprint (now):}] Submit the Phase IV version to
+  cs.AI and cs.CY (Computers and Society) immediately. Establish priority.
+  The arXiv version is submission-ready. Peer review strengthens it;
+  priority requires it now.
+
+\item[\textbf{Avoid:}] NeurIPS, ICML, ICLR (require strong empirical
+  results in ML). IEEE S\&P (requires security proof). \emph{Nature Machine
+  Intelligence} (requires large-scale deployment evidence).
+\end{description}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Final Assessment}
+
+\begin{mdframed}[style=defenseframe]
+\textbf{Honest summary:}
+
+The paper makes a genuine contribution to AI governance architecture. The
+principal-agent analysis, the non-compensatory predicate, the thermal delay
+mechanism, and the anomaly-proverb linkage are structurally sound and well-motivated.
+
+The paper's primary weaknesses are: (1) the gap between formal notation and
+current computational implementation; (2) the absence of empirical results;
+(3) insufficient clarity on deployment scope.
+
+All three are addressable without changing the paper's core claims.
+None of them invalidate the architecture.
+
+\textbf{Probability of acceptance at FAccT Vision track (as-is):} $\approx$40\%.\\
+\textbf{Probability of acceptance after M1--M6 revisions:} $\approx$70\%.\\
+\textbf{Probability of acceptance at FAccT full paper (with hiring simulation):}
+$\approx$55--65\%.
+
+The paper should be submitted to arXiv now. The revisions are a week of work.
+The architecture is ready.
+\end{mdframed}
+
+\bigskip
+\noindent\textit{The stone that knows its cracks does not break — it knows
+where to hold.}
+
+%% ─────────────────────────────────────────────────────────────────────────
+\bibliographystyle{plainnat}
+\begin{thebibliography}{10}
+
+\bibitem{friedman2006}
+B.~Friedman, P.~H. Kahn~Jr., and A.~Borning,
+``Value sensitive design and information systems,''
+in \emph{Human-Computer Interaction and Management Information Systems:
+Foundations}, 2006.
+
+\bibitem{bai2022}
+Y.~Bai et al.,
+``Constitutional AI: Harmlessness from AI feedback,''
+\emph{arXiv preprint arXiv:2212.08073}, 2022.
+
+\bibitem{nist2023}
+NIST,
+``Artificial Intelligence Risk Management Framework (AI RMF 1.0),''
+NIST AI 100-1, 2023.
+
+\bibitem{euaiact2021}
+European Commission,
+``Proposal for a Regulation: Artificial Intelligence Act,''
+COM(2021) 206 final, 2021.
+
+\end{thebibliography}
+
+\end{document}

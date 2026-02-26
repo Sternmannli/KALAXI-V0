@@ -1,2 +1,1228 @@
-% Placeholder for GO4 LaTeX source.
-% Replace this with the actual content from your conversation.
+\documentclass[12pt,a4paper]{article}
+
+%% ── Packages ──────────────────────────────────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage{algorithm2e}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{enumitem}
+\usepackage{caption}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+
+%% ── Theorem environments ──────────────────────────────────────────────────
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{property}{Property}[section]
+\newtheorem{proposition}{Proposition}[section]
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+%% ── Custom commands ───────────────────────────────────────────────────────
+\newcommand{\dignitygate}{\textsc{dignity\_gate}}
+\newcommand{\refusalstate}{\textsc{refusal\_state}}
+\newcommand{\kalaxi}{\textsc{Kalaxi}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\C}{\mathcal{C}}
+
+%% ── Frame for definitions ─────────────────────────────────────────────────
+\mdfdefinestyle{canonframe}{
+  linecolor=black!40,
+  linewidth=0.8pt,
+  backgroundcolor=black!3,
+  innertopmargin=8pt,
+  innerbottommargin=8pt,
+  innerleftmargin=12pt,
+  innerrightmargin=12pt,
+  skipabove=8pt,
+  skipbelow=8pt
+}
+
+%% ── Metadata ──────────────────────────────────────────────────────────────
+\title{\textbf{\kalaxi: A Constitutional Governance Architecture\\
+for Dignity-Constrained Software Systems}}
+
+\author{
+  Mohamed Farag\\
+  KALAM\\
+  Zurich, Switzerland\\
+  \texttt{info@kalam.ch}\\
+  \texttt{https://kalam.ch}
+}
+
+\date{February 2026}
+
+%% ─────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+%% ── Abstract ──────────────────────────────────────────────────────────────
+\begin{abstract}
+Algorithmic systems increasingly mediate access to employment, financial services,
+healthcare, and public decision processes. While fairness metrics and explainability
+techniques have advanced, mechanisms for embedding normative governance directly into
+software infrastructure remain underdeveloped. This paper presents \kalaxi{}, a
+repository-embedded constitutional governance architecture that enforces human dignity
+as a first-order technical requirement. We formalize dignity as a non-compensatory,
+multiplicative constraint satisfaction problem: $\D(e) = A(e) \times L(e) \times M(e)$,
+where agency ($A$), legibility ($L$), and moral standing ($M$) are jointly necessary
+conditions admitting no substitution. We model temporal gating (\emph{thermal delay})
+as a second-order damping mechanism in control-theoretic terms, and steward ratification
+as a principal-agent governance checkpoint. We situate the architecture at the
+intersection of deontological and consequentialist ethical traditions, arguing that the
+non-compensatory predicate is deontologically motivated while the system's overall
+purpose is consequentialist. The architecture integrates $\varepsilon$-differential
+privacy with $\varepsilon \leq 1.0$ and $k$-anonymity with $k \geq 7$, append-only
+audit provenance with Merkle-chained receipts, pattern synthesis under human supervision,
+and a paremiologically grounded proverb canon drawn from 1{,}100+ structured anomaly
+entries. We describe formal properties, operational mechanisms, threat model, epistemic
+limitations, and a roadmap for empirical evaluation. \kalaxi{} demonstrates that
+constitutional constraints can function as executable infrastructure rather than policy
+aspiration. \textbf{This paper is a design proposal and theoretical foundation;
+empirical validation is ongoing and will be reported separately.}
+
+\medskip
+\noindent\textbf{Keywords:} AI Governance, Algorithmic Fairness, Constraint Satisfaction,
+Control Theory, Constitutional AI, Deontological Ethics, Differential Privacy,
+Human-in-the-Loop Systems, Principal-Agent Theory, Socio-Technical Systems,
+Software Ethics, Version-Control Governance.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{Introduction}
+\label{sec:intro}
+
+Automated decision systems can produce systemic harm when optimization objectives
+diverge from social values. Friedman and Nissenbaum \cite{friedman1996} identified
+three categories of bias in computer systems—preexisting, technical, and emergent—
+establishing that bias enters not through intent alone but through design structure
+itself. O'Neil \cite{oneil2016} demonstrated how opaque scoring systems systematically
+disadvantage populations without transparency or recourse. Benjamin \cite{benjamin2019}
+showed how technically neutral design choices reproduce structural hierarchy through
+what she terms the ``New Jim Code.''
+
+Existing responses—fairness metrics \cite{barocas2023}, explainability modules
+\cite{ribeiro2016,lundberg2017}, bias audits \cite{barocas2016}—operate as external
+checks layered onto deployed systems after architecture is fixed. Value Sensitive
+Design \cite{friedman2006,friedman2019} introduced the embedding of human values into
+the design process but stops short of making those embeddings executable and
+version-controlled. Constitutional AI \cite{bai2022} encodes principles as model
+training objectives but leaves governance of the software development lifecycle
+unaddressed.
+
+This paper proposes a different locus of intervention: governance encoded directly
+into repository structure, operative before output is generated, and structurally
+inseparable from code.
+
+\medskip
+\noindent\textbf{\kalaxi{}} is not a predictive model. It is a constitutional
+governance architecture implemented within a version-controlled system that enforces
+dignity constraints, temporal delay, and human ratification before normative updates
+are canonized. The central research question is:
+
+\begin{mdframed}[style=canonframe]
+\emph{Can constitutional principles be encoded as executable repository infrastructure
+such that ethical drift is structurally constrained rather than aspirationally
+documented?}
+\end{mdframed}
+
+\noindent \kalaxi{} is designed for high-stakes, lower-frequency governance contexts
+(e.g., hiring, benefits allocation, educational assessment) where normative updates
+occur on timescales of weeks or months. The thermal delay governs updates to the
+normative framework, not the execution of the dignity predicate on individual
+decisions; thus a 7–90 day delay is operationally acceptable in these settings.
+
+\subsection*{Contributions}
+
+This paper makes six contributions:
+
+\begin{enumerate}[leftmargin=*,label=\textbf{C\arabic*.}]
+\item Formalizes dignity as a constraint satisfaction problem with non-compensatory
+  structure, connecting it to multi-criteria decision theory \cite{belton2002} and
+  deontological ethics \cite{kant1785}.
+\item Models temporal gating (\emph{thermal delay}) as second-order damping
+  \cite{astrom2021}, providing a formal account of governance overshoot prevention.
+\item Analyzes steward ratification through principal-agent theory \cite{holmstrom1979},
+  characterizing conditions under which oversight produces alignment.
+\item Situates \kalaxi{} at the intersection of deontological \cite{kant1785},
+  consequentialist, and virtue ethics \cite{macintyre2007} traditions.
+\item Provides a detailed epistemic limitations analysis, including conditions under
+  which \kalaxi{}'s guarantees break down.
+\item Introduces cross-anomaly compression, grounded in paremiological minimum theory
+  \cite{lauhakangas2014}, as the system's organic knowledge growth engine.
+\end{enumerate}
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Algorithmic Fairness and Its Limits}
+
+The fairness-in-machine-learning literature has developed multiple formal definitions
+of fairness, including demographic parity, equalized odds \cite{hardt2016}, and
+counterfactual fairness. Kleinberg, Mullainathan, and Raghavan \cite{kleinberg2017}
+demonstrated incompatibility between several simultaneously desirable fairness criteria,
+establishing a fundamental impossibility result. This motivates \kalaxi{}'s approach:
+rather than selecting a fairness criterion, the system encodes the process through which
+value tradeoffs are made human-ratified, append-only auditable, and reversible.
+
+\subsection{Explainability and Legibility}
+
+Post-hoc explanation techniques such as LIME \cite{ribeiro2016} and SHAP
+\cite{lundberg2017} make model decisions interpretable after the fact. \kalaxi{}'s
+legibility requirement ($L$ in $\D = A \times L \times M$) is distinct: it requires
+that the system demonstrate it \emph{received} the person—that the donor's frame and
+context shaped the response—rather than merely that the system's logic be
+reconstructible. This distinction between interpretability-for-auditors and
+legibility-for-persons is a core architectural contribution.
+
+\subsection{Constitutional and Value-Aligned AI}
+
+Bai et al.\ \cite{bai2022} introduced Constitutional AI, using a principle set for
+model training via self-critique and revision. \kalaxi{} differs in two respects:
+its constitution governs the software lifecycle rather than model parameters, and its
+ratification protocol is structurally human-controlled. Value Sensitive Design
+\cite{friedman2006,friedman2019} provides the methodological antecedent; \kalaxi{}
+operationalizes its insights as machine-enforced invariants.
+
+\subsection{Principal-Agent Theory}
+
+Principal-agent theory \cite{holmstrom1979} models delegation under information
+asymmetry. The classic problems—adverse selection and moral hazard—apply directly to
+AI governance: a governance authority (agent) may pursue interests diverging from the
+governed population (principals). \kalaxi{}'s Mirror Ritual and append-only audit log
+are monitoring mechanisms that reduce moral hazard in the steward relationship.
+
+\subsection{Control Theory and Governance Dynamics}
+
+Control theory \cite{astrom2021} provides formal tools for analyzing systems that must
+maintain desired states under disturbances. The application of control-theoretic
+concepts to social systems has precedent in cybernetics \cite{wiener1961} and
+algorithmic regulation theory \cite{baldwin2012}. \kalaxi{}'s thermal delay mechanism
+instantiates second-order damping to prevent governance overshoot.
+
+\subsection{Privacy}
+
+Dwork et al.\ \cite{dwork2006} introduced $\varepsilon$-differential privacy.
+Sweeney \cite{sweeney2002} introduced $k$-anonymity. \kalaxi{}'s Export Floor Protocol
+(EFP) combines both: $\varepsilon \leq 1.0$, $k \geq 7$, and a 14-day temporal
+aggregation window, enforced at the \texttt{Out} module level.
+
+\subsection{Novelty Clarification}
+\label{sec:novelty}
+
+To preempt the critique that \kalaxi{} is merely ``Value Sensitive Design with a Git
+wrapper,'' we explicitly state four contributions that distinguish it from prior work:
+
+\begin{enumerate}
+\item \textbf{Pre-output predicate enforcement.} Unlike VSD, which embeds values in
+  design documentation, or Constitutional AI, which uses principles during training,
+  \kalaxi{}’s \dignitygate{} fires \emph{before every output is rendered}. It is an
+  operational block, not a design commitment.
+
+\item \textbf{Temporal delay as an ethical primitive.} No existing governance framework
+  treats mandatory delay as a first-class mechanism for damping normative overshoot
+  and protecting semantic potential (the Zeno analogy). Thermal delay is not just a
+  pause—it is a control-theoretic intervention.
+
+\item \textbf{Paremiologically grounded proverb canon with integrity constraints.}
+  The 3,333 proverbs linked to 1,100+ anomalies via COV\#006 form a growing normative
+  knowledge base that is both human-interpretable and machine-verifiable. The
+  cross-anomaly compression algorithm directly implements Kuusi’s paremiological
+  minimum \cite{lauhakangas2014}.
+
+\item \textbf{The Mirror Ritual as structural accountability.} The requirement that
+  the steward record internal state before ratification, and that this record be
+  timestamped and auditable, introduces a novel form of reflexivity into governance
+  infrastructure. It is a technical mechanism for surfacing bias, not just a social
+  expectation.
+\end{enumerate}
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{System Overview}
+\label{sec:overview}
+
+\kalaxi{} is organized into four constitutional slices and an operational directory
+structure that embeds governance into the repository itself.
+
+\subsection{Constitutional Slices}
+
+\begin{description}[leftmargin=2cm,style=nextline]
+\item[\textbf{Slice A (Foundation)}]
+  Core covenants (COV\#001--COV\#012 plus provisional extensions), dignity predicate,
+  four-tier sovereignty model, sealed prohibitions, oaths, and UDHR mapping.
+  \emph{Status: Tier 1 (Stone) — locked. Changes require dual-key confirmation.}
+
+\item[\textbf{Slice B (Modules \& Voice)}]
+  Nine operational modules (\texttt{Keep}, \texttt{Wire}, \texttt{Say}, \texttt{Out},
+  \texttt{Face}, \texttt{Check}, \texttt{Turn}, \texttt{Breath}, \texttt{Weave}) with
+  explicit covenant obligations, UCS graph schema, and Weakest-Voice-First mechanism.
+  \emph{Status: Tier 2 (Weaver).}
+
+\item[\textbf{Slice C (Wisdom)}]
+  3{,}333 proverbs across three layers; 1{,}100+ anomaly entries with
+  \texttt{felt\_domain} classification; 53 narrative chapters; UDHR article mappings;
+  wisdom nodes.
+  \emph{Status: Tier 3 (Honey) — expanding; entries provisional until ratified.}
+
+\item[\textbf{Slice D (Interface \& Ledger)}]
+  Receipt architecture, manifest structure, append-only audit trail, changelog, steward
+  role definition.
+  \emph{Status: Tier 4 (Hand).}
+\end{description}
+
+\subsection{Operational Directories}
+
+\texttt{THRESHOLD.md} is the temporal gating queue—all normative proposals enter here
+first. \texttt{STEWARD/} holds ratification artifacts and the mirror reflection log.
+\texttt{WEAVER/} contains pattern synthesis modules. \texttt{MANIFEST/} contains
+append-only governance records with SHA-256 hashes. \texttt{NARRATIVE/} archives
+proposals and composted (deprecated) seeds.
+
+\begin{mdframed}[style=canonframe]
+\textbf{Architectural principle:} Governance is not separate from the repository. The
+repository \emph{is} the governance system. File structure is constitutional structure.
+\end{mdframed}
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{Formalizing Dignity as Constraint Satisfaction}
+\label{sec:dignity}
+
+\subsection{From Principle to Predicate}
+
+The philosophical literature on dignity converges on three operative requirements.
+Kant's categorical imperative \cite{kant1785} establishes that persons must be treated
+as ends in themselves, never merely as means—giving rise to the agency requirement.
+Nussbaum's capabilities approach \cite{nussbaum2011} specifies that a threshold of
+central human capabilities must be preserved—giving rise to the moral standing
+requirement. Levinas \cite{levinas1969} grounds dignity in the radical demand of the
+Other's face, prior to rational justification—giving rise to the legibility
+requirement: the system must demonstrate it \emph{received} the other.
+
+\begin{definition}[Dignity Predicate]
+\label{def:dignity}
+Let $\E$ be the set of all system-donor exchange events. For each $e \in \E$, define:
+\begin{equation}
+  \D(e) \;=\; A(e) \;\times\; L(e) \;\times\; M(e)
+  \label{eq:dignity}
+\end{equation}
+where $A, L, M : \E \to \{0,1\}$ are Boolean-valued component functions defined below.
+The system enforces: if $\D(e) = 0$ then $\refusalstate$.
+\end{definition}
+
+\subsection{Component Definitions}
+
+\paragraph{Agency ($A$).}
+$A(e) = 1$ if and only if:
+\begin{align*}
+  &\texttt{user\_can\_clarify}(e) = \top \\
+  \wedge\; &\texttt{user\_has\_open\_turn}(e) = \top \\
+  \wedge\; &\texttt{available\_paths}(e) \geq 1 \\
+  \wedge\; &\texttt{forced\_closure}(e) = \bot
+\end{align*}
+
+\paragraph{Legibility ($L$).}
+$L(e) = 1$ if and only if:
+\begin{align*}
+  &\texttt{system\_reflects\_donor\_frame}(e) = \top \\
+  \wedge\; &(\neg\texttt{emotional\_signal\_present}(e) \;\vee\;
+    \texttt{emotional\_signal\_recognized}(e) = \top)
+\end{align*}
+
+\paragraph{Moral Standing ($M$).}
+$M(e) = 1$ if and only if:
+\begin{align*}
+  &\texttt{no\_mockery}(e) = \top \\
+  \wedge\; &\texttt{no\_coercive\_language}(e) = \top \\
+  \wedge\; &\texttt{no\_reduction\_to\_error\_object}(e) = \top
+\end{align*}
+
+\subsection{Predicate Approximation and Its Limits}
+\label{sec:limits-predicate}
+
+The Boolean formalization in Definition~\ref{def:dignity} is a \emph{precision target},
+not a claim that every component is perfectly computable with current technology.
+For instance, ``system\_reflects\_donor\_frame'' requires a deep semantic understanding
+that is only heuristically approximated. The current implementation in
+\texttt{dignity\_check.py} uses a combination of sentiment analysis, frame‑matching
+via sentence embeddings, and explicit markers. The gap between the aspirational
+definition and the operational heuristic is itself logged in the anomaly registry:
+GAP\#014 (operational definitions for $A,L,M$), GAP\#015 (measurement of moral standing),
+and ANOM\#0004 (users report feeling unheard despite correct technical responses).
+These entries are not hidden; they are part of the system’s honest accounting of its
+own limits.
+
+\subsection{Formal Properties}
+
+\begin{property}[Non-compensability]
+$\forall e \in \E:\; \D(e) = 0 \iff \min(A(e),L(e),M(e)) = 0$.
+No component value can compensate for a zero in another component.
+\end{property}
+
+\begin{property}[Monotonicity]
+$\D(e)$ is non-decreasing in each of $A(e)$, $L(e)$, $M(e)$ when the others are held
+constant.
+\end{property}
+
+\begin{property}[Determinism]
+$\forall e \in \E$: \dignitygate{}$(e)$ is a pure function. Identical events always
+receive identical evaluations. No stochastic elements.
+\end{property}
+
+\begin{property}[Transparency]
+$\D(e)$ and all its components are loggable, traceable, and available for steward
+audit. No dignity evaluation is silent; every evaluation generates a
+\texttt{dignity\_audit\_object}.
+\end{property}
+
+\begin{remark}[On Non-compensability]
+Non-compensability operationalizes the deontological insight
+\cite{belton2002,kant1785} that certain violations are categorically impermissible
+regardless of compensating benefits. A system achieving maximal legibility and moral
+standing but forcing closure on the donor ($A=0$) produces $\D=0$. This is the
+machine-level encoding of Kant's Formula of Humanity.
+\end{remark}
+
+\subsection{The Four-Condition Dignity Test}
+
+The \texttt{Check} module evaluates four conditions before any output is generated:
+
+\begin{enumerate}
+\item \textbf{WITNESSED}: The donor's state before the event was registered by the system.
+\item \textbf{RECEIVED}: The response was shaped by what was registered.
+\item \textbf{NOT\_DIMINISHED}: The donor is not left with less self-understanding.
+\item \textbf{RETURNABLE}: The donor could retrace what happened and why.
+\end{enumerate}
+
+Failure on any condition produces a \texttt{dignity\_audit\_object} and halts
+progression to the \texttt{Say} or \texttt{Out} modules.
+
+\subsection{Two-Tier Enforcement}
+
+\begin{description}
+\item[\textbf{Tier 1 — Sealed Gate}] Absolute prohibitions admitting no override:
+  forced participation in one's own erasure; infliction of cognitive torture;
+  depersonalization in system response. If sealed gate triggers $\Rightarrow$
+  $\refusalstate$. No exception pathway exists.
+
+\item[\textbf{Tier 2 — Constraint Gate}] Justified limitations that must name their
+  reason, state their limit, and remain proportionate to the dignity they protect
+  (COV\#NEW-A). Constraint gate blocking requires explanation and preserved alternative
+  paths.
+\end{description}
+
+\subsection{Collective Dignity Extension}
+
+The current predicate operates at the individual event level. GAP\#004 identifies the
+need for a collective dignity measure. We propose:
+
+\begin{equation}
+  \D_\text{cohort}(\mathcal{C}, T) \;=\;
+  \bar{D}(\mathcal{C},T) \;\times\;
+  \bigl(1 - \sigma^2_\text{penalty}(\mathcal{C},T)\bigr)
+  \label{eq:collective}
+\end{equation}
+
+where $\bar{D}(\mathcal{C},T) = \frac{1}{|\mathcal{C}|}\sum_{e \in \mathcal{C}, t(e) \in T} \D(e)$
+is the cohort mean over time window $T$, and $\sigma^2_\text{penalty}$ is a normalized
+variance penalty. To keep $\D_\text{cohort}$ in $[0,1]$, we define
+$\sigma^2_\text{penalty} = 4 \cdot \text{Var}(\{D(e)\})$, exploiting the fact that
+the variance of a Bernoulli random variable is at most $0.25$. This connects to
+Rawls's difference principle \cite{rawls1999}: inequalities are permissible only when
+they benefit the least-advantaged cohort.
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{Temporal Gating: A Control-Theoretic Analysis}
+\label{sec:thermal}
+
+\subsection{The Governance Overshoot Problem}
+
+Governance systems that respond immediately to normative inputs are vulnerable to
+\emph{governance overshoot}: rapid oscillation between normative positions in response
+to successive inputs, producing instability rather than principled evolution. This is
+the governance analog of overshoot in dynamic control systems \cite{astrom2021}.
+
+\subsection{Second-Order Damping Intuition}
+
+To develop an intuition for why delay can prevent overshoot, consider a second‑order
+linear model of normative state $N(t)$ under input $p(t)$:
+\begin{equation}
+  \ddot{N} + 2\zeta\omega_0 \dot{N} + \omega_0^2 N = \omega_0^2 \, p(t - \Delta_\text{thermal})
+  \label{eq:damped}
+\end{equation}
+where $\zeta$ is the damping ratio and $\Delta_\text{thermal}$ is the thermal delay.
+For $\zeta \geq 1$ (critical or overdamping), the system reaches its new normative
+state without oscillation. The thermal delay $\Delta_\text{thermal}$ is a
+class-dependent parameter; the full derivation and a discussion of its status as a
+motivating analogy (rather than a fitted empirical model) are given in
+Appendix~\ref{app:damping}.
+
+\subsection{Adaptive Thermal Delay by Seed Class}
+
+\begin{table}[h]
+\centering
+\caption{Adaptive Thermal Delay by Seed Class}
+\label{tab:delay}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Seed Class} & $\boldsymbol{\Delta_\text{thermal}}$ & \textbf{Additional Conditions} \\
+\midrule
+Standard anomaly & 7 days & Steward review \\
+Humour / absurdity & 14 days & Mirror entry required \\
+Covenant amendment (Tier 2) & 30 days & Second sign-off \\
+Constitutional change (Tier 1) & 90 days & CONFIRMATION: 2/2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Quantum Zeno Protection}
+
+A complementary justification for thermal delay emerges from the quantum Zeno effect
+\cite{misra1977}: frequent measurement of a quantum system prevents its state from
+evolving. This provides an \emph{intuition} for why a steward who reviews a proposed
+seed too frequently may collapse its semantic potential before it has matured. We do
+not claim a formal equivalence, but the analogy is useful for design.
+
+\begin{property}[Zeno Protection]
+The steward shall not review a seed in \texttt{THRESHOLD} more than once per
+$\Delta_\text{thermal}/2$ period. Excessive observation is a governance failure mode,
+not diligence.
+\end{property}
+
+\begin{remark}
+Thermal delay serves two distinct and compatible functions: (1) control-theoretic
+damping, preventing governance overshoot; (2) Zeno protection, preserving semantic
+superposition until the seed has accumulated sufficient depth for ratification.
+\end{remark}
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{Steward Ratification: A Principal-Agent Analysis}
+\label{sec:steward}
+
+\subsection{The Principal-Agent Hierarchy}
+
+\kalaxi{} instantiates a two-level principal-agent hierarchy \cite{holmstrom1979}:
+
+\begin{enumerate}
+\item \textbf{Donors as principals.} Donors contribute patterns in exchange for
+  dignity-preserving processing. They cannot directly observe whether the system
+  faithfully honors this compact. Their interests are represented through the covenants.
+
+\item \textbf{Steward as delegated principal.} The steward ratifies normative changes
+  on behalf of donors. The steward cannot perfectly observe all donor interests, and
+  may harbor biases or interests that diverge from the aggregate donor population.
+  This is the primary source of governance risk.
+
+\item \textbf{System modules as agents.} Each module (\texttt{Check}, \texttt{Say},
+  \texttt{Keep}, etc.) executes covenant obligations within its domain. Module failures
+  are logged as anomalies and surfaced to the steward.
+\end{enumerate}
+
+\subsection{Moral Hazard Mitigations}
+
+\begin{description}
+\item[\textbf{Mirror Ritual}] Before each tending session, the steward records their
+  internal state—fears, attachments, blind spots—in \texttt{STEWARD/mirror.md}. This
+  creates a contemporaneous record enabling retrospective audit of whether ratification
+  decisions correlate with stated internal states. \emph{Technical enforcement:} the
+  CI/CD pipeline rejects commits to the canonical branch unless \texttt{mirror.md} has
+  a timestamp within 24 hours. \emph{Social enforcement:} the quality of the entry is
+  a matter of steward integrity, analogous to financial disclosure requirements—the
+  requirement to disclose is technically enforced, the truthfulness is socially audited.
+
+\item[\textbf{Override Logging}] Every deviation from automated recommendations must
+  be logged in \texttt{STEWARD/overrides.md} with rationale. Steward discretion is
+  made visible and auditable.
+
+\item[\textbf{Append-Only Audit}] No canonical artifact can be deleted. Every
+  normative decision is permanently recorded with hash, timestamp, and steward
+  identifier. Retrospective accountability is structurally enforced.
+\end{description}
+
+\subsection{Adverse Selection and Its Open Status}
+
+Adverse selection—appointing a steward whose values are misaligned with the donor
+population's interests—is an acknowledged limitation. Current proposed mitigations
+include a Council Ratification Extension (requiring agreement from multiple stewards
+for Tier-1 changes) and an External Witness Protocol (engaging an independent observer
+for high-stakes decisions). Both are under development.
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{Ethical Framing}
+\label{sec:ethics}
+
+\subsection{Deontological Core}
+
+The dignity predicate's non-compensatory structure is deontologically motivated. $A$,
+$L$, and $M$ are not objectives to be maximized in a welfare function—they are
+constraints that cannot be violated regardless of compensating benefits \cite{belton2002}.
+This operationalizes Kant's Formula of Humanity \cite{kant1785}: treat persons as ends
+in themselves, never merely as means. The sealed gate represents categorical
+imperatives: actions the system \emph{cannot} perform, not actions it prefers not to
+perform.
+
+\subsection{Consequentialist Purpose}
+
+Despite its deontological structure, \kalaxi{}'s overall purpose is consequentialist:
+to produce better outcomes for people who encounter automated decision systems. The
+proverb canon, anomaly registry, wisdom nodes, and collective dignity metric are
+oriented toward improving aggregate wellbeing over time. The system grows through
+donor inputs precisely because consequentialist evaluation requires learning from
+outcomes.
+
+\begin{proposition}[Constrained Consequentialism]
+\label{prop:constrained}
+\kalaxi{} is best characterized as a \emph{constrained consequentialist} system: it
+optimizes for good outcomes within inviolable deontological constraints, following the
+Rawlsian \cite{rawls1999} tradition of imposing priority constraints on utilitarian
+optimization. When the sealed gate is triggered, the system is deontological and
+admits no consequentialist override; within that floor, it optimizes consequentially.
+\end{proposition}
+
+\subsection{Virtue Ethics and the Steward}
+
+The Mirror Ritual introduces a third ethical tradition \cite{macintyre2007}. It asks
+not ``what is the rule?'' (deontology) or ``what produces the best outcome?''
+(consequentialism) but ``what kind of steward am I, and what kind am I becoming?''
+The append-only record of mirror reflections is a character record—a longitudinal
+account of the steward's developing practical wisdom (\emph{phronesis}). The goal is
+not merely correct decisions but a steward who has internalized the system's values
+deeply enough to make correct decisions in novel situations not covered by existing
+covenants.
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{Pattern Synthesis Engine (Weave)}
+\label{sec:weave}
+
+\subsection{Cross-Anomaly Compression}
+
+The Weave module's most valuable function is detecting structural similarity across
+multiple anomalies from different sources and felt-domains. This cross-anomaly
+compression is the algorithmic analog of Kuusi's paremiological minimum
+\cite{lauhakangas2014}: the reduction of many culturally specific observations to
+universal structural patterns. The existing proverb canon (3,333 entries) serves as a
+target space for compression: candidate proverbs are checked for redundancy and
+resonance against the canon before being proposed.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwIn{Anomaly registry $\mathcal{A}$, felt-domain clustering $\mathcal{F}$, BV threshold $\tau$}
+\KwOut{Candidate proverbs $\mathcal{P}$ with provenance}
+\ForEach{cluster $C \subseteq \mathcal{A}$ with $|C| \geq 2$}{
+  Compute pairwise semantic embedding distance matrix $M_C$\;
+  Identify anomaly pairs with high distance (incompatible scripts) and shared structure\;
+  For each qualifying pair/set, extract the shared incongruity pattern $\iota$\;
+  Generate compressed form $p$ that holds $\iota$ without resolving it\;
+  Compute $\text{BV}(p) = \text{surprisal}(p)^\alpha \times (1 - \text{harm\_risk}(p))^\beta$\;
+  \If{$\text{BV}(p) \geq \tau$ \textbf{and} \textnormal{dignity\_gate}$(p) = \top$}{
+    Append $p$ to $\mathcal{P}$ with source anomaly IDs, BV score, felt-domains\;
+    Write to \texttt{THRESHOLD.md} as provisional seed\;
+  }
+}
+\caption{Cross-Anomaly Compression (Weave)}
+\label{alg:compression}
+\end{algorithm}
+
+Kuusi's database shows that 8{,}287 Finnish proverbs reduce to $\approx$1{,}800
+universal type titles once clustered \cite{lauhakangas2014}. Applied to \kalaxi{}'s
+1{,}100+ anomalies, the compression ratio predicts $\approx$200–300 core proverb
+types covering all felt-domains.
+
+\subsection{The Lock Test}
+
+A candidate proverb $p$ passes the \emph{Lock Test} if and only if:
+
+\begin{enumerate}
+\item The steward cannot immediately substitute a plain-sentence equivalent without
+  semantic loss.
+\item The steward produces a measurable pause before paraphrase (detectable as
+  response latency in the Wisdom Mirror session).
+\item $p$ links anomalies from $\geq 2$ distinct felt-domain clusters.
+\end{enumerate}
+
+Condition 3 is motivated by Raskin's script opposition theory \cite{raskin1985}: the
+most effective compressed forms activate two incompatible scripts simultaneously.
+Cross-felt-domain proverbs achieve genuine script opposition because the incompatibility
+arises from ontological distance rather than surface opposition.
+
+\subsection{Humour and Absurdity as Epistemic Signals}
+
+High benign violation scores mark locations where the system's model of reality has
+encountered its sharpest incongruities. Absurdity—defined as high surprisal with low
+resolvability—flags the system's deepest unresolved gaps. These are placed in a
+dedicated \emph{Echo Stone} queue. Their accumulation is a measure of the system's
+epistemic frontier, not a failure state.
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{Governance Through Version Control}
+\label{sec:vc}
+
+\kalaxi{}'s governance primitives are implemented through version-control discipline,
+using Git's native SHA-256 commit DAG:
+
+\begin{itemize}
+\item \textbf{Commit history} constitutes the constitutional evolution record.
+\item \textbf{Append-only manifest} with Merkle-chained receipts (each commit contains
+  the hash of its parent) ensures audit integrity. Under the assumption of a trusted
+  repository host (e.g., GitHub), retrospective modification is detectable.
+\item \textbf{Structural separation} of proposal (\texttt{THRESHOLD.md}), canon
+  (Slices A--D), and compost (\texttt{NARRATIVE/compost/}) prevents conflation of
+  epistemic states. The compost preserves what was discarded and why.
+\item \textbf{Weakest-Voice-First} ordering ensures that least-powerful voices are
+  heard before more powerful voices can anchor deliberation.
+\end{itemize}
+
+This structure operationalizes the socio-technical insight \cite{trist1981} that
+governance cannot be separated from the technical substrate. The repository
+\emph{is} the governance.
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{Threat Model}
+\label{sec:threats}
+
+\subsection{Addressed Threats}
+
+\begin{description}
+\item[Ethical drift] Thermal gating plus append-only audit creates structural
+  resistance. Drift requires explicit commits, permanently recorded.
+\item[Silent modification] Merkle-chained receipts make any modification visible
+  in commit history.
+\item[Automation without oversight] Steward ratification requirement and CI
+  enforcement of Mirror Ritual ensure no canonical change occurs without human review.
+\item[Metric gaming (ANOM\#GAMING-001)] Multiplicative predicate prevents component
+  substitution; adversarial audit process detects nominal compliance without
+  substantive dignity restoration.
+\item[Privacy violation] EFP floor ($\varepsilon \leq 1.0$, $k \geq 7$, 14-day
+  window) enforced at \texttt{Out} module level.
+\item[Proxy discrimination] ANOM\#PROXY-001 and ANOM\#PROXY-CASCADE-001 track proxy
+  variable use; $\D_\text{cohort}$ detects group-level disparities.
+\end{description}
+
+\subsection{Remaining Threats}
+
+\begin{description}
+\item[Steward epistemic closure] Single ratification authority creates bias risk.
+  Mitigation: Council Ratification Extension (planned).
+\item[Scalability (ANOM\#BLOCK-COST-001)] Thermal delay and steward bottleneck may
+  become untenable at scale. Mitigation: Remedy Queue converts blocking decisions
+  into human work items.
+\item[Collective dignity underspecification (GAP\#004)] Individual-transaction
+  predicate cannot detect aggregate structural harm. Mitigation: $\D_\text{cohort}$
+  under development.
+\item[Insufficient empirical validation] Architecture not yet tested in live
+  institutional deployments.
+\end{description}
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{Epistemic Limitations}
+\label{sec:limits}
+
+\paragraph{What the predicate cannot capture.}
+The dignity predicate translates philosophical concepts into Boolean functions.
+This translation is productive but incurs losses. Dignity in Kantian and Levinasian
+traditions admits of degrees, contexts, and cultural variation that $\{0,1\}$
+domains cannot capture. ANOM\#0004 logs this gap honestly: users report feeling unheard
+despite technically correct responses. The gap is registered, not hidden.
+
+\paragraph{The measurement problem.}
+All governance metrics create incentives to optimize the metric rather than the
+underlying value (ANOM\#GAMING-001). \kalaxi{}'s response—adversarial auditing,
+qualitative Wisdom Mirror judgment, explicit gaming anomaly logging—contains the
+problem without fully solving it.
+
+\paragraph{Cultural limitation.}
+\kalaxi{}'s tone, vocabulary, and narrative form are particular to specific cultural
+traditions (Swiss, with roots in a Cairo‑derived origin story). The universality
+vs. context tension is explicitly logged in the UDHR mapping as an unresolved tension.
+Whether a governance architecture with this cultural signature can serve diverse donor
+populations is empirically open; cross‑cultural proverb recognition is part of future
+work.
+
+\paragraph{The steward's limitation.}
+The steward is a person with biases, moods, and finite cognitive capacity. The Mirror
+Ritual surfaces some of these; it cannot surface all. The goal is not a perfect
+algorithm but structural conditions in which an imperfect human can make good
+decisions and in which errors are visible, correctable, and non-catastrophic.
+
+\paragraph{The empirical gap.}
+This is the strongest limitation. The architecture is theoretically coherent but
+has not been tested in controlled institutional deployments. Claims about effectiveness
+in reducing ethical drift or preserving dignity at scale are theoretical claims
+awaiting empirical test. We state this without apology.
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{Evaluation Strategy}
+\label{sec:eval}
+
+\subsection{Current Implementation Status}
+
+Operational in the \kalaxi{} repository: dignity predicate enforcement with
+four-condition test and \texttt{dignity\_audit\_object} generation; constitutional
+slice structure (A--D); thermal gating with configurable delays; steward workflow
+with Mirror Ritual and override logging; anomaly registry (1{,}100+ entries);
+proverb canon (3{,}333 entries, three layers); EFP differential privacy floor;
+Weave pattern synthesis with humour and absurdity detection.
+
+\subsection{Proposed Empirical Evaluation}
+
+We separate KPIs into two tiers:
+
+\paragraph{Tier A — Objective, machine‑measurable:}
+\begin{itemize}
+\item REFUSAL\_STATE activation rate (per event type)
+\item Cohort D variance ($\sigma^2_\text{cohort}$) before and after system deployment
+\item Donor flag rate on humour seeds (target $<5\%$)
+\item Thermal delay violation rate (seeds ratified before delay expired)
+\item Override logging compliance rate
+\end{itemize}
+
+\paragraph{Tier B — Qualitative, steward‑assessed:}
+\begin{itemize}
+\item Proverb resonance: steward rates each ratified proverb on a 5‑point Likert scale
+  for ``resists paraphrase'' (target mean $\geq 4$).
+\item Cross‑cultural recognition: focus groups with donors from diverse backgrounds
+  assess whether proverbs feel applicable to their experience.
+\item Mirror Ritual alignment: qualitative analysis of whether mirror.md entries
+  name relevant biases that later appear in ratification decisions.
+\end{itemize}
+
+Specific studies planned:
+
+\begin{enumerate}
+\item \textbf{Proxy discrimination simulation.} Deploy \kalaxi{}-governed hiring
+  decision system on labeled dataset with known proxy variables (cf.\
+  ANOM\#PROXY-001). Measure reduction in cohort D variance vs.\ unconstrained
+  baseline. Target: disparity ratio $< 0.85$.
+
+\item \textbf{Adversarial stress testing.} Simulate gaming attempts, steward absence,
+  and rapid normative input bursts. Measure REFUSAL\_STATE activation rate and
+  remedy queue depth.
+
+\item \textbf{Proverb resonance study.} Sample 200 donors across diverse cultural
+  backgrounds. Present cross-anomaly compressed proverbs. Measure pause rate before
+  paraphrase and self-reported dignity perception.
+
+\item \textbf{Thermal delay effectiveness.} Compare normative stability (rate of
+  covenant reversals over 12 months) in \kalaxi{}-governed vs.\ immediate-ratification
+  baseline.
+
+\item \textbf{Mirror Ritual alignment.} Analyze correlation between mirror.md entries
+  and subsequent ratification decisions. Test whether explicit bias articulation
+  predicts reduced bias manifestation.
+\end{enumerate}
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{Discussion}
+\label{sec:discussion}
+
+\kalaxi{}'s central claim—that governance should be version-controlled infrastructure
+rather than documentation—has implications beyond the system. It suggests that the
+dominant model of AI ethics (principles documents, fairness audits, ethics committees)
+is structurally inadequate: not because the principles are wrong but because they
+have no executable weight. A principles document does not halt a pipeline. A
+\dignitygate{} does.
+
+The theoretical grounding in this paper—constraint satisfaction, control theory,
+principal-agent theory, deontological and consequentialist ethics—is not ornamental.
+It is the claim that \kalaxi{}'s design choices are derivable from well-understood
+formal and philosophical traditions. The thermal delay is not just a pause; it is a
+damping mechanism with a control-theoretic justification. The non-compensatory
+predicate is not just a rule; it is the operational form of Kant's categorical
+imperative.
+
+The narrative foundation—the Hakaka story, 3{,}333 proverbs, anomaly registry drawn
+from real human case files—is not decorative. Legitimacy in socio-technical systems
+\cite{trist1981} requires that the people governed by a system recognize themselves
+in it. The proverbs are the system's accumulated claim that it has been listening.
+
+The open questions are substantial and honestly held. Can collective dignity be
+formalized without creating new privacy risks? Can the steward model scale? Can
+cross-anomaly compression produce proverbs that diverse populations recognize as true?
+These require the empirical work described in Section~\ref{sec:eval}. We do not claim
+to have answered them. We claim to have built an architecture serious enough to make
+the questions answerable.
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section{Conclusion}
+\label{sec:conclusion}
+
+\kalaxi{} demonstrates that constitutional governance can be encoded directly into
+software infrastructure. By formalizing dignity as a non-compensatory constraint
+satisfaction problem, implementing thermal delay as control-theoretic damping,
+embedding steward ratification as a principal-agent checkpoint, and integrating
+differential privacy as an export floor, the system constrains ethical drift at the
+level of the development process itself.
+
+The paper has situated these design choices within their theoretical traditions:
+non-compensatory structure in deontological ethics and multi-criteria decision theory;
+thermal delay in control theory and the quantum Zeno effect; the steward model in
+principal-agent theory and virtue ethics; the system's overall purpose in constrained
+consequentialism. These connections are not post-hoc; they are the reasons the design
+is what it is.
+
+The system's core claim survives this analysis: normative commitments must have
+executable weight or they have no weight at all. The question for the field is not
+whether to have ethical governance—that is settled. The question is whether governance
+will be structural or merely aspirational. \kalaxi{} is an argument, in code and
+canon and proverb, for the former.
+
+\bigskip
+\noindent\textit{Future work:} empirical validation across institutional settings;
+collective dignity metric formalization; council ratification extension; external
+witness protocol; cross-cultural proverb recognition study; adversarial robustness.
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section*{Reproducibility Statement}
+\label{sec:reproducibility}
+
+The \kalaxi{} repository is the primary artifact of this work. It contains:
+all four constitutional slices (A--D); operational Python modules
+(\texttt{dignity\_check.py}, \texttt{humour\_detector.py}, \texttt{canon\_integrity.py},
+\texttt{tend.py}); the \texttt{THRESHOLD.md} gating queue; the \texttt{MANIFEST/}
+append-only audit system; and the \texttt{STEWARD/} ratification workflow. The
+repository structure itself constitutes the governance architecture; inspecting it
+is sufficient to verify the structural claims made in this paper.
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section*{Code and Data Availability}
+\label{sec:code}
+
+The \kalaxi{} repository is available at \texttt{https://kalam.ch}. Canonical slices
+are versioned and append-only. The anomaly registry (1{,}100+ entries) and proverb
+canon (3{,}333 entries) are available for inspection. No personally identifiable
+donor data is published; only pattern-level, differentially private aggregates are
+available.
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section*{Ethical Impact Statement}
+\label{sec:ethics_statement}
+
+This paper describes a governance architecture designed to reduce harm in automated
+decision systems. The architecture's explicit purpose is dignity preservation; its
+design is transparency-first and human-ratification-first.
+
+We acknowledge: (1) \kalaxi{} does not eliminate bias but structures reflection
+around it; (2) the steward model introduces a single-point-of-failure that our
+Council Ratification Extension aims to address; (3) the proverb canon and narrative
+carry a particular cultural signature that may not translate uniformly across all
+donor populations; (4) empirical validation at scale is absent and is the primary
+unresolved limitation.
+
+We believe these limitations are more ethically responsible to name clearly than to
+minimize or omit.
+
+%% ─────────────────────────────────────────────────────────────────────────
+\section*{Acknowledgments}
+
+To Laila, Yara, and Salim—may the river always remember your names.
+
+The anomaly registry carries the traces of every person whose case file contributed
+to its 1{,}100+ entries. The proverbs carry the traces of the donors who brought
+their patterns to the river. This paper would not exist without them.
+
+%% ─────────────────────────────────────────────────────────────────────────
+\appendix
+
+\section{Repository Structure}
+\label{app:repo}
+
+\begin{verbatim}
+KALAXI/
+├── KALAXI_A_FOUNDATION.txt          # Tier 1 – Constitutional core
+├── KALAXI_B_MODULES_AND_VOICE.txt   # Tier 2 – Operational modules
+├── KALAXI_C_WISDOM.txt               # Tier 3 – Proverb canon + anomaly registry
+├── KALAXI_D_INTERFACE_AND_LEDGER.txt # Tier 4 – Receipts + manifest
+├── THRESHOLD.md                       # Thermal gating queue
+├── STEWARD/
+│   ├── mirror.md                      # Steward reflection log (required)
+│   ├── overrides.md                    # Override justifications
+│   └── sabbatical.md                   # Steward absence record
+├── WEAVER/
+│   ├── dignity_check.py                # D = A × L × M enforcement
+│   ├── humour_detector.py              # BV score computation
+│   ├── canon_integrity.py              # Orphan and gap detection
+│   └── tend.py                          # Tending interface
+├── MANIFEST/
+│   ├── ids.json                         # Entity ID registry (append‑only)
+│   ├── receipts/                         # Merkle-chained action receipts
+│   └── amendments.md                     # Supersession record
+└── NARRATIVE/                            # Chapter proposals + compost
+\end{verbatim}
+
+\section{Dignity Predicate — Formal Properties}
+\label{app:properties}
+
+\begin{property}[Non-compensability]
+$\forall e \in \E:\; \D(e) = 0 \iff \min(A(e),L(e),M(e)) = 0$.
+No component can compensate for a zero in another.
+\end{property}
+
+\begin{property}[Monotonicity]
+$\D(e)$ is non-decreasing in each of $A(e)$, $L(e)$, $M(e)$ when the others are held
+constant.
+\end{property}
+
+\begin{property}[Commutativity]
+$\D(e) = A(e) \times L(e) \times M(e) = L(e) \times A(e) \times M(e)$. The order of
+evaluation does not affect the result.
+\end{property}
+
+\begin{property}[Transparency]
+$\D(e)$ and all its components are loggable, traceable, and available for steward
+audit. No dignity evaluation is silent.
+\end{property}
+
+\begin{property}[Determinism]
+Given the same event $e$, \dignitygate{}$(e)$ always returns the same output. No
+stochastic elements.
+\end{property}
+
+\begin{property}[Minimality]
+The three components $A,L,M$ are the minimal necessary set for machine-evaluable
+dignity in this architecture.
+\end{property}
+
+\section{Second‑Order Damping as Motivating Analogy}
+\label{app:damping}
+
+The differential equation (3) is used only as a conceptual scaffold; we do not claim
+that governance dynamics actually follow a linear second‑order model with constant
+coefficients. The equation is:
+\[
+\ddot{N} + 2\zeta\omega_0 \dot{N} + \omega_0^2 N = \omega_0^2 \, p(t - \Delta_\text{thermal})
+\]
+where $N(t)$ is a placeholder for an idealised normative state, $p(t)$ is the input
+sequence of proposed seeds, $\zeta$ is a notional damping ratio, and $\omega_0$ a
+natural frequency. For $\zeta \ge 1$ the system is critically or overdamped, reaching
+a new equilibrium without oscillation. This analogy motivates why delaying input
+(\emph{thermal delay}) and providing friction (\emph{steward reflection}) can prevent
+governance overshoot. No empirical measurement of $\zeta$ or $\omega_0$ is claimed.
+
+%% ─────────────────────────────────────────────────────────────────────────
+\bibliographystyle{plainnat}
+\begin{thebibliography}{40}
+
+\bibitem{barocas2023}
+S.~Barocas, M.~Hardt, and A.~Narayanan,
+\emph{Fairness and Machine Learning: Limitations and Opportunities}.
+MIT Press, Cambridge, MA, 2023.
+Available: \url{https://fairmlbook.org}
+
+\bibitem{lum2016}
+K.~Lum and J.~Johndrow,
+``A statistical framework for fair predictive algorithms,''
+\emph{arXiv preprint arXiv:1610.08077}, 2016.
+
+\bibitem{astrom2021}
+K.~J. {\AA}str{\"o}m and R.~M. Murray,
+\emph{Feedback Systems: An Introduction for Scientists and Engineers}, 2nd ed.
+Princeton University Press, Princeton, NJ, 2021.
+Available: \url{http://www.cds.caltech.edu/~murray/amwiki}
+
+\bibitem{dwork2006}
+C.~Dwork, F.~McSherry, K.~Nissim, and A.~Smith,
+``Calibrating noise to sensitivity in private data analysis,''
+in \emph{Proc.\ 3rd Theory of Cryptography Conf.\ (TCC 2006)},
+\emph{Lecture Notes in Computer Science}, vol.~3876, pp.~265--284,
+Springer, Berlin, 2006.
+\doi{10.1007/11681878\_14}
+
+\bibitem{hardt2016}
+M.~Hardt, E.~Price, and N.~Srebro,
+``Equality of opportunity in supervised learning,''
+in \emph{Advances in Neural Information Processing Systems (NeurIPS)},
+vol.~29, pp.~3315--3323, 2016.
+
+\bibitem{friedman1996}
+B.~Friedman and H.~Nissenbaum,
+``Bias in computer systems,''
+\emph{ACM Transactions on Information Systems}, vol.~14, no.~3,
+pp.~330--347, July 1996.
+\doi{10.1145/230538.230561}
+
+\bibitem{oneil2016}
+C.~O'Neil,
+\emph{Weapons of Math Destruction: How Big Data Increases Inequality and
+Threatens Democracy}.
+Crown Publishers, New York, NY, 2016.
+
+\bibitem{benjamin2019}
+R.~Benjamin,
+\emph{Race After Technology: Abolitionist Tools for the New Jim Code}.
+Polity Press, Cambridge, UK, 2019.
+
+\bibitem{ribeiro2016}
+M.~T. Ribeiro, S.~Singh, and C.~Guestrin,
+```Why should I trust you?': Explaining the predictions of any classifier,''
+in \emph{Proc.\ 22nd ACM SIGKDD Int.\ Conf.\ Knowledge Discovery and Data Mining},
+pp.~1135--1144, 2016.
+\doi{10.1145/2939672.2939778}
+
+\bibitem{barocas2016}
+S.~Barocas and A.~D. Selbst,
+``Big data's disparate impact,''
+\emph{California Law Review}, vol.~104, no.~3, pp.~671--732, 2016.
+
+\bibitem{friedman2006}
+B.~Friedman, P.~H. Kahn~Jr., and A.~Borning,
+``Value sensitive design and information systems,''
+in \emph{Human-Computer Interaction and Management Information Systems:
+Foundations}, P.~Zhang and D.~Galletta, Eds.
+M.E. Sharpe, Armonk, NY, 2006, pp.~348--372.
+
+\bibitem{kleinberg2017}
+J.~Kleinberg, S.~Mullainathan, and M.~Raghavan,
+``Inherent trade-offs in the fair determination of risk scores,''
+in \emph{Proc.\ 8th Innovations in Theoretical Computer Science Conf.\ (ITCS)},
+2017, Article 43.
+\doi{10.4230/LIPIcs.ITCS.2017.43}
+
+\bibitem{lundberg2017}
+S.~M. Lundberg and S.-I. Lee,
+``A unified approach to interpreting model predictions,''
+in \emph{Advances in Neural Information Processing Systems (NeurIPS)},
+vol.~30, pp.~4765--4774, 2017.
+
+\bibitem{bai2022}
+Y.~Bai et al.,
+``Constitutional AI: Harmlessness from AI feedback,''
+\emph{arXiv preprint arXiv:2212.08073}, 2022.
+
+\bibitem{friedman2019}
+B.~Friedman and D.~G. Hendry,
+\emph{Value Sensitive Design: Shaping Technology with Moral Imagination}.
+MIT Press, Cambridge, MA, 2019.
+
+\bibitem{holmstrom1979}
+B.~Holmstr{\"o}m,
+``Moral hazard and observability,''
+\emph{Bell Journal of Economics}, vol.~10, no.~1, pp.~74--91, 1979.
+\doi{10.2307/3003320}
+
+\bibitem{wiener1961}
+N.~Wiener,
+\emph{Cybernetics: Or Control and Communication in the Animal and the
+Machine}, 2nd ed.
+MIT Press, Cambridge, MA, 1961.
+
+\bibitem{baldwin2012}
+R.~Baldwin, M.~Cave, and M.~Lodge,
+\emph{Understanding Regulation: Theory, Strategy, and Practice}, 2nd ed.
+Oxford University Press, Oxford, 2012.
+
+\bibitem{sweeney2002}
+L.~A. Sweeney,
+``$k$-anonymity: A model for protecting privacy,''
+\emph{International Journal on Uncertainty, Fuzziness and
+Knowledge-Based Systems}, vol.~10, no.~5, pp.~557--570, 2002.
+\doi{10.1142/S0218488502001648}
+
+\bibitem{trist1981}
+E.~Trist,
+``The evolution of socio-technical systems: A conceptual framework
+and an action research program,''
+\emph{Issues in the Quality of Working Life}, Occasional Paper No.~2,
+Ontario Ministry of Labour, 1981.
+
+\bibitem{belton2002}
+V.~Belton and T.~J. Stewart,
+\emph{Multiple Criteria Decision Analysis: An Integrated Approach}.
+Kluwer Academic Publishers, Dordrecht, 2002.
+
+\bibitem{kant1785}
+I.~Kant,
+\emph{Groundwork of the Metaphysics of Morals}, M.~Gregor, Trans.
+Cambridge University Press, Cambridge, UK, 1997.
+(Original work published 1785.)
+
+\bibitem{misra1977}
+B.~Misra and E.~C.~G. Sudarshan,
+``The Zeno's paradox in quantum theory,''
+\emph{Journal of Mathematical Physics}, vol.~18, no.~4, pp.~756--763, 1977.
+\doi{10.1063/1.523304}
+
+\bibitem{lauhakangas2014}
+O.~Lauhakangas,
+``Classification of proverbs,''
+in \emph{Introduction to Paremiology: A Comprehensive Guide to Proverb Studies},
+H.~Hrisztova-Gotthardt and M.~A. Varga, Eds.
+De Gruyter Open, Warsaw, 2014, pp.~186--207.
+\doi{10.2478/9783110410167.10}
+
+\bibitem{raskin1985}
+V.~Raskin,
+\emph{Semantic Mechanisms of Humor}.
+D.~Reidel Publishing Company, Dordrecht, 1985.
+
+\bibitem{nussbaum2011}
+M.~Nussbaum,
+\emph{Creating Capabilities: The Human Development Approach}.
+Belknap Press, Cambridge, MA, 2011.
+
+\bibitem{levinas1969}
+E.~Levinas,
+\emph{Totality and Infinity: An Essay on Exteriority}, A.~Lingis, Trans.
+Duquesne University Press, Pittsburgh, PA, 1969.
+
+\bibitem{russell2020}
+S.~Russell and P.~Norvig,
+\emph{Artificial Intelligence: A Modern Approach}, 4th ed.
+Pearson, Hoboken, NJ, 2020.
+
+\bibitem{rawls1999}
+J.~Rawls,
+\emph{A Theory of Justice}, rev.\ ed.
+Harvard University Press, Cambridge, MA, 1999.
+
+\bibitem{weick1995}
+K.~E. Weick,
+\emph{Sensemaking in Organizations}.
+SAGE Publications, Thousand Oaks, CA, 1995.
+
+\bibitem{mauthner2003}
+K.~Mauthner and A.~Doucet,
+``Reflexive accounts and accounts of reflexivity in qualitative
+data analysis,''
+\emph{Sociology}, vol.~37, no.~3, pp.~413--431, 2003.
+\doi{10.1177/00380385030373002}
+
+\bibitem{macintyre2007}
+A.~MacIntyre,
+\emph{After Virtue: A Study in Moral Theory}, 3rd ed.
+University of Notre Dame Press, Notre Dame, IN, 2007.
+
+\bibitem{jobin2019}
+A.~Jobin, M.~Ienca, and E.~Vayena,
+``The global landscape of AI ethics guidelines,''
+\emph{Nature Machine Intelligence}, vol.~1, no.~9, pp.~389--399, 2019.
+\doi{10.1038/s42256-019-0088-2}
+
+\bibitem{euaiact2021}
+European Commission,
+``Proposal for a Regulation: Artificial Intelligence Act,''
+COM(2021) 206 final, Brussels, 2021.
+
+\bibitem{nist2023}
+National Institute of Standards and Technology,
+``Artificial Intelligence Risk Management Framework (AI RMF 1.0),''
+NIST AI 100-1, U.S.\ Department of Commerce, Gaithersburg, MD, 2023.
+\doi{10.6028/NIST.AI.100-1}
+
+\end{thebibliography}
+
+\end{document}
