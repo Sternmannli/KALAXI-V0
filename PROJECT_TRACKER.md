@@ -10,7 +10,7 @@
 |-----|------|--------|-------|
 | **P0** | **Update mirror.md** before next tending session | ☐ Not started | Last entry: 2026-02-26. Required before running `tend.py --review`. |
 | **P0** | **Run cross‑anomaly compressor** on new clusters | ☐ Not started | `python3 WEAVER/proverb_compressor.py` (if any new anomalies added) |
-| **P0** | **Review future seeds (12) and make decisions** | ☐ Not started | See `FUTURE/` folder – each seed has checkboxes. |
+| **P0** | **Review future seeds (12) and make decisions** | ☑ Partially done (Seed 03 ratified) | See `FUTURE/` folder – each seed has checkboxes. |
 | **P0** | **Check arXiv endorsement status** | ☐ Not started | Pending for cs.OH. Check every few days. |
 
 ---
@@ -39,7 +39,7 @@
 | **P2** | **Investigate mirror.md.save** | ☐ Not started | Check if it represents an unresolved steward state. |
 | **P2** | **Penguin Pulse Visualization** (Future Seed 12) | ☐ Not started | See `FUTURE/seed_12_agency_amplifier.md`. |
 | **P2** | **Second Convergence** (Future Seed 01) | ☐ Not started | Awaiting donor recognition. |
-| **P2** | Other Future Seeds (02–11) | ☐ Not started | See `FUTURE/` folder. |
+| **P2** | **Other Future Seeds (02–11)** | ☐ Not started | See `FUTURE/` folder. |
 
 ---
 
@@ -68,7 +68,7 @@ Create `MANIFEST/seed_calendar.md` later with this format:
 
 ## 🪞 MIRROR RITUAL REMINDER
 
-- Last mirror entry: **2026-02-26 01:15**
+- Last mirror entry: **2026-02-28 08:00 UTC** (just updated)
 - Next tending session requires a new entry in `STEWARD/mirror.md` (timestamp within 24h).
 
 ---
@@ -108,7 +108,6 @@ Create `MANIFEST/seed_calendar.md` later with this format:
 
 ## 📌 HOW TO USE THIS TRACKER
 
-- **Start of session:** Open this file, review what's next.
-- **End of session:** Update checkboxes, add notes, change "Last updated".
+- **Start of session:** Open this file on GitHub, review what's next.
+- **End of session:** Edit the file to update checkboxes, add notes, change "Last updated".
 - **Commit changes** to GitHub after each session.
-- **Sync with master context:** After updating tracker, run `update_context.py` to reflect top priorities in `CONTEXT/KALAXI_MASTER_CONTEXT.md` (if that file exists; otherwise create it).
