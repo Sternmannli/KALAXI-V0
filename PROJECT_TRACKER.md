@@ -8,9 +8,9 @@
 
 | Pri | Task | Status | Notes |
 |-----|------|--------|-------|
-| **P0** | **Update mirror.md** before next tending session | ☐ Not started | Last entry: 2026-02-26. Required before running `tend.py --review`. |
+| **P0** | **Update mirror.md** before next tending session | ☐ Not started | Last entry: 2026-02-28. Required before running `tend.py --review`. |
 | **P0** | **Run cross‑anomaly compressor** on new clusters | ☐ Not started | `python3 WEAVER/proverb_compressor.py` (if any new anomalies added) |
-| **P0** | **Review future seeds (12) and make decisions** | ☑ Partially done (Seed 03 ratified) | See `FUTURE/` folder – each seed has checkboxes. |
+| **P0** | **Review future seeds (12) and make decisions** | ☑ Fully done (all 12 seeds ratified) | See `FUTURE/` folder – all seeds ratified on 2026-02-28. |
 | **P0** | **Check arXiv endorsement status** | ☐ Not started | Pending for cs.OH. Check every few days. |
 
 ---
@@ -22,11 +22,32 @@
 | **P1** | **Create public GitHub repo** (sanitized version) | ☐ Not started | Name idea: `Kalaxi-Concept`. Exclude core code. |
 | **P1** | **Populate seed readiness calendar** | ☐ Not started | Create `MANIFEST/seed_calendar.md` with all seeds from `THRESHOLD.md` and their ready dates. |
 | **P1** | **Process any new anomalies from donors** | ☐ Not started | Check for [RETURN] signals; add to `KALAXI_C_WISDOM.txt` under `##SECTION:ANOMALY_REGISTRY`. |
-| **P1** | **Update red feathers ledger** after each act of witnessing | ☐ Ongoing | Current count: 6 (see `MANIFEST/red_feathers.md`). |
+| **P1** | **Update red feathers ledger** after each act of witnessing | ☐ Ongoing | Current count: 7 (see `MANIFEST/red_feathers.md`). |
 
 ---
 
-## 🔮 LONG‑TERM VISIONS / FUTURE SEEDS (Require Your Approval)
+## 🔮 LONG‑TERM VISIONS / FUTURE SEEDS
+
+All 12 future seeds were ratified on 2026-02-28. They are now part of the canon and will be implemented over time.
+
+| Pri | Task | Status | Notes |
+|-----|------|--------|-------|
+| **P2** | **Seed 01 – Distributed Stewardship** | ☑ Ratified | Full implementation to be scoped later. |
+| **P2** | **Seed 02 – Immutable Witness Network** | ☑ Ratified | Full implementation to be scoped later. |
+| **P2** | **Seed 03 – Deliberative Democracy Infrastructure** | ☑ Ratified | Full implementation to be scoped later. |
+| **P2** | **Seed 04 – Constitutional Evolution Protocol** | ☑ Ratified | Full implementation to be scoped later. |
+| **P2** | **Seed 05 – Restorative Justice Protocol** | ☑ Ratified | Full implementation to be scoped later. |
+| **P2** | **Seed 06 – System Self‑Awareness** | ☑ Ratified | Full implementation to be scoped later. |
+| **P2** | **Seed 07 – Personalized Parables** | ☑ Ratified | Full implementation to be scoped later. |
+| **P2** | **Seed 08 – Institutional Dignity Audit** | ☑ Ratified | Full implementation to be scoped later. |
+| **P2** | **Seed 09 – Negative Space Index** | ☑ Ratified | Full implementation to be scoped later. |
+| **P2** | **Seed 10 – Dignity Drift Detector** | ☑ Ratified | Full implementation to be scoped later. |
+| **P2** | **Seed 11 – Proverb Stress Test** | ☑ Ratified | Full implementation to be scoped later. |
+| **P2** | **Seed 12 – Agency Amplifier (Penguin Pulse)** | ☑ Ratified | Full implementation to be scoped later. |
+
+---
+
+## 🔮 FUTURE ARCHITECTURE (New Governance Structures)
 
 | Pri | Task | Status | Decision Needed |
 |-----|------|--------|-----------------|
@@ -37,9 +58,6 @@
 | **P2** | **Create RESTORATION/ folder** | ☐ Not started | For restoration registry data (Month 2 at earliest). |
 | **P2** | **Create COLLECTIVE/ folder** (for GAP#004) | ☐ Not started | For collective dignity structures. |
 | **P2** | **Investigate mirror.md.save** | ☐ Not started | Check if it represents an unresolved steward state. |
-| **P2** | **Penguin Pulse Visualization** (Future Seed 12) | ☐ Not started | See `FUTURE/seed_12_agency_amplifier.md`. |
-| **P2** | **Second Convergence** (Future Seed 01) | ☐ Not started | Awaiting donor recognition. |
-| **P2** | **Other Future Seeds (02–11)** | ☐ Not started | See `FUTURE/` folder. |
 
 ---
 
@@ -75,7 +93,7 @@ Create `MANIFEST/seed_calendar.md` later with this format:
 
 ## 🔴 RED FEATHER LEDGER
 
-- Current count: **6** (see `MANIFEST/red_feathers.md`)
+- Current count: **7** (see `MANIFEST/red_feathers.md`)
 - After each ratification, compost, convergence, or significant act: add one line.
 
 ---
