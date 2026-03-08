@@ -1,4 +1,4 @@
-# Kalaxi Dignity Architecture
+# Kalaxi Documentation Index
 ## Computational Integrity for Human Dignity
 
 **Version:** 1.0.0-patch1  

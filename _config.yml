@@ -1,5 +1,8 @@
 title: Kalaxi
-description: A dignity‑indexed epistemic engine with metabolic structure
+description: A living canon for human dignity
 theme: minima
 header_pages:
   - index.md
+  - about.md
+  - canon.md
+  - invitation.md

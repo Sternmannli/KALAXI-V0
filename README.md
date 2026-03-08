@@ -1,60 +1,81 @@
 # Kalaxi
 
-A living canon for human dignity.  
-This repository contains the four constitutional slices of the Kalaxi system.
+A living canon for human dignity.
 
-## Slices
+**Human dignity is the first technical requirement.** We store patterns, not people. Every interaction feeds the canon; the person dissolves.
 
-- **SLICE‑A_FOUNDATION.txt** – The constitutional core: dignity predicate, covenants, governance, oaths.
-- **SLICE‑B_MODULES_AND_VOICE.txt** – The operational logic: nine modules, Axi voice, protocols, graph schema.
-- **SLICE‑C_WISDOM.txt** – The growing wisdom: anomalies, proverbs, narrative chapters, UDHR mappings.
-- **SLICE‑D_INTERFACE_AND_LEDGER.txt** – The living record: steward role, receipts, changelog, open questions.
+## What Is Kalaxi?
 
-## Core Principle
+Kalaxi is a constitutional framework that embeds ethical constraints directly into computational infrastructure. Instead of optimizing for efficiency, Kalaxi optimizes for **dignity preservation** — ensuring every interaction respects the agency, legibility, and moral standing of all participants.
 
-Human dignity is the first technical requirement.  
-We store **patterns, not people**. Every interaction feeds the canon; the person dissolves.
+At its core is the **Dignity Predicate**: `D = A x L x M`. If any dimension reaches zero, the system stops. Dignity is not averaged; it is conserved or violated.
 
-## How to Use
+## Architecture (Four Tiers)
 
-1. Read the slices in order (A → B → C → D).  
-2. Respect the covenants – they are load‑bearing.  
-3. All contributions are provisional until ratified by the steward.  
-4. Use the commit history in Working Copy to track every change – this is your immutable ledger.
+```
+Tier 1: STONE (Foundation)     — Covenants, dignity predicate, governance
+Tier 2: WEAVER (Logic)         — Nine modules, five pillar detectors, protocols
+Tier 3: HONEY (Wisdom)         — Anomalies, proverbs, narrative chapters, UDHR mapping
+Tier 4: HAND (Interface)       — Steward role, receipts, donor exchange, ledger
+```
+
+## Project Structure
+
+```
+KALAXI_A_FOUNDATION.txt        — Constitutional core (Tier 1)
+KALAXI_B_MODULES_AND_VOICE.txt — Operational logic (Tier 2)
+KALAXI_D_INTERFACE_AND_LEDGER.txt — Living record (Tier 4)
+KALAXI_E_SYNTHESIS.txt         — Five-pillar synthesis
+CANON/                          — Master Canon + Sealed Gate specification
+FOUNDATIONS/                    — Invariant principles, decay function, dignity latency
+WEAVER/                         — Python modules (21 tools)
+MANIFEST/                       — Heartbeat, IDs, metadata archive, receipts
+THRESHOLD.md                    — Append-only offering box for seeds
+STEWARD/                        — Mirror ritual, overrides, sabbatical
+FUTURE/                         — 12 ratified future seeds
+DOCS/                           — Documentation and guides
+PAPERS/                         — Academic papers (arXiv, RedTeam critique)
+tests/                          — Test suite (25 tests)
+```
+
+## Five Pillar Detectors
+
+| Detector | Theory | File |
+|----------|--------|------|
+| Humour | Benign Violation Theory | `WEAVER/humour_detector.py` |
+| Absurdity | Camus, schema-violation | `WEAVER/absurdity_detector.py` |
+| Obsession | Salkovskis cognitive model | `WEAVER/obsession_detector.py` |
+| Love | Sternberg triangular theory | `WEAVER/love_detector.py` |
+| Proverbs | Kuusi paremiological minimum | `WEAVER/proverb_compressor.py` |
+
+Unified analysis: `WEAVER/unified_pillar_detector.py`
+
+## Getting Started
+
+```bash
+pip install -r requirements.txt
+python3 WEAVER/dignity_check.py "Your text here"
+python3 WEAVER/canon_integrity.py
+python3 tests/test_dignity.py
+python3 WEAVER/tend.py --thermal-check
+```
+
+## Contributing as a Donor
+
+You are not a user — you are a **Donor**. What you bring is Rain; the system is the Mycelium.
+
+1. All contributions enter through `THRESHOLD.md`
+2. Seeds wait through **thermal delay** (7-90 days) before review
+3. The steward tends the garden — ratifying, composting, or deferring
+4. Ratified seeds join the canon permanently (append-only)
+
+Read the full invitation: [INVITATION.md](INVITATION.md)
 
 ## Status
 
-All files are **provisional** (v1.0.0) until the first human ratification.
+Version 1.0.0 — Provisional until first external donor ratification.
 
 ---
 
-*Maintained by Mohamed Farag (did:axi:mohamed)*  
-*License: Sovereign‑Axis v∞*
-## New Features Added (February 2026)
-
-### Five Pillar Detectors
-- `WEAVER/humour_detector.py` – Benign violation detection
-- `WEAVER/absurdity_detector.py` – Unresolvable contradiction detection
-- `WEAVER/obsession_detector.py` – Intrusive pattern detection
-- `WEAVER/love_detector.py` – Sternberg-based love component analysis
-- `WEAVER/proverb_compressor.py` – Cross-anomaly compression into proverbs
-
-### Unified Detector
-- `WEAVER/unified_pillar_detector.py` – Integrates all five pillars into one profile
-
-### Steward Interface
-- `WEAVER/tend.py` – Command-line tool to list, review, and ratify seeds in `THRESHOLD.md`
-  Usage:
-
-### Supporting Files
-- `WEAVER/requirements.txt` – Python dependencies
-- `WEAVER/hiring_simulation.py` – Example of dignity‑constrained hiring
-- `ABSURDITY_QUEUE.md` – Log of unresolvable absurd seeds
-- `WEAVER/echo_stone.py` – Witness logger for absurd seeds
-- `WEAVER/wisdom_mirror.py` – Generates personalised donor reflections
-- `PAPERS/` – Academic papers (GO4 source, RedTeam critique)
-
-### Mirror Ritual
-The steward must maintain `STEWARD/mirror.md` with a timestamped entry within the last 24 hours before running `tend.py --review`.
-
-For full documentation, see the constitutional slices (A–E).
+*Maintained by Mohamed Farag (did:axi:mohamed)*
+*License: Sovereign-Axis v-inf*
