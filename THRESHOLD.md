@@ -43,11 +43,11 @@ Format: [timestamp] - [type] - [content]
 
 [2026-02-22] — proverb — P#EMERGE-0019 [PROVISIONAL] — „A wound seen but left to fester becomes the wound that defines us.“ [Meaning: Detection without remedy is incomplete.] [Linked covenants: COV#001, COV#NEW-B] Source: Hiring algorithm experiment harvest.
 
-[2026-02-22] — proverb — P#EMERGE-0020 [PROVISIONAL] — „The stone that decides too quickly has already forgotten the river.“ [Meaning: Automation speed itself can violate dignity; the gap between input and output must be held.] [Linked covenants: COV#001, COV#NEW-B] Source: Hiring algorithm experiment harvest.
+[2026-02-22] — proverb — P#EMERGE-0029 [PROVISIONAL] — „The stone that decides too quickly has already forgotten the river.” [Meaning: Automation speed itself can violate dignity; the gap between input and output must be held.] [Linked covenants: COV#001, COV#NEW-B] Source: Hiring algorithm experiment harvest.
 
-[2026-02-22] — proverb — P#EMERGE-0021 [PROVISIONAL] — „Bias is not only injustice of outcome; it is the absence of dialogue between system and person.“ [Source: External evaluation of dignity experiment, 2026-02-22] [Linked covenants: COV#001, COV#006]
+[2026-02-22] — proverb — P#EMERGE-0030 [PROVISIONAL] — „Bias is not only injustice of outcome; it is the absence of dialogue between system and person.” [Source: External evaluation of dignity experiment, 2026-02-22] [Linked covenants: COV#001, COV#006]
 
-[2026-02-22] — proverb — P#EMERGE-0022 [PROVISIONAL] — „Dignity is non-compensatory: one zero factor collapses the whole.“ [Source: External evaluation of dignity experiment, 2026-02-22] [Linked covenants: COV#001]
+[2026-02-22] — proverb — P#EMERGE-0031 [PROVISIONAL] — „Dignity is non-compensatory: one zero factor collapses the whole.” [Source: External evaluation of dignity experiment, 2026-02-22] [Linked covenants: COV#001]
 
 [2026-02-22] — gap — GAP#014 [PROVISIONAL] — Operational definitions for A, L, M. The dignity predicate currently relies on heuristic estimates. Without observable indicators and reproducible scoring protocols, it risks being seen as „philosophy disguised as math.“ [Source: External evaluation, 2026-02-22] [Priority: HIGH]
 
