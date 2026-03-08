@@ -85,4 +85,29 @@ Donor Input
 | Decay Function (Halflife Logic) | Honey (Tier 3) | FOUNDATIONS/decay_function.md |
 | Dignity-Latency Variable (T_d) | Stone (Tier 1), Weaver (Tier 2) | FOUNDATIONS/dignity_latency.md |
 
-Source: Cross-referenced from all canonical files and THRESHOLD.md
+## Known Red Flags (Cross-Tier Risks)
+| Risk | Affects Tiers | Priority |
+|------|--------------|----------|
+| Oracle Problem — who audits dignity evaluations? | Stone, Weaver | HIGH |
+| Privacy Theater — DP needs mathematical proof | Weaver (OUT) | HIGH |
+| Participation Inequality — donor base representativeness | Hand, Honey | MEDIUM |
+| Complexity Barriers — framework too complex for adoption | All tiers | MEDIUM |
+| Temporal Tyranny — thermal delay as weapon | Stone (BREATH), Hand | MEDIUM |
+| Scaling Paradox — intimacy vs growth | All tiers | HIGH |
+
+## New Seeds Planted (2026-03-08 Digestion)
+| Seed | Type | Tier Impact |
+|------|------|------------|
+| EQ#GR-001 Grand Resonance | equation | Weaver (WEAVE) |
+| CONST#BG-001 Brittleness Guard | constraint | Weaver (CHECK) |
+| CONST#DB-001 Defect Budget | constraint | Honey |
+| PROT#SRVP-001 Stepwise Ritual | protocol | Weaver (CHECK) |
+| PROT#LOCK-001 Lock Test | protocol | Weaver (WEAVE), Honey |
+| SPEC#LEDGER-001 Ledger Schema | specification | Hand, Honey |
+| GOV#DFP-001 Decision Filter | governance | Stone |
+| GOV#CRC-001 Co-founder Code | governance | Stone |
+| GAP#019 Oracle Problem | gap | Stone, Weaver |
+| GAP#020 Scaling Paradox | gap | All |
+| T#01-T#47 Treasure Index | index | Honey |
+
+Source: Cross-referenced from all canonical files, THRESHOLD.md, and digestion report 2026-03-08

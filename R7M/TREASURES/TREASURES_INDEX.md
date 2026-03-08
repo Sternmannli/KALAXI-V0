@@ -1,0 +1,1 @@
+# 47 Treasures — T#01 through T#47 — Registration Pending. Source: Excavation Slice 5. Formal registration pathway: each treasure to receive its own entry with source, date, covenant linkage, and steward signature. STATUS: PROVISIONAL.

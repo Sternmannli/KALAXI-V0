@@ -44,4 +44,28 @@
 - Badges: Referenced in governance structure
 - Laws: Encoded as covenants (COV# system)
 
-Source: KALAXI_A_FOUNDATION.txt (anomalies/proverbs), THRESHOLD.md, CANON/MASTER_CANON_V1.md
+## 47 Treasures (T#01–T#47 — Grand Archive Recoveries)
+Recovered from Excavation Slice 5. Key treasures:
+- T#01: Grand Resonance Equation (W* formula)
+- T#03: Three-Gate System (Sealed → Constraint → Dignity)
+- T#07: SIP Chain (Symmetric Integration Protocol)
+- T#09: Duality Engine (tension holding without forced resolution)
+- T#12: Federation Pilot (EFP handshake protocol)
+- T#15: Meta-Anomaly Registry (anomalies about the anomaly system)
+- T#21: Brittleness Guard (ψ/σ ≤ 1)
+- T#23: Defect Budget (2-5% ε-greedy exploration)
+- T#30: Lock Test (proverb quality gate)
+- T#47: Phase Transition Physics (organic → atomic growth)
+
+Full index: MANIFEST/digestion_report_2026-03-08.md
+Status: Unindexed — awaiting formal registration pathway
+
+## Cross-Anomaly Compression (Kuusi Paremiological Minimum)
+~8,287 entries → ~1,800 types → ~700 global motifs
+Source: FOUNDATIONS/paremiology.md, arXiv Phase III paper
+
+## Seven Perspectives (Metaphysical Reconstructions)
+8 metaphysical reconstructions of the dignity predicate from different philosophical traditions.
+Source: Seven Perspectives document (digested 2026-03-08)
+
+Source: KALAXI_A_FOUNDATION.txt (anomalies/proverbs), THRESHOLD.md, CANON/MASTER_CANON_V1.md, Excavation Slice 5 (digested 2026-03-08)
