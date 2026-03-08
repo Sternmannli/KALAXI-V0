@@ -50,4 +50,30 @@ D < 0.9 triggers dignity_audit_object — auto-generated, visible on Face
 - SOVEREIGN-AXIS: checksum 7f6d42e5
 - FULL-POWER: checksum a9c3fbb9
 
-Source: KALAXI_A_FOUNDATION.txt
+## Decision Filter Priority (GOV#DFP-001 — PROVISIONAL)
+1. Survive & Thrive
+2. Human Dignity
+3. Safety
+4. Clarity
+5. Reversibility
+6. Cost
+7. Speed
+8. Novelty
+
+## Co-founder Responsibility Code (GOV#CRC-001 — PROVISIONAL)
+1. Dignity first
+2. Privacy by default
+3. Explainability
+4. ID stability
+5. No lock-in
+6. Open audit trail
+7. Fail safe
+8. Culture humility
+9. No surveillance economics
+10. Donor joy
+
+## Unregistered Covenants (from Master Canon — needs alignment)
+- **COV#008:** The Right to Remedy — Failure results in "Shelter," not ejection (referenced in CANON/MASTER_CANON_V1.md)
+- **COV#015:** No data moves without the donor understanding its weight (referenced in CANON/MASTER_CANON_V1.md)
+
+Source: KALAXI_A_FOUNDATION.txt, Historical Archive (digested 2026-03-08)
