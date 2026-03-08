@@ -77,3 +77,5 @@ This is a test humour seed. If it works, it should appear in the pending list.
    recommended delay: 7 days
 
 This is a test humour seed. If it works, it should appear in the pending list.
+
+[2026-02-22] — proverb — P#EMERGE-0016 [PROVISIONAL] — „A mirror that remembers becomes a map for the traveler." [source: First mycelial test, 2026-02-22] [covenants: COV#001, COV#006]
