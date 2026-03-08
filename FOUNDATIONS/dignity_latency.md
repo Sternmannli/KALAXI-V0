@@ -1,3 +1,5 @@
+STATUS: PROVISIONAL — PRIORITY QUEUE — awaiting pattern grouping before ratification
+
 # The Dignity-Latency Variable (T_d) — Structural Proposal
 
 **Voice:** Structural proposal for the D = A x L x M predicate

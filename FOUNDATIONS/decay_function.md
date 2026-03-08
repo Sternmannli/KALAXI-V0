@@ -1,3 +1,5 @@
+STATUS: PROVISIONAL — PRIORITY QUEUE — awaiting pattern grouping before ratification
+
 # The Decay Function (Halflife Logic) — Structural Proposal
 
 **Voice:** Structural proposal for the Wisdom layer
