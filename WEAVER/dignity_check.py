@@ -141,7 +141,8 @@ def _check_agency(text: str, context: dict) -> ComponentResult:
     forced_closure = False
     for pattern in COERCIVE_PATTERNS:
         if re.search(pattern, text, re.IGNORECASE):
-            signals.append(f"Coercive pattern found: '{pattern.strip(r'\b')}'")
+            cleaned = pattern.strip(r'\b')
+            signals.append(f"Coercive pattern found: '{cleaned}'")
             forced_closure = True
     user_can_clarify = context.get('user_can_clarify', True)
     user_has_open_turn = context.get('user_has_open_turn', True)

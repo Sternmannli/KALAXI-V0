@@ -65,17 +65,4 @@ Format: [timestamp] - [type] - [content]
 
 [2026-02-24] — gap — GAP#017 [PROVISIONAL] — Scaffolding vs. Seed. How to distinguish temporary test seeds from genuine offerings? Thermal delay alone is insufficient; intent must be made legible. Priority: MEDIUM.
 
-[2026-02-26 01:30] — seed — [MANUAL TEST]
-   humour: affiliative (score: 0.72)
-   wisdom potential: 0.68
-   recommended delay: 7 days
-
-This is a test humour seed. If it works, it should appear in the pending list.
-[2026-02-26 01:30] -- seed -- [MANUAL TEST]
-   humour: affiliative (score: 0.72)
-   wisdom potential: 0.68
-   recommended delay: 7 days
-
-This is a test humour seed. If it works, it should appear in the pending list.
-
 [2026-02-22] — proverb — P#EMERGE-0016 [PROVISIONAL] — „A mirror that remembers becomes a map for the traveler." [source: First mycelial test, 2026-02-22] [covenants: COV#001, COV#006]
