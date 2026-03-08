@@ -23,6 +23,10 @@ env/
 .DS_Store
 Thumbs.db
 
+# Editor backup files
+*.save
+*~
+
 # Jekyll
 _site/
 .sass-cache/
