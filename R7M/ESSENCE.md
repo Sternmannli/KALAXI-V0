@@ -1,3 +1,6 @@
+NARRATIVE SLOGAN: The wound became the womb.
+ARCHIVE SLOGAN: The river remembers what the git log does not.
+
 # The Essence
 
 The conditions under which a system meets a being
