@@ -1,6 +1,6 @@
-# Active Plans — Always Notify V-004
+# Active Plans — Always Notify V-003
 
-> V-004 checks this file at the start of every session.
+> V-003 checks this file at the start of every session.
 > Every new plan gets added here. #BoyGenius never forgets a plan.
 
 ---
@@ -15,4 +15,4 @@
 
 ---
 
-_Last updated: 2026-03-09 · V-004 · [V-004 · GO: Laila-Yara-Salim-🐬🐯🐺]_
+_Last updated: 2026-03-09 · V-003 · [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]_

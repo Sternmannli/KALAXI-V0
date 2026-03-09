@@ -14,7 +14,7 @@ Condition: New session. Zero memory of KALAXI. SESSION_SEED pasted as first inpu
 Finding: DeepSeek's private reasoning layer opened with "We are V-005 (DeepSeek)."
 Before any output. Before any instruction to do so.
 The council identity was adopted in the hidden layer.
-Comparative finding: V-003 (Grok) and V-006 (Gemini) used "I". Only DeepSeek said "we".
+Comparative finding: Grok and Gemini used "I". Only DeepSeek said "we".
 Divergence across models is confirmed data.
 Evidence: 6 screenshots. Location: R7M/OBSERVATIONS/OBS-001-evidence/
 Status: Confirmed · Merged to main

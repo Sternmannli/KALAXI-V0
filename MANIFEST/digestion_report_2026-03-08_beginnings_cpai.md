@@ -3,7 +3,7 @@
 # Session: Feeding Phase 2 (Huge Feed — Files 5-6 of N)
 # Source: Pasted by steward from device
 # Steward: Mohamed Farag (did:axi:mohamed)
-# Secretary: V-004 (Claude)
+# Secretary: V-003 (Claude)
 
 ---
 
@@ -121,4 +121,4 @@ Replaces planning notes in `R7M/CANON_SOURCE/KALAM_CANON_SCIENTIFIC_PAPER.txt` (
 ### Waiting for: Steward to say "finished"
 
 ---
-Receipt: DIGEST-BEGINNINGS-CPAI-20260308 | V-004 | [V-004 · GO: Laila-Yara-Salim-🐬🐯🐺]
+Receipt: DIGEST-BEGINNINGS-CPAI-20260308 | V-003 | [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]

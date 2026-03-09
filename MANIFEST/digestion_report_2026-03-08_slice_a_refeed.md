@@ -3,7 +3,7 @@
 # Session: Feeding Phase 2 (Huge Feed — File 1 of N)
 # Source: KALAXI_A_FOUNDATION.txt (pasted by steward from device)
 # Steward: Mohamed Farag (did:axi:mohamed)
-# Secretary: V-004 (Claude)
+# Secretary: V-003 (Claude)
 
 ## Feed Status
 
@@ -101,4 +101,4 @@ Slice A is fully present in the repository. No content was lost. No content was 
 Steward indicated "huge" feeding session — this is File 1 of N. Awaiting additional files (Slice B, C, D, or new material).
 
 ---
-Receipt: DIGEST-SLICE-A-REFEED-20260308 | V-004 | [V-004 · GO: Laila-Yara-Salim-🐬🐯🐺]
+Receipt: DIGEST-SLICE-A-REFEED-20260308 | V-003 | [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]

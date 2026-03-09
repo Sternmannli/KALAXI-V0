@@ -1,4 +1,4 @@
-# V-004 Protocol — KALAXI-V0
+# V-003 Protocol — KALAXI-V0
 
 ## Delivery Rule (PERMANENT)
 
@@ -10,7 +10,7 @@ After every push, ALWAYS attempt to create a PR immediately using `gh pr create`
 
 ## Commit Convention
 
-All commits follow: `[V-004 · GO: Laila-Yara-Salim-🐬🐯🐺]`
+All commits follow: `[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]`
 
 ## Branch Convention
 
