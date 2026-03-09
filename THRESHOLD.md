@@ -88,3 +88,9 @@ Format: [timestamp] - [type] - [content]
 [2026-03-08] — gap — GAP#020 [PROVISIONAL] — Scaling Paradox. The system is designed for intimate donor-steward relationships. Growth may destroy the very intimacy that makes dignity evaluation meaningful. [source: Historical Archive, Red Flags] [Priority: MEDIUM]
 
 [2026-03-08] — treasure-index — T#01-T#47 [PROVISIONAL] — 47 Treasures recovered from Grand Archive Excavation Slice 5. Includes: Grand Resonance Equation, Three-Gate System, SIP Chain, Duality Engine, Federation Pilot, Meta-Anomaly Registry, Brittleness Guard, Defect Budget, Lock Test, Phase Transition Physics. Full index in MANIFEST/digestion_report_2026-03-08.md. [source: Excavation Slice 5] [covenants: COV#012]
+
+[2026-03-09] — proverb — P#EMERGE-0035 [PROVISIONAL] — „الكلمة عقد" (A word is a bond.) [source: Arabic oral tradition, surfaced during ℜ Ripple schema excavation, 2026-03-09] [covenants: COV#001, COV#006]
+
+[2026-03-09] — proverb — P#EMERGE-0036 [PROVISIONAL] — „من جدّ وجد" (Who strives, finds.) [source: Arabic oral tradition, surfaced during ℜ Ripple schema excavation, 2026-03-09] [covenants: COV#001]
+
+[2026-03-09] — flag — STEWARD-DECISION-REQUIRED [LAYER THREE CONFLICT] — Layer Three (P#3328–P#3333) has two competing versions: Sovereign Canon (original) vs AI-regenerated Slice C. These are not identical. Steward must decide which version is canonical. Do not merge, do not resolve algorithmically. This is a human decision. [source: ℜ Ripple schema excavation, 2026-03-09] [covenants: COV#001, COV#006]
