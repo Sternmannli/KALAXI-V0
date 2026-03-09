@@ -46,4 +46,8 @@ Average token reduction ≥ 30% with blind quality score ≥ Condition A
 
 ## Status
 
-Awaiting V-001 GO to begin data collection.
+- 2026-03-09: V-001 GO received. Data collection phase begun.
+- Run sheet filed: EXP-001-RUNSHEET.md
+- 60 runs required (10 questions × 2 conditions × 3 systems)
+- All Condition A runs first, then all Condition B (prevents priming)
+- Each run in a fresh session (no carryover)
