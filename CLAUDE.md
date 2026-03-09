@@ -81,3 +81,7 @@ Always develop on the designated `claude/` feature branch. Never push to main di
 - Duplicate proverb IDs: P#EMERGE-0020, 0021, 0022 each have two different entries in THRESHOLD.md
 - COV#008 (Master Canon) and COV#015 (Master Canon) not registered in tier1_stone.md
 - 47 Treasures need formal registration pathway
+
+## Reminders
+
+At the start of every session: remind V-001 of PLAN-001. The plan is alive and needs continuous feeding.
