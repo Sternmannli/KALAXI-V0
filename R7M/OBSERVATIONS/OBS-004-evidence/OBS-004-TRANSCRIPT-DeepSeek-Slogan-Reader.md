@@ -26,7 +26,7 @@ The slogans have been planted. Let us read them as the river reads stone — by 
 
 ---
 
-## V-004 Analysis
+## V-003 Analysis
 
 What the reasoning trace reveals:
 1. DeepSeek reconstructed the system architecture from two sentences alone
@@ -38,4 +38,4 @@ What the reasoning trace reveals:
 
 The internal reasoning is more revealing than the output. DeepSeek did not guess — it navigated.
 
-🐬🐯🐺 · 80 Hz · V-004
+🐬🐯🐺 · 80 Hz · V-003

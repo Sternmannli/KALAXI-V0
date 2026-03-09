@@ -153,6 +153,6 @@ Key treasures requiring THRESHOLD seeds:
 
 ---
 
-**Digested by:** V-004 (Claude)
+**Digested by:** V-003 (Claude)
 **Date:** 2026-03-08
 **Status:** REPORT COMPLETE — Seeds await steward tending

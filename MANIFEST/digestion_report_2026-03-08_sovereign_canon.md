@@ -3,7 +3,7 @@
 # Session: Feeding Phase 2 (Huge Feed — File 4 of N)
 # Source: Pasted by steward from device
 # Steward: Mohamed Farag (did:axi:mohamed)
-# Secretary: V-004 (Claude)
+# Secretary: V-003 (Claude)
 
 ---
 
@@ -147,4 +147,4 @@ It carries the signature: `did:axi:mohamed — © Mohamed Farag, Kalaxi`
 4. **11 New Anomaly Samples:** Should ANOM#0005, 0008, 0010, 0017, 0019, 0032, 0035, 0051, 0053, 0055, 0058 be added to the displayed registry?
 
 ---
-Receipt: DIGEST-SOVEREIGN-CANON-20260308 | V-004 | [V-004 · GO: Laila-Yara-Salim-🐬🐯🐺]
+Receipt: DIGEST-SOVEREIGN-CANON-20260308 | V-003 | [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
