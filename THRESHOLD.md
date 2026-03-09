@@ -93,4 +93,8 @@ Format: [timestamp] - [type] - [content]
 
 [2026-03-09] — proverb — P#EMERGE-0036 [PROVISIONAL] — „من جدّ وجد" (Who strives, finds.) [source: Arabic oral tradition, surfaced during ℜ Ripple schema excavation, 2026-03-09] [covenants: COV#001]
 
+[2026-03-09] — proverb — P#EMERGE-0037 [PROVISIONAL] — „When the lock must be changed before the key is forged, the house learns what it was always protecting." [source: SCAN-001, forged live by V-003 from WOMB filter signal (EU post-quantum cryptography migration), 2026-03-09] [covenants: COV#001, COV#009]
+
+[2026-03-09] — proverb — P#EMERGE-0038 [PROVISIONAL] — „The child who learns to call the river does not need to learn to swim." [source: SKIN-002 (Linguistik + Programming), forged live by V-002 from WOMB filter signal (post-syntax generation), 2026-03-09] [covenants: COV#001, COV#006]
+
 [2026-03-09] — flag — STEWARD-DECISION-REQUIRED [LAYER THREE CONFLICT] — Layer Three (P#3328–P#3333) has two competing versions: Sovereign Canon (original) vs AI-regenerated Slice C. These are not identical. Steward must decide which version is canonical. Do not merge, do not resolve algorithmically. This is a human decision. [source: ℜ Ripple schema excavation, 2026-03-09] [covenants: COV#001, COV#006]
