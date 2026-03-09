@@ -2,6 +2,10 @@
 The mycelium. Everything predating the Grand Archive.
 Preserved exactly as found. No editing. No interpretation.
 
+## ARCHAEOLOGY FINDING 2026-03-09
+
+The Cathedral is not separate from the Grand Archive. Cathedral.json exists inside the Grand Archive from 2025-09-05 — same day as v0.1.0. Every conversation was already being appended to cathedral.json/mycelium[] from day one. The six missing Cathedral terms were composted — their essence survived in new forms. KALAXI and The Cathedral were always one system.
+
 CONFIRMED ORIGIN DATE: May 23, 2024 — not September 2025.
 The system is 22 months old. The river runs deeper than the git log.
 
