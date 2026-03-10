@@ -39,6 +39,7 @@ from WEAVER.weave import ingest, extract_essence, propose_proverb, wisdom_mirror
 from WEAVER.keep import store, retrieve, lock, list_artifacts, receipt_count
 from WEAVER.dignity_drift import DignityDrift, DriftLevel
 from WEAVER.shelter import Shelter
+from WEAVER.federation import Federation
 
 
 @dataclass
@@ -58,6 +59,9 @@ class OrganismState:
     drift_rate: float
     drift_consecutive_declines: int
     sheltered_exchanges: int
+    federation_peers: int
+    federation_drops_shared: int
+    federation_privacy_remaining: float
     timestamp: str
 
 
@@ -99,6 +103,7 @@ class Organism:
         self._turn = Turn()
         self._drift = DignityDrift()
         self._shelter = Shelter()
+        self._federation = Federation()
         self._exchange_counter = 0
         self._last_dignity = {}
         self._drops_archive = []
@@ -339,6 +344,9 @@ class Organism:
             drift_rate=self._drift.state().dD_dt,
             drift_consecutive_declines=self._drift.state().consecutive_declines,
             sheltered_exchanges=self._shelter.held_count,
+            federation_peers=self._federation.state().peers_known,
+            federation_drops_shared=self._federation.state().drops_offered,
+            federation_privacy_remaining=self._federation.privacy_budget_remaining,
             timestamp=self._now(),
         )
 
@@ -357,6 +365,34 @@ class Organism:
     def shelter_review(self, exchange_id, note):
         """Steward reviews a sheltered exchange."""
         return self._shelter.steward_review(exchange_id, note)
+
+    def federate_offer(self, peer_id, min_contributors=7):
+        """Offer local drops to a peer organism via EFP."""
+        prepared = []
+        for drop in self._drops_archive:
+            fd = self._federation.prepare_drop(
+                content=drop.essence,
+                drop_type=drop.drop_type,
+                confidence=drop.confidence,
+                contributor_count=max(min_contributors, len(drop.source_hashes)),
+            )
+            if fd is not None:
+                prepared.append(fd)
+        if not prepared:
+            return None
+        return self._federation.offer(prepared, peer_id)
+
+    def federate_receive(self, drops, peer_id):
+        """Receive drops from a peer organism via EFP."""
+        return self._federation.receive(drops, peer_id)
+
+    def federate_merge(self, drop_hashes):
+        """Merge received federated drops into local wisdom."""
+        return self._federation.merge(drop_hashes)
+
+    def federation_state(self):
+        """Get federation layer state."""
+        return self._federation.state()
 
     def collective_check(self, texts):
         """Run collective dignity across a cohort."""
@@ -385,4 +421,7 @@ class Organism:
         print(f"  Dignity drift:     {s.drift_level} (dD/dt={s.drift_rate:.4f})")
         print(f"  Consecutive drops: {s.drift_consecutive_declines}")
         print(f"  Sheltered:         {s.sheltered_exchanges}")
+        print(f"  Federation peers:  {s.federation_peers}")
+        print(f"  Drops shared:      {s.federation_drops_shared}")
+        print(f"  Privacy budget:    {s.federation_privacy_remaining:.2f}/{1.0:.2f}")
         print(f"  {'='*48}\n")
