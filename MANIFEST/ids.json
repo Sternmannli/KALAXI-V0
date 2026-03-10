@@ -3,7 +3,7 @@
     "P": 2138,
     "ANOM": 1101,
     "GAP": 21,
-    "W": 87,
+    "W": 88,
     "COV": 14
   },
   "entries": {
@@ -69,6 +69,15 @@
       "provenance": "signed-steward",
       "supersedes": null,
       "hash": "3f95c32d15962c6dc7a7d8f564a92bb0a4d439de5a9e15a1fffb6336f57905f0"
+    },
+    "W#0088": {
+      "id": "W#0088",
+      "type": "wisdom",
+      "status": "ratified",
+      "created": "2026-03-10T22:57:32.995827+00:00",
+      "provenance": "steward-ratified-direct",
+      "supersedes": null,
+      "hash": "560385b0be1152b98fff9f057b21d561e79bbc64bc4b939fe9dc9cc0e61b419e"
     }
   }
 }

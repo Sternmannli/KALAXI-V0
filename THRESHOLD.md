@@ -35,7 +35,6 @@ Format: [timestamp] - [type] - [content]
 
 [2026-02-22] — gap — GAP#004-A [PROVISIONAL] — Collective Dignity. Amendment to GAP#004: The dignity predicate must also compute a Collective D metric (mean cohort D × variance penalty). If collective D falls below threshold, sealed-gate protections activate and require proportionality review (steward + ethics reviewer). Source: Convergent voices, hiring algorithm experiment.
 
-[2026-02-22] — wisdom node — W#HIRING-001 [PROVISIONAL] — Empathic Counterfactual Simulation. A method for detecting hidden bias by simulating the candidate under alternate conditions (e.g., different zip code). If dignity changes under counterfactuals, bias is present. Clusters anomalies HIRING-0001…0003, remedies (remove proxy variables, enforce explanation, add appeal path), simulation method, dignity shadow visualization. Validation plan: test on hiring dataset; measure reduction in cohort D variance. Source: Deep Voice PDF, hiring algorithm experiment.
 
 [2026-02-22] — proverb — P#EMERGE-0017 [PROVISIONAL] — „The river judges the swimmer, not the bank.“ [Meaning: A system must evaluate the person, not the proxy.] [Linked covenants: COV#001, COV#006] Source: Hiring algorithm experiment harvest.
 
