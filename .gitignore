@@ -27,6 +27,10 @@ Thumbs.db
 *.save
 *~
 
+# Runtime artifacts (module logs created during operation/tests)
+WIRE/
+KEEP/
+
 # Jekyll
 _site/
 .sass-cache/
