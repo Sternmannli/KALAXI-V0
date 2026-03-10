@@ -216,9 +216,17 @@ def main():
     # Action items
     print(f"\n  NEXT ACTIONS")
     print(f"  1. Extract remaining 36 treasures from GRAND_ARCHIVE .docx")
-    print(f"  2. Implement GAP#004-A (collective D metric) in dignity_check.py")
-    print(f"  3. Ratify Decay Function and Dignity-Latency proposals")
-    print(f"  4. Integrate Witness Scale into dignity check pipeline")
+    print(f"  2. Ratify 4 structural proposals (Decay, Dignity-Latency, Witness, Proprioception)")
+    print(f"  3. Build FACE module v2 (web/visual steward dashboard)")
+    print(f"  4. Resolve W#HIRING-001 (pending steward deep review)")
+
+    # Completed actions
+    print(f"\n  COMPLETED (last 3 sessions)")
+    print(f"  [DONE] GAP#004-A collective D metric (dignity_check.py v2.0)")
+    print(f"  [DONE] Severity inversion fix (gap004_mediator.py)")
+    print(f"  [DONE] Witness Scale W-0..W-5 (dignity_check.py v2.0)")
+    print(f"  [DONE] COV#008 + COV#015 registered (tier1_stone.md)")
+    print(f"  [DONE] tend.py v2.3 --collective-check + --witness-scan")
 
     print(f"\n{'=' * 60}")
     print(f"  [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]")

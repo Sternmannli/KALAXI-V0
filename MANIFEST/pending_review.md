@@ -16,5 +16,5 @@ Every seed in this file deserves a decision. Do not let it sit.
 | 2026-02-22 | P#EMERGE-0020 „The Threshold is not a delay..." | FALSE ALARM — IDs are unique. Later proverbs have P#EMERGE-0029/0030/0031. Digestion report misidentified. | [x] | resolved |
 | 2026-02-22 | P#EMERGE-0021 „A system that cannot hold..." | FALSE ALARM — IDs are unique. See above. | [x] | resolved |
 | 2026-02-22 | P#EMERGE-0022 „Capture fast. Tend slow..." | FALSE ALARM — IDs are unique. See above. | [x] | resolved |
-| 2026-02-22 | GAP#004-A Collective Dignity amendment | No standard GAP format (uses amendment syntax) | [ ] | pending |
+| 2026-02-22 | GAP#004-A Collective Dignity amendment | IMPLEMENTED 2026-03-10 in dignity_check.py v2.0. D_collective = mean(D_i) x (1 - variance_penalty). Sealed gate triggers below 0.5. | [x] | resolved |
 | 2026-02-22 | W#HIRING-001 Empathic Counterfactual Simulation | Complex wisdom node — requires steward deep review | [ ] | pending |
