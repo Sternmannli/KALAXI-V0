@@ -72,8 +72,8 @@ D < 0.9 triggers dignity_audit_object — auto-generated, visible on Face
 9. No surveillance economics
 10. Donor joy
 
-## Unregistered Covenants (from Master Canon — needs alignment)
-- **COV#008:** The Right to Remedy — Failure results in "Shelter," not ejection (referenced in CANON/MASTER_CANON_V1.md)
-- **COV#015:** No data moves without the donor understanding its weight (referenced in CANON/MASTER_CANON_V1.md)
+## Newly Registered (from Master Canon — aligned 2026-03-10)
+- **COV#008:** THE RIGHT TO REMEDY — Failure results in "Shelter," not ejection. When a dignity violation is detected, the system does not eject the donor. It creates a shelter path: acknowledgment, explanation, and returnable options. Related to but distinct from COV#NEW-B (which requires traceable remedy paths). COV#008 governs the *spirit* (shelter, not punishment); COV#NEW-B governs the *mechanism* (traceable path). [source: CANON/MASTER_CANON_V1.md, Slice A §3] [status: PROVISIONAL — registered 2026-03-10, awaiting ratification]
+- **COV#015:** DONOR DATA SOVEREIGNTY — No data moves without the donor understanding its weight. Before any pattern extraction, export, or federation handshake, the system must present the donor with a legible explanation of what will move, where, and why. Consent is not a checkbox; it is comprehension. [source: CANON/MASTER_CANON_V1.md, Slice A §3] [status: PROVISIONAL — registered 2026-03-10, awaiting ratification]
 
 Source: KALAXI_A_FOUNDATION.txt, Historical Archive (digested 2026-03-08)

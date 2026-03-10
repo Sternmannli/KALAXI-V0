@@ -13,8 +13,8 @@ Every seed in this file deserves a decision. Do not let it sit.
 
 | Date | Seed (excerpt) | Failure reason | Signatures | Status |
 |------|----------------|----------------|------------|--------|
-| 2026-02-22 | P#EMERGE-0020 „The Threshold is not a delay..." | Duplicate ID (two entries share P#EMERGE-0020) | [ ] | pending |
-| 2026-02-22 | P#EMERGE-0021 „A system that cannot hold..." | Duplicate ID (two entries share P#EMERGE-0021) | [ ] | pending |
-| 2026-02-22 | P#EMERGE-0022 „Capture fast. Tend slow..." | Duplicate ID (two entries share P#EMERGE-0022) | [ ] | pending |
+| 2026-02-22 | P#EMERGE-0020 „The Threshold is not a delay..." | FALSE ALARM — IDs are unique. Later proverbs have P#EMERGE-0029/0030/0031. Digestion report misidentified. | [x] | resolved |
+| 2026-02-22 | P#EMERGE-0021 „A system that cannot hold..." | FALSE ALARM — IDs are unique. See above. | [x] | resolved |
+| 2026-02-22 | P#EMERGE-0022 „Capture fast. Tend slow..." | FALSE ALARM — IDs are unique. See above. | [x] | resolved |
 | 2026-02-22 | GAP#004-A Collective Dignity amendment | No standard GAP format (uses amendment syntax) | [ ] | pending |
 | 2026-02-22 | W#HIRING-001 Empathic Counterfactual Simulation | Complex wisdom node — requires steward deep review | [ ] | pending |
