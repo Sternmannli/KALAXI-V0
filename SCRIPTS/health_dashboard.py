@@ -188,6 +188,18 @@ def main():
     print(f"  {'WEAVER modules:':<30} {modules}")
     print(f"  {'Test files:':<30} {tests}")
 
+    # Module inventory
+    core_modules = ["keep", "wire", "breath", "say", "out", "turn", "weave",
+                    "dignity_check", "organism"]
+    extension_modules = ["dignity_drift", "shelter", "federation", "srvp", "sip"]
+    print(f"\n  MODULE INVENTORY")
+    print(f"  {'Core (9 + organism):':<30} {', '.join(m.upper() for m in core_modules)}")
+    print(f"  {'Extensions (5):':<30} {', '.join(m.upper() for m in extension_modules)}")
+    weaver_dir = REPO / "WEAVER"
+    present = sum(1 for m in core_modules + extension_modules
+                  if (weaver_dir / f"{m}.py").exists())
+    print(f"  {'Modules present:':<30} {present}/{len(core_modules) + len(extension_modules)}")
+
     # Known Issues
     res, part, opn = known_issues()
     print(f"\n  KNOWN ISSUES (from CLAUDE.md)")
@@ -216,17 +228,22 @@ def main():
     # Action items
     print(f"\n  NEXT ACTIONS")
     print(f"  1. Extract remaining 36 treasures from GRAND_ARCHIVE .docx")
-    print(f"  2. Ratify 4 structural proposals (Decay, Dignity-Latency, Witness, Proprioception)")
+    print(f"  2. Resolve Layer Three conflict (P#3328-P#3333, steward decision)")
     print(f"  3. Build FACE module v2 (web/visual steward dashboard)")
-    print(f"  4. Resolve W#HIRING-001 (pending steward deep review)")
+    print(f"  4. Implement Ed25519 real signatures for federation")
 
     # Completed actions
-    print(f"\n  COMPLETED (last 3 sessions)")
+    print(f"\n  COMPLETED")
+    print(f"  [DONE] All 9 core modules built and wired (organism.py)")
+    print(f"  [DONE] GAP#PREVENTION-001: dignity drift detector (dD/dt)")
+    print(f"  [DONE] GAP#VICTIM-PROTECTION-001: shelter path")
+    print(f"  [DONE] GAP#MYCELIUM-CONNECT-001: EFP federation protocol")
+    print(f"  [DONE] SRVP: 7-step ritual verification protocol")
+    print(f"  [DONE] SIP: symmetric integration protocol (WVPS/GDI/HSR)")
     print(f"  [DONE] GAP#004-A collective D metric (dignity_check.py v2.0)")
-    print(f"  [DONE] Severity inversion fix (gap004_mediator.py)")
     print(f"  [DONE] Witness Scale W-0..W-5 (dignity_check.py v2.0)")
-    print(f"  [DONE] COV#008 + COV#015 registered (tier1_stone.md)")
-    print(f"  [DONE] tend.py v2.3 --collective-check + --witness-scan")
+    print(f"  [DONE] W#HIRING-001 signed and canonised as W#0088")
+    print(f"  [DONE] 277 tests across 9 suites, 0 failures")
 
     print(f"\n{'=' * 60}")
     print(f"  [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]")

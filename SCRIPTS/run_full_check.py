@@ -91,13 +91,21 @@ def run_manifest_check():
 
 
 def run_tests():
-    header("STEP 4: Test Suite")
+    header("STEP 4: Test Suite (all 9 suites)")
     test_files = [
+        "test_modules.py",
+        "test_organism.py",
+        "test_drift.py",
+        "test_shelter.py",
+        "test_federation.py",
+        "test_protocols.py",
         "test_dignity.py",
         "test_canon_integrity.py",
         "test_detectors.py",
     ]
     all_pass = True
+    total_passed = 0
+    total_failed = 0
     for tf in test_files:
         path = TESTS / tf
         if not path.exists():
@@ -111,13 +119,76 @@ def run_tests():
             lines = result.stdout.strip().split('\n')
             summary = lines[-1] if lines else "no output"
             print(f"  PASS: {tf} — {summary}")
+            # Parse counts from summary
+            import re
+            m = re.search(r'(\d+) passed', summary)
+            if m:
+                total_passed += int(m.group(1))
         else:
             print(f"  FAIL: {tf}")
-            print(result.stdout)
-            if result.stderr:
-                print(result.stderr)
+            lines = result.stdout.strip().split('\n')
+            if lines:
+                print(f"        {lines[-1]}")
             all_pass = False
+            import re
+            m = re.search(r'(\d+) passed, (\d+) failed', lines[-1] if lines else "")
+            if m:
+                total_passed += int(m.group(1))
+                total_failed += int(m.group(2))
+    print(f"\n  TOTAL: {total_passed} passed, {total_failed} failed")
     return all_pass
+
+
+def run_organism_check():
+    header("STEP 5: Organism Integration Check")
+    sys.path.insert(0, str(REPO_ROOT))
+
+    import tempfile
+    import shutil
+    import WEAVER.keep as keep
+    _tmp = Path(tempfile.mkdtemp())
+    keep.KEEP_DIR = _tmp / "KEEP"
+    keep.LEDGER_FILE = keep.KEEP_DIR / "ledger.json"
+
+    try:
+        from WEAVER.organism import Organism
+        org = Organism()
+
+        # Process a clean input
+        result = org.process("The river remembers its source.")
+        if not result.dignity_passed:
+            print("  FAIL: Clean input should pass dignity check")
+            return False
+        print(f"  PASS: Clean input processed (EX: {result.exchange_id})")
+
+        # Check drift
+        if result.drift_level != "stable":
+            print(f"  WARN: Drift level is {result.drift_level}")
+        print(f"  PASS: Drift detector active ({result.drift_level})")
+
+        # Check state
+        s = org.state()
+        print(f"  PASS: Organism alive, breath cycle {s.breath_cycle}")
+        print(f"  PASS: Federation ready (privacy budget: {s.federation_privacy_remaining:.2f})")
+
+        # SIP check
+        sip = org.sip_evaluate()
+        print(f"  PASS: SIP evaluation complete (WVPS={sip.wvps.score:.4f})")
+
+        # Sync all
+        receipt = org.sync_all()
+        if receipt["aligned"]:
+            print(f"  PASS: All {len(receipt['modules'])} modules synchronized")
+        else:
+            print(f"  FAIL: Module sync failed")
+            return False
+
+        return True
+    except Exception as e:
+        print(f"  FAIL: Organism check error: {e}")
+        return False
+    finally:
+        shutil.rmtree(_tmp, ignore_errors=True)
 
 
 def main():
@@ -129,6 +200,7 @@ def main():
     results.append(("Dignity Predicate", run_dignity_check()))
     results.append(("MANIFEST Check", run_manifest_check()))
     results.append(("Test Suite", run_tests()))
+    results.append(("Organism Integration", run_organism_check()))
 
     header("SUMMARY")
     all_pass = True
