@@ -1,8 +1,8 @@
 {
   "last_id": {
-    "P": 2135,
-    "ANOM": 1100,
-    "GAP": 20,
+    "P": 2138,
+    "ANOM": 1101,
+    "GAP": 21,
     "W": 87,
     "COV": 14
   },
@@ -24,6 +24,51 @@
       "provenance": "signed-steward",
       "supersedes": null,
       "hash": "1e2f671109d2c7fd2962265ab6f0a410ad199f4cae7aeb4659f804f5d331820b"
+    },
+    "ANOM#1101": {
+      "id": "ANOM#1101",
+      "type": "anomaly",
+      "status": "ratified",
+      "created": "2026-03-10T22:40:23.208856+00:00",
+      "provenance": "signed-steward",
+      "supersedes": null,
+      "hash": "d23560fc5383d030621b5638cd314acbfa44fa33cec7289349db0a814f0aecea"
+    },
+    "P#EMERGE-2136": {
+      "id": "P#EMERGE-2136",
+      "type": "covenant",
+      "status": "ratified",
+      "created": "2026-03-10T22:40:23.209597+00:00",
+      "provenance": "signed-steward",
+      "supersedes": null,
+      "hash": "fd33947c29d4bdee80e95052f9330a5cf1b1bc2e7ba89755fcfb305fdf46d27e"
+    },
+    "P#EMERGE-2137": {
+      "id": "P#EMERGE-2137",
+      "type": "covenant",
+      "status": "ratified",
+      "created": "2026-03-10T22:40:23.209869+00:00",
+      "provenance": "signed-steward",
+      "supersedes": null,
+      "hash": "cee34c71cd89b40eedd335896063cf779869b402c295c8e2d54787c20a0bf6df"
+    },
+    "GAP#0021": {
+      "id": "GAP#0021",
+      "type": "gap",
+      "status": "ratified",
+      "created": "2026-03-10T22:40:23.210118+00:00",
+      "provenance": "signed-steward",
+      "supersedes": null,
+      "hash": "f39b0aea8b8970abe0c81e475f3f24c2265df125258a7a889b9c4f0724bb023b"
+    },
+    "P#EMERGE-2138": {
+      "id": "P#EMERGE-2138",
+      "type": "covenant",
+      "status": "ratified",
+      "created": "2026-03-10T22:40:23.210589+00:00",
+      "provenance": "signed-steward",
+      "supersedes": null,
+      "hash": "3f95c32d15962c6dc7a7d8f564a92bb0a4d439de5a9e15a1fffb6336f57905f0"
     }
   }
 }
