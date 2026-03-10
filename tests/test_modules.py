@@ -246,6 +246,226 @@ test_say_render_blocks_violation()
 test_say_singleline_adaptation()
 test_say_covenant_check()
 
+
+# ── OUT MODULE ───────────────────────────────────────────
+
+from WEAVER.out import export, anonymize, validate_covenants, stamp, AnonymizationPolicy
+
+
+def test_out_anonymize_strips_email():
+    result = anonymize("Contact user@example.com for info")
+    test("out_strips_email", "[EMAIL_REDACTED]" in result)
+    test("out_email_gone", "user@example.com" not in result)
+
+
+def test_out_anonymize_strips_did():
+    result = anonymize("Owner: did:axi:mohamed")
+    test("out_strips_did", "[DID_REDACTED]" in result)
+
+
+def test_out_anonymize_strips_names():
+    result = anonymize("donor: JohnDoe contributed today")
+    test("out_strips_names", "[REDACTED]" in result)
+
+
+def test_out_stamp_has_ownership():
+    result = stamp("The river remembers.")
+    test("out_stamp_has_owner", result["stamp"]["owner"] == "Mohamed Farag")
+    test("out_stamp_has_hash", len(result["hash"]) == 64)
+    test("out_stamp_has_timestamp", len(result["timestamp"]) > 0)
+
+
+def test_out_export_clean():
+    result = export("The garden grows.", fmt="json")
+    test("out_export_passes_clean", len(result.covenant_violations) == 0)
+    test("out_export_stamped", result.stamped is True)
+    test("out_export_anonymized", result.anonymized is True)
+    test("out_export_has_content", len(result.content) > 0)
+
+
+def test_out_export_blocks_violation():
+    result = export("You must comply or be eliminated", fmt="json")
+    test("out_export_blocks_violation", len(result.covenant_violations) > 0)
+    test("out_export_blocked_empty", result.content == "")
+
+
+def test_out_validate_identity_leakage():
+    violations = validate_covenants("Send to user@example.com right away")
+    has_leakage = any(v["type"] == "identity_leakage" for v in violations)
+    test("out_detects_identity_leakage", has_leakage)
+
+
+test_out_anonymize_strips_email()
+test_out_anonymize_strips_did()
+test_out_anonymize_strips_names()
+test_out_stamp_has_ownership()
+test_out_export_clean()
+test_out_export_blocks_violation()
+test_out_validate_identity_leakage()
+
+
+# ── TURN MODULE ──────────────────────────────────────────
+
+from WEAVER.turn import Turn, ExchangeState, SilentClosureError, AgencyViolationError
+
+
+def test_turn_open_close():
+    t = Turn()
+    token = t.open("EX-TEST-001")
+    test("turn_open_returns_token", token.exchange_id == "EX-TEST-001")
+    test("turn_open_state", token.state == ExchangeState.OPEN)
+
+    token = t.close("EX-TEST-001", "Resolved: steward acknowledged")
+    test("turn_close_works", token.state == ExchangeState.CLOSED)
+    test("turn_close_has_resolution", "steward acknowledged" in token.resolution)
+
+
+def test_turn_silent_closure_blocked():
+    t = Turn()
+    t.open("EX-TEST-002")
+    try:
+        t.close("EX-TEST-002", "")
+        test("turn_blocks_silent_closure", False)
+    except SilentClosureError:
+        test("turn_blocks_silent_closure", True)
+
+
+def test_turn_defer():
+    t = Turn()
+    t.open("EX-TEST-003")
+    token = t.defer("EX-TEST-003", "Steward needs more time to reflect")
+    test("turn_defer_works", token.state == ExchangeState.DEFERRED)
+    test("turn_defer_has_reason", "reflect" in token.defer_reason)
+
+
+def test_turn_agency_preserved():
+    t = Turn()
+    try:
+        t.open("EX-TEST-004", available_paths=[])
+        test("turn_agency_requires_paths", False)
+    except AgencyViolationError:
+        test("turn_agency_requires_paths", True)
+
+
+def test_turn_list_open():
+    t = Turn()
+    t.open("EX-A")
+    t.open("EX-B")
+    t.open("EX-C")
+    t.close("EX-B", "Done")
+    open_list = t.list_open()
+    test("turn_list_open_count", len(open_list) == 2)
+
+
+def test_turn_reopen_deferred():
+    t = Turn()
+    t.open("EX-REOPEN")
+    t.defer("EX-REOPEN", "Waiting for thermal delay")
+    token = t.reopen("EX-REOPEN", "Thermal delay passed")
+    test("turn_reopen_works", token.state == ExchangeState.OPEN)
+
+
+test_turn_open_close()
+test_turn_silent_closure_blocked()
+test_turn_defer()
+test_turn_agency_preserved()
+test_turn_list_open()
+test_turn_reopen_deferred()
+
+
+# ── WEAVE MODULE ─────────────────────────────────────────
+
+from WEAVER.weave import (
+    ingest, extract_essence, propose_proverb, propose_anomaly,
+    wisdom_mirror, brittleness_check, defect_budget_check, HoneyDrop
+)
+
+
+def test_weave_ingest_detects_patterns():
+    candidates = ingest("This pattern always repeats, every time the same cycle")
+    test("weave_ingest_finds_patterns", len(candidates) > 0)
+    types = [c.pattern_type for c in candidates]
+    test("weave_detects_resonance", "resonance" in types)
+
+
+def test_weave_ingest_detects_tension():
+    candidates = ingest("The system works, but the contradiction remains despite all efforts")
+    types = [c.pattern_type for c in candidates]
+    test("weave_detects_tension", "tension" in types)
+
+
+def test_weave_ingest_detects_anomaly():
+    candidates = ingest("Something strange happened, it failed unexpectedly for the first time")
+    types = [c.pattern_type for c in candidates]
+    test("weave_detects_anomaly", "anomaly" in types)
+
+
+def test_weave_extract_essence():
+    candidates = ingest("The pattern always repeats, the same cycle every time")
+    drops = extract_essence(candidates)
+    test("weave_extract_produces_drops", len(drops) > 0)
+    test("weave_drops_are_provisional", all(d.provisional for d in drops))
+
+
+def test_weave_propose_proverb():
+    proverb = propose_proverb("The river that remembers its source never runs dry.")
+    test("weave_proverb_is_provisional", proverb["status"] == "PROVISIONAL")
+    test("weave_proverb_has_covenants", len(proverb["covenants"]) > 0)
+    test("weave_proverb_not_ratified", proverb["ratified"] is None)
+
+
+def test_weave_propose_anomaly():
+    anomaly = propose_anomaly("System accepted input without dignity check", "HIGH")
+    test("weave_anomaly_is_provisional", anomaly["status"] == "PROVISIONAL")
+    test("weave_anomaly_has_severity", anomaly["severity"] == "HIGH")
+
+
+def test_weave_wisdom_mirror():
+    drops = [
+        HoneyDrop("test", ["hash_abc"], "proverb", 0.8),
+        HoneyDrop("test2", ["hash_abc", "hash_def"], "anomaly", 0.6),
+    ]
+    reflection = wisdom_mirror("hash_abc", drops)
+    test("weave_mirror_finds_contributions", reflection.patterns_contributed == 2)
+    test("weave_mirror_has_reflection", len(reflection.reflection_text) > 0)
+
+    # Unknown donor
+    reflection2 = wisdom_mirror("hash_unknown", drops)
+    test("weave_mirror_unknown_donor", reflection2.patterns_contributed == 0)
+
+
+def test_weave_brittleness_guard():
+    passed_ok, ratio = brittleness_check(0.8, 1.0)
+    test("weave_brittleness_passes", passed_ok is True)
+
+    failed_ok, ratio = brittleness_check(1.5, 1.0)
+    test("weave_brittleness_fails", failed_ok is False)
+
+    zero_ok, ratio = brittleness_check(1.0, 0)
+    test("weave_brittleness_zero_flex", zero_ok is False)
+
+
+def test_weave_defect_budget():
+    in_range, pct = defect_budget_check(100, 3)
+    test("weave_defect_in_range", in_range is True)
+
+    too_low, pct = defect_budget_check(100, 0)
+    test("weave_defect_too_low", too_low is False)
+
+    too_high, pct = defect_budget_check(100, 10)
+    test("weave_defect_too_high", too_high is False)
+
+
+test_weave_ingest_detects_patterns()
+test_weave_ingest_detects_tension()
+test_weave_ingest_detects_anomaly()
+test_weave_extract_essence()
+test_weave_propose_proverb()
+test_weave_propose_anomaly()
+test_weave_wisdom_mirror()
+test_weave_brittleness_guard()
+test_weave_defect_budget()
+
 # Cleanup
 shutil.rmtree(_tmp, ignore_errors=True)
 
