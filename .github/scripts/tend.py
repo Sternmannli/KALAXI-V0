@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-tend.py -- Kalaxi Tending Engine v2.2
+tend.py -- Kalaxi Tending Engine v2.3
 Interrogative, not authoritative. Advisory, not decisive.
 The system asks. The steward decides.
 
@@ -20,6 +20,8 @@ Commands:
   --refuse "line" "why"    Refuse a seed (adds to refusals.md)
   --canonise "line" TYPE   Move seed to canon (thermal delay enforced)
   --scan                   Calibrate ID registry from slice files
+  --collective-check       Run collective D metric across THRESHOLD cohort
+  --witness-scan           Scan all registry elements for W-Scale status
 """
 
 import re
@@ -609,6 +611,122 @@ def cmd_scan():
         print("\n  ✅  Registry is correctly calibrated.")
     print()
 
+def cmd_collective_check():
+    """Run collective D metric across all THRESHOLD proverb seeds."""
+    weaver = ROOT / "WEAVER"
+    sys.path.insert(0, str(ROOT))
+    try:
+        from WEAVER.dignity_check import check_collective_dignity
+    except ImportError:
+        print("Cannot import dignity_check. Run from repo root.")
+        return
+
+    if not THRESHOLD.exists():
+        print("THRESHOLD.md not found.")
+        return
+
+    lines = [l for l in THRESHOLD.read_text().splitlines()
+             if l.strip().startswith("[20") and "proverb" in l.lower()]
+
+    if not lines:
+        print("No proverb seeds found in THRESHOLD.md")
+        return
+
+    # Extract the proverb text from each line
+    texts = []
+    for line in lines:
+        # Find text between quotes or after the last ] —
+        m = re.search(r'[„""](.+?)["""]', line)
+        if m:
+            texts.append(m.group(1))
+        else:
+            texts.append(line[30:110])  # fallback: middle portion
+
+    result = check_collective_dignity(texts, felt_domain="threshold-cohort")
+    result.display()
+
+    # Show individual scores summary
+    scores = [r.D for r in result.individual_results]
+    zeros = sum(1 for s in scores if s == 0.0)
+    ones = sum(1 for s in scores if s == 1.0)
+    print(f"  Individual breakdown: {ones} passed, {zeros} failed, {len(scores)} total")
+    if zeros > 0:
+        print(f"  Failed seeds:")
+        for i, (score, line) in enumerate(zip(scores, lines)):
+            if score == 0.0:
+                print(f"    [{i+1}] {line[:70]}")
+    print()
+
+
+def cmd_witness_scan():
+    """Scan all THRESHOLD entries and report W-Scale status."""
+    if not THRESHOLD.exists():
+        print("THRESHOLD.md not found.")
+        return
+
+    lines = [l for l in THRESHOLD.read_text().splitlines()
+             if l.strip().startswith("[20")]
+
+    # Categorize by type
+    types = {}
+    for line in lines:
+        m = re.match(r'\[.*?\] — (\w[\w\-]*)', line)
+        if m:
+            t = m.group(1)
+            types.setdefault(t, []).append(line)
+
+    # Check thermal age and classify W-Scale level heuristically
+    # W-0: UNSEEN = no ID reference anywhere else in the system
+    # W-1: PASSED = has been processed (has ID)
+    # W-2: FLAGGED = system surfaced it (in pending_review or has [PROVISIONAL])
+    # W-3+: requires steward action (we can't detect this automatically)
+
+    print(f"\n{'='*60}")
+    print(f"  WITNESS SCALE SCAN — {datetime.now().strftime('%Y-%m-%d')}")
+    print(f"{'='*60}")
+
+    total = len(lines)
+    w0_count = 0  # overdue (past thermal, never witnessed)
+    w1_count = 0  # processed but not seen
+    w2_count = 0  # flagged / provisional
+
+    overdue = []
+
+    for line in lines:
+        age = thermal_age(line)
+        has_id = bool(re.search(r'(GAP|ANOM|COV|P|W|EQ|CONST|PROT|SPEC|GOV)#[\w\-]+', line))
+
+        if has_id:
+            w2_count += 1  # at least W-2 (has an ID = system processed it)
+        elif age >= THERMAL_DAYS:
+            w0_count += 1
+            overdue.append(line)
+        else:
+            w1_count += 1
+
+    w3_plus = total - w0_count - w1_count - w2_count
+
+    print(f"\n  Total THRESHOLD entries:  {total}")
+    print(f"  W-0 (UNSEEN, overdue):   {w0_count}")
+    print(f"  W-1 (PASSED, no ID):     {w1_count}")
+    print(f"  W-2+ (FLAGGED/tracked):  {w2_count}")
+    print()
+
+    if overdue:
+        print(f"  OVERDUE ELEMENTS (past thermal delay, no ID):")
+        for line in overdue:
+            age = thermal_age(line)
+            print(f"    [{age}d] {line[:65]}")
+        print()
+
+    # Type distribution
+    print(f"  TYPE DISTRIBUTION:")
+    for t, entries in sorted(types.items(), key=lambda x: -len(x[1])):
+        print(f"    {t + ':':<25} {len(entries)}")
+
+    print(f"\n{'='*60}\n")
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -651,6 +769,10 @@ def main():
         cmd_process_pending()
     elif cmd == "--scan":
         cmd_scan()
+    elif cmd == "--collective-check":
+        cmd_collective_check()
+    elif cmd == "--witness-scan":
+        cmd_witness_scan()
     else:
         print(f"Unknown command: {cmd}")
         print(__doc__)

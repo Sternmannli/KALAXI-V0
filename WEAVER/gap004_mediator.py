@@ -166,9 +166,17 @@ def _assess_severity(individual: TensionSide, collective: TensionSide, direct: b
         return "HIGH"
     total = len(individual.signals) + len(collective.signals)
     both = individual.signals and collective.signals
+    col_only = collective.signals and not individual.signals
     if both and total >= 4:
         return "HIGH"
+    elif col_only and len(collective.signals) >= 2:
+        # WALKTHROUGH-001 fix: collective signals with ZERO individual signals
+        # means the harm is hidden — individuals are invisible precisely because
+        # the bias operates at the group level. This is MORE dangerous, not less.
+        return "HIGH"
     elif both and total >= 2:
+        return "MEDIUM"
+    elif col_only:
         return "MEDIUM"
     elif total >= 1:
         return "LOW"

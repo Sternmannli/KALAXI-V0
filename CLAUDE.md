@@ -78,9 +78,9 @@ Always develop on the designated `claude/` feature branch. Never push to main di
 - 2 structural proposals PROVISIONAL PRIORITY QUEUE (Decay Function, Dignity-Latency)
 
 ### Known Issues
-- Duplicate proverb IDs: P#EMERGE-0020, 0021, 0022 each have two different entries in THRESHOLD.md
-- COV#008 (Master Canon) and COV#015 (Master Canon) not registered in tier1_stone.md
-- 47 Treasures need formal registration pathway
+- ~~Duplicate proverb IDs~~ RESOLVED 2026-03-10: IDs are unique (later entries are P#EMERGE-0029/0030/0031, not duplicates)
+- ~~COV#008 and COV#015 not registered~~ RESOLVED 2026-03-10: Both formally registered as PROVISIONAL in tier1_stone.md
+- ~~47 Treasures need formal registration pathway~~ PARTIALLY RESOLVED 2026-03-10: 11/47 indexed in R7M/TREASURES/TREASURES_INDEX.md. 36 await extraction from GRAND_ARCHIVE .docx
 
 ## Reminders
 

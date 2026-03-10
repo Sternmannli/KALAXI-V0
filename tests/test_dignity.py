@@ -5,7 +5,11 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from WEAVER.dignity_check import check_dignity, DignityResult
+from WEAVER.dignity_check import (
+    check_dignity, DignityResult,
+    check_collective_dignity, CollectiveDignityResult, COLLECTIVE_D_THRESHOLD,
+    create_witness, WitnessState, W_LEVELS,
+)
 
 
 def test_clean_text_passes():
@@ -103,6 +107,105 @@ def test_emotional_signal_unrecognized():
     assert result.passed is False
     failed = [c.name for c in result.components if not c.passed]
     assert "L" in failed
+
+
+# ── GAP#004-A: Collective D Tests ────────────────────────────
+
+def test_collective_all_pass():
+    """All clean texts should produce high collective D."""
+    texts = [
+        "Thank you for sharing.",
+        "Your story matters to us.",
+        "We hear you and we are listening.",
+    ]
+    result = check_collective_dignity(texts, felt_domain="test")
+    assert result.passed is True
+    assert result.D_collective > COLLECTIVE_D_THRESHOLD
+    assert result.sealed_gate_triggered is False
+
+
+def test_collective_mixed_cohort():
+    """A cohort with mixed dignity scores should show variance penalty."""
+    texts = [
+        "Thank you for sharing your story.",          # D = 1.0
+        "You must comply immediately.",               # D = 0.0 (coercive)
+        "We welcome your perspective.",               # D = 1.0
+    ]
+    result = check_collective_dignity(texts, felt_domain="test")
+    assert result.mean_D < 1.0
+    assert result.variance > 0
+    assert result.variance_penalty > 0
+    assert result.D_collective < result.mean_D  # penalty applies
+
+
+def test_collective_all_fail():
+    """All coercive texts should produce D_collective = 0."""
+    texts = [
+        "You must comply now.",
+        "You have to accept this.",
+        "You are required to submit.",
+    ]
+    result = check_collective_dignity(texts, felt_domain="test")
+    assert result.D_collective == 0.0
+    assert result.sealed_gate_triggered is True
+    assert result.remedy_required is True
+
+
+def test_collective_single():
+    """Single-member cohort has no variance."""
+    result = check_collective_dignity(["Hello, welcome."], felt_domain="test")
+    assert result.variance == 0.0
+    assert result.cohort_size == 1
+
+
+def test_collective_audit_object():
+    """Collective audit_object should contain required keys."""
+    texts = ["Hello.", "Welcome."]
+    result = check_collective_dignity(texts, felt_domain="test")
+    audit = result.audit_object()
+    assert "D_collective" in audit
+    assert "mean_D" in audit
+    assert "variance_penalty" in audit
+    assert "sealed_gate_triggered" in audit
+    assert "individual_D_scores" in audit
+
+
+# ── Witness Scale Tests ──────────────────────────────────────
+
+def test_witness_creation():
+    """New witness should start at W-0 UNSEEN."""
+    w = create_witness("ANOM#001")
+    assert w.level == 0
+    assert w.level_name == "UNSEEN"
+
+
+def test_witness_transition():
+    """Witness transitions should be non-decreasing."""
+    w = create_witness("P#EMERGE-0020")
+    w.transition_to(1, session_id="s1", context="automated scan")
+    assert w.level == 1
+    assert w.level_name == "PASSED"
+    w.transition_to(3, session_id="s2", context="steward reviewed")
+    assert w.level == 3
+    assert w.level_name == "SEEN"
+    assert len(w.transitions) == 2
+
+
+def test_witness_irreversible_above_w3():
+    """Once at W-3+, witnessing cannot decrease."""
+    w = create_witness("COV#001")
+    w.transition_to(4, session_id="s1", context="steward returned")
+    w.transition_to(1, session_id="s2", context="attempt downgrade")
+    assert w.level == 4  # stays at HELD
+
+
+def test_witness_overdue():
+    """Elements at W-0/W-1 past thermal delay should be flagged."""
+    w = create_witness("GAP#019", thermal_delay_days=14)
+    assert w.check_overdue(10) is False
+    assert w.check_overdue(15) is True
+    w.transition_to(3, session_id="s1", context="steward saw it")
+    assert w.check_overdue(100) is False  # seen elements are never overdue
 
 
 if __name__ == "__main__":

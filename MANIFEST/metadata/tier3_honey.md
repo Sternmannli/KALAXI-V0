@@ -57,8 +57,8 @@ Recovered from Excavation Slice 5. Key treasures:
 - T#30: Lock Test (proverb quality gate)
 - T#47: Phase Transition Physics (organic → atomic growth)
 
-Full index: MANIFEST/digestion_report_2026-03-08.md
-Status: Unindexed — awaiting formal registration pathway
+Full index: R7M/TREASURES/TREASURES_INDEX.md (11 documented, 36 awaiting extraction)
+Status: PARTIALLY INDEXED — 11/47 registered 2026-03-10, 36 awaiting extraction from GRAND_ARCHIVE .docx
 
 ## Cross-Anomaly Compression (Kuusi Paremiological Minimum)
 ~8,287 entries → ~1,800 types → ~700 global motifs

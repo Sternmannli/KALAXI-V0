@@ -131,9 +131,9 @@ Key treasures requiring THRESHOLD seeds:
 
 ## Contradictions & Gaps Discovered
 
-1. **P#EMERGE-0020 duplicate:** Two different proverbs share the ID P#EMERGE-0020 in THRESHOLD.md — one about "The Threshold is not a delay" and one about "The stone that decides too quickly." Needs steward resolution.
-2. **P#EMERGE-0021 duplicate:** Two different proverbs share the ID P#EMERGE-0021 — one about "A system that cannot hold its own contradictions" and one about "Bias is not only injustice of outcome." Needs steward resolution.
-3. **P#EMERGE-0022 duplicate:** Two different proverbs share P#EMERGE-0022 — one about "Capture fast. Tend slow." and one about "Dignity is non-compensatory." Needs steward resolution.
+1. ~~**P#EMERGE-0020 duplicate:**~~ **RESOLVED (2026-03-10):** No duplicate. "The stone that decides too quickly" is P#EMERGE-0029 (not 0020). IDs are unique.
+2. ~~**P#EMERGE-0021 duplicate:**~~ **RESOLVED (2026-03-10):** No duplicate. "Bias is not only injustice" is P#EMERGE-0030 (not 0021). IDs are unique.
+3. ~~**P#EMERGE-0022 duplicate:**~~ **RESOLVED (2026-03-10):** No duplicate. "Dignity is non-compensatory" is P#EMERGE-0031 (not 0022). IDs are unique.
 4. **COV#008 vs COV#NEW-B:** Master Canon references COV#008 (Right to Remedy) but tier1_stone.md lists COV#NEW-B (Remedy Requirement). Are these the same covenant? Needs alignment.
 5. **COV#015 in Master Canon:** Referenced but not in tier1_stone.md covenant list. Needs registration.
 6. **47 Treasures unindexed:** None of the T#01-T#47 treasures appear in ids.json or any manifest. Need formal registration path.

@@ -1,19 +1,25 @@
 #!/usr/bin/env python3
 """
 dignity_check.py — Kalaxi Dignity Predicate
-Version: 1.0
+Version: 2.0
 Grounded in: KALAXI_A_FOUNDATION.txt §DIGNITY_PREDICATE
 
 Implements D = A × L × M as a callable function.
 If any component equals zero, D equals zero.
 D = 0 triggers dignity_violation — mandatory logging.
+
+v2.0 additions (GAP#004-A):
+  - Collective D metric: D_collective = mean(D_cohort) × (1 - variance_penalty)
+  - If D_collective < threshold, sealed-gate protections activate
+  - Witness Scale (W-Scale) checkpoint integration
 """
 
 import re
 import uuid
 import json
+import math
 from datetime import datetime, timezone
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional, List, Dict
 
 # Constants (from SLICE-A)
@@ -134,6 +140,168 @@ class DignityResult:
             for r in self._build_remedies():
                 print(f"    · {r}")
         print(f"{'─'*55}\n")
+
+# ── GAP#004-A: Collective D Metric ──────────────────────────
+# Grounded in: THRESHOLD.md GAP#004-A (2026-02-22)
+# "The dignity predicate must also compute a Collective D metric
+#  (mean cohort D × variance penalty). If collective D falls below
+#  threshold, sealed-gate protections activate."
+
+COLLECTIVE_D_THRESHOLD = 0.5  # Below this: sealed-gate review required
+
+@dataclass
+class CollectiveDignityResult:
+    """Collective D = mean(D_cohort) × (1 - variance_penalty)"""
+    D_collective: float
+    mean_D: float
+    variance: float
+    variance_penalty: float
+    cohort_size: int
+    passed: bool
+    individual_results: List[DignityResult]
+    sealed_gate_triggered: bool
+    remedy_required: bool
+
+    def audit_object(self) -> dict:
+        return {
+            "D_collective": round(self.D_collective, 4),
+            "mean_D": round(self.mean_D, 4),
+            "variance": round(self.variance, 4),
+            "variance_penalty": round(self.variance_penalty, 4),
+            "cohort_size": self.cohort_size,
+            "passed": self.passed,
+            "sealed_gate_triggered": self.sealed_gate_triggered,
+            "remedy_required": self.remedy_required,
+            "individual_D_scores": [r.D for r in self.individual_results],
+        }
+
+    def display(self):
+        status = "PASSED" if self.passed else "FAILED"
+        print(f"\n{'='*55}")
+        print(f"COLLECTIVE DIGNITY CHECK  {status}")
+        print(f"{'='*55}")
+        print(f"  Cohort size:        {self.cohort_size}")
+        print(f"  Mean D:             {self.mean_D:.4f}")
+        print(f"  Variance:           {self.variance:.4f}")
+        print(f"  Variance penalty:   {self.variance_penalty:.4f}")
+        print(f"  D_collective:       {self.D_collective:.4f}")
+        print(f"  Threshold:          {COLLECTIVE_D_THRESHOLD}")
+        if self.sealed_gate_triggered:
+            print(f"\n  SEALED GATE TRIGGERED — steward + ethics review required")
+        if self.remedy_required:
+            print(f"  COV#008 ACTIVATED — shelter path required for affected cohort")
+        print(f"{'='*55}\n")
+
+
+def check_collective_dignity(
+    texts: List[str],
+    contexts: Optional[List[dict]] = None,
+    felt_domain: str = ""
+) -> CollectiveDignityResult:
+    """
+    Evaluate collective dignity across a cohort.
+    D_collective = mean(D_i) × (1 - variance_penalty)
+    where variance_penalty = min(1.0, variance(D_i) × 4)
+    """
+    if contexts is None:
+        contexts = [{}] * len(texts)
+
+    results = [
+        check_dignity(t, c, felt_domain=felt_domain)
+        for t, c in zip(texts, contexts)
+    ]
+
+    scores = [r.D for r in results]
+    n = len(scores)
+    mean_d = sum(scores) / n if n > 0 else 0.0
+    variance = sum((s - mean_d) ** 2 for s in scores) / n if n > 0 else 0.0
+    # Variance penalty: high variance in cohort D means unequal treatment
+    # Multiplier of 4 means variance of 0.25 → full penalty
+    variance_penalty = min(1.0, variance * 4)
+    d_collective = mean_d * (1 - variance_penalty)
+
+    passed = d_collective >= COLLECTIVE_D_THRESHOLD
+    sealed_gate = not passed
+    remedy = sealed_gate
+
+    return CollectiveDignityResult(
+        D_collective=d_collective,
+        mean_D=mean_d,
+        variance=variance,
+        variance_penalty=variance_penalty,
+        cohort_size=n,
+        passed=passed,
+        individual_results=results,
+        sealed_gate_triggered=sealed_gate,
+        remedy_required=remedy,
+    )
+
+
+# ── Witness Scale (W-Scale) ────────────────────────────────
+# Grounded in: FOUNDATIONS/witness_scale.md (2026-03-10)
+# W-0: UNSEEN, W-1: PASSED, W-2: FLAGGED, W-3: SEEN,
+# W-4: HELD, W-5: EMBODIED
+
+W_LEVELS = {
+    0: "UNSEEN",
+    1: "PASSED",
+    2: "FLAGGED",
+    3: "SEEN",
+    4: "HELD",
+    5: "EMBODIED",
+}
+
+@dataclass
+class WitnessState:
+    """Witness Scale state for a registry element."""
+    element_id: str
+    level: int
+    level_name: str
+    transitions: List[dict] = field(default_factory=list)
+    thermal_delay_days: int = 14
+    overdue: bool = False
+
+    def transition_to(self, new_level: int, session_id: str = "", context: str = ""):
+        """Non-decreasing transitions only (W-3+ is irreversible)."""
+        if new_level < self.level and self.level >= 3:
+            return  # witnessing is irreversible
+        if new_level <= self.level:
+            return  # no downgrade
+        old = self.level
+        self.level = new_level
+        self.level_name = W_LEVELS.get(new_level, "UNKNOWN")
+        self.transitions.append({
+            "from": old,
+            "to": new_level,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "session_id": session_id,
+            "context": context,
+        })
+
+    def check_overdue(self, days_since_creation: int) -> bool:
+        """Flag if element is at W-0 or W-1 past its thermal delay."""
+        self.overdue = (self.level <= 1 and days_since_creation > self.thermal_delay_days)
+        return self.overdue
+
+    def to_dict(self) -> dict:
+        return {
+            "element_id": self.element_id,
+            "level": self.level,
+            "level_name": self.level_name,
+            "transitions": self.transitions,
+            "overdue": self.overdue,
+        }
+
+
+def create_witness(element_id: str, thermal_delay_days: int = 14) -> WitnessState:
+    """Create a new witness state at W-0 (UNSEEN)."""
+    return WitnessState(
+        element_id=element_id,
+        level=0,
+        level_name="UNSEEN",
+        thermal_delay_days=thermal_delay_days,
+    )
+
 
 def _check_agency(text: str, context: dict) -> ComponentResult:
     signals = []
