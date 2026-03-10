@@ -38,6 +38,7 @@ from WEAVER.dignity_check import check_dignity, check_collective_dignity
 from WEAVER.weave import ingest, extract_essence, propose_proverb, wisdom_mirror
 from WEAVER.keep import store, retrieve, lock, list_artifacts, receipt_count
 from WEAVER.dignity_drift import DignityDrift, DriftLevel
+from WEAVER.shelter import Shelter
 
 
 @dataclass
@@ -56,6 +57,7 @@ class OrganismState:
     drift_level: str
     drift_rate: float
     drift_consecutive_declines: int
+    sheltered_exchanges: int
     timestamp: str
 
 
@@ -76,6 +78,8 @@ class ProcessResult:
     breath_cycle: int
     drift_level: str = "stable"
     drift_rate: float = 0.0
+    shelter_message: str = ""
+    shelter_remedies: list = field(default_factory=list)
     warnings: list = field(default_factory=list)
 
 
@@ -94,6 +98,7 @@ class Organism:
         self._wire = Wire()
         self._turn = Turn()
         self._drift = DignityDrift()
+        self._shelter = Shelter()
         self._exchange_counter = 0
         self._last_dignity = {}
         self._drops_archive = []
@@ -200,13 +205,17 @@ class Organism:
             warnings.append(drift_alert.message)
 
         if dignity.D == 0.0:
-            # Dignity failed — block output, defer exchange
+            # Dignity failed — shelter the exchange (not discard)
+            failed_components = self._last_dignity.get("failed_components", [])
             self._wire.broadcast(
                 f"Dignity failure on input: D=0.0",
                 "dignity-alert",
                 source="check",
             )
-            self._turn.defer(ex_id, f"Input failed dignity check: {self._last_dignity.get('failed_components', [])}")
+            self._turn.defer(ex_id, f"Input failed dignity check: {failed_components}")
+
+            # SHELTER — hold the exchange with remedies
+            shelter_record = self._shelter.receive(ex_id, donor_input, failed_components)
 
             return ProcessResult(
                 exchange_id=ex_id,
@@ -223,6 +232,8 @@ class Organism:
                 breath_cycle=self._breath.cycle,
                 drift_level=drift_alert.level.value,
                 drift_rate=drift_alert.dD_dt,
+                shelter_message=shelter_record.donor_message,
+                shelter_remedies=[r.component for r in shelter_record.remedies],
                 warnings=self._last_dignity.get("warnings", []) + warnings,
             )
 
@@ -327,8 +338,25 @@ class Organism:
             drift_level=self._drift.state().level.value,
             drift_rate=self._drift.state().dD_dt,
             drift_consecutive_declines=self._drift.state().consecutive_declines,
+            sheltered_exchanges=self._shelter.held_count,
             timestamp=self._now(),
         )
+
+    def shelter_status(self, exchange_id):
+        """Get shelter record for a blocked exchange."""
+        return self._shelter.get(exchange_id)
+
+    def shelter_list(self):
+        """List all exchanges currently held in shelter."""
+        return self._shelter.list_held()
+
+    def shelter_withdraw(self, exchange_id):
+        """Donor withdraws a sheltered exchange."""
+        return self._shelter.mark_withdrawn(exchange_id)
+
+    def shelter_review(self, exchange_id, note):
+        """Steward reviews a sheltered exchange."""
+        return self._shelter.steward_review(exchange_id, note)
 
     def collective_check(self, texts):
         """Run collective dignity across a cohort."""
@@ -356,4 +384,5 @@ class Organism:
         print(f"  Receipts:          {s.receipts_total}")
         print(f"  Dignity drift:     {s.drift_level} (dD/dt={s.drift_rate:.4f})")
         print(f"  Consecutive drops: {s.drift_consecutive_declines}")
+        print(f"  Sheltered:         {s.sheltered_exchanges}")
         print(f"  {'='*48}\n")
