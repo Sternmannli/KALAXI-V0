@@ -42,6 +42,8 @@ from WEAVER.shelter import Shelter
 from WEAVER.federation import Federation
 from WEAVER.srvp import SRVPEvaluator
 from WEAVER.sip import SIPEvaluator
+from WEAVER.decay import DecayEngine
+from WEAVER.latency import DignityLatency
 
 
 @dataclass
@@ -64,6 +66,12 @@ class OrganismState:
     federation_peers: int
     federation_drops_shared: int
     federation_privacy_remaining: float
+    decay_active_patterns: int
+    decay_deep_hum_patterns: int
+    decay_cycle: int
+    latency_avg_td: float
+    latency_dignity_rate: float
+    latency_violations: int
     timestamp: str
 
 
@@ -86,6 +94,8 @@ class ProcessResult:
     drift_rate: float = 0.0
     shelter_message: str = ""
     shelter_remedies: list = field(default_factory=list)
+    complexity: str = "simple"
+    recommended_td: float = 0.0
     warnings: list = field(default_factory=list)
 
 
@@ -107,6 +117,8 @@ class Organism:
         self._shelter = Shelter()
         self._federation = Federation()
         self._sip = SIPEvaluator()
+        self._decay = DecayEngine()
+        self._latency = DignityLatency()
         self._exchange_counter = 0
         self._last_dignity = {}
         self._drops_archive = []
@@ -166,8 +178,14 @@ class Organism:
                 artifact_id="",
                 exchange_state="blocked",
                 breath_cycle=self._breath.cycle,
+                complexity="unknown",
+                recommended_td=0.0,
                 warnings=["System is paused. Resume before processing."],
             )
+
+        # 1b. LATENCY — assess complexity and recommend T_d
+        complexity = self._latency.assess_complexity(donor_input)
+        recommended_td = self._latency.recommend(complexity)
 
         # 2. TURN — open exchange
         self._exchange_counter += 1
@@ -178,6 +196,12 @@ class Organism:
         candidates = ingest(donor_input)
         drops = extract_essence(candidates)
         self._drops_archive.extend(drops)
+
+        # 3b. DECAY — register detected patterns in the halflife engine
+        for drop in drops:
+            pattern_id = f"P#{drop.drop_type}-{drop.source_hashes[0][:8]}" if drop.source_hashes else f"P#{drop.drop_type}-{ex_id}"
+            self._decay.register(pattern_id)
+            self._decay.invoke(pattern_id)  # Mark as freshly invoked
 
         # Signal pattern detection through WIRE
         if candidates:
@@ -242,6 +266,8 @@ class Organism:
                 drift_rate=drift_alert.dD_dt,
                 shelter_message=shelter_record.donor_message,
                 shelter_remedies=[r.component for r in shelter_record.remedies],
+                complexity=complexity.value,
+                recommended_td=recommended_td,
                 warnings=self._last_dignity.get("warnings", []) + warnings,
             )
 
@@ -289,7 +315,15 @@ class Organism:
         self._sip.record_activity("OUT")  # OUT not used in basic process
         self._sip.record_activity("FACE")  # FACE not used in basic process
 
-        # 9. BREATH — tick and stress check
+        # 9. DECAY — tick the halflife engine (one cycle per exchange)
+        self._decay.tick()
+
+        # 10. LATENCY — record the T_d measurement
+        # actual_td is 0 here (instant processing); in a real deployment
+        # the caller would inject the actual wait time
+        self._latency.record(ex_id, complexity, recommended_td, actual_td=recommended_td)
+
+        # 11. BREATH — tick and stress check
         self._breath.tick()
         stress = self._breath.stress_check(
             pending_messages=self._wire.pending_count(),
@@ -315,6 +349,8 @@ class Organism:
             breath_cycle=self._breath.cycle,
             drift_level=drift_alert.level.value,
             drift_rate=drift_alert.dD_dt,
+            complexity=complexity.value,
+            recommended_td=recommended_td,
             warnings=warnings,
         )
 
@@ -362,6 +398,12 @@ class Organism:
             federation_peers=self._federation.state().peers_known,
             federation_drops_shared=self._federation.state().drops_offered,
             federation_privacy_remaining=self._federation.privacy_budget_remaining,
+            decay_active_patterns=len(self._decay.list_active()),
+            decay_deep_hum_patterns=len(self._decay.list_deep_hum()),
+            decay_cycle=self._decay.cycle_count,
+            latency_avg_td=self._latency.state().avg_recommended_td,
+            latency_dignity_rate=self._latency.state().dignity_preservation_rate,
+            latency_violations=self._latency.violations_count,
             timestamp=self._now(),
         )
 
@@ -450,4 +492,43 @@ class Organism:
         print(f"  Federation peers:  {s.federation_peers}")
         print(f"  Drops shared:      {s.federation_drops_shared}")
         print(f"  Privacy budget:    {s.federation_privacy_remaining:.2f}/{1.0:.2f}")
+        print(f"  Decay cycle:       {s.decay_cycle}")
+        print(f"  Active patterns:   {s.decay_active_patterns}")
+        print(f"  Deep Hum archive:  {s.decay_deep_hum_patterns}")
+        print(f"  Avg T_d:           {s.latency_avg_td:.2f}s")
+        print(f"  Dignity-latency:   {s.latency_dignity_rate:.1%}")
+        print(f"  Latency violations:{s.latency_violations}")
         print(f"  {'='*48}\n")
+
+    def decay_state(self):
+        """Get decay engine state counts."""
+        return self._decay.state_counts()
+
+    def decay_invoke(self, pattern_id):
+        """Manually invoke a pattern — restores full weight."""
+        return self._decay.invoke(pattern_id)
+
+    def decay_contest(self, pattern_id):
+        """Contest a pattern — resets and enters review."""
+        return self._decay.contest(pattern_id)
+
+    def decay_resolve(self, pattern_id):
+        """Resolve a contested pattern."""
+        return self._decay.resolve_contestation(pattern_id)
+
+    def decay_list_deep_hum(self):
+        """List all patterns in the Deep Hum archive."""
+        return [r.to_dict() for r in self._decay.list_deep_hum()]
+
+    def latency_profile(self, complexity_str):
+        """Get the latency profile for a complexity level."""
+        from WEAVER.latency import ComplexityLevel
+        try:
+            level = ComplexityLevel(complexity_str)
+        except ValueError:
+            return None
+        return self._latency.get_profile(level)
+
+    def latency_state(self):
+        """Get latency tracker state."""
+        return self._latency.state()
