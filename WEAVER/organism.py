@@ -40,6 +40,8 @@ from WEAVER.keep import store, retrieve, lock, list_artifacts, receipt_count
 from WEAVER.dignity_drift import DignityDrift, DriftLevel
 from WEAVER.shelter import Shelter
 from WEAVER.federation import Federation
+from WEAVER.srvp import SRVPEvaluator
+from WEAVER.sip import SIPEvaluator
 
 
 @dataclass
@@ -104,6 +106,7 @@ class Organism:
         self._drift = DignityDrift()
         self._shelter = Shelter()
         self._federation = Federation()
+        self._sip = SIPEvaluator()
         self._exchange_counter = 0
         self._last_dignity = {}
         self._drops_archive = []
@@ -276,12 +279,24 @@ class Organism:
         # 7. TURN — close exchange
         self._turn.close(ex_id, f"Processed: {len(candidates)} patterns, {len(drops)} drops, D={dignity.D:.1f}")
 
-        # 8. BREATH — tick and stress check
+        # 8. SIP — record module activity for symmetric integration
+        self._sip.record_activity("WEAVE", messages_sent=1 if candidates else 0)
+        self._sip.record_activity("CHECK", decisions_made=1)
+        self._sip.record_activity("SAY", messages_sent=1)
+        self._sip.record_activity("KEEP", messages_sent=1 if stored else 0)
+        self._sip.record_activity("TURN", decisions_made=1)
+        self._sip.record_activity("WIRE", messages_sent=self._wire.pending_count())
+        self._sip.record_activity("OUT")  # OUT not used in basic process
+        self._sip.record_activity("FACE")  # FACE not used in basic process
+
+        # 9. BREATH — tick and stress check
         self._breath.tick()
         stress = self._breath.stress_check(
             pending_messages=self._wire.pending_count(),
             unconfirmed_messages=self._wire.unconfirmed_count(),
         )
+        self._sip.record_activity("BREATH", decisions_made=1,
+                                   stress_events=1 if stress != StressLevel.BELOW_THRESHOLD else 0)
         if stress == StressLevel.AT_THRESHOLD:
             warnings.append("System approaching stress threshold.")
 
@@ -393,6 +408,17 @@ class Organism:
     def federation_state(self):
         """Get federation layer state."""
         return self._federation.state()
+
+    def srvp_evaluator(self, subject_id=None):
+        """Get an SRVP evaluator for this organism."""
+        return SRVPEvaluator(
+            subject_id=subject_id or "ORG-KALAXI-LOCAL",
+            evaluator="steward",
+        )
+
+    def sip_evaluate(self):
+        """Run SIP evaluation on current module activity."""
+        return self._sip.evaluate()
 
     def collective_check(self, texts):
         """Run collective dignity across a cohort."""
