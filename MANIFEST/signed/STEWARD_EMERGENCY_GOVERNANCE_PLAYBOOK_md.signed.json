@@ -1,0 +1,28 @@
+{
+  "manifest": {
+    "artifact_id": "STEWARD/EMERGENCY_GOVERNANCE_PLAYBOOK.md",
+    "tier": "GOVERNANCE",
+    "description": "Emergency governance protocol",
+    "content_hash_sha256": "9e2d3d2f5459eb0f009b89c6dba28c548d16458675c2a13fe2759e7afe27bee8",
+    "file_size_bytes": 4991,
+    "signed_at": "2026-03-11T16:03:21.060186+00:00",
+    "system": "KALAXI-V0",
+    "protocol": "EFP-Ed25519"
+  },
+  "signatures": [
+    {
+      "public_key": "859d327b7f371576881875c400fb686b4e0afeeb74d1f652bf852e13ac7dbdd6",
+      "signature": "2da6492d0ebb00ccbc2f58ba51813eea6c4d3cd2ef0f841443e8659ad52d0d2f5dbe59736bca302b3d863ea59289fe56bd4aec19e63ecbe20d4597d2a0094804",
+      "algorithm": "Ed25519",
+      "signer_id": "V-001",
+      "signer_role": "steward-owner"
+    },
+    {
+      "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
+      "signature": "a619a0d176c60a113bd5bcd63fb8a4ad54b94e83549d8eef71eb55058966b0a683d0131a40fa3938c75d24f49863ff02327d5ed72318a51b63460c7ade105f0c",
+      "algorithm": "Ed25519",
+      "signer_id": "V-003",
+      "signer_role": "steward-system"
+    }
+  ]
+}

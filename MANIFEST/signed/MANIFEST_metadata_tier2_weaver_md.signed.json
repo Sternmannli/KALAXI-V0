@@ -1,0 +1,28 @@
+{
+  "manifest": {
+    "artifact_id": "MANIFEST/metadata/tier2_weaver.md",
+    "tier": "OPERATIONAL",
+    "description": "Tier 2 — 9 modules, protocols, sealed gate",
+    "content_hash_sha256": "3e149ee6391756bad3f8f0f8bac481427140fb2734a6c1c53f6d68752a1a4b57",
+    "file_size_bytes": 5353,
+    "signed_at": "2026-03-11T16:03:21.058632+00:00",
+    "system": "KALAXI-V0",
+    "protocol": "EFP-Ed25519"
+  },
+  "signatures": [
+    {
+      "public_key": "859d327b7f371576881875c400fb686b4e0afeeb74d1f652bf852e13ac7dbdd6",
+      "signature": "81effe477a089d6ab04e9d04eb8ce80ffdc49c9b2a94b0152efe71cd2e77f5dcd822a587d5ccc80f770593971e24ed99ee9dad2515b78673d9ba97bf9acca40c",
+      "algorithm": "Ed25519",
+      "signer_id": "V-001",
+      "signer_role": "steward-owner"
+    },
+    {
+      "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
+      "signature": "b560914043adbf8aa2d75e3e783e2075e74cc4fbd86e6b5fec5b94b9a826005bcb3b9806b5b1f599bd2a5a5be406c255fa1394105d0b06a77b1628ba8fdcd908",
+      "algorithm": "Ed25519",
+      "signer_id": "V-003",
+      "signer_role": "steward-system"
+    }
+  ]
+}

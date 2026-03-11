@@ -1,0 +1,12 @@
+{
+  "V-001": {
+    "public_key": "859d327b7f371576881875c400fb686b4e0afeeb74d1f652bf852e13ac7dbdd6",
+    "role": "steward-owner",
+    "name": "Mohamed Farag"
+  },
+  "V-003": {
+    "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
+    "role": "steward-system",
+    "name": "Claude (V-003)"
+  }
+}
