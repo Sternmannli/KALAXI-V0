@@ -44,6 +44,8 @@ from WEAVER.srvp import SRVPEvaluator
 from WEAVER.sip import SIPEvaluator
 from WEAVER.decay import DecayEngine
 from WEAVER.latency import DignityLatency
+from WEAVER.lock_test import LockTest, LockVerdict
+from WEAVER.say import audit_voice
 
 
 @dataclass
@@ -119,6 +121,7 @@ class Organism:
         self._sip = SIPEvaluator()
         self._decay = DecayEngine()
         self._latency = DignityLatency()
+        self._lock_test = LockTest()
         self._exchange_counter = 0
         self._last_dignity = {}
         self._drops_archive = []
@@ -532,3 +535,23 @@ class Organism:
     def latency_state(self):
         """Get latency tracker state."""
         return self._latency.state()
+
+    def lock_test(self, proverb):
+        """Run the Lock Test on a proverb candidate."""
+        return self._lock_test.test(proverb)
+
+    def lock_test_with_paraphrase(self, original, paraphrase):
+        """Run enhanced Lock Test with paraphrase comparison."""
+        return self._lock_test.test_with_paraphrase(original, paraphrase)
+
+    def lock_test_stats(self):
+        """Get Lock Test statistics."""
+        return {
+            "tests_run": self._lock_test.tests_run,
+            "locked": self._lock_test.locked_count,
+            "lock_rate": round(self._lock_test.lock_rate, 4),
+        }
+
+    def voice_audit(self, text, context=""):
+        """Audit text against the 6 Axi voice rules."""
+        return audit_voice(text, context)

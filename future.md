@@ -27,7 +27,7 @@ Twelve ratified seeds — structurally latent in the architecture. Each awaits a
 
 9. **Negative Space Index** — Systematic detection of what the system consistently fails to metabolize; blind-spot measurement.
 
-10. **Dignity Drift Detector** — Longitudinal analysis of dignity violation trends over time by domain. *(Now partially operational — see WEAVER/dignity_drift.py)*
+10. **Dignity Drift Detector** — Longitudinal analysis of dignity violation trends over time by domain. *(Already growing — operational as WEAVER/dignity_drift.py since 2026-03-08)*
 
 11. **Proverb Stress Test Engine** — Continuous re-application of proverbs to new anomalies; automatic flagging of failing wisdom.
 
@@ -35,6 +35,6 @@ Twelve ratified seeds — structurally latent in the architecture. Each awaits a
 
 ## Status
 
-All seeds are **latent** — the architecture supports them, but each requires a steward decision before implementation begins. Detailed proposals with decision checklists live in the [FUTURE/](https://github.com/Sternmannli/KALAXI-V0/tree/main/FUTURE) folder.
+11 seeds are **latent**, 1 is **already growing** (Dignity Drift Detector). Each requires a steward decision before implementation begins. Detailed proposals with decision checklists live in the [FUTURE/](https://github.com/Sternmannli/KALAXI-V0/tree/main/FUTURE) folder.
 
 *"A system that plants no seeds has already decided to die."*
