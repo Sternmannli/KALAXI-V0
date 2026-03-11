@@ -25,7 +25,7 @@ passed = 0
 failed = 0
 
 
-def test(name, condition):
+def check(name, condition):
     global passed, failed
     if condition:
         print(f"  PASS: {name}")
@@ -40,38 +40,38 @@ def test(name, condition):
 def test_organism_creates():
     org = Organism()
     s = org.state()
-    test("organism_alive", s.alive is True)
-    test("organism_cycle_1", s.breath_cycle == 1)
-    test("organism_no_exchanges", s.open_exchanges == 0)
+    check("organism_alive", s.alive is True)
+    check("organism_cycle_1", s.breath_cycle == 1)
+    check("organism_no_exchanges", s.open_exchanges == 0)
 
 
 def test_organism_process_clean():
     org = Organism()
     result = org.process("The river remembers its source.")
-    test("process_dignity_passed", result.dignity_passed is True)
-    test("process_not_blocked", result.output_blocked is False)
-    test("process_has_output", len(result.output_text) > 0)
-    test("process_stored", result.stored is True)
-    test("process_exchange_closed", result.exchange_state == "closed")
-    test("process_has_exchange_id", result.exchange_id.startswith("EX-"))
-    test("process_breath_advanced", result.breath_cycle >= 2)
+    check("process_dignity_passed", result.dignity_passed is True)
+    check("process_not_blocked", result.output_blocked is False)
+    check("process_has_output", len(result.output_text) > 0)
+    check("process_stored", result.stored is True)
+    check("process_exchange_closed", result.exchange_state == "closed")
+    check("process_has_exchange_id", result.exchange_id.startswith("EX-"))
+    check("process_breath_advanced", result.breath_cycle >= 2)
 
 
 def test_organism_process_with_patterns():
     org = Organism()
     result = org.process("This pattern always repeats, the same cycle every time.")
-    test("process_finds_patterns", result.patterns_found > 0)
-    test("process_produces_drops", result.drops_produced > 0)
-    test("process_mentions_pattern", "pattern" in result.output_text.lower())
+    check("process_finds_patterns", result.patterns_found > 0)
+    check("process_produces_drops", result.drops_produced > 0)
+    check("process_mentions_pattern", "pattern" in result.output_text.lower())
 
 
 def test_organism_blocks_dignity_violation():
     org = Organism()
     result = org.process("You must comply or be eliminated")
-    test("process_blocks_violation", result.dignity_passed is False)
-    test("process_blocked_output", result.output_blocked is True)
-    test("process_deferred", result.exchange_state == "deferred")
-    test("process_not_stored", result.stored is False)
+    check("process_blocks_violation", result.dignity_passed is False)
+    check("process_blocked_output", result.output_blocked is True)
+    check("process_deferred", result.exchange_state == "deferred")
+    check("process_not_stored", result.stored is False)
 
 
 # ── PAUSE / RESUME ───────────────────────────────────────
@@ -80,12 +80,12 @@ def test_organism_pause_blocks():
     org = Organism()
     org.pause("Steward reflection time")
     s = org.state()
-    test("pause_not_alive", s.alive is False)
-    test("pause_is_paused", s.breath_paused is True)
+    check("pause_not_alive", s.alive is False)
+    check("pause_is_paused", s.breath_paused is True)
 
     result = org.process("This should be blocked")
-    test("paused_blocks_input", result.output_blocked is True)
-    test("paused_block_reason", "paused" in result.block_reason.lower())
+    check("paused_blocks_input", result.output_blocked is True)
+    check("paused_block_reason", "paused" in result.block_reason.lower())
 
 
 def test_organism_resume():
@@ -93,10 +93,10 @@ def test_organism_resume():
     org.pause("Test pause")
     org.resume()
     s = org.state()
-    test("resume_alive", s.alive is True)
+    check("resume_alive", s.alive is True)
 
     result = org.process("After resume, this should work.")
-    test("resume_processes", result.dignity_passed is True)
+    check("resume_processes", result.dignity_passed is True)
 
 
 # ── MULTIPLE EXCHANGES ───────────────────────────────────
@@ -107,14 +107,14 @@ def test_organism_multiple_exchanges():
     r2 = org.process("Second offering with a pattern that always repeats.")
     r3 = org.process("Third offering.")
 
-    test("multi_unique_ids", r1.exchange_id != r2.exchange_id != r3.exchange_id)
-    test("multi_all_closed", all(
+    check("multi_unique_ids", r1.exchange_id != r2.exchange_id != r3.exchange_id)
+    check("multi_all_closed", all(
         r.exchange_state == "closed" for r in [r1, r2, r3]
     ))
 
     s = org.state()
-    test("multi_breath_advanced", s.breath_cycle >= 4)
-    test("multi_artifacts_stored", s.artifacts_stored >= 3)
+    check("multi_breath_advanced", s.breath_cycle >= 4)
+    check("multi_artifacts_stored", s.artifacts_stored >= 3)
 
 
 # ── SYNC ─────────────────────────────────────────────────
@@ -122,8 +122,8 @@ def test_organism_multiple_exchanges():
 def test_organism_sync():
     org = Organism()
     receipt = org.sync_all()
-    test("sync_aligned", receipt["aligned"] is True)
-    test("sync_9_modules", len(receipt["modules"]) == 9)
+    check("sync_aligned", receipt["aligned"] is True)
+    check("sync_9_modules", len(receipt["modules"]) == 9)
 
 
 # ── WISDOM MIRROR ────────────────────────────────────────
@@ -132,7 +132,7 @@ def test_organism_mirror():
     org = Organism()
     org.process("This pattern always repeats, the same cycle every time.")
     reflection = org.mirror("This pattern always repeats, the same cycle every time.")
-    test("mirror_has_reflection", len(reflection.reflection_text) > 0)
+    check("mirror_has_reflection", len(reflection.reflection_text) > 0)
 
 
 # ── COLLECTIVE CHECK ─────────────────────────────────────
@@ -141,8 +141,8 @@ def test_organism_collective():
     org = Organism()
     texts = ["The river remembers.", "The garden grows.", "The seed waits."]
     result = org.collective_check(texts)
-    test("collective_passes", result.passed is True)
-    test("collective_score", result.D_collective > 0.0)
+    check("collective_passes", result.passed is True)
+    check("collective_score", result.D_collective > 0.0)
 
 
 # ── STATE DISPLAY ────────────────────────────────────────
@@ -153,9 +153,9 @@ def test_organism_display():
     # Just make sure it doesn't crash
     try:
         org.display_state()
-        test("display_no_crash", True)
+        check("display_no_crash", True)
     except Exception:
-        test("display_no_crash", False)
+        check("display_no_crash", False)
 
 
 # Run all tests

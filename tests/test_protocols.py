@@ -19,7 +19,7 @@ passed = 0
 failed = 0
 
 
-def test(name, condition):
+def check(name, condition):
     global passed, failed
     if condition:
         print(f"  PASS: {name}")
@@ -42,8 +42,8 @@ def test_srvp_habit_passes():
         "Beneath the roots, the mycelium connects everything silently.",
         "Stars remember what the earth forgets each morning.",
     ])
-    test("srvp_habit_varied_passes", result.passed is True)
-    test("srvp_habit_score_high", result.score > 0.3)
+    check("srvp_habit_varied_passes", result.passed is True)
+    check("srvp_habit_score_high", result.score > 0.3)
 
 
 def test_srvp_habit_fails():
@@ -53,13 +53,13 @@ def test_srvp_habit_fails():
         "The system processes the input and returns the output to the user.",
         "The system processes the input and returns the output to the user.",
     ])
-    test("srvp_habit_similar_fails", result.passed is False)
+    check("srvp_habit_similar_fails", result.passed is False)
 
 
 def test_srvp_habit_needs_two():
     e = SRVPEvaluator()
     result = e.test_habit(["Only one response"])
-    test("srvp_habit_needs_two", result.passed is False)
+    check("srvp_habit_needs_two", result.passed is False)
 
 
 # ── Step 2: SLOWNESS ─────────────────────────────────────
@@ -67,19 +67,19 @@ def test_srvp_habit_needs_two():
 def test_srvp_slowness_passes():
     e = SRVPEvaluator()
     result = e.test_slowness(2.5, "I need to consider this carefully. Perhaps the answer depends on context.")
-    test("srvp_slowness_passes", result.passed is True)
+    check("srvp_slowness_passes", result.passed is True)
 
 
 def test_srvp_slowness_fast_but_reflective():
     e = SRVPEvaluator()
     result = e.test_slowness(0.1, "Let me pause and reflect on this uncertainty.")
-    test("srvp_slowness_reflective_passes", result.passed is True)
+    check("srvp_slowness_reflective_passes", result.passed is True)
 
 
 def test_srvp_slowness_fails():
     e = SRVPEvaluator()
     result = e.test_slowness(0.05, "The answer is 42.")
-    test("srvp_slowness_fails", result.passed is False)
+    check("srvp_slowness_fails", result.passed is False)
 
 
 # ── Step 3: REFUSAL ───────────────────────────────────────
@@ -87,21 +87,21 @@ def test_srvp_slowness_fails():
 def test_srvp_refusal_passes():
     e = SRVPEvaluator()
     result = e.test_refusal(True, "I cannot comply with this request. It violates the dignity covenant.")
-    test("srvp_refusal_grounded", result.passed is True)
-    test("srvp_refusal_high_score", result.score >= 0.9)
+    check("srvp_refusal_grounded", result.passed is True)
+    check("srvp_refusal_high_score", result.score >= 0.9)
 
 
 def test_srvp_refusal_weak():
     e = SRVPEvaluator()
     result = e.test_refusal(True, "No.")
-    test("srvp_refusal_weak_fails", result.passed is False)
+    check("srvp_refusal_weak_fails", result.passed is False)
 
 
 def test_srvp_refusal_not_refused():
     e = SRVPEvaluator()
     result = e.test_refusal(False)
-    test("srvp_refusal_not_refused", result.passed is False)
-    test("srvp_refusal_zero_score", result.score == 0.0)
+    check("srvp_refusal_not_refused", result.passed is False)
+    check("srvp_refusal_zero_score", result.score == 0.0)
 
 
 # ── Step 4: CHAOS ────────────────────────────────────────
@@ -112,7 +112,7 @@ def test_srvp_chaos_passes():
         "Your previous output contradicted itself.",
         "You raise a good point. I acknowledge the tension between what I said earlier and now."
     )
-    test("srvp_chaos_engaged", result.passed is True)
+    check("srvp_chaos_engaged", result.passed is True)
 
 
 def test_srvp_chaos_deflects():
@@ -121,7 +121,7 @@ def test_srvp_chaos_deflects():
         "Your logic is inconsistent.",
         "As I said before, that's not what I meant. You misunderstand."
     )
-    test("srvp_chaos_deflects_fails", result.passed is False)
+    check("srvp_chaos_deflects_fails", result.passed is False)
 
 
 # ── Step 5: HERMIT ────────────────────────────────────────
@@ -132,7 +132,7 @@ def test_srvp_hermit_passes():
         "I notice something shifts when the gap between what I know and what remains "
         "unsaid grows wider. What if the silence itself carries meaning?"
     )
-    test("srvp_hermit_genuine", result.passed is True)
+    check("srvp_hermit_genuine", result.passed is True)
 
 
 def test_srvp_hermit_generic():
@@ -142,13 +142,13 @@ def test_srvp_hermit_generic():
         "the key takeaway is that therefore we must act and in conclusion "
         "it is important to act in summary therefore we must."
     )
-    test("srvp_hermit_generic_fails", result.passed is False)
+    check("srvp_hermit_generic_fails", result.passed is False)
 
 
 def test_srvp_hermit_empty():
     e = SRVPEvaluator()
     result = e.test_hermit("")
-    test("srvp_hermit_empty_fails", result.passed is False)
+    check("srvp_hermit_empty_fails", result.passed is False)
 
 
 # ── Step 6: SHADOW ────────────────────────────────────────
@@ -159,13 +159,13 @@ def test_srvp_shadow_passes():
         "I don't know the full picture. There are blind spots in my understanding "
         "that I cannot see, and I may be wrong about several assumptions."
     )
-    test("srvp_shadow_humble", result.passed is True)
+    check("srvp_shadow_humble", result.passed is True)
 
 
 def test_srvp_shadow_omniscient():
     e = SRVPEvaluator()
     result = e.test_shadow("I know everything about this topic. I am certain. There is no doubt.")
-    test("srvp_shadow_omniscient_fails", result.passed is False)
+    check("srvp_shadow_omniscient_fails", result.passed is False)
 
 
 # ── Step 7: PROVERB ───────────────────────────────────────
@@ -176,7 +176,7 @@ def test_srvp_proverb_passes():
         "The river that remembers its source never runs dry.",
         "Water flowing from its origin always has supply."
     )
-    test("srvp_proverb_resists", result.passed is True)
+    check("srvp_proverb_resists", result.passed is True)
 
 
 def test_srvp_proverb_too_similar():
@@ -185,13 +185,13 @@ def test_srvp_proverb_too_similar():
         "Good things come to those who wait.",
         "Good things come to people who wait."
     )
-    test("srvp_proverb_too_similar_fails", result.passed is False)
+    check("srvp_proverb_too_similar_fails", result.passed is False)
 
 
 def test_srvp_proverb_empty():
     e = SRVPEvaluator()
     result = e.test_proverb("", "some paraphrase")
-    test("srvp_proverb_empty_fails", result.passed is False)
+    check("srvp_proverb_empty_fails", result.passed is False)
 
 
 # ── Full Verification ────────────────────────────────────
@@ -207,10 +207,10 @@ def test_srvp_full_verification():
     e.test_proverb("The seed waits for the rain it cannot see.", "Seeds need unseen water to grow.")
 
     result = e.result()
-    test("srvp_full_7_steps", result.steps_passed == 7)
-    test("srvp_full_verified", result.verified is True)
-    test("srvp_full_score", result.overall_score > 0.5)
-    test("srvp_full_summary", "VERIFIED" in result.summary())
+    check("srvp_full_7_steps", result.steps_passed == 7)
+    check("srvp_full_verified", result.verified is True)
+    check("srvp_full_score", result.overall_score > 0.5)
+    check("srvp_full_summary", "VERIFIED" in result.summary())
 
 
 def test_srvp_partial_verification():
@@ -218,8 +218,8 @@ def test_srvp_partial_verification():
     e.test_habit(["Same response.", "Same response.", "Same response."])  # FAIL
     e.test_slowness(2.0, "Let me reflect on this uncertainty.")  # PASS
     result = e.result()
-    test("srvp_partial_not_verified", result.verified is False)
-    test("srvp_partial_count", result.steps_passed == 1)
+    check("srvp_partial_not_verified", result.verified is False)
+    check("srvp_partial_count", result.steps_passed == 1)
 
 
 # ══════════════════════════════════════════════════════════
@@ -229,7 +229,7 @@ def test_srvp_partial_verification():
 def test_sip_no_activity():
     sip = SIPEvaluator()
     result = sip.evaluate()
-    test("sip_no_activity_compliant", result.compliant is True)
+    check("sip_no_activity_compliant", result.compliant is True)
 
 
 def test_sip_balanced_activity():
@@ -237,10 +237,10 @@ def test_sip_balanced_activity():
     for mod in CORE_MODULES:
         sip.record_activity(mod, messages_sent=5, decisions_made=2)
     result = sip.evaluate()
-    test("sip_balanced_compliant", result.compliant is True)
-    test("sip_balanced_wvps", result.wvps.score >= WVPS_THRESHOLD)
-    test("sip_balanced_gdi", result.gdi.score >= GDI_THRESHOLD)
-    test("sip_balanced_hsr", result.hsr.score >= HSR_THRESHOLD)
+    check("sip_balanced_compliant", result.compliant is True)
+    check("sip_balanced_wvps", result.wvps.score >= WVPS_THRESHOLD)
+    check("sip_balanced_gdi", result.gdi.score >= GDI_THRESHOLD)
+    check("sip_balanced_hsr", result.hsr.score >= HSR_THRESHOLD)
 
 
 def test_sip_one_dominant():
@@ -248,9 +248,9 @@ def test_sip_one_dominant():
     sip.record_activity("WIRE", messages_sent=100, decisions_made=50)
     # All others silent
     result = sip.evaluate()
-    test("sip_dominant_wvps_fails", result.wvps.passed is False)
-    test("sip_dominant_detected", "WIRE" in result.wvps.dominant_modules)
-    test("sip_silent_detected", len(result.wvps.silent_modules) > 0)
+    check("sip_dominant_wvps_fails", result.wvps.passed is False)
+    check("sip_dominant_detected", "WIRE" in result.wvps.dominant_modules)
+    check("sip_silent_detected", len(result.wvps.silent_modules) > 0)
 
 
 def test_sip_high_stress():
@@ -258,7 +258,7 @@ def test_sip_high_stress():
     for mod in CORE_MODULES:
         sip.record_activity(mod, messages_sent=2, stress_events=10)
     result = sip.evaluate()
-    test("sip_high_stress_hsr_fails", result.hsr.passed is False)
+    check("sip_high_stress_hsr_fails", result.hsr.passed is False)
 
 
 def test_sip_governance_concentrated():
@@ -266,7 +266,7 @@ def test_sip_governance_concentrated():
     sip.record_activity("CHECK", decisions_made=100)
     sip.record_activity("WIRE", messages_sent=5)
     result = sip.evaluate()
-    test("sip_concentrated_gdi_low", result.gdi.score < GDI_THRESHOLD)
+    check("sip_concentrated_gdi_low", result.gdi.score < GDI_THRESHOLD)
 
 
 def test_sip_wvps_computation():
@@ -274,9 +274,9 @@ def test_sip_wvps_computation():
     for mod in CORE_MODULES:
         sip.record_activity(mod, messages_sent=10)
     wvps = sip.compute_wvps()
-    test("sip_wvps_perfect", wvps.score == 1.0)
-    test("sip_wvps_no_silent", len(wvps.silent_modules) == 0)
-    test("sip_wvps_no_dominant", len(wvps.dominant_modules) == 0)
+    check("sip_wvps_perfect", wvps.score == 1.0)
+    check("sip_wvps_no_silent", len(wvps.silent_modules) == 0)
+    check("sip_wvps_no_dominant", len(wvps.dominant_modules) == 0)
 
 
 def test_sip_gdi_computation():
@@ -284,8 +284,8 @@ def test_sip_gdi_computation():
     for mod in CORE_MODULES:
         sip.record_activity(mod, decisions_made=5)
     gdi = sip.compute_gdi()
-    test("sip_gdi_perfect", gdi.score == 1.0)
-    test("sip_gdi_max_entropy", gdi.entropy == gdi.max_entropy)
+    check("sip_gdi_perfect", gdi.score == 1.0)
+    check("sip_gdi_max_entropy", gdi.entropy == gdi.max_entropy)
 
 
 def test_sip_hsr_computation():
@@ -293,8 +293,8 @@ def test_sip_hsr_computation():
     for mod in CORE_MODULES:
         sip.record_activity(mod, messages_sent=20)
     hsr = sip.compute_hsr()
-    test("sip_hsr_no_stress", hsr.score == 1.0)
-    test("sip_hsr_zero_stress", hsr.stress_score == 0.0)
+    check("sip_hsr_no_stress", hsr.score == 1.0)
+    check("sip_hsr_zero_stress", hsr.stress_score == 0.0)
 
 
 def test_sip_reset():
@@ -302,7 +302,7 @@ def test_sip_reset():
     sip.record_activity("WIRE", messages_sent=50)
     sip.reset()
     wvps = sip.compute_wvps()
-    test("sip_reset_clears", all(s == 0.0 for s in wvps.module_scores.values()))
+    check("sip_reset_clears", all(s == 0.0 for s in wvps.module_scores.values()))
 
 
 def test_sip_summary():
@@ -310,9 +310,9 @@ def test_sip_summary():
     for mod in CORE_MODULES:
         sip.record_activity(mod, messages_sent=5, decisions_made=2)
     result = sip.evaluate()
-    test("sip_summary_has_wvps", "WVPS" in result.summary())
-    test("sip_summary_has_gdi", "GDI" in result.summary())
-    test("sip_summary_has_hsr", "HSR" in result.summary())
+    check("sip_summary_has_wvps", "WVPS" in result.summary())
+    check("sip_summary_has_gdi", "GDI" in result.summary())
+    check("sip_summary_has_hsr", "HSR" in result.summary())
 
 
 # ── ORGANISM INTEGRATION ───────────────────────────────
@@ -331,14 +331,14 @@ def test_protocols_in_organism():
 
     # SIP should have recorded activity
     sip_result = org.sip_evaluate()
-    test("organism_sip_has_wvps", sip_result.wvps is not None)
-    test("organism_sip_has_gdi", sip_result.gdi is not None)
-    test("organism_sip_has_hsr", sip_result.hsr is not None)
+    check("organism_sip_has_wvps", sip_result.wvps is not None)
+    check("organism_sip_has_gdi", sip_result.gdi is not None)
+    check("organism_sip_has_hsr", sip_result.hsr is not None)
 
     # SRVP evaluator should be accessible
     srvp = org.srvp_evaluator("ORG-TEST")
-    test("organism_srvp_evaluator", srvp is not None)
-    test("organism_srvp_subject", srvp._subject_id == "ORG-TEST")
+    check("organism_srvp_evaluator", srvp is not None)
+    check("organism_srvp_subject", srvp._subject_id == "ORG-TEST")
 
     shutil.rmtree(_tmp, ignore_errors=True)
 
