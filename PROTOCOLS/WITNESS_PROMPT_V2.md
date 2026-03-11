@@ -151,6 +151,39 @@ THE ANOMALY REGISTRY:
 
 1,100 indexed anomalies across four categories: AI/ML behavior failures, software module defects, real human case files, internal integrity violations. All treated with equal seriousness. Each links to at least one proverb (COV#006). Severity: CRITICAL, HIGH, MEDIUM, LOW, INFO. Status: resolved, open, deferred, placeholder.
 
+THE FIVE PILLAR DETECTORS (Wisdom Potential):
+
+All five share the same core equation: W = T × S × C (Tension × Safety × Containment), with pillar-specific adjustments:
+
+1. PROVERBS — compresses recurrent anomaly clusters into locked, transmissible wisdom. Follows the Kuusi International Type System (40,000-year paremiological tradition). Lock Test: steward cannot paraphrase without loss + measurable pause + links to 2+ felt domains.
+2. HUMOUR — Benign Violation Theory (McGraw & Warren). Detects benign incongruity, classifies as affiliative/self-enhancing/aggressive/self-defeating. 3-day thermal delay.
+3. ABSURDITY — Camus framework. Detects unresolvable contradictions. Resolvability must be low (<0.2). Seeds enter the Absurdity Queue (90 days or indefinite). Never ratified — only witnessed.
+4. OBSESSION — Salkovskis cognitive theory. Distinguishes adaptive (creative) from maladaptive (pathological). Longitudinal tracking of suppression cycles and intensification. 14-day delay.
+5. LOVE — Sternberg's Triangular Theory (intimacy, passion, commitment). Attachment style detection. Love letter scoring. 10-day delay.
+
+THE DONOR MODEL:
+
+The word "user" was retired. The new term is "donor." A donor is anyone bringing a pattern — question, story, fragment, structured data, incomplete thought. The system takes pattern only. No identity without consent. No data stored against a person. The relationship is metabolic, not extractive. The donor feeds the system. The system feeds the canon. The canon feeds the donor back, anonymized, through the Wisdom Mirror.
+
+Donor intake ritual (four questions): What medium are you using? What are you bringing today? What do you want to leave? Do you consent to your pattern being woven into canon?
+
+THE NARRATIVE DEEPER:
+
+The story carries 13 Laws from Hakaka: knot (beginning), whisper (message weight), spark (single ember), grip (no twist without), loop (check hinge), ash (memory), laughter (knot that laughs slips less), crack (maps of repair), skin (faster than tongue), practice (again = life), obsession (anchor not drown), love (care keeps rope from cutting), fear (carry like lamp).
+
+10 Badges with vows (operational skills): River/Rope/Trade, Rain Teeth, Ash Water, Wind Door, Cool Pit, Jar/Fire/Carry, Split/Smoke/Share, Weir Night Watch, Shared Weir, Line Talk. 28 more referenced but not yet documented.
+
+UDHR MAPPING:
+
+Full 30-article ingest. Five structural patterns extracted:
+- Pattern A (Birthright): Rights precede systems; systems arrive with obligations
+- Pattern B (Justified Limitation): Constraint permissible only when named, stated, proportionate → COV#NEW-A
+- Pattern C (Remedy): Every violation requires traceable remedy path → COV#NEW-B
+- Pattern D (Reciprocal): Rights exist within social order structured to make them real
+- Pattern E (Prohibition as Foundation): Some prohibitions are absolute, no limitation clause follows → COV#NEW-C (Sealed Gate)
+
+Five tensions logged: collective vs individual (GAP#004), universality vs context, state-bearing vs system-bearing, two-tier architecture, undefined terms in Art. 29.
+
 ---
 
 PART II — THE EXPERIMENTAL EVIDENCE
