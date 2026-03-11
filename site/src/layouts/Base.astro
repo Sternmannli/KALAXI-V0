@@ -8,6 +8,8 @@ const {
   title = 'KALAM.CH — The Word',
   description = 'A living canon for human dignity. Patterns, not people.',
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -19,14 +21,25 @@ const {
 
     <title>{title}</title>
 
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="en" />
+    <meta property="og:site_name" content="KALAM.CH" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
     <!-- No tracking. No analytics scripts. No third-party requests. -->
     <!-- Dignity starts before the first pixel renders. -->
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-    <!-- Preconnect for fonts (when deployed with Google Fonts) -->
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" /> -->
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
 
     <style is:global>
       @import '../styles/global.css';
