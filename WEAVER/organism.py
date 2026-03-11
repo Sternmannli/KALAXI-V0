@@ -35,6 +35,7 @@ from WEAVER.turn import Turn, ExchangeState
 from WEAVER.say import render as say_render, SINGLELINE, TERMINAL
 from WEAVER.out import export as out_export
 from WEAVER.dignity_check import check_dignity, check_collective_dignity
+from WEAVER.dignity_measure import measure_dignity
 from WEAVER.weave import ingest, extract_essence, propose_proverb, wisdom_mirror
 from WEAVER.keep import store, retrieve, lock, list_artifacts, receipt_count
 from WEAVER.dignity_drift import DignityDrift, DriftLevel
@@ -46,6 +47,10 @@ from WEAVER.decay import DecayEngine
 from WEAVER.latency import DignityLatency
 from WEAVER.lock_test import LockTest, LockVerdict
 from WEAVER.say import audit_voice
+from WEAVER.oracle import Oracle, WitnessLevel
+from WEAVER.prevention import Prevention, SignalLevel, Intervention
+from WEAVER.mycelium import Mycelium, MyceliumAlert, K_ANONYMITY_FLOOR
+from WEAVER.gap004_mediator import ConflictEngine, surface_conflict
 
 
 @dataclass
@@ -74,6 +79,21 @@ class OrganismState:
     latency_avg_td: float
     latency_dignity_rate: float
     latency_violations: int
+    oracle_health: str
+    oracle_unwatched: int
+    oracle_witnessed: int
+    oracle_creep_risk: float
+    prevention_level: str
+    prevention_td_multiplier: float
+    prevention_escalations: int
+    mycelium_alert: str
+    mycelium_patterns: int
+    mycelium_suppressed: int
+    mycelium_epsilon_remaining: float
+    gap004_open_tickets: int
+    gap004_unwitnessed: int
+    measure_D: float
+    measure_confidence: float
     timestamp: str
 
 
@@ -122,6 +142,11 @@ class Organism:
         self._decay = DecayEngine()
         self._latency = DignityLatency()
         self._lock_test = LockTest()
+        self._oracle = Oracle()
+        self._prevention = Prevention()
+        self._mycelium = Mycelium()
+        self._conflict_engine = ConflictEngine()
+        self._last_measurement = None
         self._exchange_counter = 0
         self._last_dignity = {}
         self._drops_archive = []
@@ -200,11 +225,12 @@ class Organism:
         drops = extract_essence(candidates)
         self._drops_archive.extend(drops)
 
-        # 3b. DECAY — register detected patterns in the halflife engine
+        # 3b. DECAY + WITNESS — register detected patterns
         for drop in drops:
             pattern_id = f"P#{drop.drop_type}-{drop.source_hashes[0][:8]}" if drop.source_hashes else f"P#{drop.drop_type}-{ex_id}"
             self._decay.register(pattern_id)
             self._decay.invoke(pattern_id)  # Mark as freshly invoked
+            self._oracle.witness.process(pattern_id, "pattern")  # W-0 → W-1
 
         # Signal pattern detection through WIRE
         if candidates:
@@ -217,6 +243,23 @@ class Organism:
         # 4. CHECK — dignity gate on input
         dignity = check_dignity(donor_input, felt_domain=felt_domain)
         self._last_dignity = dignity.audit_object()
+
+        # 4a. MEASURE — graduated A, L, M scoring (GAP#014 + GAP#015)
+        self._last_measurement = measure_dignity(donor_input)
+        if self._last_measurement.confidence < 0.5:
+            warnings.append(
+                f"Low measurement confidence: {self._last_measurement.confidence:.2f}"
+            )
+
+        # 4b. GAP#004 — conflict detection (individual vs collective)
+        conflict_ticket = self._conflict_engine.process(donor_input)
+        if conflict_ticket:
+            self._wire.broadcast(
+                f"GAP#004 conflict: {conflict_ticket.severity} — {conflict_ticket.input_summary}",
+                "gap004-conflict",
+                source="mediator",
+            )
+            warnings.append(f"GAP#004 {conflict_ticket.severity}: {conflict_ticket.resolution_mode}")
 
         # Record dignity score in drift detector
         self._drift.record(dignity.D, ex_id, felt_domain=felt_domain)
@@ -238,6 +281,32 @@ class Organism:
                 source="drift",
             )
             warnings.append(drift_alert.message)
+
+        # 5b. PREVENTION — early warning assessment (Fever Night: slow down more)
+        drift_state = self._drift.state()
+        prev_signal = self._prevention.assess(
+            D=dignity.D,
+            dD_dt=drift_alert.dD_dt,
+            consecutive_declines=drift_state.consecutive_declines,
+            readings_count=drift_state.readings_count,
+        )
+        if prev_signal.level.value >= SignalLevel.PULSE.value:
+            self._wire.broadcast(
+                prev_signal.message,
+                "prevention-alert",
+                source="prevention",
+            )
+            warnings.append(prev_signal.message)
+        if prev_signal.level == SignalLevel.ALARM:
+            self._breath.pause(f"PREVENTION ALARM: {prev_signal.reason}")
+
+        # 5c. MYCELIUM — ingest anonymized trajectory for cross-donor detection
+        self._mycelium.ingest(
+            domain=felt_domain,
+            trend=prev_signal.trajectory.window_trend,
+            D=dignity.D,
+            dD_dt=drift_alert.dD_dt,
+        )
 
         if dignity.D == 0.0:
             # Dignity failed — shelter the exchange (not discard)
@@ -407,6 +476,21 @@ class Organism:
             latency_avg_td=self._latency.state().avg_recommended_td,
             latency_dignity_rate=self._latency.state().dignity_preservation_rate,
             latency_violations=self._latency.violations_count,
+            oracle_health=self._oracle.last_report.overall_health if self._oracle.last_report else "unaudited",
+            oracle_unwatched=len(self._oracle.witness.unwatched()),
+            oracle_witnessed=len(self._oracle.witness.witnessed()),
+            oracle_creep_risk=self._oracle.last_report.colonial_creep_risk if self._oracle.last_report else 0.0,
+            prevention_level=self._prevention.current_level.name,
+            prevention_td_multiplier=self._prevention.current_td_multiplier(),
+            prevention_escalations=self._prevention._escalations,
+            mycelium_alert=self._mycelium.current_alert.name,
+            mycelium_patterns=self._mycelium.patterns_count,
+            mycelium_suppressed=self._mycelium.suppressed_count,
+            mycelium_epsilon_remaining=self._mycelium._epsilon_remaining,
+            gap004_open_tickets=len(self._conflict_engine.open_tickets),
+            gap004_unwitnessed=len(self._conflict_engine.unwitnessed_tickets),
+            measure_D=self._last_measurement.D if self._last_measurement else 0.0,
+            measure_confidence=self._last_measurement.confidence if self._last_measurement else 0.0,
             timestamp=self._now(),
         )
 
@@ -501,6 +585,20 @@ class Organism:
         print(f"  Avg T_d:           {s.latency_avg_td:.2f}s")
         print(f"  Dignity-latency:   {s.latency_dignity_rate:.1%}")
         print(f"  Latency violations:{s.latency_violations}")
+        print(f"  Oracle health:     {s.oracle_health}")
+        print(f"  Unwatched (W-0/1): {s.oracle_unwatched}")
+        print(f"  Witnessed (W-3+):  {s.oracle_witnessed}")
+        print(f"  Colonial creep:    {s.oracle_creep_risk:.1%}")
+        print(f"  Prevention level:  {s.prevention_level}")
+        print(f"  T_d multiplier:    {s.prevention_td_multiplier:.1f}x")
+        print(f"  Escalations:       {s.prevention_escalations}")
+        print(f"  Mycelium alert:    {s.mycelium_alert}")
+        print(f"  Patterns found:    {s.mycelium_patterns}")
+        print(f"  Patterns hidden:   {s.mycelium_suppressed} (k<{K_ANONYMITY_FLOOR})")
+        print(f"  Privacy budget:    {s.mycelium_epsilon_remaining:.2f}ε remaining")
+        print(f"  GAP#004 open:      {s.gap004_open_tickets}")
+        print(f"  GAP#004 unseen:    {s.gap004_unwitnessed}")
+        print(f"  Measure D:         {s.measure_D:.3f} (confidence {s.measure_confidence:.2f})")
         print(f"  {'='*48}\n")
 
     def decay_state(self):
@@ -555,3 +653,89 @@ class Organism:
     def voice_audit(self, text, context=""):
         """Audit text against the 6 Axi voice rules."""
         return audit_voice(text, context)
+
+    def oracle_audit(self):
+        """Run a full Oracle self-audit cycle."""
+        drift_state = self._drift.state()
+        latency_state = self._latency.state()
+        return self._oracle.audit(
+            drift_rate=drift_state.dD_dt,
+            drift_level=drift_state.level.value,
+            voice_score=1.0,  # Updated by last render
+            breath_paused=self._breath.is_paused,
+            violations_count=latency_state.violations,
+            lock_rate=self._lock_test.lock_rate,
+            latency_dignity_rate=latency_state.dignity_preservation_rate,
+        )
+
+    def oracle_witness(self, element_id, element_type="unknown"):
+        """Register an element in the Witness Scale."""
+        return self._oracle.witness.process(element_id, element_type)
+
+    def oracle_steward_sees(self, element_id, session_id=""):
+        """Mark an element as seen by the steward (W-3)."""
+        return self._oracle.witness.steward_sees(element_id, session_id)
+
+    def oracle_check_relay(self, correction_trace, response_fidelity, steward_recognition):
+        """Run proprioception check on the relay."""
+        return self._oracle.check_relay(correction_trace, response_fidelity, steward_recognition)
+
+    def oracle_witness_distribution(self):
+        """Get Witness Scale distribution."""
+        return self._oracle.witness.distribution()
+
+    def oracle_unwatched(self):
+        """List all unwatched elements (W-0 or W-1)."""
+        return [(r.element_id, r.level.name) for r in self._oracle.witness.unwatched()]
+
+    def oracle_report(self):
+        """Get the last Oracle report."""
+        return self._oracle.last_report
+
+    def prevention_state(self):
+        """Get prevention system state."""
+        return self._prevention.state()
+
+    def prevention_signal(self):
+        """Get the last prevention signal."""
+        return self._prevention.last_signal
+
+    def prevention_is_alarm(self):
+        """Is the prevention system in ALARM state?"""
+        return self._prevention.is_alarm()
+
+    def mycelium_scan(self):
+        """Scan mycelium for cross-donor patterns."""
+        return self._mycelium.scan()
+
+    def mycelium_state(self):
+        """Get mycelium network state."""
+        return self._mycelium.state()
+
+    def mycelium_is_rhizome(self):
+        """Is there a critical structural pattern?"""
+        return self._mycelium.is_rhizome()
+
+    def gap004_process(self, text, individual_scores=None, failed_components=None):
+        """Run full GAP#004 conflict engine on text."""
+        return self._conflict_engine.process(text, individual_scores, failed_components)
+
+    def gap004_steward_sees(self, ticket):
+        """Mark a GAP#004 conflict as seen by steward (W-3)."""
+        return self._conflict_engine.steward_sees(ticket)
+
+    def gap004_steward_holds(self, ticket):
+        """Mark a GAP#004 conflict as held by steward (W-4)."""
+        return self._conflict_engine.steward_holds(ticket)
+
+    def gap004_open_tickets(self):
+        """List all open GAP#004 conflict tickets."""
+        return self._conflict_engine.open_tickets
+
+    def gap004_unwitnessed(self):
+        """List conflicts steward hasn't seen yet."""
+        return self._conflict_engine.unwitnessed_tickets
+
+    def last_measurement(self):
+        """Get last graduated dignity measurement (GAP#014/015)."""
+        return self._last_measurement

@@ -81,6 +81,7 @@ Always develop on the designated `claude/` feature branch. Never push to main di
 - ~~Duplicate proverb IDs~~ RESOLVED 2026-03-10: IDs are unique (later entries are P#EMERGE-0029/0030/0031, not duplicates)
 - ~~COV#008 and COV#015 not registered~~ RESOLVED 2026-03-10: Both formally registered as PROVISIONAL in tier1_stone.md
 - ~~47 Treasures need formal registration pathway~~ PARTIALLY RESOLVED 2026-03-10: 11/47 indexed in R7M/TREASURES/TREASURES_INDEX.md. 36 await extraction from GRAND_ARCHIVE .docx
+- ~~GAP#010 Definition of "Ratified"~~ RESOLVED 2026-03-11: Three-state lifecycle (COMMITTED/PROVISIONAL/RATIFIED) defined in tier1_stone.md. Ratification log created. Header contradiction fixed.
 
 ## Reminders
 

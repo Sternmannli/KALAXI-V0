@@ -1,10 +1,11 @@
 title: "KALAXI_A_FOUNDATION.txt"
 id: "SLICE-A_FOUNDATION_v1.0.0"
 version: "1.0.0"
-STATUS: ratified
+STATUS: PROVISIONAL
 LAST_REVIEWED: 2026-02-23
 REVIEW_CYCLE: 12 months
 provisional: true
+NOTE: "STATUS was corrected from 'ratified' to 'PROVISIONAL' on 2026-03-11 per GAP#010 resolution. Slice A contains provisional covenants and has not completed full constitutional ratification (90-day cooling + two sign-offs). The 8 founding covenants within it ARE ratified; the document as a whole is not."
 owner: "Mohamed Farag (did:axi:mohamed)"
 contact: "info@kalam.ch | kalam.ch"
 timezone: "Europe/Zurich"
@@ -390,8 +391,10 @@ Priority: MEDIUM
 ## GAP:010 – Definition of "Ratified"
 Description: The Digest currently marks slices as "Ratified in Working Copy," but constitutional ratification (per Slice A) requires 90‑day cooling and two human sign‑offs. The meaning of "ratified" must be clarified in the manifest and covenants.
 Proposed resolution: Amend the manifest to distinguish "committed" from "ratified." Possibly add a ratification log.
-Status: OPEN
+Resolution: RESOLVED 2026-03-11. Three-state lifecycle defined (COMMITTED / PROVISIONAL / RATIFIED) in MANIFEST/metadata/tier1_stone.md §Governance. Ratification log created at MANIFEST/ratification_log.md. Header STATUS contradiction in this file corrected (was: ratified + provisional:true simultaneously; now: PROVISIONAL). Sign-off requirements table added. Mutual exclusivity of states enforced.
+Status: RESOLVED
 Priority: HIGH
+Resolved-by: V-003 (relayed by V-001)
 
 ## GAP:011 – Tool Sovereignty (Obsidian)
 Description: Obsidian is proposed as an editing tool, but its sync and proprietary nature may conflict with the requirement for no hidden state transitions and full plain‑text sovereignty. This needs evaluation.

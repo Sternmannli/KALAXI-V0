@@ -46,7 +46,7 @@
 | GAP#005 | ANOM#0004 under-classified | YES → reclassify | OPEN |
 | GAP#006 | No absolute prohibition covenant | YES → COV#NEW-C | OPEN |
 | GAP#009 | Velocity vs Ritual Tension | NO PROPOSAL | OPEN-MEDIUM |
-| GAP#010 | Definition of "Ratified" | NEEDS AMENDMENT | OPEN-HIGH |
+| GAP#010 | Definition of "Ratified" | RESOLVED 2026-03-11 | RESOLVED |
 | GAP#011 | Tool Sovereignty (Obsidian) | EVALUATION | OPEN-LOW |
 | GAP#012 | ENKI Covenant Coverage | EVALUATION | OPEN-LOW |
 
@@ -90,7 +90,7 @@
 
 1. **COV#NEW-B vs COV#008** — Both claim "Remedy" territory. COV#NEW-B has a full body in Slice A. COV#008 has only a title in MASTER_CANON_V1.md. Likely the same covenant under two IDs. NEEDS STEWARD DECISION.
 2. **"18 covenants" count in heartbeat.md** — File says 8 ratified + 10 provisional = 18. But Slice A defines only 15 + VOID-006 = 16. The 18 count likely includes COV#008 and COV#015 from MASTER_CANON. Alignment needed.
-3. **STATUS field contradiction** — Header says `STATUS: ratified` AND `provisional: true` simultaneously. These are mutually exclusive per GAP#010.
+3. ~~**STATUS field contradiction** — Header says `STATUS: ratified` AND `provisional: true` simultaneously. These are mutually exclusive per GAP#010.~~ RESOLVED 2026-03-11: Header corrected to `STATUS: PROVISIONAL`. Three-state lifecycle (COMMITTED/PROVISIONAL/RATIFIED) defined in tier1_stone.md. Ratification log created.
 
 ## Confirmation
 
