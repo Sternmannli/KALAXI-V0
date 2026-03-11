@@ -49,6 +49,7 @@ from WEAVER.say import audit_voice
 from WEAVER.oracle import Oracle, WitnessLevel
 from WEAVER.prevention import Prevention, SignalLevel, Intervention
 from WEAVER.mycelium import Mycelium, MyceliumAlert, K_ANONYMITY_FLOOR
+from WEAVER.gap004_mediator import ConflictEngine, surface_conflict
 
 
 @dataclass
@@ -88,6 +89,8 @@ class OrganismState:
     mycelium_patterns: int
     mycelium_suppressed: int
     mycelium_epsilon_remaining: float
+    gap004_open_tickets: int
+    gap004_unwitnessed: int
     timestamp: str
 
 
@@ -139,6 +142,7 @@ class Organism:
         self._oracle = Oracle()
         self._prevention = Prevention()
         self._mycelium = Mycelium()
+        self._conflict_engine = ConflictEngine()
         self._exchange_counter = 0
         self._last_dignity = {}
         self._drops_archive = []
@@ -235,6 +239,16 @@ class Organism:
         # 4. CHECK — dignity gate on input
         dignity = check_dignity(donor_input, felt_domain=felt_domain)
         self._last_dignity = dignity.audit_object()
+
+        # 4b. GAP#004 — conflict detection (individual vs collective)
+        conflict_ticket = self._conflict_engine.process(donor_input)
+        if conflict_ticket:
+            self._wire.broadcast(
+                f"GAP#004 conflict: {conflict_ticket.severity} — {conflict_ticket.input_summary}",
+                "gap004-conflict",
+                source="mediator",
+            )
+            warnings.append(f"GAP#004 {conflict_ticket.severity}: {conflict_ticket.resolution_mode}")
 
         # Record dignity score in drift detector
         self._drift.record(dignity.D, ex_id, felt_domain=felt_domain)
@@ -462,6 +476,8 @@ class Organism:
             mycelium_patterns=self._mycelium.patterns_count,
             mycelium_suppressed=self._mycelium.suppressed_count,
             mycelium_epsilon_remaining=self._mycelium._epsilon_remaining,
+            gap004_open_tickets=len(self._conflict_engine.open_tickets),
+            gap004_unwitnessed=len(self._conflict_engine.unwitnessed_tickets),
             timestamp=self._now(),
         )
 
@@ -567,6 +583,8 @@ class Organism:
         print(f"  Patterns found:    {s.mycelium_patterns}")
         print(f"  Patterns hidden:   {s.mycelium_suppressed} (k<{K_ANONYMITY_FLOOR})")
         print(f"  Privacy budget:    {s.mycelium_epsilon_remaining:.2f}ε remaining")
+        print(f"  GAP#004 open:      {s.gap004_open_tickets}")
+        print(f"  GAP#004 unseen:    {s.gap004_unwitnessed}")
         print(f"  {'='*48}\n")
 
     def decay_state(self):
@@ -683,3 +701,23 @@ class Organism:
     def mycelium_is_rhizome(self):
         """Is there a critical structural pattern?"""
         return self._mycelium.is_rhizome()
+
+    def gap004_process(self, text, individual_scores=None, failed_components=None):
+        """Run full GAP#004 conflict engine on text."""
+        return self._conflict_engine.process(text, individual_scores, failed_components)
+
+    def gap004_steward_sees(self, ticket):
+        """Mark a GAP#004 conflict as seen by steward (W-3)."""
+        return self._conflict_engine.steward_sees(ticket)
+
+    def gap004_steward_holds(self, ticket):
+        """Mark a GAP#004 conflict as held by steward (W-4)."""
+        return self._conflict_engine.steward_holds(ticket)
+
+    def gap004_open_tickets(self):
+        """List all open GAP#004 conflict tickets."""
+        return self._conflict_engine.open_tickets
+
+    def gap004_unwitnessed(self):
+        """List conflicts steward hasn't seen yet."""
+        return self._conflict_engine.unwitnessed_tickets

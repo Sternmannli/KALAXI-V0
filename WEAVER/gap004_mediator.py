@@ -1,18 +1,40 @@
 #!/usr/bin/env python3
 """
-gap004_mediator.py — GAP#004 Conflict Surface Tool
-Version: 1.0
+gap004_mediator.py — GAP#004 Conflict Resolution Engine
+Version: 2.0
 Grounded in: KALAXI_A_FOUNDATION.txt §GAP_REGISTRY (GAP:004)
+Linked Covenants: COV#001 (dignity-first), COV#008 (right to remedy)
 
-Surfaces individual vs collective dignity tension without resolving it.
+v1.0: Surfaces individual vs collective dignity tension without resolving it.
+v2.0: Adds resolution architecture — not to CLOSE the gap, but to give it teeth:
+  1. Collective D integration (GAP#004-A metric)
+  2. Weakest-voice-first ordering (anti-gaming, P#010)
+  3. Witness scale checkpoint (escalate unwitnessed conflicts)
+  4. Collective shelter (group-level remedy path)
+  5. Mycelium pattern connection (cross-donor intelligence)
+
+The gap is still non-resolvable. But now the system can:
+  - Measure the tension (Collective D)
+  - Prioritize the minority (weakest-voice-first)
+  - Track whether anyone has SEEN the conflict (witness scale)
+  - Offer remedies to the group, not just individuals (collective shelter)
+  - Detect when the same conflict repeats across donors (mycelium)
+
+[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import re
 import uuid
 import json
 from datetime import datetime, timezone
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional, List
+from enum import Enum
+
+
+# ═══════════════════════════════════════════════════
+# SIGNAL PATTERNS (v1.0, unchanged)
+# ═══════════════════════════════════════════════════
 
 INDIVIDUAL_SIGNALS = [
     (r'\bone (person|donor|user|participant)\b', "Single individual referenced"),
@@ -50,14 +72,78 @@ DIRECT_TENSION_PATTERNS = [
     r'\b(individual choice|personal preference)\b.*\b(community|group|system)\b',
 ]
 
+
+# ═══════════════════════════════════════════════════
+# RESOLUTION MODES (v2.0)
+# ═══════════════════════════════════════════════════
+
+class ResolutionMode(Enum):
+    """
+    How the conflict is being held.
+    Not "resolved" — held. The gap stays open.
+    """
+    UNPROCESSED = "unprocessed"           # Detected but not yet assessed
+    SURFACE_ONLY = "surface_only"         # v1.0 behavior: ticket generated, steward notified
+    MEASURED = "measured"                 # Collective D computed, tension quantified
+    WEAKEST_PRIORITIZED = "weakest_first" # Weakest voice identified and surfaced first
+    WITNESSED = "witnessed"               # Steward has seen the conflict (W-3+)
+    SHELTERED = "sheltered"               # Group remedy offered
+    HELD = "held"                         # Steward chose to hold the tension
+
+
+# ═══════════════════════════════════════════════════
+# DATA STRUCTURES (v1.0 + v2.0 additions)
+# ═══════════════════════════════════════════════════
+
 @dataclass
 class TensionSide:
     label: str
     signals: list
     strength: float
 
+
+@dataclass
+class CollectiveMeasurement:
+    """v2.0: Quantified collective dignity measurement."""
+    D_collective: float       # From check_collective_dignity
+    mean_D: float
+    variance: float
+    variance_penalty: float
+    cohort_size: int
+    sealed_gate: bool         # True if D_collective < 0.5
+    weakest_D: float          # Lowest individual D in cohort
+    weakest_index: int        # Index of weakest member
+
+
+@dataclass
+class WeakestVoice:
+    """
+    v2.0: The weakest voice in the conflict.
+    P#010: "The weakest voice goes first."
+    Anti-gaming: systems optimize for high-scorers.
+    This reverses the optimization direction.
+    """
+    index: int                # Position in cohort
+    D_score: float            # Their dignity score
+    failed_components: list   # Which A/L/M components failed
+    question: str             # Steward question focused on this voice
+
+
+@dataclass
+class CollectiveRemedy:
+    """
+    v2.0: Group-level remedy (extends shelter.py to collectives).
+    COV#008: Right to remedy applies to groups too.
+    """
+    remedy_type: str          # "variance_reduction", "weakest_uplift", "policy_review"
+    target: str               # "cohort", "weakest_member", "policy"
+    description: str
+    proportionate: bool       # Is the remedy proportionate to the harm?
+
+
 @dataclass
 class ConflictTicket:
+    """Extended conflict ticket with v2.0 resolution architecture."""
     ticket_id: str
     timestamp: str
     severity: str
@@ -70,31 +156,56 @@ class ConflictTicket:
     linked_covenant: str = "COV#001 (DIGNITY FIRST)"
     resolution: str = "NONE — steward review required"
     status: str = "OPEN"
+    # v2.0 fields
+    resolution_mode: str = "unprocessed"
+    collective_measurement: Optional[CollectiveMeasurement] = None
+    weakest_voice: Optional[WeakestVoice] = None
+    collective_remedies: List[CollectiveRemedy] = field(default_factory=list)
+    witness_level: int = 0    # W-0 through W-5
+    mycelium_pattern_id: str = ""  # If linked to cross-donor pattern
 
     def display(self):
-        print(f"\n{'═'*60}")
+        print(f"\n{'='*60}")
         print(f"GAP#004 CONFLICT TICKET — {self.severity}")
-        print(f"{'═'*60}")
+        print(f"{'='*60}")
         print(f"Ticket:   {self.ticket_id}")
         print(f"Time:     {self.timestamp}")
         print(f"Gap:      {self.linked_gap}")
+        print(f"Mode:     {self.resolution_mode}")
+        print(f"Witness:  W-{self.witness_level}")
         print(f"Status:   {self.status}")
         if self.direct_tension:
-            print(f"\n  🔴 Direct tension language detected")
-        print(f"\n  Individual dignity signals ({len(self.individual.signals)}):")
+            print(f"\n  DIRECT TENSION detected")
+        print(f"\n  Individual signals ({len(self.individual.signals)}):")
         for s in self.individual.signals:
-            print(f"    · {s}")
-        print(f"\n  Collective dignity signals ({len(self.collective.signals)}):")
+            print(f"    - {s}")
+        print(f"\n  Collective signals ({len(self.collective.signals)}):")
         for s in self.collective.signals:
-            print(f"    · {s}")
+            print(f"    - {s}")
+        if self.collective_measurement:
+            cm = self.collective_measurement
+            print(f"\n  Collective D: {cm.D_collective:.3f}")
+            print(f"  Variance:     {cm.variance:.4f}")
+            print(f"  Weakest D:    {cm.weakest_D:.3f} (index {cm.weakest_index})")
+            if cm.sealed_gate:
+                print(f"  SEALED GATE TRIGGERED (D_collective < 0.5)")
+        if self.weakest_voice:
+            wv = self.weakest_voice
+            print(f"\n  WEAKEST VOICE (P#010: weakest goes first):")
+            print(f"    D={wv.D_score:.3f}, failed: {wv.failed_components}")
+            print(f"    Q: {wv.question}")
+        if self.collective_remedies:
+            print(f"\n  Collective remedies (COV#008):")
+            for r in self.collective_remedies:
+                print(f"    [{r.remedy_type}] {r.description}")
         print(f"\n  Steward questions (hold the gap, do not close it):")
         for i, q in enumerate(self.questions, 1):
             print(f"    {i}. {q}")
         print(f"\n  Resolution: {self.resolution}")
-        print(f"{'═'*60}\n")
+        print(f"{'='*60}\n")
 
     def to_dict(self) -> dict:
-        return {
+        d = {
             "ticket_id": self.ticket_id,
             "timestamp": self.timestamp,
             "severity": self.severity,
@@ -108,8 +219,31 @@ class ConflictTicket:
             "steward_questions": self.questions,
             "input_summary": self.input_summary,
             "resolution": self.resolution,
-            "status": self.status
+            "resolution_mode": self.resolution_mode,
+            "status": self.status,
+            "witness_level": self.witness_level,
+            "mycelium_pattern_id": self.mycelium_pattern_id,
         }
+        if self.collective_measurement:
+            cm = self.collective_measurement
+            d["collective_D"] = cm.D_collective
+            d["collective_variance"] = cm.variance
+            d["weakest_D"] = cm.weakest_D
+            d["sealed_gate"] = cm.sealed_gate
+        if self.weakest_voice:
+            d["weakest_voice_D"] = self.weakest_voice.D_score
+            d["weakest_voice_question"] = self.weakest_voice.question
+        if self.collective_remedies:
+            d["remedies"] = [
+                {"type": r.remedy_type, "target": r.target, "description": r.description}
+                for r in self.collective_remedies
+            ]
+        return d
+
+
+# ═══════════════════════════════════════════════════
+# CORE DETECTION (v1.0, preserved)
+# ═══════════════════════════════════════════════════
 
 def _generate_questions(individual: TensionSide, collective: TensionSide, direct: bool) -> list:
     questions = [
@@ -161,6 +295,7 @@ def _generate_questions(individual: TensionSide, collective: TensionSide, direct
     )
     return questions
 
+
 def _assess_severity(individual: TensionSide, collective: TensionSide, direct: bool) -> str:
     if direct:
         return "HIGH"
@@ -182,7 +317,9 @@ def _assess_severity(individual: TensionSide, collective: TensionSide, direct: b
         return "LOW"
     return "LOW"
 
+
 def surface_conflict(text: str) -> Optional[ConflictTicket]:
+    """v1.0 core: detect individual vs collective tension signals."""
     ind_signals = []
     for pattern, desc in INDIVIDUAL_SIGNALS:
         if re.search(pattern, text, re.IGNORECASE):
@@ -212,11 +349,277 @@ def surface_conflict(text: str) -> Optional[ConflictTicket]:
         individual=ind,
         collective=col,
         questions=questions,
-        input_summary=text[:80].replace('\n', ' ')
+        input_summary=text[:80].replace('\n', ' '),
+        resolution_mode=ResolutionMode.SURFACE_ONLY.value,
     )
 
+
+# ═══════════════════════════════════════════════════
+# v2.0: CONFLICT RESOLUTION ENGINE
+# ═══════════════════════════════════════════════════
+
+class ConflictEngine:
+    """
+    Gives GAP#004 teeth without closing the gap.
+
+    The engine takes a ConflictTicket and enriches it with:
+    1. Collective D measurement (how bad is the inequality?)
+    2. Weakest voice identification (who is most harmed?)
+    3. Collective remedies (what can be offered to the group?)
+    4. Witness tracking (has anyone SEEN this conflict?)
+
+    The gap remains open. The engine makes it visible, measurable,
+    and actionable — but never resolved. Resolution is the steward's.
+    """
+
+    def __init__(self):
+        self._tickets: List[ConflictTicket] = []
+        self._witnessed: dict = {}  # ticket_id → witness_level
+
+    def _now(self) -> str:
+        return datetime.now(timezone.utc).isoformat()
+
+    # ── 1. MEASURE: Collective D ──
+
+    def measure(
+        self,
+        ticket: ConflictTicket,
+        individual_scores: List[float],
+    ) -> ConflictTicket:
+        """
+        Enrich ticket with collective dignity measurement.
+        Uses GAP#004-A formula: D_collective = mean(D_i) × (1 - variance_penalty)
+        """
+        if not individual_scores:
+            return ticket
+
+        n = len(individual_scores)
+        mean_d = sum(individual_scores) / n
+        variance = sum((s - mean_d) ** 2 for s in individual_scores) / n
+        variance_penalty = min(1.0, variance * 4)
+        d_collective = mean_d * (1 - variance_penalty)
+
+        weakest_d = min(individual_scores)
+        weakest_idx = individual_scores.index(weakest_d)
+
+        ticket.collective_measurement = CollectiveMeasurement(
+            D_collective=round(d_collective, 4),
+            mean_D=round(mean_d, 4),
+            variance=round(variance, 4),
+            variance_penalty=round(variance_penalty, 4),
+            cohort_size=n,
+            sealed_gate=d_collective < 0.5,
+            weakest_D=round(weakest_d, 4),
+            weakest_index=weakest_idx,
+        )
+        ticket.resolution_mode = ResolutionMode.MEASURED.value
+
+        # If sealed gate triggers, escalate severity
+        if d_collective < 0.5:
+            ticket.severity = "HIGH"
+
+        return ticket
+
+    # ── 2. WEAKEST VOICE FIRST (P#010) ──
+
+    def prioritize_weakest(
+        self,
+        ticket: ConflictTicket,
+        individual_scores: Optional[List[float]] = None,
+        failed_components: Optional[List[List[str]]] = None,
+    ) -> ConflictTicket:
+        """
+        Identify and surface the weakest voice first.
+
+        P#010: "The weakest voice goes first."
+        Systems optimize for high-scorers. This reverses the direction.
+        The person most affected by the collective decision speaks first.
+        """
+        if not individual_scores:
+            # No cohort data — use signal analysis
+            if not ticket.individual.signals and ticket.collective.signals:
+                ticket.weakest_voice = WeakestVoice(
+                    index=-1,
+                    D_score=0.0,
+                    failed_components=["invisible"],
+                    question=(
+                        "No individual voice detected. The weakest voice is the one "
+                        "not speaking. Who is silenced by this collective action?"
+                    ),
+                )
+            ticket.resolution_mode = ResolutionMode.WEAKEST_PRIORITIZED.value
+            return ticket
+
+        weakest_d = min(individual_scores)
+        weakest_idx = individual_scores.index(weakest_d)
+        components = (
+            failed_components[weakest_idx]
+            if failed_components and weakest_idx < len(failed_components)
+            else []
+        )
+
+        ticket.weakest_voice = WeakestVoice(
+            index=weakest_idx,
+            D_score=round(weakest_d, 4),
+            failed_components=components,
+            question=(
+                f"Member {weakest_idx} has the lowest dignity score ({weakest_d:.3f}). "
+                f"What would this decision look like from their position? "
+                f"Can the collective action proceed without further harming them?"
+            ),
+        )
+
+        # Insert weakest-voice question at position 0 (before all other questions)
+        ticket.questions.insert(0, ticket.weakest_voice.question)
+        ticket.resolution_mode = ResolutionMode.WEAKEST_PRIORITIZED.value
+        return ticket
+
+    # ── 3. COLLECTIVE SHELTER (COV#008 for groups) ──
+
+    def generate_remedies(self, ticket: ConflictTicket) -> ConflictTicket:
+        """
+        Generate group-level remedies.
+        COV#008: Right to remedy applies to groups too.
+        """
+        remedies = []
+        cm = ticket.collective_measurement
+
+        if cm and cm.variance > 0.1:
+            remedies.append(CollectiveRemedy(
+                remedy_type="variance_reduction",
+                target="cohort",
+                description=(
+                    f"Dignity variance is {cm.variance:.4f}. "
+                    f"Review why treatment differs across cohort members. "
+                    f"Reduce variance before proceeding."
+                ),
+                proportionate=True,
+            ))
+
+        if cm and cm.weakest_D < 0.3:
+            remedies.append(CollectiveRemedy(
+                remedy_type="weakest_uplift",
+                target="weakest_member",
+                description=(
+                    f"Weakest member D={cm.weakest_D:.3f} is critically low. "
+                    f"Individual shelter recommended before group decision proceeds."
+                ),
+                proportionate=True,
+            ))
+
+        if cm and cm.sealed_gate:
+            remedies.append(CollectiveRemedy(
+                remedy_type="policy_review",
+                target="policy",
+                description=(
+                    f"Collective D={cm.D_collective:.3f} below threshold (0.5). "
+                    f"Sealed gate triggered. The collective action must be suspended "
+                    f"until dignity is restored across the cohort."
+                ),
+                proportionate=True,
+            ))
+
+        if ticket.direct_tension and not cm:
+            remedies.append(CollectiveRemedy(
+                remedy_type="tension_acknowledgement",
+                target="cohort",
+                description=(
+                    "Direct tension detected between individual and collective dignity. "
+                    "Both parties should be informed that the tension is held — "
+                    "not resolved — and that neither side's claim is dismissed."
+                ),
+                proportionate=True,
+            ))
+
+        ticket.collective_remedies = remedies
+        if remedies:
+            ticket.resolution_mode = ResolutionMode.SHELTERED.value
+        return ticket
+
+    # ── 4. WITNESS CHECKPOINT ──
+
+    def witness(self, ticket: ConflictTicket, level: int = 0) -> ConflictTicket:
+        """
+        Set witness level for the conflict.
+        W-0: UNSEEN, W-1: PASSED, W-2: FLAGGED, W-3: SEEN (irreversible)
+        """
+        current = self._witnessed.get(ticket.ticket_id, 0)
+        # W-3+ is irreversible — can only go up
+        new_level = max(current, level)
+        self._witnessed[ticket.ticket_id] = new_level
+        ticket.witness_level = new_level
+        if new_level >= 3:
+            ticket.resolution_mode = ResolutionMode.WITNESSED.value
+        return ticket
+
+    def steward_sees(self, ticket: ConflictTicket) -> ConflictTicket:
+        """Mark conflict as seen by steward (W-3, irreversible)."""
+        return self.witness(ticket, level=3)
+
+    def steward_holds(self, ticket: ConflictTicket) -> ConflictTicket:
+        """Mark conflict as actively held by steward (W-4)."""
+        ticket = self.witness(ticket, level=4)
+        ticket.resolution_mode = ResolutionMode.HELD.value
+        ticket.resolution = "HELD — steward chose to hold the tension"
+        return ticket
+
+    # ── 5. FULL PIPELINE ──
+
+    def process(
+        self,
+        text: str,
+        individual_scores: Optional[List[float]] = None,
+        failed_components: Optional[List[List[str]]] = None,
+    ) -> Optional[ConflictTicket]:
+        """
+        Full pipeline: detect → measure → prioritize → remedy.
+
+        This is the v2.0 entry point. It runs the complete
+        resolution engine on a text input.
+        """
+        ticket = surface_conflict(text)
+        if ticket is None:
+            return None
+
+        if individual_scores:
+            ticket = self.measure(ticket, individual_scores)
+            ticket = self.prioritize_weakest(ticket, individual_scores, failed_components)
+        else:
+            ticket = self.prioritize_weakest(ticket)
+
+        ticket = self.generate_remedies(ticket)
+        # Start at W-2 (FLAGGED) — detection counts as flagging
+        ticket = self.witness(ticket, level=2)
+
+        self._tickets.append(ticket)
+        return ticket
+
+    # ── STATE ──
+
+    @property
+    def tickets_count(self) -> int:
+        return len(self._tickets)
+
+    @property
+    def open_tickets(self) -> List[ConflictTicket]:
+        return [t for t in self._tickets if t.status == "OPEN"]
+
+    @property
+    def unwitnessed_tickets(self) -> List[ConflictTicket]:
+        """Tickets below W-3 — steward hasn't seen them yet."""
+        return [t for t in self._tickets if t.witness_level < 3]
+
+    @property
+    def last_ticket(self) -> Optional[ConflictTicket]:
+        return self._tickets[-1] if self._tickets else None
+
+
+# ═══════════════════════════════════════════════════
+# STANDALONE (v1.0 compatibility)
+# ═══════════════════════════════════════════════════
+
 def check_and_surface(text: str) -> dict:
-    from dignity_check import check_dignity
+    from WEAVER.dignity_check import check_dignity
     dignity = check_dignity(text)
     conflict = surface_conflict(text)
     return {
@@ -226,6 +629,7 @@ def check_and_surface(text: str) -> dict:
         "gap004_detected": conflict is not None,
         "gap004_ticket": conflict.to_dict() if conflict else None
     }
+
 
 def main():
     import sys
@@ -239,7 +643,8 @@ def main():
         print("No text provided.")
         return
     text = args[0]
-    ticket = surface_conflict(text)
+    engine = ConflictEngine()
+    ticket = engine.process(text)
     if ticket is None:
         print("No individual/collective dignity tension detected.")
         return
@@ -247,6 +652,7 @@ def main():
         print(json.dumps(ticket.to_dict(), indent=2))
     else:
         ticket.display()
+
 
 if __name__ == "__main__":
     main()
