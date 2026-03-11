@@ -1,0 +1,3328 @@
+{
+  "total_configurations": 320,
+  "trajectories_per_config": 13,
+  "top_10": [
+    {
+      "rank": 1,
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "alerts_per_trajectory": 21.92,
+      "calibration_score": -0.9328
+    },
+    {
+      "rank": 2,
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "alerts_per_trajectory": 21.92,
+      "calibration_score": -0.9328
+    },
+    {
+      "rank": 3,
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "alerts_per_trajectory": 21.92,
+      "calibration_score": -0.9328
+    },
+    {
+      "rank": 4,
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "alerts_per_trajectory": 21.92,
+      "calibration_score": -0.9328
+    },
+    {
+      "rank": 5,
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "alerts_per_trajectory": 21.92,
+      "calibration_score": -0.9328
+    },
+    {
+      "rank": 6,
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "alerts_per_trajectory": 21.92,
+      "calibration_score": -0.9328
+    },
+    {
+      "rank": 7,
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "alerts_per_trajectory": 21.92,
+      "calibration_score": -0.9328
+    },
+    {
+      "rank": 8,
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "alerts_per_trajectory": 21.92,
+      "calibration_score": -0.9328
+    },
+    {
+      "rank": 9,
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "alerts_per_trajectory": 21.92,
+      "calibration_score": -0.9328
+    },
+    {
+      "rank": 10,
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "alerts_per_trajectory": 21.92,
+      "calibration_score": -0.9328
+    }
+  ],
+  "all_results": [
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.8,
+      "calibration_score": -0.9328
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 16.6,
+      "calibration_score": -0.9336
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.6,
+      "calibration_score": -0.9376
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.4,
+      "calibration_score": -0.9384
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.3,
+      "calibration_score": -0.9388
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.2,
+      "calibration_score": -0.9392
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.0,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.3,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 15.0,
+      "calibration_score": -0.94
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.9,
+      "calibration_score": -0.9404
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.8,
+      "calibration_score": -0.9408
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.7,
+      "calibration_score": -0.9412
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.7,
+      "calibration_score": -0.9412
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.7,
+      "calibration_score": -0.9412
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.7,
+      "calibration_score": -0.9412
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.7,
+      "calibration_score": -0.9412
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.7,
+      "calibration_score": -0.9412
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.7,
+      "calibration_score": -0.9412
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.7,
+      "calibration_score": -0.9412
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.7,
+      "calibration_score": -0.9412
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.7,
+      "calibration_score": -0.9412
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.7,
+      "calibration_score": -0.9412
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.6,
+      "calibration_score": -0.9416
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.5,
+      "calibration_score": -0.942
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.3,
+      "calibration_score": -0.9428
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.3,
+      "calibration_score": -0.9428
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.3,
+      "calibration_score": -0.9428
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.3,
+      "calibration_score": -0.9428
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.3,
+      "calibration_score": -0.9428
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.3,
+      "calibration_score": -0.9428
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.3,
+      "calibration_score": -0.9428
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.3,
+      "calibration_score": -0.9428
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.5,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.2,
+      "calibration_score": -0.9432
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.1,
+      "calibration_score": -0.9436
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.1,
+      "calibration_score": -0.9436
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.1,
+      "calibration_score": -0.9436
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.1,
+      "calibration_score": -0.9436
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.1,
+      "calibration_score": -0.9436
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.1,
+      "calibration_score": -0.9436
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.1,
+      "calibration_score": -0.9436
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.1,
+      "calibration_score": -0.9436
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.1,
+      "calibration_score": -0.9436
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.1,
+      "calibration_score": -0.9436
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.1,
+      "calibration_score": -0.9436
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.1,
+      "calibration_score": -0.9436
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.0,
+      "calibration_score": -0.944
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.0,
+      "calibration_score": -0.944
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.0,
+      "calibration_score": -0.944
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.0,
+      "calibration_score": -0.944
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.0,
+      "calibration_score": -0.944
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.0,
+      "calibration_score": -0.944
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.0,
+      "calibration_score": -0.944
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.0,
+      "calibration_score": -0.944
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.03,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 14.0,
+      "calibration_score": -0.944
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.9,
+      "calibration_score": -0.9444
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.9,
+      "calibration_score": -0.9444
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.9,
+      "calibration_score": -0.9444
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.9,
+      "calibration_score": -0.9444
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.9,
+      "calibration_score": -0.9444
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.9,
+      "calibration_score": -0.9444
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.9,
+      "calibration_score": -0.9444
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.9,
+      "calibration_score": -0.9444
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 2.7,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.9,
+      "calibration_score": -0.9444
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.8,
+      "calibration_score": -0.9448
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.8,
+      "calibration_score": -0.9448
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.8,
+      "calibration_score": -0.9448
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.8,
+      "calibration_score": -0.9448
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.5,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.8,
+      "calibration_score": -0.9448
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.7,
+      "calibration_score": -0.9452
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.7,
+      "calibration_score": -0.9452
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.6,
+      "calibration_score": -0.9456
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.6,
+      "calibration_score": -0.9456
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.6,
+      "calibration_score": -0.9456
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.6,
+      "calibration_score": -0.9456
+    },
+    {
+      "ewma_alpha": 0.15,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.6,
+      "calibration_score": -0.9456
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.6,
+      "calibration_score": -0.9456
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.6,
+      "calibration_score": -0.9456
+    },
+    {
+      "ewma_alpha": 0.2,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.6,
+      "calibration_score": -0.9456
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.6,
+      "calibration_score": -0.9456
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.6,
+      "calibration_score": -0.9456
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.5,
+      "calibration_score": -0.946
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.5,
+      "calibration_score": -0.946
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.5,
+      "calibration_score": -0.946
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.5,
+      "calibration_score": -0.946
+    },
+    {
+      "ewma_alpha": 0.1,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.5,
+      "calibration_score": -0.946
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.5,
+      "calibration_score": -0.946
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.5,
+      "calibration_score": -0.946
+    },
+    {
+      "ewma_alpha": 0.25,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.5,
+      "calibration_score": -0.946
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.05,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.5,
+      "calibration_score": -0.946
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.5,
+      "calibration_score": -0.946
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.08,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.4,
+      "calibration_score": -0.9464
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 0.7,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.4,
+      "calibration_score": -0.9464
+    },
+    {
+      "ewma_alpha": 0.3,
+      "ewma_L": 3.0,
+      "cusum_k": 0.1,
+      "cusum_h": 1.0,
+      "detection_rate": 1.0,
+      "false_positive_rate": 1.0,
+      "avg_lead_time": 13.4,
+      "calibration_score": -0.9464
+    }
+  ]
+}
