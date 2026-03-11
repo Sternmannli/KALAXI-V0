@@ -1,148 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KALAM</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Georgia, 'Times New Roman', serif;
-      background: #faf9f7;
-      color: #2c2c2c;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-
-    .threshold {
-      max-width: 540px;
-      width: 100%;
-      text-align: center;
-    }
-
-    .sentence {
-      font-size: 1.5rem;
-      line-height: 1.6;
-      letter-spacing: 0.01em;
-      margin-bottom: 3rem;
-      color: #2c2c2c;
-    }
-
-    .field {
-      width: 100%;
-      min-height: 120px;
-      padding: 1.2rem;
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #2c2c2c;
-      background: #fff;
-      border: 1px solid #d4d0c8;
-      border-radius: 4px;
-      resize: vertical;
-      outline: none;
-      transition: border-color 0.3s ease;
-    }
-
-    .field:focus {
-      border-color: #4F46E5;
-    }
-
-    .field::placeholder {
-      color: #a8a29e;
-      font-style: italic;
-    }
-
-    .below {
-      margin-top: 1.5rem;
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .send {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 1rem;
-      padding: 0.6rem 1.8rem;
-      background: #2c2c2c;
-      color: #faf9f7;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      letter-spacing: 0.02em;
-      transition: opacity 0.3s ease;
-    }
-
-    .send:hover {
-      opacity: 0.85;
-    }
-
-    .send:disabled {
-      opacity: 0.4;
-      cursor: default;
-    }
-
-    .quiet {
-      margin-top: 4rem;
-      font-size: 0.85rem;
-      color: #a8a29e;
-      line-height: 1.6;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KALAM</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'EB Garamond', Georgia, serif;
+    background: #faf9f6;
+    color: #1e1e1e;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .threshold { max-width: 520px; width: 100%; }
+  .sentence {
+    font-size: 1.55rem;
+    line-height: 1.65;
+    margin-bottom: 2.8rem;
+    color: #1e1e1e;
+    font-weight: 400;
+  }
+  textarea {
+    width: 100%;
+    min-height: 130px;
+    padding: 1.1rem;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: #1e1e1e;
+    background: #fff;
+    border: 1px solid #ccc9be;
+    border-radius: 3px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.25s;
+  }
+  textarea:focus { border-color: #888; }
+  textarea::placeholder { color: #b0aa9e; font-style: italic; }
+  textarea:disabled { background: #f5f4f1; color: #888; }
+  .actions { margin-top: 1.2rem; display: flex; justify-content: flex-end; }
+  button {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1rem;
+    padding: 0.55rem 1.6rem;
+    background: #1e1e1e;
+    color: #faf9f6;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: opacity 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:hover { opacity: 0.8; }
+  button:disabled { opacity: 0.3; cursor: default; }
+  .response { margin-top: 2.8rem; display: none; }
+  .response.visible { display: block; animation: fadeIn 0.8s ease forwards; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .response-main { font-size: 1.2rem; line-height: 1.7; margin-bottom: 1.4rem; }
+  .response-gap {
+    font-size: 0.95rem;
+    color: #888;
+    line-height: 1.6;
+    margin-bottom: 1.6rem;
+    font-style: italic;
+  }
+  .proverb {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    border-left: 2px solid #ccc9be;
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+    color: #444;
+  }
+  .consent { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .consent button {
+    background: transparent;
+    color: #1e1e1e;
+    border: 1px solid #ccc9be;
+    font-size: 0.9rem;
+    padding: 0.45rem 1.2rem;
+  }
+  .consent button:hover { background: #f0ede6; opacity: 1; }
+  .final {
+    margin-top: 2.8rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    display: none;
+  }
+  .final.visible { display: block; animation: fadeIn 0.8s ease forwards; }
+  .quiet { margin-top: 3.5rem; font-size: 0.82rem; color: #b0aa9e; line-height: 1.6; }
+</style>
 </head>
 <body>
-
-  <div class="threshold">
-    <p class="sentence">You came with what you came with.<br>The door is open.</p>
-
-    <textarea
-      class="field"
-      id="pattern"
-      placeholder="Say as much or as little as you choose."
-      aria-label="Your pattern"
-    ></textarea>
-
-    <div class="below">
-      <button class="send" id="send" disabled>Leave this here</button>
-    </div>
-
-    <p class="quiet">Nothing is asked of you. Nothing is stored without your knowing.</p>
+<div class="threshold">
+  <p class="sentence">You came with what you came with.<br>The door is open.</p>
+  <textarea id="field" placeholder="Say as much or as little as you choose."></textarea>
+  <div class="actions">
+    <button id="sendBtn" disabled>Leave this here</button>
   </div>
+  <div class="response" id="response">
+    <p class="response-main" id="responseMain"></p>
+    <p class="response-gap" id="responseGap"></p>
+    <p class="proverb" id="proverb"></p>
+    <div class="consent" id="consent">
+      <button id="leaveBtn">Leave it here</button>
+      <button id="takeBtn">Take it with me</button>
+    </div>
+  </div>
+  <p class="final" id="final"></p>
+  <p class="quiet">Nothing is asked of you. Nothing is stored without your knowing.</p>
+</div>
+<script>
+var proverbs = [
+  "The river does not choose its banks. The banks choose the river by being there.",
+  "The bowl that knows it is empty can still hold water.",
+  "What is carried long enough becomes part of the shape of the carrier.",
+  "The knot that holds the most weight is the one tied in silence.",
+  "A path walked once in the dark is not the same path in daylight.",
+  "The door that opens inward cannot be forced from outside.",
+  "What the water remembers, the stone does not need to say.",
+  "You cannot arrive somewhere you have already been holding.",
+  "The fire does not ask permission to warm the room.",
+  "What you brought to the threshold was already yours before you named it."
+];
 
-  <script>
-    const field = document.getElementById('pattern');
-    const send = document.getElementById('send');
+var field = document.getElementById('field');
+var sendBtn = document.getElementById('sendBtn');
+var responseDiv = document.getElementById('response');
+var responseMain = document.getElementById('responseMain');
+var responseGap = document.getElementById('responseGap');
+var proverbEl = document.getElementById('proverb');
+var consent = document.getElementById('consent');
+var leaveBtn = document.getElementById('leaveBtn');
+var takeBtn = document.getElementById('takeBtn');
+var finalEl = document.getElementById('final');
 
-    field.addEventListener('input', function () {
-      send.disabled = this.value.trim().length === 0;
-    });
+field.addEventListener('input', function() {
+  sendBtn.disabled = this.value.trim().length === 0;
+});
 
-    send.addEventListener('click', function () {
-      // The public door. What happens next is the organism's work.
-      // For now: acknowledgment only. No data leaves without comprehension.
-      const pattern = field.value.trim();
-      if (!pattern) return;
+sendBtn.addEventListener('click', function(e) {
+  e.preventDefault();
+  var pattern = field.value.trim();
+  if (!pattern) return;
 
-      field.value = '';
-      field.disabled = true;
-      send.disabled = true;
-      send.style.display = 'none';
+  field.disabled = true;
+  sendBtn.disabled = true;
+  sendBtn.style.display = 'none';
 
-      const response = document.createElement('p');
-      response.className = 'sentence';
-      response.style.marginTop = '2rem';
-      response.textContent = 'It is here. You can come back.';
-      document.querySelector('.threshold').appendChild(response);
-    });
-  </script>
+  var words = pattern.split(/\s+/).length;
+  var hasQuestion = pattern.indexOf('?') !== -1;
+  var lower = pattern.toLowerCase();
+  var hasTension = lower.indexOf('but') !== -1 ||
+                   lower.indexOf('and yet') !== -1 ||
+                   lower.indexOf('still') !== -1;
 
+  var seen = "What I saw: something held carefully for a long time.";
+  if (words > 30) seen = "What I saw: a pattern that needed room to arrive fully.";
+  if (hasQuestion) seen = "What I saw: a question that already contains part of its answer.";
+  if (hasTension) seen = "What I saw: two true things pointing in different directions \u2014 and the person standing between them.";
+
+  var gap = "What I could not fully see: the weight of what came before this moment. That gap is mine, not yours.";
+  var p = proverbs[Math.floor(Math.random() * proverbs.length)];
+
+  responseMain.textContent = seen;
+  responseGap.textContent = gap;
+  proverbEl.textContent = "\u201c" + p + "\u201d";
+  responseDiv.classList.add('visible');
+
+  setTimeout(function() {
+    responseDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+});
+
+function handleConsent(message) {
+  consent.style.display = 'none';
+  finalEl.textContent = message;
+  finalEl.classList.add('visible');
+  setTimeout(function() {
+    finalEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 100);
+}
+
+leaveBtn.addEventListener('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  handleConsent("It is here. You can come back.");
+});
+
+takeBtn.addEventListener('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  handleConsent("It leaves with you. The door stays open.");
+});
+</script>
 </body>
 </html>
