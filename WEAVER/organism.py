@@ -48,6 +48,7 @@ from WEAVER.lock_test import LockTest, LockVerdict
 from WEAVER.say import audit_voice
 from WEAVER.oracle import Oracle, WitnessLevel
 from WEAVER.prevention import Prevention, SignalLevel, Intervention
+from WEAVER.mycelium import Mycelium, MyceliumAlert, K_ANONYMITY_FLOOR
 
 
 @dataclass
@@ -83,6 +84,10 @@ class OrganismState:
     prevention_level: str
     prevention_td_multiplier: float
     prevention_escalations: int
+    mycelium_alert: str
+    mycelium_patterns: int
+    mycelium_suppressed: int
+    mycelium_epsilon_remaining: float
     timestamp: str
 
 
@@ -133,6 +138,7 @@ class Organism:
         self._lock_test = LockTest()
         self._oracle = Oracle()
         self._prevention = Prevention()
+        self._mycelium = Mycelium()
         self._exchange_counter = 0
         self._last_dignity = {}
         self._drops_archive = []
@@ -268,6 +274,14 @@ class Organism:
             warnings.append(prev_signal.message)
         if prev_signal.level == SignalLevel.ALARM:
             self._breath.pause(f"PREVENTION ALARM: {prev_signal.reason}")
+
+        # 5c. MYCELIUM — ingest anonymized trajectory for cross-donor detection
+        self._mycelium.ingest(
+            domain=felt_domain,
+            trend=prev_signal.trajectory.window_trend,
+            D=dignity.D,
+            dD_dt=drift_alert.dD_dt,
+        )
 
         if dignity.D == 0.0:
             # Dignity failed — shelter the exchange (not discard)
@@ -444,6 +458,10 @@ class Organism:
             prevention_level=self._prevention.current_level.name,
             prevention_td_multiplier=self._prevention.current_td_multiplier(),
             prevention_escalations=self._prevention._escalations,
+            mycelium_alert=self._mycelium.current_alert.name,
+            mycelium_patterns=self._mycelium.patterns_count,
+            mycelium_suppressed=self._mycelium.suppressed_count,
+            mycelium_epsilon_remaining=self._mycelium._epsilon_remaining,
             timestamp=self._now(),
         )
 
@@ -545,6 +563,10 @@ class Organism:
         print(f"  Prevention level:  {s.prevention_level}")
         print(f"  T_d multiplier:    {s.prevention_td_multiplier:.1f}x")
         print(f"  Escalations:       {s.prevention_escalations}")
+        print(f"  Mycelium alert:    {s.mycelium_alert}")
+        print(f"  Patterns found:    {s.mycelium_patterns}")
+        print(f"  Patterns hidden:   {s.mycelium_suppressed} (k<{K_ANONYMITY_FLOOR})")
+        print(f"  Privacy budget:    {s.mycelium_epsilon_remaining:.2f}ε remaining")
         print(f"  {'='*48}\n")
 
     def decay_state(self):
@@ -649,3 +671,15 @@ class Organism:
     def prevention_is_alarm(self):
         """Is the prevention system in ALARM state?"""
         return self._prevention.is_alarm()
+
+    def mycelium_scan(self):
+        """Scan mycelium for cross-donor patterns."""
+        return self._mycelium.scan()
+
+    def mycelium_state(self):
+        """Get mycelium network state."""
+        return self._mycelium.state()
+
+    def mycelium_is_rhizome(self):
+        """Is there a critical structural pattern?"""
+        return self._mycelium.is_rhizome()
