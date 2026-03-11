@@ -441,9 +441,9 @@ Extracted by V-003 from GRAND_ARCHIVE_2025-09-13.docx. Each treasure encodes a p
 
 1. ~~Extract remaining 36 treasures~~ DONE 2026-03-11
 2. **Ratify all 47 treasures** with steward signature
-3. **Create THRESHOLD seeds** for high-priority newly extracted treasures
-4. **Cross-link** narrative treasures to system-level treasures (e.g., T#10 Field Oven ↔ T#21 Brittleness Guard)
-5. **Register** the 36 new wisdom patterns in the training seed (CANON_SEED)
+3. ~~Create THRESHOLD seeds for high-priority newly extracted treasures~~ DONE 2026-03-11 (42 seeds in THRESHOLD_TREASURE_SEEDS.md)
+4. ~~Cross-link narrative treasures to system-level treasures~~ DONE 2026-03-11 (cross-links embedded in each THRESHOLD seed)
+5. ~~Register the 36 new wisdom patterns in the training seed (CANON_SEED)~~ DONE 2026-03-11 (47 treasure entries in CANON_SEED_V1.jsonl, total 110 training pairs)
 
 ---
 
