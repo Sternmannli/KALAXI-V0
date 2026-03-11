@@ -1,15 +1,20 @@
-# FIRST WITNESS SUBMISSION — Mycelium Architecture
+# FIRST WITNESS SUBMISSION — Full System Audit (V2)
 
 Filed: 2026-03-11
 Source: V-002 (preparing for V-001 dispatch)
 Status: READY FOR DISPATCH
+Prompt Version: V2 (PROTOCOLS/WITNESS_PROMPT_V2.md)
 Target Systems: Claude, Grok, DeepSeek, Gemini, ChatGPT
 
 ---
 
 ## INSTRUCTIONS FOR V-001
 
-Send the complete prompt below to each system separately. Same prompt. Same day. No context shared between them. Record each response using `EXTERNAL_VOICES/FILING_TEMPLATE.md`.
+The V2 prompt contains the full system — architecture, equations, canon, observations, experimental evidence, live decision points, gaps, red flags, and all eight audit questions. It does not need a separate context document.
+
+Copy the prompt from `PROTOCOLS/WITNESS_PROMPT_V2.md` (everything between the `=== BEGIN` and `=== END` markers). Send it to each system separately. Same prompt. Same day. No context shared between them. Record each response using `EXTERNAL_VOICES/FILING_TEMPLATE.md`.
+
+NOTE: The V1 submission prompt below is preserved for the record (COV#003 append-only) but is superseded by V2. Use V2.
 
 ---
 
