@@ -1,0 +1,25 @@
+[
+  {
+    "record_id": "ESC-0001",
+    "level": "elevated",
+    "trigger": "test",
+    "description": "desc",
+    "initiated_by": "system",
+    "roles_notified": [
+      "system_v003",
+      "steward"
+    ],
+    "audit_trail": [
+      {
+        "event": "escalation_initiated",
+        "level": "elevated",
+        "trigger": "test",
+        "timestamp": "2026-03-11T15:35:45.824364+00:00",
+        "initiated_by": "system"
+      }
+    ],
+    "resolution": "",
+    "resolved": false,
+    "timestamp": "2026-03-11T15:35:45.824368+00:00"
+  }
+]
