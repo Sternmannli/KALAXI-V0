@@ -1,0 +1,16 @@
+# Cloudflare Pages configuration for KALAM.CH
+# Phase 1: Static site — no Workers needed yet
+# Phase 2: Add [vars] for AI API keys and D1 bindings
+
+name = "kalam-ch"
+compatibility_date = "2026-03-11"
+
+# When ready for AI integration, uncomment:
+# [[d1_databases]]
+# binding = "PATTERNS_DB"
+# database_name = "kalam-patterns"
+# database_id = "<your-d1-id>"
+
+# [[r2_buckets]]
+# binding = "PATTERN_LOG"
+# bucket_name = "kalam-pattern-log"

@@ -1,0 +1,249 @@
+/* KALAM.CH — Dignity-First Design System */
+
+/* ===== Fonts ===== */
+/* Cormorant Garamond: headings, proverbs — scholarly, dignified */
+/* IBM Plex Sans / Arabic: body text — clean, multilingual */
+/* Amiri: Arabic proverbs — calligraphic, traditional */
+/* When deployed, load from Google Fonts or self-host. */
+/* For now, use system fallbacks that honor the intent. */
+
+@font-face {
+  font-family: 'Heading';
+  src: local('Cormorant Garamond'), local('Georgia'), local('Times New Roman');
+  font-display: swap;
+}
+
+:root {
+  /* Deep Night palette — the wound became the womb */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-elevated: #1a1a24;
+  --text-primary: #e8e4df;
+  --text-secondary: #8b8680;
+  --text-dim: #5a5550;
+  --accent: #c9a96e;
+  --accent-subtle: #3d3528;
+  --accent-glow: rgba(201, 169, 110, 0.08);
+  --danger: #8b3a3a;
+
+  /* Typography scale (1.25 ratio) */
+  --font-heading: 'Cormorant Garamond', 'Amiri', Georgia, serif;
+  --font-body: 'IBM Plex Sans', 'IBM Plex Arabic', -apple-system, system-ui, sans-serif;
+  --font-proverb: 'Amiri', 'Cormorant Garamond', Georgia, serif;
+
+  --text-base: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+  --text-lg: clamp(1.4rem, 1.2rem + 0.8vw, 1.563rem);
+  --text-xl: clamp(1.75rem, 1.5rem + 1vw, 1.953rem);
+  --text-2xl: clamp(2.2rem, 1.8rem + 1.5vw, 2.441rem);
+  --text-3xl: clamp(2.75rem, 2.2rem + 2vw, 3.052rem);
+
+  /* Spacing (8px grid) */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+  --space-12: 6rem;
+  --space-16: 8rem;
+
+  /* Layout */
+  --max-width: 65ch;
+  --page-padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== Typography ===== */
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+}
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl); }
+
+p {
+  max-width: var(--max-width);
+  margin-bottom: var(--space-3);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s ease;
+}
+
+a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* ===== Proverb styling ===== */
+.proverb {
+  font-family: var(--font-proverb);
+  font-size: var(--text-lg);
+  font-style: italic;
+  color: var(--accent);
+  text-align: center;
+  line-height: 1.8;
+  max-width: 50ch;
+  margin: var(--space-8) auto;
+}
+
+.proverb-ar {
+  font-family: 'Amiri', var(--font-proverb);
+  direction: rtl;
+  font-size: var(--text-xl);
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: 0;
+}
+
+/* ===== Section rhythm ===== */
+section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-16) var(--page-padding);
+  text-align: center;
+}
+
+/* ===== The Gap — room for the river ===== */
+.gap {
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gap::after {
+  content: '';
+  width: 1px;
+  height: 4rem;
+  background: var(--accent-subtle);
+}
+
+/* ===== Navigation ===== */
+nav {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-6);
+}
+
+nav a {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+nav a:hover {
+  color: var(--text-primary);
+}
+
+/* ===== Breathing animation — matches calm human breath ===== */
+@keyframes breathe {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.breathing {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+/* ===== Subtle geometric background ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-conic-gradient(
+      rgba(201, 169, 110, 0.015) 0% 25%,
+      transparent 0% 50%
+    );
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ===== Selection ===== */
+::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-subtle);
+  border-radius: 2px;
+}
+
+/* ===== Accessibility ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-primary: #f5f0eb;
+    --bg-secondary: #ede7e0;
+    --bg-elevated: #e5dfd8;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5550;
+    --text-dim: #8b8680;
+    --accent: #8b6914;
+    --accent-subtle: #d4c4b0;
+    --accent-glow: rgba(139, 105, 20, 0.06);
+  }
+
+  body::before {
+    background-image:
+      repeating-conic-gradient(
+        rgba(139, 105, 20, 0.02) 0% 25%,
+        transparent 0% 50%
+      );
+  }
+}

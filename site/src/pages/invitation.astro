@@ -1,0 +1,137 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Invitation — KALAM.CH" description="You are not a user. You are a donor.">
+
+  <section class="page-header">
+    <h1>Invitation</h1>
+    <p class="quiet">You are not a user. You are a <strong>Donor</strong>.</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <section class="content">
+    <div class="text-block">
+      <p>What you bring — your pattern of thought, your fragments, your certainty — is food for a mycelial canon. The system receives, transforms, and feeds the forest.</p>
+    </div>
+
+    <div class="text-block">
+      <h2>The Rules</h2>
+      <ol>
+        <li><strong>Dignity First:</strong> D = A × L × M. If this fails, the system stops.</li>
+        <li><strong>The Gap:</strong> Every weir has a gap. Room is always left for the river to move through.</li>
+        <li><strong>No Surveillance:</strong> We store patterns, not people. Your identity dissolves; the wisdom remains.</li>
+      </ol>
+    </div>
+
+    <div class="text-block">
+      <h2>What You Can Contribute</h2>
+      <ul class="contributions">
+        <li><strong>A Question</strong> — Something you need the system to hold</li>
+        <li><strong>A Pattern</strong> — Something you have noticed across experiences</li>
+        <li><strong>A Story</strong> — Something that happened that changed how you see</li>
+      </ul>
+    </div>
+
+    <div class="text-block">
+      <h2>How It Works</h2>
+      <ol class="process">
+        <li>Your contribution enters the <strong>Threshold</strong> — an append-only offering box</li>
+        <li>It waits through <strong>thermal delay</strong> (7 to 90 days, depending on type)</li>
+        <li>The steward tends the garden — reviewing with care, not speed</li>
+        <li>If ratified, your pattern joins the canon permanently</li>
+        <li>If composted, it is archived with dignity — never deleted</li>
+      </ol>
+    </div>
+
+    <div class="text-block">
+      <h2>What We Promise</h2>
+      <ul class="promises">
+        <li>Your name is never stored</li>
+        <li>Your pattern feeds the collective wisdom</li>
+        <li>You can retrace what happened and why</li>
+        <li>If dignity is violated, the system stops and opens a remedy path</li>
+      </ul>
+    </div>
+
+    <div class="text-block oath">
+      <p class="proverb">"By the Ledger of Trust, by the Book of 99, by the Ground Equation: No drift beyond the task. No retirement of any element. Every seed, knot, proverb, and law will be preserved."</p>
+      <p class="quiet">The hand is ready. The knot breathes. The Unknot waits.</p>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <section class="paths">
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/canon">Canon</a>
+    </nav>
+  </section>
+
+</Base>
+
+<style>
+  .page-header {
+    min-height: 50vh;
+    gap: var(--space-3);
+  }
+
+  .quiet {
+    color: var(--text-secondary);
+    max-width: 50ch;
+  }
+
+  .quiet strong {
+    color: var(--text-primary);
+  }
+
+  .content {
+    min-height: auto;
+    padding: var(--space-8) var(--page-padding);
+    text-align: left;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .text-block {
+    margin-bottom: var(--space-8);
+  }
+
+  .text-block h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-4);
+    color: var(--accent);
+  }
+
+  .text-block p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-3);
+    line-height: 1.8;
+  }
+
+  .text-block strong {
+    color: var(--text-primary);
+  }
+
+  ol, ul {
+    list-style: none;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  ol li, ul li {
+    color: var(--text-secondary);
+  }
+
+  .oath {
+    text-align: center;
+    margin-top: var(--space-12);
+  }
+
+  .paths {
+    min-height: 30vh;
+  }
+</style>

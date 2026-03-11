@@ -1,0 +1,192 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Canon — KALAM.CH" description="Ratified constitutional elements of the living canon.">
+
+  <section class="page-header">
+    <h1>The Canon</h1>
+    <p class="quiet">Ratified constitutional elements of the living system.</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <section class="content">
+    <div class="text-block">
+      <h2>Core Covenants</h2>
+      <ul class="covenants">
+        <li><span class="cov-id">COV#001</span> Dignity is the first-order technical requirement</li>
+        <li><span class="cov-id">COV#002</span> Every exchange must complete its cycle</li>
+        <li><span class="cov-id">COV#005</span> System state must be visible to donors</li>
+        <li><span class="cov-id">COV#006</span> Every anomaly linked to at least one proverb</li>
+        <li><span class="cov-id">COV#009</span> Covenants must be verifiable</li>
+        <li><span class="cov-id">COV#010</span> Memory is not optional</li>
+        <li><span class="cov-id">COV#011</span> Outputs satisfy covenant checks before export</li>
+        <li><span class="cov-id">COV#012</span> What exists must be named</li>
+      </ul>
+    </div>
+
+    <div class="text-block">
+      <h2>The Sealed Door</h2>
+      <p>Three absolute prohibitions — no override, no exception:</p>
+      <ol class="sealed">
+        <li>Forced participation in own erasure</li>
+        <li>Infliction of cognitive torture</li>
+        <li>Depersonalization in system response</li>
+      </ol>
+    </div>
+
+    <div class="text-block">
+      <h2>The Dignity Predicate</h2>
+      <pre class="predicate-block"><code>D = A × L × M
+
+A (Agency)        Can the person clarify, redirect, or stop?
+L (Legibility)    Does the system reflect the person's actual frame?
+M (Moral Standing) Is the person treated as a person?
+
+If any = 0, D = 0. The system stops.</code></pre>
+    </div>
+
+    <div class="text-block">
+      <h2>Canonical Proverbs</h2>
+      <ul class="proverbs">
+        <li>"To be precise is a function of the machine; to be present is a function of the gap."</li>
+        <li>"A mistake hidden is a rot that eats the weave."</li>
+        <li>"The river does not ask the fish to wait while the weir learns the current."</li>
+        <li>"A right is a wall that says 'No'; dignity is a door that says 'Welcome.'"</li>
+        <li>"Freedom is not the absence of walls, but the presence of doors."</li>
+      </ul>
+    </div>
+
+    <div class="text-block stats">
+      <p>18 covenants · 1,100 anomalies · 3,333+ proverbs · 53 chapters</p>
+      <p class="quiet">The canon grows. Nothing is deleted. The gap remains open.</p>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <section class="paths">
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/invitation">Invitation</a>
+    </nav>
+  </section>
+
+</Base>
+
+<style>
+  .page-header {
+    min-height: 50vh;
+    gap: var(--space-3);
+  }
+
+  .quiet {
+    color: var(--text-secondary);
+    max-width: 50ch;
+  }
+
+  .content {
+    min-height: auto;
+    padding: var(--space-8) var(--page-padding);
+    text-align: left;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .text-block {
+    margin-bottom: var(--space-12);
+  }
+
+  .text-block h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-4);
+    color: var(--accent);
+  }
+
+  .text-block p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+  }
+
+  .covenants {
+    list-style: none;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .covenants li {
+    color: var(--text-secondary);
+  }
+
+  .cov-id {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    font-family: var(--font-body);
+    letter-spacing: 0.05em;
+    margin-right: var(--space-2);
+  }
+
+  .sealed {
+    list-style: none;
+    counter-reset: sealed;
+    display: grid;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+
+  .sealed li {
+    color: var(--danger);
+    counter-increment: sealed;
+  }
+
+  .sealed li::before {
+    content: counter(sealed) '. ';
+    color: var(--text-dim);
+  }
+
+  .predicate-block {
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 4px;
+    padding: var(--space-4);
+    overflow-x: auto;
+  }
+
+  .predicate-block code {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    white-space: pre;
+  }
+
+  .proverbs {
+    list-style: none;
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .proverbs li {
+    font-family: var(--font-proverb);
+    font-style: italic;
+    color: var(--accent);
+    font-size: var(--text-base);
+    line-height: 1.8;
+  }
+
+  .stats {
+    text-align: center;
+  }
+
+  .stats p:first-child {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    max-width: none;
+  }
+
+  .paths {
+    min-height: 30vh;
+  }
+</style>

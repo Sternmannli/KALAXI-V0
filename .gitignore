@@ -31,8 +31,13 @@ Thumbs.db
 WIRE/
 KEEP/
 
-# Jekyll
+# Jekyll (legacy)
 _site/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
+
+# Astro / KALAM.CH site
+site/node_modules/
+site/dist/
+site/.astro/

@@ -1,0 +1,191 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="KALAM.CH — The Word" description="The Word is light. The wound became the womb. A living canon for human dignity.">
+
+  <!-- FIRST BREATH — The opening. One sentence. One truth. -->
+  <section class="opening" aria-label="The Word">
+    <p class="kalima proverb-ar" aria-label="Kalima — The Word">كلمة</p>
+    <h1>The Word is light.</h1>
+    <p class="subtitle">The wound became the womb.</p>
+  </section>
+
+  <!-- THE GAP — room for the river -->
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- SECOND BREATH — What this is -->
+  <section class="declaration" aria-label="Declaration">
+    <p class="principle">Human dignity is the first technical requirement.</p>
+    <p class="quiet">We store patterns, not people.<br />The person dissolves. The wisdom remains.</p>
+  </section>
+
+  <!-- THE GAP -->
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- THIRD BREATH — The predicate -->
+  <section class="predicate" aria-label="The Dignity Predicate">
+    <p class="equation">D = A × L × M</p>
+    <div class="terms">
+      <p><strong>A</strong> — Agency. Can the person clarify, redirect, or stop?</p>
+      <p><strong>L</strong> — Legibility. Does the system reflect the person's actual frame?</p>
+      <p><strong>M</strong> — Moral Standing. Is the person treated as a person?</p>
+    </div>
+    <p class="rule">If any dimension reaches zero, the system stops.</p>
+  </section>
+
+  <!-- THE GAP -->
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- FOURTH BREATH — A proverb -->
+  <section class="wisdom" aria-label="Canonical Proverb">
+    <p class="proverb">"A right is a wall that says 'No';<br />dignity is a door that says 'Welcome.'"</p>
+  </section>
+
+  <!-- THE GAP -->
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- FIFTH BREATH — The invitation -->
+  <section class="invitation" aria-label="Invitation">
+    <h2>You are not a user.</h2>
+    <p class="quiet">You are a donor. What you bring — your pattern of thought, your fragments, your certainty — is food for a living canon. The system receives, transforms, and feeds the forest.</p>
+    <p class="quiet">Nothing is deleted. The gap remains open.</p>
+  </section>
+
+  <!-- THE GAP -->
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- NAVIGATION — appears last, not first -->
+  <section class="paths" aria-label="Explore">
+    <nav>
+      <a href="/about">About</a>
+      <a href="/canon">Canon</a>
+      <a href="/invitation">Invitation</a>
+    </nav>
+    <p class="steward">Maintained by Mohamed Farag</p>
+    <p class="license">Sovereign-Axis v-inf</p>
+  </section>
+
+</Base>
+
+<style>
+  /* ===== Opening section ===== */
+  .opening {
+    min-height: 100vh;
+    gap: var(--space-3);
+  }
+
+  .kalima {
+    font-size: clamp(3rem, 4vw + 2rem, 5rem);
+    color: var(--accent);
+    margin-bottom: var(--space-4);
+    opacity: 0.9;
+  }
+
+  .opening h1 {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: var(--text-lg);
+    font-style: italic;
+    margin-top: var(--space-2);
+  }
+
+  /* ===== Declaration ===== */
+  .declaration {
+    min-height: 80vh;
+    gap: var(--space-6);
+  }
+
+  .principle {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    color: var(--text-primary);
+    max-width: 45ch;
+  }
+
+  .quiet {
+    color: var(--text-secondary);
+    font-size: var(--text-base);
+    max-width: 50ch;
+    line-height: 1.8;
+  }
+
+  /* ===== Predicate ===== */
+  .predicate {
+    min-height: 80vh;
+    gap: var(--space-4);
+  }
+
+  .equation {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-4);
+  }
+
+  .terms {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: left;
+    max-width: 50ch;
+  }
+
+  .terms p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .terms strong {
+    color: var(--accent);
+    font-weight: 600;
+    margin-right: var(--space-1);
+  }
+
+  .rule {
+    color: var(--text-primary);
+    font-style: italic;
+    margin-top: var(--space-4);
+  }
+
+  /* ===== Wisdom ===== */
+  .wisdom {
+    min-height: 60vh;
+  }
+
+  /* ===== Invitation ===== */
+  .invitation {
+    min-height: 80vh;
+    gap: var(--space-4);
+  }
+
+  .invitation h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-2);
+  }
+
+  /* ===== Paths / Navigation ===== */
+  .paths {
+    min-height: 40vh;
+    gap: var(--space-4);
+  }
+
+  .steward {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-top: var(--space-8);
+  }
+
+  .license {
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+</style>
