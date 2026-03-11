@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Not Found — KALAM.CH" description="This path does not exist yet.">
+
+  <section class="lost">
+    <p class="kalima proverb-ar">فراغ</p>
+    <h1>The gap.</h1>
+    <p class="quiet">This path does not exist yet — but room is always left for the river.</p>
+    <nav>
+      <a href="/">Return home</a>
+    </nav>
+  </section>
+
+</Base>
+
+<style>
+  .lost {
+    min-height: 100vh;
+    gap: var(--space-4);
+  }
+
+  .kalima {
+    font-size: clamp(2.5rem, 3vw + 1.5rem, 4rem);
+    color: var(--accent);
+    opacity: 0.7;
+  }
+
+  .lost h1 {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 300;
+  }
+
+  .quiet {
+    color: var(--text-secondary);
+    max-width: 45ch;
+    margin-top: var(--space-2);
+  }
+
+  nav {
+    margin-top: var(--space-8);
+  }
+</style>
