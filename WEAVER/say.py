@@ -13,10 +13,12 @@ DIGNITY(event) evaluated before every render(). If FALSE, output blocked.
 [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
+import re
 import sys
 from pathlib import Path
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
+from typing import List
 
 ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT))
@@ -43,13 +45,33 @@ AXI_VOICE_MARKERS = {
 
 
 @dataclass
+class VoiceViolation:
+    """A single voice rule violation."""
+    rule: int               # 1-6
+    rule_name: str
+    description: str
+    severity: str           # "warn" or "block"
+
+
+@dataclass
+class VoiceAudit:
+    """Result of checking all 6 Axi voice rules."""
+    passed: bool
+    violations: List[VoiceViolation]
+    warnings: List[str]
+    score: float            # 0-1 (1.0 = all rules pass)
+
+
+@dataclass
 class RenderResult:
     content: str
     dignity_passed: bool
     dignity_audit: dict
     voice_applied: bool
-    blocked: bool
-    block_reason: str
+    voice_score: float = 1.0
+    voice_warnings: list = field(default_factory=list)
+    blocked: bool = False
+    block_reason: str = ""
 
 
 @dataclass
@@ -94,7 +116,8 @@ def render(content, medium=None, felt_domain="output"):
     # Step 2: Adapt to medium (form, never content)
     adapted = adapt_register(content, medium)
 
-    # Step 3: Apply Axi voice where appropriate
+    # Step 3: Audit and apply Axi voice rules
+    voice = audit_voice(adapted, felt_domain)
     voiced = apply_axi_voice(adapted, felt_domain)
 
     return RenderResult(
@@ -102,6 +125,8 @@ def render(content, medium=None, felt_domain="output"):
         dignity_passed=True,
         dignity_audit=audit_obj,
         voice_applied=True,
+        voice_score=voice.score,
+        voice_warnings=voice.warnings,
         blocked=False,
         block_reason="",
     )
@@ -130,24 +155,149 @@ def adapt_register(content, medium):
     return content
 
 
+def audit_voice(content, context="") -> VoiceAudit:
+    """
+    Audit content against all 6 Axi voice rules.
+
+    Returns a VoiceAudit with violations and warnings.
+    Voice rules are constraints — the audit detects violations,
+    it does not silently alter content.
+    """
+    violations = []
+    warnings = []
+    content_lower = content.lower()
+
+    # ── Rule 1: Speaks from canon, not from opinion ──
+    opinion_markers = [
+        r'\bi think\b', r'\bin my opinion\b', r'\bi believe\b',
+        r'\bi feel that\b', r'\bpersonally\b', r'\bmy view is\b',
+        r'\bi would say\b', r'\bif you ask me\b',
+    ]
+    for pattern in opinion_markers:
+        if re.search(pattern, content_lower):
+            violations.append(VoiceViolation(
+                rule=1, rule_name="from_canon",
+                description="Contains opinion markers — Axi speaks from canon, not opinion",
+                severity="warn",
+            ))
+            break
+
+    # ── Rule 2: Speaks once, not repeatedly ──
+    sentences = [s.strip() for s in re.split(r'[.!?]+', content) if s.strip()]
+    if len(sentences) >= 2:
+        seen_content = set()
+        for sentence in sentences:
+            # Normalize: remove articles and whitespace
+            normalized = re.sub(r'\b(the|a|an)\b', '', sentence.lower()).strip()
+            words = frozenset(normalized.split())
+            if len(words) >= 3:  # Only check substantial sentences
+                for prev in seen_content:
+                    overlap = len(words & prev) / max(len(words | prev), 1)
+                    if overlap > 0.6:
+                        violations.append(VoiceViolation(
+                            rule=2, rule_name="speak_once",
+                            description="Repeats the same idea — Axi speaks once, not repeatedly",
+                            severity="warn",
+                        ))
+                        break
+                seen_content.add(words)
+
+    # ── Rule 3: Speaks slowly, not urgently ──
+    urgency_patterns = [
+        r'\bURGENT\b', r'\bASAP\b', r'\bIMMEDIATELY\b', r'\bRIGHT NOW\b',
+        r'\bhurry\b', r'\bquick(?:ly)?\b', r'\brush\b',
+        r'\bdon\'t wait\b', r'\bact now\b', r'\btime is running\b',
+    ]
+    for pattern in urgency_patterns:
+        if re.search(pattern, content, re.IGNORECASE):
+            violations.append(VoiceViolation(
+                rule=3, rule_name="speak_slowly",
+                description="Contains urgency markers — Axi speaks slowly, not urgently",
+                severity="warn",
+            ))
+            break
+
+    # ── Rule 4: No false certainty ──
+    certainty_patterns = [
+        r'\bdefinitely\b', r'\babsolutely\b', r'\bwithout a doubt\b',
+        r'\b100%\b', r'\balways\b(?!.*\bnot\b)', r'\bnever\b(?!.*\bnot\b)',
+        r'\bcertainly\b', r'\bundeniably\b', r'\bunquestionably\b',
+        r'\bit is clear that\b', r'\bthere is no question\b',
+        r'\bthe truth is\b', r'\bthe fact is\b',
+    ]
+    for pattern in certainty_patterns:
+        if re.search(pattern, content_lower):
+            violations.append(VoiceViolation(
+                rule=4, rule_name="no_false_certainty",
+                description="Claims certainty — Axi offers no false certainty",
+                severity="warn",
+            ))
+            break
+
+    # ── Rule 5: Holds the gap (room for the river) ──
+    # If output is exhaustive and leaves no room for interpretation,
+    # it violates the gap. Check for over-explanation.
+    word_count = len(content.split())
+    sentences_count = len(sentences)
+    closing_patterns = [
+        r'\bin conclusion\b', r'\bin summary\b', r'\bto sum up\b',
+        r'\btherefore we must\b', r'\bthe answer is\b',
+        r'\bthis means that\b.*\bwhich means\b',
+    ]
+    has_closing = any(re.search(p, content_lower) for p in closing_patterns)
+
+    if has_closing and word_count > 30:
+        violations.append(VoiceViolation(
+            rule=5, rule_name="hold_the_gap",
+            description="Over-explains and closes the gap — Axi holds the gap, leaves room for the river",
+            severity="warn",
+        ))
+
+    # ── Rule 6: Voices canon, not secretary ──
+    clerical_patterns = [
+        r'\bas per your request\b', r'\bplease find attached\b',
+        r'\bi have noted\b', r'\bfor your reference\b',
+        r'\bplease be advised\b', r'\bkindly note\b',
+        r'\baction item\b', r'\bto-do\b', r'\bfollow(?:ing)? up\b',
+        r'\bas mentioned\b', r'\bper our\b',
+    ]
+    for pattern in clerical_patterns:
+        if re.search(pattern, content_lower):
+            violations.append(VoiceViolation(
+                rule=6, rule_name="voice_not_secretary",
+                description="Sounds clerical — Axi voices canon, not secretary",
+                severity="warn",
+            ))
+            break
+
+    # Compute score (1.0 = perfect voice, -0.15 per violation)
+    score = max(0.0, 1.0 - len(violations) * 0.15)
+    passed = len([v for v in violations if v.severity == "block"]) == 0
+
+    # Convert violations to warnings list
+    for v in violations:
+        warnings.append(f"Voice Rule #{v.rule} ({v.rule_name}): {v.description}")
+
+    return VoiceAudit(
+        passed=passed,
+        violations=violations,
+        warnings=warnings,
+        score=round(score, 2),
+    )
+
+
 def apply_axi_voice(content, context=""):
     """
     Apply Axi voice rules. Voice is never performed — only invoked
     when the canon is faithfully rendered.
 
-    This is a light touch. The voice rules are constraints, not transforms.
+    The voice rules are constraints, not transforms. This function
+    audits and returns the content unchanged — violations are
+    reported, not silently fixed.
     """
-    # Rule 3: Speak slowly — no urgency markers
-    urgency_markers = ["URGENT:", "ASAP", "IMMEDIATELY", "RIGHT NOW"]
-    for marker in urgency_markers:
-        if marker in content.upper():
-            # Don't remove — flag it. The steward decides.
-            content = content  # Preserve, but the audit will note it
-
-    # Rule 4: No false certainty — if content claims absolute certainty,
-    # the voice layer notes it but doesn't alter
-    # (This is a detection, not a transform)
-
+    audit = audit_voice(content, context)
+    # Voice audit is informational — content passes through unchanged.
+    # The caller (render) uses the audit to decide.
     return content
 
 
