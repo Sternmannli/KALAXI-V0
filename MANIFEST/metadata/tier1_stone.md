@@ -41,8 +41,31 @@ D < 0.9 triggers dignity_audit_object — auto-generated, visible on Face
 - Cooling period: 90 days minimum for covenant amendments
 
 ## Governance
-- Provisional tagging: All new mappings start provisional: true
-- Ratification: Two human sign-offs (canonical owner + ethics reviewer)
+
+### Element Lifecycle States (GAP#010 Resolution)
+
+Every canonical element (covenant, proverb, anomaly, equation, protocol, treasure, definition) passes through exactly three states. No element may carry two states simultaneously.
+
+**COMMITTED** — The element exists in the repository. It has been written, pushed to version control, and is visible. This is a *technical* state only. It says nothing about constitutional standing. An element may be committed but not yet offered to the Threshold. Committed is not provisional. Committed is not ratified. It is present.
+
+**PROVISIONAL** — The element has been offered to the Threshold (or registered in a manifest) and is awaiting ratification. It carries `provisional: true`. It may be referenced, discussed, tested against, and linked — but it is not yet load-bearing law. Provisional elements are subject to thermal delay (minimum 7 days for seeds, 90 days for covenant amendments). During this period the element cools. It may be withdrawn, amended, or composted. A provisional element becomes ratified only through explicit steward action during a Tending Ritual, with required sign-offs completed.
+
+**RATIFIED** — The element has completed its thermal delay, received the required sign-offs (canonical owner + ethics reviewer for structural elements; single steward sign-off for minor seeds), and been explicitly marked `STATUS: RATIFIED` with `provisional: false` (or `provisional` field removed). Ratification is recorded in `MANIFEST/ratification_log.md` with: element ID, ratification date, sign-off names, thermal delay duration, and any conditions. A ratified element is load-bearing law. It cannot be deleted — only superseded via COV#NEW-F (Amendment Protocol).
+
+### Sign-off Requirements
+
+| Element Type | Thermal Delay | Sign-offs Required |
+|---|---|---|
+| Covenant (new or amended) | 90 days minimum | Canonical owner + ethics reviewer |
+| Structural proposal | 90 days minimum | Canonical owner + ethics reviewer |
+| Proverb / Anomaly / Seed | 7 days minimum | Steward (single) |
+| Patch / Minor fix | None | Steward (single) |
+| Centre-Shift amendment | 1,000 days | Owner + two senior moderators + global consensus |
+
+### Rules
+- Provisional tagging: All new elements start `provisional: true`
+- No element may carry both `STATUS: ratified` and `provisional: true` — these are mutually exclusive
+- Ratification: Recorded in `MANIFEST/ratification_log.md` with full provenance
 - Patch & merge: Minor fixes = single sign-off; structural = full ratification
 - Audit trail: All changes append to CHANGELOG; nothing deleted; everything versioned
 
