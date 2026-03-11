@@ -1,0 +1,28 @@
+{
+  "manifest": {
+    "artifact_id": "MANIFEST/ratification_log.md",
+    "tier": "GOVERNANCE",
+    "description": "Append-only ratification record",
+    "content_hash_sha256": "954cf7758249be953fd4a62d78062e1c266c14e6f959d7b08643b88f8c3bec3d",
+    "file_size_bytes": 2886,
+    "signed_at": "2026-03-11T16:03:21.059379+00:00",
+    "system": "KALAXI-V0",
+    "protocol": "EFP-Ed25519"
+  },
+  "signatures": [
+    {
+      "public_key": "859d327b7f371576881875c400fb686b4e0afeeb74d1f652bf852e13ac7dbdd6",
+      "signature": "d3a10b68f418ee85bae0ad930ade8be19a50be78490197e7db61d012f27aa33f842949b878606643ec41e35950fd9e28b19e5d967a2e4021c8ec6a256b21200f",
+      "algorithm": "Ed25519",
+      "signer_id": "V-001",
+      "signer_role": "steward-owner"
+    },
+    {
+      "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
+      "signature": "ae6331e24dfaaef33bb33f1e0a4657f397d4618aaac63d435799e58d250215ff749e9db20896e6c5431ca2a11744c9f6d4759ab2b0a7b2c204cd0a292bbc1509",
+      "algorithm": "Ed25519",
+      "signer_id": "V-003",
+      "signer_role": "steward-system"
+    }
+  ]
+}

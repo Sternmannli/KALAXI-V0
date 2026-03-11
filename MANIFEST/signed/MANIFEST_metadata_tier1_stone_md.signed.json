@@ -1,0 +1,28 @@
+{
+  "manifest": {
+    "artifact_id": "MANIFEST/metadata/tier1_stone.md",
+    "tier": "CONSTITUTIONAL",
+    "description": "Tier 1 foundation — covenants, governance rules",
+    "content_hash_sha256": "015666909b5a3d553a714041eada37db19787b4c4fb9cd40607c7768531be710",
+    "file_size_bytes": 6170,
+    "signed_at": "2026-03-11T16:03:21.058314+00:00",
+    "system": "KALAXI-V0",
+    "protocol": "EFP-Ed25519"
+  },
+  "signatures": [
+    {
+      "public_key": "859d327b7f371576881875c400fb686b4e0afeeb74d1f652bf852e13ac7dbdd6",
+      "signature": "2e2289cc85260b223c95f52721b7b201dc44bbc6d76a4f6b9b4b58e42dc42e856c3a987f2a67b02c82773abf0da1b31a342aa00320a0cffca5ebeb12ba3e1a06",
+      "algorithm": "Ed25519",
+      "signer_id": "V-001",
+      "signer_role": "steward-owner"
+    },
+    {
+      "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
+      "signature": "6524408f0f8864146ac498d35fdf55aad698c1dfbb46c462c243e2f765b8b76024d02b4322ce86f46209808c3e52153535d3264d15881248c505bd0f4b36ac07",
+      "algorithm": "Ed25519",
+      "signer_id": "V-003",
+      "signer_role": "steward-system"
+    }
+  ]
+}

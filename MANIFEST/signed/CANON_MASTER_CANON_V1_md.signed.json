@@ -1,0 +1,28 @@
+{
+  "manifest": {
+    "artifact_id": "CANON/MASTER_CANON_V1.md",
+    "tier": "CONSTITUTIONAL",
+    "description": "Supreme constitution v1.0.0",
+    "content_hash_sha256": "1fae2285a74cc4873954742e1141ee42bbd7f729976e933027a7fed3d2720d09",
+    "file_size_bytes": 4111,
+    "signed_at": "2026-03-11T16:03:21.057306+00:00",
+    "system": "KALAXI-V0",
+    "protocol": "EFP-Ed25519"
+  },
+  "signatures": [
+    {
+      "public_key": "859d327b7f371576881875c400fb686b4e0afeeb74d1f652bf852e13ac7dbdd6",
+      "signature": "1a9e6fbeff0fd5513f563e5f5b32cc7f2ccb555344d788de313e621130dfac497c5a9f475e2d7b4b00b0bb87f8b9c4e91ee2679faeff65fbb9da2be8492e0d00",
+      "algorithm": "Ed25519",
+      "signer_id": "V-001",
+      "signer_role": "steward-owner"
+    },
+    {
+      "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
+      "signature": "fe58b0d8efe94f3c5dab7506e5f17f5c67d40eb3f346a422e735ca718f7183770b29d0ba0d973e7ce9aa5d9ca277565fadf3d38a15d179b94058fac09d17e20e",
+      "algorithm": "Ed25519",
+      "signer_id": "V-003",
+      "signer_role": "steward-system"
+    }
+  ]
+}

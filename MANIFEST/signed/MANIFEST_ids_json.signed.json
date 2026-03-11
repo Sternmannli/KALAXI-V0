@@ -1,0 +1,28 @@
+{
+  "manifest": {
+    "artifact_id": "MANIFEST/ids.json",
+    "tier": "GOVERNANCE",
+    "description": "Master ID registry",
+    "content_hash_sha256": "452e6d25cb5267b930d190b527feef769bfc2ce1eb53ef7fc170a07e66250a5e",
+    "file_size_bytes": 2571,
+    "signed_at": "2026-03-11T16:03:21.059692+00:00",
+    "system": "KALAXI-V0",
+    "protocol": "EFP-Ed25519"
+  },
+  "signatures": [
+    {
+      "public_key": "859d327b7f371576881875c400fb686b4e0afeeb74d1f652bf852e13ac7dbdd6",
+      "signature": "8eb7f556db06a8935d37c7bf12b80b2cc7576b160aa486bd13403dc3fa598c6a0f0a98c93c4951a6625a43061604ac77765d7ca1a95bf80f374f8c0b7a44fe0a",
+      "algorithm": "Ed25519",
+      "signer_id": "V-001",
+      "signer_role": "steward-owner"
+    },
+    {
+      "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
+      "signature": "3cf5f45d442bc40f18fe706053d244e77c2cc978304e7ec33124ef912700715cb88dbb1cd99795a3d8bfe69ce43cf42e81f69ff90adc37d6f564527195d9c902",
+      "algorithm": "Ed25519",
+      "signer_id": "V-003",
+      "signer_role": "steward-system"
+    }
+  ]
+}

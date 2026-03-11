@@ -1,0 +1,28 @@
+{
+  "manifest": {
+    "artifact_id": "MANIFEST/escalation_log.json",
+    "tier": "GOVERNANCE",
+    "description": "Incident and escalation log",
+    "content_hash_sha256": "42c317e7e1d6db5d9a4b5555921b811376a71dcccab4b12ffb7b99e2ecc6bd1d",
+    "file_size_bytes": 541,
+    "signed_at": "2026-03-11T16:03:21.059931+00:00",
+    "system": "KALAXI-V0",
+    "protocol": "EFP-Ed25519"
+  },
+  "signatures": [
+    {
+      "public_key": "859d327b7f371576881875c400fb686b4e0afeeb74d1f652bf852e13ac7dbdd6",
+      "signature": "83d80464ecd228ae34b8072df0241c8c5362869ff6e8cfc6d265e00f35e70a844d1b11921cc18f09242a356a2ace2e27d39cadbcbefa6748976136ce4ff12105",
+      "algorithm": "Ed25519",
+      "signer_id": "V-001",
+      "signer_role": "steward-owner"
+    },
+    {
+      "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
+      "signature": "5e35c7b5fd481d2f65b74d0f4fae0391c754896ed538bf46e833b849c2cac5b2f43cac222226eee4a95ed6fff141defe01baef4720d60992c1414cbcce6d110d",
+      "algorithm": "Ed25519",
+      "signer_id": "V-003",
+      "signer_role": "steward-system"
+    }
+  ]
+}

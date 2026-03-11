@@ -1,0 +1,28 @@
+{
+  "manifest": {
+    "artifact_id": "MANIFEST/metadata/tier4_hand.md",
+    "tier": "REGISTRY",
+    "description": "Tier 4 — interface, ledger, receipts",
+    "content_hash_sha256": "5c8e91b05a510f82b6d82054e1f1ac6e0be0ab0ecc9631e3957ed03816b4e65f",
+    "file_size_bytes": 2171,
+    "signed_at": "2026-03-11T16:03:21.060743+00:00",
+    "system": "KALAXI-V0",
+    "protocol": "EFP-Ed25519"
+  },
+  "signatures": [
+    {
+      "public_key": "859d327b7f371576881875c400fb686b4e0afeeb74d1f652bf852e13ac7dbdd6",
+      "signature": "89b3d93d0e531ee5b67c6e857241ce32eb5f82c675aebd912cbe3e831bbcbeaf618ebfa5427f91c3e6a294fde4d10c09dc2e6d98e5485516e9c91c58ab7a9604",
+      "algorithm": "Ed25519",
+      "signer_id": "V-001",
+      "signer_role": "steward-owner"
+    },
+    {
+      "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
+      "signature": "c7a85eda499f6829c0ebd9aa1e2af4bdd312d50ae1eeb96e7939c7607c38e110d8605ce3f0b08222e801576ce81720cdfecabc960d69251b29009fc8bb069e07",
+      "algorithm": "Ed25519",
+      "signer_id": "V-003",
+      "signer_role": "steward-system"
+    }
+  ]
+}

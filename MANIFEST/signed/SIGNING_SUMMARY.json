@@ -1,0 +1,118 @@
+{
+  "signed_at": "2026-03-11T16:03:21.060995+00:00",
+  "total_artifacts": 10,
+  "signers": {
+    "V-001": {
+      "public_key": "859d327b7f371576881875c400fb686b4e0afeeb74d1f652bf852e13ac7dbdd6",
+      "role": "steward-owner",
+      "name": "Mohamed Farag"
+    },
+    "V-003": {
+      "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
+      "role": "steward-system",
+      "name": "Claude (V-003)"
+    }
+  },
+  "artifacts": [
+    {
+      "artifact": "CANON/MASTER_CANON_V1.md",
+      "tier": "CONSTITUTIONAL",
+      "content_hash": "1fae2285a74cc487...",
+      "signers": [
+        "V-001",
+        "V-003"
+      ],
+      "bundle": "MANIFEST/signed/CANON_MASTER_CANON_V1_md.signed.json"
+    },
+    {
+      "artifact": "CANON/SEALED_GATE_SPEC.md",
+      "tier": "CONSTITUTIONAL",
+      "content_hash": "f377cd173a04bea0...",
+      "signers": [
+        "V-001",
+        "V-003"
+      ],
+      "bundle": "MANIFEST/signed/CANON_SEALED_GATE_SPEC_md.signed.json"
+    },
+    {
+      "artifact": "MANIFEST/metadata/tier1_stone.md",
+      "tier": "CONSTITUTIONAL",
+      "content_hash": "015666909b5a3d55...",
+      "signers": [
+        "V-001",
+        "V-003"
+      ],
+      "bundle": "MANIFEST/signed/MANIFEST_metadata_tier1_stone_md.signed.json"
+    },
+    {
+      "artifact": "MANIFEST/metadata/tier2_weaver.md",
+      "tier": "OPERATIONAL",
+      "content_hash": "3e149ee6391756ba...",
+      "signers": [
+        "V-001",
+        "V-003"
+      ],
+      "bundle": "MANIFEST/signed/MANIFEST_metadata_tier2_weaver_md.signed.json"
+    },
+    {
+      "artifact": "MANIFEST/ratification_log.md",
+      "tier": "GOVERNANCE",
+      "content_hash": "954cf7758249be95...",
+      "signers": [
+        "V-001",
+        "V-003"
+      ],
+      "bundle": "MANIFEST/signed/MANIFEST_ratification_log_md.signed.json"
+    },
+    {
+      "artifact": "MANIFEST/ids.json",
+      "tier": "GOVERNANCE",
+      "content_hash": "452e6d25cb5267b9...",
+      "signers": [
+        "V-001",
+        "V-003"
+      ],
+      "bundle": "MANIFEST/signed/MANIFEST_ids_json.signed.json"
+    },
+    {
+      "artifact": "MANIFEST/escalation_log.json",
+      "tier": "GOVERNANCE",
+      "content_hash": "42c317e7e1d6db5d...",
+      "signers": [
+        "V-001",
+        "V-003"
+      ],
+      "bundle": "MANIFEST/signed/MANIFEST_escalation_log_json.signed.json"
+    },
+    {
+      "artifact": "STEWARD/EMERGENCY_GOVERNANCE_PLAYBOOK.md",
+      "tier": "GOVERNANCE",
+      "content_hash": "9e2d3d2f5459eb0f...",
+      "signers": [
+        "V-001",
+        "V-003"
+      ],
+      "bundle": "MANIFEST/signed/STEWARD_EMERGENCY_GOVERNANCE_PLAYBOOK_md.signed.json"
+    },
+    {
+      "artifact": "MANIFEST/metadata/tier3_honey.md",
+      "tier": "REGISTRY",
+      "content_hash": "1b0b3b2a1d2d6dec...",
+      "signers": [
+        "V-001",
+        "V-003"
+      ],
+      "bundle": "MANIFEST/signed/MANIFEST_metadata_tier3_honey_md.signed.json"
+    },
+    {
+      "artifact": "MANIFEST/metadata/tier4_hand.md",
+      "tier": "REGISTRY",
+      "content_hash": "5c8e91b05a510f82...",
+      "signers": [
+        "V-001",
+        "V-003"
+      ],
+      "bundle": "MANIFEST/signed/MANIFEST_metadata_tier4_hand_md.signed.json"
+    }
+  ]
+}

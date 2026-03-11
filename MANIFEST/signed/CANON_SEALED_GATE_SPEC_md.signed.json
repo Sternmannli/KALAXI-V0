@@ -1,0 +1,28 @@
+{
+  "manifest": {
+    "artifact_id": "CANON/SEALED_GATE_SPEC.md",
+    "tier": "CONSTITUTIONAL",
+    "description": "Three irreducible prohibitions",
+    "content_hash_sha256": "f377cd173a04bea0520ada00db2d4c428993b5e634394e0ba9972ee70c8eb8d8",
+    "file_size_bytes": 5812,
+    "signed_at": "2026-03-11T16:03:21.058053+00:00",
+    "system": "KALAXI-V0",
+    "protocol": "EFP-Ed25519"
+  },
+  "signatures": [
+    {
+      "public_key": "859d327b7f371576881875c400fb686b4e0afeeb74d1f652bf852e13ac7dbdd6",
+      "signature": "85189de9ae1a4e6e600d0a31b5c0a0bdef230c66ae3b059a1c515da8982975d55bca95cdd8b9e51dd8f967c3937aa950a77e8a83effb692d07a9ae20326fdd03",
+      "algorithm": "Ed25519",
+      "signer_id": "V-001",
+      "signer_role": "steward-owner"
+    },
+    {
+      "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
+      "signature": "b99d60a402f83f43033eff10c9e04b86bcdb08a6ee052370352b09c443218f4d5d34170fcd7580a0c5fe51d5e94b3b7f3f98cd83d6f1a6192d5d18cf2924e105",
+      "algorithm": "Ed25519",
+      "signer_id": "V-003",
+      "signer_role": "steward-system"
+    }
+  ]
+}
