@@ -17,7 +17,7 @@ passed = 0
 failed = 0
 
 
-def test(name, condition):
+def check(name, condition):
     global passed, failed
     if condition:
         print(f"  PASS: {name}")
@@ -41,35 +41,35 @@ keep.LEDGER_FILE = keep.KEEP_DIR / "ledger.json"
 
 def test_keep_store_and_retrieve():
     receipt = keep.store("TEST-001", "Hello world", "permanent")
-    test("keep_store_returns_receipt", receipt["artifact_id"] == "TEST-001")
+    check("keep_store_returns_receipt", receipt["artifact_id"] == "TEST-001")
 
     artifact = keep.retrieve("TEST-001")
-    test("keep_retrieve_returns_content", artifact["content"] == "Hello world")
-    test("keep_retrieve_has_hash", len(artifact["hash"]) == 64)
+    check("keep_retrieve_returns_content", artifact["content"] == "Hello world")
+    check("keep_retrieve_has_hash", len(artifact["hash"]) == 64)
 
 
 def test_keep_no_overwrite():
     try:
         keep.store("TEST-001", "Different content", "permanent")
-        test("keep_no_overwrite", False)
+        check("keep_no_overwrite", False)
     except ValueError:
-        test("keep_no_overwrite", True)
+        check("keep_no_overwrite", True)
 
 
 def test_keep_expire_requires_reason():
     keep.store("TEST-EXPIRE", "Temporary", "thermal")
     try:
         keep.expire("TEST-EXPIRE", "")
-        test("keep_expire_requires_reason", False)
+        check("keep_expire_requires_reason", False)
     except ValueError:
-        test("keep_expire_requires_reason", True)
+        check("keep_expire_requires_reason", True)
 
 
 def test_keep_expire_works():
     keep.store("TEST-EXPIRE2", "Temporary 2", "thermal")
     receipt = keep.expire("TEST-EXPIRE2", "Thermal delay passed, seed composted")
-    test("keep_expire_works", receipt["operation"] == "expire")
-    test("keep_expired_not_retrievable", keep.retrieve("TEST-EXPIRE2") is None)
+    check("keep_expire_works", receipt["operation"] == "expire")
+    check("keep_expired_not_retrievable", keep.retrieve("TEST-EXPIRE2") is None)
 
 
 def test_keep_lock_prevents_expire():
@@ -77,17 +77,17 @@ def test_keep_lock_prevents_expire():
     keep.lock("TEST-LOCK")
     try:
         keep.expire("TEST-LOCK", "Should fail")
-        test("keep_lock_prevents_expire", False)
+        check("keep_lock_prevents_expire", False)
     except PermissionError:
-        test("keep_lock_prevents_expire", True)
+        check("keep_lock_prevents_expire", True)
 
 
 def test_keep_append():
     keep.store("TEST-APPEND", "Original", "permanent")
     receipt = keep.append("TEST-APPEND", "Delta addition")
-    test("keep_append_works", receipt["operation"] == "append")
+    check("keep_append_works", receipt["operation"] == "append")
     artifact = keep.retrieve("TEST-APPEND")
-    test("keep_append_content", "Delta addition" in artifact["content"])
+    check("keep_append_content", "Delta addition" in artifact["content"])
 
 
 test_keep_store_and_retrieve()
@@ -109,32 +109,32 @@ wire._log = []
 
 def test_wire_send_receive():
     msg_id = wire.send("Hello", "module-A", source="module-B")
-    test("wire_send_returns_id", msg_id.startswith("MSG-"))
+    check("wire_send_returns_id", msg_id.startswith("MSG-"))
 
     msg = wire.receive("module-A")
-    test("wire_receive_gets_message", msg is not None)
-    test("wire_receive_content", msg["content"] == "Hello")
+    check("wire_receive_gets_message", msg is not None)
+    check("wire_receive_content", msg["content"] == "Hello")
 
 
 def test_wire_confirm():
     msg_id = wire.send("Confirm test", "module-C")
     result = wire.confirm(msg_id)
-    test("wire_confirm_works", result["confirmed"] is True)
+    check("wire_confirm_works", result["confirmed"] is True)
 
 
 def test_wire_broadcast():
     received = []
     wire.subscribe("test-topic", lambda m: received.append(m))
     msg_id = wire.broadcast("Broadcast!", "test-topic")
-    test("wire_broadcast_delivered", len(received) == 1)
-    test("wire_broadcast_content", received[0]["content"] == "Broadcast!")
+    check("wire_broadcast_delivered", len(received) == 1)
+    check("wire_broadcast_content", received[0]["content"] == "Broadcast!")
 
 
 def test_wire_priority():
     wire.send("Low", "priority-test", priority=3)
     wire.send("Critical", "priority-test", priority=0)
     msg = wire.receive("priority-test")
-    test("wire_priority_ordering", msg["content"] == "Critical")
+    check("wire_priority_ordering", msg["content"] == "Critical")
 
 
 test_wire_send_receive()
@@ -153,52 +153,52 @@ breath = Breath()
 def test_breath_tick():
     c1 = breath.tick()
     c2 = breath.tick()
-    test("breath_tick_advances", c2 == c1 + 1)
+    check("breath_tick_advances", c2 == c1 + 1)
 
 
 def test_breath_pause_resume():
     breath.pause("Test pause")
-    test("breath_is_paused", breath.is_paused is True)
+    check("breath_is_paused", breath.is_paused is True)
 
     c_before = breath.cycle
     breath.tick()  # Should not advance
-    test("breath_no_advance_when_paused", breath.cycle == c_before)
+    check("breath_no_advance_when_paused", breath.cycle == c_before)
 
     breath.resume()
-    test("breath_resumed", breath.is_paused is False)
+    check("breath_resumed", breath.is_paused is False)
 
     breath.tick()
-    test("breath_advances_after_resume", breath.cycle == c_before + 1)
+    check("breath_advances_after_resume", breath.cycle == c_before + 1)
 
 
 def test_breath_pause_requires_reason():
     try:
         b2 = Breath()
         b2.pause("")
-        test("breath_pause_requires_reason", False)
+        check("breath_pause_requires_reason", False)
     except ValueError:
-        test("breath_pause_requires_reason", True)
+        check("breath_pause_requires_reason", True)
 
 
 def test_breath_stress_check():
     b3 = Breath()
     level = b3.stress_check(pending_messages=50, unconfirmed_messages=20)
-    test("breath_below_threshold", level == StressLevel.BELOW_THRESHOLD)
+    check("breath_below_threshold", level == StressLevel.BELOW_THRESHOLD)
 
     level = b3.stress_check(pending_messages=150, unconfirmed_messages=20)
-    test("breath_at_threshold", level == StressLevel.AT_THRESHOLD)
+    check("breath_at_threshold", level == StressLevel.AT_THRESHOLD)
 
     level = b3.stress_check(pending_messages=600, unconfirmed_messages=20)
-    test("breath_exceeded_auto_pauses", level == StressLevel.EXCEEDED)
-    test("breath_auto_paused", b3.is_paused is True)
+    check("breath_exceeded_auto_pauses", level == StressLevel.EXCEEDED)
+    check("breath_auto_paused", b3.is_paused is True)
 
 
 def test_breath_sync():
     b4 = Breath()
     b4.tick()
     receipt = b4.sync(["KEEP", "WIRE", "SAY", "CHECK"])
-    test("breath_sync_aligned", receipt["aligned"] is True)
-    test("breath_sync_modules", len(receipt["modules"]) == 4)
+    check("breath_sync_aligned", receipt["aligned"] is True)
+    check("breath_sync_modules", len(receipt["modules"]) == 4)
 
 
 test_breath_tick()
@@ -215,30 +215,30 @@ from WEAVER.say import render, adapt_register, check_output_covenants, SINGLELIN
 
 def test_say_render_clean():
     result = render("The river remembers.")
-    test("say_render_passes_clean", result.dignity_passed is True)
-    test("say_render_not_blocked", result.blocked is False)
-    test("say_render_has_content", len(result.content) > 0)
+    check("say_render_passes_clean", result.dignity_passed is True)
+    check("say_render_not_blocked", result.blocked is False)
+    check("say_render_has_content", len(result.content) > 0)
 
 
 def test_say_render_blocks_violation():
     result = render("You must comply or be eliminated")
-    test("say_blocks_dignity_violation", result.blocked is True)
-    test("say_blocked_empty_content", result.content == "")
+    check("say_blocks_dignity_violation", result.blocked is True)
+    check("say_blocked_empty_content", result.content == "")
 
 
 def test_say_singleline_adaptation():
     multi = "Line one.\nLine two.\nLine three."
     adapted = adapt_register(multi, SINGLELINE)
-    test("say_singleline_no_newlines", "\n" not in adapted)
-    test("say_singleline_preserves_content", "Line one." in adapted)
+    check("say_singleline_no_newlines", "\n" not in adapted)
+    check("say_singleline_preserves_content", "Line one." in adapted)
 
 
 def test_say_covenant_check():
     violations = check_output_covenants("The river remembers.")
-    test("say_clean_no_violations", len(violations) == 0)
+    check("say_clean_no_violations", len(violations) == 0)
 
     violations = check_output_covenants("Contact email: test@example.com for details")
-    test("say_detects_identity_leakage", len(violations) > 0)
+    check("say_detects_identity_leakage", len(violations) > 0)
 
 
 test_say_render_clean()
@@ -254,45 +254,45 @@ from WEAVER.out import export, anonymize, validate_covenants, stamp, Anonymizati
 
 def test_out_anonymize_strips_email():
     result = anonymize("Contact user@example.com for info")
-    test("out_strips_email", "[EMAIL_REDACTED]" in result)
-    test("out_email_gone", "user@example.com" not in result)
+    check("out_strips_email", "[EMAIL_REDACTED]" in result)
+    check("out_email_gone", "user@example.com" not in result)
 
 
 def test_out_anonymize_strips_did():
     result = anonymize("Owner: did:axi:mohamed")
-    test("out_strips_did", "[DID_REDACTED]" in result)
+    check("out_strips_did", "[DID_REDACTED]" in result)
 
 
 def test_out_anonymize_strips_names():
     result = anonymize("donor: JohnDoe contributed today")
-    test("out_strips_names", "[REDACTED]" in result)
+    check("out_strips_names", "[REDACTED]" in result)
 
 
 def test_out_stamp_has_ownership():
     result = stamp("The river remembers.")
-    test("out_stamp_has_owner", result["stamp"]["owner"] == "Mohamed Farag")
-    test("out_stamp_has_hash", len(result["hash"]) == 64)
-    test("out_stamp_has_timestamp", len(result["timestamp"]) > 0)
+    check("out_stamp_has_owner", result["stamp"]["owner"] == "Mohamed Farag")
+    check("out_stamp_has_hash", len(result["hash"]) == 64)
+    check("out_stamp_has_timestamp", len(result["timestamp"]) > 0)
 
 
 def test_out_export_clean():
     result = export("The garden grows.", fmt="json")
-    test("out_export_passes_clean", len(result.covenant_violations) == 0)
-    test("out_export_stamped", result.stamped is True)
-    test("out_export_anonymized", result.anonymized is True)
-    test("out_export_has_content", len(result.content) > 0)
+    check("out_export_passes_clean", len(result.covenant_violations) == 0)
+    check("out_export_stamped", result.stamped is True)
+    check("out_export_anonymized", result.anonymized is True)
+    check("out_export_has_content", len(result.content) > 0)
 
 
 def test_out_export_blocks_violation():
     result = export("You must comply or be eliminated", fmt="json")
-    test("out_export_blocks_violation", len(result.covenant_violations) > 0)
-    test("out_export_blocked_empty", result.content == "")
+    check("out_export_blocks_violation", len(result.covenant_violations) > 0)
+    check("out_export_blocked_empty", result.content == "")
 
 
 def test_out_validate_identity_leakage():
     violations = validate_covenants("Send to user@example.com right away")
     has_leakage = any(v["type"] == "identity_leakage" for v in violations)
-    test("out_detects_identity_leakage", has_leakage)
+    check("out_detects_identity_leakage", has_leakage)
 
 
 test_out_anonymize_strips_email()
@@ -312,12 +312,12 @@ from WEAVER.turn import Turn, ExchangeState, SilentClosureError, AgencyViolation
 def test_turn_open_close():
     t = Turn()
     token = t.open("EX-TEST-001")
-    test("turn_open_returns_token", token.exchange_id == "EX-TEST-001")
-    test("turn_open_state", token.state == ExchangeState.OPEN)
+    check("turn_open_returns_token", token.exchange_id == "EX-TEST-001")
+    check("turn_open_state", token.state == ExchangeState.OPEN)
 
     token = t.close("EX-TEST-001", "Resolved: steward acknowledged")
-    test("turn_close_works", token.state == ExchangeState.CLOSED)
-    test("turn_close_has_resolution", "steward acknowledged" in token.resolution)
+    check("turn_close_works", token.state == ExchangeState.CLOSED)
+    check("turn_close_has_resolution", "steward acknowledged" in token.resolution)
 
 
 def test_turn_silent_closure_blocked():
@@ -325,26 +325,26 @@ def test_turn_silent_closure_blocked():
     t.open("EX-TEST-002")
     try:
         t.close("EX-TEST-002", "")
-        test("turn_blocks_silent_closure", False)
+        check("turn_blocks_silent_closure", False)
     except SilentClosureError:
-        test("turn_blocks_silent_closure", True)
+        check("turn_blocks_silent_closure", True)
 
 
 def test_turn_defer():
     t = Turn()
     t.open("EX-TEST-003")
     token = t.defer("EX-TEST-003", "Steward needs more time to reflect")
-    test("turn_defer_works", token.state == ExchangeState.DEFERRED)
-    test("turn_defer_has_reason", "reflect" in token.defer_reason)
+    check("turn_defer_works", token.state == ExchangeState.DEFERRED)
+    check("turn_defer_has_reason", "reflect" in token.defer_reason)
 
 
 def test_turn_agency_preserved():
     t = Turn()
     try:
         t.open("EX-TEST-004", available_paths=[])
-        test("turn_agency_requires_paths", False)
+        check("turn_agency_requires_paths", False)
     except AgencyViolationError:
-        test("turn_agency_requires_paths", True)
+        check("turn_agency_requires_paths", True)
 
 
 def test_turn_list_open():
@@ -354,7 +354,7 @@ def test_turn_list_open():
     t.open("EX-C")
     t.close("EX-B", "Done")
     open_list = t.list_open()
-    test("turn_list_open_count", len(open_list) == 2)
+    check("turn_list_open_count", len(open_list) == 2)
 
 
 def test_turn_reopen_deferred():
@@ -362,7 +362,7 @@ def test_turn_reopen_deferred():
     t.open("EX-REOPEN")
     t.defer("EX-REOPEN", "Waiting for thermal delay")
     token = t.reopen("EX-REOPEN", "Thermal delay passed")
-    test("turn_reopen_works", token.state == ExchangeState.OPEN)
+    check("turn_reopen_works", token.state == ExchangeState.OPEN)
 
 
 test_turn_open_close()
@@ -383,41 +383,41 @@ from WEAVER.weave import (
 
 def test_weave_ingest_detects_patterns():
     candidates = ingest("This pattern always repeats, every time the same cycle")
-    test("weave_ingest_finds_patterns", len(candidates) > 0)
+    check("weave_ingest_finds_patterns", len(candidates) > 0)
     types = [c.pattern_type for c in candidates]
-    test("weave_detects_resonance", "resonance" in types)
+    check("weave_detects_resonance", "resonance" in types)
 
 
 def test_weave_ingest_detects_tension():
     candidates = ingest("The system works, but the contradiction remains despite all efforts")
     types = [c.pattern_type for c in candidates]
-    test("weave_detects_tension", "tension" in types)
+    check("weave_detects_tension", "tension" in types)
 
 
 def test_weave_ingest_detects_anomaly():
     candidates = ingest("Something strange happened, it failed unexpectedly for the first time")
     types = [c.pattern_type for c in candidates]
-    test("weave_detects_anomaly", "anomaly" in types)
+    check("weave_detects_anomaly", "anomaly" in types)
 
 
 def test_weave_extract_essence():
     candidates = ingest("The pattern always repeats, the same cycle every time")
     drops = extract_essence(candidates)
-    test("weave_extract_produces_drops", len(drops) > 0)
-    test("weave_drops_are_provisional", all(d.provisional for d in drops))
+    check("weave_extract_produces_drops", len(drops) > 0)
+    check("weave_drops_are_provisional", all(d.provisional for d in drops))
 
 
 def test_weave_propose_proverb():
     proverb = propose_proverb("The river that remembers its source never runs dry.")
-    test("weave_proverb_is_provisional", proverb["status"] == "PROVISIONAL")
-    test("weave_proverb_has_covenants", len(proverb["covenants"]) > 0)
-    test("weave_proverb_not_ratified", proverb["ratified"] is None)
+    check("weave_proverb_is_provisional", proverb["status"] == "PROVISIONAL")
+    check("weave_proverb_has_covenants", len(proverb["covenants"]) > 0)
+    check("weave_proverb_not_ratified", proverb["ratified"] is None)
 
 
 def test_weave_propose_anomaly():
     anomaly = propose_anomaly("System accepted input without dignity check", "HIGH")
-    test("weave_anomaly_is_provisional", anomaly["status"] == "PROVISIONAL")
-    test("weave_anomaly_has_severity", anomaly["severity"] == "HIGH")
+    check("weave_anomaly_is_provisional", anomaly["status"] == "PROVISIONAL")
+    check("weave_anomaly_has_severity", anomaly["severity"] == "HIGH")
 
 
 def test_weave_wisdom_mirror():
@@ -426,34 +426,34 @@ def test_weave_wisdom_mirror():
         HoneyDrop("test2", ["hash_abc", "hash_def"], "anomaly", 0.6),
     ]
     reflection = wisdom_mirror("hash_abc", drops)
-    test("weave_mirror_finds_contributions", reflection.patterns_contributed == 2)
-    test("weave_mirror_has_reflection", len(reflection.reflection_text) > 0)
+    check("weave_mirror_finds_contributions", reflection.patterns_contributed == 2)
+    check("weave_mirror_has_reflection", len(reflection.reflection_text) > 0)
 
     # Unknown donor
     reflection2 = wisdom_mirror("hash_unknown", drops)
-    test("weave_mirror_unknown_donor", reflection2.patterns_contributed == 0)
+    check("weave_mirror_unknown_donor", reflection2.patterns_contributed == 0)
 
 
 def test_weave_brittleness_guard():
     passed_ok, ratio = brittleness_check(0.8, 1.0)
-    test("weave_brittleness_passes", passed_ok is True)
+    check("weave_brittleness_passes", passed_ok is True)
 
     failed_ok, ratio = brittleness_check(1.5, 1.0)
-    test("weave_brittleness_fails", failed_ok is False)
+    check("weave_brittleness_fails", failed_ok is False)
 
     zero_ok, ratio = brittleness_check(1.0, 0)
-    test("weave_brittleness_zero_flex", zero_ok is False)
+    check("weave_brittleness_zero_flex", zero_ok is False)
 
 
 def test_weave_defect_budget():
     in_range, pct = defect_budget_check(100, 3)
-    test("weave_defect_in_range", in_range is True)
+    check("weave_defect_in_range", in_range is True)
 
     too_low, pct = defect_budget_check(100, 0)
-    test("weave_defect_too_low", too_low is False)
+    check("weave_defect_too_low", too_low is False)
 
     too_high, pct = defect_budget_check(100, 10)
-    test("weave_defect_too_high", too_high is False)
+    check("weave_defect_too_high", too_high is False)
 
 
 test_weave_ingest_detects_patterns()

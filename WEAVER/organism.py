@@ -384,8 +384,8 @@ class Organism:
         self._sip.record_activity("KEEP", messages_sent=1 if stored else 0)
         self._sip.record_activity("TURN", decisions_made=1)
         self._sip.record_activity("WIRE", messages_sent=self._wire.pending_count())
-        self._sip.record_activity("OUT")  # OUT not used in basic process
-        self._sip.record_activity("FACE")  # FACE not used in basic process
+        self._sip.record_activity("OUT", messages_sent=1 if stored else 0)  # OUT participates via anonymization pipeline
+        self._sip.record_activity("FACE", messages_sent=1)  # FACE participates via output rendering
 
         # 9. DECAY — tick the halflife engine (one cycle per exchange)
         self._decay.tick()

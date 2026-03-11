@@ -17,7 +17,7 @@ passed = 0
 failed = 0
 
 
-def test(name, condition):
+def check(name, condition):
     global passed, failed
     if condition:
         print(f"  PASS: {name}")
@@ -33,8 +33,8 @@ def test_drift_starts_stable():
     drift = DignityDrift()
     drift.record(1.0, "EX-001")
     alert = drift.check()
-    test("drift_starts_stable", alert.level == DriftLevel.STABLE)
-    test("drift_initial_rate_zero", alert.dD_dt == 0.0)
+    check("drift_starts_stable", alert.level == DriftLevel.STABLE)
+    check("drift_initial_rate_zero", alert.dD_dt == 0.0)
 
 
 def test_drift_stable_scores():
@@ -42,8 +42,8 @@ def test_drift_stable_scores():
     for i in range(5):
         drift.record(1.0, f"EX-{i:03d}")
     alert = drift.check()
-    test("drift_constant_is_stable", alert.level == DriftLevel.STABLE)
-    test("drift_constant_rate_zero", alert.dD_dt == 0.0)
+    check("drift_constant_is_stable", alert.level == DriftLevel.STABLE)
+    check("drift_constant_rate_zero", alert.dD_dt == 0.0)
 
 
 def test_drift_rising_is_stable():
@@ -51,8 +51,8 @@ def test_drift_rising_is_stable():
     for i in range(5):
         drift.record(0.5 + i * 0.1, f"EX-{i:03d}")
     alert = drift.check()
-    test("drift_rising_is_stable", alert.level == DriftLevel.STABLE)
-    test("drift_rising_positive_rate", alert.dD_dt > 0)
+    check("drift_rising_is_stable", alert.level == DriftLevel.STABLE)
+    check("drift_rising_positive_rate", alert.dD_dt > 0)
 
 
 # ── DECLINING DETECTION ─────────────────────────────────
@@ -64,8 +64,8 @@ def test_drift_detects_decline():
     for i, s in enumerate(scores):
         drift.record(s, f"EX-{i:03d}")
     alert = drift.check()
-    test("drift_detects_decline", alert.level == DriftLevel.DECLINING)
-    test("drift_negative_rate", alert.dD_dt < 0)
+    check("drift_detects_decline", alert.level == DriftLevel.DECLINING)
+    check("drift_negative_rate", alert.dD_dt < 0)
 
 
 def test_drift_consecutive_declines():
@@ -76,8 +76,8 @@ def test_drift_consecutive_declines():
     drift.record(0.90, "EX-003")
     drift.record(0.85, "EX-004")
     alert = drift.check()
-    test("drift_consecutive_declining", alert.level == DriftLevel.DECLINING)
-    test("drift_consecutive_count", alert.trend_readings == 3)
+    check("drift_consecutive_declining", alert.level == DriftLevel.DECLINING)
+    check("drift_consecutive_count", alert.trend_readings == 3)
 
 
 # ── CRITICAL DETECTION ──────────────────────────────────
@@ -89,7 +89,7 @@ def test_drift_critical_steep_decline():
     drift.record(0.6, "EX-002")
     drift.record(0.2, "EX-003")
     alert = drift.check()
-    test("drift_critical_steep", alert.level == DriftLevel.CRITICAL)
+    check("drift_critical_steep", alert.level == DriftLevel.CRITICAL)
 
 
 def test_drift_critical_near_zero():
@@ -98,8 +98,8 @@ def test_drift_critical_near_zero():
     drift.record(0.3, "EX-001")
     drift.record(0.15, "EX-002")
     alert = drift.check()
-    test("drift_critical_near_zero", alert.level == DriftLevel.CRITICAL)
-    test("drift_near_zero_message", "CRITICAL" in alert.message)
+    check("drift_critical_near_zero", alert.level == DriftLevel.CRITICAL)
+    check("drift_near_zero_message", "CRITICAL" in alert.message)
 
 
 def test_drift_critical_many_consecutive():
@@ -109,7 +109,7 @@ def test_drift_critical_many_consecutive():
     for i, s in enumerate(scores):
         drift.record(s, f"EX-{i:03d}")
     alert = drift.check()
-    test("drift_critical_consecutive", alert.level == DriftLevel.CRITICAL)
+    check("drift_critical_consecutive", alert.level == DriftLevel.CRITICAL)
 
 
 # ── RECOMMENDED ACTIONS ─────────────────────────────────
@@ -120,8 +120,8 @@ def test_drift_recommends_action():
     drift.record(0.5, "EX-002")
     drift.record(0.2, "EX-003")
     alert = drift.check()
-    test("drift_recommends_pause", "PAUSE" in alert.recommended_action)
-    test("drift_recommends_steward", "steward" in alert.recommended_action.lower())
+    check("drift_recommends_pause", "PAUSE" in alert.recommended_action)
+    check("drift_recommends_steward", "steward" in alert.recommended_action.lower())
 
 
 # ── STATE AND RESET ─────────────────────────────────────
@@ -131,8 +131,8 @@ def test_drift_state():
     drift.record(1.0, "EX-001")
     drift.record(0.5, "EX-002")
     state = drift.state()
-    test("drift_state_has_level", state.level in DriftLevel)
-    test("drift_state_readings", state.readings_count == 2)
+    check("drift_state_has_level", state.level in DriftLevel)
+    check("drift_state_readings", state.readings_count == 2)
 
 
 def test_drift_reset():
@@ -140,8 +140,8 @@ def test_drift_reset():
     drift.record(1.0, "EX-001")
     drift.record(0.5, "EX-002")
     drift.reset()
-    test("drift_reset_clears", drift.readings_count == 0)
-    test("drift_reset_alerts", drift.alert_count == 0)
+    check("drift_reset_clears", drift.readings_count == 0)
+    check("drift_reset_alerts", drift.alert_count == 0)
 
 
 def test_drift_alert_history():
@@ -151,7 +151,7 @@ def test_drift_alert_history():
     drift.record(0.1, "EX-003")
     drift.check()
     state = drift.state()
-    test("drift_stores_alerts", len(state.alert_history) > 0)
+    check("drift_stores_alerts", len(state.alert_history) > 0)
 
 
 # ── INTEGRATION WITH ORGANISM ───────────────────────────
@@ -170,13 +170,13 @@ def test_drift_in_organism():
 
     org = Organism()
     r1 = org.process("The river remembers its source.")
-    test("organism_has_drift_level", hasattr(r1, "drift_level"))
-    test("organism_drift_stable", r1.drift_level == "stable")
+    check("organism_has_drift_level", hasattr(r1, "drift_level"))
+    check("organism_drift_stable", r1.drift_level == "stable")
 
     # State should include drift info
     s = org.state()
-    test("organism_state_drift_level", hasattr(s, "drift_level"))
-    test("organism_state_drift_rate", hasattr(s, "drift_rate"))
+    check("organism_state_drift_level", hasattr(s, "drift_level"))
+    check("organism_state_drift_rate", hasattr(s, "drift_rate"))
 
     shutil.rmtree(_tmp, ignore_errors=True)
 
