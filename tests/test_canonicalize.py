@@ -68,7 +68,7 @@ class TestArtifactSigner:
         manifest = {"version": "1.0", "entries": {"COV#001": {}}}
         artifact, signed = signer.sign_manifest(manifest)
         assert "_signature" in signed
-        assert signed["_signature"]["algorithm"].startswith("HMAC")
+        assert signed["_signature"]["algorithm"] in ("Ed25519", "HMAC-SHA256-STUB")
         assert signer.verify(artifact, manifest) is True
 
     def test_chain_grows(self):

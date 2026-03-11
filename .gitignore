@@ -31,6 +31,10 @@ Thumbs.db
 WIRE/
 KEEP/
 
+# Steward private keys — NEVER commit
+keys/
+*.hex
+
 # Jekyll (legacy)
 _site/
 .sass-cache/
