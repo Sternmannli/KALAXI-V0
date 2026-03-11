@@ -35,6 +35,7 @@ from WEAVER.turn import Turn, ExchangeState
 from WEAVER.say import render as say_render, SINGLELINE, TERMINAL
 from WEAVER.out import export as out_export
 from WEAVER.dignity_check import check_dignity, check_collective_dignity
+from WEAVER.dignity_measure import measure_dignity
 from WEAVER.weave import ingest, extract_essence, propose_proverb, wisdom_mirror
 from WEAVER.keep import store, retrieve, lock, list_artifacts, receipt_count
 from WEAVER.dignity_drift import DignityDrift, DriftLevel
@@ -91,6 +92,8 @@ class OrganismState:
     mycelium_epsilon_remaining: float
     gap004_open_tickets: int
     gap004_unwitnessed: int
+    measure_D: float
+    measure_confidence: float
     timestamp: str
 
 
@@ -143,6 +146,7 @@ class Organism:
         self._prevention = Prevention()
         self._mycelium = Mycelium()
         self._conflict_engine = ConflictEngine()
+        self._last_measurement = None
         self._exchange_counter = 0
         self._last_dignity = {}
         self._drops_archive = []
@@ -239,6 +243,13 @@ class Organism:
         # 4. CHECK — dignity gate on input
         dignity = check_dignity(donor_input, felt_domain=felt_domain)
         self._last_dignity = dignity.audit_object()
+
+        # 4a. MEASURE — graduated A, L, M scoring (GAP#014 + GAP#015)
+        self._last_measurement = measure_dignity(donor_input)
+        if self._last_measurement.confidence < 0.5:
+            warnings.append(
+                f"Low measurement confidence: {self._last_measurement.confidence:.2f}"
+            )
 
         # 4b. GAP#004 — conflict detection (individual vs collective)
         conflict_ticket = self._conflict_engine.process(donor_input)
@@ -478,6 +489,8 @@ class Organism:
             mycelium_epsilon_remaining=self._mycelium._epsilon_remaining,
             gap004_open_tickets=len(self._conflict_engine.open_tickets),
             gap004_unwitnessed=len(self._conflict_engine.unwitnessed_tickets),
+            measure_D=self._last_measurement.D if self._last_measurement else 0.0,
+            measure_confidence=self._last_measurement.confidence if self._last_measurement else 0.0,
             timestamp=self._now(),
         )
 
@@ -585,6 +598,7 @@ class Organism:
         print(f"  Privacy budget:    {s.mycelium_epsilon_remaining:.2f}ε remaining")
         print(f"  GAP#004 open:      {s.gap004_open_tickets}")
         print(f"  GAP#004 unseen:    {s.gap004_unwitnessed}")
+        print(f"  Measure D:         {s.measure_D:.3f} (confidence {s.measure_confidence:.2f})")
         print(f"  {'='*48}\n")
 
     def decay_state(self):
@@ -721,3 +735,7 @@ class Organism:
     def gap004_unwitnessed(self):
         """List conflicts steward hasn't seen yet."""
         return self._conflict_engine.unwitnessed_tickets
+
+    def last_measurement(self):
+        """Get last graduated dignity measurement (GAP#014/015)."""
+        return self._last_measurement
