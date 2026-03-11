@@ -46,6 +46,7 @@ from WEAVER.decay import DecayEngine
 from WEAVER.latency import DignityLatency
 from WEAVER.lock_test import LockTest, LockVerdict
 from WEAVER.say import audit_voice
+from WEAVER.oracle import Oracle, WitnessLevel
 
 
 @dataclass
@@ -74,6 +75,10 @@ class OrganismState:
     latency_avg_td: float
     latency_dignity_rate: float
     latency_violations: int
+    oracle_health: str
+    oracle_unwatched: int
+    oracle_witnessed: int
+    oracle_creep_risk: float
     timestamp: str
 
 
@@ -122,6 +127,7 @@ class Organism:
         self._decay = DecayEngine()
         self._latency = DignityLatency()
         self._lock_test = LockTest()
+        self._oracle = Oracle()
         self._exchange_counter = 0
         self._last_dignity = {}
         self._drops_archive = []
@@ -200,11 +206,12 @@ class Organism:
         drops = extract_essence(candidates)
         self._drops_archive.extend(drops)
 
-        # 3b. DECAY — register detected patterns in the halflife engine
+        # 3b. DECAY + WITNESS — register detected patterns
         for drop in drops:
             pattern_id = f"P#{drop.drop_type}-{drop.source_hashes[0][:8]}" if drop.source_hashes else f"P#{drop.drop_type}-{ex_id}"
             self._decay.register(pattern_id)
             self._decay.invoke(pattern_id)  # Mark as freshly invoked
+            self._oracle.witness.process(pattern_id, "pattern")  # W-0 → W-1
 
         # Signal pattern detection through WIRE
         if candidates:
@@ -407,6 +414,10 @@ class Organism:
             latency_avg_td=self._latency.state().avg_recommended_td,
             latency_dignity_rate=self._latency.state().dignity_preservation_rate,
             latency_violations=self._latency.violations_count,
+            oracle_health=self._oracle.last_report.overall_health if self._oracle.last_report else "unaudited",
+            oracle_unwatched=len(self._oracle.witness.unwatched()),
+            oracle_witnessed=len(self._oracle.witness.witnessed()),
+            oracle_creep_risk=self._oracle.last_report.colonial_creep_risk if self._oracle.last_report else 0.0,
             timestamp=self._now(),
         )
 
@@ -501,6 +512,10 @@ class Organism:
         print(f"  Avg T_d:           {s.latency_avg_td:.2f}s")
         print(f"  Dignity-latency:   {s.latency_dignity_rate:.1%}")
         print(f"  Latency violations:{s.latency_violations}")
+        print(f"  Oracle health:     {s.oracle_health}")
+        print(f"  Unwatched (W-0/1): {s.oracle_unwatched}")
+        print(f"  Witnessed (W-3+):  {s.oracle_witnessed}")
+        print(f"  Colonial creep:    {s.oracle_creep_risk:.1%}")
         print(f"  {'='*48}\n")
 
     def decay_state(self):
@@ -555,3 +570,41 @@ class Organism:
     def voice_audit(self, text, context=""):
         """Audit text against the 6 Axi voice rules."""
         return audit_voice(text, context)
+
+    def oracle_audit(self):
+        """Run a full Oracle self-audit cycle."""
+        drift_state = self._drift.state()
+        latency_state = self._latency.state()
+        return self._oracle.audit(
+            drift_rate=drift_state.dD_dt,
+            drift_level=drift_state.level.value,
+            voice_score=1.0,  # Updated by last render
+            breath_paused=self._breath.is_paused,
+            violations_count=latency_state.violations,
+            lock_rate=self._lock_test.lock_rate,
+            latency_dignity_rate=latency_state.dignity_preservation_rate,
+        )
+
+    def oracle_witness(self, element_id, element_type="unknown"):
+        """Register an element in the Witness Scale."""
+        return self._oracle.witness.process(element_id, element_type)
+
+    def oracle_steward_sees(self, element_id, session_id=""):
+        """Mark an element as seen by the steward (W-3)."""
+        return self._oracle.witness.steward_sees(element_id, session_id)
+
+    def oracle_check_relay(self, correction_trace, response_fidelity, steward_recognition):
+        """Run proprioception check on the relay."""
+        return self._oracle.check_relay(correction_trace, response_fidelity, steward_recognition)
+
+    def oracle_witness_distribution(self):
+        """Get Witness Scale distribution."""
+        return self._oracle.witness.distribution()
+
+    def oracle_unwatched(self):
+        """List all unwatched elements (W-0 or W-1)."""
+        return [(r.element_id, r.level.name) for r in self._oracle.witness.unwatched()]
+
+    def oracle_report(self):
+        """Get the last Oracle report."""
+        return self._oracle.last_report
