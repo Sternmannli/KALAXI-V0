@@ -1,6 +1,6 @@
 # WITNESS PROMPT — V1
 
-Status: ACTIVE
+Status: SUPERSEDED BY V2 (2026-03-11)
 Filed: 2026-03-11
 Source: V-001 (Steward) via V-003
 Classification: External Voice Protocol — Foundational Instrument
