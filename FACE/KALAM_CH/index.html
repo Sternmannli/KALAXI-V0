@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KALAM</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #faf9f7;
+      color: #2c2c2c;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .threshold {
+      max-width: 540px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .sentence {
+      font-size: 1.5rem;
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+      margin-bottom: 3rem;
+      color: #2c2c2c;
+    }
+
+    .field {
+      width: 100%;
+      min-height: 120px;
+      padding: 1.2rem;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #2c2c2c;
+      background: #fff;
+      border: 1px solid #d4d0c8;
+      border-radius: 4px;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .field:focus {
+      border-color: #4F46E5;
+    }
+
+    .field::placeholder {
+      color: #a8a29e;
+      font-style: italic;
+    }
+
+    .below {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .send {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1rem;
+      padding: 0.6rem 1.8rem;
+      background: #2c2c2c;
+      color: #faf9f7;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: opacity 0.3s ease;
+    }
+
+    .send:hover {
+      opacity: 0.85;
+    }
+
+    .send:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+
+    .quiet {
+      margin-top: 4rem;
+      font-size: 0.85rem;
+      color: #a8a29e;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="threshold">
+    <p class="sentence">You came with what you came with.<br>The door is open.</p>
+
+    <textarea
+      class="field"
+      id="pattern"
+      placeholder="Say as much or as little as you choose."
+      aria-label="Your pattern"
+    ></textarea>
+
+    <div class="below">
+      <button class="send" id="send" disabled>Leave this here</button>
+    </div>
+
+    <p class="quiet">Nothing is asked of you. Nothing is stored without your knowing.</p>
+  </div>
+
+  <script>
+    const field = document.getElementById('pattern');
+    const send = document.getElementById('send');
+
+    field.addEventListener('input', function () {
+      send.disabled = this.value.trim().length === 0;
+    });
+
+    send.addEventListener('click', function () {
+      // The public door. What happens next is the organism's work.
+      // For now: acknowledgment only. No data leaves without comprehension.
+      const pattern = field.value.trim();
+      if (!pattern) return;
+
+      field.value = '';
+      field.disabled = true;
+      send.disabled = true;
+      send.style.display = 'none';
+
+      const response = document.createElement('p');
+      response.className = 'sentence';
+      response.style.marginTop = '2rem';
+      response.textContent = 'It is here. You can come back.';
+      document.querySelector('.threshold').appendChild(response);
+    });
+  </script>
+
+</body>
+</html>
