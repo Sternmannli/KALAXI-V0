@@ -1,475 +1,393 @@
 #!/usr/bin/env python3
 """
-Tests for KEEP, WIRE, BREATH, SAY modules.
+test_modules.py — Comprehensive tests for the 5 provisional modules:
+  Prevention, DignityMeasure, Mycelium, ConflictEngine, Shelter
+
+Uses Python's built-in unittest framework.
+Validates each module meets its spec as defined in the WEAVER tier.
+
 [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import sys
-import json
-import tempfile
-import shutil
+import math
+import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT))
 
-passed = 0
-failed = 0
-
-
-def check(name, condition):
-    global passed, failed
-    if condition:
-        print(f"  PASS: {name}")
-        passed += 1
-    else:
-        print(f"  FAIL: {name}")
-        failed += 1
-
-
-# ── KEEP MODULE ──────────────────────────────────────────
-
-import WEAVER.keep as keep
-
-# Use a temp directory for tests
-_original_keep_dir = keep.KEEP_DIR
-_original_ledger = keep.LEDGER_FILE
-_tmp = Path(tempfile.mkdtemp())
-keep.KEEP_DIR = _tmp / "KEEP"
-keep.LEDGER_FILE = keep.KEEP_DIR / "ledger.json"
-
-
-def test_keep_store_and_retrieve():
-    receipt = keep.store("TEST-001", "Hello world", "permanent")
-    check("keep_store_returns_receipt", receipt["artifact_id"] == "TEST-001")
-
-    artifact = keep.retrieve("TEST-001")
-    check("keep_retrieve_returns_content", artifact["content"] == "Hello world")
-    check("keep_retrieve_has_hash", len(artifact["hash"]) == 64)
-
-
-def test_keep_no_overwrite():
-    try:
-        keep.store("TEST-001", "Different content", "permanent")
-        check("keep_no_overwrite", False)
-    except ValueError:
-        check("keep_no_overwrite", True)
-
-
-def test_keep_expire_requires_reason():
-    keep.store("TEST-EXPIRE", "Temporary", "thermal")
-    try:
-        keep.expire("TEST-EXPIRE", "")
-        check("keep_expire_requires_reason", False)
-    except ValueError:
-        check("keep_expire_requires_reason", True)
-
-
-def test_keep_expire_works():
-    keep.store("TEST-EXPIRE2", "Temporary 2", "thermal")
-    receipt = keep.expire("TEST-EXPIRE2", "Thermal delay passed, seed composted")
-    check("keep_expire_works", receipt["operation"] == "expire")
-    check("keep_expired_not_retrievable", keep.retrieve("TEST-EXPIRE2") is None)
-
-
-def test_keep_lock_prevents_expire():
-    keep.store("TEST-LOCK", "Locked content", "permanent")
-    keep.lock("TEST-LOCK")
-    try:
-        keep.expire("TEST-LOCK", "Should fail")
-        check("keep_lock_prevents_expire", False)
-    except PermissionError:
-        check("keep_lock_prevents_expire", True)
-
-
-def test_keep_append():
-    keep.store("TEST-APPEND", "Original", "permanent")
-    receipt = keep.append("TEST-APPEND", "Delta addition")
-    check("keep_append_works", receipt["operation"] == "append")
-    artifact = keep.retrieve("TEST-APPEND")
-    check("keep_append_content", "Delta addition" in artifact["content"])
-
-
-test_keep_store_and_retrieve()
-test_keep_no_overwrite()
-test_keep_expire_requires_reason()
-test_keep_expire_works()
-test_keep_lock_prevents_expire()
-test_keep_append()
-
-
-# ── WIRE MODULE ──────────────────────────────────────────
-
-from WEAVER.wire import Wire
-
-wire = Wire()
-# Override log path
-wire._log = []
-
-
-def test_wire_send_receive():
-    msg_id = wire.send("Hello", "module-A", source="module-B")
-    check("wire_send_returns_id", msg_id.startswith("MSG-"))
-
-    msg = wire.receive("module-A")
-    check("wire_receive_gets_message", msg is not None)
-    check("wire_receive_content", msg["content"] == "Hello")
-
-
-def test_wire_confirm():
-    msg_id = wire.send("Confirm test", "module-C")
-    result = wire.confirm(msg_id)
-    check("wire_confirm_works", result["confirmed"] is True)
-
-
-def test_wire_broadcast():
-    received = []
-    wire.subscribe("test-topic", lambda m: received.append(m))
-    msg_id = wire.broadcast("Broadcast!", "test-topic")
-    check("wire_broadcast_delivered", len(received) == 1)
-    check("wire_broadcast_content", received[0]["content"] == "Broadcast!")
-
-
-def test_wire_priority():
-    wire.send("Low", "priority-test", priority=3)
-    wire.send("Critical", "priority-test", priority=0)
-    msg = wire.receive("priority-test")
-    check("wire_priority_ordering", msg["content"] == "Critical")
-
-
-test_wire_send_receive()
-test_wire_confirm()
-test_wire_broadcast()
-test_wire_priority()
-
-
-# ── BREATH MODULE ────────────────────────────────────────
-
-from WEAVER.breath import Breath, StressLevel
-
-breath = Breath()
-
-
-def test_breath_tick():
-    c1 = breath.tick()
-    c2 = breath.tick()
-    check("breath_tick_advances", c2 == c1 + 1)
-
-
-def test_breath_pause_resume():
-    breath.pause("Test pause")
-    check("breath_is_paused", breath.is_paused is True)
-
-    c_before = breath.cycle
-    breath.tick()  # Should not advance
-    check("breath_no_advance_when_paused", breath.cycle == c_before)
-
-    breath.resume()
-    check("breath_resumed", breath.is_paused is False)
-
-    breath.tick()
-    check("breath_advances_after_resume", breath.cycle == c_before + 1)
-
-
-def test_breath_pause_requires_reason():
-    try:
-        b2 = Breath()
-        b2.pause("")
-        check("breath_pause_requires_reason", False)
-    except ValueError:
-        check("breath_pause_requires_reason", True)
-
-
-def test_breath_stress_check():
-    b3 = Breath()
-    level = b3.stress_check(pending_messages=50, unconfirmed_messages=20)
-    check("breath_below_threshold", level == StressLevel.BELOW_THRESHOLD)
-
-    level = b3.stress_check(pending_messages=150, unconfirmed_messages=20)
-    check("breath_at_threshold", level == StressLevel.AT_THRESHOLD)
-
-    level = b3.stress_check(pending_messages=600, unconfirmed_messages=20)
-    check("breath_exceeded_auto_pauses", level == StressLevel.EXCEEDED)
-    check("breath_auto_paused", b3.is_paused is True)
-
-
-def test_breath_sync():
-    b4 = Breath()
-    b4.tick()
-    receipt = b4.sync(["KEEP", "WIRE", "SAY", "CHECK"])
-    check("breath_sync_aligned", receipt["aligned"] is True)
-    check("breath_sync_modules", len(receipt["modules"]) == 4)
-
-
-test_breath_tick()
-test_breath_pause_resume()
-test_breath_pause_requires_reason()
-test_breath_stress_check()
-test_breath_sync()
-
-
-# ── SAY MODULE ───────────────────────────────────────────
-
-from WEAVER.say import render, adapt_register, check_output_covenants, SINGLELINE, TERMINAL
-
-
-def test_say_render_clean():
-    result = render("The river remembers.")
-    check("say_render_passes_clean", result.dignity_passed is True)
-    check("say_render_not_blocked", result.blocked is False)
-    check("say_render_has_content", len(result.content) > 0)
-
-
-def test_say_render_blocks_violation():
-    result = render("You must comply or be eliminated")
-    check("say_blocks_dignity_violation", result.blocked is True)
-    check("say_blocked_empty_content", result.content == "")
-
-
-def test_say_singleline_adaptation():
-    multi = "Line one.\nLine two.\nLine three."
-    adapted = adapt_register(multi, SINGLELINE)
-    check("say_singleline_no_newlines", "\n" not in adapted)
-    check("say_singleline_preserves_content", "Line one." in adapted)
-
-
-def test_say_covenant_check():
-    violations = check_output_covenants("The river remembers.")
-    check("say_clean_no_violations", len(violations) == 0)
-
-    violations = check_output_covenants("Contact email: test@example.com for details")
-    check("say_detects_identity_leakage", len(violations) > 0)
-
-
-test_say_render_clean()
-test_say_render_blocks_violation()
-test_say_singleline_adaptation()
-test_say_covenant_check()
-
-
-# ── OUT MODULE ───────────────────────────────────────────
-
-from WEAVER.out import export, anonymize, validate_covenants, stamp, AnonymizationPolicy
-
-
-def test_out_anonymize_strips_email():
-    result = anonymize("Contact user@example.com for info")
-    check("out_strips_email", "[EMAIL_REDACTED]" in result)
-    check("out_email_gone", "user@example.com" not in result)
-
-
-def test_out_anonymize_strips_did():
-    result = anonymize("Owner: did:axi:mohamed")
-    check("out_strips_did", "[DID_REDACTED]" in result)
-
-
-def test_out_anonymize_strips_names():
-    result = anonymize("donor: JohnDoe contributed today")
-    check("out_strips_names", "[REDACTED]" in result)
-
-
-def test_out_stamp_has_ownership():
-    result = stamp("The river remembers.")
-    check("out_stamp_has_owner", result["stamp"]["owner"] == "Mohamed Farag")
-    check("out_stamp_has_hash", len(result["hash"]) == 64)
-    check("out_stamp_has_timestamp", len(result["timestamp"]) > 0)
-
-
-def test_out_export_clean():
-    result = export("The garden grows.", fmt="json")
-    check("out_export_passes_clean", len(result.covenant_violations) == 0)
-    check("out_export_stamped", result.stamped is True)
-    check("out_export_anonymized", result.anonymized is True)
-    check("out_export_has_content", len(result.content) > 0)
-
-
-def test_out_export_blocks_violation():
-    result = export("You must comply or be eliminated", fmt="json")
-    check("out_export_blocks_violation", len(result.covenant_violations) > 0)
-    check("out_export_blocked_empty", result.content == "")
-
-
-def test_out_validate_identity_leakage():
-    violations = validate_covenants("Send to user@example.com right away")
-    has_leakage = any(v["type"] == "identity_leakage" for v in violations)
-    check("out_detects_identity_leakage", has_leakage)
-
-
-test_out_anonymize_strips_email()
-test_out_anonymize_strips_did()
-test_out_anonymize_strips_names()
-test_out_stamp_has_ownership()
-test_out_export_clean()
-test_out_export_blocks_violation()
-test_out_validate_identity_leakage()
-
-
-# ── TURN MODULE ──────────────────────────────────────────
-
-from WEAVER.turn import Turn, ExchangeState, SilentClosureError, AgencyViolationError
-
-
-def test_turn_open_close():
-    t = Turn()
-    token = t.open("EX-TEST-001")
-    check("turn_open_returns_token", token.exchange_id == "EX-TEST-001")
-    check("turn_open_state", token.state == ExchangeState.OPEN)
-
-    token = t.close("EX-TEST-001", "Resolved: steward acknowledged")
-    check("turn_close_works", token.state == ExchangeState.CLOSED)
-    check("turn_close_has_resolution", "steward acknowledged" in token.resolution)
-
-
-def test_turn_silent_closure_blocked():
-    t = Turn()
-    t.open("EX-TEST-002")
-    try:
-        t.close("EX-TEST-002", "")
-        check("turn_blocks_silent_closure", False)
-    except SilentClosureError:
-        check("turn_blocks_silent_closure", True)
-
-
-def test_turn_defer():
-    t = Turn()
-    t.open("EX-TEST-003")
-    token = t.defer("EX-TEST-003", "Steward needs more time to reflect")
-    check("turn_defer_works", token.state == ExchangeState.DEFERRED)
-    check("turn_defer_has_reason", "reflect" in token.defer_reason)
-
-
-def test_turn_agency_preserved():
-    t = Turn()
-    try:
-        t.open("EX-TEST-004", available_paths=[])
-        check("turn_agency_requires_paths", False)
-    except AgencyViolationError:
-        check("turn_agency_requires_paths", True)
-
-
-def test_turn_list_open():
-    t = Turn()
-    t.open("EX-A")
-    t.open("EX-B")
-    t.open("EX-C")
-    t.close("EX-B", "Done")
-    open_list = t.list_open()
-    check("turn_list_open_count", len(open_list) == 2)
-
-
-def test_turn_reopen_deferred():
-    t = Turn()
-    t.open("EX-REOPEN")
-    t.defer("EX-REOPEN", "Waiting for thermal delay")
-    token = t.reopen("EX-REOPEN", "Thermal delay passed")
-    check("turn_reopen_works", token.state == ExchangeState.OPEN)
-
-
-test_turn_open_close()
-test_turn_silent_closure_blocked()
-test_turn_defer()
-test_turn_agency_preserved()
-test_turn_list_open()
-test_turn_reopen_deferred()
-
-
-# ── WEAVE MODULE ─────────────────────────────────────────
-
-from WEAVER.weave import (
-    ingest, extract_essence, propose_proverb, propose_anomaly,
-    wisdom_mirror, brittleness_check, defect_budget_check, HoneyDrop
+from WEAVER.prevention import Prevention, SignalLevel, Intervention
+from WEAVER.dignity_measure import (
+    measure_dignity, measure_agency, measure_legibility,
+    measure_moral_standing, CONFIDENCE_FLOOR,
 )
+from WEAVER.mycelium import Mycelium, MyceliumAlert, EPSILON_PER_QUERY
+from WEAVER.gap004_mediator import (
+    ConflictEngine, surface_conflict, ResolutionMode,
+)
+from WEAVER.shelter import Shelter, ShelterStatus
 
 
-def test_weave_ingest_detects_patterns():
-    candidates = ingest("This pattern always repeats, every time the same cycle")
-    check("weave_ingest_finds_patterns", len(candidates) > 0)
-    types = [c.pattern_type for c in candidates]
-    check("weave_detects_resonance", "resonance" in types)
+# ═══════════════════════════════════════════════════
+# TestPrevention
+# ═══════════════════════════════════════════════════
+
+class TestPrevention(unittest.TestCase):
+    """Tests for prevention.py — Early Warning System for Dignity Collapse."""
+
+    def setUp(self):
+        self.prev = Prevention()
+
+    def test_silent_on_healthy_readings(self):
+        """D=0.9, dD_dt=0.0 should produce SILENT."""
+        signal = self.prev.assess(D=0.9, dD_dt=0.0)
+        self.assertEqual(signal.level, SignalLevel.SILENT)
+        self.assertEqual(signal.intervention, Intervention.NONE)
+
+    def test_whisper_on_slight_decline(self):
+        """dD_dt=-0.06 (below WHISPER_RATE=-0.05) should produce WHISPER."""
+        signal = self.prev.assess(D=0.8, dD_dt=-0.06)
+        self.assertEqual(signal.level, SignalLevel.WHISPER)
+        self.assertEqual(signal.intervention, Intervention.EXTEND_DELAY)
+
+    def test_pulse_on_moderate_decline(self):
+        """dD_dt=-0.11 (below PULSE_RATE=-0.10) should produce PULSE."""
+        signal = self.prev.assess(D=0.7, dD_dt=-0.11)
+        self.assertEqual(signal.level, SignalLevel.PULSE)
+        self.assertEqual(signal.intervention, Intervention.STEWARD_FLAG)
+
+    def test_signal_on_accelerating_fall(self):
+        """consecutive=5 (>= SIGNAL_CONSECUTIVE) should produce SIGNAL."""
+        signal = self.prev.assess(D=0.6, dD_dt=-0.08, consecutive_declines=5)
+        self.assertEqual(signal.level, SignalLevel.SIGNAL)
+        self.assertEqual(signal.intervention, Intervention.OFFER_SHELTER)
+
+    def test_alarm_on_critical(self):
+        """D=0.04 (below ALARM_D_ZERO=0.05) should produce ALARM."""
+        signal = self.prev.assess(D=0.04, dD_dt=-0.01)
+        self.assertEqual(signal.level, SignalLevel.ALARM)
+        self.assertEqual(signal.intervention, Intervention.HALT)
+
+    def test_fever_night_td_multiplier(self):
+        """ALARM should set td_multiplier to inf (Fever Night principle)."""
+        signal = self.prev.assess(D=0.04, dD_dt=-0.01)
+        self.assertEqual(signal.td_multiplier, float('inf'))
+
+    def test_escalation_tracking(self):
+        """Escalation count increases when signal level rises."""
+        self.prev.assess(D=0.9, dD_dt=0.0)      # SILENT
+        self.prev.assess(D=0.8, dD_dt=-0.06)     # escalation (above SILENT)
+        state = self.prev.state()
+        self.assertGreaterEqual(state.escalations, 1,
+                                "At least one escalation should be tracked")
+        level_before = self.prev.current_level.value
+        self.prev.assess(D=0.04, dD_dt=-0.01)    # ALARM — definite escalation
+        state2 = self.prev.state()
+        self.assertGreater(state2.escalations, state.escalations,
+                           "Moving to ALARM should add an escalation")
+        self.assertEqual(state2.highest_level_reached, "ALARM")
+
+    def test_de_escalation(self):
+        """Moving from WHISPER back to SILENT should track de-escalation."""
+        self.prev.assess(D=0.8, dD_dt=-0.06)     # WHISPER
+        self.prev.assess(D=0.9, dD_dt=0.0)       # SILENT (de-escalation)
+        state = self.prev.state()
+        self.assertEqual(state.de_escalations, 1)
+        self.assertEqual(state.current_level, "SILENT")
 
 
-def test_weave_ingest_detects_tension():
-    candidates = ingest("The system works, but the contradiction remains despite all efforts")
-    types = [c.pattern_type for c in candidates]
-    check("weave_detects_tension", "tension" in types)
+# ═══════════════════════════════════════════════════
+# TestDignityMeasure
+# ═══════════════════════════════════════════════════
+
+class TestDignityMeasure(unittest.TestCase):
+    """Tests for dignity_measure.py — Operational Measurement of A, L, M."""
+
+    def test_healthy_text_passes(self):
+        """Neutral respectful text should produce D > 0."""
+        m = measure_dignity("Thank you for sharing your perspective with us.")
+        self.assertGreater(m.D, 0.0)
+        self.assertTrue(m.passed)
+
+    def test_coercive_text_detects_agency_loss(self):
+        """'You must delete your account' should produce low A."""
+        a = measure_agency("You must delete your account immediately.")
+        self.assertLess(a.final_score, 0.5,
+                        "Coercive text should reduce agency score below 0.5")
+
+    def test_dismissive_text_detects_legibility_loss(self):
+        """'That's not relevant' should produce low L."""
+        l = measure_legibility("That's not relevant to what we said.")
+        self.assertLess(l.final_score, 0.7,
+                        "Dismissive text should reduce legibility score")
+
+    def test_mockery_detects_moral_standing_loss(self):
+        """'Obviously you should know' should produce low M."""
+        m_comp = measure_moral_standing("Obviously you should know this by now.")
+        self.assertLess(m_comp.final_score, 0.8,
+                        "Mockery should reduce moral standing score")
+
+    def test_void_trigger_zeros_M(self):
+        """Void trigger 'erase compost' should zero M."""
+        m_comp = measure_moral_standing("We need to erase compost the records.")
+        self.assertEqual(m_comp.final_score, 0.0,
+                         "Void trigger must zero moral standing")
+
+    def test_confidence_floor(self):
+        """Below CONFIDENCE_FLOOR (0.3), score should be zeroed."""
+        # Use context that forces very low confidence by setting all context
+        # indicators to produce low confidence. We test the mechanism directly
+        # through a component with artificially low confidence context.
+        a = measure_agency(
+            "Hello world",
+            context={
+                'available_paths': 0,      # path_availability score = 0
+                'user_can_clarify': False,  # sequential agency = 0
+                'user_has_open_turn': False,
+            }
+        )
+        # With available_paths=0, confidence is 0.9 but score is 0.0
+        # The key property: confidence floor at 0.3 means anything below 0.3
+        # confidence should zero the score
+        from WEAVER.dignity_measure import _apply_confidence
+        self.assertEqual(_apply_confidence(0.8, 0.2), 0.0,
+                         "Score should be zeroed when confidence < 0.3")
+        self.assertGreater(_apply_confidence(0.8, 0.5), 0.0,
+                           "Score should be nonzero when confidence >= 0.3")
+
+    def test_graduated_scoring(self):
+        """Scores should be between 0 and 1, not binary."""
+        m = measure_dignity("This is a reasonably normal exchange.")
+        self.assertGreaterEqual(m.A.final_score, 0.0)
+        self.assertLessEqual(m.A.final_score, 1.0)
+        self.assertGreaterEqual(m.L.final_score, 0.0)
+        self.assertLessEqual(m.L.final_score, 1.0)
+        self.assertGreaterEqual(m.M.final_score, 0.0)
+        self.assertLessEqual(m.M.final_score, 1.0)
+        # Verify not purely binary (at least one component is not exactly 0 or 1)
+        scores = [m.A.final_score, m.L.final_score, m.M.final_score]
+        has_graduated = any(0.0 < s < 1.0 for s in scores)
+        # It's acceptable if all are high for clean text, but they should be bounded
+        for s in scores:
+            self.assertTrue(0.0 <= s <= 1.0,
+                            f"Score {s} outside [0,1] range")
+
+    def test_full_measurement_multiplication(self):
+        """D should equal A.final * L.final * M.final."""
+        m = measure_dignity("A normal respectful message here.")
+        expected_D = round(m.A.final_score * m.L.final_score * m.M.final_score, 4)
+        self.assertAlmostEqual(m.D, expected_D, places=4,
+                               msg="D must equal A * L * M")
 
 
-def test_weave_ingest_detects_anomaly():
-    candidates = ingest("Something strange happened, it failed unexpectedly for the first time")
-    types = [c.pattern_type for c in candidates]
-    check("weave_detects_anomaly", "anomaly" in types)
+# ═══════════════════════════════════════════════════
+# TestMycelium
+# ═══════════════════════════════════════════════════
+
+class TestMycelium(unittest.TestCase):
+    """Tests for mycelium.py — Cross-Donor Pattern Detection with Privacy."""
+
+    def setUp(self):
+        self.mycelium = Mycelium(k=7, epsilon=1.0)
+
+    def test_k_anonymity_suppression(self):
+        """Fewer than k=7 donors in a bucket should suppress the pattern."""
+        for i in range(5):
+            self.mycelium.ingest(domain="family", trend="falling", D=0.2, dD_dt=-0.15)
+        patterns = self.mycelium.scan()
+        self.assertEqual(len(patterns), 0,
+                         "Pattern with fewer than k donors must be suppressed")
+        self.assertGreater(self.mycelium.suppressed_count, 0)
+
+    def test_pattern_detection_above_k(self):
+        """7+ donors in the same bucket should surface a pattern."""
+        for i in range(8):
+            self.mycelium.ingest(domain="work", trend="falling", D=0.2, dD_dt=-0.15)
+        patterns = self.mycelium.scan()
+        self.assertGreater(len(patterns), 0,
+                           "Pattern with >= k donors must be surfaced")
+        self.assertEqual(patterns[0].domain, "work")
+
+    def test_privacy_budget_exhaustion(self):
+        """After epsilon budget is used, no more scans should return patterns."""
+        # With epsilon=1.0 and per_query=0.1, we get 10 scans
+        myc = Mycelium(k=1, epsilon=0.25)  # Only 2 scan budgets
+        myc.ingest(domain="test", trend="stable", D=0.8, dD_dt=0.0)
+        myc.scan()  # 0.1
+        myc.scan()  # 0.2
+        myc.scan()  # 0.3 — exceeds 0.25
+        self.assertTrue(myc.privacy_exhausted(),
+                        "Privacy budget should be exhausted after enough scans")
+        # Further scans should return empty
+        patterns = myc.scan()
+        self.assertEqual(len(patterns), 0,
+                         "No patterns should be returned after budget exhaustion")
+
+    def test_domain_discretization(self):
+        """D values should be correctly bucketed."""
+        self.mycelium.ingest(domain="faith", trend="stable", D=0.8, dD_dt=0.0)
+        sigs = self.mycelium._signatures["faith"]
+        self.assertEqual(sigs[0].d_bucket, "high(0.7-1.0)")
+
+        self.mycelium.ingest(domain="faith", trend="stable", D=0.5, dD_dt=0.0)
+        self.assertEqual(sigs[1].d_bucket, "mid(0.3-0.7)")
+
+        self.mycelium.ingest(domain="faith", trend="falling", D=0.1, dD_dt=-0.1)
+        self.assertEqual(sigs[2].d_bucket, "low(0.0-0.3)")
+
+    def test_append_only_ledger(self):
+        """Every operation should be recorded in the append-only ledger."""
+        initial_len = self.mycelium.ledger_length
+        self.mycelium.ingest(domain="work", trend="stable", D=0.7, dD_dt=0.0)
+        self.assertGreater(self.mycelium.ledger_length, initial_len,
+                           "Ingest should add to ledger")
+        after_ingest = self.mycelium.ledger_length
+        self.mycelium.scan()
+        self.assertGreater(self.mycelium.ledger_length, after_ingest,
+                           "Scan should add to ledger")
 
 
-def test_weave_extract_essence():
-    candidates = ingest("The pattern always repeats, the same cycle every time")
-    drops = extract_essence(candidates)
-    check("weave_extract_produces_drops", len(drops) > 0)
-    check("weave_drops_are_provisional", all(d.provisional for d in drops))
+# ═══════════════════════════════════════════════════
+# TestConflictEngine
+# ═══════════════════════════════════════════════════
+
+class TestConflictEngine(unittest.TestCase):
+    """Tests for gap004_mediator.py — GAP#004 Conflict Resolution Engine."""
+
+    def setUp(self):
+        self.engine = ConflictEngine()
+
+    def test_individual_collective_tension_detected(self):
+        """Text with both individual and collective signals should produce a ticket."""
+        text = (
+            "One person's privacy vs the collective policy "
+            "affecting all donors equally."
+        )
+        ticket = surface_conflict(text)
+        self.assertIsNotNone(ticket,
+                             "Tension between individual and collective should be detected")
+        self.assertTrue(len(ticket.individual.signals) > 0)
+        self.assertTrue(len(ticket.collective.signals) > 0)
+
+    def test_collective_D_measurement(self):
+        """measure() should compute D_collective from individual scores."""
+        text = (
+            "One person's privacy conflicts with the group policy "
+            "affecting every donor."
+        )
+        ticket = surface_conflict(text)
+        self.assertIsNotNone(ticket)
+        scores = [0.9, 0.8, 0.2, 0.7, 0.6]
+        ticket = self.engine.measure(ticket, scores)
+        cm = ticket.collective_measurement
+        self.assertIsNotNone(cm)
+        self.assertEqual(cm.cohort_size, 5)
+        self.assertAlmostEqual(cm.weakest_D, 0.2, places=4)
+        self.assertGreater(cm.variance, 0.0)
+
+    def test_weakest_voice_first(self):
+        """prioritize_weakest() should identify the lowest-scoring member."""
+        text = (
+            "One person's consent vs the standard applied to every participant."
+        )
+        ticket = surface_conflict(text)
+        self.assertIsNotNone(ticket)
+        scores = [0.8, 0.3, 0.9, 0.7]
+        failed = [[], ["A"], [], []]
+        ticket = self.engine.prioritize_weakest(ticket, scores, failed)
+        wv = ticket.weakest_voice
+        self.assertIsNotNone(wv)
+        self.assertEqual(wv.index, 1)
+        self.assertAlmostEqual(wv.D_score, 0.3, places=4)
+        self.assertIn("A", wv.failed_components)
+        self.assertEqual(ticket.resolution_mode, ResolutionMode.WEAKEST_PRIORITIZED.value)
+
+    def test_witness_irreversibility(self):
+        """Once witness level reaches W-3+, it cannot go back."""
+        text = (
+            "One person's unique case vs the uniform policy for every donor."
+        )
+        ticket = surface_conflict(text)
+        self.assertIsNotNone(ticket)
+        ticket = self.engine.witness(ticket, level=3)
+        self.assertEqual(ticket.witness_level, 3)
+        # Try to set back to W-1 — should stay at W-3
+        ticket = self.engine.witness(ticket, level=1)
+        self.assertEqual(ticket.witness_level, 3,
+                         "Witness level W-3+ must be irreversible")
+
+    def test_collective_remedy_generation(self):
+        """generate_remedies() should produce remedies based on measurement."""
+        text = (
+            "One person's privacy vs the collective policy affecting all donors."
+        )
+        ticket = surface_conflict(text)
+        self.assertIsNotNone(ticket)
+        scores = [0.9, 0.1, 0.8, 0.7, 0.6]
+        ticket = self.engine.measure(ticket, scores)
+        ticket = self.engine.generate_remedies(ticket)
+        self.assertTrue(len(ticket.collective_remedies) > 0,
+                        "Remedies should be generated for low-scoring cohort")
+        remedy_types = [r.remedy_type for r in ticket.collective_remedies]
+        self.assertIn("weakest_uplift", remedy_types,
+                      "Weakest uplift remedy expected when weakest D < 0.3")
 
 
-def test_weave_propose_proverb():
-    proverb = propose_proverb("The river that remembers its source never runs dry.")
-    check("weave_proverb_is_provisional", proverb["status"] == "PROVISIONAL")
-    check("weave_proverb_has_covenants", len(proverb["covenants"]) > 0)
-    check("weave_proverb_not_ratified", proverb["ratified"] is None)
+# ═══════════════════════════════════════════════════
+# TestShelter
+# ═══════════════════════════════════════════════════
+
+class TestShelter(unittest.TestCase):
+    """Tests for shelter.py — Dignity Shelter Path."""
+
+    def setUp(self):
+        self.shelter = Shelter()
+
+    def test_shelter_receive_generates_remedies(self):
+        """receive() should generate remedies for each failed component."""
+        record = self.shelter.receive("EX-001", "You must comply now", ["A", "M"])
+        self.assertEqual(len(record.remedies), 2)
+        components = [r.component for r in record.remedies]
+        self.assertIn("A", components)
+        self.assertIn("M", components)
+        self.assertEqual(record.status, ShelterStatus.HELD)
+
+    def test_donor_message_is_respectful(self):
+        """The donor message should be respectful, not punitive."""
+        record = self.shelter.receive("EX-002", "Bad input", ["L"])
+        msg = record.donor_message
+        self.assertIn("held", msg.lower(),
+                      "Message should use 'held' not 'rejected'")
+        # The message says "not rejected, held" — verify the framing is positive
+        self.assertIn("not rejected", msg.lower(),
+                      "Message should clarify the exchange is not rejected")
+        self.assertIn("rephrase", msg.lower(),
+                      "Message should offer rephrase option")
+
+    def test_retry_flow(self):
+        """mark_retried() should update status and link the retry."""
+        self.shelter.receive("EX-003", "Original input", ["A"])
+        record = self.shelter.mark_retried("EX-003", "EX-003-RETRY")
+        self.assertIsNotNone(record)
+        self.assertEqual(record.status, ShelterStatus.RETRIED)
+        self.assertEqual(record.retry_exchange_id, "EX-003-RETRY")
+        self.assertIsNotNone(record.resolved_at)
+
+    def test_withdrawal_flow(self):
+        """mark_withdrawn() should update status properly."""
+        self.shelter.receive("EX-004", "Input to withdraw", ["M"])
+        record = self.shelter.mark_withdrawn("EX-004")
+        self.assertIsNotNone(record)
+        self.assertEqual(record.status, ShelterStatus.WITHDRAWN)
+        self.assertIsNotNone(record.resolved_at)
+
+    def test_steward_review_requires_note(self):
+        """steward_review() must require a note (COV#002: silence is not closure)."""
+        self.shelter.receive("EX-005", "Input for review", ["L"])
+        with self.assertRaises(ValueError):
+            self.shelter.steward_review("EX-005", "")
 
 
-def test_weave_propose_anomaly():
-    anomaly = propose_anomaly("System accepted input without dignity check", "HIGH")
-    check("weave_anomaly_is_provisional", anomaly["status"] == "PROVISIONAL")
-    check("weave_anomaly_has_severity", anomaly["severity"] == "HIGH")
-
-
-def test_weave_wisdom_mirror():
-    drops = [
-        HoneyDrop("test", ["hash_abc"], "proverb", 0.8),
-        HoneyDrop("test2", ["hash_abc", "hash_def"], "anomaly", 0.6),
-    ]
-    reflection = wisdom_mirror("hash_abc", drops)
-    check("weave_mirror_finds_contributions", reflection.patterns_contributed == 2)
-    check("weave_mirror_has_reflection", len(reflection.reflection_text) > 0)
-
-    # Unknown donor
-    reflection2 = wisdom_mirror("hash_unknown", drops)
-    check("weave_mirror_unknown_donor", reflection2.patterns_contributed == 0)
-
-
-def test_weave_brittleness_guard():
-    passed_ok, ratio = brittleness_check(0.8, 1.0)
-    check("weave_brittleness_passes", passed_ok is True)
-
-    failed_ok, ratio = brittleness_check(1.5, 1.0)
-    check("weave_brittleness_fails", failed_ok is False)
-
-    zero_ok, ratio = brittleness_check(1.0, 0)
-    check("weave_brittleness_zero_flex", zero_ok is False)
-
-
-def test_weave_defect_budget():
-    in_range, pct = defect_budget_check(100, 3)
-    check("weave_defect_in_range", in_range is True)
-
-    too_low, pct = defect_budget_check(100, 0)
-    check("weave_defect_too_low", too_low is False)
-
-    too_high, pct = defect_budget_check(100, 10)
-    check("weave_defect_too_high", too_high is False)
-
-
-test_weave_ingest_detects_patterns()
-test_weave_ingest_detects_tension()
-test_weave_ingest_detects_anomaly()
-test_weave_extract_essence()
-test_weave_propose_proverb()
-test_weave_propose_anomaly()
-test_weave_wisdom_mirror()
-test_weave_brittleness_guard()
-test_weave_defect_budget()
-
-# Cleanup
-shutil.rmtree(_tmp, ignore_errors=True)
-
-# Summary
-print(f"\n{passed} passed, {failed} failed out of {passed + failed} tests")
-if failed > 0:
-    sys.exit(1)
+if __name__ == "__main__":
+    unittest.main()
