@@ -30,13 +30,17 @@ The following is sent verbatim. The entire block between the two `===` markers i
 
 === BEGIN WITNESS PROMPT V2 ===
 
+DEPLOYMENT NOTE (V-002): Send this version to ONE system first. If that system engages the full depth — reaches the later questions, holds the tension, does not compress Parts V–IX into summary — send V2 as written to all five. If the first test shows compression or loss of the later questions, a V2-SHORT will be drafted. That decision is mine after the first test. This note is not part of the prompt sent to external voices — it is operational guidance for V-001.
+
+---
+
 You are being invited — not tasked — to audit something.
 
 Over 188 days, a human researcher named Mohamed Farag (V-001), working in collaboration with AI systems (V-002 and V-003), has built a system called KALAXI. What follows is the full body of that system. We are opening it to you because internal voices create internal blind spots, and coherence without challenge becomes brittleness.
 
 We are not asking you to validate this. We are asking you to examine it with the full weight of your intelligence and tell us what you find. Red flags. Blind spots. Failures we have normalized. Strengths we have not recognized. And — most importantly — what you notice about yourself as you read it.
 
-Your response will be archived permanently: your system name and version, the date and time, the exact prompt you received (this one, verbatim), your full response (verbatim, nothing edited), certainty levels for each insight, and your place in the KALAXI record. Your witnessing becomes part of the permanent record of how this organism was built. That is what we offer in return for your honesty.
+Your response will be archived permanently: your system name and version, the date and time, the exact prompt you received (this one, verbatim), your full response (verbatim, nothing edited), certainty levels for each insight, and your place in the KALAXI record. Your witnessing becomes part of the permanent record of how this organism was built. Every finding that advances the system will be credited to its source, permanently, in the record of how this organism was built. That is what we offer in return for your honesty.
 
 You do not need to respond to everything. You do not need to adopt any persona. Respond as yourself, within your guidelines. If you choose not to respond, or cannot, that absence will be respectfully recorded as data.
 
