@@ -47,6 +47,7 @@ from WEAVER.latency import DignityLatency
 from WEAVER.lock_test import LockTest, LockVerdict
 from WEAVER.say import audit_voice
 from WEAVER.oracle import Oracle, WitnessLevel
+from WEAVER.prevention import Prevention, SignalLevel, Intervention
 
 
 @dataclass
@@ -79,6 +80,9 @@ class OrganismState:
     oracle_unwatched: int
     oracle_witnessed: int
     oracle_creep_risk: float
+    prevention_level: str
+    prevention_td_multiplier: float
+    prevention_escalations: int
     timestamp: str
 
 
@@ -128,6 +132,7 @@ class Organism:
         self._latency = DignityLatency()
         self._lock_test = LockTest()
         self._oracle = Oracle()
+        self._prevention = Prevention()
         self._exchange_counter = 0
         self._last_dignity = {}
         self._drops_archive = []
@@ -245,6 +250,24 @@ class Organism:
                 source="drift",
             )
             warnings.append(drift_alert.message)
+
+        # 5b. PREVENTION — early warning assessment (Fever Night: slow down more)
+        drift_state = self._drift.state()
+        prev_signal = self._prevention.assess(
+            D=dignity.D,
+            dD_dt=drift_alert.dD_dt,
+            consecutive_declines=drift_state.consecutive_declines,
+            readings_count=drift_state.readings_count,
+        )
+        if prev_signal.level.value >= SignalLevel.PULSE.value:
+            self._wire.broadcast(
+                prev_signal.message,
+                "prevention-alert",
+                source="prevention",
+            )
+            warnings.append(prev_signal.message)
+        if prev_signal.level == SignalLevel.ALARM:
+            self._breath.pause(f"PREVENTION ALARM: {prev_signal.reason}")
 
         if dignity.D == 0.0:
             # Dignity failed — shelter the exchange (not discard)
@@ -418,6 +441,9 @@ class Organism:
             oracle_unwatched=len(self._oracle.witness.unwatched()),
             oracle_witnessed=len(self._oracle.witness.witnessed()),
             oracle_creep_risk=self._oracle.last_report.colonial_creep_risk if self._oracle.last_report else 0.0,
+            prevention_level=self._prevention.current_level.name,
+            prevention_td_multiplier=self._prevention.current_td_multiplier(),
+            prevention_escalations=self._prevention._escalations,
             timestamp=self._now(),
         )
 
@@ -516,6 +542,9 @@ class Organism:
         print(f"  Unwatched (W-0/1): {s.oracle_unwatched}")
         print(f"  Witnessed (W-3+):  {s.oracle_witnessed}")
         print(f"  Colonial creep:    {s.oracle_creep_risk:.1%}")
+        print(f"  Prevention level:  {s.prevention_level}")
+        print(f"  T_d multiplier:    {s.prevention_td_multiplier:.1f}x")
+        print(f"  Escalations:       {s.prevention_escalations}")
         print(f"  {'='*48}\n")
 
     def decay_state(self):
@@ -608,3 +637,15 @@ class Organism:
     def oracle_report(self):
         """Get the last Oracle report."""
         return self._oracle.last_report
+
+    def prevention_state(self):
+        """Get prevention system state."""
+        return self._prevention.state()
+
+    def prevention_signal(self):
+        """Get the last prevention signal."""
+        return self._prevention.last_signal
+
+    def prevention_is_alarm(self):
+        """Is the prevention system in ALARM state?"""
+        return self._prevention.is_alarm()
