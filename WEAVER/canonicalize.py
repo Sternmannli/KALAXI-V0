@@ -27,6 +27,15 @@ from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 from enum import Enum
 
+# Try to load PyNaCl for real Ed25519 signing
+try:
+    from nacl.signing import SigningKey, VerifyKey
+    from nacl.encoding import HexEncoder
+    from nacl.exceptions import BadSignatureError
+    NACL_AVAILABLE = True
+except ImportError:
+    NACL_AVAILABLE = False
+
 ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT))
 
@@ -223,19 +232,39 @@ class ArtifactSigner:
     """
     Ed25519 artifact signing for steward decisions and manifests.
 
-    Currently uses HMAC-SHA256 as a stub. When Ed25519 keys are
-    provisioned (via PyNaCl or cryptography library), the sign/verify
-    methods swap to real Ed25519.
+    Uses real Ed25519 via PyNaCl when available. Falls back to
+    HMAC-SHA256 when PyNaCl is not installed (test/dev environments).
 
     Every signed artifact produces a verification chain entry.
     """
 
-    def __init__(self, signer_id: str = "V-003", signer_role: str = "steward-system"):
+    def __init__(self, signer_id: str = "V-003", signer_role: str = "steward-system",
+                 private_key_path: Optional[str] = None):
         self._signer_id = signer_id
         self._signer_role = signer_role
         self._chain: List[SignedArtifact] = []
-        # Stub key — replace with real Ed25519 keypair
-        self._signing_key = hashlib.sha256(f"KALAXI-STUB-KEY:{signer_id}".encode()).hexdigest()
+        self._use_ed25519 = False
+        self._signing_key_hmac = hashlib.sha256(f"KALAXI-STUB-KEY:{signer_id}".encode()).hexdigest()
+
+        # Load Ed25519 key if available
+        if private_key_path and NACL_AVAILABLE:
+            sk_hex = Path(private_key_path).read_text().strip()
+            self._ed25519_sk = SigningKey(sk_hex, encoder=HexEncoder)
+            self._ed25519_pub = self._ed25519_sk.verify_key.encode(encoder=HexEncoder).decode()
+            self._use_ed25519 = True
+        elif NACL_AVAILABLE and not private_key_path:
+            # Generate ephemeral key for testing/demo
+            self._ed25519_sk = SigningKey.generate()
+            self._ed25519_pub = self._ed25519_sk.verify_key.encode(encoder=HexEncoder).decode()
+            self._use_ed25519 = True
+
+    @property
+    def algorithm(self) -> str:
+        return "Ed25519" if self._use_ed25519 else "HMAC-SHA256-STUB"
+
+    @property
+    def public_key(self) -> Optional[str]:
+        return self._ed25519_pub if self._use_ed25519 else None
 
     def _canonical_json(self, data: dict) -> str:
         """RFC-8785 canonical JSON: sorted keys, no whitespace."""
@@ -245,14 +274,18 @@ class ArtifactSigner:
         """SHA-256 of content."""
         return hashlib.sha256(content.encode()).hexdigest()
 
-    def _sign_stub(self, content_hash: str) -> str:
-        """HMAC-SHA256 stub signature. Replace with Ed25519."""
+    def _sign_hmac(self, content_hash: str) -> str:
+        """HMAC-SHA256 fallback signature."""
         import hmac
         return hmac.new(
-            self._signing_key.encode(),
+            self._signing_key_hmac.encode(),
             content_hash.encode(),
             hashlib.sha256
         ).hexdigest()
+
+    def _sign_ed25519(self, content: bytes) -> str:
+        """Real Ed25519 signature."""
+        return self._ed25519_sk.sign(content).signature.hex()
 
     def sign(self, artifact_id: str, data: dict) -> SignedArtifact:
         """
@@ -263,7 +296,11 @@ class ArtifactSigner:
         """
         canonical = self._canonical_json(data)
         content_hash = self._content_hash(canonical)
-        signature = self._sign_stub(content_hash)
+
+        if self._use_ed25519:
+            signature = self._sign_ed25519(canonical.encode())
+        else:
+            signature = self._sign_hmac(content_hash)
 
         artifact = SignedArtifact(
             artifact_id=artifact_id,
@@ -281,16 +318,25 @@ class ArtifactSigner:
     def verify(self, artifact: SignedArtifact, data: dict) -> bool:
         """
         Verify a signed artifact against its data.
-        Recomputes hash and signature, compares.
+        Uses Ed25519 verification when available, HMAC otherwise.
         """
         canonical = self._canonical_json(data)
         content_hash = self._content_hash(canonical)
-        expected_sig = self._sign_stub(content_hash)
 
-        valid = (
-            artifact.content_hash == content_hash and
-            artifact.signature == expected_sig
-        )
+        if self._use_ed25519:
+            try:
+                vk = self._ed25519_sk.verify_key
+                sig_bytes = bytes.fromhex(artifact.signature)
+                vk.verify(canonical.encode(), sig_bytes)
+                valid = artifact.content_hash == content_hash
+            except (BadSignatureError, ValueError):
+                valid = False
+        else:
+            expected_sig = self._sign_hmac(content_hash)
+            valid = (
+                artifact.content_hash == content_hash and
+                artifact.signature == expected_sig
+            )
 
         artifact.verification_status = "valid" if valid else "invalid"
         return valid
@@ -307,10 +353,46 @@ class ArtifactSigner:
                 "signer_id": artifact.signer_id,
                 "signer_role": artifact.signer_role,
                 "timestamp": artifact.timestamp,
-                "algorithm": "HMAC-SHA256-STUB (Ed25519 ready)",
+                "algorithm": self.algorithm,
             }
         }
+        if self._use_ed25519:
+            signed_manifest["_signature"]["public_key"] = self._ed25519_pub
         return artifact, signed_manifest
+
+    def sign_manifest_bundle(self, manifest: dict) -> dict:
+        """
+        Sign a manifest and return it in the portable bundle format
+        (compatible with ed25519_sign.py CLI).
+        """
+        canonical = self._canonical_json(manifest)
+
+        if self._use_ed25519:
+            sig = self._sign_ed25519(canonical.encode())
+            return {
+                "manifest": manifest,
+                "signatures": [{
+                    "public_key": self._ed25519_pub,
+                    "signature": sig,
+                    "algorithm": "Ed25519",
+                    "signer_id": self._signer_id,
+                    "signer_role": self._signer_role,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                }]
+            }
+        else:
+            content_hash = self._content_hash(canonical)
+            sig = self._sign_hmac(content_hash)
+            return {
+                "manifest": manifest,
+                "signatures": [{
+                    "signature": sig,
+                    "algorithm": "HMAC-SHA256-STUB",
+                    "signer_id": self._signer_id,
+                    "signer_role": self._signer_role,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                }]
+            }
 
     @property
     def chain_length(self) -> int:
@@ -617,18 +699,27 @@ def demo():
     print(f"  Manifest signed:      {sig_artifact.artifact_id}")
     print(f"  Content hash:         {sig_artifact.content_hash[:32]}...")
     print(f"  Signature:            {sig_artifact.signature[:32]}...")
-    print(f"  Algorithm:            HMAC-SHA256-STUB (Ed25519 ready)")
+    print(f"  Algorithm:            {signer.algorithm}")
+    if signer.public_key:
+        print(f"  Public key:           {signer.public_key[:32]}...")
 
     # Verify
     valid = signer.verify(sig_artifact, manifest)
     print(f"  Verification:         {'VALID' if valid else 'INVALID'}")
 
-    # Save
+    # Save inline-signed manifest
     manifest_file = ROOT / "MANIFEST" / "canonical_manifest.json"
     manifest_file.parent.mkdir(parents=True, exist_ok=True)
     with open(manifest_file, "w") as f:
         json.dump(signed_manifest, f, indent=2)
     print(f"  Saved to:             {manifest_file}")
+
+    # Also save portable bundle format (compatible with ed25519_sign.py CLI)
+    bundle = signer.sign_manifest_bundle(manifest)
+    bundle_file = ROOT / "MANIFEST" / "canonical_manifest_bundle.json"
+    with open(bundle_file, "w") as f:
+        json.dump(bundle, f, indent=2)
+    print(f"  Bundle (CLI-compat):  {bundle_file}")
 
     # Save duplicate report
     report_file = ROOT / "MANIFEST" / "duplicate_id_report.json"
