@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="About — KALAM.CH" description="Kalaxi is a constitutional framework for human dignity in computational systems.">
+
+  <section class="page-header">
+    <h1>About Kalaxi</h1>
+    <p class="quiet">A constitutional framework for human dignity in computational systems.</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <section class="content">
+    <div class="text-block">
+      <h2>The Core Idea</h2>
+      <p>Every system that interacts with humans makes ethical choices — whether it knows it or not. Kalaxi makes those choices explicit, testable, and enforceable.</p>
+      <p>The <strong>Dignity Predicate</strong> is evaluated before every output, every action, every state transition. If dignity is violated, the system stops and opens a remedy path.</p>
+    </div>
+
+    <div class="text-block">
+      <h2>The Four Tiers</h2>
+      <dl>
+        <dt>Stone</dt>
+        <dd>The covenants and rules that govern everything. Changing them requires years of consensus.</dd>
+        <dt>Weaver</dt>
+        <dd>Nine modules that do the work: memory, verification, synthesis, voice, pacing.</dd>
+        <dt>Honey</dt>
+        <dd>The growing knowledge: anomalies, proverbs, and patterns from donor contributions.</dd>
+        <dt>Hand</dt>
+        <dd>How donors interact: the Empty Hands Gesture, receipts, and the ledger.</dd>
+      </dl>
+    </div>
+
+    <div class="text-block">
+      <h2>Principles</h2>
+      <ol>
+        <li><strong>Dignity First</strong> — The system stops if dignity is violated</li>
+        <li><strong>Patterns, Not People</strong> — Identity dissolves; wisdom remains</li>
+        <li><strong>Append-Only</strong> — Nothing is ever deleted from the canon</li>
+        <li><strong>Steward Authority</strong> — A human reviews and decides</li>
+        <li><strong>The Gap</strong> — Room is always left for the river to move through</li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <section class="paths">
+    <nav>
+      <a href="/">Home</a>
+      <a href="/canon">Canon</a>
+      <a href="/invitation">Invitation</a>
+    </nav>
+  </section>
+
+</Base>
+
+<style>
+  .page-header {
+    min-height: 50vh;
+    gap: var(--space-3);
+  }
+
+  .quiet {
+    color: var(--text-secondary);
+    max-width: 50ch;
+  }
+
+  .content {
+    min-height: auto;
+    padding: var(--space-8) var(--page-padding);
+    gap: var(--space-12);
+    text-align: left;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .text-block {
+    margin-bottom: var(--space-8);
+  }
+
+  .text-block h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-4);
+    color: var(--accent);
+  }
+
+  .text-block p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-3);
+  }
+
+  .text-block strong {
+    color: var(--text-primary);
+  }
+
+  dl {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  dt {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    color: var(--text-primary);
+  }
+
+  dd {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+  }
+
+  ol {
+    list-style: none;
+    counter-reset: principle;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  ol li {
+    color: var(--text-secondary);
+    counter-increment: principle;
+  }
+
+  ol li strong {
+    color: var(--text-primary);
+  }
+
+  .paths {
+    min-height: 30vh;
+  }
+</style>
