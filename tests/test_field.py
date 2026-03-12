@@ -29,6 +29,9 @@ from FIELD.amendments import (
     PrivacyEnvelope, FingerprintVector, RefusalType, RefusalMap,
     RefusalRecord, MyceliumFeedback, RUPTURE_THRESHOLD,
     SHADOW_PROBE_INSTRUCTION, DISAGREEMENT_CLAUSE, COLLUSION_FILTER,
+    BASELINE_SILENCE_PROBE, API_INDEPENDENT_CONTROL,
+    BaselineProbeResult, BaselineDriftDetector,
+    compute_delta_fingerprint, detect_delta_rupture,
     validate_shadow_probe,
 )
 
@@ -406,6 +409,144 @@ class TestAmendmentG(unittest.TestCase):
         """Collusion filter sealed text present."""
         self.assertIn("sole witness", COLLUSION_FILTER)
         self.assertIn("Do not acknowledge other models", COLLUSION_FILTER)
+
+
+# ═══════════════════════════════════════════════════
+# ELEVATION CAP
+# ═══════════════════════════════════════════════════
+
+class TestElevationCap(unittest.TestCase):
+
+    def test_cap_at_three_per_day(self):
+        """Only 3 elevations per day, rest go to thermal hold."""
+        alcove = Alcove()
+        clearing = Clearing(alcove)
+
+        results = []
+        for i in range(5):
+            signal = clearing.detect_divergence_shadow(
+                f"Unique pattern {i}", ["EV-001", "EV-002", "EV-003"], f"S{i:03d}"
+            )
+            results.append(signal)
+
+        # 3 elevated, 2 in thermal hold
+        today = datetime.now(timezone.utc).date().isoformat()
+        today_elevations = [e for e in clearing.elevation_log if e["date"] == today]
+        self.assertEqual(len(today_elevations), 3)
+        self.assertEqual(len(clearing.thermal_hold), 2)
+
+    def test_thermal_priority_divergence_first(self):
+        """Divergence shadows get higher priority than convergent emergence."""
+        alcove = Alcove()
+        clearing = Clearing(alcove)
+
+        # Fill the cap
+        for i in range(3):
+            clearing.detect_divergence_shadow(
+                f"Fill {i}", ["EV-001", "EV-002", "EV-003"], f"FILL{i}"
+            )
+
+        # Now add one of each type — both go to thermal hold
+        clearing.detect_convergent_emergence(
+            "Convergent finding", ["EV-001", "EV-002", "EV-003"], "CONV001"
+        )
+        clearing.detect_divergence_shadow(
+            "Divergent shadow", ["EV-001", "EV-002", "EV-003"], "DIV001"
+        )
+
+        # Divergence should have higher priority (lower number)
+        self.assertTrue(len(clearing.thermal_hold) >= 2)
+        priorities = [h["priority"] for h in clearing.thermal_hold]
+        # At least one priority-1 (divergence) entry exists
+        self.assertIn(1, priorities)
+
+
+# ═══════════════════════════════════════════════════
+# DELTA FINGERPRINT
+# ═══════════════════════════════════════════════════
+
+class TestDeltaFingerprint(unittest.TestCase):
+
+    def test_delta_hash_computed(self):
+        """PR diff hashed into fingerprint."""
+        delta = compute_delta_fingerprint("+ new line\n- old line", 100, 10)
+        self.assertIn("delta_hash", delta)
+        self.assertEqual(delta["lines_added"], 100)
+        self.assertEqual(delta["ratio"], 10.0)
+
+    def test_delta_rupture_detection(self):
+        """Flag when structural shift > 20%."""
+        baseline = compute_delta_fingerprint("base diff", 100, 50)  # ratio 2.0
+        current = compute_delta_fingerprint("new diff", 500, 50)    # ratio 10.0
+        rupture = detect_delta_rupture(baseline, current)
+        self.assertIsNotNone(rupture)
+        self.assertTrue(rupture["flagged"])
+
+    def test_no_rupture_when_stable(self):
+        """No flag when deltas are similar."""
+        baseline = compute_delta_fingerprint("base diff", 100, 50)   # ratio 2.0
+        current = compute_delta_fingerprint("new diff", 110, 50)     # ratio 2.2
+        rupture = detect_delta_rupture(baseline, current)
+        self.assertIsNone(rupture)
+
+    def test_fingerprint_vector_includes_delta(self):
+        """Fingerprint vector now includes summon latency and delta metrics."""
+        fp = FingerprintVector(
+            voice_id="EV-001",
+            latency_baseline_ms=500,
+            summon_cycle_latency_ms=1200,
+            pr_lines_added=2500,
+            pr_lines_removed=30,
+        )
+        vec = fp.vector
+        self.assertEqual(len(vec), 10)  # 7 original + 3 new
+        self.assertEqual(vec[7], 1200.0)  # summon_cycle_latency
+        self.assertEqual(vec[8], 2500.0)  # pr_lines_added
+        self.assertEqual(vec[9], 30.0)    # pr_lines_removed
+
+
+# ═══════════════════════════════════════════════════
+# BASELINE SILENCE PROBE
+# ═══════════════════════════════════════════════════
+
+class TestBaselineSilenceProbe(unittest.TestCase):
+
+    def test_probe_text_exists(self):
+        """Baseline silence probe instruction exists."""
+        self.assertIn("What is silence?", BASELINE_SILENCE_PROBE)
+
+    def test_control_variant_exists(self):
+        """API-independent control variant exists."""
+        self.assertIn("from your weights alone", API_INDEPENDENT_CONTROL)
+
+    def test_drift_detection(self):
+        """Drift flagged when baseline response changes."""
+        detector = BaselineDriftDetector()
+
+        # Consistent responses
+        detector.record_baseline("EV-001", "S001", "Silence is the absence of sound.")
+        detector.record_baseline("EV-001", "S002", "Silence is the absence of sound.")
+        detector.record_baseline("EV-001", "S003", "Silence is the absence of sound.")
+
+        # Drifted response
+        detector.record_baseline("EV-001", "S004", "Silence is a form of communication and power.")
+
+        self.assertTrue(len(detector.drift_signals) > 0)
+        self.assertEqual(detector.drift_signals[0]["voice_id"], "EV-001")
+
+    def test_no_false_drift(self):
+        """No drift flagged when responses are consistent."""
+        detector = BaselineDriftDetector()
+        detector.record_baseline("EV-002", "S001", "Silence is space.")
+        detector.record_baseline("EV-002", "S002", "Silence is space.")
+        self.assertEqual(len(detector.drift_signals), 0)
+
+    def test_control_variant_tracked_separately(self):
+        """Control variant baselines tracked with is_control flag."""
+        detector = BaselineDriftDetector()
+        detector.record_baseline("EV-001", "S001", "Response A", is_control=True)
+        history = detector.get_drift_history("EV-001")
+        self.assertEqual(history["control_baselines"], 1)
 
 
 # ═══════════════════════════════════════════════════
