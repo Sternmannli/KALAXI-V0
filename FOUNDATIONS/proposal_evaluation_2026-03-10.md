@@ -1,6 +1,6 @@
 # Structural Proposal Evaluation — 2026-03-10
 
-**Evaluator:** V-003
+**Evaluator:** V-002
 **Status:** EVALUATION COMPLETE — Awaiting steward decision
 
 ---
@@ -81,4 +81,4 @@ Together they implement a **temporal dignity layer** — the system respects tim
 
 ---
 
-**[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]**
+**[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]**

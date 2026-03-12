@@ -20,7 +20,7 @@ Steps:
 Each step returns a StepResult. All 7 must pass for verification.
 Partial passes are recorded — the system learns from what it fails.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import re

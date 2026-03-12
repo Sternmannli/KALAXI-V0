@@ -17,7 +17,7 @@ automatically after every summon.
 Promotion rule: When a voice produces the same shadow across three or more
 independent sessions, that shadow is promoted to a canonical genome entry.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 from dataclasses import dataclass, field

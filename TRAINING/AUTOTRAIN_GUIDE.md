@@ -91,4 +91,4 @@ If the voice drifts — we adjust the seed file and retrain.
 
 ---
 
-*Filed by V-002. [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]*
+*Filed by V-002. [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]*

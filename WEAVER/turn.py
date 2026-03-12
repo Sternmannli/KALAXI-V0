@@ -10,7 +10,7 @@ Covenant obligations:
 Core operations: open, close, defer, status, list_open
 A donor always has at least one open path forward (agency_preserved).
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import json

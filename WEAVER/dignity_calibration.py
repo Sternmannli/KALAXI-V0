@@ -23,7 +23,7 @@ Its validity comes from:
 
 This module provides the test harness for all three.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 from dataclasses import dataclass, field
@@ -460,7 +460,7 @@ def main():
     print(f"  D variance:    {irt['variance_D']:.6f}")
 
     print(f"\n{'=' * 60}")
-    print(f"[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]")
+    print(f"[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]")
 
 
 if __name__ == "__main__":

@@ -140,4 +140,4 @@ Applies equally to convergent emergence and divergence shadow.
 
 ---
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]

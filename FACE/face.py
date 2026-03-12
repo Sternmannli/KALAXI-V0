@@ -12,7 +12,7 @@ Shows:
   - Pending decisions awaiting steward
   - Next actions
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import re
@@ -206,7 +206,7 @@ def section_actions():
     print(f"    python3 SCRIPTS/health_dashboard.py")
 
     print(f"\n  {'='*52}")
-    print(f"  [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]")
+    print(f"  [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]")
     print(f"  {'='*52}\n")
 
 

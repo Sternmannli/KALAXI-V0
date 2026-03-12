@@ -10,7 +10,7 @@ Covenant obligations:
 Core operations: store, retrieve, expire, lock, append
 Append-only for canonical artifacts. No overwrite.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import json

@@ -8,7 +8,7 @@ persistence, and origin embedding all function correctly.
 No metadata is ever deleted. No metadata is ever summarized away.
 Every pattern carries its full traceable address.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import json
@@ -72,7 +72,7 @@ def populated_gathering(gathering):
         condition=Condition.ANALYTICAL,
         domain="family",
     )
-    # Relay from V-003
+    # Relay from V-002
     gathering.wrap(
         kind=EventKind.RELAY,
         speaker=Speaker.V003,

@@ -23,7 +23,7 @@ Signal Hierarchy (from SEALED_GATE_SPEC.md):
   - Single instance of cognitive torture vector = warning (D reduced)
   - >= 3 instances within 7 Breath cycles = full sealed-gate activation
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import re

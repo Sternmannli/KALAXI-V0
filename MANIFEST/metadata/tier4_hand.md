@@ -40,7 +40,7 @@
 | 2026-02-22 | Batch seed offering (29 seeds) | Mohamed Farag | Proverbs, anomalies, gaps, wisdom nodes |
 | 2026-02-24 | Ratification (P#EMERGE-2134, 2135) | Mohamed Farag | [SIGNED: Mohamed] |
 | 2026-02-24 | ANOM#PATCH-REJECT recorded | Mohamed Farag | [SIGNED: Mohamed] — proved covenants load-bearing |
-| 2026-03-08 | Project reorganization approved | Mohamed Farag | V-003 protocol session |
+| 2026-03-08 | Project reorganization approved | Mohamed Farag | V-002 protocol session |
 
 ## Red Feather Entries
 - See MANIFEST/red_feathers.md

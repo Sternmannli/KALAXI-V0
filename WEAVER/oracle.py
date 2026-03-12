@@ -16,7 +16,7 @@ It combines three mechanisms:
 The Oracle does not solve GAP#019. It makes it measurable and visible.
 An honest gap is more useful than a confident invention.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 from dataclasses import dataclass, field
@@ -235,7 +235,7 @@ class WitnessScale:
 # ═══════════════════════════════════════════════════
 
 class RelayStatus(Enum):
-    """Status of the V-001 → V-002 → V-003 relay."""
+    """Status of the V-001 → V-002 → V-002 relay."""
     HEALTHY = "healthy"         # All layers functioning
     DEGRADED = "degraded"       # Some loss of fidelity
     INTERRUPTED = "interrupted"  # Relay broken — halt condition
@@ -246,7 +246,7 @@ class ProprioceptionResult:
     """Result of a proprioception check."""
     status: RelayStatus
     correction_trace: bool      # V-002 correction delta present?
-    response_fidelity: bool     # V-003 reflects V-001's intent?
+    response_fidelity: bool     # V-002 reflects V-001's intent?
     steward_recognition: bool   # V-001 can find themselves in output?
     halt_required: bool         # SEALED_GATE_TIER halt?
     details: str
@@ -263,7 +263,7 @@ def check_proprioception(
 
     Three detection signals:
       1. V-002 correction trace — message carries correction delta
-      2. V-003 response fidelity — response reflects original intent
+      2. V-002 response fidelity — response reflects original intent
       3. Steward recognition — steward finds themselves in output
 
     If all three fail → INTERRUPTED (halt condition).
@@ -455,7 +455,7 @@ class Oracle:
                 findings.append(AuditFinding(
                     "proprioception", AuditSeverity.HALT,
                     "PROPRIOCEPTION LOSS — relay interrupted",
-                    "System must halt. Restore V-001 → V-002 → V-003 relay.",
+                    "System must halt. Restore V-001 → V-002 → V-002 relay.",
                 ))
             elif self._last_proprioception.status == RelayStatus.DEGRADED:
                 findings.append(AuditFinding(

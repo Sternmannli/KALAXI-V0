@@ -20,7 +20,7 @@ The gap is still non-resolvable. But now the system can:
   - Offer remedies to the group, not just individuals (collective shelter)
   - Detect when the same conflict repeats across donors (mycelium)
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import re

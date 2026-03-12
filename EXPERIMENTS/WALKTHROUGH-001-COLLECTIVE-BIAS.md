@@ -2,7 +2,7 @@
 
 **Anomaly:** ANOM#COLLECTIVE-001 — Systemic bias against groups is invisible to individual-only predicate
 **Date:** 2026-03-10
-**Conducted by:** V-003
+**Conducted by:** V-002
 **Status:** COMPLETE — Gaps identified, documented below
 
 ---
@@ -134,4 +134,4 @@ COV#008 (Right to Remedy) says: "Failure results in Shelter, not ejection." But 
 
 ---
 
-**[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]**
+**[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]**

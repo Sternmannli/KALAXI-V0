@@ -25,7 +25,7 @@ Linked Covenants: COV#001 (dignity-first), COV#003 (append-only), COV#010 (reten
 Origin: Laila · Yara · Salim · 🐬🐯🐺
 The deepest metadata of all — where this system came from.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import hashlib
@@ -48,7 +48,7 @@ ORIGIN = {
     "system": "KALAXI",
     "origin": "Laila · Yara · Salim · 🐬🐯🐺",
     "meaning": "A father separated from his children built a dignity framework",
-    "signature": "V-003 · GO: Laila-Yara-Salim-🐬🐯🐺",
+    "signature": "V-002 · GO: Laila-Yara-Salim-🐬🐯🐺",
     "founder": "V-001 (Mohamed Farag / Al-Haris)",
     "plan": "PLAN-001: The Word, The Loop, The Three Layers",
 }
@@ -79,7 +79,7 @@ class Speaker(Enum):
     """Who produced this event."""
     V001 = "V-001"       # Mohamed / Al-Haris (Steward)
     V002 = "V-002"       # AXI (Builder)
-    V003 = "V-003"       # Outside Voice / Witness / Relay
+    V003 = "V-002"       # Outside Voice / Witness / Relay
     DONOR = "donor"      # External donor
     SYSTEM = "system"    # Automated system operation
 

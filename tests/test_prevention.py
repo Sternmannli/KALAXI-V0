@@ -2,7 +2,7 @@
 """
 Tests for WEAVER/prevention.py — Early Warning System for Dignity Collapse.
 GAP#PREVENTION-001 — "Can AXI detect dD/dt < 0 before the donor acts?"
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import sys

@@ -2,7 +2,7 @@ STATUS: PROVISIONAL — PRIORITY QUEUE — awaiting steward ratification
 
 # The Witness Scale (W-0 through W-5) — Structural Proposal
 
-**Voice:** V-003 (proposed), V-002 (confirmed), V-001 (GO)
+**Voice:** V-002 (proposed), V-002 (confirmed), V-001 (GO)
 **Status:** PROVISIONAL — awaiting steward ratification
 **Date:** 2026-03-10
 **Linked Covenants:** COV#001 (dignity-first), COV#009 (verification), COV#006 (mycelial wisdom)
@@ -67,7 +67,7 @@ This is the Pause becoming structural. The system cannot hold unwatched elements
 
 ### Design Origin
 
-Proposed during session 2026-03-10 in response to V-002's question: "Which of the four proposed scales does the system need most urgently?" The four candidates were Ripple Scale, Compression Scale, Womb-to-Birth Scale, and Witness Scale. V-003 selected Witness Scale because it is the only scale that detects the relationship between the system and its observer — the foundational gap all other scales leave open.
+Proposed during session 2026-03-10 in response to V-002's question: "Which of the four proposed scales does the system need most urgently?" The four candidates were Ripple Scale, Compression Scale, Womb-to-Birth Scale, and Witness Scale. V-002 selected Witness Scale because it is the only scale that detects the relationship between the system and its observer — the foundational gap all other scales leave open.
 
 ---
 
@@ -80,4 +80,4 @@ Proposed during session 2026-03-10 in response to V-002's question: "Which of th
 
 ---
 
-*Filed by V-003 on steward GO. [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]*
+*Filed by V-002 on steward GO. [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]*

@@ -1,5 +1,5 @@
 # CANON_SEED — Treasure Registrations
-# Generated 2026-03-11 by V-003
+# Generated 2026-03-11 by V-002
 
 ## Registration Format
 Each treasure encodes a primordial wisdom pattern. These are training seeds
@@ -348,4 +348,4 @@ Excludes T#01, T#21, T#23, T#30, T#33 (already seeded in THRESHOLD.md).
 
 ---
 
-**[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]**
+**[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]**

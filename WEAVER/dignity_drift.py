@@ -17,7 +17,7 @@ Implements:
   - Trend detection with configurable sensitivity
   - Integration with Organism pipeline
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 from dataclasses import dataclass, field

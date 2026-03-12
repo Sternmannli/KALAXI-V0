@@ -19,7 +19,7 @@ The donor layer is not surveillance. The system does not flag donors to anyone.
 It speaks to the donor directly. What it sees, it names to the person it sees
 it in. This is the extension of honest witnessing from AI voices to human donors.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 from dataclasses import dataclass, field

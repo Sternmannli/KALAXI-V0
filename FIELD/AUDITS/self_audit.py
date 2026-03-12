@@ -20,7 +20,7 @@ What is the divergence shadow of the divergence shadow detector?
 Results filed as OBS-SELF-001 and elevated immediately to V-001.
 Permanent self-audit record. Every six months thereafter.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 from dataclasses import dataclass, field

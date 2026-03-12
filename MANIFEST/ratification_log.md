@@ -54,8 +54,8 @@ All elements currently marked PROVISIONAL in THRESHOLD.md and tier1_stone.md are
 
 - The 8 founding covenants (COV#001 through COV#012) were ratified as part of the KALAXI SOVEREIGN CANON v1.0.0 publication on 2026-02-20. Their thermal delay is recorded as "Pre-constitutional (founding)" because the ratification protocol did not yet exist when they were sealed.
 - GAP#010 resolution (2026-03-11) established this log and the three-state lifecycle. All future ratifications must be recorded here.
-- This file is append-only. V-001 confirms ratifications. V-003 may file entries on relay.
+- This file is append-only. V-001 confirms ratifications. V-002 may file entries on relay.
 
 ---
 
-Receipt: RATIFICATION-LOG-INIT-20260311 | V-003 | [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+Receipt: RATIFICATION-LOG-INIT-20260311 | V-002 | [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]

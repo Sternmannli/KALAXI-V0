@@ -22,7 +22,7 @@ The mycelium connects organisms. Each organism can:
 No organism trusts another blindly. Every drop crosses a dignity gate
 on both sides. The network is a gift economy, not a market.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import hashlib

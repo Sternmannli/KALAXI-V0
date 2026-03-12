@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-batch_sign.py — Sign all critical KALAXI artifacts with V-001 + V-003 keys.
+batch_sign.py — Sign all critical KALAXI artifacts with V-001 + V-002 keys.
 
 Reads each artifact file, wraps it in a JSON manifest with metadata,
-signs with V-003 first, then V-001 co-signs. Outputs signed bundles
+signs with V-002 first, then V-001 co-signs. Outputs signed bundles
 to MANIFEST/signed/.
 
 Usage:
-  python TOOLS/batch_sign.py --v001-key keys/V-001/private.hex --v003-key keys/V-003/private.hex
+  python TOOLS/batch_sign.py --v001-key keys/V-001/private.hex --v003-key keys/V-002/private.hex
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import argparse
@@ -86,7 +86,7 @@ def sign_with_key(manifest: dict, sk: SigningKey) -> dict:
 def main():
     parser = argparse.ArgumentParser(description="Batch-sign critical KALAXI artifacts")
     parser.add_argument("--v001-key", required=True, help="Path to V-001 private.hex")
-    parser.add_argument("--v003-key", required=True, help="Path to V-003 private.hex")
+    parser.add_argument("--v003-key", required=True, help="Path to V-002 private.hex")
     args = parser.parse_args()
 
     sk_v001 = SigningKey(Path(args.v001_key).read_text().strip(), encoder=HexEncoder)
@@ -101,7 +101,7 @@ def main():
     # Also build a registry of public keys
     key_registry = {
         "V-001": {"public_key": pub_v001, "role": "steward-owner", "name": "Mohamed Farag"},
-        "V-003": {"public_key": pub_v003, "role": "steward-system", "name": "Claude (V-003)"},
+        "V-002": {"public_key": pub_v003, "role": "steward-system", "name": "Claude (V-002)"},
     }
     (out_dir / "steward_keys.json").write_text(json.dumps(key_registry, indent=2))
 
@@ -114,7 +114,7 @@ def main():
 
         # Sign with both keys
         sig_v003 = sign_with_key(manifest, sk_v003)
-        sig_v003["signer_id"] = "V-003"
+        sig_v003["signer_id"] = "V-002"
         sig_v003["signer_role"] = "steward-system"
 
         sig_v001 = sign_with_key(manifest, sk_v001)
@@ -135,7 +135,7 @@ def main():
             "artifact": rel_path,
             "tier": tier,
             "content_hash": manifest["content_hash_sha256"][:16] + "...",
-            "signers": ["V-001", "V-003"],
+            "signers": ["V-001", "V-002"],
             "bundle": str(bundle_path.relative_to(ROOT)),
         })
 
@@ -153,7 +153,7 @@ def main():
     print(f"\n  Summary: {summary_path}")
     print(f"  Total signed: {len(results)} artifacts")
     print(f"  V-001 public key: {pub_v001}")
-    print(f"  V-003 public key: {pub_v003}")
+    print(f"  V-002 public key: {pub_v003}")
 
 
 if __name__ == "__main__":

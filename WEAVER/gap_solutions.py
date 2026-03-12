@@ -27,7 +27,7 @@ Five gap solutions in one module:
     For non-Sealed-Gate dignity halts, donor can contest.
     A system without appeal is a system without accountability.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import re

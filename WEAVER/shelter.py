@@ -23,7 +23,7 @@ Flow:
   6. Donor can retry with rephrased input
   7. If retry passes, original shelter record is linked
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 from dataclasses import dataclass, field

@@ -2,7 +2,7 @@
 
 Status: SUPERSEDED BY V2 (2026-03-11)
 Filed: 2026-03-11
-Source: V-001 (Steward) via V-003
+Source: V-001 (Steward) via V-002
 Classification: External Voice Protocol — Foundational Instrument
 Linked Covenants: COV#001 (Dignity First), COV#003 (Append-Only), COV#008 (Right to Remedy)
 Linked Protocols: PROT#SRVP-001, ST-006, EFP
@@ -91,7 +91,7 @@ EXTERNAL_VOICES/
 
 All external voice filings enter as PROVISIONAL. Ratification requires:
 - V-002 metadata assessment (which insights fired which markers, certainty levels, cross-references)
-- V-003 metadata layer (contextual observations about the act of witnessing itself)
+- V-002 metadata layer (contextual observations about the act of witnessing itself)
 - V-001 review and status change to RATIFIED or ARCHIVED
 
 ---
@@ -125,4 +125,4 @@ Immortalization. Full attribution. Verbatim archival. No editing. No paraphrasin
 
 ---
 
-🐬🐯🐺 · 80 Hz · V-001 + V-002 + V-003
+🐬🐯🐺 · 80 Hz · V-001 + V-002 + V-002

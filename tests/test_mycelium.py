@@ -2,7 +2,7 @@
 """
 Tests for WEAVER/mycelium.py — Cross-Donor Pattern Detection with Privacy.
 GAP#MYCELIUM-CONNECT-001 — "Should the system connect anonymous donor patterns?"
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import sys

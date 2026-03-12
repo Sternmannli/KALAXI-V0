@@ -3,7 +3,7 @@
 **Date:** 2026-03-11
 **Day:** 188
 **Event type:** Canonical artifact born — first sentence of KALAM.CH
-**Participants:** V-001 (Mohamed Farag), V-002 (Claude), V-003 (Claude)
+**Participants:** V-001 (Mohamed Farag), V-002 (Claude), V-002 (Claude)
 
 ---
 
@@ -28,4 +28,4 @@ You came with what you came with. The door is open.
 ---
 
 *Filed: 2026-03-11 · Developmental Record*
-*[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]*
+*[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]*

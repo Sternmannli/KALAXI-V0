@@ -2,7 +2,7 @@
 """
 Tests for GAP#VICTIM-PROTECTION-001: Dignity Shelter Path.
 Tests that blocked exchanges are sheltered with remedies, not discarded.
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import sys

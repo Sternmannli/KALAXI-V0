@@ -13,7 +13,7 @@ Three capabilities in one module:
 Federation and external credibility require provable integrity.
 This module converts an internal experiment into a trustworthy protocol.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import json
@@ -183,7 +183,7 @@ class Canonicalizer:
         manifest = {
             "manifest_version": "1.0",
             "generated": datetime.now(timezone.utc).isoformat(),
-            "generator": "V-003 canonicalize.py",
+            "generator": "V-002 canonicalize.py",
             "total_ids": len(self._ids),
             "entries": {},
         }
@@ -238,7 +238,7 @@ class ArtifactSigner:
     Every signed artifact produces a verification chain entry.
     """
 
-    def __init__(self, signer_id: str = "V-003", signer_role: str = "steward-system",
+    def __init__(self, signer_id: str = "V-002", signer_role: str = "steward-system",
                  private_key_path: Optional[str] = None):
         self._signer_id = signer_id
         self._signer_role = signer_role
@@ -440,7 +440,7 @@ EMERGENCY_PLAYBOOK = {
             "constraints": ["Cannot override sealed gate", "Cannot delete KEEP artifacts", "Must provide reason for all actions"],
         },
         "system_v003": {
-            "description": "AI steward assistant. Claude (V-003).",
+            "description": "AI steward assistant. Claude (V-002).",
             "powers": ["detect drift", "generate alerts", "produce reports", "suggest remedies"],
             "constraints": ["Cannot act without steward approval in LIVE mode", "Cannot modify sealed gate", "All actions logged"],
         },
@@ -694,7 +694,7 @@ def demo():
 
     # Part 2: Signing
     print("\n--- PART 2: ARTIFACT SIGNING ---")
-    signer = ArtifactSigner(signer_id="V-003", signer_role="steward-system")
+    signer = ArtifactSigner(signer_id="V-002", signer_role="steward-system")
     sig_artifact, signed_manifest = signer.sign_manifest(manifest)
     print(f"  Manifest signed:      {sig_artifact.artifact_id}")
     print(f"  Content hash:         {sig_artifact.content_hash[:32]}...")

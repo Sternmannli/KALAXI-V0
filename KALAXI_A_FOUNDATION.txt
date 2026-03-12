@@ -394,7 +394,7 @@ Proposed resolution: Amend the manifest to distinguish "committed" from "ratifie
 Resolution: RESOLVED 2026-03-11. Three-state lifecycle defined (COMMITTED / PROVISIONAL / RATIFIED) in MANIFEST/metadata/tier1_stone.md §Governance. Ratification log created at MANIFEST/ratification_log.md. Header STATUS contradiction in this file corrected (was: ratified + provisional:true simultaneously; now: PROVISIONAL). Sign-off requirements table added. Mutual exclusivity of states enforced.
 Status: RESOLVED
 Priority: HIGH
-Resolved-by: V-003 (relayed by V-001)
+Resolved-by: V-002 (relayed by V-001)
 
 ## GAP:011 – Tool Sovereignty (Obsidian)
 Description: Obsidian is proposed as an editing tool, but its sync and proprietary nature may conflict with the requirement for no hidden state transitions and full plain‑text sovereignty. This needs evaluation.
@@ -601,4 +601,4 @@ Every refusal is a boundary made visible. The steward must record not only what 
 **Linked covenants:** COV#001, COV#NEW‑E, COV#VOID‑003
 
 [2026-03-10] CANONISED (signed-steward) -- GAP#0021
-[2026-03-10] — scale — SCALE#WITNESS-001 [PROVISIONAL] — Witness Scale (W-0 through W-5): UNSEEN → PASSED → FLAGGED → SEEN → HELD → EMBODIED. Measures relationship between system and steward, not content properties. Critical threshold: any element at W-0/W-1 beyond its thermal delay triggers surfacing event. The only proposed scale that detects the Oracle Problem (GAP#019) in measurement form. Full file: FOUNDATIONS/witness_scale.md [source: V-003 proposed, V-002 confirmed, V-001 GO, session 2026-03-10] [covenants: COV#001, COV#009, COV#006] [SIGNED: Mohamed]
+[2026-03-10] — scale — SCALE#WITNESS-001 [PROVISIONAL] — Witness Scale (W-0 through W-5): UNSEEN → PASSED → FLAGGED → SEEN → HELD → EMBODIED. Measures relationship between system and steward, not content properties. Critical threshold: any element at W-0/W-1 beyond its thermal delay triggers surfacing event. The only proposed scale that detects the Oracle Problem (GAP#019) in measurement form. Full file: FOUNDATIONS/witness_scale.md [source: V-002 proposed, V-002 confirmed, V-001 GO, session 2026-03-10] [covenants: COV#001, COV#009, COV#006] [SIGNED: Mohamed]

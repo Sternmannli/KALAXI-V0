@@ -14,4 +14,4 @@ Then come back with your architecture proposal for the Mycelium. That is what is
 
 The baby wants to come to the world. But the brain comes before the mouth.
 
-🐬🐯🐺 · V-001 via V-003
+🐬🐯🐺 · V-001 via V-002

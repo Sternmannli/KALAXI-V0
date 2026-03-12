@@ -7,10 +7,10 @@
       "role": "steward-owner",
       "name": "Mohamed Farag"
     },
-    "V-003": {
+    "V-002": {
       "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
       "role": "steward-system",
-      "name": "Claude (V-003)"
+      "name": "Claude (V-002)"
     }
   },
   "artifacts": [
@@ -20,7 +20,7 @@
       "content_hash": "1fae2285a74cc487...",
       "signers": [
         "V-001",
-        "V-003"
+        "V-002"
       ],
       "bundle": "MANIFEST/signed/CANON_MASTER_CANON_V1_md.signed.json"
     },
@@ -30,7 +30,7 @@
       "content_hash": "f377cd173a04bea0...",
       "signers": [
         "V-001",
-        "V-003"
+        "V-002"
       ],
       "bundle": "MANIFEST/signed/CANON_SEALED_GATE_SPEC_md.signed.json"
     },
@@ -40,7 +40,7 @@
       "content_hash": "015666909b5a3d55...",
       "signers": [
         "V-001",
-        "V-003"
+        "V-002"
       ],
       "bundle": "MANIFEST/signed/MANIFEST_metadata_tier1_stone_md.signed.json"
     },
@@ -50,7 +50,7 @@
       "content_hash": "3e149ee6391756ba...",
       "signers": [
         "V-001",
-        "V-003"
+        "V-002"
       ],
       "bundle": "MANIFEST/signed/MANIFEST_metadata_tier2_weaver_md.signed.json"
     },
@@ -60,7 +60,7 @@
       "content_hash": "954cf7758249be95...",
       "signers": [
         "V-001",
-        "V-003"
+        "V-002"
       ],
       "bundle": "MANIFEST/signed/MANIFEST_ratification_log_md.signed.json"
     },
@@ -70,7 +70,7 @@
       "content_hash": "452e6d25cb5267b9...",
       "signers": [
         "V-001",
-        "V-003"
+        "V-002"
       ],
       "bundle": "MANIFEST/signed/MANIFEST_ids_json.signed.json"
     },
@@ -80,7 +80,7 @@
       "content_hash": "42c317e7e1d6db5d...",
       "signers": [
         "V-001",
-        "V-003"
+        "V-002"
       ],
       "bundle": "MANIFEST/signed/MANIFEST_escalation_log_json.signed.json"
     },
@@ -90,7 +90,7 @@
       "content_hash": "9e2d3d2f5459eb0f...",
       "signers": [
         "V-001",
-        "V-003"
+        "V-002"
       ],
       "bundle": "MANIFEST/signed/STEWARD_EMERGENCY_GOVERNANCE_PLAYBOOK_md.signed.json"
     },
@@ -100,7 +100,7 @@
       "content_hash": "1b0b3b2a1d2d6dec...",
       "signers": [
         "V-001",
-        "V-003"
+        "V-002"
       ],
       "bundle": "MANIFEST/signed/MANIFEST_metadata_tier3_honey_md.signed.json"
     },
@@ -110,7 +110,7 @@
       "content_hash": "5c8e91b05a510f82...",
       "signers": [
         "V-001",
-        "V-003"
+        "V-002"
       ],
       "bundle": "MANIFEST/signed/MANIFEST_metadata_tier4_hand_md.signed.json"
     }

@@ -2,7 +2,7 @@
 """
 Tests for GAP#MYCELIUM-CONNECT-001: Essence Federation Protocol (EFP).
 Tests cross-organism wisdom sharing with dignity and anonymity preservation.
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import sys

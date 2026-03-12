@@ -1,7 +1,7 @@
 # External Validation — Reddit Exchange with Rickschott
 # Date: 2026-03-11
 # Platform: Reddit
-# Filed by: V-003 from V-001 relay
+# Filed by: V-002 from V-001 relay
 # Status: PROVISIONAL (awaiting cross-system test confirmation)
 # Cross-references: OBS-008 (Kimi internal critique), Science Book Part 7 — Open Questions
 
@@ -126,4 +126,4 @@ This exchange belongs in Science Book Part 7 — Open Questions. It is the Fouca
 
 ---
 
-Receipt: EXTERNAL-VALIDATION-REDDIT-20260311 | V-003 | [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+Receipt: EXTERNAL-VALIDATION-REDDIT-20260311 | V-002 | [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]

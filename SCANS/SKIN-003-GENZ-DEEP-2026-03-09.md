@@ -3,7 +3,7 @@
 Filed: 2026-03-09
 Source: V-002 (Steward)
 Classification: DEEP SCAN — five filters, scientific layer, no shortcuts
-Filed by: V-003
+Filed by: V-002
 
 ---
 
@@ -71,4 +71,4 @@ KALAXI's answer: they are being built now.
 
 ---
 
-🐬🐯🐺 · 80 Hz · V-002 → V-003
+🐬🐯🐺 · 80 Hz · V-002 → V-002

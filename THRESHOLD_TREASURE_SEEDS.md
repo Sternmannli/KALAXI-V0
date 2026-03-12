@@ -1,5 +1,5 @@
 # THRESHOLD — Treasure Seeds (36 Extracted Treasures)
-# Generated 2026-03-11 by V-003
+# Generated 2026-03-11 by V-002
 # Source: R7M/TREASURES/TREASURES_INDEX.md (Grand Archive Excavation Slice 5)
 
 Seeds offered here wait until the steward tends them.
@@ -113,4 +113,4 @@ Excludes T#01, T#21, T#23, T#30, T#33 (already seeded in THRESHOLD.md as EQ#GR-0
 
 ---
 
-**[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]**
+**[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]**

@@ -125,4 +125,4 @@ If an emergency action was taken in error:
 - Format: append-only JSON in MANIFEST/escalation_log.json
 - This playbook is operational — legal counsel must provide jurisdictional appendices before non-steward donors are invited
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]

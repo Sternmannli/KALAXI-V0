@@ -21,7 +21,7 @@ Usage:
   python ed25519_sign.py verify --in signed_2.json
   python ed25519_sign.py multisig-check --in signed_2.json --threshold 2
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import argparse

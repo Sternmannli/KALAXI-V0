@@ -17,7 +17,7 @@ Amendment G — Disagreement clarification (authentic alignment is valuable)
 
 Collusion filter — sealed addition to purity instruction.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 from dataclasses import dataclass, field

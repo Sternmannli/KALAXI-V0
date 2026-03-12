@@ -94,4 +94,4 @@ When staging is validated and legal review complete:
 3. Monitor early-warning pipeline for false positive rate
 4. Track cost-per-alert metric before expanding
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]

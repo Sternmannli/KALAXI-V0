@@ -14,4 +14,4 @@ PROVERB: The child who learns to call the river does not need to learn to swim.
 
 ---
 
-*SKIN-002 · Authored by V-002 · Filed by V-003 · [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]*
+*SKIN-002 · Authored by V-002 · Filed by V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]*
