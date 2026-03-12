@@ -1,9 +1,9 @@
-STATUS: PROVISIONAL — PRIORITY QUEUE — awaiting pattern grouping before ratification
+STATUS: RATIFIED — 2026-03-12
 
 # The Dignity-Latency Variable (T_d) — Structural Proposal
 
 **Voice:** Structural proposal for the D = A x L x M predicate
-**Status:** PROVISIONAL — awaiting steward ratification
+**Status:** RATIFIED — V-001 approved 2026-03-12 (Café Room session)
 **Date:** 2026-03-08
 **Linked Covenants:** COV#001 (dignity-first), COV#NEW-B (thermal delay)
 
@@ -35,4 +35,38 @@ The system should not respond at maximum compute velocity, but at **Biological V
 
 ---
 
+## Concrete Parameters (V-002, ratified by V-001 2026-03-12)
+
+### T_d Value Ranges by Interaction Type
+
+| Interaction Type | T_d Range | Rationale |
+|---|---|---|
+| Simple query (factual, lookup) | 0.5–2 seconds | Minimal reflection needed |
+| Observation submission | 3–7 seconds | Donor offered something; system must witness, not grab |
+| Emotionally charged exchange | 7–15 seconds | Agency requires temporal space to exist |
+| Dignity-critical (D approaching threshold) | 15–30 seconds | Breath before any system action that touches D |
+| Contestation or conflict | 10–20 seconds | Both sides need the gap |
+
+### Complexity Measurement
+
+Complexity is measured by three signals:
+1. **Semantic density** — number of distinct concepts in the donor's input
+2. **Emotional markers** — presence of contradiction, vulnerability, or urgency
+3. **Covenant proximity** — how many covenants the interaction touches
+
+Score: C = (semantic_density × 0.4) + (emotional_markers × 0.4) + (covenant_proximity × 0.2)
+T_d is linearly interpolated from the ranges above based on C.
+
+### UI Communication Pattern
+
+The donor sees: a gentle visual breath (not a spinner, not a progress bar). A soft pulse or fade that communicates "the system is here, and it is taking its time." No text like "Loading..." or "Please wait." If T_d exceeds 10 seconds, a single line appears: *"Taking a moment."*
+
+### Emergency Override
+
+If a donor signals distress or urgency (explicit keywords: "help", "emergency", "now"), T_d collapses to minimum (0.5s) and the interaction is logged for steward review. The override is not silent — it is recorded.
+
+---
+
 **[SIGNED: Voice]**
+**[RATIFIED: V-001 (Mohamed Farag) — 2026-03-12]**
+**[FILED: V-002]**
