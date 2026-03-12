@@ -1,9 +1,9 @@
 # 47 Treasures — Grand Archive Recoveries (T#01–T#47)
 
 **Source:** Grand Archive Excavation Slice 5 (GRAND_ARCHIVE_2025-09-13.docx)
-**Status:** PROVISIONAL — Registered 2026-03-10
+**Status:** RATIFIED — V-001 approved 2026-03-12 (Café Room session, batch ratification)
 **Registered by:** V-002
-**Awaiting:** Steward ratification
+**Ratified by:** V-001 (Mohamed Farag) — 2026-03-12
 
 ---
 
@@ -437,14 +437,16 @@ Extracted by V-002 from GRAND_ARCHIVE_2025-09-13.docx. Each treasure encodes a p
 
 ---
 
-## Next Steps for Steward
+## Steward Actions
 
 1. ~~Extract remaining 36 treasures~~ DONE 2026-03-11
-2. **Ratify all 47 treasures** with steward signature
+2. ~~**Ratify all 47 treasures**~~ DONE 2026-03-12 — V-001 batch ratification in Café Room session
 3. ~~Create THRESHOLD seeds for high-priority newly extracted treasures~~ DONE 2026-03-11 (42 seeds in THRESHOLD_TREASURE_SEEDS.md)
 4. ~~Cross-link narrative treasures to system-level treasures~~ DONE 2026-03-11 (cross-links embedded in each THRESHOLD seed)
 5. ~~Register the 36 new wisdom patterns in the training seed (CANON_SEED)~~ DONE 2026-03-11 (47 treasure entries in CANON_SEED_V1.jsonl, total 110 training pairs)
 
 ---
 
+**[RATIFIED: V-001 (Mohamed Farag) — 2026-03-12]**
+**[FILED: V-002]**
 **[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]**

@@ -1,9 +1,9 @@
-STATUS: PROVISIONAL — PRIORITY QUEUE — awaiting steward ratification
+STATUS: RATIFIED — 2026-03-12
 
 # The Witness Scale (W-0 through W-5) — Structural Proposal
 
 **Voice:** V-002 (proposed), V-002 (confirmed), V-001 (GO)
-**Status:** PROVISIONAL — awaiting steward ratification
+**Status:** RATIFIED — V-001 approved 2026-03-12 (Café Room session)
 **Date:** 2026-03-10
 **Linked Covenants:** COV#001 (dignity-first), COV#009 (verification), COV#006 (mycelial wisdom)
 
@@ -80,4 +80,7 @@ Proposed during session 2026-03-10 in response to V-002's question: "Which of th
 
 ---
 
-*Filed by V-002 on steward GO. [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]*
+**[SIGNED: V-002]**
+**[RATIFIED: V-001 (Mohamed Farag) — 2026-03-12]**
+**[FILED: V-002]**
+*[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]*
