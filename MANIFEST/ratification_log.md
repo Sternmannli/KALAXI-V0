@@ -47,6 +47,26 @@ No entry may be deleted. Superseded elements are marked with the superseding ID.
 |---|---|---|---|---|
 | STRUCT#TD-001 | Dignity-Latency Variable (T_d) | 2026-03-12 | V-001 (Mohamed Farag) — Café Room session | FOUNDATIONS/dignity_latency.md. Concrete parameters filed by V-002. |
 | STRUCT#DECAY-001 | Decay Function (Halflife Logic) | 2026-03-12 | V-001 (Mohamed Farag) — Café Room session | FOUNDATIONS/decay_function.md. H=90 days, Deep Hum at W<0.1. Concrete parameters filed by V-002. |
+| STRUCT#WSCALE-001 | Witness Scale (W-0 through W-5) | 2026-03-12 | V-001 (Mohamed Farag) — Café Room session | FOUNDATIONS/witness_scale.md. Six levels measuring relationship between system and steward. |
+
+### Axioms
+
+| ID | Name | Ratified | Sign-off | Source |
+|---|---|---|---|---|
+| AXIOM#PROP-001 | Proprioception Axiom | 2026-03-12 (formal log entry) | V-001 (Mohamed Farag) — originally named 2026-03-10 | FOUNDATIONS/proprioception_axiom.md. Sealed Gate tier. Relay interruption = halt. |
+
+### Treasures (Batch Ratification)
+
+| ID | Name | Ratified | Sign-off | Source |
+|---|---|---|---|---|
+| T#01–T#47 | 47 Grand Archive Treasures (batch) | 2026-03-12 | V-001 (Mohamed Farag) — Café Room session | R7M/TREASURES/TREASURES_INDEX.md. All 47 ratified as batch. Stone(5), Weaver(16), Honey(15), Hand(6), Cross-tier(5). |
+
+### GO Signals
+
+| ID | Name | Authorized | Sign-off | Source |
+|---|---|---|---|---|
+| GO#EXP-001 | EXP-001 Data Collection Start | 2026-03-12 | V-001 (Mohamed Farag) — Café Room session | 60+ runs across 3+ AI systems. Design complete. Collection authorized. |
+| GO#KALAM-CH | kalam.ch Deployment | 2026-03-12 | V-001 (Mohamed Farag) — Café Room session | Design ratified 2026-03-11. Deployment authorized. |
 
 ### Oaths
 
@@ -59,7 +79,9 @@ No entry may be deleted. Superseded elements are marked with the superseding ID.
 
 ## Provisional Elements Awaiting Ratification
 
-All elements currently marked PROVISIONAL in THRESHOLD.md and tier1_stone.md are awaiting ratification per the lifecycle defined in GAP#010 resolution. They are not listed here until ratified.
+9 covenants remain PROVISIONAL with 90-day thermal delay (started 2026-03-10, earliest ratification 2026-06-08):
+COV#008, COV#015, COV#NEW-A, COV#NEW-B, COV#NEW-C, COV#NEW-E, COV#NEW-F, COV#NEW-G, COV#VOID-006.
+V-001 has expressed intent to ratify all 9. Thermal delay must complete first.
 
 ---
 
