@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-test_observatory.py — Tests for the Observatory (All Six Directions)
+test_field.py — Tests for The Field (All Six Directions)
 [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
@@ -10,22 +10,22 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import unittest
 from datetime import datetime, timezone
-from OBSERVATORY.ALCOVE.shadow_genome import (
+from FIELD.ALCOVE.shadow_genome import (
     ShadowEntry, ShadowGenome, ShadowStatus, Alcove
 )
-from OBSERVATORY.CLEARING.temporal_shadow import (
+from FIELD.CLEARING.temporal_shadow import (
     Clearing, TemporalShadowRecord, DivergenceShadowSignal
 )
-from OBSERVATORY.AUDITS.self_audit import (
+from FIELD.AUDITS.self_audit import (
     SelfAuditRecord, SelfAuditScheduler, AuditStatus
 )
-from OBSERVATORY.STEWARD.steward_observation import (
+from FIELD.STEWARD.steward_observation import (
     StewardObserver, RatificationRecord, StewardPattern
 )
-from OBSERVATORY.DONOR.donor_layer import (
+from FIELD.DONOR.donor_layer import (
     DonorProfile, DonorRegistry, DonorShadowEntry, CorrectionEntry
 )
-from OBSERVATORY.amendments import (
+from FIELD.amendments import (
     PrivacyEnvelope, FingerprintVector, RefusalType, RefusalMap,
     RefusalRecord, MyceliumFeedback, RUPTURE_THRESHOLD,
     SHADOW_PROBE_INSTRUCTION, DISAGREEMENT_CLAUSE, COLLUSION_FILTER,

@@ -2,7 +2,7 @@
 """
 shadow_genome.py — Shadow Genome: Structural Cognitive Limitation Tracking
 Version: 1.0
-Observatory Layer: Alcove
+Field Layer: Alcove
 Grounded in: V-001 Addendum 2026-03-12 — Direction ONE
 
 Every voice that passes through the Clearing develops a stable, recurring

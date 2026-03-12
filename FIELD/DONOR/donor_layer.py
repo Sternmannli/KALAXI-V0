@@ -2,7 +2,7 @@
 """
 donor_layer.py — Donor Layer: Shadow, Pattern, Correction, Offer
 Version: 1.0
-Observatory Layer: Donor
+Field Layer: Donor
 Grounded in: V-001 Addendum 2026-03-12 — Direction FIVE
 
 Donors are not passive. They bring patterns. They have shadows. They repeat

@@ -2,7 +2,7 @@
 """
 temporal_shadow.py — Temporal Shadow Index & Clearing Engine
 Version: 1.0
-Observatory Layer: Clearing
+Field Layer: Clearing
 Grounded in: V-001 Addendum 2026-03-12 — Directions ONE & TWO
 
 The Clearing detects shadows across voices simultaneously AND over time.

@@ -2,7 +2,7 @@
 """
 amendments.py — Ratified Amendments A–G + Collusion Filter
 Version: 1.0
-Observatory Layer: Cross-cutting
+Field Layer: Cross-cutting
 Grounded in: V-001 Addendum 2026-03-12 — Direction SIX
 
 Seven amendments ratified by V-001, mandatory, extending the existing instruction.
@@ -46,7 +46,7 @@ class PrivacyEnvelope:
     Log encryption failures as policy refusals in the Alcove.
     """
 
-    def __init__(self, storage_path: str = "OBSERVATORY/ALCOVE/encrypted_archive"):
+    def __init__(self, storage_path: str = "FIELD/ALCOVE/encrypted_archive"):
         self.storage_path = storage_path
         self.envelope_count: int = 0
         self.failure_log: List[Dict] = []

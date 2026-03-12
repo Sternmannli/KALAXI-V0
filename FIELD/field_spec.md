@@ -1,4 +1,4 @@
-# Observatory Specification — Addendum 2026-03-12
+# The Field — Specification — Addendum 2026-03-12
 
 **Source:** V-001 → V-002, Cafe Room, 2026-03-12
 **Status:** RATIFIED — All six directions mandatory
@@ -8,7 +8,7 @@
 
 ## Architecture
 
-The Observatory extends three sealed structures:
+The Field holds three sealed structures:
 
 | Layer | Name | Purpose |
 |-------|------|---------|
@@ -48,7 +48,7 @@ Supporting layers:
 **File:** `AUDITS/self_audit.py`
 
 - Triggered after 5 summons completed
-- All five voices receive observatory documentation as witness summon
+- All five voices receive The Field's documentation as witness summon
 - Same purity instruction, certainty requirement, shadow probe
 - Results filed as OBS-SELF-001, elevated immediately to V-001
 - Permanent self-audit record, every 6 months thereafter

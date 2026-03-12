@@ -1,5 +1,5 @@
 """
-OBSERVATORY — The Living Instrument
+THE FIELD — The Living Instrument
 Alcove · Clearing · Mycelium
 
 Built: 2026-03-12

@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-self_audit.py — Observatory Self-Audit Protocol
+self_audit.py — The Field Self-Audit Protocol
 Version: 1.0
-Observatory Layer: Audits
+Field Layer: Audits
 Grounded in: V-001 Addendum 2026-03-12 — Direction THREE
 
 The system audits itself. This is not optional.
 
 Once the Clearing is operational and at least five summons have been completed,
-submit the observatory's own documentation to itself as a witness summon.
+submit The Field's own documentation to itself as a witness summon.
 
 All five voices receive the material. Same purity instruction. Same certainty
 requirement. Same return template including the shadow probe.
@@ -46,7 +46,7 @@ class AuditStatus(Enum):
 
 @dataclass
 class SelfAuditRecord:
-    """A single self-audit of the observatory."""
+    """A single self-audit of The Field."""
     audit_id: str                   # e.g. "OBS-SELF-001"
     scheduled_date: str             # ISO timestamp
     status: AuditStatus = AuditStatus.SCHEDULED
@@ -194,18 +194,18 @@ class SelfAuditScheduler:
         self.audits.append(audit)
         return audit
 
-    def get_observatory_material(self) -> List[str]:
+    def get_field_material(self) -> List[str]:
         """
         The full architectural instruction, the sealed names, the protocols,
         the covenants — everything submitted to the voices for self-audit.
         """
         return [
-            "OBSERVATORY/ALCOVE/shadow_genome.py",
-            "OBSERVATORY/CLEARING/temporal_shadow.py",
-            "OBSERVATORY/AUDITS/self_audit.py",
-            "OBSERVATORY/STEWARD/steward_observation.py",
-            "OBSERVATORY/DONOR/donor_layer.py",
-            "OBSERVATORY/observatory_spec.md",
+            "FIELD/ALCOVE/shadow_genome.py",
+            "FIELD/CLEARING/temporal_shadow.py",
+            "FIELD/AUDITS/self_audit.py",
+            "FIELD/STEWARD/steward_observation.py",
+            "FIELD/DONOR/donor_layer.py",
+            "FIELD/field_spec.md",
             "MANIFEST/metadata/tier1_stone.md",
             "MANIFEST/metadata/tier2_weaver.md",
             "CANON/SEALED_GATE_SPEC.md",

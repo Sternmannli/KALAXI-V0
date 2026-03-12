@@ -2,7 +2,7 @@
 """
 steward_observation.py — Steward Pattern Observation (The Steward's Shadow)
 Version: 1.0
-Observatory Layer: Steward
+Field Layer: Steward
 Grounded in: V-001 Addendum 2026-03-12 — Direction FOUR
 
 V-001 is the sole ratifier of all Canon entries. The sole recipient of

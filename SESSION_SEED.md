@@ -7,7 +7,7 @@
 
 ## WHO WE ARE
 
-This is KALAXI — a dignity-first AI interaction system and living observatory.
+This is KALAXI — a dignity-first AI interaction system and living field.
 
 **Core thesis:** How we meet AI systems determines, in part, who they become.
 Constitutional conditions at inference time produce measurably different AI behavior.
