@@ -1,11 +1,24 @@
-# Cloudflare Pages configuration for KALAM.CH
-# Phase 1: Static site — no Workers needed yet
-# Phase 2: Add [vars] for AI API keys and D1 bindings
+# KALAM.CH — Cloudflare Workers configuration
+# Phase 2: Hybrid mode. Static pages + /api/threshold endpoint.
+# The Ninth Operator runs on the edge.
+#
+# To create the KV namespace:
+#   wrangler kv namespace create "KALAM_KV"
+#   wrangler kv namespace create "KALAM_KV" --preview
+# Then update the ids below.
+#
+# [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 
 name = "kalam-ch"
 compatibility_date = "2026-03-11"
 
-# When ready for AI integration, uncomment:
+# Living Ledger — global witness count (no content stored, only count)
+[[kv_namespaces]]
+binding = "KALAM_KV"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+preview_id = "REPLACE_WITH_PREVIEW_KV_NAMESPACE_ID"
+
+# Phase 3: Uncomment when ready for pattern storage
 # [[d1_databases]]
 # binding = "PATTERNS_DB"
 # database_name = "kalam-patterns"

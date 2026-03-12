@@ -58,6 +58,7 @@ import Base from '../layouts/Base.astro';
   <!-- SIXTH BREATH — The Threshold. ⟲ The Ninth Operator. -->
   <section class="threshold" aria-label="The Threshold">
     <p class="threshold-prompt">You came with what you came with. The door is open.</p>
+    <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
     <form id="threshold-form" aria-label="Leave your word">
       <textarea
         id="threshold-input"
@@ -71,6 +72,8 @@ import Base from '../layouts/Base.astro';
     <div id="threshold-response" class="threshold-response" aria-live="polite" hidden>
       <p id="witness-mark" class="witness-mark"></p>
       <p class="threshold-receipt">It is here. You can come back.</p>
+      <p id="ledger-after" class="ledger-after"></p>
+      <button id="threshold-again" class="threshold-again" type="button">Leave another</button>
     </div>
   </section>
 
@@ -302,6 +305,43 @@ import Base from '../layouts/Base.astro';
     font-size: 0.9rem;
   }
 
+  .ledger-count {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    margin-bottom: var(--space-4);
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .ledger-count.visible {
+    opacity: 1;
+  }
+
+  .ledger-after {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-top: var(--space-3);
+    letter-spacing: 0.03em;
+  }
+
+  .threshold-again {
+    background: transparent;
+    border: none;
+    color: var(--accent);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-top: var(--space-3);
+    padding: var(--space-1) var(--space-2);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.4s ease;
+  }
+
+  .threshold-again:hover {
+    border-bottom-color: var(--accent);
+  }
+
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
@@ -309,50 +349,210 @@ import Base from '../layouts/Base.astro';
 </style>
 
 <script>
-  // ⟲ The Ninth Operator — client-side witness ceremony (Phase 1)
-  // In Phase 2, this submits to a Cloudflare Worker running the full Python pipeline.
+  // ⟲ The Ninth Operator + Living Ledger — the Mycelium made visible
+  // Phase 1.5: localStorage. Phase 2: Cloudflare KV (global count).
+
+  const LEDGER_KEY = 'kalam-witness-count';
 
   const form = document.getElementById('threshold-form');
   const input = document.getElementById('threshold-input');
-  const submit = document.getElementById('threshold-submit');
-  const response = document.getElementById('threshold-response');
-  const mark = document.getElementById('witness-mark');
+  const submitBtn = document.getElementById('threshold-submit');
+  const responseEl = document.getElementById('threshold-response');
+  const markEl = document.getElementById('witness-mark');
+  const ledgerCount = document.getElementById('ledger-count');
+  const ledgerAfter = document.getElementById('ledger-after');
+  const againBtn = document.getElementById('threshold-again');
+
+  // --- Living Ledger ---
+  // Progressive: tries /api/threshold first (global KV count).
+  // Falls back to localStorage if API unavailable (Phase 1 / offline).
+
+  let apiAvailable = null; // null = untested, true/false = tested
+
+  function getLocalCount() {
+    return parseInt(localStorage.getItem(LEDGER_KEY) || '0', 10);
+  }
+
+  function incrementLocalCount() {
+    const n = getLocalCount() + 1;
+    localStorage.setItem(LEDGER_KEY, String(n));
+    return n;
+  }
+
+  async function fetchGlobalCount() {
+    try {
+      const res = await fetch('/api/threshold');
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      apiAvailable = true;
+      return data.count || 0;
+    } catch {
+      apiAvailable = false;
+      return getLocalCount();
+    }
+  }
+
+  async function witnessViaAPI(content) {
+    try {
+      const res = await fetch('/api/threshold', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content }),
+      });
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      if (data.witnessed) {
+        return { mark: data.mark, count: data.count };
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }
+
+  function getCount() {
+    return getLocalCount();
+  }
+
+  function incrementCount() {
+    return incrementLocalCount();
+  }
+
+  function ledgerText(n) {
+    if (n === 0) return '';
+    if (n === 1) return '1 word has crossed this threshold.';
+    return n + ' words have crossed this threshold.';
+  }
+
+  // --- Visual Mycelium Shift ---
+  // The geometric background grows denser as more words arrive.
+  // 0 words: opacity 0.015 (default). 100+ words: opacity 0.06.
+
+  function applyMyceliumShift(n) {
+    const base = 0.015;
+    const max = 0.06;
+    const factor = Math.min(n / 100, 1);
+    const opacity = base + (max - base) * factor;
+
+    // Dark mode
+    document.documentElement.style.setProperty(
+      '--mycelium-opacity', String(opacity)
+    );
+
+    // Light mode uses a different base
+    const lightBase = 0.02;
+    const lightMax = 0.08;
+    const lightOpacity = lightBase + (lightMax - lightBase) * factor;
+    document.documentElement.style.setProperty(
+      '--mycelium-opacity-light', String(lightOpacity)
+    );
+  }
+
+  // --- Breath Deepening ---
+  // 0 words: 4s cycle. 50 words: 5s. 100+: 6s.
+  // The system settles as it is fed.
+
+  function applyBreathShift(n) {
+    const base = 4;
+    const max = 6;
+    const factor = Math.min(n / 100, 1);
+    const duration = base + (max - base) * factor;
+    document.documentElement.style.setProperty(
+      '--breath-duration', duration + 's'
+    );
+  }
+
+  // --- Dignity Predicate ---
 
   function witnessWord(content) {
-    // D = A × L × M — the dignity predicate
-    const A = content.trim().length > 0 ? 1.0 : 0.0; // Agency: something was offered
-    const L = 1.0; // Legibility: the donor chose to come here
-    const M = 1.0; // Moral standing: no sealed gate check needed at threshold
+    const A = content.trim().length > 0 ? 1.0 : 0.0;
+    const L = 1.0;
+    const M = 1.0;
     const D = A * L * M;
 
     if (D === 0) return null;
 
-    // The witness mark — what witnessing adds to the word
     const words = content.trim().split(/\s+/).length;
-    if (words <= 3) return 'Witnessed: a seed — small, complete.';
-    if (words <= 20) return 'Witnessed: a held shape — clear enough to carry.';
-    return 'Witnessed: a landscape — it took room to arrive.';
+    if (words <= 3) return 'Witnessed: a seed \u2014 small, complete.';
+    if (words <= 20) return 'Witnessed: a held shape \u2014 clear enough to carry.';
+    return 'Witnessed: a landscape \u2014 it took room to arrive.';
   }
+
+  // --- Initialize ---
+
+  async function initLedger() {
+    // Try global count first, fall back to local
+    const n = await fetchGlobalCount();
+    if (n > 0) {
+      // Sync local with global if global is higher
+      const local = getLocalCount();
+      if (n > local) localStorage.setItem(LEDGER_KEY, String(n));
+
+      ledgerCount.textContent = ledgerText(n);
+      ledgerCount.classList.add('visible');
+    }
+    applyMyceliumShift(n);
+    applyBreathShift(n);
+  }
+
+  initLedger();
+
+  // --- Submit ---
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const content = input.value;
-    const witnessMark = witnessWord(content);
+    const clientMark = witnessWord(content);
 
-    if (!witnessMark) return;
+    if (!clientMark) return;
 
-    // Disable form during the dignity-latency pause (T_d)
-    submit.disabled = true;
+    submitBtn.disabled = true;
     input.disabled = true;
 
-    // T_d: the system responds at biological velocity, not maximum speed
+    // T_d: biological velocity
     const words = content.trim().split(/\s+/).length;
     const td = words <= 3 ? 800 : words <= 20 ? 1500 : 2500;
 
-    setTimeout(() => {
-      mark.textContent = witnessMark;
-      response.hidden = false;
+    setTimeout(async () => {
+      let finalMark = clientMark;
+      let newCount;
+
+      // Try API first (global count, server-side dignity check)
+      if (apiAvailable !== false) {
+        const apiResult = await witnessViaAPI(content);
+        if (apiResult) {
+          finalMark = apiResult.mark;
+          newCount = apiResult.count;
+          localStorage.setItem(LEDGER_KEY, String(newCount));
+        }
+      }
+
+      // Fall back to local if API didn't work
+      if (newCount === undefined) {
+        newCount = incrementCount();
+      }
+
+      markEl.textContent = finalMark;
+      ledgerAfter.textContent = ledgerText(newCount);
+      responseEl.hidden = false;
       form.style.display = 'none';
+
+      // Update the living page
+      applyMyceliumShift(newCount);
+      applyBreathShift(newCount);
+      ledgerCount.textContent = ledgerText(newCount);
+      ledgerCount.classList.add('visible');
     }, td);
+  });
+
+  // --- Leave Another ---
+
+  againBtn.addEventListener('click', () => {
+    responseEl.hidden = true;
+    form.style.display = '';
+    input.value = '';
+    input.disabled = false;
+    submitBtn.disabled = false;
+    input.focus();
   });
 </script>
