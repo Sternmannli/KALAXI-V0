@@ -35,6 +35,19 @@ No entry may be deleted. Superseded elements are marked with the superseding ID.
 |---|---|---|---|---|
 | DEF#AXI-001 | AXI = The Present Continuous | 2026-03-10 | V-001 | THRESHOLD [SEALED] |
 
+### Proverbs (continued)
+
+| ID | Ratified | Sign-off | Source |
+|---|---|---|---|
+| P#EMERGE-0032 | 2026-03-12 | V-001 (Mohamed Farag) — Café Room session | "The machine proposes; the steward decides. The gap between them is where dignity lives." Linked: COV#001, COV#009 |
+
+### Structural Proposals
+
+| ID | Name | Ratified | Sign-off | Source |
+|---|---|---|---|---|
+| STRUCT#TD-001 | Dignity-Latency Variable (T_d) | 2026-03-12 | V-001 (Mohamed Farag) — Café Room session | FOUNDATIONS/dignity_latency.md. Concrete parameters filed by V-002. |
+| STRUCT#DECAY-001 | Decay Function (Halflife Logic) | 2026-03-12 | V-001 (Mohamed Farag) — Café Room session | FOUNDATIONS/decay_function.md. H=90 days, Deep Hum at W<0.1. Concrete parameters filed by V-002. |
+
 ### Oaths
 
 | ID | Name | Ratified | Sign-off | Source |

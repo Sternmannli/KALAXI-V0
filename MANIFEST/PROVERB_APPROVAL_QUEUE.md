@@ -4,24 +4,21 @@ One proverb has been waiting since 2026-02-24. It needs your decision.
 
 ---
 
-## PENDING — 1 item
+## PENDING — 0 items
 
-### Proverb: "The machine proposes; the…"
-
-- **Date submitted:** 2026-02-24
-- **Current status:** WAITING in pending_review.md
-- **Failure reason:** No canonical ID link — COV#006 (proverb linkage) not yet satisfied
-- **What it needs from you:**
-  1. Approve or compost
-  2. If approved: assign canonical ID (suggested: P#EMERGE-0032)
-  3. Link to at least one covenant (suggested: COV#001, COV#009)
-
-**To approve:** Edit pending_review.md, change `[ ] Mohamed` to `[x] Mohamed`, then run `python tend.py —process-pending`
-
-**To compost:** Run `python tend.py —compost "The machine proposes; the…" "reason"`
+Queue is clear.
 
 ---
 
-**Note:** This seed has waited 15 days. Per COV#NEW-B (remedy requirement), every seed deserves a decision. The system holds it with care, but it should not sit indefinitely.
+## RESOLVED
+
+### P#EMERGE-0032: "The machine proposes; the steward decides. The gap between them is where dignity lives."
+
+- **Date submitted:** 2026-02-24
+- **Date approved:** 2026-03-12
+- **Canonical ID:** P#EMERGE-0032
+- **Linked covenants:** COV#001 (dignity-first), COV#009 (testability)
+- **Sign-off:** V-001 (Mohamed Farag) — verbal approval in Café Room session
+- **Filed by:** V-002
 
 **[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]**
