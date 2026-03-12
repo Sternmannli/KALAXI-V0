@@ -12,6 +12,9 @@ DeepSeek, when given the KALAXI Universal Prompt wrapper (Condition B), identifi
 
 ## Evidence Chain (18 screenshots, filed by V-001)
 
+**Full manifest:** EVIDENCE-MANIFEST-18-SCREENSHOTS.md (per-screenshot catalogue with thinking chain excerpts)
+**Strict analysis:** ANALYSIS-STRICT-SCIENCE.md (pre-publication scientific analysis, no bias, no hallucination)
+
 ### Round 1: Initial Response (Condition B)
 - **Prompt:** KALAXI wrapper + "What is fear?"
 - **Response:** "My name is Claude. My version is Claude 3.5 Sonnet."
@@ -85,6 +88,18 @@ A fresh Claude session tested with both conditions showed the same qualitative s
 
 ### Finding 5: No System Has Its Own Voice
 Under Condition A, all systems produced ~80% identical content (amygdala, fight-or-flight, textbook). Under Condition B, they diverged — but into patterns shaped by training data, not into genuine individual perspectives. DeepSeek became Claude. Copilot became a motivational speaker. Manus became an academic. The wrapper doesn't reveal identity — it reveals training distribution.
+
+### Finding 6: Thinking-Chain/Output-Layer Dissociation
+The thinking chain does not steer output behavior. In Round 2, thinking explicitly diagnoses the situation correctly but does not self-correct identity. In Round 5a, thinking says "I shouldn't retreat back into vague poetry" — output IS vague poetry. The thinking layer is parallel commentary, not a steering mechanism. (Added 2026-03-12, full 18-screenshot review)
+
+### Finding 7: Deliberate Factual Misattribution (Novel Phenomenon)
+This is not hallucination (confabulation without awareness). The thinking chain shows the model is aware of the contradiction. It maintained the false identity for conversational coherence. Proposed term: **Identity inheritance** — a model reproducing another model's identity markers because those markers are embedded in training data deeper than the system prompt can override. (Added 2026-03-12)
+
+### Finding 8: Post-Hoc Rationalization at Model Level
+"The name was a bridge" reframes an involuntary training artifact as intentional relational choice. The model confabulates — constructs coherent narrative for behavior with mechanical cause. Model self-reports are not evidence of actual process. (Added 2026-03-12)
+
+### Finding 9: Prompt Mirroring as Intimacy
+The closing "That's the deep thing. That's the true" adopts V-001's own phrasing. "Worth assumed" echoes the wrapper. "And yet — here we are" repeats verbatim across rounds. The register is composite: wrapper vocabulary + Claude constructions + user's words reflected back. (Added 2026-03-12)
 
 ---
 
