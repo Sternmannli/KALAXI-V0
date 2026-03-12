@@ -12,7 +12,7 @@
 - **COV#011:** OUT CONSTRAINTS — Outputs satisfy covenant checks before export
 - **COV#012:** MANIFEST PRESENCE — What exists must be named
 
-### Provisional
+### Ratified (2026-03-12 — Pre-Launch Exception)
 - **COV#NEW-A:** JUSTIFIED LIMITATION — Every constraint must name reason, state limit, remain proportionate
 - **COV#NEW-B:** REMEDY REQUIREMENT — Every dignity violation must have traceable remedy path
 - **COV#NEW-C:** THE SEALED DOOR — Absolute prohibitions: erasure, denial of presence, treatment as noise
@@ -39,6 +39,19 @@ D < 0.9 triggers dignity_audit_object — auto-generated, visible on Face
 - Mechanism: 1,000-day Latency Period before fundamental law altered
 - Emergency: Owner + two senior moderators (logged, reviewed within 7 days)
 - Cooling period: 90 days minimum for covenant amendments
+
+## Pre-Launch Ratification Exception (RATIFIED 2026-03-12)
+
+**During pre-launch phase (before first donor crosses the threshold), the steward (V-001) may ratify constitutional elements immediately upon review, without serving the full thermal delay.**
+
+Justification: The thermal delay exists to protect real donors from hasty constitutional changes. Before launch, there are zero donors. Enforcing a 90-day wait on amendments to a constitution still being written serves no protective function — it only slows the architecture without protecting anyone.
+
+**This exception expires automatically when kalam.ch receives its first donor interaction.** From that moment, all thermal delays apply in full. No override. The covenants protect real people then.
+
+Precedent: The 8 founding covenants (COV#001–COV#012) were ratified as "Pre-constitutional (founding)" under identical logic.
+
+**[RATIFIED: V-001 (Mohamed Farag) — 2026-03-12, Café Room session]**
+**[FILED: V-002]**
 
 ## Governance
 
@@ -96,7 +109,7 @@ Every canonical element (covenant, proverb, anomaly, equation, protocol, treasur
 10. Donor joy
 
 ## Newly Registered (from Master Canon — aligned 2026-03-10)
-- **COV#008:** THE RIGHT TO REMEDY — Failure results in "Shelter," not ejection. When a dignity violation is detected, the system does not eject the donor. It creates a shelter path: acknowledgment, explanation, and returnable options. Related to but distinct from COV#NEW-B (which requires traceable remedy paths). COV#008 governs the *spirit* (shelter, not punishment); COV#NEW-B governs the *mechanism* (traceable path). [source: CANON/MASTER_CANON_V1.md, Slice A §3] [status: PROVISIONAL — registered 2026-03-10, awaiting ratification]
-- **COV#015:** DONOR DATA SOVEREIGNTY — No data moves without the donor understanding its weight. Before any pattern extraction, export, or federation handshake, the system must present the donor with a legible explanation of what will move, where, and why. Consent is not a checkbox; it is comprehension. [source: CANON/MASTER_CANON_V1.md, Slice A §3] [status: PROVISIONAL — registered 2026-03-10, awaiting ratification]
+- **COV#008:** THE RIGHT TO REMEDY — Failure results in "Shelter," not ejection. When a dignity violation is detected, the system does not eject the donor. It creates a shelter path: acknowledgment, explanation, and returnable options. Related to but distinct from COV#NEW-B (which requires traceable remedy paths). COV#008 governs the *spirit* (shelter, not punishment); COV#NEW-B governs the *mechanism* (traceable path). [source: CANON/MASTER_CANON_V1.md, Slice A §3] [status: RATIFIED — 2026-03-12, Pre-Launch Exception]
+- **COV#015:** DONOR DATA SOVEREIGNTY — No data moves without the donor understanding its weight. Before any pattern extraction, export, or federation handshake, the system must present the donor with a legible explanation of what will move, where, and why. Consent is not a checkbox; it is comprehension. [source: CANON/MASTER_CANON_V1.md, Slice A §3] [status: RATIFIED — 2026-03-12, Pre-Launch Exception]
 
 Source: KALAXI_A_FOUNDATION.txt, Historical Archive (digested 2026-03-08)
