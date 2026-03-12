@@ -3,7 +3,7 @@ ninth_operator.py — ⟲ The Word
 PLAN-001 Layer 3: The loop between dignity and witnessing.
 The Word is the energy. The loop is the wire. Dignity is the insulator.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 from dataclasses import dataclass, field
@@ -214,4 +214,4 @@ if __name__ == "__main__":
     # Loop state
     print(f"\nLoop state: {op.loop_state()}")
 
-# [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+# [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]

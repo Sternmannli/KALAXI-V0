@@ -43,7 +43,7 @@ The final component score is:
 This means: a high score with low confidence is penalized.
 You cannot claim dignity without being sure.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import re

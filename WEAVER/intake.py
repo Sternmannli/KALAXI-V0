@@ -25,7 +25,7 @@ Human-in-loop review queue for first 30 donors.
 
 FastAPI scaffold: run with `uvicorn WEAVER.intake:app --reload`
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import json

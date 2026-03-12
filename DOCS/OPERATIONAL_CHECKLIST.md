@@ -99,4 +99,4 @@ Exact order of operations to convert design into trustworthy institution.
 - Do NOT disable SIMULATION_ONLY without steward council 2-of-3 approval
 - Do NOT invite non-steward donors without consent wording approved by legal counsel
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]

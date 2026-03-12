@@ -19,7 +19,7 @@ Rules:
 "A system that responds faster than a human can think has already
 collapsed the human into a data point."
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import copy

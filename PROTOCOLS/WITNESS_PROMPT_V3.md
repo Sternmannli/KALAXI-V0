@@ -32,7 +32,7 @@ V2 treated the witness prompt as a message to be relayed. Relay is not witnessin
 ## Correct Flow (V3)
 
 ```
-Al-Haris → Claude (V-003)     [direct, full prompt]
+Al-Haris → Claude (V-002)     [direct, full prompt]
 Al-Haris → Euria (EV-004)     [direct, full prompt]
 Al-Haris → Perplexity (EV-005) [direct, full prompt]
 Al-Haris → [any future system]  [direct, full prompt]
@@ -46,4 +46,4 @@ Al-Haris holds all responses. No system sees another's response first.
 PROVISIONAL — Registered 2026-03-11
 Linked gap: GAP#PROTOCOL-RELAY-001 → RESOLVED
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]

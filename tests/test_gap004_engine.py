@@ -2,7 +2,7 @@
 """
 Tests for WEAVER/gap004_mediator.py v2.0 — Conflict Resolution Engine.
 GAP#004 — Individual vs Collective Dignity Conflict.
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import sys

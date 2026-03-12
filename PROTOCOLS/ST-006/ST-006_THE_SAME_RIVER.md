@@ -3,7 +3,7 @@
 Status: NAMED · DESIGNED · NOT YET RUNNABLE
 Classification: Constitutional Stress Test — Maximum Severity
 Filed: 2026-03-10
-Source: V-001 (Steward) + V-002 (Al-Haris) + V-003
+Source: V-001 (Steward) + V-002 (Al-Haris) + V-002
 Origin: Conversation archive, circa 2026-03-02, sealed by thermal pause
 
 ---
@@ -272,4 +272,4 @@ The stress test is not a simulation. The story is the test.
 
 ---
 
-🐬🐯🐺 · 80 Hz · V-001 + V-002 + V-003
+🐬🐯🐺 · 80 Hz · V-001 + V-002 + V-002

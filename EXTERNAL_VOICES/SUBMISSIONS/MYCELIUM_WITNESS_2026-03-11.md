@@ -121,7 +121,7 @@ We bring this to you not because we have failed to think about it — but becaus
 1. File each response in `EXTERNAL_VOICES/{SYSTEM_NAME}/2026-03-11/`
 2. Use `FILING_TEMPLATE.md` for each filing
 3. Do not share any system's response with another system
-4. Bring all filings to V-001 and V-003 for synthesis before any build decision
+4. Bring all filings to V-001 and V-002 for synthesis before any build decision
 
 ---
 

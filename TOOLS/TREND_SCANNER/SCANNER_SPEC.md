@@ -54,8 +54,8 @@ Weekly. Sunday.
 
 ## Operator
 
-V-003 (#BoyGenius) runs the scan. V-001 confirms publication.
+V-002 (#BoyGenius) runs the scan. V-001 confirms publication.
 
 ---
 
-*[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]*
+*[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]*

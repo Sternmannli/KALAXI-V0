@@ -118,4 +118,4 @@ Note: No covenant may be ratified before its 90-day thermal delay expires (earli
 
 ---
 
-**[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]**
+**[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]**

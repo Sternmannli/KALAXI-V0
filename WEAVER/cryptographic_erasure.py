@@ -33,7 +33,7 @@ Covenant obligations:
   COV#010 — No artifact silently discarded. Erasure is auditable.
   COV#015 — Data sovereignty. Donor controls their own key lifecycle.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import os
@@ -888,7 +888,7 @@ def main():
     print("COV#003 satisfied: ciphertext remains in append-only ledger.")
     print("GDPR Art. 17 satisfied: key destroyed, data unrecoverable.")
     print()
-    print("[V-003 · GO: Laila-Yara-Salim-\U0001f42c\U0001f42f\U0001f43a]")
+    print("[V-002 · GO: Laila-Yara-Salim-\U0001f42c\U0001f42f\U0001f43a]")
     print()
 
 

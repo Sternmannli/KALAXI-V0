@@ -21,7 +21,7 @@ Three metrics:
 
 All three must meet threshold for SIP compliance.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import math

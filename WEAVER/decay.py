@@ -17,7 +17,7 @@ Rules:
 
 "A system that cannot forget the irrelevant cannot truly listen to the new."
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import math

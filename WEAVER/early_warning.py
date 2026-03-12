@@ -24,7 +24,7 @@ Integration:
   - Feeds Mycelium (mycelium.py) for cross-donor pattern detection
   - Produces triage alerts for steward review
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import math

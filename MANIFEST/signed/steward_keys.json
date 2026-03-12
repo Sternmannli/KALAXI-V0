@@ -4,9 +4,9 @@
     "role": "steward-owner",
     "name": "Mohamed Farag"
   },
-  "V-003": {
+  "V-002": {
     "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
     "role": "steward-system",
-    "name": "Claude (V-003)"
+    "name": "Claude (V-002)"
   }
 }

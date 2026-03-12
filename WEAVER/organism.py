@@ -18,7 +18,7 @@ Flow:
 The organism breathes. If BREATH pauses, nothing moves.
 If CHECK blocks, nothing speaks. If TURN has no open path, agency is preserved.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import sys

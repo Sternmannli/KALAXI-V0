@@ -9,7 +9,7 @@ Covenant obligations:
 Core operations: send, receive, confirm, broadcast, subscribe
 No message lost silently. Priority messages never dropped.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import json

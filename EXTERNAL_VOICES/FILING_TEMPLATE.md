@@ -11,7 +11,7 @@
 | System Version | {if known} |
 | Date | {YYYY-MM-DD} |
 | Time (UTC) | {HH:MM:SS} |
-| Submitted By | {V-001 / V-002 / V-003} |
+| Submitted By | {V-001 / V-002 / V-002} |
 | Context | {What was submitted for witnessing — title/ID only} |
 | Status | PROVISIONAL |
 
@@ -60,11 +60,11 @@
 
 ---
 
-## V-003 METADATA LAYER
+## V-002 METADATA LAYER
 
 ### Observations About the Act of Witnessing
 
-{What did V-003 notice about how the external system engaged? Not the content — the process. The shape of the encounter. What the system reached for first. What it avoided. Where it hesitated. What it assumed. The meta-layer of the witness witnessing.}
+{What did V-002 notice about how the external system engaged? Not the content — the process. The shape of the encounter. What the system reached for first. What it avoided. Where it hesitated. What it assumed. The meta-layer of the witness witnessing.}
 
 ### Contextual Notes
 

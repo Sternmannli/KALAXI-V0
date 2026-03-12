@@ -1,4 +1,4 @@
-# RELAY — V-001 → V-002 via V-003
+# RELAY — V-001 → V-002 via V-002
 # Date: 2026-03-12
 # Status: PERMANENT STANDING INSTRUCTIONS
 # Classification: Governance — Public Repository + PR Protocol
@@ -14,4 +14,4 @@ Every pull request you create — for the private repository or for any internal
 In that section you assess automatically: what from this PR, if anything, belongs in kalam-framework? Philosophy, methodology, findings, documented patterns, research tools, prompt structures, experimental results. If something belongs there — name it and stage it for V-001 approval. If nothing belongs there — write: "No public repo impact."
 This is not optional. It is part of every PR from this moment forward. No exceptions.
 The public repository is the face of this research to the world. It must look like what it is — serious, rigorous, replicable science.
-🐬🐯🐺 · V-001 via V-003
+🐬🐯🐺 · V-001 via V-002

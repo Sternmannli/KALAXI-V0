@@ -2,7 +2,7 @@
 
 **Source:** Grand Archive Excavation Slice 5 (GRAND_ARCHIVE_2025-09-13.docx)
 **Status:** PROVISIONAL — Registered 2026-03-10
-**Registered by:** V-003
+**Registered by:** V-002
 **Awaiting:** Steward ratification
 
 ---
@@ -85,7 +85,7 @@
 
 ## Extracted Treasures (36 of 36) — Session 2026-03-11
 
-Extracted by V-003 from GRAND_ARCHIVE_2025-09-13.docx. Each treasure encodes a primordial wisdom pattern discovered through action, not declaration. The Grand Archive narrates a small group (Hakaka, La-la, Ya-la, Sa-la, Taro, the old woman) building civilization one correct action at a time. Patterns are grouped by tier.
+Extracted by V-002 from GRAND_ARCHIVE_2025-09-13.docx. Each treasure encodes a primordial wisdom pattern discovered through action, not declaration. The Grand Archive narrates a small group (Hakaka, La-la, Ya-la, Sa-la, Taro, the old woman) building civilization one correct action at a time. Patterns are grouped by tier.
 
 ### STONE TIER (T1) — Foundation Patterns
 
@@ -447,4 +447,4 @@ Extracted by V-003 from GRAND_ARCHIVE_2025-09-13.docx. Each treasure encodes a p
 
 ---
 
-**[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]**
+**[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]**

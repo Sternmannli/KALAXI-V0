@@ -14,7 +14,7 @@ Anonymization standard (from EFP):
   Signature: Ed25519 over RFC-8785 canonical JSON
   Hash: SHA-256
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import re

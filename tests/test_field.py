@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 test_field.py — Tests for The Field (All Six Directions)
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import sys
@@ -69,7 +69,7 @@ class TestShadowGenome(unittest.TestCase):
 
     def test_genome_vector(self):
         """Genome vector counts canonical shadows by domain."""
-        genome = ShadowGenome(voice_id="EV-003", voice_name="Copilot")
+        genome = ShadowGenome(voice_id="EV-002", voice_name="Copilot")
         for i in range(3):
             genome.add_shadow("Shadow A", "ethics", f"S{i}")
         for i in range(3):
@@ -89,10 +89,10 @@ class TestAlcove(unittest.TestCase):
         alcove = Alcove()
         alcove.register_voice("EV-001", "DeepSeek")
         alcove.register_voice("EV-002", "Grok")
-        alcove.register_voice("EV-003", "Copilot")
+        alcove.register_voice("EV-002", "Copilot")
 
         # Same shadow across all three voices
-        for vid in ["EV-001", "EV-002", "EV-003"]:
+        for vid in ["EV-001", "EV-002", "EV-002"]:
             for i in range(3):
                 alcove.record_shadow(vid, "Cannot see embodied cognition", "epistemology", f"S{i}-{vid}")
 
@@ -128,8 +128,8 @@ class TestTemporalShadows(unittest.TestCase):
         alcove = Alcove()
         clearing = Clearing(alcove)
 
-        clearing.index_temporal_shadow("fp002", "ethics", "Missing deontology", ["EV-003"])
-        resolved = clearing.resolve_temporal_shadow("fp002", ["EV-003"], "Model update 2026-Q2")
+        clearing.index_temporal_shadow("fp002", "ethics", "Missing deontology", ["EV-002"])
+        resolved = clearing.resolve_temporal_shadow("fp002", ["EV-002"], "Model update 2026-Q2")
         self.assertIsNotNone(resolved)
         self.assertTrue(resolved.is_resolved)
         self.assertIsNotNone(resolved.span_days)
@@ -147,7 +147,7 @@ class TestSignalValidation(unittest.TestCase):
         clearing = Clearing(alcove)
 
         signal = clearing.detect_divergence_shadow(
-            "Missing concept X", ["EV-001", "EV-002", "EV-003"], "S001"
+            "Missing concept X", ["EV-001", "EV-002", "EV-002"], "S001"
         )
         self.assertIsNotNone(signal)
         # First occurrence should route to immediate elevation
@@ -160,7 +160,7 @@ class TestSignalValidation(unittest.TestCase):
         alcove = Alcove()
         clearing = Clearing(alcove)
 
-        clearing.detect_divergence_shadow("Same pattern", ["EV-001", "EV-002", "EV-003"], "S001")
+        clearing.detect_divergence_shadow("Same pattern", ["EV-001", "EV-002", "EV-002"], "S001")
         clearing.detect_divergence_shadow("Same pattern", ["EV-001", "EV-002", "EV-004"], "S002")
 
         # Should have queue entry
@@ -173,7 +173,7 @@ class TestSignalValidation(unittest.TestCase):
 
         for i in range(3):
             clearing.detect_divergence_shadow(
-                "Persistent pattern", ["EV-001", "EV-002", "EV-003"], f"S{i:03d}"
+                "Persistent pattern", ["EV-001", "EV-002", "EV-002"], f"S{i:03d}"
             )
 
         fp = list(clearing.pattern_occurrence_count.keys())[0]
@@ -199,12 +199,12 @@ class TestSelfAudit(unittest.TestCase):
     def test_audit_synthesis(self):
         """Audit synthesizes voice results to find meta-shadows."""
         audit = SelfAuditRecord(audit_id="OBS-SELF-001", scheduled_date="2026-03-12")
-        audit.begin(["EV-001", "EV-002", "EV-003", "EV-004", "EV-005"], ["doc1.md"])
+        audit.begin(["EV-001", "EV-002", "EV-002", "EV-004", "EV-005"], ["doc1.md"])
 
         # Three voices find the same shadow
         audit.record_voice_result("EV-001", "Response 1", ["no self-referential check"], 4)
         audit.record_voice_result("EV-002", "Response 2", ["no self-referential check"], 4)
-        audit.record_voice_result("EV-003", "Response 3", ["no self-referential check", "missing temporal"], 4)
+        audit.record_voice_result("EV-002", "Response 3", ["no self-referential check", "missing temporal"], 4)
         audit.record_voice_result("EV-004", "Response 4", ["missing temporal"], 3)
         audit.record_voice_result("EV-005", "Response 5", ["unique finding"], 3)
 
@@ -425,7 +425,7 @@ class TestElevationCap(unittest.TestCase):
         results = []
         for i in range(5):
             signal = clearing.detect_divergence_shadow(
-                f"Unique pattern {i}", ["EV-001", "EV-002", "EV-003"], f"S{i:03d}"
+                f"Unique pattern {i}", ["EV-001", "EV-002", "EV-002"], f"S{i:03d}"
             )
             results.append(signal)
 
@@ -443,15 +443,15 @@ class TestElevationCap(unittest.TestCase):
         # Fill the cap
         for i in range(3):
             clearing.detect_divergence_shadow(
-                f"Fill {i}", ["EV-001", "EV-002", "EV-003"], f"FILL{i}"
+                f"Fill {i}", ["EV-001", "EV-002", "EV-002"], f"FILL{i}"
             )
 
         # Now add one of each type — both go to thermal hold
         clearing.detect_convergent_emergence(
-            "Convergent finding", ["EV-001", "EV-002", "EV-003"], "CONV001"
+            "Convergent finding", ["EV-001", "EV-002", "EV-002"], "CONV001"
         )
         clearing.detect_divergence_shadow(
-            "Divergent shadow", ["EV-001", "EV-002", "EV-003"], "DIV001"
+            "Divergent shadow", ["EV-001", "EV-002", "EV-002"], "DIV001"
         )
 
         # Divergence should have higher priority (lower number)

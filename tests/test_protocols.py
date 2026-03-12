@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Tests for SRVP and SIP protocols.
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import sys

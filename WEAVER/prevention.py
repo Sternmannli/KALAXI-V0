@@ -25,7 +25,7 @@ Signal Hierarchy:
   Each level triggers progressively stronger interventions.
   ALARM is a halt — same tier as Sealed Gate.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 from dataclasses import dataclass, field

@@ -68,4 +68,4 @@ Your answers are stored as observations. We do not collect your name, email, pho
 
 **IMPORTANT: This template is a DRAFT. Legal counsel must review and approve before any non-steward donor is invited. Particular attention needed for: (1) FADP compliance details, (2) cross-border data transfer provisions if EU donors participate, (3) minor donor protections if applicable.**
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]

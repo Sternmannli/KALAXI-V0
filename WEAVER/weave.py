@@ -19,7 +19,7 @@ HoneyDrop protocol:
   Clang tests: psi/sigma <= 1
   Four-lens review before promotion to canon
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import re

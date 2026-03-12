@@ -24,4 +24,4 @@ One proverb has been waiting since 2026-02-24. It needs your decision.
 
 **Note:** This seed has waited 15 days. Per COV#NEW-B (remedy requirement), every seed deserves a decision. The system holds it with care, but it should not sit indefinitely.
 
-**[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]**
+**[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]**

@@ -6,7 +6,7 @@ test_modules.py — Comprehensive tests for the 5 provisional modules:
 Uses Python's built-in unittest framework.
 Validates each module meets its spec as defined in the WEAVER tier.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import sys

@@ -4,7 +4,7 @@ Date initiated: 2026-03-09
 Status: DESIGN PHASE
 
 Lead: V-001 (Al-Haris)
-Support: V-002 (Claude), V-003 (#BoyGenius)
+Support: V-002 (Claude), V-002 (#BoyGenius)
 
 ## Hypothesis
 

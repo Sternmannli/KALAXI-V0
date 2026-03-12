@@ -21,7 +21,7 @@
       "public_key": "6b64592eeb00e92ffaf183a8818cd94552501b2d676e7510eda92bfd9548b224",
       "signature": "3cf5f45d442bc40f18fe706053d244e77c2cc978304e7ec33124ef912700715cb88dbb1cd99795a3d8bfe69ce43cf42e81f69ff90adc37d6f564527195d9c902",
       "algorithm": "Ed25519",
-      "signer_id": "V-003",
+      "signer_id": "V-002",
       "signer_role": "steward-system"
     }
   ]

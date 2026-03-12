@@ -19,7 +19,7 @@ The pattern of resolution — which shadows resolve quickly, which persist — i
 
 This turns the instrument into a longitudinal map of how AI cognition changes over time.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 from dataclasses import dataclass, field

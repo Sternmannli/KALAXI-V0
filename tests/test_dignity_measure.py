@@ -2,7 +2,7 @@
 """
 Tests for WEAVER/dignity_measure.py — Operational Measurement Protocols.
 GAP#014 (operational A, L, M definitions) + GAP#015 (moral standing).
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import sys

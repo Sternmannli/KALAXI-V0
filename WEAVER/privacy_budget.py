@@ -18,7 +18,7 @@ Key principle: ε is global, not per-query. Composition matters.
 This module uses basic composition (conservative) with an option
 to switch to advanced composition when the math is validated.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import json

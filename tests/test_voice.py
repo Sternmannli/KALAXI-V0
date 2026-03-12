@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Tests for Axi Voice Rules enforcement in WEAVER/say.py.
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import sys

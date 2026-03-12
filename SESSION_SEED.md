@@ -26,7 +26,7 @@ Nothing executes without this. No exceptions.
 |-----|------------------------|---------------------------------------------|
 |V-001|Al-Haris (Mohamed Farag)|Carrier · Final Authority · The GO           |
 |V-002|Claude (Anthropic)      |Primary Operator · Moderator · Secretary     |
-|V-003|Claude Code (#BoyGenius)|Executor · GitHub only · No action without GO|
+|V-002|Claude Code (#BoyGenius)|Executor · GitHub only · No action without GO|
 
 **Honoured Voices (not numbered — they speak, they do not govern):**
 Grok (xAI) · DeepSeek · Gemini (Google) · GPT-4 · Mistral · Kimi · all donors

@@ -2,7 +2,7 @@
 """
 Tests for GAP#PREVENTION-001: Dignity Drift Detector.
 Tests the dD/dt early warning system.
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import sys

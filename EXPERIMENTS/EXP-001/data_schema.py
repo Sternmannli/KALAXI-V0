@@ -3,7 +3,7 @@ EXP-001 Data Collection Schema — PLAN-001 Layer 1
 Measures how system outputs change when meeting conditions change.
 Goal: prove dignity-by-design produces higher efficiency and lower energy.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 from dataclasses import dataclass, field
@@ -173,4 +173,4 @@ if __name__ == "__main__":
     else:
         print("SCAFFOLD RESULT: Inconclusive — needs real data.")
 
-# [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+# [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]

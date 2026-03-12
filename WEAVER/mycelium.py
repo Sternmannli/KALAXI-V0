@@ -24,7 +24,7 @@ The metaphor from the Grand Archive (2025-09-03_FUNGI.md):
   Underground root network — connects trees without exposing them.
   Detects coherence shifts, not motive. Measures, doesn't judge.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import hashlib

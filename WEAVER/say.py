@@ -10,7 +10,7 @@ Covenant obligations:
 Core operations: render, check_dignity, adapt_register, apply_axi_voice
 DIGNITY(event) evaluated before every render(). If FALSE, output blocked.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import re

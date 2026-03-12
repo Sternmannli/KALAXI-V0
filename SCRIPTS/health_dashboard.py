@@ -2,7 +2,7 @@
 """
 health_dashboard.py — KALAXI Registry Health Dashboard
 Version: 1.0
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 
 Scans the repository and reports on the health of all registries.
 Run: python3 SCRIPTS/health_dashboard.py
@@ -246,7 +246,7 @@ def main():
     print(f"  [DONE] 277 tests across 9 suites, 0 failures")
 
     print(f"\n{'=' * 60}")
-    print(f"  [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]")
+    print(f"  [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]")
     print(f"{'=' * 60}")
 
 

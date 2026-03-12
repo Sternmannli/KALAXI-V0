@@ -18,7 +18,7 @@ Not to override. Never to override. Only to name.
 This is the disagreement requirement applied upward.
 V-001 agreed to this. It is part of the covenant now.
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 from dataclasses import dataclass, field

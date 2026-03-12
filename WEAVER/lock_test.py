@@ -12,7 +12,7 @@ A proverb passes the Lock Test only if:
 
 "A proverb that can be said another way was never a proverb."
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import re

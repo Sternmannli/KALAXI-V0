@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Tests for early_warning.py — Early-Warning Shadow Pipeline
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 import sys
 import shutil

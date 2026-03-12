@@ -15,7 +15,7 @@ Usage:
   python WEAVER/calibrate.py                    # Run default sweep
   python WEAVER/calibrate.py --detailed         # Include per-trajectory breakdown
 
-[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import json

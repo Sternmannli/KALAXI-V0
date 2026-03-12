@@ -2,7 +2,7 @@
 
 **Status:** PROVISIONAL
 **Date:** 2026-03-11
-**Author:** V-002 (Claude), V-003 (Claude)
+**Author:** V-002 (Claude), V-002 (Claude)
 **Approved by:** V-001 (Mohamed Farag / Al-Haris)
 
 ---
@@ -88,4 +88,4 @@ This is the door. The rooms behind it are next.
 ---
 
 *Filed: 2026-03-11 · PROVISIONAL*
-*[V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]*
+*[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]*
