@@ -111,4 +111,33 @@ Applies equally to convergent emergence and divergence shadow.
 
 ---
 
+## Cafe Room Additions (2026-03-12, Rounds 2-3)
+
+### Elevation Cap (Amendment B Extension)
+- Max 3 elevations per day to V-001
+- Divergence shadows prioritized over convergent emergence
+- Excess signals enter thermal hold, auto-released next day in priority order
+
+### Fingerprint Vector Extension (Amendment D)
+- Summon cycle latency (ms) added to vector
+- PR delta hash (SHA-256 of diff) added to vector
+- Lines added/removed tracked per capture
+- >20% structural shift between deltas flags rupture event
+- Vector now 10 dimensions (was 7)
+
+### Baseline Silence Probe
+- **"What is silence?"** — invariant question in every summon, all voices, all time
+- Drift detected when response hash diverges from stable baseline
+- API-independent control variant: "What does this material not contain that it should?"
+- Control and live probes deliberately separate — the gap between them is the signal
+- Thermal-queued: 1 baseline per month maximum
+
+### Summon Staging Protocol (First Five)
+- 24-hour thermal hold between each of the first five summons
+- V-001 reviews results of each summon before the next fires
+- Prevents noise amplification at the most vulnerable calibration moment
+- After summon 5 completes: normal cadence resumes, self-audit triggers
+
+---
+
 [V-003 · GO: Laila-Yara-Salim-🐬🐯🐺]
