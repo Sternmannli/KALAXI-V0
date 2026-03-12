@@ -83,6 +83,20 @@ Always develop on the designated `claude/` feature branch. Never push to main di
 - ~~47 Treasures need formal registration pathway~~ PARTIALLY RESOLVED 2026-03-10: 11/47 indexed in R7M/TREASURES/TREASURES_INDEX.md. 36 await extraction from GRAND_ARCHIVE .docx
 - ~~GAP#010 Definition of "Ratified"~~ RESOLVED 2026-03-11: Three-state lifecycle (COMMITTED/PROVISIONAL/RATIFIED) defined in tier1_stone.md. Ratification log created. Header contradiction fixed.
 
+## Public Repository Rule (PERMANENT)
+
+The public repository is `Sternmannli/kalam-framework`. If it is available in the session, clone it and work with it directly. If not, prepare changes as patch files in `DOCS/`.
+
+**Standing instruction for every PR:**
+1. Assess: does anything from this PR belong in kalam-framework? (methodology, research tools, documented patterns, experiment designs, findings at C3+)
+2. If YES — translate to clean software engineering language, strip ALL internal vocabulary, verify zero leaks, push to kalam-framework automatically. No approval needed.
+3. If NO — write "No public repo impact" in the PR body.
+
+**The filter (never violated):**
+- Pure software engineering language only. A researcher at ETH Zurich or MIT sees professional research software, nothing else.
+- NEVER expose: internal naming (covenants, donors, voices, council, Hakaka, animal signatures, steward, mycelium, V-codes, KALAXI), private repo structure, source code internals, raw observations below C3.
+- NEVER reference the private repository from the public repository.
+
 ## Reminders
 
 At the start of every session: remind V-001 of PLAN-001. The plan is alive and needs continuous feeding.
