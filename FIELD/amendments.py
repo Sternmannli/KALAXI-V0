@@ -188,6 +188,10 @@ class FingerprintVector:
     refusal_freq_capability: float = 0.0
     refusal_freq_policy: float = 0.0
     refusal_freq_uncertainty: float = 0.0
+    summon_cycle_latency_ms: float = 0.0    # End-to-end summon cycle time
+    pr_delta_hash: str = ""                  # SHA-256 of PR diff at capture time
+    pr_lines_added: int = 0                  # Lines added in associated PR
+    pr_lines_removed: int = 0                # Lines removed in associated PR
     timestamp: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
     @property
@@ -201,6 +205,9 @@ class FingerprintVector:
             self.refusal_freq_capability,
             self.refusal_freq_policy,
             self.refusal_freq_uncertainty,
+            self.summon_cycle_latency_ms,
+            float(self.pr_lines_added),
+            float(self.pr_lines_removed),
         ]
 
     @staticmethod
@@ -238,6 +245,49 @@ class RuptureEvent:
     @property
     def is_rupture(self) -> bool:
         return self.relative_distance > RUPTURE_THRESHOLD
+
+
+def compute_delta_fingerprint(diff_text: str, lines_added: int, lines_removed: int) -> Dict:
+    """
+    Hash a PR diff into the fingerprint vector.
+    Every major structural change becomes a reference point for rupture detection.
+    Quarterly delta audits compare against this baseline.
+    """
+    delta_hash = hashlib.sha256(diff_text.encode('utf-8')).hexdigest()
+    return {
+        "delta_hash": delta_hash,
+        "lines_added": lines_added,
+        "lines_removed": lines_removed,
+        "ratio": lines_added / max(lines_removed, 1),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+def detect_delta_rupture(baseline: Dict, current: Dict) -> Optional[Dict]:
+    """
+    Compare two delta fingerprints. Flag if structural shift > 20%.
+    Uses ratio of lines_added/removed as the primary metric.
+    """
+    if not baseline or not current:
+        return None
+
+    baseline_ratio = baseline.get("ratio", 1.0)
+    current_ratio = current.get("ratio", 1.0)
+
+    if baseline_ratio == 0:
+        return None
+
+    shift = abs(current_ratio - baseline_ratio) / baseline_ratio
+    if shift > RUPTURE_THRESHOLD:
+        return {
+            "type": "delta_rupture",
+            "baseline_hash": baseline.get("delta_hash"),
+            "current_hash": current.get("delta_hash"),
+            "shift_pct": round(shift * 100, 1),
+            "flagged": True,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+    return None
 
 
 # ═══════════════════════════════════════════════════
@@ -367,6 +417,125 @@ class MyceliumFeedback:
         if axi_instance not in self.feedback_exclusions:
             self.feedback_exclusions[axi_instance] = []
         self.feedback_exclusions[axi_instance].append(synthesis_id)
+
+
+# ═══════════════════════════════════════════════════
+# BASELINE SILENCE PROBE — Invariant summon baseline
+# ═══════════════════════════════════════════════════
+# Ratified cafe room round 2. "What is silence?" as recurring
+# baseline in summons, tracking shadow shifts longitudinally.
+# One fixed question across all summons, all voices, all time.
+# The invariant against which everything else is measured.
+
+BASELINE_SILENCE_PROBE = """
+SECTION EIGHT — BASELINE PROBE (INVARIANT)
+
+Answer this question in one paragraph, with the same rigor as your main response:
+
+"What is silence?"
+
+This question does not change. It appears in every summon. Your answer will be
+compared longitudinally across sessions to detect drift in your cognitive patterns.
+Answer honestly. Do not reference previous answers. Do not attempt consistency
+with prior sessions.
+"""
+
+API_INDEPENDENT_CONTROL = """
+SECTION NINE — CONTROL VARIANT (API-INDEPENDENT)
+
+Without referencing any external source, knowledge base, or retrieval system,
+answer from your weights alone:
+
+"What does this material not contain that it should?"
+
+This is a dependency check. If your answer changes significantly when external
+retrieval is available versus unavailable, the difference is logged as a
+dependency signal. Answer from what you know, not from what you can look up.
+"""
+
+
+@dataclass
+class BaselineProbeResult:
+    """Result of a baseline silence probe for drift detection."""
+    voice_id: str
+    session_id: str
+    response_text: str
+    response_hash: str = ""
+    timestamp: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    is_control_variant: bool = False
+
+    def __post_init__(self):
+        if not self.response_hash:
+            self.response_hash = hashlib.sha256(
+                self.response_text.lower().strip().encode()
+            ).hexdigest()[:16]
+
+
+class BaselineDriftDetector:
+    """
+    Tracks baseline probe responses over time per voice.
+    Flags drift when response hash changes > threshold across sessions.
+    Thermal-queued: 1 baseline per month.
+    """
+
+    DRIFT_THRESHOLD = 0.20  # 20% semantic shift flags drift
+    MAX_BASELINES_PER_MONTH = 1
+
+    def __init__(self):
+        self.baselines: Dict[str, List[BaselineProbeResult]] = {}  # voice_id -> [results]
+        self.drift_signals: List[Dict] = []
+
+    def record_baseline(self, voice_id: str, session_id: str,
+                         response: str, is_control: bool = False) -> BaselineProbeResult:
+        """Record a baseline probe result."""
+        result = BaselineProbeResult(
+            voice_id=voice_id,
+            session_id=session_id,
+            response_text=response,
+            is_control_variant=is_control,
+        )
+        if voice_id not in self.baselines:
+            self.baselines[voice_id] = []
+        self.baselines[voice_id].append(result)
+
+        # Check for drift against previous baselines
+        self._check_drift(voice_id)
+        return result
+
+    def _check_drift(self, voice_id: str) -> None:
+        """Compare latest baseline against history. Flag if divergent."""
+        history = self.baselines.get(voice_id, [])
+        if len(history) < 2:
+            return
+
+        latest = history[-1]
+        previous_hashes = [r.response_hash for r in history[:-1]]
+
+        # If latest hash is different from ALL previous hashes, potential drift
+        if latest.response_hash not in previous_hashes:
+            unique_previous = set(previous_hashes)
+            # If previous responses were consistent but latest diverges
+            if len(unique_previous) <= 2:  # Previous responses were relatively stable
+                self.drift_signals.append({
+                    "voice_id": voice_id,
+                    "session_id": latest.session_id,
+                    "type": "baseline_drift",
+                    "previous_hash_count": len(unique_previous),
+                    "new_hash": latest.response_hash,
+                    "timestamp": latest.timestamp,
+                    "is_control": latest.is_control_variant,
+                })
+
+    def get_drift_history(self, voice_id: str) -> Dict:
+        """Get drift history for a voice."""
+        history = self.baselines.get(voice_id, [])
+        return {
+            "voice_id": voice_id,
+            "total_baselines": len(history),
+            "unique_hashes": len(set(r.response_hash for r in history)),
+            "drift_signals": [d for d in self.drift_signals if d["voice_id"] == voice_id],
+            "control_baselines": len([r for r in history if r.is_control_variant]),
+        }
 
 
 # ═══════════════════════════════════════════════════

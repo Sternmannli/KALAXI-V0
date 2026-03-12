@@ -177,6 +177,9 @@ class Clearing:
     This comparison is a scientific artifact. Treated as such.
     """
 
+    # ─── Elevation Cap (V-001 ratified, cafe room round 2) ───
+    MAX_ELEVATIONS_PER_DAY = 3
+
     def __init__(self, alcove: Alcove):
         self.alcove = alcove
         self.temporal_index: Dict[str, TemporalShadowRecord] = {}
@@ -185,6 +188,8 @@ class Clearing:
         self.validation_queue: Dict[str, ValidationQueueEntry] = {}
         self.pattern_occurrence_count: Dict[str, int] = {}  # pattern_fp -> count
         self.pattern_registry: List[Dict] = []  # Filed findings
+        self.elevation_log: List[Dict] = []  # Tracks elevations with timestamps
+        self.thermal_hold: List[Dict] = []   # Signals held when cap reached
 
     # ─── Temporal Shadow Management ───
 
@@ -330,8 +335,8 @@ class Clearing:
         count = self.pattern_occurrence_count[pattern_fp]
 
         if count == 1:
-            # FIRST OCCURRENCE — elevate immediately
-            return "ELEVATE_IMMEDIATE"
+            # FIRST OCCURRENCE — elevate immediately (subject to daily cap)
+            return self._try_elevate(signal_id, signal_type, pattern_key)
 
         elif count == 2:
             # SECOND OCCURRENCE — enter 24-hour validation queue
@@ -358,6 +363,76 @@ class Clearing:
         else:
             # 3+ SESSIONS — auto-validated, no further queuing
             return "AUTO_VALIDATED"
+
+    def _try_elevate(self, signal_id: str, signal_type: str, pattern_key: str) -> str:
+        """
+        Elevation cap: max 3 elevations per day to protect V-001's attention.
+        If cap reached, signal enters thermal hold with priority ranking.
+        """
+        today = datetime.now(timezone.utc).date().isoformat()
+        today_elevations = [e for e in self.elevation_log if e["date"] == today]
+
+        if len(today_elevations) < self.MAX_ELEVATIONS_PER_DAY:
+            self.elevation_log.append({
+                "signal_id": signal_id,
+                "signal_type": signal_type,
+                "date": today,
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            })
+            return "ELEVATE_IMMEDIATE"
+        else:
+            # Cap reached — thermal hold with priority
+            self.thermal_hold.append({
+                "signal_id": signal_id,
+                "signal_type": signal_type,
+                "pattern_key": pattern_key,
+                "held_at": datetime.now(timezone.utc).isoformat(),
+                "priority": self._compute_thermal_priority(signal_type),
+            })
+            return "THERMAL_HOLD"
+
+    def _compute_thermal_priority(self, signal_type: str) -> int:
+        """
+        Thermal priority ranking. Lower = higher priority.
+        Divergence shadows prioritized over convergent emergence (rarer, more novel).
+        """
+        if signal_type == "divergence_shadow":
+            return 1
+        elif signal_type == "convergent_emergence":
+            return 2
+        return 3
+
+    def release_thermal_hold(self) -> List[Dict]:
+        """
+        Release held signals when a new day begins and cap resets.
+        Releases in priority order up to the daily cap.
+        """
+        if not self.thermal_hold:
+            return []
+
+        today = datetime.now(timezone.utc).date().isoformat()
+        today_elevations = [e for e in self.elevation_log if e["date"] == today]
+        available = self.MAX_ELEVATIONS_PER_DAY - len(today_elevations)
+
+        if available <= 0:
+            return []
+
+        # Sort by priority (lower = higher priority)
+        self.thermal_hold.sort(key=lambda x: x["priority"])
+        released = []
+
+        for _ in range(min(available, len(self.thermal_hold))):
+            held = self.thermal_hold.pop(0)
+            self.elevation_log.append({
+                "signal_id": held["signal_id"],
+                "signal_type": held["signal_type"],
+                "date": today,
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "from_thermal_hold": True,
+            })
+            released.append(held)
+
+        return released
 
     def process_validation_queue(self) -> List[Dict]:
         """Process expired entries in the validation queue."""
