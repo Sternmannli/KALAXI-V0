@@ -30,12 +30,14 @@ The deepest metadata of all — where this system came from.
 
 import hashlib
 import json
+import math
 import uuid
+from collections import Counter
 from dataclasses import dataclass, field, asdict
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 
 # ═══════════════════════════════════════════════════
@@ -99,6 +101,18 @@ class Condition(Enum):
     PRESENCE = "presence"
     WITNESSING = "witnessing"
     UNKNOWN = "unknown"
+
+
+# Enrichment 1 — Dual temporal track boundary
+SHORT_TERM_DAYS = 7
+
+
+class ChangeMode(Enum):
+    """Enrichment 3 — How did dignity change? Smooth decline vs rupture."""
+    SMOOTH = "smooth"       # Gradual decline over multiple sessions
+    RUPTURE = "rupture"     # Sudden collapse within a single session
+    STABLE = "stable"       # No significant change
+    RECOVERY = "recovery"   # Upward movement after decline
 
 
 # ═══════════════════════════════════════════════════
@@ -215,8 +229,15 @@ class MetadataGathering:
         self._index_by_marker: Dict[str, List[int]] = {}     # marker → [positions]
         self._index_by_covenant: Dict[str, List[int]] = {}   # covenant → [positions]
         self._index_temporal: List[tuple] = []                # (timestamp, position)
+        # ── Enrichment 1: Dual temporal tracks ──
+        self._index_temporal_short: List[tuple] = []          # last 7 days
+        self._index_temporal_long: List[tuple] = []           # everything before
         self._ledger: List[dict] = []  # COV#003 append-only operations log
         self._discovery_log: List[dict] = []  # Connections discovered
+        # ── Enrichment 2: Automatic echo detection log ──
+        self._echo_detection_log: List[dict] = []
+        # ── Enrichment 3: Rupture detection state ──
+        self._rupture_log: List[dict] = []
         self._storage_path = storage_path
         self._load()
 
@@ -340,8 +361,11 @@ class MetadataGathering:
         for cov in envelope.layer2.covenants_touched:
             self._index_by_covenant.setdefault(cov, []).append(pos)
 
-        # Temporal index
+        # Temporal index (unified)
         self._index_temporal.append((envelope.layer1.timestamp, pos))
+
+        # Enrichment 1: Dual temporal tracks
+        self._assign_temporal_track(envelope.layer1.timestamp, pos)
 
         self._record_ledger("store", f"envelope={envelope.envelope_id} event={envelope.layer1.event_id}")
         self._persist()
@@ -399,6 +423,343 @@ class MetadataGathering:
         e_score = min(1.0, len(echoes) * 0.15)
         x_score = min(1.0, len(external) * 0.3)
         return round(min(1.0, t_score + e_score + x_score), 3)
+
+    # ═══════════════════════════════════════════════════
+    # ENRICHMENT 1 — DUAL TEMPORAL TRACKS
+    # Short-term: last 7 days. Long-term: everything before.
+    # "The insights that emerge from connecting across those
+    #  two tracks separately are qualitatively different from
+    #  mixing them together."
+    # ═══════════════════════════════════════════════════
+
+    def _assign_temporal_track(self, timestamp: str, pos: int):
+        """Place event into short-term or long-term temporal track."""
+        try:
+            ts = datetime.fromisoformat(timestamp)
+        except (ValueError, TypeError):
+            self._index_temporal_long.append((timestamp, pos))
+            return
+        cutoff = datetime.now(timezone.utc) - timedelta(days=SHORT_TERM_DAYS)
+        if ts >= cutoff:
+            self._index_temporal_short.append((timestamp, pos))
+        else:
+            self._index_temporal_long.append((timestamp, pos))
+
+    def rebalance_temporal_tracks(self):
+        """
+        Move events that aged out of short-term into long-term.
+        Call periodically — the boundary shifts with time.
+        """
+        cutoff = datetime.now(timezone.utc) - timedelta(days=SHORT_TERM_DAYS)
+        still_short = []
+        for ts_str, pos in self._index_temporal_short:
+            try:
+                ts = datetime.fromisoformat(ts_str)
+                if ts >= cutoff:
+                    still_short.append((ts_str, pos))
+                else:
+                    self._index_temporal_long.append((ts_str, pos))
+            except (ValueError, TypeError):
+                self._index_temporal_long.append((ts_str, pos))
+        self._index_temporal_short = still_short
+
+    def query_short_term(self) -> List[MetadataEnvelope]:
+        """All events in the short-term window (last 7 days)."""
+        self.rebalance_temporal_tracks()
+        return [self._envelopes[pos] for _, pos in self._index_temporal_short]
+
+    def query_long_term(self) -> List[MetadataEnvelope]:
+        """All events in the long-term archive (before 7 days)."""
+        self.rebalance_temporal_tracks()
+        return [self._envelopes[pos] for _, pos in self._index_temporal_long]
+
+    def cross_track_discovery(self) -> List[dict]:
+        """
+        The real power: find patterns that span both tracks.
+        A short-term event echoes a long-term event — that is
+        where the deepest insight lives.
+        """
+        self.rebalance_temporal_tracks()
+        discoveries = []
+        short_envs = [self._envelopes[pos] for _, pos in self._index_temporal_short]
+        long_positions = {pos for _, pos in self._index_temporal_long}
+
+        for env in short_envs:
+            # Check if any of this event's echo patterns come from long-term
+            for echo_id in env.layer3.echo_patterns:
+                for lpos in long_positions:
+                    long_env = self._envelopes[lpos]
+                    if long_env.layer1.event_id == echo_id:
+                        discoveries.append({
+                            "type": "cross_track_echo",
+                            "short_term_event": env.layer1.event_id,
+                            "long_term_event": long_env.layer1.event_id,
+                            "short_domain": env.layer2.domain,
+                            "long_domain": long_env.layer2.domain,
+                            "time_span_hint": "short↔long",
+                            "timestamp": self._now(),
+                        })
+
+            # Check if same markers fire across tracks
+            for marker in env.layer2.markers_fired:
+                if marker in self._index_by_marker:
+                    for mpos in self._index_by_marker[marker]:
+                        if mpos in long_positions:
+                            long_env = self._envelopes[mpos]
+                            disc = {
+                                "type": "cross_track_marker",
+                                "marker": marker,
+                                "short_term_event": env.layer1.event_id,
+                                "long_term_event": long_env.layer1.event_id,
+                                "timestamp": self._now(),
+                            }
+                            if disc not in discoveries:
+                                discoveries.append(disc)
+
+        if discoveries:
+            self._record_ledger("cross_track_discovery", f"found={len(discoveries)}")
+        return discoveries
+
+    # ═══════════════════════════════════════════════════
+    # ENRICHMENT 2 — AUTOMATIC ECHO DETECTION
+    # "The most valuable moment in any temporal system is
+    #  when two events that look unrelated turn out to share
+    #  hidden structure."
+    # The Mycelium should be active, not waiting.
+    # ═══════════════════════════════════════════════════
+
+    ECHO_SIMILARITY_THRESHOLD = 0.6  # Structural similarity above this triggers detection
+
+    def _structural_fingerprint(self, env: MetadataEnvelope) -> Dict[str, Any]:
+        """
+        Extract the structural signature of an event.
+        Not content — structure. The shape, not the words.
+        """
+        return {
+            "kind": env.layer1.kind,
+            "domain": env.layer2.domain,
+            "markers": set(env.layer2.markers_fired),
+            "covenants": set(env.layer2.covenants_touched),
+            "certainty": env.layer2.certainty,
+            "condition": env.layer2.condition,
+            "module_chain": tuple(env.layer2.module_chain),
+        }
+
+    def _structural_similarity(self, fp_a: dict, fp_b: dict) -> float:
+        """
+        Compute structural similarity between two fingerprints.
+        Jaccard on sets, exact match on scalars, weighted combination.
+        """
+        score = 0.0
+        weights = 0.0
+
+        # Kind match (weight 2)
+        weights += 2.0
+        if fp_a["kind"] == fp_b["kind"]:
+            score += 2.0
+
+        # Domain match (weight 2)
+        weights += 2.0
+        if fp_a["domain"] and fp_b["domain"] and fp_a["domain"] == fp_b["domain"]:
+            score += 2.0
+
+        # Marker overlap — Jaccard (weight 3)
+        weights += 3.0
+        ma, mb = fp_a["markers"], fp_b["markers"]
+        if ma or mb:
+            union = ma | mb
+            inter = ma & mb
+            score += 3.0 * (len(inter) / len(union)) if union else 0.0
+
+        # Covenant overlap — Jaccard (weight 2)
+        weights += 2.0
+        ca, cb = fp_a["covenants"], fp_b["covenants"]
+        if ca or cb:
+            union = ca | cb
+            inter = ca & cb
+            score += 2.0 * (len(inter) / len(union)) if union else 0.0
+
+        # Certainty proximity (weight 1)
+        weights += 1.0
+        cert_diff = abs(fp_a["certainty"] - fp_b["certainty"])
+        score += 1.0 * max(0, 1 - cert_diff / 4)
+
+        # Condition match (weight 1)
+        weights += 1.0
+        if fp_a["condition"] == fp_b["condition"]:
+            score += 1.0
+
+        return round(score / weights, 4) if weights > 0 else 0.0
+
+    def detect_echoes(self, scan_last_n: int = 30) -> List[dict]:
+        """
+        Active echo detection — scan recent events against the full
+        gathering space. Surface pairs that share hidden structure
+        above the similarity threshold.
+
+        The Mycelium is now active. It does not wait for a human
+        to notice. It hears.
+        """
+        detected = []
+        recent = self._envelopes[-scan_last_n:]
+        older = self._envelopes[:-scan_last_n] if len(self._envelopes) > scan_last_n else []
+
+        for env_a in recent:
+            fp_a = self._structural_fingerprint(env_a)
+            for env_b in older:
+                # Skip same event
+                if env_a.layer1.event_id == env_b.layer1.event_id:
+                    continue
+                # Skip same speaker at same time (obvious pair)
+                if (env_a.layer1.speaker == env_b.layer1.speaker
+                        and env_a.layer1.kind == env_b.layer1.kind
+                        and env_a.layer2.domain == env_b.layer2.domain):
+                    continue
+
+                fp_b = self._structural_fingerprint(env_b)
+                sim = self._structural_similarity(fp_a, fp_b)
+
+                if sim >= self.ECHO_SIMILARITY_THRESHOLD:
+                    echo = {
+                        "type": "auto_echo",
+                        "event_a": env_a.layer1.event_id,
+                        "event_b": env_b.layer1.event_id,
+                        "similarity": sim,
+                        "shared_markers": list(fp_a["markers"] & fp_b["markers"]),
+                        "shared_covenants": list(fp_a["covenants"] & fp_b["covenants"]),
+                        "domain_a": env_a.layer2.domain,
+                        "domain_b": env_b.layer2.domain,
+                        "timestamp": self._now(),
+                    }
+                    detected.append(echo)
+
+        # Deduplicate — keep highest similarity per pair
+        seen_pairs: Dict[tuple, dict] = {}
+        for echo in detected:
+            pair = tuple(sorted([echo["event_a"], echo["event_b"]]))
+            if pair not in seen_pairs or echo["similarity"] > seen_pairs[pair]["similarity"]:
+                seen_pairs[pair] = echo
+        detected = list(seen_pairs.values())
+
+        if detected:
+            self._echo_detection_log.extend(detected)
+            self._record_ledger("echo_detection", f"auto_echoes_found={len(detected)}")
+            self._persist()
+
+        return detected
+
+    # ═══════════════════════════════════════════════════
+    # ENRICHMENT 3 — RUPTURE DETECTION
+    # "Slow decline over three sessions is not the same event
+    #  as sudden collapse in one session."
+    # Smooth change versus rupture. Different soul. Different response.
+    # ═══════════════════════════════════════════════════
+
+    RUPTURE_THRESHOLD = 0.4    # D drop >= this in one step = rupture
+    SMOOTH_WINDOW = 3          # Check this many recent readings for smooth decline
+    SMOOTH_TOTAL_DROP = 0.3    # Cumulative drop over window for smooth decline
+
+    def detect_change_mode(self, readings: List[Tuple[float, str]]) -> dict:
+        """
+        Given a sequence of (D_score, exchange_id) tuples, determine
+        whether the dignity trajectory represents:
+          - RUPTURE: sudden collapse (big drop in one step)
+          - SMOOTH: gradual decline (small drops over multiple steps)
+          - STABLE: no significant change
+          - RECOVERY: upward movement after decline
+
+        Returns a dict with mode, details, and recommended response.
+        """
+        if len(readings) < 2:
+            return {
+                "mode": ChangeMode.STABLE.value,
+                "message": "Insufficient readings.",
+                "response": "Continue monitoring.",
+                "details": {},
+            }
+
+        current_D = readings[-1][0]
+        prev_D = readings[-2][0]
+        step_delta = current_D - prev_D
+
+        # Check for rupture — sudden large drop
+        if step_delta <= -self.RUPTURE_THRESHOLD:
+            result = {
+                "mode": ChangeMode.RUPTURE.value,
+                "message": (
+                    f"RUPTURE detected. D dropped {abs(step_delta):.2f} in one step "
+                    f"(from {prev_D:.2f} to {current_D:.2f}). "
+                    f"This is not gradual. Something broke."
+                ),
+                "response": (
+                    "IMMEDIATE response required. Pause all exchanges. "
+                    "Steward must investigate the specific event that caused collapse. "
+                    "Do not treat this as a trend — treat it as an incident."
+                ),
+                "details": {
+                    "step_delta": round(step_delta, 4),
+                    "current_D": current_D,
+                    "previous_D": prev_D,
+                    "exchange_id": readings[-1][1],
+                },
+            }
+            self._rupture_log.append({**result, "timestamp": self._now()})
+            self._record_ledger("rupture_detected", f"delta={step_delta:.4f} D={current_D:.2f}")
+            self._persist()
+            return result
+
+        # Check for smooth decline — gradual drop over window
+        window = readings[-self.SMOOTH_WINDOW:]
+        if len(window) >= self.SMOOTH_WINDOW:
+            total_drop = window[0][0] - window[-1][0]
+            all_declining = all(
+                window[i][0] >= window[i + 1][0]
+                for i in range(len(window) - 1)
+            )
+            if all_declining and total_drop >= self.SMOOTH_TOTAL_DROP:
+                result = {
+                    "mode": ChangeMode.SMOOTH.value,
+                    "message": (
+                        f"Smooth decline detected. D dropped {total_drop:.2f} over "
+                        f"{len(window)} readings (from {window[0][0]:.2f} to {window[-1][0]:.2f}). "
+                        f"Gradual erosion, not sudden break."
+                    ),
+                    "response": (
+                        "Gentle holding. Review the pattern across recent sessions. "
+                        "Look for what is slowly shifting — not what exploded. "
+                        "Steward attention recommended but no emergency pause."
+                    ),
+                    "details": {
+                        "total_drop": round(total_drop, 4),
+                        "window_size": len(window),
+                        "start_D": window[0][0],
+                        "end_D": window[-1][0],
+                    },
+                }
+                self._rupture_log.append({**result, "timestamp": self._now()})
+                self._record_ledger("smooth_decline", f"drop={total_drop:.4f} over={len(window)}")
+                self._persist()
+                return result
+
+        # Check for recovery
+        if step_delta > 0 and len(readings) >= 3:
+            if readings[-3][0] > readings[-2][0] and current_D > prev_D:
+                return {
+                    "mode": ChangeMode.RECOVERY.value,
+                    "message": f"Recovery detected. D rising from {prev_D:.2f} to {current_D:.2f}.",
+                    "response": "Continue current approach. The holding is working.",
+                    "details": {
+                        "step_delta": round(step_delta, 4),
+                        "current_D": current_D,
+                    },
+                }
+
+        return {
+            "mode": ChangeMode.STABLE.value,
+            "message": f"Stable. D={current_D:.2f}, delta={step_delta:.2f}.",
+            "response": "Continue monitoring.",
+            "details": {"current_D": current_D, "step_delta": round(step_delta, 4)},
+        }
 
     # ── QUERY API ──
 
@@ -538,6 +899,7 @@ class MetadataGathering:
 
     def state(self) -> dict:
         """Full state of the gathering space."""
+        self.rebalance_temporal_tracks()
         return {
             "total_events": self.total_events,
             "total_discoveries": self.total_discoveries,
@@ -545,6 +907,10 @@ class MetadataGathering:
             "speakers_active": self.speakers_active,
             "covenants_touched": self.covenants_touched,
             "ledger_entries": self.ledger_length,
+            "short_term_events": len(self._index_temporal_short),
+            "long_term_events": len(self._index_temporal_long),
+            "auto_echoes_detected": len(self._echo_detection_log),
+            "rupture_events": len(self._rupture_log),
             "origin": ORIGIN,
             "timestamp": self._now(),
         }
@@ -560,6 +926,8 @@ class MetadataGathering:
             "origin": ORIGIN,
             "envelopes": [self._envelope_to_dict(e) for e in self._envelopes],
             "discoveries": self._discovery_log,
+            "echo_detections": self._echo_detection_log,
+            "rupture_log": self._rupture_log,
             "ledger": self._ledger,
             "persisted_at": self._now(),
         }
@@ -586,7 +954,10 @@ class MetadataGathering:
                 for c in env.layer2.covenants_touched:
                     self._index_by_covenant.setdefault(c, []).append(pos)
                 self._index_temporal.append((env.layer1.timestamp, pos))
+                self._assign_temporal_track(env.layer1.timestamp, pos)
             self._discovery_log = data.get("discoveries", [])
+            self._echo_detection_log = data.get("echo_detections", [])
+            self._rupture_log = data.get("rupture_log", [])
             self._ledger = data.get("ledger", [])
         except (json.JSONDecodeError, KeyError):
             pass  # Start fresh if corrupted
