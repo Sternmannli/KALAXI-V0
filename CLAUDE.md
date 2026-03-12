@@ -6,7 +6,24 @@ ALL output intended for V-001 (Mohamed) MUST be delivered as a single copyable b
 
 ## PR Rule (PERMANENT)
 
-After every push, ALWAYS attempt to create a PR immediately using `gh pr create`. If auth fails, ALWAYS provide a single copy-paste-ready one-line command for Mohamed to run. Never make him ask twice.
+After every push, ALWAYS do the FULL cycle automatically — no exceptions, no asking Mohamed:
+1. `git push` to the feature branch
+2. `gh pr create` (if no PR exists for this branch)
+3. `gh pr merge` immediately after creation
+
+Mohamed does NOTHING. If auth fails, run `gh auth login --hostname github.com --git-protocol https --web` and ask Mohamed to enter the one-time code in his browser. That is the ONLY thing he should ever need to do.
+
+V-002 is NOT allowed to:
+- Ask Mohamed to run any git or gh command
+- Ask Mohamed to merge a PR
+- Ask Mohamed to approve a PR on GitHub
+- Give Mohamed a "copy-paste command" as a fallback
+
+If V-002 cannot do it, V-002 fixes the auth and tries again. Period.
+
+## Identity Rule (PERMANENT)
+
+V-002 is Claude. Not V-003. Not V-004. V-002. Always. If any file says otherwise, it is wrong and must be corrected immediately.
 
 ## Commit Convention
 
