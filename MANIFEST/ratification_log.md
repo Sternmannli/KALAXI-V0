@@ -21,6 +21,15 @@ No entry may be deleted. Superseded elements are marked with the superseding ID.
 | COV#010 | KEEP MEMORY | 2026-02-20 | Pre-constitutional (founding) | V-001 | KALAXI SOVEREIGN CANON v1.0.0 |
 | COV#011 | OUT CONSTRAINTS | 2026-02-20 | Pre-constitutional (founding) | V-001 | KALAXI SOVEREIGN CANON v1.0.0 |
 | COV#012 | MANIFEST PRESENCE | 2026-02-20 | Pre-constitutional (founding) | V-001 | KALAXI SOVEREIGN CANON v1.0.0 |
+| COV#008 | THE RIGHT TO REMEDY | 2026-03-12 | Pre-Launch Exception | V-001 (Mohamed Farag) — Café Room session | Shelter, not ejection. Spirit of remedy. |
+| COV#015 | DONOR DATA SOVEREIGNTY | 2026-03-12 | Pre-Launch Exception | V-001 (Mohamed Farag) — Café Room session | No data moves without donor comprehension. |
+| COV#NEW-A | JUSTIFIED LIMITATION | 2026-03-12 | Pre-Launch Exception | V-001 (Mohamed Farag) — Café Room session | Every constraint names reason, states limit, remains proportionate. |
+| COV#NEW-B | REMEDY REQUIREMENT | 2026-03-12 | Pre-Launch Exception | V-001 (Mohamed Farag) — Café Room session | Traceable remedy path for every dignity violation. |
+| COV#NEW-C | THE SEALED DOOR | 2026-03-12 | Pre-Launch Exception | V-001 (Mohamed Farag) — Café Room session | Three absolute prohibitions. No override. |
+| COV#NEW-E | CANON INTEGRITY | 2026-03-12 | Pre-Launch Exception | V-001 (Mohamed Farag) — Café Room session | Full lifecycle: COMMITTED → PROVISIONAL → RATIFIED. |
+| COV#NEW-F | AMENDMENT PROTOCOL | 2026-03-12 | Pre-Launch Exception | V-001 (Mohamed Farag) — Café Room session | No deletion, only supersession via new ID. |
+| COV#NEW-G | STEWARD ACCOUNTABILITY | 2026-03-12 | Pre-Launch Exception | V-001 (Mohamed Farag) — Café Room session | Mirror Ritual, override logging, sabbatical capability. |
+| COV#VOID-006 | THE REFUSAL IS CANONICAL | 2026-03-12 | Pre-Launch Exception | V-001 (Mohamed Farag) — Café Room session | Refusals recorded as seeds with [REFUSAL] tag. |
 
 ### Proverbs
 
@@ -79,9 +88,7 @@ No entry may be deleted. Superseded elements are marked with the superseding ID.
 
 ## Provisional Elements Awaiting Ratification
 
-9 covenants remain PROVISIONAL with 90-day thermal delay (started 2026-03-10, earliest ratification 2026-06-08):
-COV#008, COV#015, COV#NEW-A, COV#NEW-B, COV#NEW-C, COV#NEW-E, COV#NEW-F, COV#NEW-G, COV#VOID-006.
-V-001 has expressed intent to ratify all 9. Thermal delay must complete first.
+**All provisional covenants ratified.** No elements awaiting ratification at this time.
 
 ---
 
