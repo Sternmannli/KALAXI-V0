@@ -50,6 +50,11 @@
   /* Layout */
   --max-width: 65ch;
   --page-padding: clamp(1.5rem, 4vw, 3rem);
+
+  /* Living Ledger — set by JS, defaults here */
+  --mycelium-opacity: 0.015;
+  --mycelium-opacity-light: 0.02;
+  --breath-duration: 4s;
 }
 
 /* ===== Reset ===== */
@@ -179,22 +184,25 @@ nav a:hover {
 }
 
 .breathing {
-  animation: breathe 4s ease-in-out infinite;
+  animation: breathe var(--breath-duration) ease-in-out infinite;
 }
 
-/* ===== Subtle geometric background ===== */
+/* ===== Subtle geometric background — the Mycelium ===== */
+/* Opacity is driven by --mycelium-opacity (set by JS from Living Ledger count). */
+/* More words = denser golden threads. The forest floor grows. */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image:
     repeating-conic-gradient(
-      rgba(201, 169, 110, 0.015) 0% 25%,
+      rgba(201, 169, 110, var(--mycelium-opacity)) 0% 25%,
       transparent 0% 50%
     );
   background-size: 60px 60px;
   pointer-events: none;
   z-index: -1;
+  transition: background-image 2s ease;
 }
 
 /* ===== Selection ===== */
@@ -242,7 +250,7 @@ body::before {
   body::before {
     background-image:
       repeating-conic-gradient(
-        rgba(139, 105, 20, 0.02) 0% 25%,
+        rgba(139, 105, 20, var(--mycelium-opacity-light)) 0% 25%,
         transparent 0% 50%
       );
   }
