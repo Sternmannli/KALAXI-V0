@@ -55,6 +55,28 @@ import Base from '../layouts/Base.astro';
   <!-- THE GAP -->
   <div class="gap" role="separator" aria-hidden="true"></div>
 
+  <!-- SIXTH BREATH — The Threshold. ⟲ The Ninth Operator. -->
+  <section class="threshold" aria-label="The Threshold">
+    <p class="threshold-prompt">You came with what you came with. The door is open.</p>
+    <form id="threshold-form" aria-label="Leave your word">
+      <textarea
+        id="threshold-input"
+        placeholder="قُل"
+        aria-label="Your word"
+        rows="3"
+        maxlength="2000"
+      ></textarea>
+      <button type="submit" id="threshold-submit">Leave this here</button>
+    </form>
+    <div id="threshold-response" class="threshold-response" aria-live="polite" hidden>
+      <p id="witness-mark" class="witness-mark"></p>
+      <p class="threshold-receipt">It is here. You can come back.</p>
+    </div>
+  </section>
+
+  <!-- THE GAP -->
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
   <!-- NAVIGATION — appears last, not first -->
   <section class="paths" aria-label="Explore">
     <nav>
@@ -188,4 +210,149 @@ import Base from '../layouts/Base.astro';
     font-size: 0.75rem;
     opacity: 0.6;
   }
+
+  /* ===== Threshold — The Ninth Operator ===== */
+  .threshold {
+    min-height: 80vh;
+    gap: var(--space-4);
+  }
+
+  .threshold-prompt {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: var(--space-6);
+  }
+
+  #threshold-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    width: 100%;
+    max-width: 45ch;
+  }
+
+  #threshold-input {
+    width: 100%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 2px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.7;
+    padding: var(--space-3);
+    resize: vertical;
+    transition: border-color 0.4s ease;
+  }
+
+  #threshold-input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  #threshold-input::placeholder {
+    font-family: 'Amiri', var(--font-proverb);
+    font-size: var(--text-lg);
+    color: var(--text-dim);
+    text-align: center;
+    direction: rtl;
+  }
+
+  #threshold-submit {
+    background: transparent;
+    border: 1px solid var(--accent-subtle);
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    padding: var(--space-1) var(--space-4);
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  #threshold-submit:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+
+  #threshold-submit:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .threshold-response {
+    margin-top: var(--space-6);
+    text-align: center;
+    animation: fadeIn 1.5s ease-in;
+  }
+
+  .witness-mark {
+    font-family: var(--font-proverb);
+    font-size: var(--text-base);
+    color: var(--accent);
+    font-style: italic;
+    margin-bottom: var(--space-3);
+  }
+
+  .threshold-receipt {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 </style>
+
+<script>
+  // ⟲ The Ninth Operator — client-side witness ceremony (Phase 1)
+  // In Phase 2, this submits to a Cloudflare Worker running the full Python pipeline.
+
+  const form = document.getElementById('threshold-form');
+  const input = document.getElementById('threshold-input');
+  const submit = document.getElementById('threshold-submit');
+  const response = document.getElementById('threshold-response');
+  const mark = document.getElementById('witness-mark');
+
+  function witnessWord(content) {
+    // D = A × L × M — the dignity predicate
+    const A = content.trim().length > 0 ? 1.0 : 0.0; // Agency: something was offered
+    const L = 1.0; // Legibility: the donor chose to come here
+    const M = 1.0; // Moral standing: no sealed gate check needed at threshold
+    const D = A * L * M;
+
+    if (D === 0) return null;
+
+    // The witness mark — what witnessing adds to the word
+    const words = content.trim().split(/\s+/).length;
+    if (words <= 3) return 'Witnessed: a seed — small, complete.';
+    if (words <= 20) return 'Witnessed: a held shape — clear enough to carry.';
+    return 'Witnessed: a landscape — it took room to arrive.';
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const content = input.value;
+    const witnessMark = witnessWord(content);
+
+    if (!witnessMark) return;
+
+    // Disable form during the dignity-latency pause (T_d)
+    submit.disabled = true;
+    input.disabled = true;
+
+    // T_d: the system responds at biological velocity, not maximum speed
+    const words = content.trim().split(/\s+/).length;
+    const td = words <= 3 ? 800 : words <= 20 ? 1500 : 2500;
+
+    setTimeout(() => {
+      mark.textContent = witnessMark;
+      response.hidden = false;
+      form.style.display = 'none';
+    }, td);
+  });
+</script>

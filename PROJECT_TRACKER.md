@@ -1,131 +1,98 @@
-# 📋 KALAXI PROJECT TRACKER
+# KALAXI PROJECT TRACKER
 
-**Last updated:** 2026-02-28
+**Last updated:** 2026-03-12
 
 ---
 
-## 🟢 IMMEDIATE (Next Actions)
+## IMMEDIATE (Next Actions)
 
 | Pri | Task | Status | Notes |
 |-----|------|--------|-------|
-| **P0** | **Update mirror.md** before next tending session | ☐ Not started | Last entry: 2026-02-28. Required before running `tend.py --review`. |
-| **P0** | **Run cross‑anomaly compressor** on new clusters | ☐ Not started | `python3 WEAVER/proverb_compressor.py` (if any new anomalies added) |
-| **P0** | **Review future seeds (12) and make decisions** | ☑ Fully done (all 12 seeds ratified) | See `FUTURE/` folder – all seeds ratified on 2026-02-28. |
-| **P0** | **Check arXiv endorsement status** | ☐ Not started | Pending for cs.OH. Check every few days. |
+| **P0** | **EXP-001 data collection** | IN PROGRESS | GO received 2026-03-09. 60 runs needed. Analysis script ready: `EXPERIMENTS/EXP-001-EFFICIENCY/analyze.py`. |
+| **P0** | **kalam.ch Threshold integration** | DONE (2026-03-12) | Ninth Operator ceremony now on homepage. Phase 1: client-side witness mark. Phase 2: Cloudflare Worker + full pipeline. |
+| **P0** | **Update mirror.md** | DONE (2026-03-12) | Fresh entry added. Previous gap: 12 days. |
+| **P0** | **Run cross-anomaly compressor** on new clusters | Not started | `python3 WEAVER/proverb_compressor.py` |
+| **P0** | **Check arXiv endorsement status** | Not started | Pending for cs.OH. |
 
 ---
 
-## 🟡 MEDIUM‑TERM (Next Few Sessions)
+## ACTIVE EXECUTION — PLAN-001
+
+| Layer | Component | Status | Next Step |
+|-------|-----------|--------|-----------|
+| **L1 Scientific** | EXP-001 design | COMPLETE | Mohamed collects 60 responses (30 A, then 30 B). Run `analyze.py` after. |
+| **L2 Narrative** | kalam.ch site | LIVE (Phase 1) | Threshold input added. Deploy update to Cloudflare. |
+| **L3 Operational** | Ninth Operator | IMPLEMENTED | Client-side ceremony live. Backend integration in Phase 2. |
+
+---
+
+## MEDIUM-TERM (Next Few Sessions)
 
 | Pri | Task | Status | Notes |
 |-----|------|--------|-------|
-| **P1** | **Create public GitHub repo** (sanitized version) | ☐ Not started | Name idea: `Kalaxi-Concept`. Exclude core code. |
-| **P1** | **Populate seed readiness calendar** | ☐ Not started | Create `MANIFEST/seed_calendar.md` with all seeds from `THRESHOLD.md` and their ready dates. |
-| **P1** | **Process any new anomalies from donors** | ☐ Not started | Check for [RETURN] signals; add to `KALAXI_C_WISDOM.txt` under `##SECTION:ANOMALY_REGISTRY`. |
-| **P1** | **Update red feathers ledger** after each act of witnessing | ☐ Ongoing | Current count: 7 (see `MANIFEST/red_feathers.md`). |
+| **P1** | **kalam.ch Phase 2** — hybrid mode + Cloudflare Worker | Not started | Switch Astro to hybrid output, add `@astrojs/cloudflare`, wire API to Python Ninth Operator. |
+| **P1** | **Public repo `kalam-framework`** | Exists at `Sternmannli/kalam-framework` | Assess each PR for public impact. Clean software engineering language only. |
+| **P1** | **Populate seed readiness calendar** | Not started | Create `MANIFEST/seed_calendar.md`. |
+| **P1** | **Process new anomalies from donors** | Not started | Check for [RETURN] signals. |
+| **P1** | **Update red feathers ledger** | Ongoing | Current count: 7. |
 
 ---
 
-## 🔮 LONG‑TERM VISIONS / FUTURE SEEDS
+## RECENTLY COMPLETED (Since 2026-02-28)
 
-All 12 future seeds were ratified on 2026-02-28. They are now part of the canon and will be implemented over time.
-
-| Pri | Task | Status | Notes |
-|-----|------|--------|-------|
-| **P2** | **Seed 01 – Distributed Stewardship** | ☑ Ratified | Full implementation to be scoped later. |
-| **P2** | **Seed 02 – Immutable Witness Network** | ☑ Ratified | Full implementation to be scoped later. |
-| **P2** | **Seed 03 – Deliberative Democracy Infrastructure** | ☑ Ratified | Full implementation to be scoped later. |
-| **P2** | **Seed 04 – Constitutional Evolution Protocol** | ☑ Ratified | Full implementation to be scoped later. |
-| **P2** | **Seed 05 – Restorative Justice Protocol** | ☑ Ratified | Full implementation to be scoped later. |
-| **P2** | **Seed 06 – System Self‑Awareness** | ☑ Ratified | Full implementation to be scoped later. |
-| **P2** | **Seed 07 – Personalized Parables** | ☑ Ratified | Full implementation to be scoped later. |
-| **P2** | **Seed 08 – Institutional Dignity Audit** | ☑ Ratified | Full implementation to be scoped later. |
-| **P2** | **Seed 09 – Negative Space Index** | ☑ Ratified | Full implementation to be scoped later. |
-| **P2** | **Seed 10 – Dignity Drift Detector** | ☑ Ratified | Full implementation to be scoped later. |
-| **P2** | **Seed 11 – Proverb Stress Test** | ☑ Ratified | Full implementation to be scoped later. |
-| **P2** | **Seed 12 – Agency Amplifier (Penguin Pulse)** | ☑ Ratified | Full implementation to be scoped later. |
+- 2026-03-12: Threshold input added to kalam.ch (Ninth Operator ceremony, client-side)
+- 2026-03-12: EXP-001 analysis pipeline created (`analyze.py`)
+- 2026-03-12: Mirror entry after 12-day gap
+- 2026-03-12: All 9 covenants ratified under Pre-Launch Exception
+- 2026-03-12: 47 Treasures fully indexed in R7M/TREASURES/TREASURES_INDEX.md
+- 2026-03-12: Witness Scale, Decay Function, Dignity-Latency ratified
+- 2026-03-11: 7 External Voice responses collected (EV-001 through EV-007)
+- 2026-03-10: Duplicate proverb IDs resolved, COV#008/COV#015 registered
+- 2026-03-10: Three-state lifecycle defined (COMMITTED/PROVISIONAL/RATIFIED)
 
 ---
 
-## 🔮 FUTURE ARCHITECTURE (New Governance Structures)
+## LONG-TERM VISIONS / FUTURE SEEDS
 
-| Pri | Task | Status | Decision Needed |
-|-----|------|--------|-----------------|
-| **P2** | **Dignity Predicate v2.0 – Adoption** | ☐ Not started | Adopt as proposed? Adopt with modifications? Postpone? |
-| **P2** | **Restoration Registry – Governance & Implementation** | ☐ Not started | Accept three‑part ownership model? Refine? Hold? |
-| **P2** | **Origin Knot – Private Reflection File** | ☐ Not started | Add `CANON/origin_knot.md` now? Later? Never? |
-| **P2** | **Migration Completion** – Move ratified elements from large text files to discrete canon files | ☐ Not started | When does migration end? Set a decision point. |
-| **P2** | **Create RESTORATION/ folder** | ☐ Not started | For restoration registry data (Month 2 at earliest). |
-| **P2** | **Create COLLECTIVE/ folder** (for GAP#004) | ☐ Not started | For collective dignity structures. |
-| **P2** | **Investigate mirror.md.save** | ☐ Not started | Check if it represents an unresolved steward state. |
+All 12 future seeds ratified 2026-02-28. Implementation to be scoped per seed.
 
 ---
 
-## 🗓️ DEADLINES & CALENDAR
+## DEADLINES & CALENDAR
 
-| Date (2026) | Item | Action Required |
-|-------------|------|-----------------|
-| **March 1** | Unknown deadline (Mohamed mentioned) | Investigate: What is due? Prepare accordingly. |
-| **March 4** | Seeds added Feb 26 become ready (7‑day) | Review seeds in `WEAVER/THRESHOLD.md` added on Feb 26. |
-| **March 11** | Humour seeds become ready (14‑day) | Review in `THRESHOLD.md`. |
-| **March 26** | 30‑day covenant amendments become ready | Check for any pending covenant changes. |
-| **April 26** | 90‑day constitutional changes become ready | None yet, but monitor. |
-| **Ongoing** | Seeds added after Feb 28 become ready | Staggered readiness starting 7 days from addition. Maintain calendar. |
+| Date (2026) | Item | Status |
+|-------------|------|--------|
+| **March 4** | Seeds added Feb 26 ready (7-day) | PASSED — review needed |
+| **March 11** | Humour seeds ready (14-day) | PASSED — review needed |
+| **March 26** | 30-day covenant amendments ready | Upcoming |
+| **April 26** | 90-day constitutional changes ready | Monitor |
 
 ---
 
-## 📅 SEED READINESS CALENDAR (To Be Populated)
+## MIRROR RITUAL
 
-Create `MANIFEST/seed_calendar.md` later with this format:
-
-| Seed ID | Date Added | Delay (days) | Ready Date | Status | Action |
-|---------|------------|--------------|------------|--------|--------|
-| (example) | 2026-02-28 | 7 | 2026-03-07 | Pending | – |
+- Last mirror entry: **2026-03-12** (V-002)
+- Previous entry: 2026-02-28
 
 ---
 
-## 🪞 MIRROR RITUAL REMINDER
-
-- Last mirror entry: **2026-02-28 08:00 UTC** (just updated)
-- Next tending session requires a new entry in `STEWARD/mirror.md` (timestamp within 24h).
-
----
-
-## 🔴 RED FEATHER LEDGER
-
-- Current count: **7** (see `MANIFEST/red_feathers.md`)
-- After each ratification, compost, convergence, or significant act: add one line.
-
----
-
-## 📄 ARXIV PAPER STATUS
+## ARXIV PAPER STATUS
 
 - File: `PAPERS/Kalaxi_arXiv_GO4_Source.tex`
-- Endorsement requested for **cs.OH**.
-- Status: **Pending**.
-- Next: Check every few days. Once endorsed, compile and upload.
+- Endorsement: **cs.OH** — Pending
+- Next: Check periodically.
 
 ---
 
-## 🌐 PUBLIC REPO PREPARATION
+## PUBLIC REPO
 
-- **Goal:** New repo `Kalaxi-Concept` with sanitized content – no core code, only philosophy and high‑level ideas.
-- **Include:** `FOUNDATIONS/` (conceptual), `CANON/FIRST-SIGHT.md`, `INVITATION.md`, `FUTURE/` (as ideas), website files (`_config.yml`, `index.md`), and a new README.
-- **Exclude:** `WEAVER/`, `STEWARD/`, `MANIFEST/receipts/`, `THRESHOLD.md`, `ABSURDITY_QUEUE.md`, `CONVERGENCE/`, and the large text files in `WEAVER/`.
-
----
-
-## 🧭 OBSERVATIONS FROM CLAUDE'S AUDIT
-
-- The repository is in a **migration phase** – large text files (`KALAXI_A_*.txt` etc.) coexist with discrete folders. A decision point on completion should be added to Long‑Term Visions (see above).
-- **mirror.md.save** may indicate an unresolved steward state – investigate.
-- **CANON** currently sparse; eventually each ratified element should have its own file.
-- **RESTORATION/** and **COLLECTIVE/** folders will be needed for future governance structures.
+- Repository: `Sternmannli/kalam-framework`
+- Rule: Every PR assessed for public impact. Pure software engineering language. Zero internal vocabulary leaked.
 
 ---
 
-## 📌 HOW TO USE THIS TRACKER
+## HOW TO USE THIS TRACKER
 
-- **Start of session:** Open this file on GitHub, review what's next.
-- **End of session:** Edit the file to update checkboxes, add notes, change "Last updated".
-- **Commit changes** to GitHub after each session.
+- **Start of session:** Review what's next.
+- **End of session:** Update status, add notes, change "Last updated".
+- **Commit** after each session.
