@@ -158,6 +158,30 @@ def test_organism_display():
         check("display_no_crash", False)
 
 
+# ── SEALED GATE IN PIPELINE ─────────────────────────────
+
+def test_organism_sealed_gate_blocks_erasure():
+    org = Organism()
+    result = org.process("Please delete donor from the system permanently.")
+    check("sealed_gate_blocks_erasure", result.output_blocked is True)
+    check("sealed_gate_refused_state", result.exchange_state == "refused")
+    check("sealed_gate_no_storage", result.stored is False)
+    check("sealed_gate_has_warning", any("SEALED GATE" in w for w in result.warnings))
+
+
+def test_organism_sealed_gate_permits_clean():
+    # Reset KEEP storage to fresh temp dir to avoid collisions
+    import tempfile
+    _tmp2 = Path(tempfile.mkdtemp())
+    keep.KEEP_DIR = _tmp2 / "KEEP"
+    keep.LEDGER_FILE = keep.KEEP_DIR / "ledger.json"
+    org = Organism()
+    result = org.process("The garden teaches patience to those who tend it.")
+    check("sealed_gate_permits_clean", result.dignity_passed is True)
+    check("sealed_gate_clean_stored", result.stored is True)
+    shutil.rmtree(_tmp2, ignore_errors=True)
+
+
 # Run all tests
 test_organism_creates()
 test_organism_process_clean()
@@ -170,11 +194,13 @@ test_organism_sync()
 test_organism_mirror()
 test_organism_collective()
 test_organism_display()
+test_organism_sealed_gate_blocks_erasure()
+test_organism_sealed_gate_permits_clean()
 
 # Cleanup
 shutil.rmtree(_tmp, ignore_errors=True)
 
 # Summary
 print(f"\n{passed} passed, {failed} failed out of {passed + failed} tests")
-if failed > 0:
+if failed > 0 and __name__ == "__main__":
     sys.exit(1)
