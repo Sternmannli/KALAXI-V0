@@ -70,6 +70,7 @@ from WEAVER.gap_solutions import (
 from WEAVER.cryptographic_erasure import CryptographicErasure
 from WEAVER.early_warning import EarlyWarningPipeline, EWMADetector, CUSUMDetector
 from WEAVER.canonicalize import Canonicalizer, ArtifactSigner, EmergencyGovernance
+from WEAVER.ratification import RatificationEngine, ElementType, ElementState
 from FIELD.ALCOVE.shadow_genome import Alcove as FieldAlcove
 from FIELD.CLEARING.temporal_shadow import Clearing as FieldClearing
 from FIELD.AUDITS.self_audit import SelfAuditScheduler, SelfAuditRecord
@@ -168,6 +169,11 @@ class OrganismState:
     field_donors_registered: int
     field_audit_count: int
     steward_observer_patterns: int
+    ratification_total: int
+    ratification_committed: int
+    ratification_provisional: int
+    ratification_ratified: int
+    ratification_awaiting_signoff: int
     timestamp: str
 
 
@@ -247,6 +253,8 @@ class Organism:
         self._canonicalizer = Canonicalizer()
         self._signer = ArtifactSigner()
         self._emergency = EmergencyGovernance()
+        self._ratification = RatificationEngine(signer=self._signer, pre_launch=True)
+        self._ratification.bootstrap_from_log()
         self._field_alcove = FieldAlcove()
         self._field_clearing = FieldClearing(self._field_alcove)
         self._field_audit_scheduler = SelfAuditScheduler()
@@ -749,6 +757,11 @@ class Organism:
             field_donors_registered=len(self._donor_registry.profiles),
             field_audit_count=len(self._field_audit_scheduler.audits),
             steward_observer_patterns=len(self._steward_observer.patterns),
+            ratification_total=len(self._ratification._elements),
+            ratification_committed=len(self._ratification.committed()),
+            ratification_provisional=len(self._ratification.provisional()),
+            ratification_ratified=len(self._ratification.ratified()),
+            ratification_awaiting_signoff=len(self._ratification.awaiting_signoff()),
             timestamp=self._now(),
         )
 
@@ -889,6 +902,9 @@ class Organism:
         print(f"  FIELD donors:      {s.field_donors_registered}")
         print(f"  FIELD audits:      {s.field_audit_count}")
         print(f"  Steward patterns:  {s.steward_observer_patterns}")
+        print(f"  {'-'*48}")
+        print(f"  Ratification:      {s.ratification_total} total ({s.ratification_ratified} ratified, {s.ratification_provisional} provisional, {s.ratification_committed} committed)")
+        print(f"  Awaiting sign-off: {s.ratification_awaiting_signoff}")
         print(f"  {'='*48}\n")
 
     def decay_state(self):
@@ -1459,4 +1475,5 @@ class Organism:
                 "audits": len(self._field_audit_scheduler.audits),
                 "steward_patterns": len(self._steward_observer.patterns),
             },
+            "ratification": self._ratification.summary(),
         }
