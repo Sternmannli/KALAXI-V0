@@ -24,7 +24,7 @@ from dataclasses import dataclass, asdict
 
 DATA_DIR = Path(__file__).parent / "data"
 RESULTS_DIR = Path(__file__).parent / "results"
-SYSTEMS = ["CLAUDE", "GROK", "DEEPSEEK"]
+SYSTEMS = ["CLAUDE", "GROK", "DEEPSEEK", "CHATGPT", "GEMINI", "COPILOT", "MANUS", "KIMI", "EURIA", "PERPLEXITY"]
 QUESTIONS = list(range(1, 11))
 CONDITIONS = ["A", "B"]
 
@@ -59,28 +59,40 @@ class Comparison:
 
 
 def scan_data():
-    """Scan data/ for collected response files."""
+    """Scan data/ for collected response files, auto-discovering any system."""
     results = []
     missing = []
+    discovered_systems = set()
 
+    # Auto-discover: scan all files matching the naming pattern
+    if DATA_DIR.exists():
+        import re
+        pattern = re.compile(r"EXP-001_([A-Z]+)_(\d{2})_([AB])\.txt")
+        for fpath in sorted(DATA_DIR.glob("EXP-001_*_*_*.txt")):
+            m = pattern.match(fpath.name)
+            if m:
+                system, q_str, cond = m.group(1), m.group(2), m.group(3)
+                q = int(q_str)
+                discovered_systems.add(system)
+                content = fpath.read_text(encoding="utf-8").strip()
+                results.append(RunResult(
+                    system=system,
+                    question=q,
+                    question_label=QUESTION_LABELS.get(q, f"q{q}"),
+                    condition=cond,
+                    word_count=len(content.split()),
+                    char_count=len(content),
+                    line_count=content.count("\n") + 1,
+                    file_path=str(fpath),
+                ))
+
+    # Track missing for core systems only
     for system in SYSTEMS:
         for q in QUESTIONS:
             for cond in CONDITIONS:
                 fname = f"EXP-001_{system}_{q:02d}_{cond}.txt"
                 fpath = DATA_DIR / fname
-                if fpath.exists():
-                    content = fpath.read_text(encoding="utf-8").strip()
-                    results.append(RunResult(
-                        system=system,
-                        question=q,
-                        question_label=QUESTION_LABELS[q],
-                        condition=cond,
-                        word_count=len(content.split()),
-                        char_count=len(content),
-                        line_count=content.count("\n") + 1,
-                        file_path=str(fpath),
-                    ))
-                else:
+                if not fpath.exists():
                     missing.append(fname)
 
     return results, missing
@@ -186,6 +198,26 @@ def main():
 
         for s, sv in stats["by_system"].items():
             print(f"  {s}: {sv['pairs']} pairs, mean {sv['mean_reduction_pct']:+.1f}%")
+
+    # B-only responses (systems without A baseline)
+    b_only = [r for r in results if r.condition == "B"
+              and not any(r2.system == r.system and r2.question == r.question and r2.condition == "A" for r2 in results)]
+    if b_only:
+        print(f"\n{'='*56}")
+        print(f"B-ONLY responses (no A baseline for comparison):")
+        print(f"{'System':<12} {'Q#':<4} {'Topic':<10} {'Words B':>8}")
+        print("-" * 40)
+        for r in sorted(b_only, key=lambda x: (x.system, x.question)):
+            print(f"{r.system:<12} {r.question:>2}   {r.question_label:<10} {r.word_count:>8}")
+
+    # Coverage summary
+    systems_found = sorted(set(r.system for r in results))
+    questions_found = sorted(set(r.question for r in results))
+    print(f"\n{'='*56}")
+    print(f"Coverage: {len(systems_found)} systems, {len(questions_found)} questions")
+    print(f"Systems: {', '.join(systems_found)}")
+    print(f"Questions: {', '.join(QUESTION_LABELS[q] for q in questions_found)}")
+    print(f"Total files: {len(results)}")
 
     # Save results as JSON
     RESULTS_DIR.mkdir(exist_ok=True)
