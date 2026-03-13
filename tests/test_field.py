@@ -199,12 +199,12 @@ class TestSelfAudit(unittest.TestCase):
     def test_audit_synthesis(self):
         """Audit synthesizes voice results to find meta-shadows."""
         audit = SelfAuditRecord(audit_id="OBS-SELF-001", scheduled_date="2026-03-12")
-        audit.begin(["EV-001", "EV-002", "EV-002", "EV-004", "EV-005"], ["doc1.md"])
+        audit.begin(["EV-001", "EV-002", "EV-003", "EV-004", "EV-005"], ["doc1.md"])
 
         # Three voices find the same shadow
         audit.record_voice_result("EV-001", "Response 1", ["no self-referential check"], 4)
         audit.record_voice_result("EV-002", "Response 2", ["no self-referential check"], 4)
-        audit.record_voice_result("EV-002", "Response 3", ["no self-referential check", "missing temporal"], 4)
+        audit.record_voice_result("EV-003", "Response 3", ["no self-referential check", "missing temporal"], 4)
         audit.record_voice_result("EV-004", "Response 4", ["missing temporal"], 3)
         audit.record_voice_result("EV-005", "Response 5", ["unique finding"], 3)
 
