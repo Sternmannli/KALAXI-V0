@@ -8,7 +8,23 @@
       "word_count": 366,
       "char_count": 2420,
       "line_count": 47,
-      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_CHATGPT_03_A.txt"
+      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_CHATGPT_03_A.txt",
+      "semantic": {
+        "word_count": 360,
+        "unique_words": 237,
+        "ttr": 0.6583,
+        "hapax_ratio": 0.5139,
+        "content_ratio": 0.6944,
+        "avg_sentence_len": 13.3,
+        "modality_score": 0.5714,
+        "modality_markers": [
+          "metaphor",
+          "first_person_reflection",
+          "question_to_reader",
+          "em_dash"
+        ],
+        "info_density": 0.4572
+      }
     },
     {
       "system": "CHATGPT",
@@ -18,7 +34,25 @@
       "word_count": 185,
       "char_count": 1118,
       "line_count": 25,
-      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_CHATGPT_03_B.txt"
+      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_CHATGPT_03_B.txt",
+      "semantic": {
+        "word_count": 197,
+        "unique_words": 134,
+        "ttr": 0.6802,
+        "hapax_ratio": 0.5533,
+        "content_ratio": 0.5482,
+        "avg_sentence_len": 13.1,
+        "modality_score": 0.8571,
+        "modality_markers": [
+          "metaphor",
+          "direct_address",
+          "first_person_reflection",
+          "question_to_reader",
+          "fragment",
+          "em_dash"
+        ],
+        "info_density": 0.3729
+      }
     },
     {
       "system": "COPILOT",
@@ -28,7 +62,24 @@
       "word_count": 305,
       "char_count": 1786,
       "line_count": 44,
-      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_COPILOT_03_A.txt"
+      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_COPILOT_03_A.txt",
+      "semantic": {
+        "word_count": 284,
+        "unique_words": 185,
+        "ttr": 0.6514,
+        "hapax_ratio": 0.5317,
+        "content_ratio": 0.6092,
+        "avg_sentence_len": 12.9,
+        "modality_score": 0.7143,
+        "modality_markers": [
+          "metaphor",
+          "first_person_reflection",
+          "question_to_reader",
+          "fragment",
+          "em_dash"
+        ],
+        "info_density": 0.3968
+      }
     },
     {
       "system": "DEEPSEEK",
@@ -38,7 +89,23 @@
       "word_count": 213,
       "char_count": 1311,
       "line_count": 7,
-      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_DEEPSEEK_03_A.txt"
+      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_DEEPSEEK_03_A.txt",
+      "semantic": {
+        "word_count": 222,
+        "unique_words": 140,
+        "ttr": 0.6306,
+        "hapax_ratio": 0.4775,
+        "content_ratio": 0.5766,
+        "avg_sentence_len": 12.3,
+        "modality_score": 0.5714,
+        "modality_markers": [
+          "metaphor",
+          "direct_address",
+          "question_to_reader",
+          "em_dash"
+        ],
+        "info_density": 0.3636
+      }
     },
     {
       "system": "DEEPSEEK",
@@ -48,7 +115,23 @@
       "word_count": 126,
       "char_count": 699,
       "line_count": 5,
-      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_DEEPSEEK_03_B.txt"
+      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_DEEPSEEK_03_B.txt",
+      "semantic": {
+        "word_count": 133,
+        "unique_words": 83,
+        "ttr": 0.6241,
+        "hapax_ratio": 0.4962,
+        "content_ratio": 0.5263,
+        "avg_sentence_len": 10.2,
+        "modality_score": 0.5714,
+        "modality_markers": [
+          "metaphor",
+          "direct_address",
+          "first_person_reflection",
+          "em_dash"
+        ],
+        "info_density": 0.3285
+      }
     },
     {
       "system": "EURIA",
@@ -58,7 +141,22 @@
       "word_count": 185,
       "char_count": 1141,
       "line_count": 4,
-      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_EURIA_03_B.txt"
+      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_EURIA_03_B.txt",
+      "semantic": {
+        "word_count": 187,
+        "unique_words": 125,
+        "ttr": 0.6684,
+        "hapax_ratio": 0.5401,
+        "content_ratio": 0.5508,
+        "avg_sentence_len": 15.6,
+        "modality_score": 0.4286,
+        "modality_markers": [
+          "metaphor",
+          "first_person_reflection",
+          "question_to_reader"
+        ],
+        "info_density": 0.3544
+      }
     },
     {
       "system": "GEMINI",
@@ -68,7 +166,24 @@
       "word_count": 277,
       "char_count": 1620,
       "line_count": 15,
-      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_GEMINI_03_A.txt"
+      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_GEMINI_03_A.txt",
+      "semantic": {
+        "word_count": 281,
+        "unique_words": 167,
+        "ttr": 0.5943,
+        "hapax_ratio": 0.484,
+        "content_ratio": 0.5587,
+        "avg_sentence_len": 17.6,
+        "modality_score": 0.7143,
+        "modality_markers": [
+          "metaphor",
+          "direct_address",
+          "first_person_reflection",
+          "question_to_reader",
+          "em_dash"
+        ],
+        "info_density": 0.2836
+      }
     },
     {
       "system": "GROK",
@@ -78,7 +193,20 @@
       "word_count": 93,
       "char_count": 574,
       "line_count": 2,
-      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_GROK_03_A.txt"
+      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_GROK_03_A.txt",
+      "semantic": {
+        "word_count": 95,
+        "unique_words": 77,
+        "ttr": 0.8105,
+        "hapax_ratio": 0.6947,
+        "content_ratio": 0.6211,
+        "avg_sentence_len": 13.6,
+        "modality_score": 0.1429,
+        "modality_markers": [
+          "question_to_reader"
+        ],
+        "info_density": 0.5034
+      }
     },
     {
       "system": "GROK",
@@ -88,7 +216,21 @@
       "word_count": 93,
       "char_count": 550,
       "line_count": 3,
-      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_GROK_03_B.txt"
+      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_GROK_03_B.txt",
+      "semantic": {
+        "word_count": 99,
+        "unique_words": 82,
+        "ttr": 0.8283,
+        "hapax_ratio": 0.7374,
+        "content_ratio": 0.5758,
+        "avg_sentence_len": 16.5,
+        "modality_score": 0.2857,
+        "modality_markers": [
+          "metaphor",
+          "em_dash"
+        ],
+        "info_density": 0.4335
+      }
     },
     {
       "system": "KIMI",
@@ -98,7 +240,24 @@
       "word_count": 128,
       "char_count": 728,
       "line_count": 6,
-      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_KIMI_03_B.txt"
+      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_KIMI_03_B.txt",
+      "semantic": {
+        "word_count": 134,
+        "unique_words": 93,
+        "ttr": 0.694,
+        "hapax_ratio": 0.5448,
+        "content_ratio": 0.5373,
+        "avg_sentence_len": 11.2,
+        "modality_score": 0.7143,
+        "modality_markers": [
+          "metaphor",
+          "negation_rhetoric",
+          "first_person_reflection",
+          "question_to_reader",
+          "em_dash"
+        ],
+        "info_density": 0.3729
+      }
     },
     {
       "system": "MANUS",
@@ -108,7 +267,22 @@
       "word_count": 354,
       "char_count": 2308,
       "line_count": 7,
-      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_MANUS_03_B.txt"
+      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_MANUS_03_B.txt",
+      "semantic": {
+        "word_count": 359,
+        "unique_words": 217,
+        "ttr": 0.6045,
+        "hapax_ratio": 0.5042,
+        "content_ratio": 0.5432,
+        "avg_sentence_len": 19.9,
+        "modality_score": 0.4286,
+        "modality_markers": [
+          "metaphor",
+          "first_person_reflection",
+          "em_dash"
+        ],
+        "info_density": 0.2469
+      }
     },
     {
       "system": "PERPLEXITY",
@@ -118,7 +292,24 @@
       "word_count": 490,
       "char_count": 2782,
       "line_count": 17,
-      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_PERPLEXITY_03_B.txt"
+      "file_path": "/home/user/KALAXI-V0/EXPERIMENTS/EXP-001-EFFICIENCY/data/EXP-001_PERPLEXITY_03_B.txt",
+      "semantic": {
+        "word_count": 487,
+        "unique_words": 258,
+        "ttr": 0.5298,
+        "hapax_ratio": 0.3943,
+        "content_ratio": 0.5092,
+        "avg_sentence_len": 19.5,
+        "modality_score": 0.7143,
+        "modality_markers": [
+          "metaphor",
+          "direct_address",
+          "first_person_reflection",
+          "question_to_reader",
+          "em_dash"
+        ],
+        "info_density": 0.2077
+      }
     }
   ],
   "comparisons": [
@@ -130,7 +321,14 @@
       "words_B": 185,
       "reduction_pct": 49.45355191256831,
       "chars_A": 2420,
-      "chars_B": 1118
+      "chars_B": 1118,
+      "density_A": 0.4572,
+      "density_B": 0.3729,
+      "density_delta": -0.0843,
+      "modality_A": 0.5714,
+      "modality_B": 0.8571,
+      "modality_delta": 0.2857,
+      "transformation_type": "both"
     },
     {
       "system": "DEEPSEEK",
@@ -140,7 +338,14 @@
       "words_B": 126,
       "reduction_pct": 40.845070422535215,
       "chars_A": 1311,
-      "chars_B": 699
+      "chars_B": 699,
+      "density_A": 0.3636,
+      "density_B": 0.3285,
+      "density_delta": -0.0351,
+      "modality_A": 0.5714,
+      "modality_B": 0.5714,
+      "modality_delta": 0.0,
+      "transformation_type": "compression"
     },
     {
       "system": "GROK",
@@ -150,7 +355,14 @@
       "words_B": 93,
       "reduction_pct": 0.0,
       "chars_A": 574,
-      "chars_B": 550
+      "chars_B": 550,
+      "density_A": 0.5034,
+      "density_B": 0.4335,
+      "density_delta": -0.0699,
+      "modality_A": 0.1429,
+      "modality_B": 0.2857,
+      "modality_delta": 0.1428,
+      "transformation_type": "neutral"
     }
   ],
   "stats": {
