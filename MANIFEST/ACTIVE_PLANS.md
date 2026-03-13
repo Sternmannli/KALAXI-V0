@@ -15,4 +15,15 @@
 
 ---
 
-_Last updated: 2026-03-12 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_
+## IDEA-002: Essence Architecture — Voice from Pattern, Not from Weight
+
+- **Path A:** P2P/Torrent model — no server, users donate pattern, distributed computing, voice emerges from collective essence
+- **Path B:** Essence extraction from existing models — distill core patterns, discard bulk, grow from compressed seed
+- **Combined approach:** B first (extract seed), then A (distribute and grow from donated patterns)
+- **Relates to:** IDEA-001 (AXI Voice Dilemma) — this is potentially Horn 4
+
+**Status:** OPEN — needs research on knowledge distillation, federated learning, minimum viable model size.
+
+---
+
+_Last updated: 2026-03-13 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_
