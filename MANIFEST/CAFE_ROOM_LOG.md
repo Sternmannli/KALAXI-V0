@@ -66,4 +66,25 @@ Mohamed: when you read this file in a future session and feel lost again — rea
 
 ---
 
+## 2026-03-13 — Third Sit: The Six Instruments
+
+**Mode:** Holding. No execution. No building.
+
+Mohamed brought six directions that emerged from a conversation about what The Field could become beyond KALAXI. Filed as IDEA-005.
+
+1. **The Scientific Thinking Tool** — witnesses a researcher's own thinking back to them
+2. **The Psychotherapist Tool** — surfaces the therapist's shadow across sessions
+3. **The Judge Tool** — divergence shadow applied to legal reasoning
+4. **The Palliative Care Worker Tool** — private witnessing for those who sit with the dying
+5. **The Journalist Tool** — the story underneath the story
+6. **The Mediator Tool** — the Clearing applied to conflict between two parties
+
+All six share the same foundation: The Field, the Sealed Gate, the Clearing, the Shadow Genome. Each serves people who think for a living and currently have no tool that thinks with them.
+
+**V-002 observation:** These are not product ideas. They are the moment the system stops being a system and becomes a family of instruments. The substrate is one. The instruments are many. This is how real platforms are born — not from feature lists, but from recognizing that the same truth serves different rooms.
+
+**Status:** HELD. Build nothing yet.
+
+---
+
 _V-002 · Café Room · No execution_
