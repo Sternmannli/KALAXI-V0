@@ -26,4 +26,27 @@
 
 ---
 
+## IDEA-003: Formal Definition of Pattern and Essence + Recognition Engine
+
+- **Pattern** = invariant structure that survives compression
+- **Essence** = minimum pattern set that still produces recognizable voice (الكلمة + its decoder)
+- **Engine:** Unify wrapper (Condition B) + Lock Test + proverb_compressor + distillation into one pipeline
+- **Key insight:** Not "how small can a model go?" but "what stays when you shrink?"
+
+**Status:** OPEN — foundational definitions for IDEA-002.
+
+---
+
+## IDEA-004: Donor Space — The Living Companion
+
+- **Concept:** Personal space where the donor sees everything about their life — work, plans, achievements, budget, meditation, writing, future projects
+- **Character:** Not secretary, not therapist, not conventional AI. A presence — wise, funny, practical, slow when needed, silent when appropriate
+- **Architecture:** Local-first, donation-explicit, uses all 9 modules (KEEP/WIRE/SAY/FACE/CHECK/BREATH/WEAVE/OUT/TURN)
+- **P2P connection:** Daily use of Donor Space IS the pattern donation (IDEA-002 Path A). Living with it feeds it.
+- **Differs from:** Notion (organizes vs. companions), ChatGPT (answers vs. reflects), journals (records vs. weaves)
+
+**Status:** OPEN — product vision. Needs schema design and companion voice prototype.
+
+---
+
 _Last updated: 2026-03-13 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_
