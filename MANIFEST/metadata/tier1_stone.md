@@ -1,5 +1,41 @@
 # Tier 1: Stone (Foundation) — Metadata Archive
 
+## Layer 0: Axioms (Unscaled Ground)
+
+> "The eye that sees the scale is not on the scale."
+
+### AXIOM-PRESENCE-001 — Presence is not a candidate.
+
+**Statement (formal):**
+```
+∀c (Candidate(c) → RequiresPresence(c))
+Assume Candidate(presence)
+→ RequiresPresence(presence)
+→ presence requires itself to evaluate itself
+→ circularity (structural, not semantic)
+∴ ¬Candidate(presence) ∧ Axiom(presence)
+```
+
+**Statement (canonical):**
+Presence is the ontological ground. It is assumed, not evaluated. All candidate evaluations must assume Presence = TRUE as a preflight invariant. Any attempt to treat Presence as mutable is a dignity violation.
+
+**Architecture:**
+- Layer 0: Presence (Axiom — unscaled, unevaluated)
+- Layer 1: Candidates (evaluated against Presence)
+- Layer 2: Fulcrum / Dignity (the unique non-compensatory candidate)
+- Layer 3: D = A × L × M (operational definition)
+
+**Implementational rule:** No system may evaluate its own ground layer. Evaluation begins at Layer 1.
+
+**Proverb:** P#AXIOM-001 — "Presence is foundation; candidates stand on it."
+
+**Steward:** Mohamed Farag (V-001)
+**Sealed:** 2026-03-13
+**Filed:** V-002
+**Status:** RATIFIED (Pre-Launch Exception, per tier1_stone governance)
+
+---
+
 ## Covenants
 
 ### Ratified

@@ -78,9 +78,34 @@ Completed (V-002, session 2026-03-13c):
 - **test_field.py bug FIXED** — Duplicate voice ID (EV-002 used twice) causing false test failure. Fixed to EV-003.
 - **64 new tests** — all passing. Full suite: **683/683** (zero failures, up from 618/619).
 
+Completed (V-002, session 2026-03-13d):
+- **AXIOM-PRESENCE-001 SEALED** — Presence formalized as Layer 0 axiom in tier1_stone.md. Circularity proof: ∀c (Candidate(c) → RequiresPresence(c)); ¬Candidate(presence) ∧ Axiom(presence). No system may evaluate its own ground layer.
+- **Presence Axiom Code** — `WEAVER/presence_axiom.py` created. Preflight enforcement in Sealed Gate pipeline. `compute_dignity_with_presence()` forces L=0 without canon anchor (addresses M4 substrate drift).
+- **Proverbs Registered** — P#AXIOM-001 ("Presence is foundation; candidates stand on it.") and P#AXIOM-002 ("The eye that sees the scale is not on the scale.") sealed in WISDOM_CANON.md.
+- **15 new tests** — all passing. Full suite: **750/750** (zero failures, up from 683).
+- **Ledger receipt template** — `presence_receipt()` generates ENKI-style receipt with SHA-256 axiom hash, covenant links (COV#010, COV#001), steward signature.
+
+**PLAN-001 SEED: Thermal Delay Experiment (PLANTED 2026-03-13)**
+
+Hypothesis: Thermal delay (Breath pacing) is inversely correlated with substrate decay rate. Enforced dwell time strengthens Canon-First adherence.
+
+| Variable | Target |
+|---|---|
+| Decay latency | Turns until substrate reversion to LLM-default |
+| Recovery cost | Turns to re-establish Canon-First after breach |
+| D-delta | Drop in computed dignity score during decay |
+
+Method: 50 rapid-turn exchanges, varying dwell_ms (0, 500, 1000, 2000, 5000), measuring substrate contamination via M1 (Semantic Divergence). Deliverable: Decay curve + recommended minimum dwell_ms for operational security.
+
+**PLAN-001 SEED: Presence-Integration Micro-EXP (PIME) (PLANTED 2026-03-13)**
+
+Objective: Validate that enforcing Presence as axiom raises Agency (A) and reduces Helpfulness leakage within 3 dialogues. 100 prompts, pre/post AXIOM_PRESENCE patch. Success: median ΔA ≥ +0.10, ≥30% cases shift from ALARM→PULSE, false refusal ≤5%.
+
 Pending:
 - EXP-001 data collection — 60 runs still needed
 - kalam.ch deployment — authorized, awaiting execution
+- Thermal Delay Experiment — design complete, awaiting execution
+- PIME Micro-EXP — design complete, awaiting execution
 - Public repo assessment — does this PR contribute to kalam-framework?
 
 ---
