@@ -8,11 +8,11 @@
 
 | Pri | Task | Status | Notes |
 |-----|------|--------|-------|
-| **P0** | **EXP-001 data collection** | IN PROGRESS | GO received 2026-03-09. 60 runs needed. Analysis script ready: `EXPERIMENTS/EXP-001-EFFICIENCY/analyze.py`. |
+| **P0** | **EXP-001 data collection** | IN PROGRESS | GO received 2026-03-12. 188/200 runs remaining. Runner: `run_exp001.py`. Analyzer: `analyze.py`. Runsheet: `RUNSHEET.md`. |
 | **P0** | **kalam.ch Threshold integration** | DONE (2026-03-12) | Ninth Operator ceremony now on homepage. Phase 1: client-side witness mark. Phase 2: Cloudflare Worker + full pipeline. |
 | **P0** | **Update mirror.md** | DONE (2026-03-12) | Fresh entry added. Previous gap: 12 days. |
 | **P0** | **Run cross-anomaly compressor** on new clusters | DONE (2026-03-13) | 2 proverb candidates generated. Results in PROVERB_APPROVAL_QUEUE.md. |
-| **P0** | **Check arXiv endorsement status** | CHECKED (2026-03-13) | Still pending for cs.OH. Cannot query programmatically — Mohamed to check inbox. |
+| **P0** | **Submit arXiv paper** | READY TO SUBMIT | Paper complete. Recommend cs.AI (primary) + cs.CY (secondary). Mohamed has not started submission — endorsement not yet requested. |
 
 ---
 
@@ -20,7 +20,7 @@
 
 | Layer | Component | Status | Next Step |
 |-------|-----------|--------|-----------|
-| **L1 Scientific** | EXP-001 design | COMPLETE | Mohamed collects 60 responses (30 A, then 30 B). Run `analyze.py` after. |
+| **L1 Scientific** | EXP-001 design | COMPLETE | 188 runs remaining across 10 systems × 10 questions × 2 conditions. Q3 pilot done. Science inventory filed. |
 | **L2 Narrative** | kalam.ch site | LIVE (Phase 1) | Threshold input added. Deploy update to Cloudflare. |
 | **L3 Operational** | Ninth Operator | IMPLEMENTED | Client-side ceremony live. Backend integration in Phase 2. |
 
@@ -68,7 +68,21 @@
 
 ## LONG-TERM VISIONS / FUTURE SEEDS
 
-All 12 future seeds planted, implemented, tested, and integrated into the Organism (2026-03-13). Full test suite: 683/683.
+All 12 future seeds planted, implemented, tested, and integrated into the Organism (2026-03-13). Full test suite: **750/750**.
+
+---
+
+## SCIENCE INVENTORY
+
+Full scientific registry filed at `MANIFEST/SCIENCE_INVENTORY.md` (2026-03-13). Contains:
+- 4 experiments (1 active, 3 designed)
+- 17 empirical observations (C3–C5)
+- 11 equations/formulas
+- 16 scientific tools (Python)
+- 9 identified gaps
+- 10 red flags
+- 1 complete paper (ready to submit)
+- 3 external validations
 
 ---
 
@@ -93,8 +107,11 @@ All 12 future seeds planted, implemented, tested, and integrated into the Organi
 ## ARXIV PAPER STATUS
 
 - File: `PAPERS/Kalaxi_arXiv_GO4_Source.tex`
-- Endorsement: **cs.OH** — Pending
-- Next: Check periodically.
+- Status: **PAPER COMPLETE — READY TO SUBMIT**
+- Recommended categories: **cs.AI** (primary), **cs.CY** (secondary)
+- Original target cs.OH dropped — cs.AI is better fit and may not require endorsement
+- Mohamed has NOT started submission process yet
+- Next: Go to arxiv.org → New Submission → Upload .tex → Select cs.AI
 
 ---
 
