@@ -54,6 +54,14 @@ from WEAVER.gap004_mediator import ConflictEngine, surface_conflict
 from WEAVER.agency_amplifier import AgencyAmplifier, AgencyScore
 from WEAVER.proverb_stress_test import ProverbStressTest, ProverbHealth
 from WEAVER.negative_space import NegativeSpaceIndex, SilenceType
+from WEAVER.distributed_stewardship import DistributedStewardship, StewardRole
+from WEAVER.witness_network import WitnessNetwork
+from WEAVER.deliberative_democracy import DeliberativeDemocracy, VoteType
+from WEAVER.constitutional_evolution import ConstitutionalEvolution, AmendmentTier
+from WEAVER.restorative_justice import RestorativeJustice, HarmSeverity
+from WEAVER.system_self_awareness import SystemSelfAwareness, CapabilityLevel
+from WEAVER.personalized_parables import PersonalizedParables
+from WEAVER.institutional_dignity import InstitutionalDignity
 
 
 @dataclass
@@ -108,6 +116,24 @@ class OrganismState:
     negative_space_critical: int
     negative_space_blindness: float
     negative_space_cycle: int
+    # Seeds #1-#8
+    stewardship_active: int
+    stewardship_uncovered: int
+    witness_chain_length: int
+    witness_chain_valid: bool
+    democracy_open_proposals: int
+    democracy_voices: int
+    evolution_active_amendments: int
+    evolution_ratified: int
+    justice_open_harms: int
+    justice_repair_rate: float
+    self_awareness_capabilities: int
+    self_awareness_limitations: int
+    self_awareness_calibration: str
+    parables_deliveries: int
+    parables_avg_relevance: float
+    institutional_institutions: int
+    institutional_evaluations: int
     timestamp: str
 
 
@@ -165,6 +191,15 @@ class Organism:
         self._agency = AgencyAmplifier()
         self._proverb_stress = ProverbStressTest()
         self._negative_space = NegativeSpaceIndex()
+        # Seeds #1-#8
+        self._stewardship = DistributedStewardship()
+        self._witness_net = WitnessNetwork()
+        self._democracy = DeliberativeDemocracy()
+        self._evolution = ConstitutionalEvolution()
+        self._justice = RestorativeJustice()
+        self._self_awareness = SystemSelfAwareness()
+        self._parables = PersonalizedParables()
+        self._institutional = InstitutionalDignity()
         self._last_measurement = None
         self._last_agency = None
         self._exchange_counter = 0
@@ -407,6 +442,21 @@ class Organism:
         except (ValueError, OSError) as e:
             warnings.append(f"Storage warning: {e}")
 
+        # 6b. WITNESS — record exchange on immutable chain (Seed #2)
+        self._witness_net.witness(
+            "exchange",
+            f"{ex_id}: D={dignity.D:.1f}, patterns={len(candidates)}, drops={len(drops)}",
+            "organism",
+        )
+
+        # 6c. RESTORATIVE JUSTICE — if dignity failed, record harm (Seed #5)
+        if dignity.D == 0.0:
+            failed_comps = self._last_dignity.get("failed_components", [])
+            self._justice.record_harm(
+                ex_id, HarmSeverity.MODERATE, failed_comps,
+                f"Dignity collapsed on exchange {ex_id}",
+            )
+
         # 7. TURN — close exchange
         self._turn.close(ex_id, f"Processed: {len(candidates)} patterns, {len(drops)} drops, D={dignity.D:.1f}")
 
@@ -552,6 +602,24 @@ class Organism:
             negative_space_critical=len([s for s in self._negative_space._silences if s.severity >= 0.8]),
             negative_space_blindness=self._negative_space.report().blindness_score,
             negative_space_cycle=self._negative_space.cycle,
+            # Seeds #1-#8
+            stewardship_active=self._stewardship.active_count,
+            stewardship_uncovered=len(self._stewardship.uncovered_roles()),
+            witness_chain_length=self._witness_net.chain_length,
+            witness_chain_valid=self._witness_net.verify_chain(),
+            democracy_open_proposals=self._democracy.open_proposals,
+            democracy_voices=self._democracy.voices_count,
+            evolution_active_amendments=self._evolution.active_count,
+            evolution_ratified=self._evolution.ratified_count,
+            justice_open_harms=self._justice.open_harms,
+            justice_repair_rate=self._justice.repair_rate,
+            self_awareness_capabilities=self._self_awareness.capabilities_count,
+            self_awareness_limitations=self._self_awareness.limitations_count,
+            self_awareness_calibration=self._self_awareness.calibration_bias().value,
+            parables_deliveries=self._parables.deliveries_count,
+            parables_avg_relevance=self._parables.avg_relevance,
+            institutional_institutions=self._institutional.institutions_count,
+            institutional_evaluations=self._institutional.evaluations_count,
             timestamp=self._now(),
         )
 
@@ -666,6 +734,15 @@ class Organism:
         print(f"  Proverb stress:    {s.proverb_stress_registered} registered, {s.proverb_stress_tests_run} tests, {s.proverb_stress_flagged} flagged")
         print(f"  Negative space:    {s.negative_space_silences} silences ({s.negative_space_critical} critical), blindness={s.negative_space_blindness:.3f}")
         print(f"  NS cycle:          {s.negative_space_cycle}")
+        print(f"  {'-'*48}")
+        print(f"  Stewardship:       {s.stewardship_active} active, {s.stewardship_uncovered} uncovered")
+        print(f"  Witness chain:     {s.witness_chain_length} records, valid={s.witness_chain_valid}")
+        print(f"  Democracy:         {s.democracy_open_proposals} open proposals, {s.democracy_voices} voices")
+        print(f"  Evolution:         {s.evolution_active_amendments} active, {s.evolution_ratified} ratified")
+        print(f"  Justice:           {s.justice_open_harms} open harms, repair rate={s.justice_repair_rate:.1%}")
+        print(f"  Self-awareness:    {s.self_awareness_capabilities} caps, {s.self_awareness_limitations} lims, {s.self_awareness_calibration}")
+        print(f"  Parables:          {s.parables_deliveries} deliveries, relevance={s.parables_avg_relevance:.3f}")
+        print(f"  Institutional:     {s.institutional_institutions} institutions, {s.institutional_evaluations} evals")
         print(f"  {'='*48}\n")
 
     def decay_state(self):
@@ -870,3 +947,151 @@ class Organism:
     def negative_space_observe(self, identifier):
         """Manually observe something (domain, pattern, voice)."""
         self._negative_space.observe(identifier)
+
+    # ── Seed #1: Distributed Stewardship ─────────────────
+
+    def stewardship_delegate(self, steward_id, role, scope=""):
+        """Delegate a steward role."""
+        return self._stewardship.delegate(steward_id, role, scope=scope)
+
+    def stewardship_rotate(self, delegation_id, new_steward_id):
+        """Rotate a role to a new steward."""
+        return self._stewardship.rotate(delegation_id, new_steward_id)
+
+    def stewardship_check(self):
+        """Check for power concentration."""
+        return self._stewardship.check_concentration()
+
+    def stewardship_report(self):
+        """Get stewardship health report."""
+        return self._stewardship.report()
+
+    # ── Seed #2: Immutable Witness Network ───────────────
+
+    def witness(self, event_type, event_summary, actor_id="organism"):
+        """Record an event on the witness chain."""
+        return self._witness_net.witness(event_type, event_summary, actor_id)
+
+    def witness_verify(self):
+        """Verify the witness chain integrity."""
+        return self._witness_net.verify_chain()
+
+    def witness_report(self):
+        """Get witness network health report."""
+        return self._witness_net.report()
+
+    # ── Seed #3: Deliberative Democracy ──────────────────
+
+    def democracy_register_voice(self, voice_id, participation_score=0.0):
+        """Register a voice for deliberation."""
+        return self._democracy.register_voice(voice_id, participation_score)
+
+    def democracy_propose(self, proposer_id, title, description):
+        """Submit a proposal."""
+        return self._democracy.propose(proposer_id, title, description)
+
+    def democracy_deliberate(self, proposal_id, voice_id, vote, statement, concerns=None):
+        """Add a voice's deliberation."""
+        return self._democracy.deliberate(proposal_id, voice_id, vote, statement, concerns)
+
+    def democracy_resolve(self, proposal_id, resolution):
+        """Resolve a proposal."""
+        return self._democracy.resolve(proposal_id, resolution)
+
+    def democracy_speaking_order(self):
+        """Get weakest-voice-first speaking order."""
+        return self._democracy.speaking_order()
+
+    def democracy_report(self):
+        """Get deliberation health report."""
+        return self._democracy.report()
+
+    # ── Seed #4: Constitutional Evolution ────────────────
+
+    def evolution_propose(self, proposer, target_covenant, tier, title, description):
+        """Propose a constitutional amendment."""
+        return self._evolution.propose(proposer, target_covenant, tier, title, description)
+
+    def evolution_cool(self, amendment_id):
+        """Enter cooling period."""
+        return self._evolution.enter_cooling(amendment_id)
+
+    def evolution_ratify(self, amendment_id, ratifier):
+        """Ratify an amendment."""
+        return self._evolution.ratify(amendment_id, ratifier)
+
+    def evolution_report(self):
+        """Get constitutional evolution report."""
+        return self._evolution.report()
+
+    # ── Seed #5: Restorative Justice ─────────────────────
+
+    def justice_record_harm(self, exchange_id, severity, failed_components, description):
+        """Record a dignity violation."""
+        return self._justice.record_harm(exchange_id, severity, failed_components, description)
+
+    def justice_acknowledge(self, harm_id):
+        """Acknowledge a harm."""
+        return self._justice.acknowledge(harm_id)
+
+    def justice_propose_repair(self, harm_id, action, responsible):
+        """Propose a repair action."""
+        return self._justice.propose_repair(harm_id, action, responsible)
+
+    def justice_complete_repair(self, repair_id, outcome):
+        """Complete a repair."""
+        return self._justice.complete_repair(repair_id, outcome)
+
+    def justice_report(self):
+        """Get restorative justice report."""
+        return self._justice.report()
+
+    # ── Seed #6: System Self-Awareness ───────────────────
+
+    def self_awareness_register_capability(self, cap_id, domain, description, level):
+        """Register a system capability."""
+        return self._self_awareness.register_capability(cap_id, domain, description, level)
+
+    def self_awareness_register_limitation(self, lim_id, domain, description, severity=0.5):
+        """Register a system limitation."""
+        return self._self_awareness.register_limitation(lim_id, domain, description, severity=severity)
+
+    def self_awareness_calibrate(self, predicted, actual, domain):
+        """Record a calibration measurement."""
+        self._self_awareness.record_calibration(predicted, actual, domain)
+
+    def self_awareness_report(self):
+        """Get self-awareness report."""
+        return self._self_awareness.report()
+
+    # ── Seed #7: Personalized Parables ───────────────────
+
+    def parables_register_donor(self, donor_id, domains=None, style="direct"):
+        """Register a donor for personalized wisdom delivery."""
+        return self._parables.register_donor(donor_id, domains=domains, preferred_style=style)
+
+    def parables_deliver(self, proverb_id, proverb_text, donor_id, theme=""):
+        """Deliver a personalized proverb."""
+        return self._parables.deliver(proverb_id, proverb_text, donor_id, donor_theme=theme)
+
+    def parables_report(self):
+        """Get parables delivery report."""
+        return self._parables.report()
+
+    # ── Seed #8: Institutional Dignity Score ─────────────
+
+    def institutional_register(self, institution_id, name, sector=""):
+        """Register an institution for dignity evaluation."""
+        return self._institutional.register(institution_id, name, sector=sector)
+
+    def institutional_record(self, institution_id, D):
+        """Record an individual dignity score for an institution."""
+        return self._institutional.record_exchange(institution_id, D)
+
+    def institutional_evaluate(self, institution_id):
+        """Evaluate an institution's dignity score."""
+        return self._institutional.evaluate(institution_id)
+
+    def institutional_report(self):
+        """Get institutional dignity report."""
+        return self._institutional.report()
