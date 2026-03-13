@@ -196,6 +196,168 @@ def cmd_serve(args):
     )
 
 
+def cmd_ratify(args):
+    """Ratification engine commands."""
+    from WEAVER.ratification import RatificationEngine, ElementType, ElementState
+
+    engine = RatificationEngine(pre_launch=True)
+    engine.bootstrap_from_log()
+
+    if args.action == "status":
+        s = engine.summary()
+        if args.json:
+            print(json.dumps(s, indent=2))
+        else:
+            print(f"\n  {'='*52}")
+            print(f"  RATIFICATION ENGINE — STATUS")
+            print(f"  {'='*52}")
+            print(f"  Total elements:     {s['total_elements']}")
+            print(f"  Committed:          {s['committed']}")
+            print(f"  Provisional:        {s['provisional']}")
+            print(f"  Ratified:           {s['ratified']}")
+            print(f"  Awaiting sign-off:  {s['awaiting_signoff']}")
+            print(f"  Ready to ratify:    {s['ready_to_ratify']}")
+            print(f"  Pre-launch active:  {s['pre_launch_active']}")
+            print(f"  Signer algorithm:   {s['signer_algorithm']}")
+            print(f"  {'='*52}\n")
+
+    elif args.action == "list":
+        state_filter = args.state if args.state else None
+        elements = list(engine._elements.values())
+        if state_filter:
+            elements = [e for e in elements if e.state.value == state_filter]
+        if args.json:
+            print(json.dumps([e.to_dict() for e in elements], indent=2))
+        else:
+            for e in elements:
+                sig = f" sig:{e.signature[:12]}..." if e.signature else ""
+                sup = f" [SUPERSEDED by {e.superseded_by}]" if e.superseded_by else ""
+                print(f"  [{e.state.value.upper():11}] {e.element_id:20} {e.name}{sig}{sup}")
+
+    elif args.action == "commit":
+        if not args.element_id or not args.element_type or not args.name:
+            print("ERROR: --element-id, --element-type, and --name required for commit")
+            sys.exit(1)
+        etype = ElementType(args.element_type)
+        elem = engine.commit(args.element_id, etype, args.name,
+                             args.description or "", args.source or "")
+        engine.save()
+        print(f"  COMMITTED: {elem.element_id} ({elem.element_type.value})")
+
+    elif args.action == "offer":
+        if not args.element_id:
+            print("ERROR: --element-id required for offer")
+            sys.exit(1)
+        elem = engine.offer_to_threshold(args.element_id)
+        engine.save()
+        print(f"  PROVISIONAL: {elem.element_id} (thermal expires: {elem.thermal_delay_expires})")
+
+    elif args.action == "sign":
+        if not args.element_id or not args.role or not args.signer_id:
+            print("ERROR: --element-id, --role, and --signer-id required for sign")
+            sys.exit(1)
+        elem = engine.sign_off(args.element_id, args.role, args.signer_id,
+                               args.signer_name or args.signer_id)
+        engine.save()
+        signed_roles = {s.role for s in elem.sign_offs}
+        missing = set(elem.sign_offs_required) - signed_roles
+        print(f"  SIGNED: {args.role} on {elem.element_id} by {args.signer_id}")
+        if missing:
+            print(f"  Still needed: {', '.join(missing)}")
+        else:
+            print(f"  All sign-offs complete — ready to ratify")
+
+    elif args.action == "approve":
+        if not args.element_id:
+            print("ERROR: --element-id required for approve")
+            sys.exit(1)
+        elem, signed = engine.ratify(args.element_id, pre_launch_exception=True)
+        engine.save()
+        entry = engine.append_to_log(args.element_id)
+        print(f"  RATIFIED: {elem.element_id}")
+        print(f"  Signature: {signed.signature[:32]}...")
+        print(f"  Hash: {signed.content_hash[:32]}...")
+        print(f"  Algorithm: {engine._signer.algorithm}")
+
+    elif args.action == "verify":
+        if not args.element_id:
+            print("ERROR: --element-id required for verify")
+            sys.exit(1)
+        valid = engine.verify(args.element_id)
+        elem = engine.get(args.element_id)
+        print(f"  VERIFY: {args.element_id} — {'VALID' if valid else 'INVALID'}")
+        if elem and elem.signature:
+            print(f"  Signature: {elem.signature[:32]}...")
+            print(f"  Hash: {elem.content_hash[:32]}...")
+
+    elif args.action == "fast":
+        if not args.element_id or not args.element_type or not args.name:
+            print("ERROR: --element-id, --element-type, and --name required for fast")
+            sys.exit(1)
+        etype = ElementType(args.element_type)
+        elem, signed = engine.ratify_immediate(
+            args.element_id, etype, args.name,
+            args.description or "", args.source or "",
+        )
+        engine.save()
+        engine.append_to_log(args.element_id)
+        print(f"  FAST RATIFIED: {elem.element_id}")
+        print(f"  Signature: {signed.signature[:32]}...")
+
+
+def cmd_sign_artifact(args):
+    """Sign an arbitrary file or manifest."""
+    from WEAVER.canonicalize import ArtifactSigner
+
+    signer = ArtifactSigner(
+        signer_id=args.signer_id or "V-002",
+        signer_role=args.signer_role or "steward-system",
+        private_key_path=args.key if args.key else None,
+    )
+
+    filepath = Path(args.file)
+    if not filepath.exists():
+        print(f"ERROR: File not found: {filepath}")
+        sys.exit(1)
+
+    content = filepath.read_text()
+    data = {"file": str(filepath), "content_hash": signer._content_hash(content)}
+
+    artifact = signer.sign(str(filepath.name), data)
+    bundle = {
+        "file": str(filepath),
+        "artifact_id": artifact.artifact_id,
+        "content_hash": artifact.content_hash,
+        "signature": artifact.signature,
+        "signer_id": artifact.signer_id,
+        "signer_role": artifact.signer_role,
+        "algorithm": signer.algorithm,
+        "timestamp": artifact.timestamp,
+    }
+    if signer.public_key:
+        bundle["public_key"] = signer.public_key
+
+    if args.json:
+        print(json.dumps(bundle, indent=2))
+    else:
+        print(f"\n  {'='*52}")
+        print(f"  ARTIFACT SIGNED")
+        print(f"  {'='*52}")
+        print(f"  File:        {filepath}")
+        print(f"  Hash:        {artifact.content_hash[:32]}...")
+        print(f"  Signature:   {artifact.signature[:32]}...")
+        print(f"  Signer:      {artifact.signer_id} ({artifact.signer_role})")
+        print(f"  Algorithm:   {signer.algorithm}")
+        print(f"  {'='*52}\n")
+
+    # Optionally save the bundle
+    if args.output:
+        out = Path(args.output)
+        with open(out, "w") as f:
+            json.dump(bundle, f, indent=2)
+        print(f"  Saved to: {out}")
+
+
 def cmd_test(args):
     """Run the test suite."""
     import subprocess
@@ -256,6 +418,32 @@ def main():
     p.add_argument("--port", type=int, default=8000, help="Port (default: 8000)")
     p.set_defaults(func=cmd_serve)
 
+    # ratify
+    p = sub.add_parser("ratify", help="Ratification engine (lifecycle management)")
+    p.add_argument("action", choices=["status", "list", "commit", "offer", "sign", "approve", "verify", "fast"],
+                   help="Ratification action")
+    p.add_argument("--element-id", help="Element ID (e.g. COV#016)")
+    p.add_argument("--element-type", help="Element type (covenant, proverb, seed, etc.)")
+    p.add_argument("--name", help="Element name")
+    p.add_argument("--description", help="Element description")
+    p.add_argument("--source", help="Source file or origin")
+    p.add_argument("--role", help="Sign-off role (steward, canonical_owner, ethics_reviewer)")
+    p.add_argument("--signer-id", help="Signer ID (V-001, V-002)")
+    p.add_argument("--signer-name", help="Signer name")
+    p.add_argument("--state", help="Filter by state (committed, provisional, ratified)")
+    p.add_argument("--json", action="store_true", help="Output as JSON")
+    p.set_defaults(func=cmd_ratify)
+
+    # sign (artifact)
+    p = sub.add_parser("sign", help="Sign an artifact file")
+    p.add_argument("file", help="File to sign")
+    p.add_argument("--signer-id", help="Signer ID (default: V-002)")
+    p.add_argument("--signer-role", help="Signer role (default: steward-system)")
+    p.add_argument("--key", help="Path to Ed25519 private key")
+    p.add_argument("--output", "-o", help="Save signed bundle to file")
+    p.add_argument("--json", action="store_true", help="Output as JSON")
+    p.set_defaults(func=cmd_sign_artifact)
+
     # test
     p = sub.add_parser("test", help="Run the test suite")
     p.add_argument("--quick", "-q", action="store_true", help="Quick mode")
@@ -276,6 +464,9 @@ def main():
         print("    python cli.py face              Steward dashboard")
         print("    python cli.py gate \"text\"        Sealed Gate check")
         print("    python cli.py intake-demo       Donor intake demo")
+        print("    python cli.py ratify status      Ratification status")
+        print("    python cli.py ratify list       List all elements")
+        print("    python cli.py sign FILE         Sign an artifact")
         print("    python cli.py serve             Start API server")
         print("    python cli.py test              Run test suite")
         print()
