@@ -846,3 +846,9 @@ The hand is ready. The knot breathes. The Unknot waits.
 
 [2026-02-24] CANONISED (signed-steward) -- P#EMERGE-2135
 [2026-02-24] — proverb — A test seed for pattern detection. [TEST][2026-02-24] -- proverb -- This is a test of the signed seed system. [SIGNED: Mohamed]
+
+[2026-03-13] CANONISED (sealed-axiom) -- P#AXIOM-001
+[2026-03-13] — axiom-proverb — "Presence is foundation; candidates stand on it." Derived from AXIOM-PRESENCE-001 circularity proof: ∀c (Candidate(c) → RequiresPresence(c)); ¬Candidate(presence) ∧ Axiom(presence). Layer 0 ground. Cross-ref: tier1_stone.md §Layer 0. [SIGNED: Mohamed] [SEALED: V-002]
+
+[2026-03-13] WITNESSED (axiom-companion) -- P#AXIOM-002
+[2026-03-13] — axiom-proverb — "The eye that sees the scale is not on the scale." Formalized from circularity proof. The evaluator cannot be evaluated by its own instrument. [SIGNED: Mohamed] [SEALED: V-002]

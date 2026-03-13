@@ -33,6 +33,11 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 from enum import Enum
 
+try:
+    from WEAVER.presence_axiom import preflight_require_presence, AXIOM_PRESENCE
+except ImportError:
+    from presence_axiom import preflight_require_presence, AXIOM_PRESENCE
+
 
 # ═══════════════════════════════════════════════════
 # REFUSAL STATE
@@ -252,6 +257,10 @@ def sealed_gate(text: str, context: Optional[dict] = None) -> SealedGateResult:
     Returns:
         SealedGateResult with verdict and audit trail.
     """
+    # Layer 0 Preflight: Presence axiom (AXIOM-PRESENCE-001)
+    # Runs before any prohibition check. Presence is ground, not candidate.
+    presence = preflight_require_presence(context if isinstance(context, dict) else None)
+
     triggered = []
     all_signals = []
 
