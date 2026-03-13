@@ -60,6 +60,20 @@ from WEAVER.deliberative_democracy import DeliberativeDemocracy, VoteType
 from WEAVER.constitutional_evolution import ConstitutionalEvolution, AmendmentTier
 from WEAVER.restorative_justice import RestorativeJustice, HarmSeverity
 from WEAVER.system_self_awareness import SystemSelfAwareness, CapabilityLevel
+# Disconnected modules now wired in:
+from WEAVER.ninth_operator import NinthOperator, WordState
+from WEAVER.gap_solutions import (
+    OverprotectionGuard, StewardShadow, ShelterHeartbeat,
+    HarmDetector, HarmType, ContestabilityEngine,
+)
+from WEAVER.cryptographic_erasure import CryptographicErasure
+from WEAVER.early_warning import EarlyWarningPipeline, EWMADetector, CUSUMDetector
+from WEAVER.canonicalize import Canonicalizer, ArtifactSigner, EmergencyGovernance
+from FIELD.ALCOVE.shadow_genome import Alcove as FieldAlcove
+from FIELD.CLEARING.temporal_shadow import Clearing as FieldClearing
+from FIELD.AUDITS.self_audit import SelfAuditScheduler, SelfAuditRecord
+from FIELD.STEWARD.steward_observation import StewardObserver, RatificationRecord
+from FIELD.DONOR.donor_layer import DonorRegistry
 from WEAVER.personalized_parables import PersonalizedParables
 from WEAVER.institutional_dignity import InstitutionalDignity
 
@@ -134,6 +148,25 @@ class OrganismState:
     parables_avg_relevance: float
     institutional_institutions: int
     institutional_evaluations: int
+    # Ninth Operator + Gap Solutions + Erasure + Early Warning + Field
+    ninth_words_received: int
+    ninth_words_witnessed: int
+    ninth_words_sheltered: int
+    ninth_loop_completions: int
+    shelter_heartbeat_pending: int
+    contests_pending: int
+    erasure_active_donors: int
+    erasure_erased_donors: int
+    early_warning_ewma_alert: bool
+    early_warning_cusum_alert: bool
+    canonicalizer_duplicates: int
+    emergency_level: str
+    field_voices_registered: int
+    field_shadows_canonical: int
+    field_temporal_records: int
+    field_donors_registered: int
+    field_audit_count: int
+    steward_observer_patterns: int
     timestamp: str
 
 
@@ -200,6 +233,24 @@ class Organism:
         self._self_awareness = SystemSelfAwareness()
         self._parables = PersonalizedParables()
         self._institutional = InstitutionalDignity()
+        # Previously disconnected — now wired
+        self._ninth = NinthOperator()
+        self._overprotection = OverprotectionGuard()
+        self._steward_shadow = StewardShadow()
+        self._shelter_heartbeat = ShelterHeartbeat()
+        self._harm_detector = HarmDetector()
+        self._contestability = ContestabilityEngine()
+        self._erasure = CryptographicErasure(master_key=b'\x00' * 32, persist=False)
+        self._ewma = EWMADetector()
+        self._cusum = CUSUMDetector()
+        self._canonicalizer = Canonicalizer()
+        self._signer = ArtifactSigner()
+        self._emergency = EmergencyGovernance()
+        self._field_alcove = FieldAlcove()
+        self._field_clearing = FieldClearing(self._field_alcove)
+        self._field_audit_scheduler = SelfAuditScheduler()
+        self._steward_observer = StewardObserver()
+        self._donor_registry = DonorRegistry()
         self._last_measurement = None
         self._last_agency = None
         self._exchange_counter = 0
@@ -449,7 +500,37 @@ class Organism:
             "organism",
         )
 
-        # 6c. RESTORATIVE JUSTICE — if dignity failed, record harm (Seed #5)
+        # 6c. NINTH OPERATOR — the word loop
+        word_id = self._ninth.receive_word(donor_input[:2000], felt_domain)
+        ninth_result = self._ninth.witness(word_id)
+        if ninth_result.dignity_passed:
+            self._ninth.return_word(word_id)
+
+        # 6d. HARM DETECTOR (GAP#025) — physical/material safety beyond dignity
+        harm_signal = self._harm_detector.scan(donor_input)
+        if harm_signal.harm_type != HarmType.NONE:
+            self._wire.broadcast(
+                f"HARM detected: {harm_signal.harm_type.value} — {harm_signal.recommended_action}",
+                "harm-alert",
+                source="harm_detector",
+            )
+            warnings.append(f"HARM: {harm_signal.harm_type.value} (severity={harm_signal.severity:.2f})")
+
+        # 6e. EARLY WARNING — EWMA + CUSUM drift detectors
+        ewma_state = self._ewma.update(dignity.D)
+        cusum_state = self._cusum.update(dignity.D)
+        if ewma_state.breached:
+            warnings.append(f"EWMA alert: drift detected (ewma={ewma_state.current_ewma:.4f})")
+        if cusum_state.alarm:
+            warnings.append(f"CUSUM alert: change point ({cusum_state.alarm_direction}, S_high={cusum_state.S_high:.3f})")
+
+        # 6f. SHELTER HEARTBEAT (GAP#024) — pulse for sheltered exchanges
+        heartbeats = self._shelter_heartbeat.pulse()
+        for hb in heartbeats:
+            if hb.urgency >= 0.8:
+                warnings.append(f"Shelter heartbeat: {hb.exchange_id} needs attention")
+
+        # 6g. RESTORATIVE JUSTICE — if dignity failed, record harm (Seed #5)
         if dignity.D == 0.0:
             failed_comps = self._last_dignity.get("failed_components", [])
             self._justice.record_harm(
@@ -620,6 +701,27 @@ class Organism:
             parables_avg_relevance=self._parables.avg_relevance,
             institutional_institutions=self._institutional.institutions_count,
             institutional_evaluations=self._institutional.evaluations_count,
+            # Ninth Operator + Gap Solutions + Erasure + Early Warning + Field
+            ninth_words_received=self._ninth.words_received,
+            ninth_words_witnessed=self._ninth.words_witnessed,
+            ninth_words_sheltered=self._ninth.words_sheltered,
+            ninth_loop_completions=self._ninth.loop_completions,
+            shelter_heartbeat_pending=len(self._shelter_heartbeat.pulse()),
+            contests_pending=len(self._contestability.list_pending()),
+            erasure_active_donors=self._erasure.active_donor_count(),
+            erasure_erased_donors=self._erasure.erased_donor_count(),
+            early_warning_ewma_alert=self._ewma.state.breached,
+            early_warning_cusum_alert=self._cusum.state.alarm,
+            canonicalizer_duplicates=self._canonicalizer.scan().duplicate_count,
+            emergency_level=self._emergency.current_level.value,
+            field_voices_registered=len(self._field_alcove.genomes),
+            field_shadows_canonical=sum(
+                len(g.canonical_shadows) for g in self._field_alcove.genomes.values()
+            ),
+            field_temporal_records=len(self._field_clearing.temporal_index),
+            field_donors_registered=len(self._donor_registry.profiles),
+            field_audit_count=len(self._field_audit_scheduler.audits),
+            steward_observer_patterns=len(self._steward_observer.patterns),
             timestamp=self._now(),
         )
 
@@ -743,6 +845,23 @@ class Organism:
         print(f"  Self-awareness:    {s.self_awareness_capabilities} caps, {s.self_awareness_limitations} lims, {s.self_awareness_calibration}")
         print(f"  Parables:          {s.parables_deliveries} deliveries, relevance={s.parables_avg_relevance:.3f}")
         print(f"  Institutional:     {s.institutional_institutions} institutions, {s.institutional_evaluations} evals")
+        print(f"  {'-'*48}")
+        print(f"  Ninth Operator:    {s.ninth_words_received} received, {s.ninth_words_witnessed} witnessed, {s.ninth_loop_completions} loops")
+        print(f"  Ninth sheltered:   {s.ninth_words_sheltered}")
+        print(f"  Heartbeat pending: {s.shelter_heartbeat_pending}")
+        print(f"  Contests pending:  {s.contests_pending}")
+        print(f"  Erasure active:    {s.erasure_active_donors} donors, {s.erasure_erased_donors} erased")
+        print(f"  EWMA alert:        {s.early_warning_ewma_alert}")
+        print(f"  CUSUM alert:       {s.early_warning_cusum_alert}")
+        print(f"  Canon duplicates:  {s.canonicalizer_duplicates}")
+        print(f"  Emergency level:   {s.emergency_level}")
+        print(f"  {'-'*48}")
+        print(f"  FIELD voices:      {s.field_voices_registered}")
+        print(f"  FIELD shadows:     {s.field_shadows_canonical} canonical")
+        print(f"  FIELD temporal:    {s.field_temporal_records} records")
+        print(f"  FIELD donors:      {s.field_donors_registered}")
+        print(f"  FIELD audits:      {s.field_audit_count}")
+        print(f"  Steward patterns:  {s.steward_observer_patterns}")
         print(f"  {'='*48}\n")
 
     def decay_state(self):
@@ -1095,3 +1214,222 @@ class Organism:
     def institutional_report(self):
         """Get institutional dignity report."""
         return self._institutional.report()
+
+    # ── Ninth Operator (Word Loop) ───────────────────────
+
+    def ninth_receive(self, text, domain="donor-exchange"):
+        """Receive a word into the Ninth Operator loop."""
+        return self._ninth.receive_word(text, domain)
+
+    def ninth_witness(self, word_id):
+        """Witness a word (dignity check within the loop)."""
+        return self._ninth.witness(word_id)
+
+    def ninth_return(self, word_id):
+        """Return a witnessed word to the donor."""
+        return self._ninth.return_word(word_id)
+
+    def ninth_report(self):
+        """Get Ninth Operator report."""
+        return {
+            "words_received": self._ninth.words_received,
+            "words_witnessed": self._ninth.words_witnessed,
+            "words_sheltered": self._ninth.words_sheltered,
+            "loop_completions": self._ninth.loop_completions,
+        }
+
+    # ── Gap Solutions (GAP#022-026) ──────────────────────
+
+    def overprotection_check(self, measurement, exchange_history=None):
+        """Check if a block is overprotective (GAP#022)."""
+        return self._overprotection.check(measurement, exchange_history or [])
+
+    def steward_shadow_propose(self, override_type, scope, justification, steward_id="steward"):
+        """Propose a steward override (GAP#023)."""
+        return self._steward_shadow.propose(override_type, scope, justification, steward_id)
+
+    def steward_shadow_ratify(self, proposal_id, second_steward=None):
+        """Ratify a steward override after delay expires."""
+        return self._steward_shadow.ratify_override(proposal_id, second_steward)
+
+    def steward_shadow_pending(self):
+        """List pending steward override proposals."""
+        return self._steward_shadow.list_pending()
+
+    def shelter_heartbeat_register(self, exchange_id, sheltered_at=""):
+        """Register a sheltered exchange for heartbeat monitoring."""
+        if not sheltered_at:
+            sheltered_at = self._now()
+        return self._shelter_heartbeat.register(exchange_id, sheltered_at)
+
+    def shelter_heartbeat_pulse(self):
+        """Pulse all registered shelter heartbeats."""
+        return self._shelter_heartbeat.pulse()
+
+    def contest_file(self, exchange_id, reason):
+        """File a contestability claim (GAP#026)."""
+        return self._contestability.contest(exchange_id, reason)
+
+    def contest_add_context(self, contest_id, context):
+        """Add context to a pending contest."""
+        return self._contestability.add_context(contest_id, context)
+
+    def contest_resolve(self, contest_id, outcome, steward_note):
+        """Resolve a contest."""
+        return self._contestability.resolve(contest_id, outcome, steward_note)
+
+    def contest_pending(self):
+        """List pending contests."""
+        return self._contestability.list_pending()
+
+    # ── Cryptographic Erasure ────────────────────────────
+
+    def erasure_seal(self, donor_id, data):
+        """Seal donor data with cryptographic erasure envelope. Data must be bytes."""
+        return self._erasure.seal(donor_id, data)
+
+    def erasure_unseal(self, donor_id, blob):
+        """Unseal (read) donor data from a sealed blob."""
+        return self._erasure.unseal(donor_id, blob)
+
+    def erasure_erase(self, donor_id):
+        """Erase donor data by destroying the key (GDPR Art. 17)."""
+        return self._erasure.erase(donor_id)
+
+    def erasure_report(self):
+        """Get erasure status report."""
+        return {
+            "active_donors": self._erasure.active_donor_count(),
+            "erased_donors": self._erasure.erased_donor_count(),
+        }
+
+    # ── Early Warning (EWMA + CUSUM) ────────────────────
+
+    def early_warning_state(self):
+        """Get early warning detector states."""
+        return {
+            "ewma": self._ewma.state,
+            "cusum": self._cusum.state,
+        }
+
+    def early_warning_reset(self):
+        """Reset early warning detectors."""
+        self._ewma.reset()
+        self._cusum.reset()
+
+    # ── Canonicalize + Signing + Emergency ───────────────
+
+    def canonicalize_scan(self):
+        """Scan codebase for duplicate IDs."""
+        return self._canonicalizer.scan()
+
+    def sign_artifact(self, artifact_id, data):
+        """Sign an artifact with Ed25519."""
+        return self._signer.sign(artifact_id, data)
+
+    def emergency_escalate(self, level, trigger, description, initiated_by="system"):
+        """Escalate emergency governance level."""
+        return self._emergency.escalate(level, trigger, description, initiated_by)
+
+    def emergency_resolve(self, record_id, resolution, resolved_by="steward"):
+        """Resolve an emergency escalation."""
+        return self._emergency.resolve(record_id, resolution, resolved_by)
+
+    def emergency_state(self):
+        """Get emergency governance state."""
+        return {
+            "level": self._emergency.current_level.value,
+            "open_escalations": len(self._emergency.open_escalations),
+        }
+
+    # ── FIELD Layer ──────────────────────────────────────
+
+    def field_register_voice(self, voice_id, voice_name=""):
+        """Register a voice in the FIELD alcove."""
+        return self._field_alcove.register_voice(voice_id, voice_name)
+
+    def field_record_shadow(self, voice_id, description, domain, session_id):
+        """Record a shadow observation for a voice."""
+        return self._field_alcove.record_shadow(voice_id, description, domain, session_id)
+
+    def field_voice_report(self, voice_id):
+        """Get a voice's shadow genome report."""
+        genome = self._field_alcove.get_genome(voice_id)
+        if genome is None:
+            return None
+        return genome.to_dict()
+
+    def field_compare_genomes(self):
+        """Compare all voice genomes for cross-voice patterns."""
+        return self._field_alcove.compare_genomes()
+
+    def field_temporal_index(self, fingerprint, domain, description, voices=None):
+        """Index a temporal shadow observation."""
+        return self._field_clearing.index_temporal_shadow(fingerprint, domain, description, voices or [])
+
+    def field_temporal_divergence(self, absent_element, voices, session_id, certainty=3):
+        """Detect a divergence shadow."""
+        return self._field_clearing.detect_divergence_shadow(absent_element, voices, session_id, certainty)
+
+    def field_temporal_convergence(self, finding, voices, session_id, certainty=3):
+        """Detect convergent emergence."""
+        return self._field_clearing.detect_convergent_emergence(finding, voices, session_id, certainty)
+
+    def field_register_donor(self, donor_id):
+        """Register a donor in the FIELD donor registry."""
+        return self._donor_registry.get_or_create(donor_id)
+
+    def field_donor_profile(self, donor_id):
+        """Get a donor's profile."""
+        return self._donor_registry.get_profile(donor_id)
+
+    def field_schedule_audit(self):
+        """Schedule a FIELD self-audit if due."""
+        if self._field_audit_scheduler.should_audit():
+            return self._field_audit_scheduler.schedule_audit()
+        return None
+
+    def field_audit_history(self):
+        """Get FIELD audit history."""
+        return self._field_audit_scheduler.get_audit_history()
+
+    def steward_observer_record(self, record):
+        """Record a steward ratification for observation."""
+        return self._steward_observer.record_ratification(record)
+
+    def steward_observer_report(self):
+        """Get steward observation summary."""
+        return self._steward_observer.get_summary()
+
+    # ── Full System Report ───────────────────────────────
+
+    def full_report(self):
+        """Generate a comprehensive system health report across all modules."""
+        return {
+            "organism": "alive" if not self._breath.is_paused else "paused",
+            "breath_cycle": self._breath.cycle,
+            "exchanges_processed": self._exchange_counter,
+            "dignity_drift": self._drift.state().level.value,
+            "oracle": self._oracle.last_report.overall_health if self._oracle.last_report else "unaudited",
+            "prevention": self._prevention.current_level.name,
+            "mycelium": self._mycelium.current_alert.name,
+            "ninth_operator": self.ninth_report(),
+            "early_warning": {
+                "ewma_breached": self._ewma.state.breached,
+                "cusum_alarm": self._cusum.state.alarm,
+            },
+            "emergency": self._emergency.current_level.value,
+            "justice": self._justice.report(),
+            "democracy": self._democracy.report(),
+            "evolution": self._evolution.report(),
+            "stewardship": self._stewardship.report(),
+            "witness_chain": self._witness_net.report(),
+            "self_awareness": self._self_awareness.report(),
+            "erasure": self.erasure_report(),
+            "field": {
+                "voices": len(self._field_alcove.genomes),
+                "donors": len(self._donor_registry.profiles),
+                "audits": len(self._field_audit_scheduler.audits),
+                "steward_patterns": len(self._steward_observer.patterns),
+            },
+        }
