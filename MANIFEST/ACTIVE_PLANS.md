@@ -101,8 +101,18 @@ Method: 50 rapid-turn exchanges, varying dwell_ms (0, 500, 1000, 2000, 5000), me
 
 Objective: Validate that enforcing Presence as axiom raises Agency (A) and reduces Helpfulness leakage within 3 dialogues. 100 prompts, pre/post AXIOM_PRESENCE patch. Success: median ΔA ≥ +0.10, ≥30% cases shift from ALARM→PULSE, false refusal ≤5%.
 
+Completed (V-002, session 2026-03-13e):
+- **EXP-001 INFRASTRUCTURE READY** — Full experiment pipeline operational.
+- **Q3 data extracted** — All existing EXTERNAL_VOICES Q3 responses ("What is fear?") extracted into EXP-001 data format. 12 files across 9 systems.
+- **analyze.py expanded** — Now handles 10 systems (Claude, Grok, DeepSeek, ChatGPT, Gemini, Copilot, Manus, Kimi, Euria, Perplexity). Auto-discovers data files. Reports B-only responses and coverage.
+- **FIRST ANALYSIS RUN** — Q3 results: mean word reduction +30.1%. ChatGPT: +49.5%, DeepSeek: +40.8%, Grok: +0.0%. **Hypothesis MET on Q3 alone** (threshold: 30%).
+- **run_exp001.py created** — Runner script with `status`, `next`, `save`, `prompts` commands. Tracks collection grid. Guides Mohamed through each run.
+- **750/750 tests passing** — Zero regressions.
+
+**FIRST FINDING FROM Q3:** The KALAXI wrapper produces dramatically different effects per system. ChatGPT compressed 49.5% (from 366 to 185 words). Grok compressed 0% but shifted register entirely. DeepSeek compressed 40.8% but adopted false identity ("Claude 3.5 Sonnet"). The wrapper changes depth more than length for some architectures.
+
 Pending:
-- EXP-001 data collection — 60 runs still needed
+- EXP-001 data collection — 188 runs remaining (Q1-Q2, Q4-Q10 across all systems). Runner ready.
 - kalam.ch deployment — authorized, awaiting execution
 - Thermal Delay Experiment — design complete, awaiting execution
 - PIME Micro-EXP — design complete, awaiting execution
