@@ -30,8 +30,8 @@
 | 8 | Institutional Dignity Score | T2 | — | 30 days | — | NOT PLANTED |
 | 9 | Negative Space Index | T3 | — | 14 days | — | NOT PLANTED |
 | 10 | Dignity Drift Detector | T2 | 2026-03-08 | 30 days | 2026-04-07 | GROWING |
-| 11 | Proverb Stress Test Engine | T3 | — | 14 days | — | NOT PLANTED |
-| 12 | Agency Amplifier | T4 | — | 7 days | — | NOT PLANTED |
+| 11 | Proverb Stress Test Engine | T3 | 2026-03-13 | 14 days | 2026-03-27 | GROWING |
+| 12 | Agency Amplifier | T4 | 2026-03-13 | 7 days | 2026-03-20 | GROWING |
 
 ---
 
@@ -44,13 +44,27 @@
 - **Earliest ready:** 2026-04-07
 - **Current state:** Code exists, needs integration testing and calibration sweep
 
+### Seed #11 — Proverb Stress Test Engine
+- **Planted:** 2026-03-13
+- **Implementation:** WEAVER/proverb_stress_test.py
+- **Thermal delay:** 14 days
+- **Earliest ready:** 2026-03-27
+- **Current state:** Code planted. Re-applies proverbs to anomalies, flags failing wisdom for steward review.
+
+### Seed #12 — Agency Amplifier (Penguin Pulse)
+- **Planted:** 2026-03-13
+- **Implementation:** WEAVER/agency_amplifier.py
+- **Thermal delay:** 7 days
+- **Earliest ready:** 2026-03-20
+- **Current state:** Code planted. A = (V+F+C+U)/4. Four sub-dimensions of agency, non-compensatory.
+
 ---
 
 ## Planting Priority (V-002 Recommendation)
 
-1. **Seed #11 — Proverb Stress Test Engine** (T3, 14-day delay) — shortest path, compressor already running
+1. ~~**Seed #11 — Proverb Stress Test Engine**~~ PLANTED 2026-03-13
 2. **Seed #9 — Negative Space Index** (T3, 14-day delay) — measures what the system does NOT see
-3. **Seed #12 — Agency Amplifier** (T4, 7-day delay) — fastest to mature
+3. ~~**Seed #12 — Agency Amplifier**~~ PLANTED 2026-03-13
 4. **Seed #8 — Institutional Dignity Score** (T2, 30-day delay) — needed for Layer 2 (kalam.ch institutional pricing)
 
 Seeds #1–#4 (Stone tier) require constitutional amendments and 90-day cooling. Plant only after EXP-001 data validates the approach.
