@@ -51,6 +51,8 @@ from WEAVER.oracle import Oracle, WitnessLevel
 from WEAVER.prevention import Prevention, SignalLevel, Intervention
 from WEAVER.mycelium import Mycelium, MyceliumAlert, K_ANONYMITY_FLOOR
 from WEAVER.gap004_mediator import ConflictEngine, surface_conflict
+from WEAVER.agency_amplifier import AgencyAmplifier, AgencyScore
+from WEAVER.proverb_stress_test import ProverbStressTest, ProverbHealth
 
 
 @dataclass
@@ -94,6 +96,13 @@ class OrganismState:
     gap004_unwitnessed: int
     measure_D: float
     measure_confidence: float
+    agency_score: float
+    agency_weakest: str
+    agency_collapsed: bool
+    agency_measurements: int
+    proverb_stress_registered: int
+    proverb_stress_tests_run: int
+    proverb_stress_flagged: int
     timestamp: str
 
 
@@ -118,6 +127,8 @@ class ProcessResult:
     shelter_remedies: list = field(default_factory=list)
     complexity: str = "simple"
     recommended_td: float = 0.0
+    agency_A: float = 0.0
+    agency_weakest: str = ""
     warnings: list = field(default_factory=list)
 
 
@@ -146,7 +157,10 @@ class Organism:
         self._prevention = Prevention()
         self._mycelium = Mycelium()
         self._conflict_engine = ConflictEngine()
+        self._agency = AgencyAmplifier()
+        self._proverb_stress = ProverbStressTest()
         self._last_measurement = None
+        self._last_agency = None
         self._exchange_counter = 0
         self._last_dignity = {}
         self._drops_archive = []
@@ -251,7 +265,20 @@ class Organism:
                 f"Low measurement confidence: {self._last_measurement.confidence:.2f}"
             )
 
-        # 4b. GAP#004 — conflict detection (individual vs collective)
+        # 4b. AGENCY — measure four sub-dimensions of agency for this exchange
+        agency_score = self._agency.measure(
+            ex_id,
+            V=1.0 if dignity.D > 0 else 0.0,   # Visible: system tells the person what happened
+            F=1.0,                                # Affordable: no cost to participate
+            C=1.0 if not self._breath.is_paused else 0.0,  # Controllable: can act if system alive
+            U=self._last_measurement.confidence if self._last_measurement else 0.5,  # Understandable: proportional to measurement confidence
+            notes=f"Auto-measured during process pipeline",
+        )
+        self._last_agency = agency_score
+        if agency_score.is_collapsed:
+            warnings.append(f"Agency collapsed: weakest dimension is {agency_score.weakest}")
+
+        # 4c. GAP#004 — conflict detection (individual vs collective)
         conflict_ticket = self._conflict_engine.process(donor_input)
         if conflict_ticket:
             self._wire.broadcast(
@@ -423,6 +450,8 @@ class Organism:
             drift_rate=drift_alert.dD_dt,
             complexity=complexity.value,
             recommended_td=recommended_td,
+            agency_A=agency_score.A,
+            agency_weakest=agency_score.weakest,
             warnings=warnings,
         )
 
@@ -491,6 +520,13 @@ class Organism:
             gap004_unwitnessed=len(self._conflict_engine.unwitnessed_tickets),
             measure_D=self._last_measurement.D if self._last_measurement else 0.0,
             measure_confidence=self._last_measurement.confidence if self._last_measurement else 0.0,
+            agency_score=self._last_agency.A if self._last_agency else 0.0,
+            agency_weakest=self._last_agency.weakest if self._last_agency else "none",
+            agency_collapsed=self._last_agency.is_collapsed if self._last_agency else False,
+            agency_measurements=self._agency.scores_count,
+            proverb_stress_registered=self._proverb_stress.proverbs_count,
+            proverb_stress_tests_run=self._proverb_stress.total_tests,
+            proverb_stress_flagged=len(self._proverb_stress.flagged()),
             timestamp=self._now(),
         )
 
@@ -599,6 +635,10 @@ class Organism:
         print(f"  GAP#004 open:      {s.gap004_open_tickets}")
         print(f"  GAP#004 unseen:    {s.gap004_unwitnessed}")
         print(f"  Measure D:         {s.measure_D:.3f} (confidence {s.measure_confidence:.2f})")
+        print(f"  Agency A:          {s.agency_score:.3f} (weakest: {s.agency_weakest})")
+        print(f"  Agency collapsed:  {s.agency_collapsed}")
+        print(f"  Agency measures:   {s.agency_measurements}")
+        print(f"  Proverb stress:    {s.proverb_stress_registered} registered, {s.proverb_stress_tests_run} tests, {s.proverb_stress_flagged} flagged")
         print(f"  {'='*48}\n")
 
     def decay_state(self):
@@ -739,3 +779,41 @@ class Organism:
     def last_measurement(self):
         """Get last graduated dignity measurement (GAP#014/015)."""
         return self._last_measurement
+
+    # ── Agency Amplifier (Seed #12) ──────────────────────────
+
+    def agency_measure(self, exchange_id, V, F, C, U, notes=""):
+        """Manually measure agency for an exchange."""
+        score = self._agency.measure(exchange_id, V=V, F=F, C=C, U=U, notes=notes)
+        self._last_agency = score
+        return score
+
+    def agency_report(self):
+        """Get agency report across all measurements."""
+        return self._agency.report()
+
+    def agency_last(self):
+        """Get last agency score."""
+        return self._last_agency
+
+    # ── Proverb Stress Test (Seed #11) ───────────────────────
+
+    def proverb_stress_register(self, proverb_id, text, domain):
+        """Register a proverb for stress testing."""
+        self._proverb_stress.register_proverb(proverb_id, text, domain)
+
+    def proverb_stress_test(self, proverb_id, anomaly_id, held, notes=""):
+        """Apply a proverb to an anomaly and record whether it held."""
+        return self._proverb_stress.test(proverb_id, anomaly_id, held, notes)
+
+    def proverb_stress_report(self, proverb_id):
+        """Get stress report for a single proverb."""
+        return self._proverb_stress.report(proverb_id)
+
+    def proverb_stress_report_all(self):
+        """Get stress reports for all registered proverbs."""
+        return self._proverb_stress.report_all()
+
+    def proverb_stress_flagged(self):
+        """Get proverbs that need steward attention."""
+        return self._proverb_stress.flagged()

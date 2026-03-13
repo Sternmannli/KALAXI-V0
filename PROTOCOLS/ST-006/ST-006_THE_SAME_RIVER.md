@@ -262,7 +262,7 @@ That is the story. That is the proof.
 ## STATUS
 
 - ST-006 design: **COMPLETE**
-- Narrative (KALAXI_1): **NOT YET WRITTEN**
+- Narrative (KALAXI_1): **FIRST DRAFT COMPLETE** (2026-03-13, V-002, thermal delay 90 days)
 - TRIAD #002: **THERMAL DELAY ACTIVE**
 - Constitutional panel: 2 AI + 1 steward + 1 ethicist
 - Q3 (The Girl): **MAY NEVER RESOLVE — held in Book of Silence**
