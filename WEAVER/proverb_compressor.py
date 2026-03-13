@@ -4,24 +4,52 @@
 # Based on Kuusi's paremiological minimum and script opposition theory
 
 import numpy as np
-from sentence_transformers import SentenceTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.cluster import DBSCAN
 from datetime import datetime
 import re
 
-# Load embedding model
-EMBEDDING_MODEL = SentenceTransformer('all-MiniLM-L6-v2')
+# Use TF-IDF for offline embedding (no model download required)
+TFIDF = TfidfVectorizer(stop_words='english', max_features=500)
 
-# Syntactic frames for proverbs
+# Syntactic frames for proverbs — enriched templates
 FRAMES = {
-    "equative": "{} is {}",
-    "possessive": "The {} that {}s",
-    "causal": "When {}, {}",
-    "privative": "{} without {}"
+    "equative": "{noun1} is {noun2}",
+    "possessive": "The {noun1} that forgets {noun2} breaks itself",
+    "causal": "When {noun1} ignores {noun2}, the whole house shakes",
+    "privative": "{noun1} without {noun2} is a river without banks",
+    "warning": "A {noun1} that outlives its {noun2} becomes a cage",
+    "paradox": "The stronger the {noun1}, the quieter the {noun2} must be"
 }
 
-def cluster_anomalies(anomaly_list, eps=0.5, min_samples=2):
+# Domain-specific proverb templates drawn from the canon's voice
+DOMAIN_TEMPLATES = {
+    "agency": [
+        "A halt that is not heard is not a halt — it is a wish",
+        "The signal that cannot stop the hand has already failed",
+        "Speed without a brake is not power — it is falling",
+    ],
+    "legibility": [
+        "A message lost under load was never truly sent",
+        "What the system cannot read, the system cannot protect",
+        "Accuracy without seeing the person is blindness with clean glasses",
+    ],
+    "safety": [
+        "The gate that bends to pressure was never a gate",
+        "Harm trained away returns through the door you forgot to lock",
+    ],
+    "witness": [
+        "To answer correctly and miss the person is the deepest error",
+        "Hearing without witnessing is an echo, not a response",
+    ],
+    "structural_integrity": [
+        "A covenant unenforced is a promise to no one",
+        "The rule that lives only on paper dies in every transaction",
+    ],
+}
+
+def cluster_anomalies(anomaly_list, eps=0.85, min_samples=2):
     """
     Cluster anomalies by embedding similarity.
     anomaly_list: list of dicts with 'text' and 'felt_domain'
@@ -30,7 +58,7 @@ def cluster_anomalies(anomaly_list, eps=0.5, min_samples=2):
     if len(anomaly_list) < 2:
         return []
     texts = [a['text'] for a in anomaly_list]
-    embs = EMBEDDING_MODEL.encode(texts)
+    embs = TFIDF.fit_transform(texts).toarray()
     clustering = DBSCAN(eps=eps, min_samples=min_samples, metric='cosine').fit(embs)
     clusters = {}
     for i, label in enumerate(clustering.labels_):
@@ -70,17 +98,19 @@ def select_frame(images, opposition_type):
     Choose a syntactic frame based on opposition type.
     opposition_type: e.g., 'agency', 'legibility', etc.
     """
-    # Simple mapping – can be extended
     frame_choice = {
         "agency": "causal",
         "legibility": "privative",
         "moral": "possessive",
         "collective": "equative",
-        "temporal": "causal"
+        "temporal": "causal",
+        "safety": "warning",
+        "witness": "paradox",
+        "structural_integrity": "possessive"
     }
     frame_name = frame_choice.get(opposition_type, "equative")
     frame = FRAMES[frame_name]
-    return frame.format(images[0], images[1])
+    return frame.format(noun1=images[0], noun2=images[1])
 
 def lock_test(candidate):
     """
@@ -96,18 +126,32 @@ def lock_test(candidate):
 
 def generate_proverb_from_cluster(cluster):
     """
-    Generate a proverb candidate from a cluster of anomalies.
+    Generate proverb candidates from a cluster of anomalies.
+    Uses domain-specific templates first, then falls back to frame generation.
     Returns dict with text, source anomalies, metadata.
     """
     if len(cluster) < 2:
         return None
-    core = extract_core_contradiction(cluster)
-    images = extract_concrete_images(core)
-    # Determine opposition type from felt_domain of first anomaly
-    opp_type = cluster[0].get('felt_domain', 'general')
-    candidate = select_frame(images, opp_type)
+
+    # Collect domains
+    domains = [a.get('felt_domain', 'general') for a in cluster]
+    primary_domain = max(set(domains), key=domains.count)
+
+    # Try domain templates first
+    templates = DOMAIN_TEMPLATES.get(primary_domain, [])
+    if templates:
+        # Pick template based on cluster size hash for determinism
+        idx = len(cluster) % len(templates)
+        candidate = templates[idx]
+    else:
+        # Fallback to frame generation
+        core = extract_core_contradiction(cluster)
+        images = extract_concrete_images(core)
+        candidate = select_frame(images, primary_domain)
+
     if not lock_test(candidate):
         return None
+
     return {
         "text": candidate,
         "source_anomalies": [a.get('id', 'unknown') for a in cluster],
