@@ -35,7 +35,7 @@
 | 6 | System Self-Awareness | T2 | — | 30 days | — | NOT PLANTED |
 | 7 | Personalized Parables | T3 | — | 14 days | — | NOT PLANTED |
 | 8 | Institutional Dignity Score | T2 | — | 30 days | — | NOT PLANTED |
-| 9 | Negative Space Index | T3 | — | 14 days | — | NOT PLANTED |
+| 9 | Negative Space Index | T3 | 2026-03-13 | ⏸ FROZEN | NOW | READY |
 | 10 | Dignity Drift Detector | T2 | 2026-03-08 | ⏸ FROZEN | NOW | READY |
 | 11 | Proverb Stress Test Engine | T3 | 2026-03-13 | ⏸ FROZEN | NOW | READY |
 | 12 | Agency Amplifier | T4 | 2026-03-13 | ⏸ FROZEN | NOW | READY |
@@ -43,6 +43,13 @@
 ---
 
 ## Already Growing
+
+### Seed #9 — Negative Space Index — READY
+- **Planted:** 2026-03-13
+- **Implementation:** WEAVER/negative_space.py
+- **Thermal delay:** ⏸ FROZEN (was 14 days)
+- **Ready:** NOW
+- **Current state:** Code planted + integrated into Organism. Tracks dormant domains, missing patterns, silent voices, unasked questions. Ticks each exchange.
 
 ### Seed #10 — Dignity Drift Detector — READY
 - **Planted:** 2026-03-08
@@ -70,7 +77,7 @@
 ## Planting Priority (V-002 Recommendation)
 
 1. ~~**Seed #11 — Proverb Stress Test Engine**~~ PLANTED 2026-03-13
-2. **Seed #9 — Negative Space Index** (T3, 14-day delay) — measures what the system does NOT see
+2. ~~**Seed #9 — Negative Space Index**~~ PLANTED + INTEGRATED 2026-03-13
 3. ~~**Seed #12 — Agency Amplifier**~~ PLANTED 2026-03-13
 4. **Seed #8 — Institutional Dignity Score** (T2, 30-day delay) — needed for Layer 2 (kalam.ch institutional pricing)
 

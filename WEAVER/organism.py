@@ -53,6 +53,7 @@ from WEAVER.mycelium import Mycelium, MyceliumAlert, K_ANONYMITY_FLOOR
 from WEAVER.gap004_mediator import ConflictEngine, surface_conflict
 from WEAVER.agency_amplifier import AgencyAmplifier, AgencyScore
 from WEAVER.proverb_stress_test import ProverbStressTest, ProverbHealth
+from WEAVER.negative_space import NegativeSpaceIndex, SilenceType
 
 
 @dataclass
@@ -103,6 +104,10 @@ class OrganismState:
     proverb_stress_registered: int
     proverb_stress_tests_run: int
     proverb_stress_flagged: int
+    negative_space_silences: int
+    negative_space_critical: int
+    negative_space_blindness: float
+    negative_space_cycle: int
     timestamp: str
 
 
@@ -159,6 +164,7 @@ class Organism:
         self._conflict_engine = ConflictEngine()
         self._agency = AgencyAmplifier()
         self._proverb_stress = ProverbStressTest()
+        self._negative_space = NegativeSpaceIndex()
         self._last_measurement = None
         self._last_agency = None
         self._exchange_counter = 0
@@ -414,15 +420,30 @@ class Organism:
         self._sip.record_activity("OUT", messages_sent=1 if stored else 0)  # OUT participates via anonymization pipeline
         self._sip.record_activity("FACE", messages_sent=1)  # FACE participates via output rendering
 
-        # 9. DECAY — tick the halflife engine (one cycle per exchange)
+        # 9. NEGATIVE SPACE — observe what was active this cycle
+        self._negative_space.observe(felt_domain)
+        for drop in drops:
+            self._negative_space.observe(drop.drop_type)
+        ns_silences = self._negative_space.tick()
+        if ns_silences:
+            critical_ns = [s for s in ns_silences if s.severity >= 0.8]
+            if critical_ns:
+                self._wire.broadcast(
+                    f"Negative space: {len(critical_ns)} critical blind spot(s)",
+                    "negative-space-alert",
+                    source="negative_space",
+                )
+                warnings.append(f"Negative space: {len(critical_ns)} critical blind spot(s)")
+
+        # 10. DECAY — tick the halflife engine (one cycle per exchange)
         self._decay.tick()
 
-        # 10. LATENCY — record the T_d measurement
+        # 11. LATENCY — record the T_d measurement
         # actual_td is 0 here (instant processing); in a real deployment
         # the caller would inject the actual wait time
         self._latency.record(ex_id, complexity, recommended_td, actual_td=recommended_td)
 
-        # 11. BREATH — tick and stress check
+        # 12. BREATH — tick and stress check
         self._breath.tick()
         stress = self._breath.stress_check(
             pending_messages=self._wire.pending_count(),
@@ -527,6 +548,10 @@ class Organism:
             proverb_stress_registered=self._proverb_stress.proverbs_count,
             proverb_stress_tests_run=self._proverb_stress.total_tests,
             proverb_stress_flagged=len(self._proverb_stress.flagged()),
+            negative_space_silences=self._negative_space.silences_count,
+            negative_space_critical=len([s for s in self._negative_space._silences if s.severity >= 0.8]),
+            negative_space_blindness=self._negative_space.report().blindness_score,
+            negative_space_cycle=self._negative_space.cycle,
             timestamp=self._now(),
         )
 
@@ -639,6 +664,8 @@ class Organism:
         print(f"  Agency collapsed:  {s.agency_collapsed}")
         print(f"  Agency measures:   {s.agency_measurements}")
         print(f"  Proverb stress:    {s.proverb_stress_registered} registered, {s.proverb_stress_tests_run} tests, {s.proverb_stress_flagged} flagged")
+        print(f"  Negative space:    {s.negative_space_silences} silences ({s.negative_space_critical} critical), blindness={s.negative_space_blindness:.3f}")
+        print(f"  NS cycle:          {s.negative_space_cycle}")
         print(f"  {'='*48}\n")
 
     def decay_state(self):
@@ -817,3 +844,29 @@ class Organism:
     def proverb_stress_flagged(self):
         """Get proverbs that need steward attention."""
         return self._proverb_stress.flagged()
+
+    # ── Negative Space Index (Seed #9) ───────────────────────
+
+    def negative_space_register_domain(self, domain):
+        """Register a domain for negative space tracking."""
+        self._negative_space.register_domain(domain)
+
+    def negative_space_register_pattern(self, pattern_type, expected_by):
+        """Register an expected pattern type."""
+        self._negative_space.register_expected_pattern(pattern_type, expected_by)
+
+    def negative_space_register_voice(self, voice_id):
+        """Register a voice (participant) for silence detection."""
+        self._negative_space.register_voice(voice_id)
+
+    def negative_space_register_question(self, question, expected_by):
+        """Register a question the system should eventually ask."""
+        self._negative_space.register_question(question, expected_by)
+
+    def negative_space_report(self):
+        """Get the current negative space report."""
+        return self._negative_space.report()
+
+    def negative_space_observe(self, identifier):
+        """Manually observe something (domain, pattern, voice)."""
+        self._negative_space.observe(identifier)
