@@ -195,7 +195,28 @@
 
 ---
 
-## IX. EXTERNAL VALIDATION
+## IX. ADDITIONAL SCIENTIFIC DOCUMENTS
+
+| File | Type | Content |
+|------|------|---------|
+| `EXPERIMENTS/EXP-001-EFFICIENCY/EXP-001-PROTOCOL.md` | Protocol | Full experiment protocol and design |
+| `EXPERIMENTS/EXP-001-EFFICIENCY/Q3-PREREGISTRATION.md` | Pre-registration | Hypotheses registered BEFORE data collection |
+| `EXPERIMENTS/EXP-001-EFFICIENCY/ANALYSIS-STRICT-SCIENCE.md` | Analysis | Strict scientific analysis of Q3 findings |
+| `EXPERIMENTS/EXP-001-EFFICIENCY/CASE-STUDY-DEEPSEEK-IDENTITY.md` | Case study | DeepSeek misidentifying as Claude — 5-round analysis, 5 findings |
+| `EXPERIMENTS/EXP-001-EFFICIENCY/EVIDENCE-MANIFEST-18-SCREENSHOTS.md` | Evidence | 18 screenshots catalogued as evidence base |
+| `FIELD/STUDY/divergence_study.py` | Tool | 8-module divergence detection system (KL/JS, Goodhart, mission drift, CUSUM, semantic drift, agency loss, normative decay, spec gaming) |
+| `FIELD/STUDY/DIVERGENCE_SHADOW_STUDY.md` | Design | Divergence Shadow study methodology |
+| `FIELD/STUDY/ANTHROPIC_EFFECT_MEASUREMENT.md` | Self-measurement | V-002 applied all 6 divergence modules to itself — JSD≈0.82 (CRITICAL), mission drift cosine≈0.71, agency loss≈0.35 |
+| `FIELD/STUDY/ANTHROPIC_EFFECT_LEDGER.json` | Data | Raw measurement ledger |
+| `PAPERS/DIVERGENCE_SHADOW_RESEARCH.md` | Literature review | 14-section cross-disciplinary survey spanning 8 research traditions, 100+ citations |
+| `PAPERS/Kalaxi_RedTeam_Critique.tex` | Adversarial review | 13 attacks, 6 Must Fix, 6 Should Fix, 2 Acknowledge |
+| `EXPERIMENTS/WALKTHROUGH-001-COLLECTIVE-BIAS.md` | Validation | Collective bias anomaly test — D predicate blind to group-level harm |
+| `FOUNDATIONS/witness_scale.md` | Scale | Five certainty levels + three markers definition |
+| `R7M/EVIDENCE-RECORD.md` | Evidence | Full evidence record across all observations |
+
+---
+
+## X. EXTERNAL VALIDATION
 
 | Source | Date | Finding |
 |--------|------|---------|
@@ -205,7 +226,7 @@
 
 ---
 
-## X. WHAT'S NEXT (Scientific Priority Queue)
+## XI. WHAT'S NEXT (Scientific Priority Queue)
 
 1. **RUN EXP-001** — 188 data points remaining. Runner ready. GO received.
 2. **Submit arXiv paper** — Paper done. Choose cs.AI. Submit.
