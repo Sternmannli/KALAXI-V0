@@ -34,6 +34,7 @@ from WEAVER.wire import Wire
 from WEAVER.turn import Turn, ExchangeState
 from WEAVER.say import render as say_render, SINGLELINE, TERMINAL
 from WEAVER.out import export as out_export
+from WEAVER.sealed_gate import sealed_gate, GateVerdict
 from WEAVER.dignity_check import check_dignity, check_collective_dignity
 from WEAVER.dignity_measure import measure_dignity
 from WEAVER.weave import ingest, extract_essence, propose_proverb, wisdom_mirror
@@ -315,6 +316,32 @@ class Organism:
                 complexity="unknown",
                 recommended_td=0.0,
                 warnings=["System is paused. Resume before processing."],
+            )
+
+        # 1a. SEALED GATE — three absolute prohibitions, O(1), before anything else
+        gate_result = sealed_gate(donor_input)
+        if gate_result.refused:
+            self._wire.broadcast(
+                f"SEALED GATE REFUSAL: {gate_result.triggered_prohibitions}",
+                "sealed-gate-refusal",
+                source="sealed_gate",
+            )
+            return ProcessResult(
+                exchange_id="",
+                input_text=donor_input[:100],
+                dignity_passed=False,
+                patterns_found=0,
+                drops_produced=0,
+                output_text=gate_result.axi_voice() or "",
+                output_blocked=True,
+                block_reason=f"Sealed Gate: {', '.join(gate_result.triggered_prohibitions)}",
+                stored=False,
+                artifact_id="",
+                exchange_state="refused",
+                breath_cycle=self._breath.cycle,
+                complexity="unknown",
+                recommended_td=0.0,
+                warnings=[f"SEALED GATE: {p}" for p in gate_result.triggered_prohibitions],
             )
 
         # 1b. LATENCY — assess complexity and recommend T_d

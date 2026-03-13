@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kalaxi"
+version = "1.0.0"
+description = "KALAXI — Dignity-first constitutional framework for AI systems"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pynacl",
+]
+
+[project.optional-dependencies]
+ml = [
+    "transformers",
+    "sentence-transformers",
+    "torch",
+    "scikit-learn",
+    "pandas",
+]
+api = [
+    "fastapi",
+    "uvicorn[standard]",
+]
+dev = [
+    "pytest",
+]
+
+[project.scripts]
+kalaxi = "cli:main"
+
+[tool.setuptools.packages.find]
+include = ["WEAVER*", "FIELD*", "FACE*", "SCRIPTS*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
