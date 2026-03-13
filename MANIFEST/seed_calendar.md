@@ -14,6 +14,13 @@
 | Wisdom (T3) | 7–14 days |
 | Interface (T4) | 3–7 days |
 
+### ⏸ THERMAL DELAY FROZEN — Creation Phase Override
+
+**Decision:** V-001 (2026-03-13) — Thermal delay is FROZEN for the duration of the creation phase.
+**Reason:** We are building the system, not running it live. The delay protects a living system from premature action. During construction, all seeds are available for immediate integration and testing.
+**Reactivation:** When the system goes live, or when V-001 decides it is needed.
+**Effect:** All GROWING seeds are reclassified as READY. No delay windows apply until reactivation.
+
 ---
 
 ## 12 Future Seeds — Status
@@ -29,33 +36,33 @@
 | 7 | Personalized Parables | T3 | — | 14 days | — | NOT PLANTED |
 | 8 | Institutional Dignity Score | T2 | — | 30 days | — | NOT PLANTED |
 | 9 | Negative Space Index | T3 | — | 14 days | — | NOT PLANTED |
-| 10 | Dignity Drift Detector | T2 | 2026-03-08 | 30 days | 2026-04-07 | GROWING |
-| 11 | Proverb Stress Test Engine | T3 | 2026-03-13 | 14 days | 2026-03-27 | GROWING |
-| 12 | Agency Amplifier | T4 | 2026-03-13 | 7 days | 2026-03-20 | GROWING |
+| 10 | Dignity Drift Detector | T2 | 2026-03-08 | ⏸ FROZEN | NOW | READY |
+| 11 | Proverb Stress Test Engine | T3 | 2026-03-13 | ⏸ FROZEN | NOW | READY |
+| 12 | Agency Amplifier | T4 | 2026-03-13 | ⏸ FROZEN | NOW | READY |
 
 ---
 
 ## Already Growing
 
-### Seed #10 — Dignity Drift Detector
+### Seed #10 — Dignity Drift Detector — READY
 - **Planted:** 2026-03-08
 - **Implementation:** WEAVER/dignity_drift.py
-- **Thermal delay:** 30 days
-- **Earliest ready:** 2026-04-07
+- **Thermal delay:** ⏸ FROZEN (was 30 days)
+- **Ready:** NOW
 - **Current state:** Code exists, needs integration testing and calibration sweep
 
-### Seed #11 — Proverb Stress Test Engine
+### Seed #11 — Proverb Stress Test Engine — READY
 - **Planted:** 2026-03-13
 - **Implementation:** WEAVER/proverb_stress_test.py
-- **Thermal delay:** 14 days
-- **Earliest ready:** 2026-03-27
+- **Thermal delay:** ⏸ FROZEN (was 14 days)
+- **Ready:** NOW
 - **Current state:** Code planted. Re-applies proverbs to anomalies, flags failing wisdom for steward review.
 
-### Seed #12 — Agency Amplifier (Penguin Pulse)
+### Seed #12 — Agency Amplifier (Penguin Pulse) — READY
 - **Planted:** 2026-03-13
 - **Implementation:** WEAVER/agency_amplifier.py
-- **Thermal delay:** 7 days
-- **Earliest ready:** 2026-03-20
+- **Thermal delay:** ⏸ FROZEN (was 7 days)
+- **Ready:** NOW
 - **Current state:** Code planted. A = (V+F+C+U)/4. Four sub-dimensions of agency, non-compensatory.
 
 ---
@@ -71,4 +78,4 @@ Seeds #1–#4 (Stone tier) require constitutional amendments and 90-day cooling.
 
 ---
 
-_Last updated: 2026-03-13 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_
+_Last updated: 2026-03-13 · Thermal delay frozen by V-001 decision · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_

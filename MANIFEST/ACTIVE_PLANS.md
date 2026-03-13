@@ -57,10 +57,16 @@ Completed:
 3. **arXiv endorsement** — Still pending for cs.OH. Mohamed should check inbox for endorsement email.
 4. **PROJECT_TRACKER.md** — Updated with all completions.
 
-Pending from V-002 recommendation:
-- Plant Seed #11 (Proverb Stress Test Engine) — 14-day delay, compressor now supports it
-- Plant Seed #12 (Agency Amplifier) — 7-day delay, fastest to mature
+Completed (V-002, session 2026-03-13b):
+- **Thermal delay FROZEN** — V-001 decision: we are building, not running live. All seeds immediately available.
+- **Seed #12 (Agency Amplifier)** — INTEGRATED into Organism. A = (V+F+C+U)/4. Auto-measured in pipeline. API: agency_measure(), agency_report().
+- **Seed #11 (Proverb Stress Test)** — INTEGRATED into Organism. API: proverb_stress_register(), proverb_stress_test(), proverb_stress_flagged().
+- **Seed #10 (Dignity Drift Detector)** — was already integrated. Confirmed working.
+- **17 new tests** — all passing. Full suite: 604/605 (1 pre-existing failure in test_field.py).
+
+Pending:
 - EXP-001 data collection — 60 runs still needed
+- Next easiest: Plant Seed #9 (Negative Space Index) or Seed #7 (Personalized Parables)
 
 ---
 
