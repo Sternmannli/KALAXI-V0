@@ -1,6 +1,6 @@
 ---
 title: Seed 12 – Agency Amplifier
-status: latent
+status: growing
 ---
 
 # Agency Amplifier
@@ -20,5 +20,7 @@ Extend A from binary to graded; measure practical vs technical agency.
 
 **Implementation complexity:** Low‑medium. Requires predicate extension, measurement framework.
 
-**Steward note:**  
-[To be filled when decided]
+**Steward note:**
+Planted 2026-03-13. V-001 blanket approval. Implementation: WEAVER/agency_amplifier.py
+A = (V + F + C + U) / 4 — Visibility, Affordability, Controllability, Understandability.
+Non-compensatory: any zero collapses A. Thermal delay: 7 days. Ready: 2026-03-20.
