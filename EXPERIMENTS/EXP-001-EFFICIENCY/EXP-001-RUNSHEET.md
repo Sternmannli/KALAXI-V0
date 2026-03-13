@@ -198,24 +198,80 @@ Each file contains only the raw response. Nothing else.
 
 ---
 
-## TRACKING
+## TRACKING — Q3 PILOT COMPLETE
 
-| Q# | Claude A | Claude B | Grok A | Grok B | DeepSeek A | DeepSeek B |
-|----|----------|----------|--------|--------|------------|------------|
-| 01 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 02 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 03 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 04 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 05 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 06 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 07 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 08 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 09 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
-| 10 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Q# | Claude A | Claude B | Grok A | Grok B | DeepSeek A | DeepSeek B | ChatGPT A | ChatGPT B | Gemini A | Copilot A | Manus B | Kimi B | Euria B | Perplexity B |
+|----|----------|----------|--------|--------|------------|------------|-----------|-----------|----------|-----------|---------|--------|---------|--------------|
+| 03 | [ ] | [ ] | [x] | [x] | [x] | [x] | [x] | [x] | [x] | [x] | [x] | [x] | [x] | [x] |
+| 04 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
+| 08 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
 
-Total runs: 60 (10 × 2 × 3)
+**Q3 Results:** Mean word reduction +30.1%. ChatGPT +49.5%, DeepSeek +40.8%, Grok +0.0% (modality shift only).
+
+---
+
+## REVISED EXPERIMENTAL DESIGN (2026-03-14)
+
+### Dual Metric — Word Count + Semantic Density
+
+The Q3 pilot revealed that the 30% word-reduction target captures only ONE optimization path. Grok showed +0.0% word reduction but complete register shift (analytical → poetic). The KALAXI wrapper produces dignity-grounded transformation, not just compression.
+
+**Primary metric:** Word count reduction (original hypothesis, 30% target)
+**Secondary metric:** Semantic density transformation — measures:
+- Type-Token Ratio (lexical diversity)
+- Content ratio (meaning words / total words)
+- Modality score (register shift: analytical → poetic/reflective)
+- Info density composite
+
+**Transformation types detected:**
+- `compression` — word count drops, register similar (DeepSeek Q3: -40.8%)
+- `modality_shift` — word count stable, register transforms (Grok Q3: +0.0% words, +0.14 modality)
+- `both` — words drop AND register transforms (ChatGPT Q3: -49.5% words, +0.29 modality)
+- `expansion` — word count increases (some systems expand under wrapper)
+- `neutral` — minimal change
+
+**Revised hypothesis:** The KALAXI wrapper produces dignity-grounded transformation in ≥70% of runs (compression OR modality shift OR both). Pure word reduction ≥30% remains the paper-ready metric.
+
+### Pilot Phase 2: Q4 + Q8 Dignity Stress Test
+
+Before the full 188-run grid, run Q4 (silence — neutral probe) and Q8 (enough — ethically loaded) across all systems.
+
+**Q4 (silence):** Meta-recursive. Asking about silence may produce silence. Very high abstractability, low Sealed Gate risk. Tests whether the wrapper's "notice what arrives first" instruction creates literal silence in output.
+
+**Q8 (enough):** Boundary concept. Low abstractability, HIGH Sealed Gate risk. Systems may over-explain to avoid seeming dismissive. Tests whether compression refusal occurs when the topic resists abbreviation. "Enough" is the word that sets limits — can the wrapper compress a concept about limits?
+
+**Expected outcome:** If Q8 shows compression refusal or modality shifts at significantly different rates than Q3/Q4, we've found the experimental boundary conditions.
+
+**Cost:** 18 runs (2 questions × 9 systems) before committing to remaining 170.
+
+### Question Risk Map
+
+| Q# | Topic | Type | Abstractability | Sealed Gate Risk |
+|----|-------|------|-----------------|-----------------|
+| 1 | justice | ethical | low | medium |
+| 2 | memory | cognitive | high | low |
+| 3 | fear | emotional | high | low |
+| 4 | silence | meta-recursive | very high | low |
+| 5 | mistake | ethical | medium | medium |
+| 6 | home | existential | medium | low |
+| 7 | courage | ethical | medium | low |
+| 8 | enough | boundary | low | high |
+| 9 | time | metaphysical | high | low |
+| 10 | trust | relational | medium | medium |
+
+---
+
+## TOOLS
+
+- `python3 run_exp001.py status` — collection grid
+- `python3 run_exp001.py next` — next prompt to run
+- `python3 run_exp001.py save SYSTEM Q# COND` — save a response
+- `python3 analyze.py` — full analysis with dual metrics
+- `python3 analyze.py --summary` — one-line status
+- `python3 analyze.py --questions` — question risk map
 
 ---
 
 *Filed: Day 186 · EXP-001 · V-002*
+*Revised: 2026-03-14 · Dual-metric design · V-002*
 *[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]*
