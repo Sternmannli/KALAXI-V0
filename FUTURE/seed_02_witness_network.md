@@ -14,11 +14,11 @@ Distributed ledger of dignity events usable as legal/social evidence; Echo Stone
 Blockchain or similar distributed consensus for public verification.
 
 **Decision required:**  
-- [ ] Public or permissioned network?  
-- [ ] Legal jurisdiction recognition?  
-- [ ] Integration with existing legal systems?
+- [x] Public or permissioned network? → **Permissioned first, public after validation**
+- [x] Legal jurisdiction recognition? → **Swiss jurisdiction primary, explore UDHR alignment**
+- [x] Integration with existing legal systems? → **Yes, advisory integration**
 
 **Implementation complexity:** High. Requires cryptographic infrastructure, legal partnerships.
 
-**Steward note:**  
-[To be filled when decided]
+**Steward note:**
+V-001 blanket approval 2026-03-13. Permissioned network first (privacy-by-default). Swiss jurisdiction. Stone tier — 90-day thermal delay. Awaits EXP-001 validation before planting.

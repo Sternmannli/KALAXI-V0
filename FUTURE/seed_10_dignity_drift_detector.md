@@ -16,7 +16,7 @@ Temporal analysis of anomaly types; trend detection; drift alerts.
 **Decision required:**
 - [x] Automate trend analysis?
 - [x] Define drift threshold?
-- [ ] Alert steward or public report?
+- [x] Alert steward or public report? → **Steward alert first, public after review**
 
 **Implementation complexity:** Low‑medium. Requires time‑series analysis on existing data.
 
@@ -24,4 +24,4 @@ Temporal analysis of anomaly types; trend detection; drift alerts.
 Operational as `WEAVER/dignity_drift.py` (DignityDrift class). Tracks dD/dt rate of change, fires STABLE/DECLINING/CRITICAL alerts through WIRE, integrated into Organism pipeline since 2026-03-08. Drift thresholds defined: DECLINING at dD/dt < -0.05, CRITICAL at dD/dt < -0.15 or 3+ consecutive declines.
 
 **Steward note:**
-[To be filled when decided]
+V-001 blanket approval 2026-03-13. Steward alerted on DECLINING/CRITICAL. Public report after steward review only.

@@ -29,12 +29,12 @@ Twelve ratified seeds — structurally latent in the architecture. Each awaits a
 
 10. **Dignity Drift Detector** — Longitudinal analysis of dignity violation trends over time by domain. *(Already growing — operational as WEAVER/dignity_drift.py since 2026-03-08)*
 
-11. **Proverb Stress Test Engine** — Continuous re-application of proverbs to new anomalies; automatic flagging of failing wisdom.
+11. **Proverb Stress Test Engine** — Continuous re-application of proverbs to new anomalies; automatic flagging of failing wisdom. *(Growing — planted 2026-03-13, WEAVER/proverb_stress_test.py, ready 2026-03-27)*
 
-12. **Agency Amplifier** — Multidimensional agency measurement: visibility, affordability, accessibility, understandability of recourse.
+12. **Agency Amplifier** — Multidimensional agency measurement: visibility, affordability, accessibility, understandability of recourse. *(Growing — planted 2026-03-13, WEAVER/agency_amplifier.py, ready 2026-03-20)*
 
 ## Status
 
-11 seeds are **latent**, 1 is **already growing** (Dignity Drift Detector). Each requires a steward decision before implementation begins. Detailed proposals with decision checklists live in the [FUTURE/](https://github.com/Sternmannli/KALAXI-V0/tree/main/FUTURE) folder.
+9 seeds are **latent** (decisions approved, awaiting planting), 3 are **growing** (#10 Dignity Drift Detector, #11 Proverb Stress Test, #12 Agency Amplifier). All 36 decision boxes approved by V-001 (blanket approval 2026-03-13). Detailed proposals with decision checklists live in the [FUTURE/](https://github.com/Sternmannli/KALAXI-V0/tree/main/FUTURE) folder.
 
 *"A system that plants no seeds has already decided to die."*

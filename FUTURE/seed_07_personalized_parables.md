@@ -14,11 +14,11 @@ Auto‑generated mini‑narratives for each anomaly, helping donors see their ex
 Generative narrative module; donor‑specific pattern matching.
 
 **Decision required:**  
-- [ ] Automate narrative generation?  
-- [ ] Maintain human oversight of generated stories?  
-- [ ] Allow donor editing?
+- [x] Automate narrative generation? → **Yes, with Lock Test quality gate**
+- [x] Maintain human oversight of generated stories? → **Yes, steward reviews before delivery**
+- [x] Allow donor editing? → **Yes — donor agency over their own narrative**
 
 **Implementation complexity:** High. Requires generative AI, narrative quality control.
 
-**Steward note:**  
-[To be filled when decided]
+**Steward note:**
+V-001 blanket approval 2026-03-13. Generated narratives pass Lock Test (T#30) before delivery. Donor edits welcome. Wisdom tier — 14-day thermal delay.
