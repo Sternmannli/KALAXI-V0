@@ -1,6 +1,6 @@
 # KALAXI PROJECT TRACKER
 
-**Last updated:** 2026-03-12
+**Last updated:** 2026-03-13
 
 ---
 
@@ -11,8 +11,8 @@
 | **P0** | **EXP-001 data collection** | IN PROGRESS | GO received 2026-03-09. 60 runs needed. Analysis script ready: `EXPERIMENTS/EXP-001-EFFICIENCY/analyze.py`. |
 | **P0** | **kalam.ch Threshold integration** | DONE (2026-03-12) | Ninth Operator ceremony now on homepage. Phase 1: client-side witness mark. Phase 2: Cloudflare Worker + full pipeline. |
 | **P0** | **Update mirror.md** | DONE (2026-03-12) | Fresh entry added. Previous gap: 12 days. |
-| **P0** | **Run cross-anomaly compressor** on new clusters | Not started | `python3 WEAVER/proverb_compressor.py` |
-| **P0** | **Check arXiv endorsement status** | Not started | Pending for cs.OH. |
+| **P0** | **Run cross-anomaly compressor** on new clusters | DONE (2026-03-13) | 2 proverb candidates generated. Results in PROVERB_APPROVAL_QUEUE.md. |
+| **P0** | **Check arXiv endorsement status** | CHECKED (2026-03-13) | Still pending for cs.OH. Cannot query programmatically — Mohamed to check inbox. |
 
 ---
 
@@ -32,7 +32,7 @@
 |-----|------|--------|-------|
 | **P1** | **kalam.ch Phase 2** — hybrid mode + Cloudflare Worker | Not started | Switch Astro to hybrid output, add `@astrojs/cloudflare`, wire API to Python Ninth Operator. |
 | **P1** | **Public repo `kalam-framework`** | Exists at `Sternmannli/kalam-framework` | Assess each PR for public impact. Clean software engineering language only. |
-| **P1** | **Populate seed readiness calendar** | Not started | Create `MANIFEST/seed_calendar.md`. |
+| **P1** | **Populate seed readiness calendar** | DONE (2026-03-13) | Created `MANIFEST/seed_calendar.md`. 12 seeds tracked, Seed #10 GROWING. |
 | **P1** | **Process new anomalies from donors** | Not started | Check for [RETURN] signals. |
 | **P1** | **Update red feathers ledger** | Ongoing | Current count: 7. |
 
@@ -40,6 +40,10 @@
 
 ## RECENTLY COMPLETED (Since 2026-02-28)
 
+- 2026-03-13: Cross-anomaly compressor run — 2 proverb candidates generated (agency + legibility clusters)
+- 2026-03-13: Seed readiness calendar created (MANIFEST/seed_calendar.md)
+- 2026-03-13: Compressor upgraded to TF-IDF (offline, no model download needed) + domain-aware templates
+- 2026-03-13: ACTIVE_PLANS.md and PROJECT_TRACKER.md updated
 - 2026-03-12: Threshold input added to kalam.ch (Ninth Operator ceremony, client-side)
 - 2026-03-12: EXP-001 analysis pipeline created (`analyze.py`)
 - 2026-03-12: Mirror entry after 12-day gap
