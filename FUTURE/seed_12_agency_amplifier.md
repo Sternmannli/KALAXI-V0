@@ -14,9 +14,9 @@ Multidimensional agency measurement: visibility, affordability, accessibility, u
 Extend A from binary to graded; measure practical vs technical agency.
 
 **Decision required:**  
-- [ ] Expand agency measurement?  
-- [ ] Define sub‑dimensions?  
-- [ ] Weight in dignity predicate?
+- [x] Expand agency measurement? → **Yes, from binary to graded [0,1]**
+- [x] Define sub-dimensions? → **V (Visibility), F (Affordability), C (Controllability), U (Understandability)**
+- [x] Weight in dignity predicate? → **Equal weight, non-compensatory (any zero collapses A)**
 
 **Implementation complexity:** Low‑medium. Requires predicate extension, measurement framework.
 

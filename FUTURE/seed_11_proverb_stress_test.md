@@ -14,9 +14,9 @@ Continuous re‑application of proverbs to new anomalies; automatic flagging of 
 Re‑apply ratified proverbs; measure dignity outcomes; flag degradation.
 
 **Decision required:**  
-- [ ] Implement continuous testing?  
-- [ ] Define "failure" threshold?  
-- [ ] Auto‑compost or steward review?
+- [x] Implement continuous testing? → **Yes**
+- [x] Define "failure" threshold? → **Below 40% pass rate = FAILING**
+- [x] Auto-compost or steward review? → **Steward review only — never auto-compost**
 
 **Implementation complexity:** Medium. Requires feedback loop, outcome measurement.
 
