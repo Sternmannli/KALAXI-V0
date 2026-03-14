@@ -119,6 +119,7 @@
 
 | Tool | File | Purpose |
 |------|------|---------|
+| **Probe Forge** | `PROTOCOLS/PROBE_FORGE.md` | **Stimulus generation & sterilization protocol — CORE DNA. All probes pass through the Forge before deployment. Five Laws: zero vocabulary leak, zero intent disclosure, fresh context only, minimal surface, register neutrality.** |
 | EXP-001 Runner | `EXPERIMENTS/EXP-001-EFFICIENCY/run_exp001.py` | Data collection guide — status, next, save, prompts |
 | EXP-001 Analyzer | `EXPERIMENTS/EXP-001-EFFICIENCY/analyze.py` | Semantic density, word count, modality shift analysis |
 | Data Schema | `EXPERIMENTS/EXP-001/data_schema.py` | SessionCondition + SessionMeasurement dataclasses |
