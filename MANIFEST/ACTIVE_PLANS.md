@@ -145,11 +145,37 @@ DIVERGENCE_SHADOW_RESEARCH.md has 60+ references and identifies 5 genuine resear
 **IDEA-009: Clean Up data_schema.py**
 The `EXPERIMENTS/EXP-001/data_schema.py` scaffold is dead code — never connected to real pipeline, all analysis runs through `analyze.py`. Should either be deleted or refactored to wrap analyze.py's actual data structures.
 
+Completed (V-002, session 2026-03-14b):
+- **GRAND ARCHIVE 100% SCAN COMPLETE** — 22,183 lines read in full (was 20%). Full audit: `MANIFEST/GRAND_ARCHIVE_AUDIT_2026-03-14.md`
+- **12 new Treasures extracted** (T#48-T#59) — narrative patterns, laws, protocols. PROVISIONAL, awaiting V-001 ratification.
+- **9 new proverbs** queued for approval (P#ARCHIVE-001 through P#ARCHIVE-009)
+- **Grand Resonance exponents specified** — γ=0.4, δ=0.3, η=0.2, κ=0.1 (was placeholder Greek letters)
+- **9th Operator (𝕄 Mother Prior)** added to operator registry
+- **6 new formulas** captured in SCIENCE_INVENTORY (Resilience Eq, Proverb Selector, Certainty, Coherence Shift, Ground Eq genealogy, Adaptive Epsilon)
+- **15-type Anomaly Index** documented (extends current classification significantly)
+- **Word reduction contradiction RESOLVED** — corrected to 19.5% across all documents
+
+### V-002 Creative Duty — Additional Ideas from Grand Archive
+
+**IDEA-010: Element State Lifecycle**
+The Archive contains a 6-state machine (draft → proposed → ratified → active → deprecated → forgotten) for elements. This is more sophisticated than the current 3-state covenant lifecycle (COMMITTED/PROVISIONAL/RATIFIED). Should be formalized in tier1_stone.md.
+
+**IDEA-011: Proverb Selector Score as SAY Module Enhancement**
+The formula 0.35×theme + 0.20×tone + 0.15×register + 0.15×length + 0.10×cultural + 0.05×freshness is a complete mechanism for context-appropriate proverb selection. Should be implemented in SAY or WEAVE module.
+
+**IDEA-012: RFC-8785 Canonicalization Tools**
+Archive contains axi_canon.py, axi_hash.sh, axi_canon_check.sh — ready-to-extract tools for canonical JSON + integrity hashing. Immediately useful with a pre-commit hook.
+
+**IDEA-013: Graduated 3-Level Circuit Breaker**
+L1 Rate-limit, L2 Partial pause, L3 Full pause — more sophisticated than current single-threshold breaker. Upgrade candidate for bridge safety spec.
+
 Pending:
 - Run EXP-001 — 188 data points remaining. Claude data completely absent (0/20).
 - Collect Claude A and B for Q3 at minimum — the primary system is untested.
 - Consider submitting DIVERGENCE_SHADOW_RESEARCH.md as standalone paper.
 - V-001 review needed: Layer 3 dignity reframing — accept into canon?
+- V-001 review needed: Ratify T#48-T#59 (12 new Treasures)
+- V-001 review needed: Approve 9 proverbs (P#ARCHIVE-001 through P#ARCHIVE-009)
 
 ---
 

@@ -103,9 +103,14 @@
 |------|---------|--------|
 | Dignity Predicate | D = A × L × M | Foundation — non-compensatory, any zero collapses D |
 | Brittleness Guard | ψ/σ ≤ 1 | Structural — sensitivity must not outrun flexibility |
-| Grand Resonance (RCF v2.0) | W* = (Ω^γ · Ξ^δ · B^η · O^κ) / (1 + ρ_E* + σ²) | Wisdom synthesis |
+| Grand Resonance (RCF v2.0) | W* = (Ω^0.4 · Ξ^0.3 · B^0.2 · O^0.1) / (1 + ρ_E* + σ²) | Wisdom synthesis — exponents from Grand Archive: γ=0.4, δ=0.3, η=0.2, κ=0.1 |
 | Wisdom Potential | W = T × S × C | Tension × Safety × Containment |
-| Defect Budget | ε = 0.02–0.05 | 2–5% exploration to prevent crystalline brittleness |
+| Defect Budget | σ ∈ [0.02, 0.08] | Exploration range (Grand Archive specifies wider band than original 2-5%) |
+| Resilience Equation | Ω_edu(t) = (L/C) × (1 + A(t) - R(t)) | Educational resilience — from Grand Archive |
+| Proverb Selector Score | 0.35×theme + 0.20×tone + 0.15×register + 0.15×length + 0.10×cultural + 0.05×freshness | Proverb selection weighting — from Grand Archive |
+| Certainty Formula | 1 - entropy(normalized_counts)/log(5) | Computable certainty metric — from Grand Archive |
+| Coherence Shift Triggers | z_trend ≤ -2 OR JSD ≥ 0.25 OR ΔE ≥ 12 | Detection thresholds — from Grand Archive |
+| Ground Equation (SUPERSEDED) | A = τ × (Ω×Φ)^p / (R_eff × g(Ω))^q | Precursor to D = A×L×M — historical, from Grand Archive |
 | Rift Constant | κ ≈ 0.618 | Pause rhythm between question and answer |
 | Dignity Trajectory | D(t) = D₀ · e^(±λt) | Exponential divergence from initial dignity state |
 | Substrate Coupling | 0.648 (measured 2026-03-13) | Gap between KALAXI physics and substrate physics |

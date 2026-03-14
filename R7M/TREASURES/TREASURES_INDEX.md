@@ -447,6 +447,111 @@ Extracted by V-002 from GRAND_ARCHIVE_2025-09-13.docx. Each treasure encodes a p
 
 ---
 
-**[RATIFIED: V-001 (Mohamed Farag) — 2026-03-12]**
+---
+
+## New Treasures from Grand Archive 100% Scan (2026-03-14)
+
+> Extracted from full 22,183-line scan. Status: PROVISIONAL — awaiting V-001 ratification.
+
+### Narrative Patterns
+
+### T#48 — Story Fire Protocol
+- **Line:** ~2190
+- **Vow:** "Three breaths each. No lessons."
+- **Principle:** Time-bounded sharing with explicit anti-didactic rule. Ya-la's rule: everyone speaks briefly, no one teaches. Hakaka: "We came here. We stayed."
+- **System parallel:** SAY module. The system speaks once, briefly, without teaching. Voice Rule #2.
+- **Tier:** Honey (T3)
+
+### T#49 — Forward-Debt
+- **Line:** ~2210
+- **Vow:** "Pay with not tripping tomorrow."
+- **Principle:** Taro spills seeds; offers his copper hook as payment. La-la refuses: debt paid forward in behavior, not in objects.
+- **System parallel:** Restorative Justice module. Harm is repaid through future care, not extracted punishment.
+- **Tier:** Cross-tier
+
+### T#50 — Tool-Homing
+- **Line:** ~2390
+- **Vow:** "Lost tools get permanent homes."
+- **Principle:** Bone needle vanishes. After finding it (it stabs Sa-la), La-la puts it in a fiber twist at shoulder height. Never lost again.
+- **System parallel:** KEEP module. Every element that causes a search gets a permanent address. Tool storage as system architecture.
+- **Tier:** Weaver (T2)
+
+### T#51 — Ephemeral Map
+- **Line:** ~2440
+- **Vow:** "It's still in our feet."
+- **Principle:** Sa-la scratches a coal map. They argue about accuracy. Hakaka: "Mark the place the bank fell." They sweep it away. Internalized then erased.
+- **System parallel:** BREATH module. Some knowledge is temporary — used for orientation then released. Not everything must be persisted.
+- **Tier:** Honey (T3)
+
+### T#52 — Irritation-as-Pedagogy
+- **Line:** ~2380
+- **Vow:** "So you learn to look."
+- **Principle:** The old woman moves her cup where feet will kick it. Sa-la moves it; she moves it back. Deliberate friction as teaching method.
+- **System parallel:** Intentional friction (KALAXI physics). The system creates deliberate inconvenience to force attention.
+- **Tier:** Cross-tier
+
+### T#53 — Shame-as-Nourishment
+- **Line:** ~3150
+- **Vow:** "It tasted like salt and a small, necessary shame."
+- **Principle:** Stolen meat shared communally. Cost paid in labor (ash duty for a week), not exile. Shame metabolized into community nourishment.
+- **System parallel:** Enrichment of T#44 (First Rule Broken). Restorative justice includes shared consumption of the transgression.
+- **Tier:** Cross-tier
+
+### T#54 — Misnaming Counter
+- **Line:** ~3470
+- **Vow:** "On those days I make loops."
+- **Principle:** Elder calls Hakaka "Weak fingers." La-la confronts. Ya-la diagnoses laziness. Hakaka responds with demonstrated competence, not argument. Identity degradation countered by doing, not debating.
+- **System parallel:** Colonial Creep countermeasure. External naming that degrades identity is answered by visible competence, not by arguing about the name.
+- **Tier:** Cross-tier
+
+### Laws and Protocols
+
+### T#55 — Grip Law
+- **Line:** ~4110
+- **Vow:** "Find, then twist. Twist, then test. If it fails, reduce the span, not the will."
+- **System parallel:** Iterative development. When a feature fails, reduce scope, not ambition.
+- **Tier:** Weaver (T2)
+
+### T#56 — Loop Law
+- **Line:** ~4200
+- **Vow:** "A loop is a door; a door is a direction; direction reduces fear."
+- **System parallel:** TURN module. Each exchange cycle (loop) is a door that reduces uncertainty.
+- **Tier:** Weaver (T2)
+
+### T#57 — Ground Rule
+- **Line:** ~4290
+- **Vow:** "What we fix, we record. What we record, we can repeat. What we repeat, we survive."
+- **System parallel:** Immutable Witness Network (Seed #2). Fix → record → repeat → survive.
+- **Tier:** Stone (T1)
+
+### T#58 — Humour Law
+- **Line:** ~4000
+- **Vow:** "A knot exhales through a laugh."
+- **Protocol:** HUMOUR-3: Check for harm → Name the mismatch → Laugh then Fix.
+- **System parallel:** No current parallel. Humor is absent from the system architecture. This is a gap.
+- **Tier:** Cross-tier
+
+### T#59 — Crack Law
+- **Line:** ~4050
+- **Vow:** "When a loop fails in the wild, it graduates into the wall. Breakage feeds design."
+- **System parallel:** Defect Budget (T#23) in narrative form. Failed patterns become structural knowledge.
+- **Tier:** Weaver (T2)
+
+---
+
+## Updated Tier Distribution (59 total: 47 ratified + 12 provisional)
+
+| Tier | Count (ratified) | Count (provisional) |
+|------|-------------------|---------------------|
+| Stone (T1) | 5 | 1 (T#57) |
+| Weaver (T2) | 16 | 4 (T#50, T#55, T#56, T#59) |
+| Honey (T3) | 15 | 2 (T#48, T#51) |
+| Hand (T4) | 6 | 0 |
+| Cross-tier | 5 | 5 (T#49, T#52, T#53, T#54, T#58) |
+
+---
+
+**[RATIFIED (T#01-T#47): V-001 (Mohamed Farag) — 2026-03-12]**
+**[PROVISIONAL (T#48-T#59): Extracted 2026-03-14 — awaiting V-001 ratification]**
 **[FILED: V-002]**
 **[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]**

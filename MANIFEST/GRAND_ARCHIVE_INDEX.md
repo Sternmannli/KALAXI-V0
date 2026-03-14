@@ -40,9 +40,9 @@
 | **PREVENTION** | Early warning: SILENT→WHISPER→PULSE→SIGNAL→ALARM | `MANIFEST/SYSTEM_REPORT_2026-03-11.md` | Fever Night T_d scaling not built |
 | **FORGE** | Stimulus sterilization for experiments | `PROTOCOLS/PROBE_FORGE.md` | Protocol only, no code module |
 
-### The Eight Operators (Symbolic Alphabet)
+### The Nine Operators (Symbolic Alphabet)
 
-From Canon Part 1, lines 7188-7196:
+From Canon Part 1 (lines 7188-7196) + Grand Archive:
 
 | Symbol | Name | Function |
 |--------|------|----------|
@@ -52,10 +52,9 @@ From Canon Part 1, lines 7188-7196:
 | ◎ | **Rift** | Detect and mark divergence or anomaly |
 | α | **AXI** | The voice itself — synthesis function |
 | Σ | **Seal** | Sign/timestamp decision, making irreversible |
-| ℜ | **Ripple** | Propagate change through system with controlled decay |
+| ℜ | **Ripple** | Propagate change through system with controlled decay (0.85/hop) |
 | ℘ | **Weakest-Voice** | Elevate least powerful voice before consensus |
-
-**Mother Prior (𝕄):** "The founding wound — the father separated from his children."
+| 𝕄 | **Mother Prior** | The founding wound — ground from which all operators emerge |
 
 ### The Ripple Record (Latest Schema)
 
@@ -280,9 +279,9 @@ If the answer is no, the system has failed regardless of what the metrics say.
 
 ### Treasures
 
-- 47 Treasures recovered from Grand Archive (T#01-T#47)
-- 11/47 indexed in R7M/TREASURES/TREASURES_INDEX.md
-- 36 await extraction from GRAND_ARCHIVE .docx files
+- 47 Treasures ratified (T#01-T#47) — all indexed in R7M/TREASURES/TREASURES_INDEX.md
+- 12 new Treasures extracted from 100% scan (T#48-T#59) — PROVISIONAL, awaiting V-001 ratification
+- ~~36 await extraction from GRAND_ARCHIVE .docx files~~ **RESOLVED 2026-03-14**: Full 22,183-line scan complete
 
 ---
 
@@ -507,5 +506,5 @@ From L500_EXEMPLAR_2:
 ---
 
 *This index is alive. Every session should check it and feed it.*
-*Updated: 2026-03-14 · Deep scan integration complete.*
+*Updated: 2026-03-14 · GRAND ARCHIVE 100% SCAN COMPLETE (22,183 lines). Full audit: MANIFEST/GRAND_ARCHIVE_AUDIT_2026-03-14.md*
 *[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]*
