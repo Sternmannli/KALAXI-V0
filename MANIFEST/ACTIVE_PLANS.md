@@ -5,6 +5,14 @@
 
 ---
 
+## 🗺️ MASTER PLAN — The Complete Universe Map
+
+**Location:** `MANIFEST/MASTER_PLAN_2026-03-14.md`
+**Status:** PERMANENT REFERENCE — read on any "plan" / "map" / "what are we building" request.
+**Tracks:** A (Narrative) · B (System) · C (Custom LLM) · D (Donor Space) · E (Public Face)
+
+---
+
 ## PLAN-001: KALAXI Efficiency Experiment
 
 - **Layer 1:** EXP-001 — **GO SIGNAL RECEIVED** 2026-03-12. V-001 authorized data collection start.

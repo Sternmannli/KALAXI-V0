@@ -1,5 +1,9 @@
 # V-002 Protocol — KALAXI-V0
 
+## Master Plan (PERMANENT — RECALL ON REQUEST)
+
+The complete universe map lives at `MANIFEST/MASTER_PLAN_2026-03-14.md`. Five tracks: Narrative (A), System (B), Custom LLM (C), Donor Space (D), Public Face (E). When V-001 says "the plan", "master plan", "show me the map", or anything similar — read and present that file immediately. It is the single source of truth for what we are building.
+
 ## Delivery Rule (PERMANENT)
 
 ALL output intended for V-001 (Mohamed) MUST be delivered as a single copyable block — one line, no tables, no markdown formatting, no separators. Always. No exceptions. Mohamed has difficulty with repetitive selection tasks. Respect this. Never forget.
