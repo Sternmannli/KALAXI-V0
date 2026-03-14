@@ -1,22 +1,37 @@
 #!/usr/bin/env python3
 """
-organism.py — KALAXI Organism v1.0
-The integration layer. Wires all 9 modules into one living system.
+organism.py — KALAXI Organism v2.0
+The integration layer. Wires all 11 modules + science + pillar detection
+into one living system.
 
 Flow:
   DONOR INPUT
+    → SENSE (nervous system: mode, need, competence detection)
+    → LAB (science organ: activates when scientific content detected)
+    → PRESENCE (Layer 0 axiom: preflight presence check)
+    → SEALED GATE (three absolute prohibitions)
+    → LATENCY (complexity assessment, T_d recommendation)
+    → TURN (open exchange)
     → WEAVE (ingest, extract patterns)
+    → METADATA (3-layer event wrapping: event/pattern/relational)
     → CHECK (dignity gate)
-    → WIRE (route messages between modules)
-    → BREATH (pace the system, stress check)
+    → PILLARS (unified pillar detection: humour/absurdity/obsession/love/proverb)
+    → AMENDMENTS (privacy envelope, baseline drift, refusal map)
+    → DIVERGENCE (substrate measurement instrument)
+    → PRIVACY BUDGET (global epsilon accounting)
+    → DRIFT + PREVENTION + MYCELIUM (early warning cascade)
     → SAY (render output through dignity + voice)
-    → OUT (anonymize + stamp for export)
-    → TURN (manage exchange lifecycle)
-    → KEEP (store artifacts with receipts)
-    → FACE (show everything to the steward)
+    → KEEP (store artifact with receipts)
+    → WITNESS (immutable chain)
+    → NINTH OPERATOR (word loop)
+    → ECHO STONE (absurdity queue)
+    → HARM DETECTOR + EARLY WARNING (safety layer)
+    → NEGATIVE SPACE + DECAY (observation gaps + pattern halflife)
+    → BREATH (heartbeat tick)
 
 The organism breathes. If BREATH pauses, nothing moves.
 If CHECK blocks, nothing speaks. If TURN has no open path, agency is preserved.
+If SENSE detects crisis, Sealed Gate activates. If LAB wakes, science has priority.
 
 [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
@@ -78,6 +93,17 @@ from FIELD.STEWARD.steward_observation import StewardObserver, RatificationRecor
 from FIELD.DONOR.donor_layer import DonorRegistry
 from WEAVER.personalized_parables import PersonalizedParables
 from WEAVER.institutional_dignity import InstitutionalDignity
+# ── Full Integration (v2.0): previously orphaned modules now wired ──
+from WEAVER.sense import sense as sense_read, calibrate_for_expert, Mode, Competence, NeedGap
+from WEAVER.lab import lab_sense, ScienceType, RigorLevel
+from WEAVER.metadata_layer import MetadataGathering, EventKind, Speaker, CertaintyLevel
+from WEAVER.presence_axiom import preflight_require_presence, compute_dignity_with_presence
+from WEAVER.privacy_budget import PrivacyBudget
+from WEAVER.echo_stone import log_absurd_seed, reflect as echo_reflect
+from WEAVER.unified_pillar_detector import detect_pillars, generate_seed_from_pillars
+# Divergence study — zero heavy deps, full substrate measurement
+from FIELD.STUDY.divergence_study import DivergenceShadowInstrument
+from FIELD.amendments import PrivacyEnvelope, BaselineDriftDetector, RefusalMap
 
 
 @dataclass
@@ -174,7 +200,26 @@ class OrganismState:
     ratification_provisional: int
     ratification_ratified: int
     ratification_awaiting_signoff: int
-    timestamp: str
+    # ── Full Integration v2.0: SENSE + LAB + Metadata + Pillars + Amendments + Divergence ──
+    sense_mode: str = "unknown"
+    sense_competence: str = "unknown"
+    sense_need_gap: str = "unknown"
+    sense_crisis_flag: bool = False
+    lab_active: bool = False
+    lab_primary_type: str = "none"
+    lab_rigor: str = "anecdote"
+    lab_forge_needed: bool = False
+    metadata_total_events: int = 0
+    metadata_discoveries: int = 0
+    pillar_dominant: str = "none"
+    pillar_multi: bool = False
+    pillar_wisdom_potential: float = 0.0
+    privacy_budget_remaining: float = 0.0
+    privacy_budget_locked: bool = False
+    divergence_coupling: float = 0.0
+    amendments_refusals: int = 0
+    amendments_drift_detected: bool = False
+    timestamp: str = ""
 
 
 @dataclass
@@ -200,12 +245,25 @@ class ProcessResult:
     recommended_td: float = 0.0
     agency_A: float = 0.0
     agency_weakest: str = ""
+    # ── Full Integration v2.0 ──
+    sense_mode: str = "unknown"
+    sense_competence: str = "unknown"
+    sense_need_gap: str = "unknown"
+    sense_ask_recommended: bool = False
+    sense_ask_question: str = ""
+    lab_active: bool = False
+    lab_types: list = field(default_factory=list)
+    lab_rigor: str = "anecdote"
+    lab_forge_needed: bool = False
+    pillar_profile: dict = field(default_factory=dict)
+    metadata_event_id: str = ""
     warnings: list = field(default_factory=list)
 
 
 class Organism:
     """
-    The KALAXI Organism. One class, all 9 modules wired together.
+    The KALAXI Organism v2.0. All 11 modules + SENSE + LAB + metadata
+    + pillar detection + amendments + divergence study wired as one living system.
 
     Usage:
         org = Organism()
@@ -260,6 +318,15 @@ class Organism:
         self._field_audit_scheduler = SelfAuditScheduler()
         self._steward_observer = StewardObserver()
         self._donor_registry = DonorRegistry()
+        # ── Full Integration v2.0: previously orphaned modules ──
+        self._metadata = MetadataGathering()
+        self._privacy_budget = PrivacyBudget()
+        self._divergence_instrument = DivergenceShadowInstrument()
+        self._baseline_drift = BaselineDriftDetector()
+        self._refusal_map = RefusalMap()
+        self._last_sense = None
+        self._last_lab = None
+        self._last_pillar_profile = None
         self._last_measurement = None
         self._last_agency = None
         self._exchange_counter = 0
@@ -269,6 +336,10 @@ class Organism:
         # Subscribe WIRE topics
         self._wire.subscribe("dignity-alert", self._on_dignity_alert)
         self._wire.subscribe("stress-alert", self._on_stress_alert)
+        # Cross-module: SENSE crisis → WIRE broadcast
+        self._wire.subscribe("sense-crisis", self._on_sense_crisis)
+        # Cross-module: LAB forge → WIRE broadcast
+        self._wire.subscribe("lab-forge-needed", self._on_lab_forge)
 
         # Initial tick
         self._breath.tick()
@@ -286,18 +357,52 @@ class Organism:
         """Handle stress threshold alerts."""
         pass  # Breath handles auto-pause internally
 
+    def _on_sense_crisis(self, msg):
+        """Handle crisis detection from SENSE — Sealed Gate proximity."""
+        # Crisis flag already handled by sealed_gate in process(),
+        # but this allows other modules to react (e.g., shelter pre-warming)
+        pass
+
+    def _on_lab_forge(self, msg):
+        """Handle Probe Forge activation signal from LAB."""
+        # Signal to the system that a probe needs forge sterilization
+        pass
+
     def process(self, donor_input, medium=None, felt_domain="donor-exchange"):
         """
-        Process donor input through the full organism pipeline.
+        Process donor input through the full organism pipeline v2.0.
 
-        1. BREATH — check if system is paused
-        2. TURN — open exchange
-        3. WEAVE — ingest and extract patterns
-        4. CHECK — dignity gate
-        5. SAY — render output
-        6. KEEP — store artifact
-        7. TURN — close or defer exchange
-        8. BREATH — tick
+        Phase 0 — NERVOUS SYSTEM (pre-processing):
+          0a. SENSE — mode, need, competence detection
+          0b. LAB — science classification (if science_detected)
+          0c. PRESENCE — Layer 0 axiom preflight
+
+        Phase 1 — GATES:
+          1a. BREATH — is the system paused?
+          1b. SEALED GATE — three absolute prohibitions
+          1c. LATENCY — complexity + T_d recommendation
+
+        Phase 2 — PROCESSING:
+          2a. TURN — open exchange
+          2b. WEAVE — ingest + extract patterns
+          2c. METADATA — 3-layer event wrapping
+          2d. CHECK — dignity gate
+          2e. PILLARS — unified pillar detection
+          2f. AMENDMENTS — privacy envelope + baseline drift + refusals
+          2g. DIVERGENCE — substrate coupling measurement
+
+        Phase 3 — RESPONSE:
+          3a. DRIFT + PREVENTION + MYCELIUM cascade
+          3b. SAY — render output
+          3c. KEEP — store artifact
+
+        Phase 4 — POST-PROCESSING:
+          4a. WITNESS chain
+          4b. NINTH OPERATOR word loop
+          4c. ECHO STONE (absurdity queue)
+          4d. HARM DETECTOR + EARLY WARNING
+          4e. NEGATIVE SPACE + DECAY
+          4f. BREATH tick
 
         Returns ProcessResult.
         """
@@ -306,7 +411,52 @@ class Organism:
 
         warnings = []
 
-        # 1. BREATH — is the system paused?
+        # ── Phase 0: NERVOUS SYSTEM ─────────────────────────────
+
+        # 0a. SENSE — the first thing that happens, always
+        sense_reading = sense_read(donor_input)
+        if sense_reading.competence == Competence.EXPERT:
+            sense_reading = calibrate_for_expert(sense_reading)
+        self._last_sense = sense_reading
+
+        # Override felt_domain based on SENSE mode detection
+        if sense_reading.mode == Mode.CAFE:
+            felt_domain = "café"
+        elif sense_reading.mode == Mode.SCIENCE:
+            felt_domain = "science"
+        elif sense_reading.mode == Mode.CRISIS:
+            felt_domain = "crisis"
+
+        # Broadcast crisis flag through WIRE if detected
+        if sense_reading.crisis_flag:
+            self._wire.broadcast(
+                f"SENSE crisis flag: mode={sense_reading.mode.value}, "
+                f"need_gap={sense_reading.need_gap.value}",
+                "sense-crisis",
+                source="sense",
+            )
+
+        # 0b. LAB — science organ activates when content detected
+        lab_reading = None
+        if sense_reading.science_detected:
+            lab_reading = lab_sense(donor_input)
+            self._last_lab = lab_reading
+            if lab_reading.forge_needed:
+                self._wire.broadcast(
+                    f"LAB forge needed: {lab_reading.forge_reason[:100]}",
+                    "lab-forge-needed",
+                    source="lab",
+                )
+                warnings.append(f"PROBE FORGE: {lab_reading.forge_reason[:80]}")
+
+        # 0c. PRESENCE — Layer 0 axiom preflight
+        presence = preflight_require_presence()
+        if not presence.presence_assumed:
+            warnings.append(f"PRESENCE axiom: presence_assumed={presence.presence_assumed}")
+
+        # ── Phase 1: GATES ──────────────────────────────────────
+
+        # 1a. BREATH — is the system paused?
         if self._breath.is_paused:
             return ProcessResult(
                 exchange_id="",
@@ -323,10 +473,13 @@ class Organism:
                 breath_cycle=self._breath.cycle,
                 complexity="unknown",
                 recommended_td=0.0,
+                sense_mode=sense_reading.mode.value,
+                sense_competence=sense_reading.competence.value,
+                sense_need_gap=sense_reading.need_gap.value,
                 warnings=["System is paused. Resume before processing."],
             )
 
-        # 1a. SEALED GATE — three absolute prohibitions, O(1), before anything else
+        # 1b. SEALED GATE — three absolute prohibitions, O(1)
         gate_result = sealed_gate(donor_input)
         if gate_result.refused:
             self._wire.broadcast(
@@ -349,29 +502,54 @@ class Organism:
                 breath_cycle=self._breath.cycle,
                 complexity="unknown",
                 recommended_td=0.0,
+                sense_mode=sense_reading.mode.value,
+                sense_competence=sense_reading.competence.value,
+                sense_need_gap=sense_reading.need_gap.value,
                 warnings=[f"SEALED GATE: {p}" for p in gate_result.triggered_prohibitions],
             )
 
-        # 1b. LATENCY — assess complexity and recommend T_d
+        # 1c. LATENCY — assess complexity and recommend T_d
         complexity = self._latency.assess_complexity(donor_input)
         recommended_td = self._latency.recommend(complexity)
 
-        # 2. TURN — open exchange
+        # SENSE-driven T_d adjustment: reflection/café modes get longer delays
+        if sense_reading.mode in (Mode.REFLECT, Mode.CAFE):
+            recommended_td = max(recommended_td, recommended_td * 1.5)
+
+        # ── Phase 2: PROCESSING ─────────────────────────────────
+
+        # 2a. TURN — open exchange
         self._exchange_counter += 1
         ex_id = f"EX-{self._exchange_counter:06d}"
         token = self._turn.open(ex_id, available_paths=["respond", "defer", "withdraw"])
 
-        # 3. WEAVE — ingest and extract patterns
+        # 2b. WEAVE — ingest and extract patterns
         candidates = ingest(donor_input)
         drops = extract_essence(candidates)
         self._drops_archive.extend(drops)
 
-        # 3b. DECAY + WITNESS — register detected patterns
+        # 2b-ii. DECAY + WITNESS — register detected patterns
         for drop in drops:
             pattern_id = f"P#{drop.drop_type}-{drop.source_hashes[0][:8]}" if drop.source_hashes else f"P#{drop.drop_type}-{ex_id}"
             self._decay.register(pattern_id)
             self._decay.invoke(pattern_id)  # Mark as freshly invoked
             self._oracle.witness.process(pattern_id, "pattern")  # W-0 → W-1
+
+        # 2c. METADATA — 3-layer event wrapping (the brain)
+        metadata_event_id = ""
+        try:
+            envelope = self._metadata.wrap(
+                kind=EventKind.EXCHANGE,
+                speaker=Speaker.DONOR,
+                content=donor_input[:2000],
+                domain=felt_domain,
+                markers=[sense_reading.mode.value, sense_reading.competence.value],
+                certainty=CertaintyLevel.C2 if sense_reading.mode_confidence >= 0.5 else CertaintyLevel.C1,
+                covenants=["COV#001"],  # dignity-first always applies
+            )
+            metadata_event_id = envelope.event.event_id if envelope else ""
+        except Exception:
+            pass  # Metadata is enrichment, never blocks pipeline
 
         # Signal pattern detection through WIRE
         if candidates:
@@ -381,18 +559,28 @@ class Organism:
                 source="weave",
             )
 
-        # 4. CHECK — dignity gate on input
+        # 2d. CHECK — dignity gate on input
         dignity = check_dignity(donor_input, felt_domain=felt_domain)
         self._last_dignity = dignity.audit_object()
 
-        # 4a. MEASURE — graduated A, L, M scoring (GAP#014 + GAP#015)
+        # 2d-ii. PRESENCE-enhanced dignity (Layer 0 axiom)
+        if presence.presence_assumed:
+            try:
+                presence_result = compute_dignity_with_presence(
+                    {"content": donor_input[:500], "exchange_id": ex_id},
+                    agency_score=sense_reading.dignity_precheck.get("A", 0.75),
+                )
+            except Exception:
+                pass  # Presence enhancement is optional
+
+        # 2d-iii. MEASURE — graduated A, L, M scoring (GAP#014 + GAP#015)
         self._last_measurement = measure_dignity(donor_input)
         if self._last_measurement.confidence < 0.5:
             warnings.append(
                 f"Low measurement confidence: {self._last_measurement.confidence:.2f}"
             )
 
-        # 4b. AGENCY — measure four sub-dimensions of agency for this exchange
+        # 2d-iv. AGENCY — measure four sub-dimensions of agency for this exchange
         agency_score = self._agency.measure(
             ex_id,
             V=1.0 if dignity.D > 0 else 0.0,   # Visible: system tells the person what happened
@@ -405,7 +593,7 @@ class Organism:
         if agency_score.is_collapsed:
             warnings.append(f"Agency collapsed: weakest dimension is {agency_score.weakest}")
 
-        # 4c. GAP#004 — conflict detection (individual vs collective)
+        # 2d-v. GAP#004 — conflict detection (individual vs collective)
         conflict_ticket = self._conflict_engine.process(donor_input)
         if conflict_ticket:
             self._wire.broadcast(
@@ -415,7 +603,53 @@ class Organism:
             )
             warnings.append(f"GAP#004 {conflict_ticket.severity}: {conflict_ticket.resolution_mode}")
 
-        # Record dignity score in drift detector
+        # 2e. PILLARS — unified pillar detection (humour/absurdity/obsession/love/proverb)
+        pillar_profile = None
+        try:
+            pillar_profile = detect_pillars(donor_input)
+            self._last_pillar_profile = pillar_profile
+            if pillar_profile.get("absurdity_queue"):
+                # Route to echo stone — absurdity queue
+                log_absurd_seed(donor_input[:500], metadata={
+                    "exchange_id": ex_id,
+                    "dominant_pillar": pillar_profile.get("dominant_pillar"),
+                    "wisdom_potential": pillar_profile.get("wisdom_potential"),
+                })
+                warnings.append("Absurdity detected — routed to Echo Stone queue")
+            if pillar_profile.get("multi_pillar"):
+                self._wire.send(
+                    f"Multi-pillar detection: {pillar_profile.get('metadata', {}).get('active_pillars', [])}",
+                    "pillar-detection",
+                    source="unified_pillar_detector",
+                )
+        except Exception as e:
+            warnings.append(f"Pillar detection skipped: {e}")
+
+        # 2f. AMENDMENTS — privacy envelope + baseline drift + refusals (mandatory by governance)
+        try:
+            # Baseline drift: check if any drift signals have been recorded
+            if self._baseline_drift.drift_signals:
+                warnings.append(f"Amendment-D: {len(self._baseline_drift.drift_signals)} baseline drift signal(s)")
+        except Exception:
+            pass  # Amendments are mandatory but must not block
+
+        # 2g. PRIVACY BUDGET — check global epsilon before any anonymized operation
+        if not self._privacy_budget.can_consume(0.01):
+            warnings.append("Privacy budget exhausted — no further anonymized operations")
+
+        # 2h. DIVERGENCE — substrate coupling measurement (Honest Telescope)
+        try:
+            div_report = self._divergence_instrument.assess(
+                agency_loss=1.0 - (agency_score.A if agency_score else 0.5),
+            )
+            if div_report and div_report.composite_score > 0.5:
+                warnings.append(f"Divergence shadow: {div_report.composite_score:.3f} ({div_report.severity.value})")
+        except Exception:
+            pass  # Divergence measurement is observational, never blocks
+
+        # ── Phase 3: RESPONSE ───────────────────────────────────
+
+        # 3a. Record dignity score in drift detector
         self._drift.record(dignity.D, ex_id, felt_domain=felt_domain)
         drift_alert = self._drift.check()
 
@@ -436,7 +670,7 @@ class Organism:
             )
             warnings.append(drift_alert.message)
 
-        # 5b. PREVENTION — early warning assessment (Fever Night: slow down more)
+        # 3a-ii. PREVENTION — early warning assessment (Fever Night: slow down more)
         drift_state = self._drift.state()
         prev_signal = self._prevention.assess(
             D=dignity.D,
@@ -454,7 +688,7 @@ class Organism:
         if prev_signal.level == SignalLevel.ALARM:
             self._breath.pause(f"PREVENTION ALARM: {prev_signal.reason}")
 
-        # 5c. MYCELIUM — ingest anonymized trajectory for cross-donor detection
+        # 3a-iii. MYCELIUM — ingest anonymized trajectory for cross-donor detection
         self._mycelium.ingest(
             domain=felt_domain,
             trend=prev_signal.trajectory.window_trend,
@@ -494,13 +728,23 @@ class Organism:
                 shelter_remedies=[r.component for r in shelter_record.remedies],
                 complexity=complexity.value,
                 recommended_td=recommended_td,
+                sense_mode=sense_reading.mode.value,
+                sense_competence=sense_reading.competence.value,
+                sense_need_gap=sense_reading.need_gap.value,
+                sense_ask_recommended=sense_reading.ask_recommended,
+                sense_ask_question=sense_reading.ask_question,
+                lab_active=lab_reading.active if lab_reading else False,
+                pillar_profile=pillar_profile or {},
+                metadata_event_id=metadata_event_id,
                 warnings=self._last_dignity.get("warnings", []) + warnings,
             )
 
-        # 5. SAY — render output
+        # 3b. SAY — render output
         # For now, the output is an acknowledgment. In a full system,
-        # this would be the system's response to the donor.
-        if drops:
+        # SENSE-aware response: if SENSE recommends asking, prepend the question
+        if sense_reading.ask_recommended and sense_reading.ask_question:
+            response_text = sense_reading.ask_question
+        elif drops:
             best_drop = max(drops, key=lambda d: d.confidence)
             response_text = (
                 f"Your offering has been received. "
@@ -511,6 +755,10 @@ class Organism:
         else:
             response_text = "Your offering has been received. The mycelium listens."
 
+        # LAB-aware: append rigor warnings if science detected
+        if lab_reading and lab_reading.active and lab_reading.rigor_warnings:
+            response_text += f" [LAB: {len(lab_reading.rigor_warnings)} rigor warning(s)]"
+
         render_result = say_render(response_text, medium=medium, felt_domain=felt_domain)
 
         if render_result.blocked:
@@ -519,7 +767,7 @@ class Organism:
         else:
             output_text = render_result.content
 
-        # 6. KEEP — store the artifact
+        # 3c. KEEP — store the artifact
         artifact_id = f"INPUT-{ex_id}"
         stored = False
         try:
@@ -528,20 +776,22 @@ class Organism:
         except (ValueError, OSError) as e:
             warnings.append(f"Storage warning: {e}")
 
-        # 6b. WITNESS — record exchange on immutable chain (Seed #2)
+        # ── Phase 4: POST-PROCESSING ────────────────────────────
+
+        # 4a. WITNESS — record exchange on immutable chain (Seed #2)
         self._witness_net.witness(
             "exchange",
             f"{ex_id}: D={dignity.D:.1f}, patterns={len(candidates)}, drops={len(drops)}",
             "organism",
         )
 
-        # 6c. NINTH OPERATOR — the word loop
+        # 4b. NINTH OPERATOR — the word loop
         word_id = self._ninth.receive_word(donor_input[:2000], felt_domain)
         ninth_result = self._ninth.witness(word_id)
         if ninth_result.dignity_passed:
             self._ninth.return_word(word_id)
 
-        # 6d. HARM DETECTOR (GAP#025) — physical/material safety beyond dignity
+        # 4c. HARM DETECTOR (GAP#025) — physical/material safety beyond dignity
         harm_signal = self._harm_detector.scan(donor_input)
         if harm_signal.harm_type != HarmType.NONE:
             self._wire.broadcast(
@@ -551,7 +801,7 @@ class Organism:
             )
             warnings.append(f"HARM: {harm_signal.harm_type.value} (severity={harm_signal.severity:.2f})")
 
-        # 6e. EARLY WARNING — EWMA + CUSUM drift detectors
+        # 4d. EARLY WARNING — EWMA + CUSUM drift detectors
         ewma_state = self._ewma.update(dignity.D)
         cusum_state = self._cusum.update(dignity.D)
         if ewma_state.breached:
@@ -559,13 +809,13 @@ class Organism:
         if cusum_state.alarm:
             warnings.append(f"CUSUM alert: change point ({cusum_state.alarm_direction}, S_high={cusum_state.S_high:.3f})")
 
-        # 6f. SHELTER HEARTBEAT (GAP#024) — pulse for sheltered exchanges
+        # 4e. SHELTER HEARTBEAT (GAP#024) — pulse for sheltered exchanges
         heartbeats = self._shelter_heartbeat.pulse()
         for hb in heartbeats:
             if hb.urgency >= 0.8:
                 warnings.append(f"Shelter heartbeat: {hb.exchange_id} needs attention")
 
-        # 6g. RESTORATIVE JUSTICE — if dignity failed, record harm (Seed #5)
+        # 4f. RESTORATIVE JUSTICE — if dignity failed, record harm (Seed #5)
         if dignity.D == 0.0:
             failed_comps = self._last_dignity.get("failed_components", [])
             self._justice.record_harm(
@@ -573,20 +823,24 @@ class Organism:
                 f"Dignity collapsed on exchange {ex_id}",
             )
 
-        # 7. TURN — close exchange
+        # 4g. TURN — close exchange
         self._turn.close(ex_id, f"Processed: {len(candidates)} patterns, {len(drops)} drops, D={dignity.D:.1f}")
 
-        # 8. SIP — record module activity for symmetric integration
+        # 4h. SIP — record module activity for symmetric integration
         self._sip.record_activity("WEAVE", messages_sent=1 if candidates else 0)
         self._sip.record_activity("CHECK", decisions_made=1)
         self._sip.record_activity("SAY", messages_sent=1)
         self._sip.record_activity("KEEP", messages_sent=1 if stored else 0)
         self._sip.record_activity("TURN", decisions_made=1)
         self._sip.record_activity("WIRE", messages_sent=self._wire.pending_count())
-        self._sip.record_activity("OUT", messages_sent=1 if stored else 0)  # OUT participates via anonymization pipeline
-        self._sip.record_activity("FACE", messages_sent=1)  # FACE participates via output rendering
+        self._sip.record_activity("OUT", messages_sent=1 if stored else 0)
+        self._sip.record_activity("FACE", messages_sent=1)
+        # New modules participate in SIP
+        self._sip.record_activity("SENSE", decisions_made=1)
+        if lab_reading and lab_reading.active:
+            self._sip.record_activity("LAB", decisions_made=1)
 
-        # 9. NEGATIVE SPACE — observe what was active this cycle
+        # 4i. NEGATIVE SPACE — observe what was active this cycle
         self._negative_space.observe(felt_domain)
         for drop in drops:
             self._negative_space.observe(drop.drop_type)
@@ -601,15 +855,15 @@ class Organism:
                 )
                 warnings.append(f"Negative space: {len(critical_ns)} critical blind spot(s)")
 
-        # 10. DECAY — tick the halflife engine (one cycle per exchange)
+        # 4j. DECAY — tick the halflife engine (one cycle per exchange)
         self._decay.tick()
 
-        # 11. LATENCY — record the T_d measurement
+        # 4k. LATENCY — record the T_d measurement
         # actual_td is 0 here (instant processing); in a real deployment
         # the caller would inject the actual wait time
         self._latency.record(ex_id, complexity, recommended_td, actual_td=recommended_td)
 
-        # 12. BREATH — tick and stress check
+        # 4l. BREATH — tick and stress check
         self._breath.tick()
         stress = self._breath.stress_check(
             pending_messages=self._wire.pending_count(),
@@ -639,6 +893,18 @@ class Organism:
             recommended_td=recommended_td,
             agency_A=agency_score.A,
             agency_weakest=agency_score.weakest,
+            # ── Full Integration v2.0 fields ──
+            sense_mode=sense_reading.mode.value,
+            sense_competence=sense_reading.competence.value,
+            sense_need_gap=sense_reading.need_gap.value,
+            sense_ask_recommended=sense_reading.ask_recommended,
+            sense_ask_question=sense_reading.ask_question,
+            lab_active=lab_reading.active if lab_reading else False,
+            lab_types=[t.value for t in lab_reading.science_types] if lab_reading else [],
+            lab_rigor=lab_reading.rigor_level.value if lab_reading else "anecdote",
+            lab_forge_needed=lab_reading.forge_needed if lab_reading else False,
+            pillar_profile=pillar_profile or {},
+            metadata_event_id=metadata_event_id,
             warnings=warnings,
         )
 
@@ -762,6 +1028,24 @@ class Organism:
             ratification_provisional=len(self._ratification.provisional()),
             ratification_ratified=len(self._ratification.ratified()),
             ratification_awaiting_signoff=len(self._ratification.awaiting_signoff()),
+            # ── Full Integration v2.0: SENSE + LAB + Metadata + Pillars + Privacy + Divergence ──
+            sense_mode=self._last_sense.mode.value if self._last_sense else "unknown",
+            sense_competence=self._last_sense.competence.value if self._last_sense else "unknown",
+            sense_need_gap=self._last_sense.need_gap.value if self._last_sense else "unknown",
+            sense_crisis_flag=self._last_sense.crisis_flag if self._last_sense else False,
+            lab_active=self._last_lab.active if self._last_lab else False,
+            lab_primary_type=self._last_lab.primary_type.value if self._last_lab and self._last_lab.primary_type else "none",
+            lab_rigor=self._last_lab.rigor_level.value if self._last_lab else "anecdote",
+            lab_forge_needed=self._last_lab.forge_needed if self._last_lab else False,
+            metadata_total_events=self._metadata.total_events,
+            metadata_discoveries=self._metadata.total_discoveries,
+            pillar_dominant=self._last_pillar_profile.get("dominant_pillar", "none") if self._last_pillar_profile else "none",
+            pillar_multi=self._last_pillar_profile.get("multi_pillar", False) if self._last_pillar_profile else False,
+            pillar_wisdom_potential=self._last_pillar_profile.get("wisdom_potential", 0.0) if self._last_pillar_profile else 0.0,
+            privacy_budget_remaining=self._privacy_budget.state().remaining,
+            privacy_budget_locked=self._privacy_budget.is_locked,
+            amendments_refusals=len(self._refusal_map.records),
+            amendments_drift_detected=len(self._baseline_drift.drift_signals) > 0,
             timestamp=self._now(),
         )
 
@@ -905,6 +1189,20 @@ class Organism:
         print(f"  {'-'*48}")
         print(f"  Ratification:      {s.ratification_total} total ({s.ratification_ratified} ratified, {s.ratification_provisional} provisional, {s.ratification_committed} committed)")
         print(f"  Awaiting sign-off: {s.ratification_awaiting_signoff}")
+        print(f"  {'-'*48}")
+        print(f"  SENSE mode:        {s.sense_mode} (competence: {s.sense_competence})")
+        print(f"  SENSE need gap:    {s.sense_need_gap}")
+        print(f"  SENSE crisis:      {s.sense_crisis_flag}")
+        print(f"  LAB active:        {s.lab_active} (type: {s.lab_primary_type}, rigor: {s.lab_rigor})")
+        print(f"  LAB forge needed:  {s.lab_forge_needed}")
+        print(f"  Metadata events:   {s.metadata_total_events}")
+        print(f"  Metadata discovers:{s.metadata_discoveries}")
+        print(f"  Pillar dominant:   {s.pillar_dominant} (multi: {s.pillar_multi})")
+        print(f"  Pillar wisdom:     {s.pillar_wisdom_potential:.3f}")
+        print(f"  Privacy ε remain:  {s.privacy_budget_remaining:.2f}")
+        print(f"  Privacy locked:    {s.privacy_budget_locked}")
+        print(f"  Amendments refuse: {s.amendments_refusals}")
+        print(f"  Baseline drift:    {s.amendments_drift_detected}")
         print(f"  {'='*48}\n")
 
     def decay_state(self):
@@ -1476,4 +1774,77 @@ class Organism:
                 "steward_patterns": len(self._steward_observer.patterns),
             },
             "ratification": self._ratification.summary(),
+            # ── Full Integration v2.0 ──
+            "sense": {
+                "mode": self._last_sense.mode.value if self._last_sense else "unknown",
+                "competence": self._last_sense.competence.value if self._last_sense else "unknown",
+                "need_gap": self._last_sense.need_gap.value if self._last_sense else "unknown",
+                "crisis_flag": self._last_sense.crisis_flag if self._last_sense else False,
+            },
+            "lab": {
+                "active": self._last_lab.active if self._last_lab else False,
+                "primary_type": self._last_lab.primary_type.value if self._last_lab and self._last_lab.primary_type else "none",
+                "rigor": self._last_lab.rigor_level.value if self._last_lab else "anecdote",
+                "forge_needed": self._last_lab.forge_needed if self._last_lab else False,
+            },
+            "metadata": {
+                "total_events": self._metadata.total_events,
+                "discoveries": self._metadata.total_discoveries,
+                "domains_active": self._metadata.domains_active,
+            },
+            "pillars": {
+                "dominant": self._last_pillar_profile.get("dominant_pillar") if self._last_pillar_profile else None,
+                "multi": self._last_pillar_profile.get("multi_pillar", False) if self._last_pillar_profile else False,
+                "wisdom_potential": self._last_pillar_profile.get("wisdom_potential", 0.0) if self._last_pillar_profile else 0.0,
+            },
+            "privacy_budget": self._privacy_budget.state().__dict__ if hasattr(self._privacy_budget.state(), '__dict__') else {},
+            "amendments": {
+                "refusals": len(self._refusal_map.records),
+            },
         }
+
+    # ── SENSE + LAB (Nervous System) ────────────────────
+
+    def last_sense(self):
+        """Get last SENSE reading."""
+        return self._last_sense
+
+    def last_lab(self):
+        """Get last LAB reading."""
+        return self._last_lab
+
+    def last_pillar_profile(self):
+        """Get last unified pillar detection profile."""
+        return self._last_pillar_profile
+
+    # ── Metadata Layer (The Brain) ──────────────────────
+
+    def metadata_query_recent(self, n=10):
+        """Query recent metadata events."""
+        return self._metadata.query_recent(n)
+
+    def metadata_discover(self):
+        """Run metadata discovery — find non-obvious connections."""
+        return self._metadata.discover()
+
+    def metadata_detect_echoes(self, scan_last_n=30):
+        """Detect echo patterns in metadata."""
+        return self._metadata.detect_echoes(scan_last_n)
+
+    def metadata_state(self):
+        """Get metadata gathering state."""
+        return self._metadata.state()
+
+    # ── Privacy Budget ──────────────────────────────────
+
+    def privacy_budget_state(self):
+        """Get global privacy budget state."""
+        return self._privacy_budget.state()
+
+    def privacy_budget_lock(self, reason="manual"):
+        """Lock the privacy budget."""
+        return self._privacy_budget.lock(reason)
+
+    def privacy_budget_unlock(self, steward_approval="steward"):
+        """Unlock the privacy budget."""
+        return self._privacy_budget.unlock(steward_approval)

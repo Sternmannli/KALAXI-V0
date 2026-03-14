@@ -5,12 +5,38 @@
 import json
 from datetime import datetime
 
-# Import the individual detectors (assumed to be in same directory)
-from humour_detector import detect_humour_in_text
-from absurdity_detector import detect_absurdity_in_text
-from obsession_detector import detect_obsession_in_text
-from love_detector import detect_love_in_text
-from proverb_compressor import generate_proverb_from_cluster  # we'll use a stub for single‑text; real compression needs clusters
+# Import the individual detectors (WEAVER package)
+# These detectors require heavy ML dependencies (torch, transformers, sentence-transformers).
+# When those deps are unavailable, we use lightweight stubs that return neutral results.
+try:
+    from WEAVER.humour_detector import detect_humour_in_text
+except ImportError:
+    def detect_humour_in_text(text):
+        return {"is_humour": False, "humour_type": "none", "wisdom_potential": 0, "bv_score": 0}
+
+try:
+    from WEAVER.absurdity_detector import detect_absurdity_in_text
+except ImportError:
+    def detect_absurdity_in_text(text):
+        return {"is_absurd": False, "absurdity_type": "none", "wisdom_potential": 0, "metadata": {}}
+
+try:
+    from WEAVER.obsession_detector import detect_obsession_in_text
+except ImportError:
+    def detect_obsession_in_text(text):
+        return {"is_obsessive": False, "obsession_type": "none", "wisdom_potential": 0, "metadata": {}}
+
+try:
+    from WEAVER.love_detector import detect_love_in_text
+except ImportError:
+    def detect_love_in_text(text):
+        return {"love_type": "non-love", "wisdom_potential": 0, "intimacy": 0, "passion": 0, "commitment": 0}
+
+try:
+    from WEAVER.proverb_compressor import generate_proverb_from_cluster
+except ImportError:
+    def generate_proverb_from_cluster(cluster):
+        return None
 
 # Pillar weights for wisdom potential (used in thermal delay)
 PILLAR_BASE_WEIGHTS = {
