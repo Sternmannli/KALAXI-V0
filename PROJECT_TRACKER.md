@@ -1,6 +1,6 @@
 # KALAXI PROJECT TRACKER
 
-**Last updated:** 2026-03-13
+**Last updated:** 2026-03-14
 
 ---
 
@@ -11,7 +11,7 @@
 | **P0** | **EXP-001 data collection** | IN PROGRESS | GO received 2026-03-12. 188/200 runs remaining. Runner: `run_exp001.py`. Analyzer: `analyze.py`. Runsheet: `RUNSHEET.md`. |
 | **P0** | **kalam.ch Threshold integration** | DONE (2026-03-12) | Ninth Operator ceremony now on homepage. Phase 1: client-side witness mark. Phase 2: Cloudflare Worker + full pipeline. |
 | **P0** | **Update mirror.md** | DONE (2026-03-12) | Fresh entry added. Previous gap: 12 days. |
-| **P0** | **Run cross-anomaly compressor** on new clusters | DONE (2026-03-13) | 2 proverb candidates generated. Results in PROVERB_APPROVAL_QUEUE.md. |
+| **P0** | **Run cross-anomaly compressor** on new clusters | DONE (2026-03-13) | 2 proverb candidates generated, approved, filed. Queue clear. |
 | **P0** | **Submit arXiv paper** | READY TO SUBMIT | Paper complete. Recommend cs.AI (primary) + cs.CY (secondary). Mohamed has not started submission — endorsement not yet requested. |
 
 ---
@@ -99,8 +99,8 @@ Full scientific registry filed at `MANIFEST/SCIENCE_INVENTORY.md` (2026-03-13). 
 
 ## MIRROR RITUAL
 
-- Last mirror entry: **2026-03-12** (V-002)
-- Previous entry: 2026-02-28
+- Last mirror entry: **2026-03-14** (V-002)
+- Previous entry: 2026-03-12
 
 ---
 
