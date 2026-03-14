@@ -280,7 +280,7 @@ If the answer is no, the system has failed regardless of what the metrics say.
 ### Treasures
 
 - 47 Treasures ratified (T#01-T#47) — all indexed in R7M/TREASURES/TREASURES_INDEX.md
-- 12 new Treasures extracted from 100% scan (T#48-T#59) — PROVISIONAL, awaiting V-001 ratification
+- 12 new Treasures extracted from 100% scan (T#48-T#59) — RATIFIED by V-001 2026-03-14
 - ~~36 await extraction from GRAND_ARCHIVE .docx files~~ **RESOLVED 2026-03-14**: Full 22,183-line scan complete
 
 ---
