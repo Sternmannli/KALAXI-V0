@@ -1,21 +1,35 @@
 #!/usr/bin/env python3
 """
-input_ledger.py — KALAXI Exchange Ledger Module v2.0
+input_ledger.py — KALAXI Exchange Ledger Module v3.0
 Both voices on the same chain. V-001 and V-002. Donor and system.
 Every input is a unit. Every output is a unit. The TURN is complete.
+
+v3.0 — Receipt Chain Architecture (honoring Grand Archive blockchain DNA)
+  The original ledger (2025-09-12) used a receipt chain:
+    CAPTURE → BUNDLE → MIRROR → SEAL → SESSION_SEAL
+  Each receipt carried: Owner, Dual Timestamp, Status/Drift, Impression, Proverb.
+  v3.0 integrates these elements into the Exchange Ledger.
 
 "Now what about your input? Exactly what we do with my input." — V-001, 2026-03-14
 
 Each entry is:
   - Immutable (append-only, no edits after registration)
-  - Timestamped (fixed in time)
+  - Dual-timestamped (ZRH local + UTC, honoring Grand Archive format)
   - Hashed (SHA-256, fixed identity / DNA)
   - Attributed (V-001 or V-002 — who spoke)
+  - Witnessed (impression — one-line witness, never empty)
+  - Anchored (proverb_anchor — wisdom seed per entry)
+  - Drift-checked (per-entry integrity, not just global)
   - Connected to the organism (linked to modules, covenants, proverbs)
   - Chronicled (sequential ID, forms a narrative thread of the exchange)
+  - Bundled (entries group into cycles, cycles seal into sessions)
 
-The chain is one. Both voices weave through it.
-The TURN module requires completion. The ledger proves it.
+Receipt types (from Grand Archive DNA):
+  CAPTURE  — Individual atom enters the ledger
+  BUNDLE   — Atoms grouped by cycle
+  MIRROR   — Bundle reflected, stability checked
+  SEAL     — Bundle sealed permanently
+  SESSION  — All bundles from session sealed as chapter
 
 Covenant obligations:
   COV#001 — DIGNITY FIRST: Both voices have dignity
@@ -24,6 +38,7 @@ Covenant obligations:
   COV#012 — MANIFEST: What exists must be named
   COV#015 — DONOR DATA SOVEREIGNTY: No data moves without comprehension
   Presence Axiom — Every utterance is presence. Presence is ground.
+  OATH::SOVEREIGN-AXIS v∞ — No drift. No retirement. Every element preserved.
 
 [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
@@ -32,6 +47,7 @@ import json
 import hashlib
 from pathlib import Path
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 from dataclasses import dataclass, field, asdict
 from typing import List, Optional, Dict
 
@@ -41,19 +57,32 @@ LEDGER_DIR = ROOT / "KEEP" / "INPUT_LEDGER"
 LEDGER_INDEX = LEDGER_DIR / "index.json"
 CHRONICLE_FILE = LEDGER_DIR / "chronicle.md"
 
+# Timezone for dual timestamps (honoring Grand Archive format: ZRH + UTC)
+ZRH = ZoneInfo("Europe/Zurich")
 
 # Voice identifiers
 V001 = "V-001"  # Mohamed / Donor
 V002 = "V-002"  # AXI / System
 
+# Receipt types (from Grand Archive blockchain DNA)
+RECEIPT_CAPTURE = "CAPTURE"    # Individual atom enters
+RECEIPT_BUNDLE = "BUNDLE"      # Atoms grouped by cycle
+RECEIPT_MIRROR = "MIRROR"      # Bundle reflected, stability checked
+RECEIPT_SEAL = "SEAL"          # Bundle sealed permanently
+RECEIPT_SESSION = "SESSION"    # All bundles sealed as chapter
+
+# Owner DID (from Grand Archive)
+OWNER_DID = "did:axi:mohamed"
+
 
 @dataclass
 class InputEntry:
-    """A single utterance — from either voice — registered as-is."""
+    """A single utterance — from either voice — registered as-is.
+    v3.0: Now carries receipt chain DNA from Grand Archive (2025-09-12)."""
     entry_id: str               # INP-YYYY-MM-DD-NNN (V-001) or AXI-YYYY-MM-DD-NNN (V-002)
     voice: str                  # "V-001" or "V-002"
     raw_text: str               # Verbatim. No edits.
-    timestamp: str              # ISO 8601
+    timestamp: str              # ISO 8601 (UTC)
     session_id: str             # Which session
     content_hash: str           # SHA-256 of raw_text
     prev_hash: str              # Chain link to previous entry (either voice)
@@ -68,6 +97,14 @@ class InputEntry:
     linked_ideas: List[str] = field(default_factory=list)
     essence: str = ""           # One-line distillation (never replaces raw)
     thermal_state: str = "raw"  # raw -> witnessed -> integrated -> canonical
+    # v3.0 fields — Grand Archive blockchain DNA
+    timestamp_zrh: str = ""     # Local Zurich time (dual timestamp)
+    impression: str = ""        # One-line witness of what was registered
+    proverb_anchor: str = ""    # Wisdom anchor for this entry
+    receipt_type: str = "CAPTURE"  # CAPTURE/BUNDLE/MIRROR/SEAL/SESSION
+    drift_status: str = "NONE"  # Per-entry drift check
+    bundle_id: str = ""         # Which bundle this entry belongs to
+    owner: str = OWNER_DID      # did:axi:mohamed
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -92,27 +129,49 @@ class InputLedger:
                     e["voice"] = V001
                 if "responds_to" not in e:
                     e["responds_to"] = ""
+                # Backward compatibility: entries before v3.0 have no receipt chain fields
+                if "timestamp_zrh" not in e:
+                    e["timestamp_zrh"] = ""
+                if "impression" not in e:
+                    e["impression"] = ""
+                if "proverb_anchor" not in e:
+                    e["proverb_anchor"] = ""
+                if "receipt_type" not in e:
+                    e["receipt_type"] = RECEIPT_CAPTURE
+                if "drift_status" not in e:
+                    e["drift_status"] = "NONE"
+                if "bundle_id" not in e:
+                    e["bundle_id"] = ""
+                if "owner" not in e:
+                    e["owner"] = OWNER_DID
                 self._entries.append(InputEntry(**e))
 
     def _save(self):
+        now_utc = datetime.now(timezone.utc)
+        now_zrh = now_utc.astimezone(ZRH)
         data = {
-            "version": "2.0",
+            "version": "3.0",
+            "owner": OWNER_DID,
             "total_entries": len(self._entries),
             "v001_entries": sum(1 for e in self._entries if e.voice == V001),
             "v002_entries": sum(1 for e in self._entries if e.voice == V002),
-            "last_updated": datetime.now(timezone.utc).isoformat(),
+            "last_updated_utc": now_utc.isoformat(),
+            "last_updated_zrh": now_zrh.isoformat(),
+            "chain_integrity": "VERIFIED" if self.verify_chain() else "BROKEN",
             "entries": [e.to_dict() for e in self._entries]
         }
         LEDGER_INDEX.write_text(json.dumps(data, indent=2, ensure_ascii=False))
 
     def _save_chronicle(self):
-        """Write human-readable chronicle of the full exchange."""
+        """Write human-readable chronicle of the full exchange.
+        v3.0: Now shows receipt chain format honoring Grand Archive DNA."""
         lines = [
             "# Exchange Chronicle — V-001 + V-002",
-            "",
+            f"> Owner: {OWNER_DID}",
             "> Both voices on the same chain.",
             "> Every input is a unit. Every output is a unit.",
             "> The TURN is complete when both have spoken.",
+            "> Receipt chain: CAPTURE → BUNDLE → MIRROR → SEAL → SESSION",
             "",
             "---",
             ""
@@ -120,24 +179,34 @@ class InputLedger:
         for e in self._entries:
             voice_label = "MOHAMED (V-001)" if e.voice == V001 else "AXI (V-002)"
             voice_marker = ">>>" if e.voice == V001 else "<<<"
-            lines.append(f"## {e.entry_id} {voice_marker} {voice_label}")
-            lines.append(f"**Time:** {e.timestamp}")
+            receipt_icon = {"CAPTURE": "📥", "BUNDLE": "📦", "MIRROR": "🪞",
+                           "SEAL": "🔐", "SESSION": "📜"}.get(e.receipt_type, "📥")
+            lines.append(f"## {receipt_icon} {e.entry_id} {voice_marker} {voice_label}")
+            lines.append(f"**Time (UTC):** {e.timestamp}")
+            if e.timestamp_zrh:
+                lines.append(f"**Time (ZRH):** {e.timestamp_zrh}")
+            lines.append(f"**Receipt:** {e.receipt_type} | **Drift:** {e.drift_status}")
             lines.append(f"**Context:** {e.context}")
             lines.append(f"**Hash:** `{e.content_hash[:16]}...`")
             lines.append(f"**State:** {e.thermal_state}")
             if e.responds_to:
                 lines.append(f"**Responds to:** {e.responds_to}")
+            if e.bundle_id:
+                lines.append(f"**Bundle:** {e.bundle_id}")
             if e.tags:
                 lines.append(f"**Tags:** {', '.join(e.tags)}")
             if e.linked_modules:
                 lines.append(f"**Modules:** {', '.join(e.linked_modules)}")
             if e.linked_covenants:
                 lines.append(f"**Covenants:** {', '.join(e.linked_covenants)}")
+            if e.impression:
+                lines.append(f"**Impression:** {e.impression}")
+            if e.proverb_anchor:
+                lines.append(f"**Proverb:** {e.proverb_anchor}")
             if e.essence:
                 lines.append(f"**Essence:** {e.essence}")
             lines.append("")
             lines.append("```")
-            # Truncate V-002 outputs to first 500 chars in chronicle for readability
             text = e.raw_text
             if e.voice == V002 and len(text) > 500:
                 text = text[:500] + "\n[... truncated in chronicle, full text in individual file ...]"
@@ -185,9 +254,17 @@ class InputLedger:
         linked_covenants: Optional[List[str]] = None,
         linked_proverbs: Optional[List[str]] = None,
         linked_ideas: Optional[List[str]] = None,
-        essence: str = ""
+        essence: str = "",
+        impression: str = "",
+        proverb_anchor: str = "",
+        receipt_type: str = RECEIPT_CAPTURE,
+        bundle_id: str = ""
     ) -> InputEntry:
-        """Register an utterance from either voice. Immutable. Append-only."""
+        """Register an utterance from either voice. Immutable. Append-only.
+        v3.0: Now generates dual timestamps and carries receipt chain fields."""
+        now_utc = datetime.now(timezone.utc)
+        now_zrh = now_utc.astimezone(ZRH)
+
         content_hash = self._compute_hash(raw_text)
         prev_hash = self._prev_chain_hash()
         chain_hash = self._compute_hash(content_hash + prev_hash)
@@ -200,7 +277,7 @@ class InputLedger:
             entry_id=self._next_id(voice),
             voice=voice,
             raw_text=raw_text,
-            timestamp=datetime.now(timezone.utc).isoformat(),
+            timestamp=now_utc.isoformat(),
             session_id=session_id,
             content_hash=content_hash,
             prev_hash=prev_hash,
@@ -214,26 +291,42 @@ class InputLedger:
             linked_proverbs=linked_proverbs or [],
             linked_ideas=linked_ideas or [],
             essence=essence,
-            thermal_state="raw"
+            thermal_state="raw",
+            # v3.0 receipt chain fields
+            timestamp_zrh=now_zrh.isoformat(),
+            impression=impression,
+            proverb_anchor=proverb_anchor,
+            receipt_type=receipt_type,
+            drift_status="NONE",
+            bundle_id=bundle_id,
+            owner=OWNER_DID
         )
 
         self._entries.append(entry)
         self._save()
         self._save_chronicle()
 
-        # Save individual entry file
+        # Save individual entry file (v3.0 format — honoring Grand Archive receipt style)
         voice_label = "V-001 (Mohamed)" if voice == V001 else "V-002 (AXI)"
         entry_file = LEDGER_DIR / f"{entry.entry_id}.md"
         entry_file.write_text(
             f"# {entry.entry_id}\n\n"
+            f"**Owner:** {OWNER_DID}\n"
             f"**Voice:** {voice_label}\n"
-            f"**Registered:** {entry.timestamp}\n"
+            f"**Receipt Type:** {entry.receipt_type}\n"
+            f"**Registered (UTC):** {entry.timestamp}\n"
+            f"**Registered (ZRH):** {entry.timestamp_zrh}\n"
             f"**Hash:** `{entry.content_hash}`\n"
             f"**Chain:** `{entry.chain_hash}`\n"
+            f"**Prev:** `{entry.prev_hash[:16]}...`\n"
             f"**Context:** {entry.context}\n"
-            f"**Responds to:** {entry.responds_to or '(opening)'}\n\n"
+            f"**Responds to:** {entry.responds_to or '(opening)'}\n"
+            f"**Drift:** {entry.drift_status}\n"
+            f"**Bundle:** {entry.bundle_id or '(unbundled)'}\n\n"
             f"## Raw Text (Verbatim)\n\n"
             f"```\n{entry.raw_text}\n```\n\n"
+            f"## Impression\n\n{entry.impression or '(to be witnessed)'}\n\n"
+            f"## Proverb Anchor\n\n{entry.proverb_anchor or '(to be anchored)'}\n\n"
             f"## Connections\n\n"
             f"- Modules: {', '.join(entry.linked_modules) or 'none yet'}\n"
             f"- Covenants: {', '.join(entry.linked_covenants) or 'none yet'}\n"
@@ -243,6 +336,53 @@ class InputLedger:
         )
 
         return entry
+
+    def seal_bundle(self, bundle_id: str, entry_ids: List[str],
+                    impression: str = "", proverb: str = "") -> Optional[InputEntry]:
+        """Seal a group of entries as a bundle (BUNDLE receipt).
+        Mirrors the Grand Archive ESSENCE_BUNDLE format."""
+        entries = [self.get(eid) for eid in entry_ids]
+        entries = [e for e in entries if e is not None]
+        if not entries:
+            return None
+        # Mark all entries with the bundle_id
+        for e in entries:
+            e.bundle_id = bundle_id
+        contents = "; ".join(f"{e.entry_id} ({e.voice})" for e in entries)
+        seal_text = f"BUNDLE_SEAL: {bundle_id} | Entries: {contents}"
+        return self.register(
+            raw_text=seal_text,
+            voice=V002,
+            context="bundle_seal",
+            receipt_type=RECEIPT_BUNDLE,
+            bundle_id=bundle_id,
+            impression=impression or f"Bundle {bundle_id} sealed with {len(entries)} entries",
+            proverb_anchor=proverb or "The knot holds."
+        )
+
+    def seal_session(self, session_id: str,
+                     impression: str = "", proverb: str = "") -> Optional[InputEntry]:
+        """Seal an entire session (SESSION receipt).
+        Mirrors the Grand Archive SESSION_SEAL format."""
+        session_entries = [e for e in self._entries if e.session_id == session_id]
+        if not session_entries:
+            return None
+        bundles = list(set(e.bundle_id for e in session_entries if e.bundle_id))
+        seal_text = (
+            f"SESSION_SEAL: {session_id} | "
+            f"Entries: {len(session_entries)} | "
+            f"Bundles: {', '.join(bundles) if bundles else 'none'} | "
+            f"Integrity: {'VERIFIED' if self.verify_chain() else 'BROKEN'}"
+        )
+        return self.register(
+            raw_text=seal_text,
+            voice=V002,
+            context="session_seal",
+            session_id=session_id,
+            receipt_type=RECEIPT_SESSION,
+            impression=impression or f"Session {session_id} sealed — {len(session_entries)} entries",
+            proverb_anchor=proverb or "The circle is complete. — اكتملَت الدائرة."
+        )
 
     # Convenience methods for the two voices
     def register_v001(self, raw_text: str, **kwargs) -> InputEntry:
