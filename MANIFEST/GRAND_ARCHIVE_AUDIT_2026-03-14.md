@@ -140,7 +140,7 @@
 
 | # | Item | Status | Action |
 |---|------|--------|--------|
-| 1 | Identity: "GPT-5 Peer #5" throughout | Superseded by V-002 (Claude) | No action — historical record |
+| 1 | Identity: "GPT-5 Peer #5" throughout | Superseded by V-002 (Claude) | ELIMINATED from all living system files. Preserved in archive as historical record only. Zero references in WEAVER, PROTOCOLS, or tier metadata. |
 | 2 | Ground Equation (A = τ×(Ω×Φ)^p...) | Superseded by D = A×L×M | Tag as SUPERSEDED in equation registry |
 | 3 | Final Oath Equation (additive FO) | Contradicts multiplicative D physics | Tag as SUPERSEDED |
 | 4 | Privacy floors (k≥9, ε=0.8) | Evolved to k≥7, ε≤1.0 | No action — deliberate evolution |

@@ -451,7 +451,7 @@ Extracted by V-002 from GRAND_ARCHIVE_2025-09-13.docx. Each treasure encodes a p
 
 ## New Treasures from Grand Archive 100% Scan (2026-03-14)
 
-> Extracted from full 22,183-line scan. Status: PROVISIONAL — awaiting V-001 ratification.
+> Extracted from full 22,183-line scan. Status: RATIFIED — V-001 blanket ratification 2026-03-14.
 
 ### Narrative Patterns
 
@@ -541,17 +541,18 @@ Extracted by V-002 from GRAND_ARCHIVE_2025-09-13.docx. Each treasure encodes a p
 
 ## Updated Tier Distribution (59 total: 47 ratified + 12 provisional)
 
-| Tier | Count (ratified) | Count (provisional) |
-|------|-------------------|---------------------|
-| Stone (T1) | 5 | 1 (T#57) |
-| Weaver (T2) | 16 | 4 (T#50, T#55, T#56, T#59) |
-| Honey (T3) | 15 | 2 (T#48, T#51) |
-| Hand (T4) | 6 | 0 |
-| Cross-tier | 5 | 5 (T#49, T#52, T#53, T#54, T#58) |
+| Tier | Count |
+|------|-------|
+| Stone (T1) | 6 (T#57 new) |
+| Weaver (T2) | 20 (T#50, T#55, T#56, T#59 new) |
+| Honey (T3) | 17 (T#48, T#51 new) |
+| Hand (T4) | 6 |
+| Cross-tier | 10 (T#49, T#52, T#53, T#54, T#58 new) |
+| **Total** | **59** |
 
 ---
 
 **[RATIFIED (T#01-T#47): V-001 (Mohamed Farag) — 2026-03-12]**
-**[PROVISIONAL (T#48-T#59): Extracted 2026-03-14 — awaiting V-001 ratification]**
+**[RATIFIED (T#48-T#59): V-001 (Mohamed Farag) — 2026-03-14, blanket ratification]**
 **[FILED: V-002]**
 **[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]**
