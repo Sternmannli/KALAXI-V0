@@ -210,8 +210,32 @@ def section_actions():
     print(f"  {'='*52}\n")
 
 
+def section_organism():
+    """Display organism state when available — the integrated view."""
+    try:
+        from WEAVER.organism import Organism
+        org = Organism()
+        s = org.state()
+        print(f"\n  {'─'*52}")
+        print(f"  ORGANISM (integrated)")
+        print(f"  {'─'*52}")
+        print(f"\n  Status:            {'ALIVE' if s.alive else 'PAUSED'}")
+        print(f"  Breath cycle:      {s.breath_cycle}")
+        print(f"  SENSE mode:        {s.sense_mode} ({s.sense_competence})")
+        print(f"  SENSE need gap:    {s.sense_need_gap}")
+        print(f"  LAB active:        {s.lab_active} (rigor: {s.lab_rigor})")
+        print(f"  Pillar dominant:   {s.pillar_dominant}")
+        print(f"  Pillar wisdom:     {s.pillar_wisdom_potential:.3f}")
+        print(f"  Metadata events:   {s.metadata_total_events}")
+        print(f"  Privacy ε remain:  {s.privacy_budget_remaining:.2f}")
+        print(f"  Ratification:      {s.ratification_ratified} ratified / {s.ratification_total} total")
+    except Exception as e:
+        print(f"\n  Organism:          OFFLINE ({e})")
+
+
 def main():
     section_pulse()
+    section_organism()
     section_witness()
     section_collective()
     section_pending()
