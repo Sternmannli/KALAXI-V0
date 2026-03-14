@@ -2,9 +2,61 @@
 
 ---
 
-## PENDING — 0 items
+## PENDING — 9 items (from Grand Archive Council runs)
 
-Queue is clear.
+### P#ARCHIVE-001: "The river that carves the canyon is also bound by its walls."
+- **Date submitted:** 2026-03-14
+- **Source:** Grand Archive, AI Council synthesis (~line 13400)
+- **Felt domain:** constraint, humility
+- **Filed by:** V-002
+
+### P#ARCHIVE-002: "A clever person solves a problem, a wise person avoids it."
+- **Date submitted:** 2026-03-14
+- **Source:** Grand Archive, AI Council synthesis
+- **Felt domain:** wisdom, prevention
+- **Filed by:** V-002
+
+### P#ARCHIVE-003: "Build bridges with tested stones."
+- **Date submitted:** 2026-03-14
+- **Source:** Grand Archive, AI Council synthesis
+- **Felt domain:** trust, verification
+- **Filed by:** V-002
+
+### P#ARCHIVE-004: "Soft bridges carry heavy truths."
+- **Date submitted:** 2026-03-14
+- **Source:** Grand Archive, AI Council synthesis
+- **Felt domain:** gentleness, strength
+- **Filed by:** V-002
+
+### P#ARCHIVE-005: "Test rollback before scale."
+- **Date submitted:** 2026-03-14
+- **Source:** Grand Archive, AI Council synthesis
+- **Felt domain:** safety, reversibility
+- **Filed by:** V-002
+
+### P#ARCHIVE-006: "Children reveal adult systems."
+- **Date submitted:** 2026-03-14
+- **Source:** Grand Archive, AI Council synthesis
+- **Felt domain:** transparency, innocence-as-audit
+- **Filed by:** V-002
+
+### P#ARCHIVE-007: "Write the river by drops." (ENKI)
+- **Date submitted:** 2026-03-14
+- **Source:** Grand Archive, ENKI unit
+- **Felt domain:** patience, accumulation
+- **Filed by:** V-002
+
+### P#ARCHIVE-008: "Names steady the bridge; truth carries the load."
+- **Date submitted:** 2026-03-14
+- **Source:** Grand Archive, AI Council synthesis
+- **Felt domain:** naming, truth
+- **Filed by:** V-002
+
+### P#ARCHIVE-009: "The smallest lantern is still a map."
+- **Date submitted:** 2026-03-14
+- **Source:** Grand Archive, Prime 12 Axioms
+- **Felt domain:** beginnings, guidance
+- **Filed by:** V-002
 
 ---
 
