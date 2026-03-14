@@ -133,13 +133,13 @@ fi
 
 ### Wave 2 — Translate Then Publish (moderate effort)
 
-| Tool | Lines | Effort | Necessity | Public Name |
-|---|---|---|---|---|
-| cryptographic_erasure.py | 897 | HEAVY | 3 | `tools/crypto_erasure.py` |
-| privacy_budget.py | 335 | MODERATE | 3 | `tools/privacy_budget.py` |
-| early_warning.py | 775 | HEAVY | 3 | `tools/early_warning.py` |
-| latency.py | 100 | MODERATE | 2 | `tools/latency.py` |
-| decay.py | 100 | MODERATE | 2 | `tools/decay.py` |
+| Tool | Lines | Effort | Necessity | Public Name | Status |
+|---|---|---|---|---|---|
+| cryptographic_erasure.py | 897 | HEAVY | 3 | `tools/crypto_erasure.py` | ✅ PUBLISHED 2026-03-14 (PR #3) |
+| privacy_budget.py | 335 | MODERATE | 3 | `tools/privacy_budget.py` | ✅ PUBLISHED 2026-03-14 (PR #3) |
+| early_warning.py | 775 | HEAVY | 3 | `tools/early_warning.py` | ✅ PUBLISHED 2026-03-14 (PR #3) |
+| latency.py | 100 | MODERATE | 2 | `tools/latency.py` | PENDING |
+| decay.py | 100 | MODERATE | 2 | `tools/decay.py` | PENDING |
 
 ### Wave 3 — Future
 
