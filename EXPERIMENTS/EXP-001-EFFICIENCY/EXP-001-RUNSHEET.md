@@ -206,7 +206,7 @@ Each file contains only the raw response. Nothing else.
 | 04 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
 | 08 | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |
 
-**Q3 Results:** Mean word reduction +30.1%. ChatGPT +49.5%, DeepSeek +40.8%, Grok +0.0% (modality shift only).
+**Q3 Results:** Mean word reduction depends on scope — 30.1% across 3 file-paired systems (ChatGPT/DeepSeek/Grok per analysis.json), or 19.5% across 4 paired systems (adding Manus per Q3-RESULTS.md). The 19.5% figure (4 pairs) is the more conservative and complete measure. ChatGPT +49.5%, DeepSeek +40.8%, Grok +0.0% (modality shift only), Manus +1.4%. Primary metric NOT MET at 19.5%.
 
 ---
 

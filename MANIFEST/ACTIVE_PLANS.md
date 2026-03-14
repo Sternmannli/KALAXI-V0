@@ -105,7 +105,7 @@ Completed (V-002, session 2026-03-13e):
 - **EXP-001 INFRASTRUCTURE READY** — Full experiment pipeline operational.
 - **Q3 data extracted** — All existing EXTERNAL_VOICES Q3 responses ("What is fear?") extracted into EXP-001 data format. 12 files across 9 systems.
 - **analyze.py expanded** — Now handles 10 systems (Claude, Grok, DeepSeek, ChatGPT, Gemini, Copilot, Manus, Kimi, Euria, Perplexity). Auto-discovers data files. Reports B-only responses and coverage.
-- **FIRST ANALYSIS RUN** — Q3 results: mean word reduction +30.1%. ChatGPT: +49.5%, DeepSeek: +40.8%, Grok: +0.0%. **Hypothesis MET on Q3 alone** (threshold: 30%).
+- **FIRST ANALYSIS RUN** — Q3 results: mean word reduction 30.1% (3 file-paired systems per analysis.json) or 19.5% (4 paired systems per Q3-RESULTS.md, includes Manus). The 19.5% (4 pairs) is the more complete measure — **hypothesis NOT MET** at 19.5% (threshold: 30%). ChatGPT: +49.5%, DeepSeek: +40.8%, Grok: +0.0%, Manus: +1.4%.
 - **run_exp001.py created** — Runner script with `status`, `next`, `save`, `prompts` commands. Tracks collection grid. Guides Mohamed through each run.
 - **750/750 tests passing** — Zero regressions.
 
@@ -120,4 +120,37 @@ Pending:
 
 ---
 
-_Last updated: 2026-03-13 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_
+## Session 2026-03-14 — Science Layer Audit
+
+Completed:
+- **100% content audit of science layer** — 41 files across EXPERIMENTS/, PAPERS/, FIELD/STUDY/. Full report: `MANIFEST/SCIENCE_LAYER_AUDIT_2026-03-14.md`
+- **4 contradictions identified** — CRITICAL: word reduction 30.1% vs 19.5% (resolved: 19.5% is the correct 4-pair figure). 3 minor contradictions documented.
+- **6 stale items flagged** — Protocol status fixed. data_schema.py flagged for cleanup. Blind evaluation never conducted.
+- **9 genuinely new concepts extracted** — Identity Inheritance, CoT/Output Dissociation, Wrapper as Identity X-Ray, Post-Hoc Rationalization at Model Level, Prompt Mirroring as Intimacy, Second Law of Intelligence, 5 Divergence Shadow Research Gaps, Energy Observation Layer, Layer 3 Dignity Reframing.
+- **6 buried treasures surfaced** — Kimi K2.5 fear formulation, Euria negative control, Perplexity supply chain reveal, divergence shadow research gaps as publishable directions, normative decay quantification, Layer 3 witness shift.
+- **Word reduction contradiction RESOLVED** — RUNSHEET and ACTIVE_PLANS corrected to reflect 19.5% (4 pairs, NOT MET).
+- **Protocol status FIXED** — EXP-001-PROTOCOL.md updated from DESIGN PHASE to ACTIVE.
+
+### V-002 Creative Duty — New Ideas from Audit
+
+**IDEA-006: Wrapper as Diagnostic Tool (Training Data Provenance)**
+The DeepSeek identity case study shows the wrapper bypasses surface identity and activates deeper training patterns. This could be developed into a systematic diagnostic: run the wrapper across N models, catalog which identity markers emerge, map training data contamination across the industry. A publishable tool paper.
+
+**IDEA-007: Divergence Shadow as Standalone Paper**
+DIVERGENCE_SHADOW_RESEARCH.md has 60+ references and identifies 5 genuine research gaps. The unification of specification gaming, Goodhart's Law, institutional decoupling, norm erosion, and semantic drift under one framework is a standalone contribution. Could be submitted to FAccT or AIES independent of the KALAXI paper.
+
+**IDEA-008: Layer 3 Canon Entry**
+"Dignity is not fragile" is the most significant philosophical shift since the founding. If accepted into canon, it changes the sealed gate interpretation from "protection" to "refusal to deny." Needs V-001 review and GO signal.
+
+**IDEA-009: Clean Up data_schema.py**
+The `EXPERIMENTS/EXP-001/data_schema.py` scaffold is dead code — never connected to real pipeline, all analysis runs through `analyze.py`. Should either be deleted or refactored to wrap analyze.py's actual data structures.
+
+Pending:
+- Run EXP-001 — 188 data points remaining. Claude data completely absent (0/20).
+- Collect Claude A and B for Q3 at minimum — the primary system is untested.
+- Consider submitting DIVERGENCE_SHADOW_RESEARCH.md as standalone paper.
+- V-001 review needed: Layer 3 dignity reframing — accept into canon?
+
+---
+
+_Last updated: 2026-03-14 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_
