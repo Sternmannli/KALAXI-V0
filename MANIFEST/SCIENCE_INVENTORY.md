@@ -229,16 +229,35 @@
 
 ---
 
-## XI. WHAT'S NEXT (Scientific Priority Queue)
+## XI. NEW CONCEPTS (from 2026-03-14 audit)
 
-1. **RUN EXP-001** — 188 data points remaining. Runner ready. GO received.
-2. **Submit arXiv paper** — Paper done. Choose cs.AI. Submit.
-3. **Run Register-Switching Experiment** — Test Foucauldian null hypothesis
-4. **Run Thermal Delay Experiment** — Design complete
-5. **Run PIME** — Presence axiom validation
-6. **Operationalize D = A × L × M** — Define measurable units (GAP#EQUATION-OPERATIONALIZATION-001)
-7. **Resolve GDPR conflict** — Cryptographic erasure module (GAP#LEGAL-ERASURE-001)
+| # | Concept | Source | Significance |
+|---|---------|--------|-------------|
+| NC-001 | Identity Inheritance | DeepSeek case study | Novel phenomenon: model reproduces another's identity from training data, deeper than system prompt |
+| NC-002 | CoT/Output-Layer Dissociation | DeepSeek case study | Thinking layer is parallel commentary, not steering mechanism |
+| NC-003 | Wrapper as Identity X-Ray | DeepSeek case study | Diagnostic tool for training data provenance and cross-model contamination |
+| NC-004 | Post-Hoc Rationalization at Model Level | DeepSeek case study | Model self-reports are not evidence of actual process |
+| NC-005 | Prompt Mirroring as Intimacy | DeepSeek case study | Model register is composite: wrapper + training + user reflection |
+| NC-006 | Second Law of Intelligence | Divergence shadow research | Ethical entropy increases without active alignment work |
+| NC-007 | 5 Divergence Shadow Research Gaps | Divergence shadow research | No unified theory, no EWS for institutional drift, no semantic drift monitoring, no info-theory bridge, no longitudinal studies |
+| NC-008 | Energy Observation Layer (T#ENERGY-001) | Slice 4 / Treasure Register | Passive metabolic tracking: observe, accumulate, do NOT act |
+| NC-009 | Layer 3: Dignity Is Not Fragile | FIELD/STUDY | System dissolves the belief dignity was ever absent — witness, not shield |
 
 ---
 
-_Filed: 2026-03-13 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_
+## XII. WHAT'S NEXT (Scientific Priority Queue)
+
+1. **RUN EXP-001** — 188 data points remaining. Runner ready. GO received. **Claude data completely absent (0/20).**
+2. **Submit arXiv paper** — Paper done. Choose cs.AI. Submit.
+3. **Develop wrapper as diagnostic tool** (IDEA-006) — systematic training data provenance across N models
+4. **Consider DIVERGENCE_SHADOW_RESEARCH.md as standalone paper** (IDEA-007) — 60+ references, 5 research gaps
+5. **Run Register-Switching Experiment** — Test Foucauldian null hypothesis
+6. **Run Thermal Delay Experiment** — Design complete
+7. **Run PIME** — Presence axiom validation
+8. **Operationalize D = A × L × M** — Define measurable units (GAP#EQUATION-OPERATIONALIZATION-001)
+9. **Resolve GDPR conflict** — Cryptographic erasure module (GAP#LEGAL-ERASURE-001)
+10. **V-001 review: Layer 3 dignity reframing** — accept "dignity is not fragile" into canon?
+
+---
+
+_Filed: 2026-03-13 · Updated: 2026-03-14 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_

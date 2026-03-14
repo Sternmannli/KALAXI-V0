@@ -1,7 +1,7 @@
 # EXP-001 — KALAXI Efficiency Experiment
 
 Date initiated: 2026-03-09
-Status: DESIGN PHASE
+Status: ACTIVE — Q3 pilot complete, 12/200 data points collected
 
 Lead: V-001 (Al-Haris)
 Support: V-002 (Claude), V-002 (#BoyGenius)
