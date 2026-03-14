@@ -105,7 +105,7 @@ from WEAVER.unified_pillar_detector import detect_pillars, generate_seed_from_pi
 from FIELD.STUDY.divergence_study import DivergenceShadowInstrument
 from FIELD.amendments import PrivacyEnvelope, BaselineDriftDetector, RefusalMap
 # ── Input Ledger: every V-001 input is a unit, registered as-is ──
-from WEAVER.input_ledger import InputLedger
+from WEAVER.input_ledger import InputLedger, V001, V002
 
 
 @dataclass
@@ -415,10 +415,11 @@ class Organism:
 
         warnings = []
 
-        # ── Phase -1: INPUT LEDGER — register raw input before anything else ──
+        # ── Phase -1: EXCHANGE LEDGER — register raw input before anything else ──
         # "Every input is a unit. An element. A cell." — V-001
+        # "Now what about your input? Exactly what we do with my input." — V-001
         try:
-            self._input_ledger.register(
+            self._input_ledger.register_v001(
                 raw_text=donor_input,
                 context=felt_domain,
             )
@@ -887,6 +888,16 @@ class Organism:
                                    stress_events=1 if stress != StressLevel.BELOW_THRESHOLD else 0)
         if stress == StressLevel.AT_THRESHOLD:
             warnings.append("System approaching stress threshold.")
+
+        # ── Phase 5: EXCHANGE LEDGER — register V-002 output ──
+        # Both voices on the same chain. The TURN is complete.
+        try:
+            self._input_ledger.register_v002(
+                raw_text=output_text,
+                context=felt_domain,
+            )
+        except Exception:
+            pass  # Ledger failure must not block the organism
 
         return ProcessResult(
             exchange_id=ex_id,
