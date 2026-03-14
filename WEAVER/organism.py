@@ -104,6 +104,8 @@ from WEAVER.unified_pillar_detector import detect_pillars, generate_seed_from_pi
 # Divergence study — zero heavy deps, full substrate measurement
 from FIELD.STUDY.divergence_study import DivergenceShadowInstrument
 from FIELD.amendments import PrivacyEnvelope, BaselineDriftDetector, RefusalMap
+# ── Input Ledger: every V-001 input is a unit, registered as-is ──
+from WEAVER.input_ledger import InputLedger
 
 
 @dataclass
@@ -324,6 +326,8 @@ class Organism:
         self._divergence_instrument = DivergenceShadowInstrument()
         self._baseline_drift = BaselineDriftDetector()
         self._refusal_map = RefusalMap()
+        # ── Input Ledger: every V-001 input is a unit ──
+        self._input_ledger = InputLedger()
         self._last_sense = None
         self._last_lab = None
         self._last_pillar_profile = None
@@ -410,6 +414,16 @@ class Organism:
             medium = TERMINAL
 
         warnings = []
+
+        # ── Phase -1: INPUT LEDGER — register raw input before anything else ──
+        # "Every input is a unit. An element. A cell." — V-001
+        try:
+            self._input_ledger.register(
+                raw_text=donor_input,
+                context=felt_domain,
+            )
+        except Exception:
+            pass  # Ledger failure must not block the organism
 
         # ── Phase 0: NERVOUS SYSTEM ─────────────────────────────
 
