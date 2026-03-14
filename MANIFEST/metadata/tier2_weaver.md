@@ -11,6 +11,12 @@
 7. **TURN** — Exchange Cycle Management (open/close/defer exchanges, COV#002)
 8. **BREATH** — Synchronization (heartbeat, stress threshold, controlled pause, T_d latency)
 9. **WEAVE** — Pattern Synthesis (ingest, extract essence, map to canon, propose proverbs/anomalies)
+10. **SENSE** — Nervous System (mode detection, need gap analysis, competence calibration, dignity precheck). Reads every input before any organ speaks. Five modes: EXEC, REFLECT, CAFÉ, SCIENCE, CRISIS. Detects what the donor needs, not just what they say (GAP#DONOR-001). `WEAVER/sense.py`
+11. **LAB** — Science Organ (classification, rigor assessment, Forge routing, inventory linking). Activates whenever scientific content detected. Routes model-testing to Probe Forge. `WEAVER/lab.py`
+
+## Organ Coordination Protocol
+
+See `PROTOCOLS/ORGAN_MAP.md` — defines how organs activate, coordinate, and switch modes based on donor input. SENSE is the nervous system that reads input first and determines which organs wake.
 
 ## Protocols
 

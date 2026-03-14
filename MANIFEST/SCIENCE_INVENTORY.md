@@ -120,6 +120,8 @@
 | Tool | File | Purpose |
 |------|------|---------|
 | **Probe Forge** | `PROTOCOLS/PROBE_FORGE.md` | **Stimulus generation & sterilization protocol — CORE DNA. All probes pass through the Forge before deployment. Five Laws: zero vocabulary leak, zero intent disclosure, fresh context only, minimal surface, register neutrality.** |
+| **SENSE (Nervous System)** | `WEAVER/sense.py` | **Input detection — reads donor before any organ speaks. Five modes (EXEC/REFLECT/CAFÉ/SCIENCE/CRISIS), need gap detection, competence calibration, dignity precheck, organ activation. 24 tests.** |
+| **LAB (Science Organ)** | `WEAVER/lab.py` | **Science detection — classifies scientific content, assesses rigor, routes to Forge, links to inventory, catches certainty bias and HARKing. 18 tests.** |
 | EXP-001 Runner | `EXPERIMENTS/EXP-001-EFFICIENCY/run_exp001.py` | Data collection guide — status, next, save, prompts |
 | EXP-001 Analyzer | `EXPERIMENTS/EXP-001-EFFICIENCY/analyze.py` | Semantic density, word count, modality shift analysis |
 | Data Schema | `EXPERIMENTS/EXP-001/data_schema.py` | SessionCondition + SessionMeasurement dataclasses |
