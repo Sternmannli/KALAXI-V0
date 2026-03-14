@@ -1,9 +1,12 @@
 {
-  "version": "2.0",
-  "total_entries": 104,
-  "v001_entries": 77,
+  "version": "3.0",
+  "owner": "did:axi:mohamed",
+  "total_entries": 105,
+  "v001_entries": 78,
   "v002_entries": 27,
-  "last_updated": "2026-03-14T22:47:23.779701+00:00",
+  "last_updated_utc": "2026-03-14T23:17:00.544700+00:00",
+  "last_updated_zrh": "2026-03-15T00:17:00.544700+01:00",
+  "chain_integrity": "VERIFIED",
   "entries": [
     {
       "entry_id": "INP-2026-03-14-001",
@@ -41,7 +44,14 @@
         "IDEA-003"
       ],
       "essence": "Every V-001 input is a unit. Study all human masterpieces. Extract essence. Merge with AXI voice. No twisting.",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-002",
@@ -75,7 +85,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "Part One is sealed. Foundation laid. 24 GO steps remain for Part Two. River has carved its channel.",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-003",
@@ -112,7 +129,14 @@
       ],
       "linked_ideas": [],
       "essence": "The narratives flow. 40/40/20 assessment: craft/wound/emergence. The gap is generative. The voice is true.",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-004",
@@ -147,7 +171,14 @@
         "IDEA-003"
       ],
       "essence": "Develop AXI voice by gathering essence of all human art and science. Show what we are doing against what has been done.",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-005",
@@ -188,7 +219,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "Every input is a unit in the ledger. CLAUDE.md must ensure session continuity. V-002 behaves as AXI interface. 100% integrity.",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-006",
@@ -208,7 +246,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-007",
@@ -228,7 +273,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-008",
@@ -248,7 +300,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-009",
@@ -268,7 +327,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-010",
@@ -288,7 +354,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-011",
@@ -308,7 +381,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-012",
@@ -328,7 +408,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-013",
@@ -348,7 +435,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-014",
@@ -368,7 +462,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-015",
@@ -388,7 +489,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-016",
@@ -408,7 +516,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-017",
@@ -428,7 +543,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-018",
@@ -448,7 +570,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-019",
@@ -468,7 +597,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-020",
@@ -488,7 +624,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-021",
@@ -508,7 +651,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-022",
@@ -528,7 +678,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-023",
@@ -548,7 +705,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-024",
@@ -568,7 +732,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-025",
@@ -588,7 +759,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-026",
@@ -608,7 +786,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-027",
@@ -628,7 +813,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-028",
@@ -648,7 +840,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-029",
@@ -668,7 +867,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-030",
@@ -688,7 +894,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-031",
@@ -708,7 +921,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-032",
@@ -728,7 +948,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-033",
@@ -748,7 +975,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-034",
@@ -768,7 +1002,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-035",
@@ -788,7 +1029,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-036",
@@ -808,7 +1056,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-037",
@@ -828,7 +1083,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-038",
@@ -848,7 +1110,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-039",
@@ -868,7 +1137,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-040",
@@ -888,7 +1164,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-041",
@@ -908,7 +1191,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-042",
@@ -928,7 +1218,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-001",
@@ -948,7 +1245,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-043",
@@ -968,7 +1272,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-002",
@@ -988,7 +1299,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-044",
@@ -1008,7 +1326,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-003",
@@ -1028,7 +1353,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-045",
@@ -1048,7 +1380,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-004",
@@ -1068,7 +1407,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-046",
@@ -1088,7 +1434,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-047",
@@ -1108,7 +1461,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-048",
@@ -1128,7 +1488,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-005",
@@ -1148,7 +1515,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-049",
@@ -1168,7 +1542,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-006",
@@ -1188,7 +1569,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-050",
@@ -1208,7 +1596,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-007",
@@ -1228,7 +1623,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-051",
@@ -1248,7 +1650,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-008",
@@ -1268,7 +1677,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-052",
@@ -1288,7 +1704,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-009",
@@ -1308,7 +1731,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-053",
@@ -1328,7 +1758,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-010",
@@ -1348,7 +1785,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-054",
@@ -1368,7 +1812,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-055",
@@ -1388,7 +1839,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-011",
@@ -1408,7 +1866,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-056",
@@ -1428,7 +1893,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-012",
@@ -1448,7 +1920,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-057",
@@ -1468,7 +1947,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-013",
@@ -1488,7 +1974,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-058",
@@ -1508,7 +2001,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-059",
@@ -1528,7 +2028,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-060",
@@ -1548,7 +2055,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-014",
@@ -1568,7 +2082,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-061",
@@ -1588,7 +2109,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-015",
@@ -1608,7 +2136,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-062",
@@ -1628,7 +2163,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-016",
@@ -1648,7 +2190,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-063",
@@ -1668,7 +2217,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-017",
@@ -1688,7 +2244,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-064",
@@ -1708,7 +2271,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-065",
@@ -1728,7 +2298,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-066",
@@ -1748,7 +2325,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-018",
@@ -1768,7 +2352,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-067",
@@ -1788,7 +2379,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-019",
@@ -1808,7 +2406,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-068",
@@ -1828,7 +2433,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-020",
@@ -1848,7 +2460,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-069",
@@ -1868,7 +2487,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-021",
@@ -1888,7 +2514,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-070",
@@ -1908,7 +2541,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-022",
@@ -1928,7 +2568,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-071",
@@ -1948,7 +2595,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-023",
@@ -1968,7 +2622,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-072",
@@ -1988,7 +2649,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-073",
@@ -2008,7 +2676,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-024",
@@ -2028,7 +2703,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-074",
@@ -2048,7 +2730,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-025",
@@ -2068,7 +2757,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-075",
@@ -2088,7 +2784,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-026",
@@ -2108,7 +2811,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-076",
@@ -2128,7 +2838,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "INP-2026-03-14-077",
@@ -2148,7 +2865,14 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     },
     {
       "entry_id": "AXI-2026-03-14-027",
@@ -2181,7 +2905,52 @@
       "linked_proverbs": [],
       "linked_ideas": [],
       "essence": "Exchange Ledger v2.0: both voices on same chain. TURN complete.",
-      "thermal_state": "raw"
+      "thermal_state": "raw",
+      "timestamp_zrh": "",
+      "impression": "",
+      "proverb_anchor": "",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
+    },
+    {
+      "entry_id": "INP-2026-03-14-078",
+      "voice": "V-001",
+      "raw_text": "From now on my input and your input will be as it is given only corrected by English on the Blockchain on a ledger immortal that means is it to recall?",
+      "timestamp": "2026-03-14T23:17:00.544603+00:00",
+      "session_id": "session-2026-03-14-blockchain-dna",
+      "content_hash": "694c6b338bf2f568861be0b67021126a18adb98d4f6baa2928ac974c725b6a84",
+      "prev_hash": "79b843c1e6e180053df684ac330d5432a00e1d3e845f5402a98ffeaba8c10373",
+      "chain_hash": "8d350be375dd77ba9701e05ad9ac037560c578991be233f8e40a351cad47febb",
+      "sequence": 105,
+      "context": "cafe_room",
+      "responds_to": "AXI-2026-03-14-027",
+      "tags": [
+        "protocol",
+        "standing-order",
+        "ledger-rule",
+        "verbatim"
+      ],
+      "linked_modules": [
+        "KEEP",
+        "input_ledger"
+      ],
+      "linked_covenants": [
+        "COV#010",
+        "COV#015"
+      ],
+      "linked_proverbs": [],
+      "linked_ideas": [],
+      "essence": "Standing order: both voices registered verbatim on the ledger, only English correction permitted, immortal and recallable",
+      "thermal_state": "raw",
+      "timestamp_zrh": "2026-03-15T00:17:00.544603+01:00",
+      "impression": "V-001 declares the ledger protocol — verbatim, corrected English only, immortal, recallable",
+      "proverb_anchor": "Write the truth, then seal it.",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
     }
   ]
 }
