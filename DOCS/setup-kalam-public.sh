@@ -70,7 +70,7 @@ M. Farag and collaborators · 2024–2026
 
 ## Contact
 
-info@KALAM.CH
+info@kalam.ch
 ENDOFFILE
 echo "Rewrote README.md"
 
@@ -185,7 +185,7 @@ DESIGN PHASE. Data collection pending.
 
 ## Contact
 
-info@KALAM.CH
+info@kalam.ch
 ENDOFFILE
 echo "Rewrote experiments/EXP-001-PROTOCOL.md"
 

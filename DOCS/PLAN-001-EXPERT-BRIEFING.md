@@ -1,6 +1,6 @@
 # PLAN-001 — The Word, The Loop, The Three Layers (Expert Briefing)
 
-Filed: 2026-03-09 | Status: ACTIVE | Principal Investigator: M. Farag | Contact: info@KALAM.CH
+Filed: 2026-03-09 | Status: ACTIVE | Principal Investigator: M. Farag | Contact: info@kalam.ch
 
 ## The Central Thesis
 
