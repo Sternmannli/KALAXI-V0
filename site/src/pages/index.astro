@@ -85,14 +85,17 @@ import Base from '../layouts/Base.astro';
       <div id="threshold-responses" class="threshold-responses" aria-live="polite"></div>
 
       <form id="threshold-form" method="POST" action="/api/threshold.php" aria-label="Leave your word">
-        <textarea
-          id="threshold-input"
-          name="content"
-          placeholder="قُل"
-          aria-label="Your word"
-          rows="3"
-          maxlength="2000"
-        ></textarea>
+        <div class="grow-wrap" id="grow-wrap">
+          <textarea
+            id="threshold-input"
+            name="content"
+            placeholder="قُل"
+            aria-label="Your word"
+            rows="3"
+            maxlength="2000"
+            oninput="this.parentNode.dataset.replicatedValue = this.value"
+          ></textarea>
+        </div>
         <button type="submit" id="threshold-submit">Leave this here</button>
       </form>
     </div>
@@ -393,9 +396,33 @@ import Base from '../layouts/Base.astro';
     width: 100%;
   }
 
+  /* Auto-growing textarea — CSS grid trick */
+  .grow-wrap {
+    display: grid;
+    width: 100%;
+  }
+
+  .grow-wrap::after {
+    content: attr(data-replicated-value) " ";
+    white-space: pre-wrap;
+    visibility: hidden;
+    grid-area: 1 / 1 / 2 / 2;
+    font: var(--text-base) / 1.7 var(--font-body);
+    padding: var(--space-3);
+    border: 1px solid transparent;
+    min-height: 5rem;
+  }
+
+  .grow-wrap > textarea,
+  .grow-wrap::after {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
   #threshold-input {
     width: 100%;
     min-height: 5rem;
+    max-height: 60vh;
+    overflow-y: auto;
     background: var(--bg-secondary);
     border: 1px solid var(--accent-subtle);
     border-radius: 2px;
@@ -404,14 +431,27 @@ import Base from '../layouts/Base.astro';
     font-size: var(--text-base);
     line-height: 1.7;
     padding: var(--space-3);
-    resize: vertical;
-    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    resize: none;
+    transition: border-color 0.8s ease-in-out, box-shadow 0.8s ease-in-out;
   }
 
   #threshold-input:focus {
     outline: none;
     border-color: var(--accent);
-    box-shadow: 0 0 0 1px var(--accent-subtle);
+    box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.15);
+    animation: breathe-glow 6s ease-in-out infinite;
+  }
+
+  @keyframes breathe-glow {
+    0%, 100% { box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.1); }
+    50%      { box-shadow: 0 0 8px 2px rgba(201, 169, 110, 0.15); }
+  }
+
+  /* Witness acknowledgment flash after submission */
+  #threshold-input.witnessed {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px 2px rgba(201, 169, 110, 0.2);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
   #threshold-input::placeholder {
@@ -420,6 +460,12 @@ import Base from '../layouts/Base.astro';
     color: var(--text-dim);
     text-align: center;
     direction: rtl;
+  }
+
+  /* Progressive enhancement: native auto-grow */
+  @supports (field-sizing: content) {
+    #threshold-input { field-sizing: content; }
+    .grow-wrap::after { display: none; }
   }
 
   #threshold-submit {
@@ -431,7 +477,7 @@ import Base from '../layouts/Base.astro';
     letter-spacing: 0.05em;
     padding: var(--space-1) var(--space-4);
     cursor: pointer;
-    transition: all 0.4s ease;
+    transition: all 0.8s ease-in-out;
   }
 
   #threshold-submit:hover {
@@ -653,6 +699,14 @@ import Base from '../layouts/Base.astro';
 
     // Clear input but keep form visible — always ready
     input.value = '';
+    // Reset the grow-wrap mirror
+    const wrap = document.getElementById('grow-wrap');
+    if (wrap) wrap.dataset.replicatedValue = '';
+
+    // Brief gold flash — witness acknowledgment
+    input.classList.add('witnessed');
+    setTimeout(() => input.classList.remove('witnessed'), 1200);
+
     submit.disabled = false;
     submit.textContent = 'Leave this here';
     input.focus();
