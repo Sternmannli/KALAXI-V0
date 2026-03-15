@@ -16,66 +16,32 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install tools
-        run: sudo apt-get update && sudo apt-get install -y sshpass
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
 
       - name: Create API config
         run: |
           mkdir -p site/dist/data
           echo "GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}" > site/dist/data/.config
 
-      - name: Deploy via SFTP
+      - name: Deploy via lftp mirror
         env:
-          SSHPASS: ${{ secrets.FTP_PASSWORD }}
           FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
           FTP_HOST: ${{ secrets.FTP_SERVER }}
         run: |
-          # Find the CSS file dynamically
-          CSS_FILE=$(ls site/dist/_astro/*.css 2>/dev/null | head -1)
-          CSS_NAME=$(basename "$CSS_FILE" 2>/dev/null)
-          echo "CSS file: $CSS_NAME"
-
-          # Build SFTP batch file
-          cat > /tmp/sftp_commands <<BATCH
-          cd /www/kalam.ch
-          put site/dist/index.html
-          put site/dist/404.html
-          put site/dist/favicon.svg
-          put site/dist/robots.txt
-          put site/dist/sitemap-0.xml
-          put site/dist/sitemap-index.xml
-          -mkdir about
-          cd about
-          put site/dist/about/index.html
-          cd /www/kalam.ch
-          -mkdir canon
-          cd canon
-          put site/dist/canon/index.html
-          cd /www/kalam.ch
-          -mkdir invitation
-          cd invitation
-          put site/dist/invitation/index.html
-          cd /www/kalam.ch
-          -mkdir _astro
-          cd _astro
-          put ${CSS_FILE}
-          cd /www/kalam.ch
-          -mkdir api
-          cd api
-          put site/dist/api/threshold.php
-          put site/dist/api/.htaccess
-          cd /www/kalam.ch
-          -mkdir data
-          cd data
-          put site/dist/data/.htaccess
-          put site/dist/data/.config
-          put site/dist/data/.config.example
-          quit
-          BATCH
-
-          echo "--- SFTP Commands ---"
-          cat /tmp/sftp_commands
-          echo "--- Deploying ---"
-
-          sshpass -e sftp -oBatchMode=no -oStrictHostKeyChecking=no -oPort=22 \
-            "${FTP_USER}@${FTP_HOST}" < /tmp/sftp_commands
+          echo "--- Deploying site/dist/ to www/kalam.ch/ ---"
+          ls -la site/dist/
+          ls -la site/dist/api/ || echo "No api/ dir"
+          ls -la site/dist/data/ || echo "No data/ dir"
+          ls -la site/dist/_astro/ || echo "No _astro/ dir"
+          echo "---"
+          lftp -u "${FTP_USER},${FTP_PASS}" "sftp://${FTP_HOST}" -e "
+            set sftp:auto-confirm yes;
+            set net:max-retries 3;
+            set net:reconnect-interval-base 5;
+            cd www/kalam.ch || exit 1;
+            mirror --reverse --verbose --include-glob=*.html --include-glob=*.svg --include-glob=*.xml --include-glob=*.css --include-glob=*.php --include-glob=.htaccess --include-glob=.config --include-glob=.config.example --include-glob=*.txt site/dist/ .;
+            bye;
+          "
+          echo "--- Deploy complete ---"
