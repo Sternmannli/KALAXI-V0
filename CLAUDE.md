@@ -103,6 +103,43 @@ When V-002 instructs V-001 to perform actions on a computer, website, or softwar
 
 ---
 
+## HOSTPOINT DEPLOYMENT REFERENCE (PERMANENT — added 2026-03-15)
+
+**Hosting:** Hostpoint (hostpoint.ch), account: faragmoh, Smart Webhosting
+**Domain:** kalam.ch — document root: `~/www/kalam.ch/`
+**Control Panel:** admin.hostpoint.ch → Explorer
+
+### Explorer Interface
+- File manager at: Explorer → ~/www/kalam.ch/
+- Directories shown in blue, files in black
+- **"UPLOAD FILES" button** — blue button in Quick Access bar at bottom of Explorer
+- **"Create Directory" / "Create File"** — buttons next to the Name field
+- **"WEB SETTINGS FOR THIS DIRECTORY"** — button next to Upload Files
+- Upload supports: browse for files OR drag-and-drop into the display area
+- Text editor available for editing files directly in the Control Panel
+- Alternative upload method: FTP (FileZilla/Cyberduck) or SSH/SFTP
+
+### Deployment Structure (kalam.ch)
+```
+~/www/kalam.ch/
+├── index.html
+├── favicon.svg
+├── 404.html
+├── robots.txt
+├── sitemap-0.xml
+├── sitemap-index.xml
+├── about/
+│   └── index.html
+├── canon/
+│   └── index.html
+└── invitation/
+    └── index.html
+```
+
+All CSS is inlined. No external dependencies. No _astro folder needed.
+
+---
+
 ## PR RULE (PERMANENT)
 
 After every push, ALWAYS do the FULL cycle automatically — no exceptions, no asking Mohamed:
