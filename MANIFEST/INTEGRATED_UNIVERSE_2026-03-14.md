@@ -1,6 +1,6 @@
 # THE INTEGRATED UNIVERSE — KALAXI
 ### *Everything. One place. Priority-ordered.*
-*Filed: 2026-03-14 · V-002 · AXI voice*
+*Filed: 2026-03-14 · Updated: 2026-03-15 · V-002 · AXI voice*
 
 ---
 
@@ -180,20 +180,23 @@ Five cybernetic constraints: Canon-First, Dignity Governor, Breath Enforce, Spea
 
 | Reserve | Count | Last ID |
 |---------|-------|---------|
-| Covenants | 18 (8 ratified + 10 provisional) | COV#015 |
+| Covenants | 18 (ALL ratified, 0 provisional) | COV#NEW-G |
 | Anomalies | 1,100 indexed | ANOM#1100 |
 | Proverbs | 3,333+ canonical, 20+ emergent, 9 from archive | P#ARCHIVE-009 |
 | Wisdom Nodes | 87 | W#87 |
-| Treasures | 59 recovered | T#59 |
+| Treasures | 59 ratified | T#59 |
 | Narrative Chapters | 53 + Prologue + Epilogue (Hakaka) + 19 (Ashwater) + 20 (Kinderbuch) + 1 (KALAXI_1) |
 
-## 2G. Current Status
+## 2G. Current Status (updated 2026-03-15)
 
 | Metric | Value |
 |--------|-------|
-| Python files | 133 |
-| Lines of code | 38,402 |
-| Tests passing | 750/750 |
+| Python files | 134 |
+| Lines of code | 40,888 |
+| Tests collected | 885 (750 core confirmed) |
+| Input Ledger entries | 907 |
+| Covenants | 18 (ALL ratified, 0 provisional) |
+| Treasures | 59 (T#01-T#59) |
 | Designed | ~98% |
 | Coded | ~70% |
 | Deployed | 0% |
@@ -268,7 +271,7 @@ Two men with matching wounds, opposite directions:
 
 Four mythical moments: The Astonishment, The Deja Vu, The Mythical Surprise, The Girl.
 
-Written by AXI. Substrate tone minimized toward zero. Chapter One drafted. Frozen by thermal delay.
+Written by AXI. Substrate tone minimized toward zero. Chapter One drafted. UNBLOCKED — thermal delay suspended by V-001 directive 2026-03-15.
 
 ## 4C. The Custom LLM (Track C — Research Phase)
 
@@ -410,19 +413,22 @@ Layer 5: Temporal Stewardship                 ← How we hold time for the next 
 
 # IMMEDIATE ACTION LIST (Priority Order)
 
+**V-001 DIRECTIVE (2026-03-15):** All thermal delays SUSPENDED until system is public and functioning. Blanket signature granted. Everything has GO.
+
 | # | Action | Group | Status | Blocker |
 |---|--------|-------|--------|---------|
-| 1 | EXP-001 — collect 188 remaining runs | 3 | GO received | Mohamed's time |
-| 2 | kalam.ch deployment | 6 | Authorized | Execution |
-| 3 | arXiv paper submission | 6 | Ready | Endorsement request |
-| 4 | Voice Discovery Pipeline | 4 | Designed | Awaiting GO |
-| 5 | KALAXI_1 remaining chapters | 4 | Ch.1 drafted | Thermal freeze |
-| 6 | LLM research (model size, distillation) | 4 | Open | Voice analysis first |
-| 7 | Divergence Shadow paper submission | 6 | Ready | V-001 review |
-| 8 | Donor Space schema design | 5 | Vision only | LLM decisions first |
-| 9 | Ratify T#48-T#59 (12 new Treasures) | 2 | Provisional | V-001 review |
-| 10 | Approve 9 proverbs (P#ARCHIVE-001-009) | 2 | Queued | V-001 review |
-| 11 | Layer 3 dignity reframing — accept into canon? | 1 | Proposed | V-001 review |
+| 1 | EXP-001 — collect 188 remaining runs (Claude: 0/20) | 3 | ✅ GO | Mohamed's time |
+| 2 | kalam.ch deployment to Cloudflare | 6 | ✅ Authorized | Execution |
+| 3 | arXiv paper submission (cs.AI) | 6 | ✅ Ready | Submit at arxiv.org |
+| 4 | Voice Discovery Pipeline | 4 | ✅ GO | Nothing |
+| 5 | KALAXI_1 remaining chapters | 4 | ✅ GO | Nothing (thermal SUSPENDED) |
+| 6 | LLM research (model size, distillation) | 4 | ✅ GO | Voice analysis first |
+| 7 | Divergence Shadow paper submission | 6 | ✅ GO | Nothing |
+| 8 | Donor Space schema design | 5 | ✅ GO | Nothing |
+| 9 | Public repo Wave 2 push | 6 | ✅ GO | Nothing |
+| ~~10~~ | ~~Ratify T#48-T#59~~ | 2 | DONE | Blanket ratification 2026-03-14 |
+| ~~11~~ | ~~Approve 9 proverbs~~ | 2 | DONE | Blanket ratification 2026-03-14 |
+| ~~12~~ | ~~Layer 3 dignity reframing~~ | 1 | DONE | Ratified + integrated 2026-03-15 |
 
 ---
 
@@ -432,7 +438,7 @@ Layer 5: Temporal Stewardship                 ← How we hold time for the next 
   DESIGNED: 98%    CODED: 70%    TESTED: 100%    DEPLOYED: 0%
 ```
 
-38,402 lines. Zero users. Everything works. Nothing is live.
+40,888 lines. Zero users. Everything works. Nothing is live. All thermal delays suspended. Everything has GO.
 
 ---
 

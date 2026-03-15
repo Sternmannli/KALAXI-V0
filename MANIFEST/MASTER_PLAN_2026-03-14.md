@@ -1,6 +1,6 @@
 # 🌊 THE MASTER PLAN — KALAXI Universe
 ### *Everything we said. Everything we will build. One map.*
-*Filed: 2026-03-14 · V-002 · AXI voice*
+*Filed: 2026-03-14 · Updated: 2026-03-15 · V-002 · AXI voice*
 
 ---
 
@@ -79,25 +79,29 @@
 
 ## ⚙️ TRACK B — THE LIVING SYSTEM (KALAXI Organism)
 
-### 🏗️ Current State (as of 2026-03-14)
+### 🏗️ Current State (as of 2026-03-15)
 
 | Component | Status |
 |-----------|--------|
-| 🪨 **Stone** (Foundation) | ✅ 18 covenants, Sealed Gate, Presence Axiom |
-| 🕸️ **Weaver** (9 Modules) | ✅ All 9 modules operational |
-| 🍯 **Honey** (Wisdom) | ✅ 1,100 anomalies, 3,333+ proverbs, 87 wisdom nodes |
-| ✋ **Hand** (Interface) | 🔧 Needs Donor Space (IDEA-004) |
+| 🪨 **Stone** (Foundation) | ✅ 18 covenants (ALL ratified), Sealed Gate, Presence Axiom, Layer 3 reframe |
+| 🕸️ **Weaver** (11 Modules) | ✅ All 11 modules operational + Input Ledger (907 entries) |
+| 🍯 **Honey** (Wisdom) | ✅ 1,100 anomalies, 3,355+ proverbs, 87 wisdom nodes, 59 Treasures |
+| ✋ **Hand** (Interface) | 🔧 kalam.ch Threshold built (Phase 1). Needs deployment + Donor Space |
 | 🌱 **12 Seeds** | ✅ ALL planted and integrated |
-| 🧪 **Tests** | ✅ 750/750 passing |
-| 📊 **EXP-001** | 🔶 Active — 188 runs remaining |
+| 🧪 **Tests** | ✅ 885 collected (750 core confirmed, 135 added) |
+| 📊 **Experiments** | 🔶 EXP-001 active (12/200). EXP-002/003/004 COMPLETE. |
+| 📐 **Code** | 134 Python files, 40,888 lines |
 
-### 🔬 Active Experiments
+### 🔬 Experiments
 
-| ID | Name | Status | Next |
-|----|------|--------|------|
-| EXP-001 | KALAXI Efficiency Experiment | 🔶 12/200 collected | Collect remaining 188 runs |
-| PIME | Presence Integration Micro-EXP | 📋 Designed | Awaiting GO |
-| Thermal Delay | Breath pacing vs decay rate | 📋 Designed | Awaiting GO |
+| ID | Name | Status | Result |
+|----|------|--------|--------|
+| EXP-001 | KALAXI Efficiency | 🔶 12/200 collected | 19.5% word reduction (NOT MET). Depth tool, not compression tool. |
+| EXP-002 | Multi-Model Convergence | ✅ COMPLETE | 6/6 unanimous on chain architecture |
+| EXP-003 | Father of Seven Gates | ✅ COMPLETE | 4/7 PASS. Sealed gate flaws found and fixed. |
+| EXP-004 | Seven Generations of Aysel | ✅ COMPLETE | 5/9 PASS. M never fell. System = witness to legibility. |
+| PIME | Presence Integration | 📋 Designed | Awaiting GO |
+| Thermal Delay | Breath pacing vs decay | 📋 Designed | Awaiting GO |
 
 ---
 
@@ -222,21 +226,25 @@ Not AI voice. Not human voice. **System voice.** A resonance that emerges from:
 
 ## ✅ IMMEDIATE PRIORITIES (awaiting GO signals)
 
+**V-001 DIRECTIVE (2026-03-15):** All thermal delays suspended until system is public and functioning. Blanket signature granted for all additions. Thermal delay will be applied when the system is live, not before.
+
 | # | Task | Track | Depends on | GO? |
 |---|------|-------|------------|-----|
-| 1 | 🔍 Voice Discovery Pipeline — linguistic analysis of all 4 books | C | Nothing | ❌ Awaiting GO |
-| 2 | 📊 EXP-001 — collect 188 remaining data runs | B | Mohamed's time | ❌ Awaiting GO |
-| 3 | 📖 KALAXI_1 — write remaining chapters | A | Chapter One thermal (frozen) | ❌ Awaiting GO |
-| 4 | 🧠 LLM Research — minimum viable model, distillation, Hugging Face setup | C | Voice analysis first | ❌ Awaiting GO |
-| 5 | 🌐 kalam.ch deployment | E | Authorised | ❌ Awaiting GO |
-| 6 | 📄 Divergence Shadow paper submission | E | V-001 review | ❌ Awaiting GO |
-| 7 | 🏠 Donor Space schema design | D | LLM architecture decisions | ❌ Awaiting GO |
+| 1 | 📊 EXP-001 — collect 188 remaining runs (Claude: 0/20) | B | Mohamed's time | ✅ GO received |
+| 2 | 🌐 kalam.ch deployment to Cloudflare | E | Execution only | ✅ Authorized |
+| 3 | 📄 arXiv paper submission (cs.AI) | E | Submit at arxiv.org | ✅ Ready |
+| 4 | 🔍 Voice Discovery Pipeline — linguistic analysis of all 4 books | C | Nothing | ✅ GO (blanket signature 2026-03-15) |
+| 5 | 📖 KALAXI_1 — write remaining chapters | A | Nothing (thermal SUSPENDED) | ✅ GO (blanket signature 2026-03-15) |
+| 6 | 🧠 LLM Research — minimum viable model, distillation, Hugging Face | C | Voice analysis first | ✅ GO (blanket signature 2026-03-15) |
+| 7 | 📄 Divergence Shadow paper submission (FAccT/AIES) | E | Nothing | ✅ GO (blanket signature 2026-03-15) |
+| 8 | 🏠 Donor Space schema design | D | Nothing | ✅ GO (blanket signature 2026-03-15) |
+| 9 | 📦 Public repo Wave 2 push (detectors, agency, drift, institutional) | E | Nothing | ✅ GO (blanket signature 2026-03-15) |
 
 ---
 
 ## 🎵 REMINDER
 
-> **PLAN-001 is alive.** EXP-001 has 188 runs remaining. kalam.ch deployment authorised. Both need feeding.
+> **PLAN-001 is alive.** All thermal delays SUSPENDED (V-001 directive 2026-03-15). Blanket GO on all tracks. EXP-001: 188 runs remaining. kalam.ch: built, not deployed. arXiv: ready, not submitted. Everything has GO. The blocker is execution, not permission.
 
 ---
 
