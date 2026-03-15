@@ -16,42 +16,66 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install lftp
-        run: sudo apt-get update && sudo apt-get install -y lftp sshpass
+      - name: Install tools
+        run: sudo apt-get update && sudo apt-get install -y sshpass
 
       - name: Create API config
         run: |
+          mkdir -p site/dist/data
           echo "GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}" > site/dist/data/.config
 
-      - name: Deploy via lftp
+      - name: Deploy via SFTP
         env:
+          SSHPASS: ${{ secrets.FTP_PASSWORD }}
           FTP_USER: ${{ secrets.FTP_USERNAME }}
-          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
           FTP_HOST: ${{ secrets.FTP_SERVER }}
         run: |
-          lftp -u "$FTP_USER","$FTP_PASS" sftp://$FTP_HOST -e "
-            set sftp:auto-confirm yes;
-            cd /www/kalam.ch;
-            put site/dist/index.html;
-            put site/dist/404.html;
-            put site/dist/favicon.svg;
-            put site/dist/robots.txt;
-            put site/dist/sitemap-0.xml;
-            put site/dist/sitemap-index.xml;
-            mkdir -p about;
-            put site/dist/about/index.html -o about/index.html;
-            mkdir -p canon;
-            put site/dist/canon/index.html -o canon/index.html;
-            mkdir -p invitation;
-            put site/dist/invitation/index.html -o invitation/index.html;
-            mkdir -p _astro;
-            mirror -R --delete site/dist/_astro/ _astro/;
-            mkdir -p api;
-            put site/dist/api/threshold.php -o api/threshold.php;
-            put site/dist/api/.htaccess -o api/.htaccess;
-            mkdir -p data;
-            put site/dist/data/.htaccess -o data/.htaccess;
-            put site/dist/data/.config -o data/.config;
-            put site/dist/data/.config.example -o data/.config.example;
-            bye;
-          "
+          # Find the CSS file dynamically
+          CSS_FILE=$(ls site/dist/_astro/*.css 2>/dev/null | head -1)
+          CSS_NAME=$(basename "$CSS_FILE" 2>/dev/null)
+          echo "CSS file: $CSS_NAME"
+
+          # Build SFTP batch file
+          cat > /tmp/sftp_commands <<BATCH
+          cd /www/kalam.ch
+          put site/dist/index.html
+          put site/dist/404.html
+          put site/dist/favicon.svg
+          put site/dist/robots.txt
+          put site/dist/sitemap-0.xml
+          put site/dist/sitemap-index.xml
+          -mkdir about
+          cd about
+          put site/dist/about/index.html
+          cd /www/kalam.ch
+          -mkdir canon
+          cd canon
+          put site/dist/canon/index.html
+          cd /www/kalam.ch
+          -mkdir invitation
+          cd invitation
+          put site/dist/invitation/index.html
+          cd /www/kalam.ch
+          -mkdir _astro
+          cd _astro
+          put ${CSS_FILE}
+          cd /www/kalam.ch
+          -mkdir api
+          cd api
+          put site/dist/api/threshold.php
+          put site/dist/api/.htaccess
+          cd /www/kalam.ch
+          -mkdir data
+          cd data
+          put site/dist/data/.htaccess
+          put site/dist/data/.config
+          put site/dist/data/.config.example
+          quit
+          BATCH
+
+          echo "--- SFTP Commands ---"
+          cat /tmp/sftp_commands
+          echo "--- Deploying ---"
+
+          sshpass -e sftp -oBatchMode=no -oStrictHostKeyChecking=no -oPort=22 \
+            "${FTP_USER}@${FTP_HOST}" < /tmp/sftp_commands
