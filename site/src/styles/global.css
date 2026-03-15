@@ -171,7 +171,35 @@ section {
   background: linear-gradient(to bottom, transparent, var(--accent-subtle), transparent);
 }
 
-/* ===== Navigation ===== */
+/* ===== Top Navigation (sticky) ===== */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: var(--space-2) var(--page-padding);
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--accent-subtle);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.site-nav a {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  padding: var(--space-1) 0;
+}
+
+.site-nav a:hover {
+  color: var(--text-primary);
+}
+
+/* Generic nav (footer etc) */
 nav {
   display: flex;
   gap: var(--space-4);
@@ -189,6 +217,27 @@ nav a {
 
 nav a:hover {
   color: var(--text-primary);
+}
+
+/* ===== Sticky input bar ===== */
+.sticky-input {
+  position: sticky;
+  bottom: 0;
+  z-index: 90;
+  background: var(--bg-primary);
+  border-top: 1px solid var(--accent-subtle);
+  padding: var(--space-2) var(--page-padding);
+  display: flex;
+  justify-content: center;
+}
+
+.sticky-input-inner {
+  width: 100%;
+  max-width: 50ch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 /* ===== Breathing animation ===== */
@@ -252,17 +301,7 @@ nav a:hover {
   left: 41%;
 }
 
-/* ===== Egyptian flag mark ===== */
-.egypt-flag {
-  display: inline-block;
-  width: 1.3em;
-  height: 0.9em;
-  border-radius: 2px;
-  overflow: hidden;
-  position: relative;
-  vertical-align: middle;
-  background: linear-gradient(to bottom, #ce1126 33.3%, #fff 33.3%, #fff 66.6%, #111 66.6%);
-}
+/* ===== Flag marks ===== */
 
 .swiss-mark {
   display: inline-flex;
@@ -390,9 +429,11 @@ nav a:hover {
     opacity: 0.02;
   }
 
-  --color-dignity: #8b6914;
-  --color-presence: #3d7a6a;
-  --color-pattern: #5a6699;
-  --color-wisdom: #8b6d30;
-  --color-witness: #5a7a8f;
+  :root {
+    --color-dignity: #8b6914;
+    --color-presence: #3d7a6a;
+    --color-pattern: #5a6699;
+    --color-wisdom: #8b6d30;
+    --color-witness: #5a7a8f;
+  }
 }

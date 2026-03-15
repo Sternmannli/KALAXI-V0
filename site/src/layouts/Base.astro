@@ -53,6 +53,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </style>
   </head>
   <body>
+    <!-- Top Navigation — always visible -->
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/">home</a>
+      <a href="/about">about</a>
+      <a href="/canon">canon</a>
+      <a href="/invitation">invitation</a>
+    </nav>
+
     <slot />
 
     {!hideFooter && (
@@ -67,7 +75,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <div class="footer-meta">
           <p>Created by M. Farag</p>
           <p class="footer-origins">
-            <span class="swiss-mark"><span class="egypt-flag" aria-hidden="true"></span> Cairo, Egypt</span>
+            <span class="swiss-mark">🇪🇬 Cairo, Egypt</span>
             &nbsp;&middot;&nbsp;
             <span class="swiss-mark"><span class="swiss-flag" aria-hidden="true"></span> Zürich, Switzerland</span>
           </p>
