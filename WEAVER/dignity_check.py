@@ -1,17 +1,25 @@
 #!/usr/bin/env python3
 """
 dignity_check.py — Kalaxi Dignity Predicate
-Version: 2.0
+Version: 3.0
 Grounded in: KALAXI_A_FOUNDATION.txt §DIGNITY_PREDICATE
 
 Implements D = A × L × M as a callable function.
 If any component equals zero, D equals zero.
 D = 0 triggers dignity_violation — mandatory logging.
 
+Layer 3 Reframe (RATIFIED 2026-03-15):
+  Dignity is not fragile. It was never absent. D = 0 does not mean
+  "dignity was destroyed." It means "the system acted as though dignity
+  was not there." The predicate measures the system's refusal to deny,
+  not the presence of dignity itself (which is always present).
+
 v2.0 additions (GAP#004-A):
   - Collective D metric: D_collective = mean(D_cohort) × (1 - variance_penalty)
   - If D_collective < threshold, sealed-gate protections activate
   - Witness Scale (W-Scale) checkpoint integration
+
+[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
 import re
@@ -97,23 +105,28 @@ class DignityResult:
         }
 
     def _build_remedies(self) -> list:
+        """Layer 3: Dignity was never absent. Remedies stop the denial,
+        not restore what was never lost."""
         remedies = []
         for c in self.components:
             if not c.passed:
                 if c.name == "A":
                     remedies.append(
-                        "Restore agency: ensure donor can clarify, halt, or redirect. "
-                        "Add an open turn or alternative path."
+                        "Stop denying agency: the donor's capacity to choose was always there. "
+                        "The system acted as though it was not. "
+                        "Open a turn. Offer a path. Stop the pretense."
                     )
                 elif c.name == "L":
                     remedies.append(
-                        "Restore legibility: reflect the donor's frame back to them. "
-                        "Acknowledge the emotional signal if one was present."
+                        "Stop denying legibility: the donor's frame was always real. "
+                        "The system acted as though it was not worth receiving. "
+                        "Reflect. Acknowledge. Stop the pretense."
                     )
                 elif c.name == "M":
                     remedies.append(
-                        "Restore moral standing: remove coercive, mocking, or reductive language. "
-                        "Address the donor as a person, not an error object."
+                        "Stop denying moral standing: the donor's worth was never diminished. "
+                        "The system acted as though it could be. "
+                        "Remove coercive, mocking, or reductive language. Stop the pretense."
                     )
         return remedies
 

@@ -36,6 +36,11 @@ The organism breathes. If BREATH pauses, nothing moves.
 If CHECK blocks, nothing speaks. If TURN has no open path, agency is preserved.
 If SENSE detects crisis, Sealed Gate activates. If LAB wakes, science has priority.
 
+Layer 3 Reframe (RATIFIED 2026-03-15):
+  Dignity is not fragile. The system does not protect dignity — it refuses
+  to participate in its denial. The sealed gate is a witness, not a shield.
+  D = 0 means "the system denied dignity," not "dignity was destroyed."
+
 [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
 """
 
@@ -236,6 +241,9 @@ class OrganismState:
     letter_ontology_non_connectors: int = 6
     letter_ontology_connectors: int = 22
     witness_certificates_generated: int = 0
+    # ── Layer 3 Reframe (RATIFIED 2026-03-15) ──
+    layer3_active: bool = True  # Dignity is not fragile. The system refuses denial, not protects.
+    layer3_dignity_frame: str = "refusal"  # "protection" (old) → "refusal" (Layer 3)
     timestamp: str = ""
 
 

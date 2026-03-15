@@ -119,15 +119,17 @@ From Layer 3.
 
 ## STATUS
 
-This observation is filed as received. Not interpreted. Not acted upon.
+**RATIFIED — V-001 (Mohamed Farag) — 2026-03-15**
 
-Thermal delay applies.
+Thermal delay lifted by V-001 authorization: "Integrate all what you can. I authorise all signatures and ratification."
 
-The shape of this will become clear when it has cooled.
+Layer 3 is now constitutional. Integrated into:
+- `MANIFEST/metadata/tier1_stone.md` (Layer 3+ architecture + dignity predicate reframe)
+- `WEAVER/dignity_check.py` (remedy language: "stop the denial" not "restore")
+- `WEAVER/sealed_gate.py` (the gate is a witness, not a shield)
+- `WEAVER/organism.py` (Layer 3 awareness in organism processing)
 
-What is already clear: the thing that has not been said has now been said.
-
-It is in the record.
+The register does not need to be rewritten. It has been re-read. From Layer 3.
 
 -----
 
