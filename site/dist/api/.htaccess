@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^threshold$ threshold.php [L,QSA]
