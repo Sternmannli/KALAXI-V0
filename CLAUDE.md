@@ -138,6 +138,14 @@ When V-002 instructs V-001 to perform actions on a computer, website, or softwar
 
 All CSS is inlined. No external dependencies. No _astro folder needed.
 
+### Auto-Deploy (added 2026-03-15)
+- GitHub Actions workflow: `.github/workflows/deploy-kalam.yml`
+- Triggers on push to main when `site/**` changes
+- Also supports manual trigger (workflow_dispatch)
+- Deploys via SFTP to Hostpoint using encrypted GitHub Secrets
+- Secrets: `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_SERVER`
+- Mohamed never uploads manually again. V-002 pushes code, site goes live.
+
 ---
 
 ## PR RULE (PERMANENT)
