@@ -244,20 +244,19 @@ import Base from '../layouts/Base.astro';
   }
 
   .text-block p {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     margin-bottom: var(--space-3);
     line-height: 1.8;
   }
 
   .text-block strong {
-    color: var(--text-primary);
+    color: var(--accent-warm);
   }
 
   .proverb-inline {
     font-family: var(--font-proverb);
     font-style: italic;
-    color: var(--accent);
-    opacity: 0.8;
+    color: var(--accent-warm);
   }
 
   /* Definition list */
@@ -273,8 +272,9 @@ import Base from '../layouts/Base.astro';
   }
 
   dd {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     margin-bottom: var(--space-2);
+    line-height: 1.7;
   }
 
   /* Ordered lists */
@@ -286,12 +286,13 @@ import Base from '../layouts/Base.astro';
   }
 
   ol li {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     counter-increment: principle;
+    line-height: 1.7;
   }
 
   ol li strong {
-    color: var(--text-primary);
+    color: var(--accent-warm);
   }
 
   /* Milestones */
@@ -327,9 +328,10 @@ import Base from '../layouts/Base.astro';
   }
 
   .milestones li div p {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     font-size: var(--text-sm);
     margin-bottom: 0;
+    line-height: 1.7;
   }
 
   /* Legal list */
@@ -341,12 +343,12 @@ import Base from '../layouts/Base.astro';
   }
 
   .legal-list li {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     line-height: 1.7;
   }
 
   .legal-list li strong {
-    color: var(--text-primary);
+    color: var(--accent-warm);
     display: block;
     margin-bottom: 0.25rem;
   }
@@ -356,19 +358,21 @@ import Base from '../layouts/Base.astro';
     margin-top: var(--space-6);
     padding: var(--space-4);
     background: var(--bg-secondary);
-    border-left: 2px solid var(--accent-subtle);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
   }
 
   .story-card h3 {
     font-size: var(--text-lg);
-    color: var(--accent);
+    color: var(--accent-warm);
     margin-bottom: var(--space-2);
   }
 
   .story-card p {
-    color: var(--text-secondary);
-    font-size: var(--text-sm);
-    line-height: 1.7;
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    line-height: 1.8;
   }
 
   /* Contact */
