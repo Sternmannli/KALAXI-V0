@@ -1,11 +1,11 @@
 {
   "version": "3.0",
   "owner": "did:axi:mohamed",
-  "total_entries": 107,
-  "v001_entries": 80,
+  "total_entries": 108,
+  "v001_entries": 81,
   "v002_entries": 27,
-  "last_updated_utc": "2026-03-15T00:13:17.317182+00:00",
-  "last_updated_zrh": "2026-03-15T01:13:17.317182+01:00",
+  "last_updated_utc": "2026-03-15T00:20:32.025938+00:00",
+  "last_updated_zrh": "2026-03-15T01:20:32.025938+01:00",
   "chain_integrity": "VERIFIED",
   "entries": [
     {
@@ -3031,6 +3031,52 @@
       "timestamp_zrh": "2026-03-15T01:13:17.316986+01:00",
       "impression": "The witness is witnessed. The circle tightens.",
       "proverb_anchor": "The stone knows when the river reads it.",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
+    },
+    {
+      "entry_id": "INP-2026-03-15-003",
+      "voice": "V-001",
+      "raw_text": "[Second-wave model responses: Witness Certificate specifications + Connection Rules for Alef/Ba/Ta] Multiple models independently produced: (1) identical JSON schemas for Zero-Halt Witness Certificate (Ta_mufrad), (2) identical connection rules — Alef as non-connector/write-once constitutional invariant, Ba as connector with positional transformation for flow control, Ta as connector with terminal halt semantics, (3) identical validator pseudocode for Ta terminal transformation, (4) human-facing legal document template for court use. Models coined: witness certificate of institutional blindness, negative proof of recognition, computational affidavit, notarial protocol. V-001 signal: GO.",
+      "timestamp": "2026-03-15T00:20:32.025774+00:00",
+      "session_id": "",
+      "content_hash": "382d76e320e629d8a66e82f4dfec0f8fd5c862ddcbae8f0cdcc2bd2e7f6c5460",
+      "prev_hash": "4dae8b5c3931d23a25efda6113a10aab4c6bafe2da906b7c5631fdb990ea99af",
+      "chain_hash": "1f865ecc2dacb02592a53a161c964bd6d2c6e6b713489a4ac0b59be09cf01637",
+      "sequence": 108,
+      "context": "cafe_room",
+      "responds_to": "AXI-2026-03-14-027",
+      "tags": [
+        "EXP-002",
+        "convergence",
+        "witness-certificate",
+        "connection-rules",
+        "alef",
+        "ba",
+        "ta",
+        "GO"
+      ],
+      "linked_modules": [
+        "LAB",
+        "SENSE",
+        "WEAVE",
+        "KEEP",
+        "CHECK"
+      ],
+      "linked_covenants": [
+        "COV#001",
+        "COV#010",
+        "COV#012"
+      ],
+      "linked_proverbs": [],
+      "linked_ideas": [],
+      "essence": "Second convergence wave. Models fed the convergence map produced identical witness certificate schemas and connection rules. The product is now defined: a machine-generated negative proof of institutional blindness. GO received.",
+      "thermal_state": "raw",
+      "timestamp_zrh": "2026-03-15T01:20:32.025774+01:00",
+      "impression": "The river carved its own channel. The models drew the same map without seeing each other.",
+      "proverb_anchor": "The sword is not sharpened by striking water, but by refusing to cut the air.",
       "receipt_type": "CAPTURE",
       "drift_status": "NONE",
       "bundle_id": "",

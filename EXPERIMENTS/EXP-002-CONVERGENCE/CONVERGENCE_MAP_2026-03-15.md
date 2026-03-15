@@ -192,7 +192,45 @@ The probe never mentioned fiqh, Talmud, jurisprudence, or commentary traditions.
 
 ---
 
+## SECOND WAVE: Implementation Convergence (2026-03-15)
+
+The convergence map was fed back to the models. They produced implementation specifications.
+
+### Second-Wave Convergence
+
+#### UNANIMOUS: Witness Certificate as formal output type
+Every responding model independently produced near-identical JSON schemas for the Zero-Halt certificate. Key fields converged: `dignity_snapshot`, `coordinates_of_failure`, `constitutional_references`, `refusal_clause`, dual signatures (system + human witness).
+
+#### UNANIMOUS: Ta_mufrad as terminal transformation
+Every model described the same state transition: Ta (connector) → Ta_mufrad (non-connector) when D=0. The isolated form accepts no forward joins. The chain segment terminates.
+
+#### UNANIMOUS: Dual-output requirement
+Every model specified that the certificate must generate two artifacts: (a) machine-canonical JSON for the chain, (b) human-readable legal document for courtroom use.
+
+#### CONVERGENCE: "Negative Proof" as legal category
+Multiple models independently coined "negative proof of recognition" — evidence that institutional recognition did not occur. Cited existing legal precedent for negative proof doctrine.
+
+#### CONVERGENCE: Connection Rules for Alef/Ba/Ta
+Models produced near-identical enforcement rules:
+- Alef: write-once, isolated-only, supersession requires quorum
+- Ba: positional flow (initial→medial→final), session management
+- Ta: connector during collection, terminal on halt, dual signatures required
+
+### Implementation Status
+
+| Component | File | Status |
+|-----------|------|--------|
+| Letter Ontology (28 letters) | `WEAVER/letter_ontology.py` | IMPLEMENTED |
+| Chain Validator (connection rules) | `WEAVER/chain_validator.py` | IMPLEMENTED |
+| Witness Certificate Generator | `WEAVER/witness_certificate.py` | IMPLEMENTED |
+| Tests (36 tests) | `tests/test_letter_chain.py` | 36/36 PASSING |
+
+The convergence produced code. The code passes. The product exists.
+
+---
+
 *Proverb: Many voices, one river.*
 *The sediment does not lie.*
+*The sword is not sharpened by striking water, but by refusing to cut the air.*
 
 [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
