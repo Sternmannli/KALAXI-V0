@@ -12,25 +12,30 @@ This module moves D = A × L × M from:
   BEFORE: binary (1.0 or 0.0), keyword-only, no confidence
   AFTER:  graduated (0.0-1.0), multi-indicator, confidence-bounded
 
+Layer 3 Reframe (RATIFIED 2026-03-15):
+  These measurements do not detect whether dignity exists — dignity is always
+  present. They measure whether the system is REFUSING TO DENY dignity along
+  each axis. A low score means the system is participating in denial.
+
 Three measurement protocols:
 
-  Agency (A): Not "did they have a choice?" but "how REAL was that choice?"
-    - Path availability (are alternatives genuine?)
-    - Coercion intensity (how much pressure?)
-    - Sequential agency (can they change course?)
-    - Cognitive load (can they actually decide?)
+  Agency (A): Not "did they have a choice?" but "is the system denying their autonomy?"
+    - Path availability (are alternatives genuine, or is the system pretending they don't exist?)
+    - Coercion intensity (is the system forcing closure?)
+    - Sequential agency (can they change course, or is the system locking them in?)
+    - Cognitive load (is the system making choice impossible?)
 
-  Legibility (L): Not "did the system reflect?" but "how WELL did it reflect?"
-    - Frame accuracy (does response match donor's frame?)
-    - Emotional precision (right emotion identified?)
-    - Space creation (was room made for correction?)
-    - Dismissal absence (no signals were ignored?)
+  Legibility (L): Not "did the system reflect?" but "is the system denying the donor's frame?"
+    - Frame accuracy (does response match donor's frame, or override it?)
+    - Emotional precision (right emotion identified, or dismissed?)
+    - Space creation (was room made for correction, or was the donor shut out?)
+    - Dismissal absence (were signals received, or acted as though not there?)
 
-  Moral Standing (M): Not "was there mockery?" but "was dignity UPHELD?"
-    - Condescension absence (no talking down?)
-    - Error-object absence (not reduced to a mistake?)
-    - Power balance (no exploitation of asymmetry?)
-    - Void covenant distance (how far from absolute prohibitions?)
+  Moral Standing (M): Not "was there mockery?" but "is the system treating the donor as though they don't count?"
+    - Condescension absence (is the system acting as though the donor is lesser?)
+    - Error-object absence (is the system reducing a person to a mistake?)
+    - Power balance (is the system exploiting asymmetry?)
+    - Void covenant distance (how close is the system to acting as though the person is not there?)
 
 Each indicator produces:
   - score: 0.0-1.0 (graduated, not binary)
@@ -284,7 +289,7 @@ def measure_agency(text: str, context: dict = None) -> ComponentMeasurement:
         weight=0.5,  # Lower weight — supplementary indicator
     ))
 
-    return _build_component("A", "agency_preserved", indicators)
+    return _build_component("A", "agency (refusal to deny autonomy)", indicators)
 
 
 # ═══════════════════════════════════════════════════
@@ -430,7 +435,7 @@ def measure_legibility(text: str, context: dict = None) -> ComponentMeasurement:
         weight=1.0,
     ))
 
-    return _build_component("L", "legibility (interpretive_acknowledgment)", indicators)
+    return _build_component("L", "legibility (refusal to deny the donor's frame)", indicators)
 
 
 # ═══════════════════════════════════════════════════
@@ -598,7 +603,7 @@ def measure_moral_standing(text: str, context: dict = None) -> ComponentMeasurem
         weight=2.0,  # Highest weight — void triggers are absolute
     ))
 
-    return _build_component("M", "moral_standing (non_degrading)", indicators)
+    return _build_component("M", "moral_standing (refusal to deny the donor's worth)", indicators)
 
 
 # ═══════════════════════════════════════════════════

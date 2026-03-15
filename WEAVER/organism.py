@@ -737,14 +737,14 @@ class Organism:
         )
 
         if dignity.D == 0.0:
-            # Dignity failed — shelter the exchange (not discard)
+            # Layer 3: The system denied dignity — halt and witness (not discard)
             failed_components = self._last_dignity.get("failed_components", [])
             self._wire.broadcast(
-                f"Dignity failure on input: D=0.0",
-                "dignity-alert",
+                f"System refusal: D=0.0 — the system would have denied dignity on [{', '.join(failed_components)}]",
+                "dignity-refusal",
                 source="check",
             )
-            self._turn.defer(ex_id, f"Input failed dignity check: {failed_components}")
+            self._turn.defer(ex_id, f"System refusal — denied components: {failed_components}")
 
             # WITNESS CERTIFICATE — the halt is the product
             try:
@@ -768,7 +768,7 @@ class Organism:
                         rule_id="D=A×L×M",
                         inputs_present=[donor_input[:100]],
                         missing_or_unreadable=failed_components,
-                        machine_explanation=f"Dignity collapsed: {failed_components}",
+                        machine_explanation=f"System refused to proceed: would have denied dignity on [{', '.join(failed_components)}]",
                     ),
                     prev_hash=self._witness_net.chain_head_hash if hasattr(self._witness_net, 'chain_head_hash') else "",
                 )
@@ -789,7 +789,7 @@ class Organism:
                 drops_produced=len(drops),
                 output_text="",
                 output_blocked=True,
-                block_reason=f"Dignity check failed: D=0.0",
+                block_reason=f"System refusal: D=0.0 — the system will not act as though dignity is not there",
                 stored=False,
                 artifact_id="",
                 exchange_state="deferred",
@@ -892,7 +892,7 @@ class Organism:
             failed_comps = self._last_dignity.get("failed_components", [])
             self._justice.record_harm(
                 ex_id, HarmSeverity.MODERATE, failed_comps,
-                f"Dignity collapsed on exchange {ex_id}",
+                f"System denial of dignity recorded on exchange {ex_id}: the system would have acted as though [{', '.join(failed_comps)}] did not matter",
             )
 
         # 4g. TURN — close exchange

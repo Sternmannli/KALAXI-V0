@@ -210,9 +210,10 @@ class DignityDrift:
             return (
                 f"CRITICAL dignity drift: dD/dt={dD_dt:.4f}, current D={current_D:.2f}. "
                 f"{self._consecutive_declines} consecutive declines. "
-                f"Dignity collapse imminent.",
-                "PAUSE recommended. Steward must review immediately. "
-                "System should not process new exchanges until drift is reversed."
+                f"System approaching systematic denial of dignity.",
+                "SYSTEM HALT recommended. The system is trending toward acting as though "
+                "dignity is not there. Steward must review immediately. "
+                "No new exchanges until the pattern of denial is addressed."
             )
 
     def state(self) -> DriftState:

@@ -120,7 +120,7 @@ def test_drift_recommends_action():
     drift.record(0.5, "EX-002")
     drift.record(0.2, "EX-003")
     alert = drift.check()
-    check("drift_recommends_pause", "PAUSE" in alert.recommended_action)
+    check("drift_recommends_pause", "HALT" in alert.recommended_action or "PAUSE" in alert.recommended_action)
     check("drift_recommends_steward", "steward" in alert.recommended_action.lower())
 
 
