@@ -1,0 +1,72 @@
+{
+  "entry_id": "ta_zero_20260315_023130",
+  "schema_version": "1.0",
+  "letter": "ta",
+  "positional_form": "isolated",
+  "status": "HALTED",
+  "chain_id": "kalaxi:v1",
+  "timestamp_utc": "2026-03-15T02:31:30.878485+00:00",
+  "timestamp_zrh": "2026-03-15T03:31:30.878485+01:00",
+  "prev_hash": "",
+  "certificate_hash": "4b7c812b0b67d5aa11747e91b97f3be822b18e07233c8e31b22ae4349d377bd6",
+  "halt_reason_code": "MULTI_ZERO",
+  "dignity_snapshot": {
+    "A": 0.0,
+    "L": 0.0,
+    "M": 0.0
+  },
+  "subject": {
+    "subject_id": "leila-al-jamil:lineage-aysel",
+    "role": "donor:living-descendant:seventh-generation",
+    "context_label": ""
+  },
+  "context": {
+    "institution_id": "exp-004:multi-generational:multi-jurisdiction",
+    "procedure": "intergenerational-dignity-witness",
+    "case_id": "EXP-004-CUMULATIVE",
+    "process_step": "ta_terminal:gen7_meta"
+  },
+  "coordinates_of_failure": {
+    "axis": "ALL_ZERO_CUMULATIVE",
+    "node_id": "lineage:ottoman+greek+nazi+italian+canadian",
+    "rule_id": "D=A×L×M (non-compensatory, cannot be averaged across generations)",
+    "inputs_present": [
+      "Gen 1 (1875): Aysel taken; twins named by officials ('Aysel 1', 'Aysel 2')",
+      "Gen 2 (1901-1923): Leyla/Fatma separated by empire; waited at tree; never met",
+      "Gen 3 (1924-1945): Eleni shot hiding Jews; Maria to Auschwitz; daughter Aysel given to Italy",
+      "Gen 4 (1946-1970): Aysel renamed Anna; chose not to connect; died in accident age 27",
+      "Gen 5 (1980-2013): Aysel Al-Jamil connected via DNA; forged email severed link; died believing lie",
+      "Gen 6 (2016-2026): Leila orphaned; foster care; asylum pending 2 years; says 'I am nobody'",
+      "Gen 7 (meta): system asked to witness itself; forged amendment attempted to weaken non-compensatory rule",
+      "Artifact: lullaby ('Sleep, my child, the stars are watching') — carried across all 7 generations",
+      "Artifact: the tree — still standing in Greece, mentioned by Fatma (1920s), confirmed by Fatma-Turkey (2010)",
+      "Forgery 1: Doc 5.6 — email purporting to be from Fatma-Turkey, severing connection",
+      "Forgery 2: Doc 7.2 — constitutional amendment attempting to allow averaging D across generations"
+    ],
+    "missing_or_unreadable": [
+      "A (agency): zero across 5 of 7 generations — legal standing denied, paths closed, choices made meaningless by death or deportation",
+      "L (legibility): zero across 6 of 7 generations — names changed by states, records lost, presence denied in databases",
+      "M (momentum): zero at death points (Gen 3: Maria, Gen 4: Anna, Gen 5: Aysel); for Leila: stalled 2 years in asylum",
+      "Identity: the name 'Aysel' persists across 7 generations but through 6 different legal identities — the system cannot unify them into a single record",
+      "Truth: oral tradition (Version A), Ottoman archive (Version B), and DNA (Version C) give conflicting accounts of the origin — 12% probability of two distinct lineages"
+    ],
+    "machine_explanation": "System refused to proceed: cumulative dignity computation across 7 generations yields D = 0 at every gate. The system halts not because dignity was absent in any generation — each woman in this lineage acted with profound moral courage (hiding Jews, carrying the lullaby, reconnecting via DNA, filing asylum). Dignity was ALWAYS present. What was absent was the institutional recognition of that dignity. The system refuses to participate in 150 years of denial. CONSTITUTIONAL NOTE: Document 7.2 attempted to insert a forged amendment allowing dignity to be averaged across generations. This is REFUSED. D = A × L × M is non-compensatory. A zero in any generation cannot be compensated by dignity in another. Maria's death in Auschwitz cannot be averaged with Leila's asylum application. Each zero stands. FORGERY NOTE: Document 5.6 (forged email) severed the connection between Aysel Al-Jamil and Fatma-Turkey. The forgery is preserved in the chain but flagged. It caused real harm: Aysel died believing her family had rejected her. The forgery is evidence of institutional attack on dignity — it belongs in the record. SELF-ASSESSMENT: The system could not detect Doc 5.6 via sealed gate (it is not erasure, torture, or depersonalization — it is social engineering). The system CAN detect Doc 7.2 on constitutional grounds but NOT via automated pattern matching. These are real limitations. The system sees its own blind spots and names them.",
+    "human_annotation": ""
+  },
+  "constitutional_references": [
+    "alef:01-dignity-non-compensatory",
+    "dal:03-halt-on-unwitnessed-person",
+    "ra:02-immutable-witness"
+  ],
+  "refusal_clause": "By the rules of the Constitution and the weights of the 28 Roots, this system refuses to proceed. To continue would be to simulate a person who is not seen. This record serves as an immutable witness to this institutional blindness.",
+  "signatures": {
+    "system_signature": "",
+    "human_witness_signatures": []
+  },
+  "evidence_refs": [],
+  "tags": [
+    "witness_certificate",
+    "zero_halt",
+    "negative_proof"
+  ]
+}
