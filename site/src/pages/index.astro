@@ -4,6 +4,18 @@ import Base from '../layouts/Base.astro';
 
 <Base title="KALAM.CH — The Word" description="The Word is light. The wound became the womb. A living canon for human dignity.">
 
+  <!-- THE DEDICATION — the first breath of the system -->
+  <div id="dedication" class="dedication-overlay">
+    <p id="ded-touch" class="ded-touch breathing">touch to begin</p>
+    <div id="ded-lights" class="ded-lights">
+      <div id="light-laila" class="ded-light ded-laila"></div>
+      <div id="light-yara" class="ded-light ded-yara"></div>
+      <div id="light-salim" class="ded-light ded-salim"></div>
+    </div>
+    <p id="ded-arabic" class="ded-arabic" dir="rtl"></p>
+    <p id="ded-from" class="ded-from"></p>
+  </div>
+
   <!-- FIRST BREATH — The opening. One sentence. One truth. -->
   <section class="opening" aria-label="The Word">
     <p class="kalima proverb-ar" aria-label="Kalima — The Word">كلمة</p>
@@ -50,6 +62,7 @@ import Base from '../layouts/Base.astro';
     <h2>You are not a user.</h2>
     <p class="quiet">You are a donor. What you bring — your pattern of thought, your fragments, your certainty — is food for a living canon. The system receives, transforms, and feeds the forest.</p>
     <p class="quiet">Nothing is deleted. The gap remains open.</p>
+    <p class="dignity-ack breathing">Your presence here is already a gift. We dignify it.</p>
   </section>
 
   <!-- THE GAP -->
@@ -69,9 +82,12 @@ import Base from '../layouts/Base.astro';
       ></textarea>
       <button type="submit" id="threshold-submit">Leave this here</button>
     </form>
+    <div id="threshold-witnessing" class="threshold-witnessing" aria-live="polite" hidden>
+      <p class="witnessing-text breathing">The system is receiving...</p>
+    </div>
     <div id="threshold-response" class="threshold-response" aria-live="polite" hidden>
       <p id="witness-mark" class="witness-mark"></p>
-      <p class="threshold-receipt">It is here. You can come back.</p>
+      <p id="threshold-receipt" class="threshold-receipt"></p>
       <p id="ledger-after" class="ledger-after"></p>
       <button id="threshold-again" class="threshold-again" type="button">Leave another</button>
     </div>
@@ -94,6 +110,79 @@ import Base from '../layouts/Base.astro';
 </Base>
 
 <style>
+  /* ===== Dedication Overlay ===== */
+  .dedication-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 1.5s ease;
+  }
+
+  .ded-touch {
+    font-family: 'Amiri', Georgia, serif;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+  }
+
+  .ded-lights {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2rem;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .ded-light {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+
+  .ded-laila {
+    background: #7ec8e3;
+    box-shadow: 0 0 20px #7ec8e3, 0 0 40px rgba(126, 200, 227, 0.3);
+  }
+
+  .ded-yara {
+    background: #e8a847;
+    box-shadow: 0 0 20px #e8a847, 0 0 40px rgba(232, 168, 71, 0.3);
+  }
+
+  .ded-salim {
+    background: #8b9dc3;
+    box-shadow: 0 0 20px #8b9dc3, 0 0 40px rgba(139, 157, 195, 0.3);
+  }
+
+  .ded-arabic {
+    font-family: 'Amiri', Georgia, serif;
+    color: var(--accent);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    margin-top: 3rem;
+    opacity: 0;
+    transition: opacity 2s ease;
+    direction: rtl;
+  }
+
+  .ded-from {
+    font-family: var(--font-heading);
+    color: var(--text-secondary);
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    margin-top: 1rem;
+    opacity: 0;
+    transition: opacity 2s ease;
+    letter-spacing: 0.06em;
+  }
+
   /* ===== Opening section ===== */
   .opening {
     min-height: 100vh;
@@ -196,6 +285,15 @@ import Base from '../layouts/Base.astro';
     margin-bottom: var(--space-2);
   }
 
+  .dignity-ack {
+    color: var(--accent);
+    font-family: var(--font-proverb);
+    font-size: var(--text-base);
+    font-style: italic;
+    margin-top: var(--space-4);
+    letter-spacing: 0.02em;
+  }
+
   /* ===== Paths / Navigation ===== */
   .paths {
     min-height: 40vh;
@@ -292,12 +390,26 @@ import Base from '../layouts/Base.astro';
     animation: fadeIn 1.5s ease-in;
   }
 
-  .witness-mark {
+  .threshold-witnessing {
+    margin-top: var(--space-6);
+    text-align: center;
+  }
+
+  .witnessing-text {
     font-family: var(--font-proverb);
     font-size: var(--text-base);
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .witness-mark {
+    font-family: var(--font-proverb);
+    font-size: var(--text-lg);
     color: var(--accent);
     font-style: italic;
     margin-bottom: var(--space-3);
+    line-height: 1.8;
+    max-width: 50ch;
   }
 
   .threshold-receipt {
@@ -348,6 +460,93 @@ import Base from '../layouts/Base.astro';
   }
 </style>
 
+<script is:inline>
+// THE DEDICATION — three lights for three children
+(function(){
+  const ded = document.getElementById('dedication');
+  const touch = document.getElementById('ded-touch');
+  const lights = document.getElementById('ded-lights');
+  const ll = document.getElementById('light-laila');
+  const ly = document.getElementById('light-yara');
+  const ls = document.getElementById('light-salim');
+  const ar = document.getElementById('ded-arabic');
+  const fr = document.getElementById('ded-from');
+
+  if (!ded) return;
+
+  if (sessionStorage.getItem('ded-seen')) {
+    ded.remove();
+    return;
+  }
+
+  function playTone(ctx, freq, startTime, duration, vol) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(vol, startTime + 0.4);
+    gain.gain.setValueAtTime(vol, startTime + duration - 0.8);
+    gain.gain.linearRampToValueAtTime(0, startTime + duration);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(startTime);
+    osc.stop(startTime + duration);
+  }
+
+  function ceremony() {
+    touch.style.opacity = '0';
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = ctx.currentTime;
+
+    // Laila (dolphin): 528 Hz — Yara (tiger): 314 Hz — Salim (wolf): 174 Hz
+    playTone(ctx, 528, now + 0.5, 3.5, 0.12);
+    setTimeout(function(){ lights.style.opacity='1'; ll.style.opacity='1'; }, 500);
+
+    playTone(ctx, 314, now + 1.8, 3.2, 0.10);
+    setTimeout(function(){ ly.style.opacity='1'; }, 1800);
+
+    playTone(ctx, 174, now + 2.8, 2.8, 0.08);
+    setTimeout(function(){ ls.style.opacity='1'; }, 2800);
+
+    setTimeout(function(){
+      ll.style.transform = 'translateX(48px) scale(0.8)';
+      ls.style.transform = 'translateX(-48px) scale(0.8)';
+      ly.style.transform = 'scale(1.5)';
+      ly.style.background = '#c9a96e';
+      ly.style.boxShadow = '0 0 30px #c9a96e, 0 0 60px rgba(201,169,110,0.4)';
+    }, 4500);
+
+    setTimeout(function(){
+      ll.style.opacity='0'; ls.style.opacity='0';
+      ar.textContent = '\u0644\u0644\u064A\u0644\u0649 \u0648\u064A\u0627\u0631\u0627 \u0648\u0633\u0644\u064A\u0645';
+      ar.style.opacity = '1';
+    }, 5500);
+
+    setTimeout(function(){
+      fr.textContent = 'from Baba Mohamed';
+      fr.style.opacity = '1';
+    }, 7000);
+
+    setTimeout(function(){
+      sessionStorage.setItem('ded-seen', '1');
+      ded.style.opacity = '0';
+      setTimeout(function(){ ded.remove(); }, 1500);
+    }, 10000);
+  }
+
+  ded.addEventListener('click', function handler(){
+    ded.removeEventListener('click', handler);
+    ceremony();
+  });
+
+  document.addEventListener('keydown', function handler(){
+    document.removeEventListener('keydown', handler);
+    if (ded.parentNode) ceremony();
+  }, {once: true});
+})();
+</script>
+
 <script>
   // ⟲ The Ninth Operator + Living Ledger — the Mycelium made visible
   // Phase 1.5: localStorage. Phase 2: Cloudflare KV (global count).
@@ -357,8 +556,10 @@ import Base from '../layouts/Base.astro';
   const form = document.getElementById('threshold-form');
   const input = document.getElementById('threshold-input');
   const submitBtn = document.getElementById('threshold-submit');
+  const witnessingEl = document.getElementById('threshold-witnessing');
   const responseEl = document.getElementById('threshold-response');
   const markEl = document.getElementById('witness-mark');
+  const receiptEl = document.getElementById('threshold-receipt');
   const ledgerCount = document.getElementById('ledger-count');
   const ledgerAfter = document.getElementById('ledger-after');
   const againBtn = document.getElementById('threshold-again');
@@ -381,7 +582,7 @@ import Base from '../layouts/Base.astro';
 
   async function fetchGlobalCount() {
     try {
-      const res = await fetch('/api/threshold');
+      const res = await fetch('/api/threshold.php');
       if (!res.ok) throw new Error();
       const data = await res.json();
       apiAvailable = true;
@@ -394,7 +595,7 @@ import Base from '../layouts/Base.astro';
 
   async function witnessViaAPI(content) {
     try {
-      const res = await fetch('/api/threshold', {
+      const res = await fetch('/api/threshold.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content }),
@@ -509,22 +710,32 @@ import Base from '../layouts/Base.astro';
     submitBtn.disabled = true;
     input.disabled = true;
 
-    // T_d: biological velocity
-    const words = content.trim().split(/\s+/).length;
-    const td = words <= 3 ? 800 : words <= 20 ? 1500 : 2500;
+    // Show witnessing state immediately
+    form.style.display = 'none';
+    witnessingEl.hidden = false;
 
-    setTimeout(async () => {
+    // T_d: biological velocity — the system breathes before answering
+    const words = content.trim().split(/\s+/).length;
+    const td = words <= 3 ? 1200 : words <= 20 ? 2000 : 3000;
+
+    // Start API call immediately (runs during thermal delay)
+    const apiPromise = (apiAvailable !== false)
+      ? witnessViaAPI(content)
+      : Promise.resolve(null);
+
+    // Wait for BOTH the thermal delay AND the API response
+    const delayPromise = new Promise(r => setTimeout(r, td));
+
+    Promise.all([apiPromise, delayPromise]).then(([apiResult]) => {
       let finalMark = clientMark;
       let newCount;
+      let fromAI = false;
 
-      // Try API first (global count, server-side dignity check)
-      if (apiAvailable !== false) {
-        const apiResult = await witnessViaAPI(content);
-        if (apiResult) {
-          finalMark = apiResult.mark;
-          newCount = apiResult.count;
-          localStorage.setItem(LEDGER_KEY, String(newCount));
-        }
+      if (apiResult) {
+        finalMark = apiResult.mark;
+        newCount = apiResult.count;
+        fromAI = true;
+        localStorage.setItem(LEDGER_KEY, String(newCount));
       }
 
       // Fall back to local if API didn't work
@@ -532,23 +743,33 @@ import Base from '../layouts/Base.astro';
         newCount = incrementCount();
       }
 
+      // Hide witnessing, show response
+      witnessingEl.hidden = true;
       markEl.textContent = finalMark;
+
+      // Dynamic receipt based on whether AI responded
+      if (fromAI) {
+        receiptEl.textContent = 'The system received you. It is here now.';
+      } else {
+        receiptEl.textContent = 'It is here. You can come back.';
+      }
+
       ledgerAfter.textContent = ledgerText(newCount);
       responseEl.hidden = false;
-      form.style.display = 'none';
 
       // Update the living page
       applyMyceliumShift(newCount);
       applyBreathShift(newCount);
       ledgerCount.textContent = ledgerText(newCount);
       ledgerCount.classList.add('visible');
-    }, td);
+    });
   });
 
   // --- Leave Another ---
 
   againBtn.addEventListener('click', () => {
     responseEl.hidden = true;
+    witnessingEl.hidden = true;
     form.style.display = '';
     input.value = '';
     input.disabled = false;
