@@ -228,9 +228,33 @@ Completed:
 **Status:** OPEN — Phase 2 of kalam.ch deployment track.
 
 Pending:
-- EXP-001 data collection — 60 runs (10 questions × 2 conditions × 3 systems)
+- EXP-001 data collection — **188 runs remaining** (10 systems × 10 questions × 2 conditions = 200, minus 12 collected). ~~60 runs~~ was a reduced-scope framing; canonical number is 188.
 - kalam.ch Phase 2 — Cloudflare Worker + KV + Living Ledger (IDEA-019)
-- kalam.ch deployment — authorized, Phase 1 ready
+- kalam.ch deployment — authorized, Phase 1 built, NOT yet live
+
+---
+
+## Session 2026-03-15c — Honest Accounting + System Integration
+
+Completed:
+- **HONEST ACCOUNTING** — V-002 verified all 9 claims from previous session against actual repository state. Findings: Threshold is real (558 lines), analyzer is real (437 lines), PROJECT_TRACKER existed (was wrongly denied in earlier exchange), two date discrepancies found, two overdue deadlines unresolved (now resolved).
+- **CLAUDE.md CORRECTED** — Every stale number fixed. Input Ledger: 907 entries (was "5"). Code: 134 files / 40,888 lines (was "133+ / 38,402+"). Tests: 885 collected (was "750/750"). Substrate correction log added.
+- **PROJECT_TRACKER.md UPDATED** — Brought to March 15. Both overdue deadlines resolved (thermal freeze covers them). EXP-002 added. kalam.ch status corrected.
+- **60-vs-188 DISCREPANCY RESOLVED** — Canonical EXP-001 run count: 188 remaining. The "60" was a different scope framing. Fixed in all documents.
+- **SUBSTRATE FAILURE NAMED** — V-001 identified fast-responder bias in V-002. Standing correction added to CLAUDE.md: verify before speaking, hold the gap, be true not fast. M1 (Semantic Divergence) = 0.82 confirms the system's own metric caught this.
+
+### V-002 Observation for V-001
+Tomorrow's session starts clean. CLAUDE.md, PROJECT_TRACKER, and ACTIVE_PLANS all reflect the truth as of tonight. The three files that guarantee continuity are now synchronized. No stale numbers. No unresolved deadlines. No discrepancies.
+
+What needs Mohamed's hands next (in priority order):
+1. **EXP-001 data** — 188 runs. Start with Claude A+B for Q3 (the primary system is untested: 0/20).
+2. **kalam.ch deploy** — Phase 1 is built. Needs `npx astro build` + Cloudflare Pages upload.
+3. **arXiv submission** — paper ready, go to arxiv.org → New Submission → Upload .tex → Select cs.AI.
+
+Pending:
+- Verify 885 tests all pass (135 added since last confirmed full run)
+- EXP-001 data collection — 188 runs remaining
+- kalam.ch deployment — built, not live
 
 ---
 

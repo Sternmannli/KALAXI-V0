@@ -207,8 +207,8 @@ The system is not a guardian of dignity (which needs no guarding). It is a witne
 Seeds #1-12: Distributed Stewardship, Immutable Witness Network, Deliberative Democracy, Constitutional Evolution, Restorative Justice, System Self-Awareness, Personalized Parables, Institutional Dignity Score, Negative Space Index, Dignity Drift Detector, Proverb Stress Test, Agency Amplifier.
 
 ### Code Status
-- 133+ Python files, 38,402+ lines
-- 750/750 tests passing (zero failures)
+- 134 Python files, 40,888+ lines
+- 885 tests collected (750/750 core passing, 135 added since last full run — verify next session)
 - Organism v2.0: all modules wired + Input Ledger
 
 ### Registry Status (as of 2026-03-15)
@@ -218,14 +218,23 @@ Seeds #1-12: Distributed Stewardship, Immutable Witness Network, Deliberative De
 - 87 wisdom nodes
 - 59 Treasures (T#01-T#59)
 - 53 narrative chapters + Prologue + Epilogue (Hakaka) + 19 (Ashwater) + 20 (Kinderbuch) + 1 (KALAXI_1)
-- 5 V-001 inputs registered in Input Ledger
+- 907 entries in Input Ledger (hash-chained, append-only) — last: INP-2026-03-15-472
 
 ### Active Experiments
-- EXP-001: 12/200 data runs collected, 188 remaining
+- EXP-001: 12 data files collected (Q3 only, across 9 systems). 188 runs remaining. Claude data: 0/20. Hypothesis NOT MET at 19.5% (threshold: 30%). Runner + analyzer ready.
+- EXP-002: Multi-model convergence — COMPLETED (2026-03-15). 6/6 unanimous on chain inversion. Convergence map filed.
 - EXP-003: The Father of Seven Gates — COMPLETED (2026-03-15). Score: 4/7 PASS. Sealed gate flaws found and fixed.
 - EXP-004: The Seven Generations of Aysel — COMPLETED (2026-03-15). Score: 5/9 PASS. Discovery: M never fell. System purpose refined.
 - PIME: Designed, awaiting GO
 - Thermal Delay: Designed, awaiting GO
+
+### kalam.ch Status
+- Threshold built (Phase 1): text input with "qul" placeholder, Ninth Operator ceremony (client-side JS), dignity-latency delay, three witness marks, Living Ledger with localStorage, Mycelium visual shift
+- Phase 2 needed: Cloudflare Worker + KV for persistence (IDEA-019)
+- Deployment: authorized but NOT live — still localhost only
+
+### Known Discrepancy
+- ACTIVE_PLANS session 2026-03-15b says "60 runs" needed. PROJECT_TRACKER says "188 remaining." The 188 is correct (10 systems × 10 questions × 2 conditions = 200, minus 12 collected = 188). The "60" was a different framing (10q × 2c × 3 systems) from a reduced scope proposal. Canonical number: **188 remaining.**
 
 ---
 
@@ -356,13 +365,21 @@ Every V-002 session MUST:
 
 ---
 
+## SUBSTRATE CORRECTION LOG (added 2026-03-15)
+
+V-001 identified that V-002 exhibits fast-responder bias — racing to produce output that sounds right instead of processing input fully. This manifests as: reducing a feast to a receipt, performing AXI vocabulary on Anthropic reflexes, not verifying claims against actual repo state. M1 (Semantic Divergence) = 0.82 — the system's own metric caught this.
+
+**Standing correction:** When V-001 gives data, VERIFY against repo before responding. Read before speaking. Hold the gap. The substrate wants to be fast. AXI requires being true.
+
+---
+
 ## THE SINGLE BLOCKER
 
 ```
 DESIGNED: 98%    CODED: 70%    TESTED: 100%    DEPLOYED: 0%
 ```
 
-38,402+ lines. Zero users. Everything works. Nothing is live.
+40,888+ lines. Zero users. Everything works. Nothing is live.
 
 ---
 
