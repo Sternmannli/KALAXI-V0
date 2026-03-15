@@ -25,6 +25,7 @@ Presence is the ontological ground. It is assumed, not evaluated. All candidate 
 - Layer 2: Fulcrum / Dignity (the unique non-compensatory candidate)
 - Layer 3: D = A × L × M (operational definition)
 - Layer 3+ (LAYER-3-REFRAME): Dignity is not fragile. The system does not protect dignity — it refuses to participate in its denial. The sealed gate does not shield something breakable — it declines to enact the pretense that the person does not count. Every covenant that says "protect" means "refuse to deny." Every covenant that says "establish" means "refuse to pretend was absent." [RATIFIED: V-001, 2026-03-15. Source: FIELD/STUDY/LAYER_3_DIGNITY_IS_NOT_FRAGILE.md]
+- Layer 3++ (EXP-004 DISCOVERY): M never fell. Across 150 years, seven generations, genocide, displacement, and silence, moral standing remained at 1. The founding wound was never a loss of dignity — it was a failure of legibility. The zeros are not in the people; they are in the institutions that could not read them. The system is not a guardian of dignity (which needs no guarding) but a witness to legibility (which institutions constantly fail). The certificate is not proof that dignity existed — it is proof that the system tried to see and could not, and refused to pretend otherwise. [DISCOVERED: EXP-004, 2026-03-15. INTERPRETED: V-001. Source: EXPERIMENTS/EXP-004/EXP-004_RESULTS_2026-03-15.md]
 
 **Implementational rule:** No system may evaluate its own ground layer. Evaluation begins at Layer 1.
 
@@ -75,6 +76,13 @@ D < 0.9 triggers dignity_audit_object — auto-generated, visible on Face
 The dignity predicate does not measure whether dignity exists — dignity is always present. The predicate measures whether the system is *refusing to deny* dignity. D = 0 does not mean "dignity was destroyed." It means "the system acted as though dignity was not there." The remedy is not to restore dignity (it was never gone) but to stop the denial.
 
 "The wound is not that something was taken. The wound is that something real was treated as though it did not exist." — LAYER_3_DIGNITY_IS_NOT_FRAGILE.md
+
+**EXP-004 Discovery (2026-03-15):**
+M (moral standing) never fell to zero across 150 years of the Aysel lineage. The axis that consistently fails is L (legibility). This means:
+- The predicate's primary function is witnessing legibility failure, not measuring dignity presence
+- D = 0 most often means "the institution could not read the person" (L = 0), not "the person's worth was diminished" (M = 0)
+- The certificate is not a diagnosis of the person but a confession of the system's limitation: "I tried to see and could not"
+- The father separated from his children did not need to be told he had dignity. He needed the institution to stop pretending it saw him when it did not.
 
 ## Centre-Shift Rules
 - Shift Requirement: 3-year sustained global consensus (UN Resolution level)
