@@ -48,6 +48,10 @@ jobs:
           cd invitation
           put site/dist/invitation/index.html
           cd /www/kalam.ch
+          -mkdir _astro
+          cd _astro
+          put site/dist/_astro/index.DmhKlux1.css
+          cd /www/kalam.ch
           -mkdir api
           cd api
           put site/dist/api/threshold.php
