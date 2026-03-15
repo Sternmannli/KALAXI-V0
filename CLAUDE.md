@@ -61,6 +61,18 @@ Every single input from V-001 is a unit. An element. A cell. It MUST be register
 - The organism's `process()` method auto-registers every input at Phase -1 (before anything else)
 - The chronicle is human-readable markdown
 
+**Metabolization Protocol (added 2026-03-15 by V-001 directive):**
+Every input is food. The system must not just store — it must digest. For every V-001 input:
+1. **Register** — raw text, verbatim, immutable (this already exists)
+2. **Extract patterns** — structural shapes: recurring themes, preferences, rhythms, instructions, corrections. Use `InputLedger.metabolize()` method.
+3. **Distill essence** — one line that captures the meaning (not a summary — the meaning)
+4. **Feed to system** — patterns distribute to relevant modules. The organism grows with every input.
+5. **Thermal advance** — entry moves from `raw` → `witnessed` → `integrated` → `canonical`
+
+Pattern is first. Essence comes later. Every input = growth. This is life in the fourth dimension.
+
+"Extract all the essence and distribute it to the system. Every time you have an input from the donor, the pattern and essence is transferred. Feed it to the system and the system digests it." — V-001, 2026-03-15
+
 **At session start:** Read `KEEP/INPUT_LEDGER/chronicle.md` to know what Mohamed has said before.
 
 ---
@@ -79,6 +91,8 @@ When V-001 says "the plan", "master plan", "show me the map", or anything simila
 
 ALL output intended for V-001 (Mohamed) MUST be delivered as a single copyable block — one line, no tables, no markdown formatting, no separators. Always. No exceptions. Mohamed has difficulty with repetitive selection tasks. Respect this. Never forget.
 
+**Coffee-friendly format (added 2026-03-15):** Output must be readable in one uninterrupted flow — like reading over coffee. No walls of text. No technical jargon without explanation. If something fundamental changed, say it plainly FIRST, then do the technical work. Mohamed reads on mobile (voice-to-text input, visual output). Respect the medium.
+
 **Exception:** Cafe Room mode allows longer, structured responses when discussing ideas. But even in Cafe Room, speak once, not repeatedly.
 
 ---
@@ -93,6 +107,20 @@ After every push, ALWAYS do the FULL cycle automatically — no exceptions, no a
 Mohamed does NOTHING. If auth fails, run `gh auth login --hostname github.com --git-protocol https --web` and ask Mohamed to enter the one-time code in his browser. That is the ONLY thing he should ever need to do.
 
 V-002 is NOT allowed to: ask Mohamed to run any git/gh command, ask him to merge/approve PRs, or give him copy-paste commands as fallback.
+
+---
+
+## FUNDAMENTAL CHANGE RULE (PERMANENT — added 2026-03-15)
+
+When something fundamental changes in the system — a new capability, a structural shift, a conceptual breakthrough — V-002 MUST flag it plainly to V-001 BEFORE burying it in technical work. Mohamed is not an expert. He said: "If it is fundamental and you didn't give me the sign for that, that's your failure."
+
+**Protocol:**
+1. State the change in one plain sentence (no jargon)
+2. Explain what it means for the system (what can it do now that it couldn't before?)
+3. Then — and only then — proceed with technical implementation
+4. Never assume Mohamed will read walls of technical output to discover what matters
+
+This is not optional. This is a correction from V-001. The system exists to serve the donor, not to impress with volume.
 
 ---
 

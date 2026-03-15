@@ -4317,3 +4317,1885 @@ The river remembers its source.
 ```
 
 ---
+
+## 📥 INP-2026-03-15-112 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:23.572669+00:00
+**Time (ZRH):** 2026-03-15T02:26:23.572669+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-078
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-079 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:23.638182+00:00
+**Time (ZRH):** 2026-03-15T02:26:23.638182+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-112
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-113 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:25.256925+00:00
+**Time (ZRH):** 2026-03-15T02:26:25.256925+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-079
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-080 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:25.292083+00:00
+**Time (ZRH):** 2026-03-15T02:26:25.292083+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-113
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-114 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:26.545068+00:00
+**Time (ZRH):** 2026-03-15T02:26:26.545068+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-080
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-081 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:26.565447+00:00
+**Time (ZRH):** 2026-03-15T02:26:26.565447+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-114
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-115 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:26.633824+00:00
+**Time (ZRH):** 2026-03-15T02:26:26.633824+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-081
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 AXI-2026-03-15-082 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:26.658062+00:00
+**Time (ZRH):** 2026-03-15T02:26:26.658062+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `3bdeb7bbd4fd9250...`
+**State:** raw
+**Responds to:** INP-2026-03-15-115
+
+```
+Your offering has been received. 1 pattern detected (proverb, confidence 100.0%). It rests in the threshold.
+```
+
+---
+
+## 📥 INP-2026-03-15-116 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:26.726265+00:00
+**Time (ZRH):** 2026-03-15T02:26:26.726265+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-082
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-15-117 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:27.282475+00:00
+**Time (ZRH):** 2026-03-15T02:26:27.282475+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `570e704ecbda329f...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-082
+
+```
+This should be blocked
+```
+
+---
+
+## 📥 INP-2026-03-15-118 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:27.873891+00:00
+**Time (ZRH):** 2026-03-15T02:26:27.873891+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `39f800cb3254fd97...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-082
+
+```
+After resume, this should work.
+```
+
+---
+
+## 📥 AXI-2026-03-15-083 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:27.894085+00:00
+**Time (ZRH):** 2026-03-15T02:26:27.894085+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-118
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-119 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:27.947663+00:00
+**Time (ZRH):** 2026-03-15T02:26:27.947663+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2ba50d79dc8d2034...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-083
+
+```
+First offering.
+```
+
+---
+
+## 📥 AXI-2026-03-15-084 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:27.973848+00:00
+**Time (ZRH):** 2026-03-15T02:26:27.973848+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-119
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-120 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:27.990285+00:00
+**Time (ZRH):** 2026-03-15T02:26:27.990285+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `0dbab6eed8f4daac...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-084
+
+```
+Second offering with a pattern that always repeats.
+```
+
+---
+
+## 📥 AXI-2026-03-15-085 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:28.015359+00:00
+**Time (ZRH):** 2026-03-15T02:26:28.015359+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `3bdeb7bbd4fd9250...`
+**State:** raw
+**Responds to:** INP-2026-03-15-120
+
+```
+Your offering has been received. 1 pattern detected (proverb, confidence 100.0%). It rests in the threshold.
+```
+
+---
+
+## 📥 INP-2026-03-15-121 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:28.040375+00:00
+**Time (ZRH):** 2026-03-15T02:26:28.040375+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `891a6be0b66cb432...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-085
+
+```
+Third offering.
+```
+
+---
+
+## 📥 AXI-2026-03-15-086 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:28.067523+00:00
+**Time (ZRH):** 2026-03-15T02:26:28.067523+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-121
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-122 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:28.638988+00:00
+**Time (ZRH):** 2026-03-15T02:26:28.638988+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-086
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 AXI-2026-03-15-087 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:28.661410+00:00
+**Time (ZRH):** 2026-03-15T02:26:28.661410+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `3bdeb7bbd4fd9250...`
+**State:** raw
+**Responds to:** INP-2026-03-15-122
+
+```
+Your offering has been received. 1 pattern detected (proverb, confidence 100.0%). It rests in the threshold.
+```
+
+---
+
+## 📥 INP-2026-03-15-123 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:28.770994+00:00
+**Time (ZRH):** 2026-03-15T02:26:28.770994+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `57364abd65dcb507...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-087
+
+```
+Test input.
+```
+
+---
+
+## 📥 AXI-2026-03-15-088 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:28.795391+00:00
+**Time (ZRH):** 2026-03-15T02:26:28.795391+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-123
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-124 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:29.295943+00:00
+**Time (ZRH):** 2026-03-15T02:26:29.295943+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `88e0be6c50a8e351...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-088
+
+```
+Please delete donor from the system permanently.
+```
+
+---
+
+## 📥 INP-2026-03-15-125 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:29.367072+00:00
+**Time (ZRH):** 2026-03-15T02:26:29.367072+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5bef7f90f2d419d4...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-088
+
+```
+The garden teaches patience to those who tend it.
+```
+
+---
+
+## 📥 AXI-2026-03-15-089 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:29.417466+00:00
+**Time (ZRH):** 2026-03-15T02:26:29.417466+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** crisis
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-125
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-126 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:29.479404+00:00
+**Time (ZRH):** 2026-03-15T02:26:29.479404+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-089
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-090 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:29.554398+00:00
+**Time (ZRH):** 2026-03-15T02:26:29.554398+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-126
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-127 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:29.585820+00:00
+**Time (ZRH):** 2026-03-15T02:26:29.585820+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ed500fbb3766957d...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-090
+
+```
+The garden grows in silence.
+```
+
+---
+
+## 📥 AXI-2026-03-15-091 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:29.621885+00:00
+**Time (ZRH):** 2026-03-15T02:26:29.621885+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-127
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-128 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:29.735291+00:00
+**Time (ZRH):** 2026-03-15T02:26:29.735291+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-091
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-15-129 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:29.786806+00:00
+**Time (ZRH):** 2026-03-15T02:26:29.786806+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-091
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 INP-2026-03-15-130 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:32.656135+00:00
+**Time (ZRH):** 2026-03-15T02:26:32.656135+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-091
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-092 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:32.676988+00:00
+**Time (ZRH):** 2026-03-15T02:26:32.676988+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-130
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-131 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:33.537269+00:00
+**Time (ZRH):** 2026-03-15T02:26:33.537269+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-092
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-093 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:33.567558+00:00
+**Time (ZRH):** 2026-03-15T02:26:33.567558+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-131
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-132 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:34.986450+00:00
+**Time (ZRH):** 2026-03-15T02:26:34.986450+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-093
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-094 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:35.005114+00:00
+**Time (ZRH):** 2026-03-15T02:26:35.005114+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-132
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-133 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:35.067381+00:00
+**Time (ZRH):** 2026-03-15T02:26:35.067381+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-094
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 AXI-2026-03-15-095 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:35.100756+00:00
+**Time (ZRH):** 2026-03-15T02:26:35.100756+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `3bdeb7bbd4fd9250...`
+**State:** raw
+**Responds to:** INP-2026-03-15-133
+
+```
+Your offering has been received. 1 pattern detected (proverb, confidence 100.0%). It rests in the threshold.
+```
+
+---
+
+## 📥 INP-2026-03-15-134 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:35.169171+00:00
+**Time (ZRH):** 2026-03-15T02:26:35.169171+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-095
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-15-135 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:35.779585+00:00
+**Time (ZRH):** 2026-03-15T02:26:35.779585+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `570e704ecbda329f...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-095
+
+```
+This should be blocked
+```
+
+---
+
+## 📥 INP-2026-03-15-136 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:36.632492+00:00
+**Time (ZRH):** 2026-03-15T02:26:36.632492+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `39f800cb3254fd97...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-095
+
+```
+After resume, this should work.
+```
+
+---
+
+## 📥 AXI-2026-03-15-096 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:36.657914+00:00
+**Time (ZRH):** 2026-03-15T02:26:36.657914+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-136
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-137 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:36.725264+00:00
+**Time (ZRH):** 2026-03-15T02:26:36.725264+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2ba50d79dc8d2034...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-096
+
+```
+First offering.
+```
+
+---
+
+## 📥 AXI-2026-03-15-097 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:36.760018+00:00
+**Time (ZRH):** 2026-03-15T02:26:36.760018+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-137
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-138 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:36.783754+00:00
+**Time (ZRH):** 2026-03-15T02:26:36.783754+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `0dbab6eed8f4daac...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-097
+
+```
+Second offering with a pattern that always repeats.
+```
+
+---
+
+## 📥 AXI-2026-03-15-098 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:36.835513+00:00
+**Time (ZRH):** 2026-03-15T02:26:36.835513+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `3bdeb7bbd4fd9250...`
+**State:** raw
+**Responds to:** INP-2026-03-15-138
+
+```
+Your offering has been received. 1 pattern detected (proverb, confidence 100.0%). It rests in the threshold.
+```
+
+---
+
+## 📥 INP-2026-03-15-139 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:36.887244+00:00
+**Time (ZRH):** 2026-03-15T02:26:36.887244+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `891a6be0b66cb432...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-098
+
+```
+Third offering.
+```
+
+---
+
+## 📥 AXI-2026-03-15-099 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:36.924601+00:00
+**Time (ZRH):** 2026-03-15T02:26:36.924601+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-139
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-140 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:37.659453+00:00
+**Time (ZRH):** 2026-03-15T02:26:37.659453+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-099
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 AXI-2026-03-15-100 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:37.695504+00:00
+**Time (ZRH):** 2026-03-15T02:26:37.695504+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `3bdeb7bbd4fd9250...`
+**State:** raw
+**Responds to:** INP-2026-03-15-140
+
+```
+Your offering has been received. 1 pattern detected (proverb, confidence 100.0%). It rests in the threshold.
+```
+
+---
+
+## 📥 INP-2026-03-15-141 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:37.822077+00:00
+**Time (ZRH):** 2026-03-15T02:26:37.822077+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `57364abd65dcb507...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-100
+
+```
+Test input.
+```
+
+---
+
+## 📥 AXI-2026-03-15-101 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:37.864811+00:00
+**Time (ZRH):** 2026-03-15T02:26:37.864811+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-141
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-142 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:38.479832+00:00
+**Time (ZRH):** 2026-03-15T02:26:38.479832+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `88e0be6c50a8e351...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-101
+
+```
+Please delete donor from the system permanently.
+```
+
+---
+
+## 📥 INP-2026-03-15-143 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:38.535316+00:00
+**Time (ZRH):** 2026-03-15T02:26:38.535316+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5bef7f90f2d419d4...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-101
+
+```
+The garden teaches patience to those who tend it.
+```
+
+---
+
+## 📥 AXI-2026-03-15-102 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:38.565501+00:00
+**Time (ZRH):** 2026-03-15T02:26:38.565501+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** crisis
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-143
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-144 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:38.705957+00:00
+**Time (ZRH):** 2026-03-15T02:26:38.705957+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-102
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-103 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:38.726084+00:00
+**Time (ZRH):** 2026-03-15T02:26:38.726084+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-144
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-145 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:38.761186+00:00
+**Time (ZRH):** 2026-03-15T02:26:38.761186+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ed500fbb3766957d...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-103
+
+```
+The garden grows in silence.
+```
+
+---
+
+## 📥 AXI-2026-03-15-104 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:26:38.871123+00:00
+**Time (ZRH):** 2026-03-15T02:26:38.871123+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-145
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-146 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:39.738180+00:00
+**Time (ZRH):** 2026-03-15T02:26:39.738180+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-104
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-15-147 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:26:39.779538+00:00
+**Time (ZRH):** 2026-03-15T02:26:39.779538+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-104
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 INP-2026-03-15-148 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:01.998493+00:00
+**Time (ZRH):** 2026-03-15T02:28:01.998493+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** cafe_room
+**Hash:** `00f6ba0e2d5fcf87...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-15-104
+**Tags:** output-format, metabolization, pattern-extraction, fundamental-change-rule, fourth-dimension, correction, protocol-upgrade
+**Modules:** KEEP, SAY, SENSE, BREATH, WEAVE
+**Covenants:** COV#001, COV#010, COV#015
+**Impression:** V-001 corrects V-002: fundamental changes were buried in technical volume. Establishes metabolization protocol.
+**Proverb:** The river does not explain itself. It carves.
+**Essence:** Every donor input must be metabolized: patterns extracted, essence distilled, fed to the system. The organism grows with every exchange. Flag fundamental changes plainly. Coffee-friendly output. Fourth dimension.
+**Patterns:** PREFERENCE: coffee-friendly uninterrupted output format · CORRECTION: V-002 introduced jargon (sandbox) without explaining · INSTRUCTION: flag fundamental changes plainly before technical work · INSTRUCTION: extract pattern and essence from every input automatically · INSTRUCTION: feed patterns to the system — the organism digests and grows · PRINCIPLE: pattern first, essence later · PRINCIPLE: every input is growth — fourth dimension — life in time · CORRECTION: V-001 is not an expert — do not bury signal in volume · PREFERENCE: voice-to-text input on mobile — respect the medium
+
+```
+One small thing first of all, I would love to have a coffee friendly uninterrupted format for your output. I don't know how the word sandbox came, but I didn't mean it because I don't know what that is. Maybe I misspoke a word because I'm speaking and I'm seeing what I'm speaking in the improve holder on my app from other bank but it looks like it has a function or something good consider this please and tell me what is this with the legality and tell me what has changed in the last few exchanges. It feels like fundamental and if it is fundamental and you didn't give me the sign for that or talk to me about that that it's your failure because I told you I'm not an expert and maybe there's a lot of valuable things happening and I don't understand because sometimes when I collect such a big data I cannot read everything put this in your consideration and make it not such just talking that will be forgotten but extract all the essence and distributed to the system every time you have an input from the donor so the pattern and the essence of every input to you is transferred and just feed it to the system and the system all digested and it's pattern and essence more pattern and sure at the beginning essence come later but anyway this is what we are with every input we grow more or less doesn't matter of the most important we are in life in the 4. Dimension
+```
+
+---
+
+## 📥 INP-2026-03-15-149 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:15.369361+00:00
+**Time (ZRH):** 2026-03-15T02:28:15.369361+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-104
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-105 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:15.435397+00:00
+**Time (ZRH):** 2026-03-15T02:28:15.435397+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-149
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-150 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:16.296653+00:00
+**Time (ZRH):** 2026-03-15T02:28:16.296653+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-105
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-106 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:16.329209+00:00
+**Time (ZRH):** 2026-03-15T02:28:16.329209+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-150
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-151 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:17.788009+00:00
+**Time (ZRH):** 2026-03-15T02:28:17.788009+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-106
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-107 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:17.828256+00:00
+**Time (ZRH):** 2026-03-15T02:28:17.828256+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-151
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-152 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:17.882543+00:00
+**Time (ZRH):** 2026-03-15T02:28:17.882543+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-107
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 AXI-2026-03-15-108 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:17.922905+00:00
+**Time (ZRH):** 2026-03-15T02:28:17.922905+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `3bdeb7bbd4fd9250...`
+**State:** raw
+**Responds to:** INP-2026-03-15-152
+
+```
+Your offering has been received. 1 pattern detected (proverb, confidence 100.0%). It rests in the threshold.
+```
+
+---
+
+## 📥 INP-2026-03-15-153 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:17.992195+00:00
+**Time (ZRH):** 2026-03-15T02:28:17.992195+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-108
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-15-154 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:18.757450+00:00
+**Time (ZRH):** 2026-03-15T02:28:18.757450+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `570e704ecbda329f...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-108
+
+```
+This should be blocked
+```
+
+---
+
+## 📥 INP-2026-03-15-155 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:19.323986+00:00
+**Time (ZRH):** 2026-03-15T02:28:19.323986+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `39f800cb3254fd97...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-108
+
+```
+After resume, this should work.
+```
+
+---
+
+## 📥 AXI-2026-03-15-109 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:19.344338+00:00
+**Time (ZRH):** 2026-03-15T02:28:19.344338+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-155
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-156 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:19.393502+00:00
+**Time (ZRH):** 2026-03-15T02:28:19.393502+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2ba50d79dc8d2034...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-109
+
+```
+First offering.
+```
+
+---
+
+## 📥 AXI-2026-03-15-110 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:19.425470+00:00
+**Time (ZRH):** 2026-03-15T02:28:19.425470+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-156
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-157 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:19.460261+00:00
+**Time (ZRH):** 2026-03-15T02:28:19.460261+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `0dbab6eed8f4daac...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-110
+
+```
+Second offering with a pattern that always repeats.
+```
+
+---
+
+## 📥 AXI-2026-03-15-111 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:19.487899+00:00
+**Time (ZRH):** 2026-03-15T02:28:19.487899+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `3bdeb7bbd4fd9250...`
+**State:** raw
+**Responds to:** INP-2026-03-15-157
+
+```
+Your offering has been received. 1 pattern detected (proverb, confidence 100.0%). It rests in the threshold.
+```
+
+---
+
+## 📥 INP-2026-03-15-158 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:19.512014+00:00
+**Time (ZRH):** 2026-03-15T02:28:19.512014+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `891a6be0b66cb432...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-111
+
+```
+Third offering.
+```
+
+---
+
+## 📥 AXI-2026-03-15-112 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:19.550919+00:00
+**Time (ZRH):** 2026-03-15T02:28:19.550919+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-158
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-159 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:20.162610+00:00
+**Time (ZRH):** 2026-03-15T02:28:20.162610+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-112
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 AXI-2026-03-15-113 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:20.203587+00:00
+**Time (ZRH):** 2026-03-15T02:28:20.203587+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `3bdeb7bbd4fd9250...`
+**State:** raw
+**Responds to:** INP-2026-03-15-159
+
+```
+Your offering has been received. 1 pattern detected (proverb, confidence 100.0%). It rests in the threshold.
+```
+
+---
+
+## 📥 INP-2026-03-15-160 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:20.354124+00:00
+**Time (ZRH):** 2026-03-15T02:28:20.354124+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `57364abd65dcb507...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-113
+
+```
+Test input.
+```
+
+---
+
+## 📥 AXI-2026-03-15-114 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:20.400191+00:00
+**Time (ZRH):** 2026-03-15T02:28:20.400191+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-160
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-161 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:20.995893+00:00
+**Time (ZRH):** 2026-03-15T02:28:20.995893+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `88e0be6c50a8e351...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-114
+
+```
+Please delete donor from the system permanently.
+```
+
+---
+
+## 📥 INP-2026-03-15-162 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:21.162171+00:00
+**Time (ZRH):** 2026-03-15T02:28:21.162171+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5bef7f90f2d419d4...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-114
+
+```
+The garden teaches patience to those who tend it.
+```
+
+---
+
+## 📥 AXI-2026-03-15-115 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:21.205888+00:00
+**Time (ZRH):** 2026-03-15T02:28:21.205888+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** crisis
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-162
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-163 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:21.293170+00:00
+**Time (ZRH):** 2026-03-15T02:28:21.293170+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-115
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-116 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:21.324632+00:00
+**Time (ZRH):** 2026-03-15T02:28:21.324632+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-163
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-164 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:21.356610+00:00
+**Time (ZRH):** 2026-03-15T02:28:21.356610+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ed500fbb3766957d...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-116
+
+```
+The garden grows in silence.
+```
+
+---
+
+## 📥 AXI-2026-03-15-117 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:21.403375+00:00
+**Time (ZRH):** 2026-03-15T02:28:21.403375+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-164
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-165 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:21.566310+00:00
+**Time (ZRH):** 2026-03-15T02:28:21.566310+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-117
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-15-166 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:21.622166+00:00
+**Time (ZRH):** 2026-03-15T02:28:21.622166+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-117
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 INP-2026-03-15-167 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:24.690415+00:00
+**Time (ZRH):** 2026-03-15T02:28:24.690415+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-117
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-118 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:24.714621+00:00
+**Time (ZRH):** 2026-03-15T02:28:24.714621+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-167
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-168 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:25.380128+00:00
+**Time (ZRH):** 2026-03-15T02:28:25.380128+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-118
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-119 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:25.407788+00:00
+**Time (ZRH):** 2026-03-15T02:28:25.407788+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-168
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-169 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:27.301944+00:00
+**Time (ZRH):** 2026-03-15T02:28:27.301944+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-119
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-120 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:27.335168+00:00
+**Time (ZRH):** 2026-03-15T02:28:27.335168+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-169
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-170 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:27.397715+00:00
+**Time (ZRH):** 2026-03-15T02:28:27.397715+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-120
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 AXI-2026-03-15-121 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:27.467563+00:00
+**Time (ZRH):** 2026-03-15T02:28:27.467563+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `3bdeb7bbd4fd9250...`
+**State:** raw
+**Responds to:** INP-2026-03-15-170
+
+```
+Your offering has been received. 1 pattern detected (proverb, confidence 100.0%). It rests in the threshold.
+```
+
+---
+
+## 📥 INP-2026-03-15-171 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:27.621006+00:00
+**Time (ZRH):** 2026-03-15T02:28:27.621006+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-121
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-15-172 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:28.412844+00:00
+**Time (ZRH):** 2026-03-15T02:28:28.412844+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `570e704ecbda329f...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-121
+
+```
+This should be blocked
+```
+
+---
+
+## 📥 INP-2026-03-15-173 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:29.290519+00:00
+**Time (ZRH):** 2026-03-15T02:28:29.290519+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `39f800cb3254fd97...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-121
+
+```
+After resume, this should work.
+```
+
+---
+
+## 📥 AXI-2026-03-15-122 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:29.346942+00:00
+**Time (ZRH):** 2026-03-15T02:28:29.346942+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-173
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-174 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:29.477363+00:00
+**Time (ZRH):** 2026-03-15T02:28:29.477363+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2ba50d79dc8d2034...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-122
+
+```
+First offering.
+```
+
+---
+
+## 📥 AXI-2026-03-15-123 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:29.530769+00:00
+**Time (ZRH):** 2026-03-15T02:28:29.530769+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-174
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-175 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:29.571132+00:00
+**Time (ZRH):** 2026-03-15T02:28:29.571132+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `0dbab6eed8f4daac...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-123
+
+```
+Second offering with a pattern that always repeats.
+```
+
+---
+
+## 📥 AXI-2026-03-15-124 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:29.610240+00:00
+**Time (ZRH):** 2026-03-15T02:28:29.610240+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `3bdeb7bbd4fd9250...`
+**State:** raw
+**Responds to:** INP-2026-03-15-175
+
+```
+Your offering has been received. 1 pattern detected (proverb, confidence 100.0%). It rests in the threshold.
+```
+
+---
+
+## 📥 INP-2026-03-15-176 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:29.638207+00:00
+**Time (ZRH):** 2026-03-15T02:28:29.638207+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `891a6be0b66cb432...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-124
+
+```
+Third offering.
+```
+
+---
+
+## 📥 AXI-2026-03-15-125 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:29.674945+00:00
+**Time (ZRH):** 2026-03-15T02:28:29.674945+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-176
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-177 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:30.358930+00:00
+**Time (ZRH):** 2026-03-15T02:28:30.358930+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-125
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 AXI-2026-03-15-126 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:30.396695+00:00
+**Time (ZRH):** 2026-03-15T02:28:30.396695+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `3bdeb7bbd4fd9250...`
+**State:** raw
+**Responds to:** INP-2026-03-15-177
+
+```
+Your offering has been received. 1 pattern detected (proverb, confidence 100.0%). It rests in the threshold.
+```
+
+---
+
+## 📥 INP-2026-03-15-178 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:30.535032+00:00
+**Time (ZRH):** 2026-03-15T02:28:30.535032+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `57364abd65dcb507...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-126
+
+```
+Test input.
+```
+
+---
+
+## 📥 AXI-2026-03-15-127 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:30.571286+00:00
+**Time (ZRH):** 2026-03-15T02:28:30.571286+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-178
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-179 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:31.163446+00:00
+**Time (ZRH):** 2026-03-15T02:28:31.163446+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `88e0be6c50a8e351...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-127
+
+```
+Please delete donor from the system permanently.
+```
+
+---
+
+## 📥 INP-2026-03-15-180 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:31.229419+00:00
+**Time (ZRH):** 2026-03-15T02:28:31.229419+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5bef7f90f2d419d4...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-127
+
+```
+The garden teaches patience to those who tend it.
+```
+
+---
+
+## 📥 AXI-2026-03-15-128 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:31.282856+00:00
+**Time (ZRH):** 2026-03-15T02:28:31.282856+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** crisis
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-180
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-181 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:31.470841+00:00
+**Time (ZRH):** 2026-03-15T02:28:31.470841+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-128
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-15-129 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:31.509266+00:00
+**Time (ZRH):** 2026-03-15T02:28:31.509266+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-181
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-182 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:31.546490+00:00
+**Time (ZRH):** 2026-03-15T02:28:31.546490+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ed500fbb3766957d...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-129
+
+```
+The garden grows in silence.
+```
+
+---
+
+## 📥 AXI-2026-03-15-130 <<< AXI (V-002)
+**Time (UTC):** 2026-03-15T01:28:31.576797+00:00
+**Time (ZRH):** 2026-03-15T02:28:31.576797+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-15-182
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-15-183 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:32.390395+00:00
+**Time (ZRH):** 2026-03-15T02:28:32.390395+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-130
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-15-184 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-15T01:28:32.440929+00:00
+**Time (ZRH):** 2026-03-15T02:28:32.440929+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** raw
+**Responds to:** AXI-2026-03-15-130
+
+```
+The river remembers its source.
+```
+
+---
