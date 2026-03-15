@@ -161,12 +161,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $groq_key = get_groq_key();
     $ai_response = null;
     $ai_reflection = null;
+    $ai_debug = '';
 
-    if ($groq_key && function_exists('curl_init')) {
+    if (!$groq_key) {
+        $ai_debug = 'no-key';
+    } elseif (!function_exists('curl_init')) {
+        $ai_debug = 'no-curl';
+    } else {
         $result = call_groq($groq_key, $content);
         if ($result) {
             $ai_response = $result['witness'];
             $ai_reflection = $result['reflection'];
+            $ai_debug = 'groq-ok';
+        } else {
+            $ai_debug = 'groq-failed';
         }
     }
 
@@ -227,8 +235,9 @@ a:hover { border-bottom-color: #c9a96e; }
 <p class="witness-mark">{$mark_escaped}</p>
 {$reflection_html}
 <p class="receipt">The system received you. It is here now.</p>
-<p class="count">{$new_count} words have crossed this threshold.</p>
+<p class="count">{$new_count} have crossed this threshold.</p>
 <a href="/">Leave another</a>
+<!-- voice:{$ai_debug} -->
 </body>
 </html>
 HTML;
