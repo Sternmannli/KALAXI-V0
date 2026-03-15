@@ -98,13 +98,13 @@ if (class_exists('SQLite3')) {
             word_count INTEGER NOT NULL,
             witness_mark TEXT NOT NULL,
             dignity_score REAL DEFAULT 1.0,
-            created_at TEXT DEFAULT (datetime("now")),
+            created_at TEXT,
             hash TEXT NOT NULL
         )');
         $db->exec('CREATE TABLE IF NOT EXISTS ledger (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             total_count INTEGER NOT NULL,
-            updated_at TEXT DEFAULT (datetime("now"))
+            updated_at TEXT
         )');
         $result = $db->querySingle('SELECT total_count FROM ledger ORDER BY id DESC LIMIT 1');
         if ($result === null) {
@@ -184,17 +184,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // --- Store ---
     $new_count = 1;
     if ($db) {
-        $stmt = $db->prepare('INSERT INTO threshold (content, word_count, witness_mark, dignity_score, hash) VALUES (:content, :words, :mark, :dignity, :hash)');
-        $stmt->bindValue(':content', $content, SQLITE3_TEXT);
-        $stmt->bindValue(':words', $words, SQLITE3_INTEGER);
-        $stmt->bindValue(':mark', $ai_response, SQLITE3_TEXT);
-        $stmt->bindValue(':dignity', $dignity, SQLITE3_FLOAT);
-        $stmt->bindValue(':hash', $hash, SQLITE3_TEXT);
-        $stmt->execute();
+        $stmt = $db->prepare('INSERT INTO threshold (content, word_count, witness_mark, dignity_score, hash, created_at) VALUES (:content, :words, :mark, :dignity, :hash, datetime("now"))');
+        if ($stmt) {
+            $stmt->bindValue(':content', $content, SQLITE3_TEXT);
+            $stmt->bindValue(':words', $words, SQLITE3_INTEGER);
+            $stmt->bindValue(':mark', $ai_response ?? '', SQLITE3_TEXT);
+            $stmt->bindValue(':dignity', $dignity, SQLITE3_FLOAT);
+            $stmt->bindValue(':hash', $hash, SQLITE3_TEXT);
+            $stmt->execute();
+        }
 
         $current_count = (int) $db->querySingle('SELECT total_count FROM ledger ORDER BY id DESC LIMIT 1');
         $new_count = $current_count + 1;
-        $db->exec("INSERT INTO ledger (total_count) VALUES ($new_count)");
+        $db->exec("INSERT INTO ledger (total_count, updated_at) VALUES ($new_count, datetime('now'))");
     }
 
     // For form POSTs: return full HTML page
