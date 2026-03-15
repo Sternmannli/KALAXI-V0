@@ -87,6 +87,7 @@ import Base from '../layouts/Base.astro';
     </div>
     <div id="threshold-response" class="threshold-response" aria-live="polite" hidden>
       <p id="witness-mark" class="witness-mark"></p>
+      <div id="axi-reflection" class="axi-reflection" hidden></div>
       <p id="threshold-receipt" class="threshold-receipt"></p>
       <p id="ledger-after" class="ledger-after"></p>
       <button id="threshold-again" class="threshold-again" type="button">Leave another</button>
@@ -407,9 +408,20 @@ import Base from '../layouts/Base.astro';
     font-size: var(--text-lg);
     color: var(--accent);
     font-style: italic;
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-4);
     line-height: 1.8;
     max-width: 50ch;
+  }
+
+  .axi-reflection {
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    line-height: 1.9;
+    max-width: 50ch;
+    text-align: left;
+    margin-bottom: var(--space-4);
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--accent-subtle);
   }
 
   .threshold-receipt {
@@ -559,6 +571,7 @@ import Base from '../layouts/Base.astro';
   const witnessingEl = document.getElementById('threshold-witnessing');
   const responseEl = document.getElementById('threshold-response');
   const markEl = document.getElementById('witness-mark');
+  const reflectionEl = document.getElementById('axi-reflection');
   const receiptEl = document.getElementById('threshold-receipt');
   const ledgerCount = document.getElementById('ledger-count');
   const ledgerAfter = document.getElementById('ledger-after');
@@ -603,7 +616,11 @@ import Base from '../layouts/Base.astro';
       if (!res.ok) throw new Error();
       const data = await res.json();
       if (data.witnessed) {
-        return { mark: data.mark, count: data.count };
+        return {
+          mark: data.mark,
+          count: data.count,
+          reflection: data.reflection || null
+        };
       }
       return null;
     } catch {
@@ -730,10 +747,12 @@ import Base from '../layouts/Base.astro';
       let finalMark = clientMark;
       let newCount;
       let fromAI = false;
+      let reflection = null;
 
       if (apiResult) {
-        finalMark = apiResult.mark;
+        if (apiResult.mark) finalMark = apiResult.mark;
         newCount = apiResult.count;
+        reflection = apiResult.reflection;
         fromAI = true;
         localStorage.setItem(LEDGER_KEY, String(newCount));
       }
@@ -747,11 +766,16 @@ import Base from '../layouts/Base.astro';
       witnessingEl.hidden = true;
       markEl.textContent = finalMark;
 
-      // Dynamic receipt based on whether AI responded
-      if (fromAI) {
-        receiptEl.textContent = 'The system received you. It is here now.';
+      // Show AI reflection if present
+      if (reflection) {
+        reflectionEl.textContent = reflection;
+        reflectionEl.hidden = false;
+        receiptEl.textContent = '';
       } else {
-        receiptEl.textContent = 'It is here. You can come back.';
+        reflectionEl.hidden = true;
+        receiptEl.textContent = fromAI
+          ? 'The system received you. It is here now.'
+          : 'It is here. You can come back.';
       }
 
       ledgerAfter.textContent = ledgerText(newCount);
@@ -770,6 +794,8 @@ import Base from '../layouts/Base.astro';
   againBtn.addEventListener('click', () => {
     responseEl.hidden = true;
     witnessingEl.hidden = true;
+    reflectionEl.hidden = true;
+    reflectionEl.textContent = '';
     form.style.display = '';
     input.value = '';
     input.disabled = false;

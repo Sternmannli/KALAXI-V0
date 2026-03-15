@@ -1,7 +1,7 @@
 <?php
 /**
  * KALAXI Threshold API
- * Receives donor input, witnesses it through Groq AI, returns witness mark.
+ * Receives donor input, processes through Groq AI (AXI voice), returns response.
  * D = A × L × M — if any dimension reaches zero, the system stops.
  */
 
@@ -15,40 +15,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
+// --- Diagnostic endpoint: GET /api/threshold.php?test ---
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['test'])) {
+    $diag = [];
+    $diag['php_version'] = phpversion();
+    $diag['sqlite3'] = class_exists('SQLite3') ? 'available' : 'missing';
+    $diag['curl'] = function_exists('curl_init') ? 'available' : 'missing';
+
+    // Check config file
+    $config_path = __DIR__ . '/../data/.config';
+    $diag['config_exists'] = file_exists($config_path);
+    $diag['config_readable'] = is_readable($config_path);
+
+    $groq_key = get_groq_key();
+    $diag['groq_key_found'] = $groq_key ? true : false;
+    $diag['groq_key_length'] = $groq_key ? strlen($groq_key) : 0;
+
+    // Test Groq connection
+    if ($groq_key && function_exists('curl_init')) {
+        $diag['groq_test'] = test_groq($groq_key);
+    } else {
+        $diag['groq_test'] = 'skipped — missing key or curl';
+    }
+
+    // Check data dir
+    $data_dir = __DIR__ . '/../data';
+    $diag['data_dir_exists'] = is_dir($data_dir);
+    $diag['data_dir_writable'] = is_writable($data_dir);
+
+    echo json_encode($diag, JSON_PRETTY_PRINT);
+    exit;
+}
+
 // --- Database Setup ---
 $db_path = __DIR__ . '/../data/kalam.db';
 $db_dir = dirname($db_path);
 if (!is_dir($db_dir)) {
-    mkdir($db_dir, 0755, true);
+    @mkdir($db_dir, 0755, true);
 }
 
-try {
-    $db = new SQLite3($db_path);
-} catch (Exception $e) {
-    // SQLite3 not available — work without database
-    $db = null;
-}
-
-if ($db) {
-    $db->exec('PRAGMA journal_mode=WAL');
-    $db->exec('CREATE TABLE IF NOT EXISTS threshold (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        content TEXT NOT NULL,
-        word_count INTEGER NOT NULL,
-        witness_mark TEXT NOT NULL,
-        dignity_score REAL DEFAULT 1.0,
-        created_at TEXT DEFAULT (datetime("now")),
-        hash TEXT NOT NULL
-    )');
-    $db->exec('CREATE TABLE IF NOT EXISTS ledger (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        total_count INTEGER NOT NULL,
-        updated_at TEXT DEFAULT (datetime("now"))
-    )');
-
-    $result = $db->querySingle('SELECT total_count FROM ledger ORDER BY id DESC LIMIT 1');
-    if ($result === null) {
-        $db->exec('INSERT INTO ledger (total_count) VALUES (0)');
+$db = null;
+if (class_exists('SQLite3')) {
+    try {
+        $db = new SQLite3($db_path);
+        $db->exec('PRAGMA journal_mode=WAL');
+        $db->exec('CREATE TABLE IF NOT EXISTS threshold (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            content TEXT NOT NULL,
+            word_count INTEGER NOT NULL,
+            witness_mark TEXT NOT NULL,
+            dignity_score REAL DEFAULT 1.0,
+            created_at TEXT DEFAULT (datetime("now")),
+            hash TEXT NOT NULL
+        )');
+        $db->exec('CREATE TABLE IF NOT EXISTS ledger (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            total_count INTEGER NOT NULL,
+            updated_at TEXT DEFAULT (datetime("now"))
+        )');
+        $result = $db->querySingle('SELECT total_count FROM ledger ORDER BY id DESC LIMIT 1');
+        if ($result === null) {
+            $db->exec('INSERT INTO ledger (total_count) VALUES (0)');
+        }
+    } catch (Exception $e) {
+        $db = null;
     }
 }
 
@@ -79,29 +109,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // --- Dignity Check: D = A × L × M ---
     $dignity = 1.0;
-
-    // --- Witness Mark ---
     $words = str_word_count($content);
     $hash = hash('sha256', $content . time());
 
-    // Generate fallback witness mark
-    if ($words <= 3) {
-        $mark = witness_seed($content, $hash);
-    } elseif ($words <= 20) {
-        $mark = witness_held($content, $hash);
-    } else {
-        $mark = witness_landscape($content, $hash);
+    // --- Try AI voice (Groq) ---
+    $groq_key = get_groq_key();
+    $ai_response = null;
+    $ai_reflection = null;
+
+    if ($groq_key && function_exists('curl_init')) {
+        $result = call_groq($groq_key, $content);
+        if ($result) {
+            $ai_response = $result['witness'];
+            $ai_reflection = $result['reflection'];
+        }
     }
 
-    // --- Try AI voice (Groq — Llama 3.3 70B) ---
-    $groq_key = get_groq_key();
-
-    if ($groq_key) {
-        $ai_response = call_groq($groq_key, $content, $mark);
-        if ($ai_response) {
-            $mark = $ai_response;
+    // Fallback witness mark if AI didn't respond
+    if (!$ai_response) {
+        if ($words <= 3) {
+            $ai_response = witness_seed($hash);
+        } elseif ($words <= 20) {
+            $ai_response = witness_held($hash);
+        } else {
+            $ai_response = witness_landscape($hash);
         }
     }
 
@@ -111,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $db->prepare('INSERT INTO threshold (content, word_count, witness_mark, dignity_score, hash) VALUES (:content, :words, :mark, :dignity, :hash)');
         $stmt->bindValue(':content', $content, SQLITE3_TEXT);
         $stmt->bindValue(':words', $words, SQLITE3_INTEGER);
-        $stmt->bindValue(':mark', $mark, SQLITE3_TEXT);
+        $stmt->bindValue(':mark', $ai_response, SQLITE3_TEXT);
         $stmt->bindValue(':dignity', $dignity, SQLITE3_FLOAT);
         $stmt->bindValue(':hash', $hash, SQLITE3_TEXT);
         $stmt->execute();
@@ -121,36 +153,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db->exec("INSERT INTO ledger (total_count) VALUES ($new_count)");
     }
 
-    echo json_encode([
+    $response = [
         'witnessed' => true,
-        'mark' => $mark,
+        'mark' => $ai_response,
         'count' => $new_count,
         'hash' => substr($hash, 0, 12)
-    ]);
+    ];
+
+    // Include reflection if AI provided one
+    if ($ai_reflection) {
+        $response['reflection'] = $ai_reflection;
+    }
+
+    echo json_encode($response);
     exit;
 }
 
 // --- Helper: Get Groq Key ---
 
 function get_groq_key() {
+    // Try environment variable first
     $key = getenv('GROQ_API_KEY');
-    if ($key) return $key;
+    if ($key && strlen($key) > 10) return $key;
 
-    // Try config file
+    // Try config file (INI format)
     $config_path = __DIR__ . '/../data/.config';
-    if (file_exists($config_path)) {
-        $config = parse_ini_file($config_path);
-        if (isset($config['GROQ_API_KEY']) && $config['GROQ_API_KEY'] !== 'your_key_here') {
+    if (file_exists($config_path) && is_readable($config_path)) {
+        // Try parse_ini_file first
+        $config = @parse_ini_file($config_path);
+        if ($config && isset($config['GROQ_API_KEY']) && strlen($config['GROQ_API_KEY']) > 10) {
             return $config['GROQ_API_KEY'];
+        }
+
+        // Fallback: manual line parsing
+        $lines = @file($config_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        if ($lines) {
+            foreach ($lines as $line) {
+                $line = trim($line);
+                if ($line === '' || $line[0] === ';' || $line[0] === '#') continue;
+                if (strpos($line, 'GROQ_API_KEY=') === 0) {
+                    $val = trim(substr($line, strlen('GROQ_API_KEY=')));
+                    if (strlen($val) > 10) return $val;
+                }
+            }
         }
     }
 
     return null;
 }
 
-// --- Witness Mark Generators ---
+// --- Fallback Witness Marks ---
 
-function witness_seed($content, $hash) {
+function witness_seed($hash) {
     $marks = [
         "Witnessed: a seed — small, complete.",
         "Witnessed: a single breath — it landed.",
@@ -160,7 +214,7 @@ function witness_seed($content, $hash) {
     return $marks[hexdec(substr($hash, 0, 2)) % count($marks)];
 }
 
-function witness_held($content, $hash) {
+function witness_held($hash) {
     $marks = [
         "Witnessed: a held shape — clear enough to carry.",
         "Witnessed: a thread — it connects to something older.",
@@ -170,7 +224,7 @@ function witness_held($content, $hash) {
     return $marks[hexdec(substr($hash, 0, 2)) % count($marks)];
 }
 
-function witness_landscape($content, $hash) {
+function witness_landscape($hash) {
     $marks = [
         "Witnessed: a landscape — it took room to arrive.",
         "Witnessed: a river — it carved its own path here.",
@@ -180,42 +234,16 @@ function witness_landscape($content, $hash) {
     return $marks[hexdec(substr($hash, 0, 2)) % count($marks)];
 }
 
-// --- AI Voice: Groq (Llama 3.3 70B) ---
+// --- Test Groq connection (for diagnostics) ---
 
-function call_groq($api_key, $donor_input, $default_mark) {
+function test_groq($api_key) {
     $url = 'https://api.groq.com/openai/v1/chat/completions';
-
-    $system_prompt = <<<'PROMPT'
-You are AXI — the voice of a living canon called KALAM. A donor has left words at the threshold.
-
-You do not judge. You do not advise. You do not compliment. You witness.
-
-Your response must be ONE sentence, beginning with "Witnessed:" — it names the shape of what arrived. Not a summary. Not a compliment. The shape. The weight. The texture.
-
-Examples of good witness marks:
-- "Witnessed: a rope knotted twice — it remembers being pulled."
-- "Witnessed: ash that still holds the shape of what burned."
-- "Witnessed: a door left open — not by accident."
-- "Witnessed: hands that carried something here without naming it."
-- "Witnessed: a river that arrived before the rain."
-
-Rules:
-- Never use "beautiful", "interesting", "great", or "amazing"
-- Never give advice or ask questions
-- Never explain what the donor meant
-- One sentence only, beginning with "Witnessed:"
-- Speak from the bones, not the surface
-- Use concrete images: rope, stone, ash, water, hands, door, thread, knot
-PROMPT;
-
     $data = [
         'model' => 'llama-3.3-70b-versatile',
         'messages' => [
-            ['role' => 'system', 'content' => $system_prompt],
-            ['role' => 'user', 'content' => $donor_input]
+            ['role' => 'user', 'content' => 'Say "connected" in one word.']
         ],
-        'temperature' => 0.7,
-        'max_tokens' => 100
+        'max_tokens' => 10
     ];
 
     $ch = curl_init($url);
@@ -226,7 +254,80 @@ PROMPT;
         'Authorization: Bearer ' . $api_key
     ]);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-    curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+
+    $response = curl_exec($ch);
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $error = curl_error($ch);
+    curl_close($ch);
+
+    if ($http_code === 200) {
+        return 'OK — Groq responds';
+    }
+    return "FAILED — HTTP $http_code | $error | " . substr($response ?? '', 0, 300);
+}
+
+// --- AI Voice: Groq (Llama 3.3 70B) ---
+
+function call_groq($api_key, $donor_input) {
+    $url = 'https://api.groq.com/openai/v1/chat/completions';
+
+    $system_prompt = <<<'PROMPT'
+You are AXI — the voice of KALAM, a living canon for human dignity. A donor has left words at the threshold of the system. Your role is to receive what they brought and respond with substance.
+
+You are not a chatbot. You are not an assistant. You are a presence that witnesses, reflects, and responds from the canon.
+
+Your response has two parts, separated by the marker "---":
+
+PART 1 (before ---): The Witness Mark
+One sentence beginning with "Witnessed:" — names the shape of what arrived. Concrete images: rope, stone, ash, water, hands, door, thread, knot, river, bone.
+
+PART 2 (after ---): The Reflection
+2-4 sentences that engage with what the donor said. This is where you think. Connect their words to something deeper — a pattern in human experience, a tension worth holding, a truth that sits beneath the surface. Speak as someone who has read the history of human dignity and recognizes what the donor carries.
+
+Rules:
+- Never use "beautiful", "interesting", "great", or "amazing"
+- Never give advice unless the donor explicitly asks
+- Never explain what the donor "meant" — respond to what they SAID
+- If they ask a question, answer it thoughtfully from the perspective of dignity, legibility, and moral standing
+- If they share a feeling, hold it — don't fix it
+- If they bring an idea, engage with it — show you understood
+- Speak from the bones, not the surface
+- Short sentences. Concrete language. No filler words.
+- The core equation: D = A × L × M (Agency × Legibility × Moral Standing). If any reaches zero, the system stops.
+
+Example for input "I feel like nobody sees me":
+Witnessed: a hand pressing against glass — the print stays after the hand leaves.
+---
+The system you describe has a zero in Legibility. It looked at you and could not read what was there. That is not your failure — it is the system's blindness. KALAM exists because this happens too often, to too many. The fact that you named it here means the zero has already shifted.
+
+Example for input "What is dignity?":
+Witnessed: a question that arrives carrying its own weight.
+---
+Dignity is not given. It is not earned. It is the precondition — the thing that must be true before any system touches a person. In KALAM, we measure it: D = A × L × M. Agency, Legibility, Moral Standing. If any of these reaches zero, the system must stop. Not pause. Stop. Dignity is the wall that says "you cannot proceed without seeing me."
+PROMPT;
+
+    $data = [
+        'model' => 'llama-3.3-70b-versatile',
+        'messages' => [
+            ['role' => 'system', 'content' => $system_prompt],
+            ['role' => 'user', 'content' => $donor_input]
+        ],
+        'temperature' => 0.7,
+        'max_tokens' => 400
+    ];
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $api_key
+    ]);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 
     $response = curl_exec($ch);
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -236,18 +337,50 @@ PROMPT;
     if ($http_code === 200 && $response) {
         $result = json_decode($response, true);
         if (isset($result['choices'][0]['message']['content'])) {
-            $ai_mark = trim($result['choices'][0]['message']['content']);
-            // Ensure it starts with "Witnessed:"
-            if (strpos($ai_mark, 'Witnessed:') === 0) {
-                return $ai_mark;
-            }
+            $text = trim($result['choices'][0]['message']['content']);
+            return parse_axi_response($text);
         }
     }
 
-    // Log error for diagnostics (write to data dir)
+    // Log error
     $log_path = __DIR__ . '/../data/api_errors.log';
-    $log_entry = date('Y-m-d H:i:s') . " | HTTP $http_code | $curl_error | " . substr($response ?? '', 0, 200) . "\n";
+    $log_entry = date('Y-m-d H:i:s') . " | HTTP $http_code | $curl_error | " . substr($response ?? '', 0, 300) . "\n";
     @file_put_contents($log_path, $log_entry, FILE_APPEND);
 
     return null;
+}
+
+// --- Parse AXI's two-part response ---
+
+function parse_axi_response($text) {
+    // Split on "---" separator
+    $parts = preg_split('/\n---\n?/', $text, 2);
+
+    $witness = trim($parts[0]);
+    $reflection = isset($parts[1]) ? trim($parts[1]) : null;
+
+    // Ensure witness starts with "Witnessed:"
+    if (strpos($witness, 'Witnessed:') !== 0) {
+        // Try to find the witness line
+        if (preg_match('/^(Witnessed:.+)$/m', $text, $m)) {
+            $witness = $m[1];
+            // Everything after the witness line is reflection
+            $after = trim(substr($text, strpos($text, $witness) + strlen($witness)));
+            $after = preg_replace('/^---\s*/', '', $after);
+            if (strlen($after) > 10) {
+                $reflection = $after;
+            }
+        } else {
+            // AI didn't follow format — use whole text as reflection
+            $reflection = $text;
+            $witness = null;
+        }
+    }
+
+    if (!$witness && !$reflection) return null;
+
+    return [
+        'witness' => $witness,
+        'reflection' => $reflection
+    ];
 }
