@@ -16,16 +16,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
       - name: Deploy via SFTP
-        uses: pressidium/lftp-mirror-action@v1
-        with:
-          host: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
-          pass: ${{ secrets.FTP_PASSWORD }}
-          remoteDir: /www/kalam.ch/
-          localDir: ./site/dist/
-          reverse: true
-          ignoreFile: .lftp_ignore
-          options: '--delete --verbose --transfer-all'
-          settings: 'sftp:auto-confirm=yes;net:max-retries=3;net:reconnect-interval-base=5'
-          onlyNewer: true
+        env:
+          FTP_HOST: ${{ secrets.FTP_SERVER }}
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          lftp -c "
+            set sftp:auto-confirm yes;
+            set net:max-retries 3;
+            set net:reconnect-interval-base 5;
+            open -u \$FTP_USER,\$FTP_PASS sftp://\$FTP_HOST;
+            mirror --reverse --delete --verbose --transfer-all ./site/dist/ /www/kalam.ch/;
+            quit;
+          "
