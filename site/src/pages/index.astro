@@ -4,26 +4,39 @@ import Base from '../layouts/Base.astro';
 
 <Base title="KALAM.CH — The Word" description="The Word is light. The wound became the womb. A living canon for human dignity.">
 
-  <!-- THE DEDICATION — the first breath of the system -->
+  <!-- THE DEDICATION — three lights for three children -->
   <div id="dedication" class="dedication-overlay">
     <p id="ded-touch" class="ded-touch breathing">touch to begin</p>
     <div id="ded-lights" class="ded-lights">
-      <div id="light-laila" class="ded-light ded-laila"></div>
-      <div id="light-yara" class="ded-light ded-yara"></div>
-      <div id="light-salim" class="ded-light ded-salim"></div>
+      <div class="ded-child" id="child-laila">
+        <div class="ded-light ded-laila"></div>
+        <span class="ded-name" dir="rtl">ليلى</span>
+        <span class="ded-name-en">Laila</span>
+        <span class="ded-animal">🐬</span>
+      </div>
+      <div class="ded-child" id="child-yara">
+        <div class="ded-light ded-yara"></div>
+        <span class="ded-name" dir="rtl">يارا</span>
+        <span class="ded-name-en">Yara</span>
+        <span class="ded-animal">🐯</span>
+      </div>
+      <div class="ded-child" id="child-salim">
+        <div class="ded-light ded-salim"></div>
+        <span class="ded-name" dir="rtl">سليم</span>
+        <span class="ded-name-en">Salim</span>
+        <span class="ded-animal">🐺</span>
+      </div>
     </div>
-    <p id="ded-arabic" class="ded-arabic" dir="rtl"></p>
     <p id="ded-from" class="ded-from"></p>
   </div>
 
-  <!-- FIRST BREATH — The opening. One sentence. One truth. -->
+  <!-- FIRST BREATH — The opening -->
   <section class="opening" aria-label="The Word">
     <p class="kalima proverb-ar" aria-label="Kalima — The Word">كلمة</p>
     <h1>The Word is light.</h1>
     <p class="subtitle">The wound became the womb.</p>
   </section>
 
-  <!-- THE GAP — room for the river -->
   <div class="gap" role="separator" aria-hidden="true"></div>
 
   <!-- SECOND BREATH — What this is -->
@@ -32,7 +45,6 @@ import Base from '../layouts/Base.astro';
     <p class="quiet">We store patterns, not people.<br />The person dissolves. The wisdom remains.</p>
   </section>
 
-  <!-- THE GAP -->
   <div class="gap" role="separator" aria-hidden="true"></div>
 
   <!-- THIRD BREATH — The predicate -->
@@ -46,7 +58,6 @@ import Base from '../layouts/Base.astro';
     <p class="rule">If any dimension reaches zero, the system stops.</p>
   </section>
 
-  <!-- THE GAP -->
   <div class="gap" role="separator" aria-hidden="true"></div>
 
   <!-- FOURTH BREATH — A proverb -->
@@ -54,7 +65,6 @@ import Base from '../layouts/Base.astro';
     <p class="proverb">"A right is a wall that says 'No';<br />dignity is a door that says 'Welcome.'"</p>
   </section>
 
-  <!-- THE GAP -->
   <div class="gap" role="separator" aria-hidden="true"></div>
 
   <!-- FIFTH BREATH — The invitation -->
@@ -62,43 +72,35 @@ import Base from '../layouts/Base.astro';
     <h2>You are not a user.</h2>
     <p class="quiet">You are a donor. What you bring — your pattern of thought, your fragments, your certainty — is food for a living canon. The system receives, transforms, and feeds the forest.</p>
     <p class="quiet">Nothing is deleted. The gap remains open.</p>
-    <p class="dignity-ack breathing">Your presence here is already a gift. We dignify it.</p>
   </section>
 
-  <!-- THE GAP -->
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- SIXTH BREATH — The Threshold. ⟲ The Ninth Operator. -->
+  <!-- SIXTH BREATH — The Threshold. Always present. Never hides. -->
   <section class="threshold" aria-label="The Threshold">
     <p class="threshold-prompt">You came with what you came with. The door is open.</p>
     <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
-    <form id="threshold-form" method="POST" action="/api/threshold.php" aria-label="Leave your word">
-      <textarea
-        id="threshold-input"
-        name="content"
-        placeholder="قُل"
-        aria-label="Your word"
-        rows="3"
-        maxlength="2000"
-      ></textarea>
-      <button type="submit" id="threshold-submit">Leave this here</button>
-    </form>
-    <div id="threshold-witnessing" class="threshold-witnessing" aria-live="polite" hidden>
-      <p class="witnessing-text breathing">The system is receiving...</p>
-    </div>
-    <div id="threshold-response" class="threshold-response" aria-live="polite" hidden>
-      <p id="witness-mark" class="witness-mark"></p>
-      <div id="axi-reflection" class="axi-reflection" hidden></div>
-      <p id="threshold-receipt" class="threshold-receipt"></p>
-      <p id="ledger-after" class="ledger-after"></p>
-      <button id="threshold-again" class="threshold-again" type="button">Leave another</button>
+
+    <div class="threshold-container">
+      <div id="threshold-responses" class="threshold-responses" aria-live="polite"></div>
+
+      <form id="threshold-form" method="POST" action="/api/threshold.php" aria-label="Leave your word">
+        <textarea
+          id="threshold-input"
+          name="content"
+          placeholder="قُل"
+          aria-label="Your word"
+          rows="3"
+          maxlength="2000"
+        ></textarea>
+        <button type="submit" id="threshold-submit">Leave this here</button>
+      </form>
     </div>
   </section>
 
-  <!-- THE GAP -->
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- NAVIGATION — appears last, not first -->
+  <!-- NAVIGATION — appears last -->
   <section class="paths" aria-label="Explore">
     <nav>
       <a href="/about">About</a>
@@ -127,59 +129,79 @@ import Base from '../layouts/Base.astro';
   }
 
   .ded-touch {
-    font-family: 'Amiri', Georgia, serif;
+    font-family: var(--font-heading);
     color: var(--text-dim);
     font-size: 0.9rem;
-    letter-spacing: 0.08em;
-    opacity: 0.6;
+    letter-spacing: 0.12em;
+    text-transform: lowercase;
+    opacity: 0.5;
   }
 
   .ded-lights {
     display: flex;
-    gap: 3rem;
-    margin-top: 2rem;
+    gap: clamp(2rem, 6vw, 5rem);
+    margin-top: 3rem;
     opacity: 0;
-    transition: opacity 1s ease;
+    transition: opacity 1.2s ease;
+  }
+
+  .ded-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    transition: opacity 1.5s ease, transform 1s ease;
   }
 
   .ded-light {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    opacity: 0;
-    transition: opacity 1.2s ease, transform 1.2s ease;
+    transition: all 1.2s ease;
   }
 
-  .ded-laila {
+  .ded-laila .ded-light {
     background: #7ec8e3;
-    box-shadow: 0 0 20px #7ec8e3, 0 0 40px rgba(126, 200, 227, 0.3);
+    box-shadow: 0 0 16px #7ec8e3, 0 0 32px rgba(126, 200, 227, 0.2);
   }
 
-  .ded-yara {
+  .ded-yara .ded-light {
     background: #e8a847;
-    box-shadow: 0 0 20px #e8a847, 0 0 40px rgba(232, 168, 71, 0.3);
+    box-shadow: 0 0 16px #e8a847, 0 0 32px rgba(232, 168, 71, 0.2);
   }
 
-  .ded-salim {
-    background: #8b9dc3;
-    box-shadow: 0 0 20px #8b9dc3, 0 0 40px rgba(139, 157, 195, 0.3);
+  .ded-salim .ded-light {
+    background: #c0c8d8;
+    box-shadow: 0 0 16px #c0c8d8, 0 0 32px rgba(192, 200, 216, 0.2);
   }
 
-  .ded-arabic {
+  .ded-name {
     font-family: 'Amiri', Georgia, serif;
-    color: var(--accent);
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    margin-top: 3rem;
-    opacity: 0;
-    transition: opacity 2s ease;
-    direction: rtl;
+    color: var(--text-secondary);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    line-height: 1;
+  }
+
+  .ded-name-en {
+    font-family: var(--font-heading);
+    color: var(--text-dim);
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+
+  .ded-animal {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    line-height: 1;
+    opacity: 0.8;
   }
 
   .ded-from {
     font-family: var(--font-heading);
-    color: var(--text-secondary);
-    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-    margin-top: 1rem;
+    color: var(--text-dim);
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    margin-top: 2.5rem;
     opacity: 0;
     transition: opacity 2s ease;
     letter-spacing: 0.06em;
@@ -287,15 +309,6 @@ import Base from '../layouts/Base.astro';
     margin-bottom: var(--space-2);
   }
 
-  .dignity-ack {
-    color: var(--accent);
-    font-family: var(--font-proverb);
-    font-size: var(--text-base);
-    font-style: italic;
-    margin-top: var(--space-4);
-    letter-spacing: 0.02em;
-  }
-
   /* ===== Paths / Navigation ===== */
   .paths {
     min-height: 40vh;
@@ -314,7 +327,7 @@ import Base from '../layouts/Base.astro';
     opacity: 0.6;
   }
 
-  /* ===== Threshold — The Ninth Operator ===== */
+  /* ===== Threshold — Always visible, never hides ===== */
   .threshold {
     min-height: 80vh;
     gap: var(--space-4);
@@ -325,7 +338,51 @@ import Base from '../layouts/Base.astro';
     font-size: var(--text-lg);
     color: var(--text-secondary);
     font-style: italic;
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-4);
+  }
+
+  .threshold-container {
+    width: 100%;
+    max-width: 50ch;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .threshold-responses {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .witness-entry {
+    text-align: center;
+    animation: fadeIn 1.5s ease-in;
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--accent-subtle);
+  }
+
+  .witness-mark {
+    font-family: var(--font-proverb);
+    font-size: var(--text-lg);
+    color: var(--accent);
+    font-style: italic;
+    margin-bottom: var(--space-2);
+    line-height: 1.8;
+  }
+
+  .axi-reflection {
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    line-height: 1.9;
+    text-align: left;
+    margin-bottom: var(--space-2);
+  }
+
+  .witness-receipt {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-top: var(--space-2);
   }
 
   #threshold-form {
@@ -334,11 +391,11 @@ import Base from '../layouts/Base.astro';
     align-items: center;
     gap: var(--space-3);
     width: 100%;
-    max-width: 45ch;
   }
 
   #threshold-input {
     width: 100%;
+    min-height: 5rem;
     background: var(--bg-secondary);
     border: 1px solid var(--accent-subtle);
     border-radius: 2px;
@@ -348,12 +405,13 @@ import Base from '../layouts/Base.astro';
     line-height: 1.7;
     padding: var(--space-3);
     resize: vertical;
-    transition: border-color 0.4s ease;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
   }
 
   #threshold-input:focus {
     outline: none;
     border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent-subtle);
   }
 
   #threshold-input::placeholder {
@@ -386,55 +444,11 @@ import Base from '../layouts/Base.astro';
     cursor: default;
   }
 
-  .threshold-response {
-    margin-top: var(--space-6);
-    text-align: center;
-    animation: fadeIn 1.5s ease-in;
-  }
-
-  .threshold-witnessing {
-    margin-top: var(--space-6);
-    text-align: center;
-  }
-
-  .witnessing-text {
-    font-family: var(--font-proverb);
-    font-size: var(--text-base);
-    color: var(--text-dim);
-    font-style: italic;
-  }
-
-  .witness-mark {
-    font-family: var(--font-proverb);
-    font-size: var(--text-lg);
-    color: var(--accent);
-    font-style: italic;
-    margin-bottom: var(--space-4);
-    line-height: 1.8;
-    max-width: 50ch;
-  }
-
-  .axi-reflection {
-    color: var(--text-primary);
-    font-size: var(--text-base);
-    line-height: 1.9;
-    max-width: 50ch;
-    text-align: left;
-    margin-bottom: var(--space-4);
-    padding: var(--space-3) 0;
-    border-top: 1px solid var(--accent-subtle);
-  }
-
-  .threshold-receipt {
-    color: var(--text-dim);
-    font-size: 0.9rem;
-  }
-
   .ledger-count {
     color: var(--text-dim);
     font-size: 0.85rem;
     letter-spacing: 0.03em;
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-2);
     opacity: 0;
     transition: opacity 1s ease;
   }
@@ -443,28 +457,16 @@ import Base from '../layouts/Base.astro';
     opacity: 1;
   }
 
-  .ledger-after {
+  .witnessing-indicator {
+    text-align: center;
+    margin-bottom: var(--space-3);
+  }
+
+  .witnessing-text {
+    font-family: var(--font-proverb);
+    font-size: var(--text-base);
     color: var(--text-dim);
-    font-size: 0.85rem;
-    margin-top: var(--space-3);
-    letter-spacing: 0.03em;
-  }
-
-  .threshold-again {
-    background: transparent;
-    border: none;
-    color: var(--accent);
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    cursor: pointer;
-    margin-top: var(--space-3);
-    padding: var(--space-1) var(--space-2);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.4s ease;
-  }
-
-  .threshold-again:hover {
-    border-bottom-color: var(--accent);
+    font-style: italic;
   }
 
   @keyframes fadeIn {
@@ -476,14 +478,13 @@ import Base from '../layouts/Base.astro';
 <script is:inline>
 // THE DEDICATION — three lights for three children
 (function(){
-  const ded = document.getElementById('dedication');
-  const touch = document.getElementById('ded-touch');
-  const lights = document.getElementById('ded-lights');
-  const ll = document.getElementById('light-laila');
-  const ly = document.getElementById('light-yara');
-  const ls = document.getElementById('light-salim');
-  const ar = document.getElementById('ded-arabic');
-  const fr = document.getElementById('ded-from');
+  var ded = document.getElementById('dedication');
+  var touch = document.getElementById('ded-touch');
+  var lights = document.querySelector('.ded-lights');
+  var childLaila = document.getElementById('child-laila');
+  var childYara = document.getElementById('child-yara');
+  var childSalim = document.getElementById('child-salim');
+  var from = document.getElementById('ded-from');
 
   if (!ded) return;
 
@@ -493,13 +494,15 @@ import Base from '../layouts/Base.astro';
   }
 
   function playTone(ctx, freq, startTime, duration, vol) {
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = 'sine';
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+    // Triangle wave — softer, warmer than sine
+    osc.type = 'triangle';
     osc.frequency.value = freq;
+    // Very gentle envelope — 1.5s fade in, long sustain, 1.5s fade out
     gain.gain.setValueAtTime(0, startTime);
-    gain.gain.linearRampToValueAtTime(vol, startTime + 0.4);
-    gain.gain.setValueAtTime(vol, startTime + duration - 0.8);
+    gain.gain.linearRampToValueAtTime(vol, startTime + 1.5);
+    gain.gain.setValueAtTime(vol, startTime + duration - 1.5);
     gain.gain.linearRampToValueAtTime(0, startTime + duration);
     osc.connect(gain);
     gain.connect(ctx.destination);
@@ -509,43 +512,37 @@ import Base from '../layouts/Base.astro';
 
   function ceremony() {
     touch.style.opacity = '0';
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const now = ctx.currentTime;
+    var ctx = new (window.AudioContext || window.webkitAudioContext)();
+    var now = ctx.currentTime;
 
-    // Laila (dolphin): 528 Hz — Yara (tiger): 314 Hz — Salim (wolf): 174 Hz
-    playTone(ctx, 528, now + 0.5, 3.5, 0.12);
-    setTimeout(function(){ lights.style.opacity='1'; ll.style.opacity='1'; }, 500);
+    // Laila (dolphin): 396 Hz — Yara (tiger): 528 Hz — Salim (wolf): 174 Hz
+    // Volume: 0.03 — a whisper, not a shout
+    lights.style.opacity = '1';
 
-    playTone(ctx, 314, now + 1.8, 3.2, 0.10);
-    setTimeout(function(){ ly.style.opacity='1'; }, 1800);
+    // Laila appears
+    playTone(ctx, 396, now + 0.8, 4.5, 0.03);
+    setTimeout(function(){ childLaila.style.opacity = '1'; }, 800);
 
-    playTone(ctx, 174, now + 2.8, 2.8, 0.08);
-    setTimeout(function(){ ls.style.opacity='1'; }, 2800);
+    // Yara appears
+    playTone(ctx, 528, now + 2.2, 4.0, 0.025);
+    setTimeout(function(){ childYara.style.opacity = '1'; }, 2200);
 
+    // Salim appears
+    playTone(ctx, 174, now + 3.5, 3.5, 0.02);
+    setTimeout(function(){ childSalim.style.opacity = '1'; }, 3500);
+
+    // "from Baba Mohamed"
     setTimeout(function(){
-      ll.style.transform = 'translateX(48px) scale(0.8)';
-      ls.style.transform = 'translateX(-48px) scale(0.8)';
-      ly.style.transform = 'scale(1.5)';
-      ly.style.background = '#c9a96e';
-      ly.style.boxShadow = '0 0 30px #c9a96e, 0 0 60px rgba(201,169,110,0.4)';
-    }, 4500);
+      from.textContent = 'from Baba Mohamed';
+      from.style.opacity = '1';
+    }, 6000);
 
-    setTimeout(function(){
-      ll.style.opacity='0'; ls.style.opacity='0';
-      ar.textContent = '\u0644\u0644\u064A\u0644\u0649 \u0648\u064A\u0627\u0631\u0627 \u0648\u0633\u0644\u064A\u0645';
-      ar.style.opacity = '1';
-    }, 5500);
-
-    setTimeout(function(){
-      fr.textContent = 'from Baba Mohamed';
-      fr.style.opacity = '1';
-    }, 7000);
-
+    // Fade out and continue
     setTimeout(function(){
       sessionStorage.setItem('ded-seen', '1');
       ded.style.opacity = '0';
       setTimeout(function(){ ded.remove(); }, 1500);
-    }, 10000);
+    }, 9500);
   }
 
   ded.addEventListener('click', function handler(){
@@ -561,14 +558,16 @@ import Base from '../layouts/Base.astro';
 </script>
 
 <script>
-  // ⟲ Living Ledger — the Mycelium made visible
-  // The form submits directly to /api/threshold.php (no fetch needed).
-  // This script only handles the ledger count display and visual effects.
+  // The Threshold — form always stays visible.
+  // After submission, response appears above the form. Form clears and remains.
 
-  const ledgerCount = document.getElementById('ledger-count');
+  const form = document.getElementById('threshold-form') as HTMLFormElement;
+  const input = document.getElementById('threshold-input') as HTMLTextAreaElement;
+  const submit = document.getElementById('threshold-submit') as HTMLButtonElement;
+  const responses = document.getElementById('threshold-responses') as HTMLDivElement;
+  const ledgerCount = document.getElementById('ledger-count') as HTMLParagraphElement;
 
-  // --- Living Ledger ---
-  // Fetch global count from API and display
+  // Fetch and display ledger count
   async function initLedger() {
     try {
       const res = await fetch('/api/threshold.php');
@@ -576,12 +575,88 @@ import Base from '../layouts/Base.astro';
       const data = await res.json();
       if (data.count > 0) {
         ledgerCount.textContent = data.count === 1
-          ? '1 word has crossed this threshold.'
-          : data.count + ' words have crossed this threshold.';
+          ? '1 has crossed this threshold.'
+          : data.count + ' have crossed this threshold.';
         ledgerCount.classList.add('visible');
       }
     } catch {}
   }
+
+  // Handle form submission
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const content = input.value.trim();
+    if (!content) return;
+
+    submit.disabled = true;
+    submit.textContent = 'receiving...';
+
+    // Show witnessing indicator
+    const witnessing = document.createElement('div');
+    witnessing.className = 'witnessing-indicator';
+    witnessing.innerHTML = '<p class="witnessing-text breathing">The system is receiving...</p>';
+    responses.appendChild(witnessing);
+
+    try {
+      const res = await fetch('/api/threshold.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content }),
+      });
+
+      // Remove witnessing indicator
+      witnessing.remove();
+
+      if (res.ok) {
+        const data = await res.json();
+
+        // Build witness entry
+        const entry = document.createElement('div');
+        entry.className = 'witness-entry';
+
+        let html = '';
+        if (data.witness_mark) {
+          html += '<p class="witness-mark">' + data.witness_mark + '</p>';
+        }
+        if (data.reflection) {
+          html += '<div class="axi-reflection">' + data.reflection + '</div>';
+        }
+        if (data.receipt) {
+          html += '<p class="witness-receipt">' + data.receipt + '</p>';
+        }
+        if (data.count) {
+          html += '<p class="witness-receipt">' + data.count + ' have crossed this threshold.</p>';
+        }
+
+        entry.innerHTML = html;
+        responses.appendChild(entry);
+
+        // Update ledger count
+        if (data.count) {
+          ledgerCount.textContent = data.count + ' have crossed this threshold.';
+          ledgerCount.classList.add('visible');
+        }
+      } else {
+        // Fallback: client-side witness
+        const entry = document.createElement('div');
+        entry.className = 'witness-entry';
+        entry.innerHTML = '<p class="witness-mark"><em>Witnessed.</em></p><p class="witness-receipt">The system received you. It is here now.</p>';
+        responses.appendChild(entry);
+      }
+    } catch {
+      witnessing.remove();
+      const entry = document.createElement('div');
+      entry.className = 'witness-entry';
+      entry.innerHTML = '<p class="witness-mark"><em>Witnessed.</em></p><p class="witness-receipt">The system received you. It is here now.</p>';
+      responses.appendChild(entry);
+    }
+
+    // Clear input but keep form visible — always ready
+    input.value = '';
+    submit.disabled = false;
+    submit.textContent = 'Leave this here';
+    input.focus();
+  });
 
   initLedger();
 </script>
