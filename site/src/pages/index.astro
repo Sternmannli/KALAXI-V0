@@ -145,7 +145,7 @@ import Base from '../layouts/Base.astro';
   <!-- STICKY INPUT — always visible at bottom -->
   <div class="sticky-input">
     <div class="sticky-input-inner">
-      <form id="threshold-form" method="POST" action="/api/threshold.php" aria-label="Speak to AXI">
+      <form id="threshold-form" method="POST" action="#" aria-label="Speak to AXI">
         <div class="sticky-form-row">
           <input
             type="text"
@@ -678,6 +678,39 @@ import Base from '../layouts/Base.astro';
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  /* ===== Mycelium Visual Shift — site breathes as marks accumulate ===== */
+  :root {
+    --mycelium-intensity: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(
+      ellipse at 50% 60%,
+      rgba(255, 215, 0, 0.08) 0%,
+      rgba(201, 169, 110, 0.04) 30%,
+      transparent 70%
+    );
+    opacity: calc(var(--mycelium-intensity) * 0.01);
+    transition: opacity 2s ease;
+  }
+
+  /* ===== Thermal Delay — response cools into focus ===== */
+  .thermal-blur {
+    filter: blur(8px);
+    opacity: 0.3;
+    transition: filter 3s ease-out, opacity 3s ease-out;
+  }
+
+  .thermal-blur.cooled {
+    filter: blur(0px);
+    opacity: 1;
+  }
 </style>
 
 <script is:inline>
@@ -863,7 +896,12 @@ import Base from '../layouts/Base.astro';
 </script>
 
 <script>
-  // === THRESHOLD FORM with localStorage persistence ===
+  // === AXI LIVING VOICE — Worker connection + Thermal Delay + Mycelium + 80 Hz ===
+
+  // ── Configuration ──
+  // Replace with your deployed Cloudflare Worker URL
+  const WORKER_URL = 'https://axi-voice.REPLACE_WITH_YOUR_SUBDOMAIN.workers.dev';
+
   const form = document.getElementById('threshold-form') as HTMLFormElement;
   const input = document.getElementById('threshold-input') as HTMLInputElement;
   const submit = document.getElementById('threshold-submit') as HTMLButtonElement;
@@ -900,7 +938,7 @@ import Base from '../layouts/Base.astro';
     const el = document.createElement('div');
     el.className = 'history-entry';
     const date = new Date(entry.timestamp);
-    const timeStr = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' · ' + date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+    const timeStr = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' \u00b7 ' + date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
 
     let html = '<p class="history-donor-label">you</p>';
     html += '<p class="history-donor-text">' + escapeHtml(entry.donor) + '</p>';
@@ -921,9 +959,51 @@ import Base from '../layouts/Base.astro';
     });
   }
 
+  // ── Mycelium Visual Shift ──
+  function updateMycelium(count: number) {
+    const intensity = Math.min(count, 100);
+    document.documentElement.style.setProperty('--mycelium-intensity', String(intensity));
+  }
+
+  // ── 80 Hz Sonar — the children's frequency ──
+  let sonarCtx: AudioContext | null = null;
+  let sonarOsc: OscillatorNode | null = null;
+  let sonarGain: GainNode | null = null;
+
+  function startSonar() {
+    if (sonarOsc) return; // already playing
+    try {
+      if (!sonarCtx) sonarCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      sonarOsc = sonarCtx.createOscillator();
+      sonarGain = sonarCtx.createGain();
+      sonarOsc.type = 'sine';
+      sonarOsc.frequency.value = 80;
+      sonarGain.gain.setValueAtTime(0, sonarCtx.currentTime);
+      sonarGain.gain.linearRampToValueAtTime(0.015, sonarCtx.currentTime + 1.0);
+      sonarOsc.connect(sonarGain);
+      sonarGain.connect(sonarCtx.destination);
+      sonarOsc.start();
+    } catch { /* Web Audio not available */ }
+  }
+
+  function stopSonar() {
+    if (sonarGain && sonarCtx) {
+      sonarGain.gain.linearRampToValueAtTime(0, sonarCtx.currentTime + 0.5);
+      setTimeout(() => {
+        if (sonarOsc) { try { sonarOsc.stop(); } catch {} sonarOsc = null; }
+        sonarGain = null;
+      }, 600);
+    }
+  }
+
+  // Bind 80 Hz to threshold input focus
+  input.addEventListener('focus', startSonar);
+  input.addEventListener('blur', stopSonar);
+
+  // ── Ledger init from Worker ──
   async function initLedger() {
     try {
-      const res = await fetch('/api/threshold.php');
+      const res = await fetch(WORKER_URL, { method: 'GET' });
       if (!res.ok) return;
       const data = await res.json();
       if (data.count > 0) {
@@ -931,10 +1011,20 @@ import Base from '../layouts/Base.astro';
           ? '1 has crossed this threshold.'
           : data.count + ' have crossed this threshold.';
         ledgerCount.classList.add('visible');
+        updateMycelium(data.count);
       }
-    } catch {}
+    } catch {
+      // Fallback to localStorage count
+      const history = loadHistory();
+      if (history.length > 0) {
+        ledgerCount.textContent = history.length + ' have crossed this threshold.';
+        ledgerCount.classList.add('visible');
+        updateMycelium(history.length);
+      }
+    }
   }
 
+  // ── Form submission — speak to AXI ──
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const content = input.value.trim();
@@ -951,10 +1041,10 @@ import Base from '../layouts/Base.astro';
     let responseText = '';
 
     try {
-      const res = await fetch('/api/threshold.php', {
+      const res = await fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content }),
+        body: JSON.stringify({ input: content }),
       });
 
       witnessing.remove();
@@ -967,25 +1057,44 @@ import Base from '../layouts/Base.astro';
         let html = '<p class="history-donor-label">you</p>';
         html += '<p class="history-donor-text">' + escapeHtml(content) + '</p>';
 
-        if (data.witness_mark) {
-          html += '<p class="history-response-label">axi</p>';
-          html += '<p class="witness-mark">' + data.witness_mark + '</p>';
-          responseText += data.witness_mark;
+        // AXI's response with thermal delay
+        const axiText = data.response || data.witness_mark || 'Witnessed.';
+        responseText = axiText;
+
+        html += '<p class="history-response-label">axi</p>';
+        html += '<div class="axi-reflection thermal-blur" id="thermal-response">' + escapeHtml(axiText) + '</div>';
+
+        if (data.witness_mark && data.witness_mark !== axiText) {
+          html += '<p class="witness-mark">' + escapeHtml(data.witness_mark) + '</p>';
         }
-        if (data.reflection) {
-          html += '<div class="axi-reflection">' + data.reflection + '</div>';
-          responseText += ' ' + data.reflection;
-        }
-        if (data.receipt) {
-          html += '<p class="witness-receipt">' + data.receipt + '</p>';
+
+        if (data.total) {
+          html += '<p class="witness-receipt">' + data.total + ' have crossed this threshold.</p>';
         }
 
         entry.innerHTML = html;
         responses.appendChild(entry);
 
-        if (data.count) {
-          ledgerCount.textContent = data.count + ' have crossed this threshold.';
+        // Thermal delay: blur cools into focus over 3 seconds
+        const thermalEl = entry.querySelector('.thermal-blur');
+        if (thermalEl) {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              thermalEl.classList.add('cooled');
+            });
+          });
+        }
+
+        // Update mycelium and ledger
+        if (data.total) {
+          ledgerCount.textContent = data.total + ' have crossed this threshold.';
           ledgerCount.classList.add('visible');
+          updateMycelium(data.total);
+        }
+
+        // Sealed gate visual
+        if (data.sealed) {
+          entry.style.borderColor = 'var(--color-danger, #8b3a3a)';
         }
       } else {
         responseText = 'Witnessed.';
@@ -996,10 +1105,10 @@ import Base from '../layouts/Base.astro';
       }
     } catch {
       witnessing.remove();
-      responseText = 'Witnessed.';
+      responseText = 'The river is silent. Try again.';
       const entry = document.createElement('div');
       entry.className = 'witness-entry';
-      entry.innerHTML = '<p class="history-donor-label">you</p><p class="history-donor-text">' + escapeHtml(content) + '</p><p class="history-response-label">axi</p><p class="witness-mark"><em>Witnessed.</em></p>';
+      entry.innerHTML = '<p class="history-donor-label">you</p><p class="history-donor-text">' + escapeHtml(content) + '</p><p class="history-response-label">axi</p><p class="witness-mark"><em>The river is silent. Try again.</em></p>';
       responses.appendChild(entry);
     }
 
