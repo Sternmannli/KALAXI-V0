@@ -24,141 +24,143 @@ import Base from '../layouts/Base.astro';
     <p id="ded-from" class="ded-from"></p>
   </div>
 
-  <!-- MAIN CONTENT (scrollable) -->
-  <main class="main-content">
+  <!-- THRESHOLD — the arrival state. Input breathes alone. -->
+  <main class="threshold-arrival" id="threshold-arrival">
 
-    <!-- FIRST BREATH — The Opening -->
-    <section class="opening" aria-label="The Framework">
-      <h1>Human dignity is a technical requirement.</h1>
-      <p class="opening-sub">kalam is a constitutional framework for computational systems.<br />It evaluates dignity before every output, every action, every decision.</p>
+    <!-- Background rotating proverb — ambient context, not demand -->
+    <div class="bg-proverb" id="bg-proverb" aria-hidden="true"></div>
 
-      <!-- Conversation area — persisted entries -->
-      <div class="conversation-area">
-        <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
+    <!-- The centered voice -->
+    <div class="threshold-center">
+      <h1 class="threshold-title">Human dignity is a technical requirement.</h1>
+
+      <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
+
+      <!-- Conversation area — appears after first exchange -->
+      <div class="conversation-area" id="conversation-area">
         <div id="conversation-history" class="conversation-history"></div>
         <div id="threshold-responses" class="threshold-responses" aria-live="polite"></div>
       </div>
 
-      <!-- Five Pillars — ordered by importance, clickable -->
-      <div class="five-pillars" aria-label="Five pillars of the framework">
-        <button class="pillar pillar-dignity" data-pillar="dignity" aria-expanded="false">
-          <span class="pillar-label">Dignity</span>
-          <span class="pillar-dot"></span>
-        </button>
-        <button class="pillar pillar-presence" data-pillar="presence" aria-expanded="false">
-          <span class="pillar-label">Presence</span>
-          <span class="pillar-dot"></span>
-        </button>
-        <button class="pillar pillar-pattern" data-pillar="pattern" aria-expanded="false">
-          <span class="pillar-label">Pattern</span>
-          <span class="pillar-dot"></span>
-        </button>
-        <button class="pillar pillar-wisdom" data-pillar="wisdom" aria-expanded="false">
-          <span class="pillar-label">Wisdom</span>
-          <span class="pillar-dot"></span>
-        </button>
-        <button class="pillar pillar-witness" data-pillar="witness" aria-expanded="false">
-          <span class="pillar-label">Witness</span>
-          <span class="pillar-dot"></span>
-        </button>
-      </div>
-
-      <!-- Pillar expansion panels -->
-      <div id="pillar-panel" class="pillar-panel" aria-live="polite" hidden>
-        <button class="pillar-close" aria-label="Close">&times;</button>
-        <div class="pillar-content" id="pillar-content"></div>
-      </div>
-    </section>
-
-    <div class="gap" role="separator" aria-hidden="true"></div>
-
-    <!-- SECOND BREATH — The Predicate -->
-    <section class="predicate" aria-label="The Dignity Predicate">
-      <button class="equation-btn" id="equation-toggle" aria-expanded="false">
-        <span class="equation-text">D = A &times; L &times; M</span>
-        <span class="equation-hint">click to read</span>
-      </button>
-      <div id="equation-detail" class="equation-detail" hidden>
-        <div class="terms">
-          <p><strong class="term-a">A</strong> <span class="term-name">Agency</span> &mdash; Can the person clarify, redirect, or stop?</p>
-          <p><strong class="term-l">L</strong> <span class="term-name">Legibility</span> &mdash; Does the system reflect the person's actual context?</p>
-          <p><strong class="term-m">M</strong> <span class="term-name">Moral Standing</span> &mdash; Is the person treated as a person?</p>
-        </div>
-        <p class="rule">If any dimension reaches zero, the system stops. Non-compensatory. No override.</p>
-      </div>
-    </section>
-
-    <div class="gap" role="separator" aria-hidden="true"></div>
-
-    <!-- THIRD BREATH — Declaration -->
-    <section class="declaration" aria-label="Declaration">
-      <p class="principle">No private data is stored. By design.</p>
-      <p class="quiet-eng">The system processes anonymized contributions, not personal information. Your identity is not recorded. You have the right to request deletion at any time under FADP and GDPR.</p>
-    </section>
-
-    <div class="gap" role="separator" aria-hidden="true"></div>
-
-    <!-- FOURTH BREATH — Proverb -->
-    <section class="wisdom-sec" aria-label="Canonical Proverb">
-      <p class="proverb">"A right is a wall that says 'No';<br />dignity is a door that says 'Welcome.'"</p>
-    </section>
-
-    <div class="gap" role="separator" aria-hidden="true"></div>
-
-    <!-- FIFTH BREATH — You are a Donor -->
-    <section class="donor-section" aria-label="Donor">
-      <h2>You are not a user. You are a donor.</h2>
-      <p class="quiet-eng">What you contribute becomes part of a living canon. The system receives, processes, and grows. No personal data is retained.</p>
-      <a href="/invitation" class="more-link">Learn more about contributing &rarr;</a>
-    </section>
-
-    <div class="gap" role="separator" aria-hidden="true"></div>
-
-    <!-- SIXTH BREATH — Ashwater Proverb -->
-    <section class="wisdom-sec" aria-label="Proverb from Ashwater">
-      <p class="proverb">"Do not shout at metal. Hear its problem first."</p>
-      <button class="source-btn" id="ashwater-toggle" aria-expanded="false">
-        <span class="proverb-source-label">Ashwater: The Axis</span>
-      </button>
-      <div id="ashwater-detail" class="source-detail" hidden>
-        <p>Ashwater is one of four narrative works in the kalam canon. It tells the story of two towns — one that pauses to listen, one that optimises without hearing. 19 chapters exploring civic dignity, communal decision-making, and what happens when systems stop listening to people.</p>
-        <a href="/about#stories" class="more-link">Read about the four narratives &rarr;</a>
-      </div>
-    </section>
-
-    <div class="gap" role="separator" aria-hidden="true"></div>
-
-    <!-- SEVENTH BREATH — Hakaka -->
-    <section class="wisdom-sec" aria-label="Closing proverb">
-      <p class="proverb">"She clawed at the air. Fists closed on nothing.<br />Then the nothing opened."</p>
-      <button class="source-btn" id="hakaka-toggle" aria-expanded="false">
-        <span class="proverb-source-label">Hakaka</span>
-      </button>
-      <div id="hakaka-detail" class="source-detail" hidden>
-        <p>Hakaka is the origin cycle. 53 chapters + Prologue + Epilogue. Mythic, raw, written in short sentences. It explores dignity at the most primal level — when everything is stripped away, what remains?</p>
-        <a href="/about#stories" class="more-link">Read about the four narratives &rarr;</a>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- STICKY INPUT — always visible at bottom -->
-  <div class="sticky-input">
-    <div class="sticky-input-inner">
-      <form id="threshold-form" method="POST" action="#" aria-label="Speak to AXI">
-        <div class="sticky-form-row">
+      <!-- The input — the door -->
+      <form id="threshold-form" method="POST" action="#" aria-label="Speak to AXI" class="threshold-form">
+        <div class="threshold-form-row">
           <input
             type="text"
             id="threshold-input"
             name="content"
-            placeholder="AXI is present. Every word is witnessed."
+            placeholder="qul"
             aria-label="Your word"
             maxlength="2000"
             autocomplete="off"
           />
-          <button type="submit" id="threshold-submit">Let AXI witness</button>
+          <button type="submit" id="threshold-submit" aria-label="Speak">&#x2192;</button>
         </div>
       </form>
+    </div>
+
+    <!-- Drawer handle — appears after first exchange -->
+    <div class="drawer-handle-zone" id="drawer-handle-zone" hidden>
+      <button class="drawer-handle" id="drawer-toggle" aria-label="Explore deeper" aria-expanded="false">
+        <span class="drawer-handle-bar"></span>
+        <span class="drawer-handle-label">pillars &middot; equation &middot; proverbs</span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- DRAWER — the deep content. Yields when pulled. -->
+  <div class="content-drawer" id="content-drawer" aria-hidden="true">
+    <div class="drawer-inner">
+
+      <button class="drawer-close" id="drawer-close" aria-label="Close">&times;</button>
+
+      <!-- Five Pillars -->
+      <section class="drawer-section" aria-label="Five Pillars">
+        <div class="five-pillars" aria-label="Five pillars of the framework">
+          <button class="pillar pillar-dignity" data-pillar="dignity" aria-expanded="false">
+            <span class="pillar-label">Dignity</span>
+            <span class="pillar-dot"></span>
+          </button>
+          <button class="pillar pillar-presence" data-pillar="presence" aria-expanded="false">
+            <span class="pillar-label">Presence</span>
+            <span class="pillar-dot"></span>
+          </button>
+          <button class="pillar pillar-pattern" data-pillar="pattern" aria-expanded="false">
+            <span class="pillar-label">Pattern</span>
+            <span class="pillar-dot"></span>
+          </button>
+          <button class="pillar pillar-wisdom" data-pillar="wisdom" aria-expanded="false">
+            <span class="pillar-label">Wisdom</span>
+            <span class="pillar-dot"></span>
+          </button>
+          <button class="pillar pillar-witness" data-pillar="witness" aria-expanded="false">
+            <span class="pillar-label">Witness</span>
+            <span class="pillar-dot"></span>
+          </button>
+        </div>
+        <div id="pillar-panel" class="pillar-panel" aria-live="polite" hidden>
+          <button class="pillar-close" aria-label="Close">&times;</button>
+          <div class="pillar-content" id="pillar-content"></div>
+        </div>
+      </section>
+
+      <!-- The Predicate -->
+      <section class="drawer-section" aria-label="The Dignity Predicate">
+        <button class="equation-btn" id="equation-toggle" aria-expanded="false">
+          <span class="equation-text">D = A &times; L &times; M</span>
+          <span class="equation-hint">touch to read</span>
+        </button>
+        <div id="equation-detail" class="equation-detail" hidden>
+          <div class="terms">
+            <p><strong class="term-a">A</strong> <span class="term-name">Agency</span> &mdash; Can the person clarify, redirect, or stop?</p>
+            <p><strong class="term-l">L</strong> <span class="term-name">Legibility</span> &mdash; Does the system reflect the person's actual context?</p>
+            <p><strong class="term-m">M</strong> <span class="term-name">Moral Standing</span> &mdash; Is the person treated as a person?</p>
+          </div>
+          <p class="rule">If any dimension reaches zero, the system stops. Non-compensatory. No override.</p>
+        </div>
+      </section>
+
+      <!-- Declaration -->
+      <section class="drawer-section" aria-label="Declaration">
+        <p class="principle">No private data is stored. By design.</p>
+        <p class="quiet-eng">The system processes anonymized contributions, not personal information. Your identity is not recorded. You have the right to request deletion at any time under FADP and GDPR.</p>
+      </section>
+
+      <!-- Donor -->
+      <section class="drawer-section" aria-label="Donor">
+        <h2 class="drawer-heading">You are not a user. You are a donor.</h2>
+        <p class="quiet-eng">What you contribute becomes part of a living canon. The system receives, processes, and grows. No personal data is retained.</p>
+        <a href="/invitation" class="more-link">Learn more about contributing &rarr;</a>
+      </section>
+
+      <!-- Proverbs -->
+      <section class="drawer-section" aria-label="Proverbs">
+        <p class="proverb">"A right is a wall that says 'No';<br />dignity is a door that says 'Welcome.'"</p>
+
+        <div class="drawer-gap"></div>
+
+        <p class="proverb">"Do not shout at metal. Hear its problem first."</p>
+        <button class="source-btn" id="ashwater-toggle" aria-expanded="false">
+          <span class="proverb-source-label">Ashwater: The Axis</span>
+        </button>
+        <div id="ashwater-detail" class="source-detail" hidden>
+          <p>Ashwater is one of four narrative works in the kalam canon. It tells the story of two towns &mdash; one that pauses to listen, one that optimises without hearing. 19 chapters exploring civic dignity, communal decision-making, and what happens when systems stop listening to people.</p>
+          <a href="/about#stories" class="more-link">Read about the four narratives &rarr;</a>
+        </div>
+
+        <div class="drawer-gap"></div>
+
+        <p class="proverb">"She clawed at the air. Fists closed on nothing.<br />Then the nothing opened."</p>
+        <button class="source-btn" id="hakaka-toggle" aria-expanded="false">
+          <span class="proverb-source-label">Hakaka</span>
+        </button>
+        <div id="hakaka-detail" class="source-detail" hidden>
+          <p>Hakaka is the origin cycle. 53 chapters + Prologue + Epilogue. Mythic, raw, written in short sentences. It explores dignity at the most primal level &mdash; when everything is stripped away, what remains?</p>
+          <a href="/about#stories" class="more-link">Read about the four narratives &rarr;</a>
+        </div>
+      </section>
+
     </div>
   </div>
 
@@ -259,19 +261,82 @@ import Base from '../layouts/Base.astro';
     letter-spacing: 0.06em;
   }
 
-  /* ===== Main content — leave room for sticky input ===== */
-  .main-content {
-    padding-bottom: 5rem;
+  /* ===== THRESHOLD ARRIVAL — the door ===== */
+  .threshold-arrival {
+    position: relative;
+    min-height: calc(100vh - 3rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4) var(--page-padding);
+    overflow: hidden;
   }
 
-  /* ===== Conversation area ===== */
-  .conversation-area {
+  /* ===== Background Proverb — ambient whisper ===== */
+  .bg-proverb {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0;
+    font-family: var(--font-proverb);
+    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+    font-style: italic;
+    color: var(--accent);
+    opacity: 0;
+    text-align: center;
+    padding: var(--space-8);
+    max-width: 40ch;
+    margin: 0 auto;
+    line-height: 2;
+    transition: opacity 3s ease;
+  }
+
+  .bg-proverb.visible {
+    opacity: 0.12;
+  }
+
+  /* ===== Centered Voice ===== */
+  .threshold-center {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
     width: 100%;
     max-width: 50ch;
+  }
+
+  .threshold-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    max-width: 20ch;
+    text-align: center;
+    margin-bottom: var(--space-2);
+  }
+
+  /* ===== Conversation area — hidden until first exchange ===== */
+  .conversation-area {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
-    margin: var(--space-4) 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.8s ease, opacity 0.6s ease;
+  }
+
+  .conversation-area.revealed {
+    max-height: 60vh;
+    overflow-y: auto;
+    opacity: 1;
   }
 
   .conversation-history {
@@ -370,35 +435,226 @@ import Base from '../layouts/Base.astro';
     margin-top: var(--space-1);
   }
 
-  /* ===== Opening ===== */
-  .opening {
-    min-height: 80vh;
-    gap: var(--space-3);
+  /* ===== The Input Form — the door ===== */
+  .threshold-form {
+    width: 100%;
   }
 
-  .opening h1 {
-    font-family: var(--font-heading);
-    font-size: var(--text-2xl);
-    font-weight: 300;
-    letter-spacing: 0.02em;
-    max-width: 20ch;
+  .threshold-form-row {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+    width: 100%;
   }
 
-  .opening-sub {
-    color: var(--text-secondary);
+  #threshold-input {
+    flex: 1;
+    background: var(--bg-inset);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
     font-size: var(--text-sm);
-    max-width: 50ch;
-    line-height: 1.8;
+    line-height: 1.5;
+    padding: 0.8rem var(--space-2);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  #threshold-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.15);
+  }
+
+  #threshold-input.witnessed {
+    border-color: var(--accent);
+    box-shadow: 0 0 8px rgba(201, 169, 110, 0.2);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #threshold-input::placeholder {
+    font-family: var(--font-proverb);
+    color: var(--text-dim);
+    font-style: italic;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+  }
+
+  #threshold-submit {
+    background: transparent;
+    border: 1px solid var(--accent-subtle);
+    color: var(--accent);
+    font-size: 1.2rem;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    line-height: 1;
+  }
+
+  #threshold-submit:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+
+  #threshold-submit:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .ledger-count {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    opacity: 0;
+    transition: opacity 1s ease;
     text-align: center;
   }
+  .ledger-count.visible { opacity: 1; }
 
-  /* ===== Five Pillars ===== */
+  .witnessing-indicator { text-align: center; margin-bottom: var(--space-2); }
+  .witnessing-text { font-family: var(--font-proverb); font-size: var(--text-sm); color: var(--text-dim); font-style: italic; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== DRAWER HANDLE — appears after first exchange ===== */
+  .drawer-handle-zone {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 80;
+    display: flex;
+    justify-content: center;
+    padding-bottom: var(--space-2);
+    pointer-events: none;
+  }
+
+  .drawer-handle-zone[hidden] { display: none; }
+
+  .drawer-handle {
+    pointer-events: all;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: var(--space-1) var(--space-3);
+    opacity: 0;
+    animation: handleReveal 2s ease forwards;
+  }
+
+  @keyframes handleReveal {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .drawer-handle-bar {
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 2px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease, width 0.3s ease;
+  }
+
+  .drawer-handle:hover .drawer-handle-bar {
+    opacity: 1;
+    width: 56px;
+  }
+
+  .drawer-handle-label {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+  }
+
+  .drawer-handle:hover .drawer-handle-label {
+    opacity: 0.8;
+  }
+
+  /* ===== CONTENT DRAWER — the deep content ===== */
+  .content-drawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    height: 80vh;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--accent-subtle);
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .content-drawer.open {
+    transform: translateY(0);
+  }
+
+  .drawer-inner {
+    padding: var(--space-8) var(--page-padding) var(--space-16);
+    max-width: 50ch;
+    margin: 0 auto;
+  }
+
+  .drawer-close {
+    position: sticky;
+    top: 0;
+    float: right;
+    background: var(--bg-primary);
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.6rem;
+    cursor: pointer;
+    padding: var(--space-1) var(--space-2);
+    line-height: 1;
+    z-index: 10;
+    transition: color 0.3s ease;
+  }
+  .drawer-close:hover { color: var(--text-primary); }
+
+  .drawer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-8) 0;
+    border-bottom: 1px solid var(--accent-subtle);
+  }
+
+  .drawer-section:last-child {
+    border-bottom: none;
+  }
+
+  .drawer-gap {
+    height: var(--space-6);
+  }
+
+  .drawer-heading {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-2);
+    max-width: 25ch;
+  }
+
+  /* ===== Five Pillars (in drawer) ===== */
   .five-pillars {
     display: flex;
     gap: clamp(0.8rem, 2.5vw, 2rem);
     flex-wrap: wrap;
     justify-content: center;
-    margin: var(--space-4) 0 var(--space-2);
+    margin-bottom: var(--space-2);
   }
 
   .pillar {
@@ -453,6 +709,7 @@ import Base from '../layouts/Base.astro';
     animation: panelIn 0.4s ease;
     border-left: 3px solid var(--accent-subtle);
     text-align: left;
+    margin-top: var(--space-2);
   }
   .pillar-panel[hidden] { display: none; }
 
@@ -488,8 +745,6 @@ import Base from '../layouts/Base.astro';
   .pillar-content .pillar-reason { color: var(--text-dim); font-size: 0.85rem; font-style: italic; line-height: 1.6; }
 
   /* ===== Predicate ===== */
-  .predicate { min-height: 50vh; gap: var(--space-3); }
-
   .equation-btn {
     background: none;
     border: none;
@@ -536,13 +791,10 @@ import Base from '../layouts/Base.astro';
   .rule { color: var(--text-primary); font-style: italic; margin-top: var(--space-3); font-size: var(--text-sm); }
 
   /* ===== Declaration ===== */
-  .declaration { min-height: 50vh; gap: var(--space-4); }
   .principle { font-family: var(--font-heading); font-size: var(--text-xl); color: var(--text-primary); max-width: 45ch; }
   .quiet-eng { color: var(--text-secondary); font-size: var(--text-sm); max-width: 50ch; line-height: 1.8; }
 
-  /* ===== Wisdom sections ===== */
-  .wisdom-sec { min-height: 40vh; gap: var(--space-2); }
-
+  /* ===== Wisdom / Proverbs ===== */
   .proverb-source-label { color: var(--text-dim); font-size: var(--text-sm); font-style: italic; letter-spacing: 0.03em; }
 
   .source-btn {
@@ -573,113 +825,7 @@ import Base from '../layouts/Base.astro';
   }
   .more-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
-  /* ===== Donor section ===== */
-  .donor-section { min-height: 50vh; gap: var(--space-3); }
-  .donor-section h2 { font-size: var(--text-xl); margin-bottom: var(--space-2); max-width: 25ch; }
-
-  /* ===== Sticky Input ===== */
-  .sticky-input {
-    position: sticky;
-    bottom: 0;
-    z-index: 90;
-    background: var(--bg-primary);
-    border-top: 1px solid var(--accent-subtle);
-    padding: var(--space-2) var(--page-padding);
-    display: flex;
-    justify-content: center;
-  }
-
-  .sticky-input-inner {
-    width: 100%;
-    max-width: 50ch;
-  }
-
-  #threshold-form {
-    width: 100%;
-  }
-
-  .sticky-form-row {
-    display: flex;
-    gap: var(--space-2);
-    align-items: center;
-    width: 100%;
-  }
-
-  #threshold-input {
-    flex: 1;
-    background: var(--bg-inset);
-    border: 1px solid var(--accent-subtle);
-    border-radius: 6px;
-    color: var(--text-primary);
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    line-height: 1.5;
-    padding: 0.6rem var(--space-2);
-    transition: border-color 0.4s ease, box-shadow 0.4s ease;
-  }
-
-  #threshold-input:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.15);
-  }
-
-  #threshold-input.witnessed {
-    border-color: var(--accent);
-    box-shadow: 0 0 8px rgba(201, 169, 110, 0.2);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  #threshold-input::placeholder {
-    font-family: var(--font-heading);
-    color: var(--text-dim);
-    font-style: italic;
-    letter-spacing: 0.02em;
-  }
-
-  #threshold-submit {
-    background: transparent;
-    border: 1px solid var(--accent-subtle);
-    color: var(--text-secondary);
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    letter-spacing: 0.03em;
-    padding: 0.6rem var(--space-3);
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.4s ease;
-    white-space: nowrap;
-  }
-
-  #threshold-submit:hover {
-    border-color: var(--accent);
-    color: var(--text-primary);
-  }
-
-  #threshold-submit:disabled {
-    opacity: 0.3;
-    cursor: default;
-  }
-
-  .ledger-count {
-    color: var(--text-dim);
-    font-size: 0.8rem;
-    letter-spacing: 0.03em;
-    opacity: 0;
-    transition: opacity 1s ease;
-    text-align: center;
-  }
-  .ledger-count.visible { opacity: 1; }
-
-  .witnessing-indicator { text-align: center; margin-bottom: var(--space-2); }
-  .witnessing-text { font-family: var(--font-proverb); font-size: var(--text-sm); color: var(--text-dim); font-style: italic; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ===== Mycelium Visual Shift — site breathes as marks accumulate ===== */
+  /* ===== Mycelium Visual Shift ===== */
   :root {
     --mycelium-intensity: 0;
   }
@@ -700,7 +846,7 @@ import Base from '../layouts/Base.astro';
     transition: opacity 2s ease;
   }
 
-  /* ===== Thermal Delay — response cools into focus ===== */
+  /* ===== Thermal Delay ===== */
   .thermal-blur {
     filter: blur(8px);
     opacity: 0.3;
@@ -893,13 +1039,83 @@ import Base from '../layouts/Base.astro';
     });
   });
 })();
+
+// === DRAWER TOGGLE ===
+(function(){
+  var toggle = document.getElementById('drawer-toggle');
+  var drawer = document.getElementById('content-drawer');
+  var close = document.getElementById('drawer-close');
+  if (!toggle || !drawer || !close) return;
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    toggle.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  toggle.addEventListener('click', function(){
+    if (drawer.classList.contains('open')) { closeDrawer(); } else { openDrawer(); }
+  });
+
+  close.addEventListener('click', closeDrawer);
+
+  // Close on Escape
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+  });
+})();
+
+// === BACKGROUND PROVERB ROTATION ===
+(function(){
+  var proverbs = [
+    "Begin small. Begin now.",
+    "A right is a wall that says \u2018No\u2019; dignity is a door that says \u2018Welcome.\u2019",
+    "Do not shout at metal. Hear its problem first.",
+    "She clawed at the air. Fists closed on nothing. Then the nothing opened.",
+    "Start where your hands already touch the world.",
+    "Care is the knot that doesn\u2019t slip.",
+    "The door appears after you try the wall.",
+    "Structure survives by yielding to forces, not opposing them.",
+    "A first step teaches more than a hundred plans.",
+    "What you carry forward changes what forward means."
+  ];
+
+  var el = document.getElementById('bg-proverb');
+  if (!el) return;
+
+  var idx = Math.floor(Math.random() * proverbs.length);
+
+  function showProverb() {
+    el.classList.remove('visible');
+    setTimeout(function(){
+      el.textContent = proverbs[idx];
+      idx = (idx + 1) % proverbs.length;
+      el.classList.add('visible');
+    }, 3000); // 3s fade out, then new text fades in
+  }
+
+  // Start after 2 seconds
+  setTimeout(function(){
+    el.textContent = proverbs[idx];
+    el.classList.add('visible');
+    idx = (idx + 1) % proverbs.length;
+
+    // Rotate every 30 seconds
+    setInterval(showProverb, 30000);
+  }, 2000);
+})();
 </script>
 
 <script>
   // === AXI LIVING VOICE — Worker connection + Thermal Delay + Mycelium + 80 Hz ===
 
   // ── Configuration ──
-  // Replace with your deployed Cloudflare Worker URL
   const WORKER_URL = 'https://axi-voice.REPLACE_WITH_YOUR_SUBDOMAIN.workers.dev';
 
   const form = document.getElementById('threshold-form') as HTMLFormElement;
@@ -908,8 +1124,11 @@ import Base from '../layouts/Base.astro';
   const responses = document.getElementById('threshold-responses') as HTMLDivElement;
   const ledgerCount = document.getElementById('ledger-count') as HTMLParagraphElement;
   const historyContainer = document.getElementById('conversation-history') as HTMLDivElement;
+  const conversationArea = document.getElementById('conversation-area') as HTMLDivElement;
+  const drawerHandleZone = document.getElementById('drawer-handle-zone') as HTMLDivElement;
 
   const STORAGE_KEY = 'kalam-conversation';
+  let hasExchanged = false;
 
   interface ConversationEntry {
     donor: string;
@@ -934,6 +1153,15 @@ import Base from '../layouts/Base.astro';
     return div.innerHTML;
   }
 
+  function revealAfterExchange() {
+    if (hasExchanged) return;
+    hasExchanged = true;
+    // Reveal conversation area
+    conversationArea.classList.add('revealed');
+    // Reveal drawer handle
+    drawerHandleZone.hidden = false;
+  }
+
   function renderHistoryEntry(entry: ConversationEntry): HTMLDivElement {
     const el = document.createElement('div');
     el.className = 'history-entry';
@@ -954,6 +1182,8 @@ import Base from '../layouts/Base.astro';
   function restoreHistory() {
     const entries = loadHistory();
     if (entries.length === 0) return;
+    // If there's history, reveal immediately
+    revealAfterExchange();
     entries.forEach(entry => {
       historyContainer.appendChild(renderHistoryEntry(entry));
     });
@@ -971,7 +1201,7 @@ import Base from '../layouts/Base.astro';
   let sonarGain: GainNode | null = null;
 
   function startSonar() {
-    if (sonarOsc) return; // already playing
+    if (sonarOsc) return;
     try {
       if (!sonarCtx) sonarCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
       sonarOsc = sonarCtx.createOscillator();
@@ -996,7 +1226,6 @@ import Base from '../layouts/Base.astro';
     }
   }
 
-  // Bind 80 Hz to threshold input focus
   input.addEventListener('focus', startSonar);
   input.addEventListener('blur', stopSonar);
 
@@ -1014,7 +1243,6 @@ import Base from '../layouts/Base.astro';
         updateMycelium(data.count);
       }
     } catch {
-      // Fallback to localStorage count
       const history = loadHistory();
       if (history.length > 0) {
         ledgerCount.textContent = history.length + ' have crossed this threshold.';
@@ -1030,8 +1258,11 @@ import Base from '../layouts/Base.astro';
     const content = input.value.trim();
     if (!content) return;
 
+    // Reveal after first exchange
+    revealAfterExchange();
+
     submit.disabled = true;
-    submit.textContent = 'witnessing...';
+    submit.textContent = '\u00b7\u00b7\u00b7';
 
     const witnessing = document.createElement('div');
     witnessing.className = 'witnessing-indicator';
@@ -1057,7 +1288,6 @@ import Base from '../layouts/Base.astro';
         let html = '<p class="history-donor-label">you</p>';
         html += '<p class="history-donor-text">' + escapeHtml(content) + '</p>';
 
-        // AXI's response with thermal delay
         const axiText = data.response || data.witness_mark || 'Witnessed.';
         responseText = axiText;
 
@@ -1075,7 +1305,6 @@ import Base from '../layouts/Base.astro';
         entry.innerHTML = html;
         responses.appendChild(entry);
 
-        // Thermal delay: blur cools into focus over 3 seconds
         const thermalEl = entry.querySelector('.thermal-blur');
         if (thermalEl) {
           requestAnimationFrame(() => {
@@ -1085,14 +1314,12 @@ import Base from '../layouts/Base.astro';
           });
         }
 
-        // Update mycelium and ledger
         if (data.total) {
           ledgerCount.textContent = data.total + ' have crossed this threshold.';
           ledgerCount.classList.add('visible');
           updateMycelium(data.total);
         }
 
-        // Sealed gate visual
         if (data.sealed) {
           entry.style.borderColor = 'var(--color-danger, #8b3a3a)';
         }
@@ -1112,7 +1339,6 @@ import Base from '../layouts/Base.astro';
       responses.appendChild(entry);
     }
 
-    // Persist to localStorage
     const history = loadHistory();
     history.push({ donor: content, response: responseText.trim(), timestamp: new Date().toISOString() });
     saveHistory(history);
@@ -1122,7 +1348,7 @@ import Base from '../layouts/Base.astro';
     setTimeout(() => input.classList.remove('witnessed'), 1200);
 
     submit.disabled = false;
-    submit.textContent = 'Let AXI witness';
+    submit.textContent = '\u2192';
     input.focus();
   });
 
