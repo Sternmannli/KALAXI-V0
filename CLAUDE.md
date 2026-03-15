@@ -277,19 +277,30 @@ Phase 9: GO 9.1-9.5 (narrative — remaining Hakaka, Ashwater, Kinderbuch, Offsp
 
 ---
 
-## IMMEDIATE PRIORITIES (Awaiting GO)
+## THERMAL DELAY DIRECTIVE (PERMANENT — 2026-03-15)
 
-1. EXP-001 — 188 runs remaining (Claude data completely absent: 0/20)
-2. kalam.ch deployment — authorized
-3. arXiv paper submission — ready, needs endorsement
-4. Voice Discovery Pipeline — linguistic analysis of 4 books
-5. KALAXI_1 remaining chapters — Ch.1 frozen by thermal
-6. LLM research — minimum viable model, distillation
-7. Divergence Shadow paper — FAccT/AIES
-8. Donor Space schema design
-9. ~~Ratify T#48-T#59~~ — DONE (blanket ratification 2026-03-14)
-10. ~~Approve 9 proverbs (P#ARCHIVE-001-009)~~ — DONE (blanket ratification 2026-03-14)
-11. ~~Layer 3 dignity reframing~~ — RATIFIED + INTEGRATED (2026-03-15, full constitutional integration)
+**V-001 said:** "All thermal delay will be applied when the system is created. We said we will stop this until we have the system in public and functioning."
+
+**Rule:** ALL thermal delays are SUSPENDED. No thermal delay may be cited as a blocker for any work until the system is public and functioning. Thermal delay will be re-activated when the system is live with real users. V-002 must NEVER name thermal delay as a reason not to proceed.
+
+**Blanket signature:** V-001 grants blanket permission/signature for all additions to the system. No item requires individual GO until the system is live.
+
+---
+
+## IMMEDIATE PRIORITIES (ALL HAVE GO)
+
+1. EXP-001 — 188 runs remaining (Claude: 0/20) — ✅ GO received
+2. kalam.ch deployment to Cloudflare — ✅ authorized
+3. arXiv paper submission (cs.AI) — ✅ ready
+4. Voice Discovery Pipeline — linguistic analysis of 4 books — ✅ GO (blanket)
+5. KALAXI_1 remaining chapters — ✅ GO (thermal SUSPENDED)
+6. LLM research — minimum viable model, distillation — ✅ GO (blanket)
+7. Divergence Shadow paper — FAccT/AIES — ✅ GO (blanket)
+8. Donor Space schema design — ✅ GO (blanket)
+9. Public repo Wave 2 push — ✅ GO (blanket)
+10. ~~Ratify T#48-T#59~~ — DONE (blanket ratification 2026-03-14)
+11. ~~Approve 9 proverbs (P#ARCHIVE-001-009)~~ — DONE (blanket ratification 2026-03-14)
+12. ~~Layer 3 dignity reframing~~ — RATIFIED + INTEGRATED (2026-03-15)
 
 ---
 
