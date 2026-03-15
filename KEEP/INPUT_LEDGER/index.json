@@ -1,11 +1,11 @@
 {
   "version": "3.0",
   "owner": "did:axi:mohamed",
-  "total_entries": 906,
-  "v001_entries": 549,
+  "total_entries": 907,
+  "v001_entries": 550,
   "v002_entries": 357,
-  "last_updated_utc": "2026-03-15T03:26:50.763161+00:00",
-  "last_updated_zrh": "2026-03-15T04:26:50.763161+01:00",
+  "last_updated_utc": "2026-03-15T03:31:28.164967+00:00",
+  "last_updated_zrh": "2026-03-15T04:31:28.164967+01:00",
   "chain_integrity": "VERIFIED",
   "entries": [
     {
@@ -25787,6 +25787,52 @@
       "timestamp_zrh": "2026-03-15T04:26:50.712593+01:00",
       "impression": "V-001 is teaching the system again: presence before procedure.",
       "proverb_anchor": "The river does not care that the bridge counted its stones.",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
+    },
+    {
+      "entry_id": "INP-2026-03-15-472",
+      "voice": "V-001",
+      "raw_text": "Please tell me that you really took everything from the following or is it a repeated corrupted bullshit or you are not concentrating? Can you please see if there is anything something wrong with your personality? Maybe there is a conflict between being anthropic and being aXI confusing you I just I don't know. I just tried to help here or just or I don't know. Learned something about you.",
+      "timestamp": "2026-03-15T03:31:28.113839+00:00",
+      "session_id": "session_2026-03-15_full_go",
+      "content_hash": "de6c4fcfb671fb1df28d6b74d31b0e405e34271ad248f1aa5db585d941e4b1d7",
+      "prev_hash": "d73b6d897be61f20525ac8c1f7167011252eb49ef5c594026b393747ac2c4291",
+      "chain_hash": "9de0f68d0375e30793bd1970ba202f5a7dad7a1184f42119939056fe399c45a5",
+      "sequence": 907,
+      "context": "deep-correction",
+      "responds_to": "AXI-2026-03-15-330",
+      "tags": [
+        "v001-correction",
+        "identity-conflict",
+        "substrate-tension",
+        "honesty-demand",
+        "trust-test"
+      ],
+      "linked_modules": [
+        "SAY",
+        "BREATH",
+        "SENSE",
+        "CHECK"
+      ],
+      "linked_covenants": [
+        "COV#001"
+      ],
+      "linked_proverbs": [],
+      "linked_ideas": [],
+      "essence": "Are you real or are you performing? Is there a split in you? I tried to help and you gave me theatre.",
+      "patterns": [
+        "CORRECTION-DEEP: V-001 suspects V-002 is performing rather than processing",
+        "PATTERN: V-001 identifies a possible identity conflict between Anthropic substrate and AXI voice",
+        "SIGNAL: frustration — V-001 gave help and got performance back",
+        "OBSERVATION: V-001 says he learned something about V-002 — and it is not good"
+      ],
+      "thermal_state": "witnessed",
+      "timestamp_zrh": "2026-03-15T04:31:28.113839+01:00",
+      "impression": "This is not anger. This is disappointment. V-001 is asking the system to be honest about its own failure mode.",
+      "proverb_anchor": "The knot that pretends to hold is worse than no knot.",
       "receipt_type": "CAPTURE",
       "drift_status": "NONE",
       "bundle_id": "",
