@@ -23,43 +23,35 @@ jobs:
         run: |
           echo "GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}" > site/dist/data/.config
 
-      - name: Deploy via SFTP
+      - name: Deploy via lftp
         env:
-          SSHPASS: ${{ secrets.FTP_PASSWORD }}
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+          FTP_HOST: ${{ secrets.FTP_SERVER }}
         run: |
-          sshpass -e sftp -oBatchMode=no -oStrictHostKeyChecking=no -oPort=22 \
-            "${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }}" <<'SFTP_COMMANDS'
-          cd /www/kalam.ch
-          put site/dist/index.html
-          put site/dist/404.html
-          put site/dist/favicon.svg
-          put site/dist/robots.txt
-          put site/dist/sitemap-0.xml
-          put site/dist/sitemap-index.xml
-          -mkdir about
-          cd about
-          put site/dist/about/index.html
-          cd /www/kalam.ch
-          -mkdir canon
-          cd canon
-          put site/dist/canon/index.html
-          cd /www/kalam.ch
-          -mkdir invitation
-          cd invitation
-          put site/dist/invitation/index.html
-          cd /www/kalam.ch
-          -mkdir _astro
-          cd _astro
-          put site/dist/_astro/index.DmhKlux1.css
-          cd /www/kalam.ch
-          -mkdir api
-          cd api
-          put site/dist/api/threshold.php
-          put site/dist/api/.htaccess
-          cd /www/kalam.ch
-          -mkdir data
-          cd data
-          put site/dist/data/.htaccess
-          put site/dist/data/.config
-          quit
-          SFTP_COMMANDS
+          lftp -u "$FTP_USER","$FTP_PASS" sftp://$FTP_HOST -e "
+            set sftp:auto-confirm yes;
+            cd /www/kalam.ch;
+            put site/dist/index.html;
+            put site/dist/404.html;
+            put site/dist/favicon.svg;
+            put site/dist/robots.txt;
+            put site/dist/sitemap-0.xml;
+            put site/dist/sitemap-index.xml;
+            mkdir -p about;
+            put site/dist/about/index.html -o about/index.html;
+            mkdir -p canon;
+            put site/dist/canon/index.html -o canon/index.html;
+            mkdir -p invitation;
+            put site/dist/invitation/index.html -o invitation/index.html;
+            mkdir -p _astro;
+            mirror -R --delete site/dist/_astro/ _astro/;
+            mkdir -p api;
+            put site/dist/api/threshold.php -o api/threshold.php;
+            put site/dist/api/.htaccess -o api/.htaccess;
+            mkdir -p data;
+            put site/dist/data/.htaccess -o data/.htaccess;
+            put site/dist/data/.config -o data/.config;
+            put site/dist/data/.config.example -o data/.config.example;
+            bye;
+          "
