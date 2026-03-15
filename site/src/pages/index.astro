@@ -183,11 +183,11 @@ import Base from '../layouts/Base.astro';
 
   .ded-touch {
     font-family: var(--font-heading);
-    color: var(--text-dim);
-    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-size: var(--text-base);
     letter-spacing: 0.12em;
     text-transform: lowercase;
-    opacity: 0.5;
+    opacity: 0.6;
   }
 
   .ded-lights {
@@ -245,16 +245,16 @@ import Base from '../layouts/Base.astro';
 
   .ded-initial {
     font-family: var(--font-heading);
-    color: var(--text-secondary);
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--text-primary);
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
     letter-spacing: 0.08em;
     font-weight: 300;
   }
 
   .ded-from {
     font-family: var(--font-heading);
-    color: var(--text-dim);
-    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    color: var(--text-secondary);
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
     margin-top: 2.5rem;
     opacity: 0;
     transition: opacity 2s ease;
@@ -347,52 +347,56 @@ import Base from '../layouts/Base.astro';
   }
 
   .history-entry {
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-3) var(--space-4);
     border: 1px solid var(--accent-subtle);
-    border-radius: 6px;
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
     background: var(--bg-secondary);
     text-align: left;
     animation: fadeIn 0.6s ease;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   }
 
   .history-donor-label {
-    color: var(--text-dim);
-    font-size: 0.7rem;
+    color: var(--accent-warm);
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.25rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
   }
 
   .history-donor-text {
     color: var(--text-primary);
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     line-height: 1.7;
-    margin-bottom: var(--space-1);
+    margin-bottom: var(--space-2);
     white-space: pre-wrap;
     word-break: break-word;
   }
 
   .history-response-label {
     color: var(--color-witness);
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.25rem;
-    margin-top: var(--space-1);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+    margin-top: var(--space-2);
+    font-weight: 500;
   }
 
   .history-response {
-    color: var(--text-secondary);
-    font-size: var(--text-sm);
-    line-height: 1.7;
-    padding-top: var(--space-1);
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    line-height: 1.8;
+    padding-top: var(--space-2);
     border-top: 1px solid var(--accent-subtle);
   }
 
   .history-meta {
     color: var(--text-dim);
-    font-size: 0.7rem;
-    margin-top: var(--space-1);
+    font-size: 0.85rem;
+    margin-top: var(--space-2);
     letter-spacing: 0.02em;
     text-align: right;
   }
@@ -406,33 +410,37 @@ import Base from '../layouts/Base.astro';
   .witness-entry {
     text-align: left;
     animation: fadeIn 1s ease-in;
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-3) var(--space-4);
     border: 1px solid var(--accent-subtle);
-    border-radius: 6px;
+    border-left: 3px solid var(--color-witness);
+    border-radius: 8px;
     background: var(--bg-secondary);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
   }
 
   .witness-mark {
     font-family: var(--font-proverb);
-    font-size: var(--text-base);
-    color: var(--accent);
+    font-size: var(--text-lg);
+    color: var(--accent-warm);
     font-style: italic;
-    margin-bottom: var(--space-1);
+    margin-bottom: var(--space-2);
     line-height: 1.8;
   }
 
   .axi-reflection {
     color: var(--text-primary);
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     line-height: 1.9;
     text-align: left;
-    margin-bottom: var(--space-1);
+    margin-bottom: var(--space-2);
   }
 
   .witness-receipt {
-    color: var(--text-dim);
-    font-size: 0.8rem;
-    margin-top: var(--space-1);
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    margin-top: var(--space-2);
+    padding-top: var(--space-1);
+    border-top: 1px solid var(--accent-subtle);
   }
 
   /* ===== The Input Form — the door ===== */
@@ -450,25 +458,25 @@ import Base from '../layouts/Base.astro';
   #threshold-input {
     flex: 1;
     background: var(--bg-inset);
-    border: 1px solid var(--accent-subtle);
-    border-radius: 6px;
+    border: 2px solid var(--accent-subtle);
+    border-radius: 10px;
     color: var(--text-primary);
     font-family: var(--font-body);
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     line-height: 1.5;
-    padding: 0.8rem var(--space-2);
+    padding: 1rem var(--space-3);
     transition: border-color 0.4s ease, box-shadow 0.4s ease;
   }
 
   #threshold-input:focus {
     outline: none;
     border-color: var(--accent);
-    box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.15);
+    box-shadow: 0 0 0 3px rgba(212, 180, 120, 0.15), 0 0 20px rgba(212, 180, 120, 0.08);
   }
 
   #threshold-input.witnessed {
-    border-color: var(--accent);
-    box-shadow: 0 0 8px rgba(201, 169, 110, 0.2);
+    border-color: var(--accent-warm);
+    box-shadow: 0 0 12px rgba(212, 180, 120, 0.25);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
@@ -476,25 +484,27 @@ import Base from '../layouts/Base.astro';
     font-family: var(--font-proverb);
     color: var(--text-dim);
     font-style: italic;
+    font-size: var(--text-base);
     letter-spacing: 0.05em;
-    opacity: 0.6;
+    opacity: 0.7;
   }
 
   #threshold-submit {
-    background: transparent;
-    border: 1px solid var(--accent-subtle);
-    color: var(--accent);
-    font-size: 1.2rem;
-    padding: 0.6rem 1rem;
-    border-radius: 6px;
+    background: var(--accent-subtle);
+    border: 2px solid var(--accent);
+    color: var(--accent-warm);
+    font-size: 1.4rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.4s ease;
+    transition: all 0.3s ease;
     line-height: 1;
   }
 
   #threshold-submit:hover {
-    border-color: var(--accent);
-    color: var(--text-primary);
+    background: var(--accent);
+    color: var(--bg-primary);
+    box-shadow: 0 0 16px rgba(212, 180, 120, 0.3);
   }
 
   #threshold-submit:disabled {
@@ -503,8 +513,8 @@ import Base from '../layouts/Base.astro';
   }
 
   .ledger-count {
-    color: var(--text-dim);
-    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
     letter-spacing: 0.03em;
     opacity: 0;
     transition: opacity 1s ease;
@@ -513,7 +523,7 @@ import Base from '../layouts/Base.astro';
   .ledger-count.visible { opacity: 1; }
 
   .witnessing-indicator { text-align: center; margin-bottom: var(--space-2); }
-  .witnessing-text { font-family: var(--font-proverb); font-size: var(--text-sm); color: var(--text-dim); font-style: italic; }
+  .witnessing-text { font-family: var(--font-proverb); font-size: var(--text-base); color: var(--accent); font-style: italic; }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
@@ -571,11 +581,11 @@ import Base from '../layouts/Base.astro';
 
   .drawer-handle-label {
     font-family: var(--font-heading);
-    font-size: 0.7rem;
-    color: var(--text-dim);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
     letter-spacing: 0.1em;
     text-transform: lowercase;
-    opacity: 0.5;
+    opacity: 0.6;
     transition: opacity 0.3s ease;
   }
 
@@ -739,10 +749,10 @@ import Base from '../layouts/Base.astro';
     align-items: center;
     gap: 0.5rem;
   }
-  .pillar-content .pillar-emoji { font-size: 1.3rem; }
-  .pillar-content .pillar-def { color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.8; margin-bottom: var(--space-2); }
-  .pillar-content .pillar-eq { font-family: var(--font-heading); color: var(--accent); font-size: var(--text-base); letter-spacing: 0.03em; margin-bottom: var(--space-1); }
-  .pillar-content .pillar-reason { color: var(--text-dim); font-size: 0.85rem; font-style: italic; line-height: 1.6; }
+  .pillar-content .pillar-emoji { font-size: 1.5rem; }
+  .pillar-content .pillar-def { color: var(--text-primary); font-size: var(--text-base); line-height: 1.8; margin-bottom: var(--space-2); }
+  .pillar-content .pillar-eq { font-family: var(--font-heading); color: var(--accent-warm); font-size: var(--text-lg); letter-spacing: 0.03em; margin-bottom: var(--space-1); }
+  .pillar-content .pillar-reason { color: var(--text-secondary); font-size: var(--text-sm); font-style: italic; line-height: 1.7; }
 
   /* ===== Predicate ===== */
   .equation-btn {
@@ -767,8 +777,8 @@ import Base from '../layouts/Base.astro';
   }
 
   .equation-hint {
-    font-size: 0.75rem;
-    color: var(--text-dim);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
     letter-spacing: 0.08em;
     text-transform: lowercase;
     opacity: 0.6;
@@ -792,10 +802,10 @@ import Base from '../layouts/Base.astro';
 
   /* ===== Declaration ===== */
   .principle { font-family: var(--font-heading); font-size: var(--text-xl); color: var(--text-primary); max-width: 45ch; }
-  .quiet-eng { color: var(--text-secondary); font-size: var(--text-sm); max-width: 50ch; line-height: 1.8; }
+  .quiet-eng { color: var(--text-primary); font-size: var(--text-base); max-width: 50ch; line-height: 1.8; }
 
   /* ===== Wisdom / Proverbs ===== */
-  .proverb-source-label { color: var(--text-dim); font-size: var(--text-sm); font-style: italic; letter-spacing: 0.03em; }
+  .proverb-source-label { color: var(--text-secondary); font-size: var(--text-sm); font-style: italic; letter-spacing: 0.03em; }
 
   .source-btn {
     background: none;
@@ -807,17 +817,17 @@ import Base from '../layouts/Base.astro';
     margin-top: var(--space-1);
   }
   .source-btn:hover { background: var(--accent-glow); }
-  .source-btn::after { content: ' +'; color: var(--text-dim); font-size: 0.8rem; }
+  .source-btn::after { content: ' +'; color: var(--accent); font-size: var(--text-sm); }
   .source-btn[aria-expanded="true"]::after { content: ' -'; }
 
   .source-detail { max-width: 45ch; text-align: center; animation: panelIn 0.4s ease; margin-top: var(--space-2); }
   .source-detail[hidden] { display: none; }
-  .source-detail p { color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.8; }
+  .source-detail p { color: var(--text-primary); font-size: var(--text-base); line-height: 1.8; }
 
   .more-link {
     display: inline-block;
-    color: var(--text-dim);
-    font-size: 0.85rem;
+    color: var(--accent);
+    font-size: var(--text-sm);
     letter-spacing: 0.03em;
     margin-top: var(--space-2);
     border-bottom: 1px solid var(--accent-subtle);

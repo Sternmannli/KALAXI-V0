@@ -8,38 +8,38 @@
 
 :root {
   /* Deep Night palette — warm charcoal, not flat black */
-  --bg-primary: #0c0c10;
-  --bg-secondary: #131318;
-  --bg-elevated: #1a1a22;
-  --bg-inset: #08080c;
-  --text-primary: #e8e4df;
-  --text-secondary: #8b8680;
-  --text-dim: #5a5550;
-  --accent: #c9a96e;
-  --accent-warm: #d4b87a;
-  --accent-subtle: #3d3528;
-  --accent-glow: rgba(201, 169, 110, 0.08);
-  --danger: #8b3a3a;
+  --bg-primary: #0d0d12;
+  --bg-secondary: #161620;
+  --bg-elevated: #1e1e2a;
+  --bg-inset: #0a0a0f;
+  --text-primary: #f0ece6;
+  --text-secondary: #b5afa8;
+  --text-dim: #7a746e;
+  --accent: #d4b478;
+  --accent-warm: #e0c48a;
+  --accent-subtle: #4a3d2e;
+  --accent-glow: rgba(212, 180, 120, 0.12);
+  --danger: #c45050;
   --swiss-red: #d52b1e;
 
-  /* Five Pillar colors — subtle, distinct, ordered by importance */
-  --color-dignity: #c9a96e;     /* warm gold — the foundation */
-  --color-presence: #5a9e8f;    /* teal — being here */
-  --color-pattern: #7e8bbf;     /* muted blue-violet — structure */
-  --color-wisdom: #b89a6a;      /* deep amber — accumulated knowledge */
-  --color-witness: #8fa6b7;     /* silver-blue — the act of seeing */
+  /* Five Pillar colors — vivid, distinct, ordered by importance */
+  --color-dignity: #d4b478;     /* warm gold — the foundation */
+  --color-presence: #6cc4b0;    /* teal — being here */
+  --color-pattern: #9aa4e0;     /* blue-violet — structure */
+  --color-wisdom: #d4a84e;      /* amber — accumulated knowledge */
+  --color-witness: #a8c4d8;     /* silver-blue — the act of seeing */
 
   /* Typography */
   --font-heading: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'IBM Plex Sans', -apple-system, system-ui, sans-serif;
   --font-proverb: 'Amiri', 'Cormorant Garamond', Georgia, serif;
 
-  --text-sm: clamp(0.85rem, 0.8rem + 0.2vw, 0.95rem);
-  --text-base: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
-  --text-lg: clamp(1.3rem, 1.1rem + 0.7vw, 1.5rem);
-  --text-xl: clamp(1.6rem, 1.3rem + 0.9vw, 1.9rem);
-  --text-2xl: clamp(2rem, 1.6rem + 1.2vw, 2.4rem);
-  --text-3xl: clamp(2.5rem, 2rem + 1.5vw, 3rem);
+  --text-sm: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
+  --text-base: clamp(1.1rem, 1rem + 0.4vw, 1.3rem);
+  --text-lg: clamp(1.4rem, 1.2rem + 0.7vw, 1.65rem);
+  --text-xl: clamp(1.75rem, 1.4rem + 0.9vw, 2.1rem);
+  --text-2xl: clamp(2.2rem, 1.8rem + 1.2vw, 2.7rem);
+  --text-3xl: clamp(2.8rem, 2.2rem + 1.5vw, 3.4rem);
 
   /* Spacing (8px grid) */
   --space-1: 0.5rem;
@@ -190,13 +190,16 @@ section {
 .site-nav a {
   color: var(--text-secondary);
   font-size: var(--text-sm);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: lowercase;
-  padding: var(--space-1) 0;
+  padding: var(--space-1) var(--space-2);
+  border-radius: 4px;
+  transition: color 0.3s ease, background 0.3s ease;
 }
 
 .site-nav a:hover {
   color: var(--text-primary);
+  background: var(--accent-glow);
 }
 
 /* Generic nav (footer etc) */
@@ -343,7 +346,7 @@ nav a:hover {
 
 .footer-meta p {
   color: var(--text-dim);
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   letter-spacing: 0.03em;
   margin-bottom: 0;
 }
@@ -366,15 +369,15 @@ nav a:hover {
 
 .footer-contact a {
   color: var(--text-dim);
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
 }
 
 /* ===== Legal ribbon ===== */
 .legal-ribbon {
   color: var(--text-dim);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   letter-spacing: 0.02em;
-  opacity: 0.6;
+  opacity: 0.7;
   max-width: 60ch;
   text-align: center;
   line-height: 1.6;
@@ -412,28 +415,25 @@ nav a:hover {
 /* ===== Light mode ===== */
 @media (prefers-color-scheme: light) {
   :root {
-    --bg-primary: #f5f0eb;
-    --bg-secondary: #ede7e0;
-    --bg-elevated: #e5dfd8;
-    --bg-inset: #e0dbd4;
+    --bg-primary: #f7f2ec;
+    --bg-secondary: #efe9e2;
+    --bg-elevated: #e7e1d9;
+    --bg-inset: #e2dcd4;
     --text-primary: #1a1a1a;
-    --text-secondary: #5a5550;
-    --text-dim: #8b8680;
-    --accent: #8b6914;
-    --accent-warm: #a07a1a;
-    --accent-subtle: #d4c4b0;
-    --accent-glow: rgba(139, 105, 20, 0.06);
+    --text-secondary: #4a4540;
+    --text-dim: #7a756f;
+    --accent: #996e10;
+    --accent-warm: #b08418;
+    --accent-subtle: #d8c8b0;
+    --accent-glow: rgba(153, 110, 16, 0.08);
+    --color-dignity: #996e10;
+    --color-presence: #2e8870;
+    --color-pattern: #4a5699;
+    --color-wisdom: #946a1a;
+    --color-witness: #4a7090;
   }
 
   body::before {
     opacity: 0.02;
-  }
-
-  :root {
-    --color-dignity: #8b6914;
-    --color-presence: #3d7a6a;
-    --color-pattern: #5a6699;
-    --color-wisdom: #8b6d30;
-    --color-witness: #5a7a8f;
   }
 }

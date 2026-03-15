@@ -166,13 +166,13 @@ import Base from '../layouts/Base.astro';
   }
 
   .text-block p {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     margin-bottom: var(--space-3);
     line-height: 1.8;
   }
 
   .text-block strong {
-    color: var(--text-primary);
+    color: var(--accent-warm);
   }
 
   ol, ul {
@@ -182,8 +182,8 @@ import Base from '../layouts/Base.astro';
   }
 
   ol li, ul li {
-    color: var(--text-secondary);
-    line-height: 1.7;
+    color: var(--text-primary);
+    line-height: 1.8;
   }
 
   /* Contributions */
@@ -194,14 +194,14 @@ import Base from '../layouts/Base.astro';
   .contributions li strong {
     display: block;
     font-family: var(--font-heading);
-    font-size: var(--text-base);
-    color: var(--accent);
+    font-size: var(--text-lg);
+    color: var(--accent-warm);
     margin-bottom: var(--space-1);
   }
 
   .contributions li p {
-    color: var(--text-secondary);
-    font-size: var(--text-sm);
+    color: var(--text-primary);
+    font-size: var(--text-base);
     margin-bottom: 0;
   }
 
@@ -220,10 +220,10 @@ import Base from '../layouts/Base.astro';
     content: counter(process);
     position: absolute;
     left: 0;
-    color: var(--accent);
+    color: var(--accent-warm);
     font-family: var(--font-heading);
-    font-size: var(--text-sm);
-    opacity: 0.6;
+    font-size: var(--text-base);
+    font-weight: 600;
   }
 
   /* Promises */
@@ -236,7 +236,7 @@ import Base from '../layouts/Base.astro';
     content: '—';
     position: absolute;
     left: 0;
-    color: var(--accent-subtle);
+    color: var(--accent);
   }
 
   /* Contact */
