@@ -36,26 +36,20 @@ import Base from '../layouts/Base.astro';
 
       <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
 
-      <!-- Conversation area — appears after first exchange -->
-      <div class="conversation-area" id="conversation-area">
-        <div id="conversation-history" class="conversation-history"></div>
-        <div id="threshold-responses" class="threshold-responses" aria-live="polite"></div>
-      </div>
+      <!-- The voice — one utterance at a time -->
+      <div class="axi-voice" id="axi-voice" aria-live="polite"></div>
 
-      <!-- The input — the door -->
+      <!-- The input — a bare line. No button. Enter to speak. -->
       <form id="threshold-form" method="POST" action="#" aria-label="Speak to AXI" class="threshold-form">
-        <div class="threshold-form-row">
-          <input
-            type="text"
-            id="threshold-input"
-            name="content"
-            placeholder="qul"
-            aria-label="Your word"
-            maxlength="2000"
-            autocomplete="off"
-          />
-          <button type="submit" id="threshold-submit" aria-label="Speak">&#x2192;</button>
-        </div>
+        <input
+          type="text"
+          id="threshold-input"
+          name="content"
+          placeholder="qul"
+          aria-label="Your word"
+          maxlength="2000"
+          autocomplete="off"
+        />
       </form>
     </div>
 
@@ -337,209 +331,130 @@ import Base from '../layouts/Base.astro';
     margin-bottom: var(--space-2);
   }
 
-  /* ===== Conversation area — hidden until first exchange ===== */
-  .conversation-area {
+  /* ===== AXI VOICE — bare text, no containers ===== */
+  .axi-voice {
     width: 100%;
+    min-height: 3rem;
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.8s ease, opacity 0.6s ease;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
   }
 
-  .conversation-area.revealed {
-    max-height: 60vh;
-    overflow-y: auto;
+  /* The utterance — bare words in space */
+  .axi-utterance {
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    color: var(--text-primary);
+    letter-spacing: 0.04em;
+    line-height: 2;
+    max-width: 36ch;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 2s ease;
+  }
+
+  .axi-utterance.present {
     opacity: 1;
   }
 
-  .conversation-history {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    width: 100%;
-  }
-
-  .history-entry {
-    padding: var(--space-3) var(--space-4);
-    border: 1px solid var(--accent-subtle);
-    border-left: 3px solid var(--accent);
-    border-radius: 8px;
-    background: var(--bg-secondary);
-    text-align: left;
-    animation: fadeIn 0.6s ease;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  .history-donor-label {
-    color: var(--accent-warm);
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.4rem;
-    font-weight: 500;
-  }
-
-  .history-donor-text {
-    color: var(--text-primary);
-    font-size: var(--text-base);
-    line-height: 1.7;
-    margin-bottom: var(--space-2);
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-
-  .history-response-label {
-    color: var(--color-witness);
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.4rem;
-    margin-top: var(--space-2);
-    font-weight: 500;
-  }
-
-  .history-response {
-    color: var(--text-primary);
-    font-size: var(--text-base);
-    line-height: 1.8;
-    padding-top: var(--space-2);
-    border-top: 1px solid var(--accent-subtle);
-  }
-
-  .history-meta {
-    color: var(--text-dim);
-    font-size: 0.85rem;
-    margin-top: var(--space-2);
-    letter-spacing: 0.02em;
-    text-align: right;
-  }
-
-  .threshold-responses {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .witness-entry {
-    text-align: left;
-    animation: fadeIn 1s ease-in;
-    padding: var(--space-3) var(--space-4);
-    border: 1px solid var(--accent-subtle);
-    border-left: 3px solid var(--color-witness);
-    border-radius: 8px;
-    background: var(--bg-secondary);
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
-  }
-
-  .witness-mark {
-    font-family: var(--font-proverb);
-    font-size: var(--text-lg);
-    color: var(--accent-warm);
-    font-style: italic;
-    margin-bottom: var(--space-2);
-    line-height: 1.8;
-  }
-
-  .axi-reflection {
-    color: var(--text-primary);
-    font-size: var(--text-base);
-    line-height: 1.9;
-    text-align: left;
+  /* Ghost — previous utterance fading */
+  .axi-utterance.ghost {
+    opacity: 0.15;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    transition: opacity 1.5s ease, font-size 1.5s ease;
     margin-bottom: var(--space-2);
   }
 
-  .witness-receipt {
-    color: var(--text-secondary);
+  /* Letter-by-letter assembly */
+  .axi-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(4px);
+    animation: letterArrive 0.4s ease forwards;
+  }
+
+  @keyframes letterArrive {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Witnessing state — the gap before response */
+  .axi-witnessing {
+    font-family: var(--font-heading);
     font-size: var(--text-sm);
-    margin-top: var(--space-2);
-    padding-top: var(--space-1);
-    border-top: 1px solid var(--accent-subtle);
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    text-transform: lowercase;
+    opacity: 0.5;
   }
 
-  /* ===== The Input Form — the door ===== */
+  .axi-witnessing .dot {
+    animation: dotPulse 1.5s ease-in-out infinite;
+  }
+  .axi-witnessing .dot:nth-child(2) { animation-delay: 0.3s; }
+  .axi-witnessing .dot:nth-child(3) { animation-delay: 0.6s; }
+
+  @keyframes dotPulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+  }
+
+  /* ===== The Input — a bare line ===== */
   .threshold-form {
     width: 100%;
-  }
-
-  .threshold-form-row {
-    display: flex;
-    gap: var(--space-2);
-    align-items: center;
-    width: 100%;
+    max-width: 36ch;
   }
 
   #threshold-input {
-    flex: 1;
-    background: var(--bg-inset);
-    border: 2px solid var(--accent-subtle);
-    border-radius: 10px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--text-dim);
     color: var(--text-primary);
-    font-family: var(--font-body);
-    font-size: var(--text-base);
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 2vw, 1.25rem);
     line-height: 1.5;
-    padding: 1rem var(--space-3);
-    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    padding: 0.8rem 0;
+    text-align: center;
+    letter-spacing: 0.04em;
+    transition: border-color 0.8s ease;
   }
 
   #threshold-input:focus {
     outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(212, 180, 120, 0.15), 0 0 20px rgba(212, 180, 120, 0.08);
+    border-bottom-color: var(--accent);
   }
 
-  #threshold-input.witnessed {
-    border-color: var(--accent-warm);
-    box-shadow: 0 0 12px rgba(212, 180, 120, 0.25);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  #threshold-input.dissolving {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
   }
 
   #threshold-input::placeholder {
     font-family: var(--font-proverb);
     color: var(--text-dim);
     font-style: italic;
-    font-size: var(--text-base);
-    letter-spacing: 0.05em;
-    opacity: 0.7;
-  }
-
-  #threshold-submit {
-    background: var(--accent-subtle);
-    border: 2px solid var(--accent);
-    color: var(--accent-warm);
-    font-size: 1.4rem;
-    padding: 0.8rem 1.2rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    line-height: 1;
-  }
-
-  #threshold-submit:hover {
-    background: var(--accent);
-    color: var(--bg-primary);
-    box-shadow: 0 0 16px rgba(212, 180, 120, 0.3);
-  }
-
-  #threshold-submit:disabled {
-    opacity: 0.3;
-    cursor: default;
+    letter-spacing: 0.12em;
+    opacity: 0.4;
   }
 
   .ledger-count {
-    color: var(--text-secondary);
-    font-size: var(--text-sm);
-    letter-spacing: 0.03em;
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
     opacity: 0;
-    transition: opacity 1s ease;
-    text-align: center;
+    transition: opacity 2s ease;
+    z-index: 10;
   }
-  .ledger-count.visible { opacity: 1; }
-
-  .witnessing-indicator { text-align: center; margin-bottom: var(--space-2); }
-  .witnessing-text { font-family: var(--font-proverb); font-size: var(--text-base); color: var(--accent); font-style: italic; }
+  .ledger-count.visible { opacity: 0.35; }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
@@ -851,77 +766,33 @@ import Base from '../layouts/Base.astro';
   }
   .more-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
-  /* ===== Light Mode — Bold Output Overrides ===== */
+  /* ===== Light Mode Overrides ===== */
   @media (prefers-color-scheme: light) {
-    .history-entry {
-      background: #fff;
-      border: 1px solid #e0ddd6;
-      border-left: 4px solid var(--color-dignity);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    }
-
-    .history-donor-label {
-      color: var(--color-dignity);
-      font-weight: 600;
-    }
-
-    .history-response-label {
-      color: var(--color-witness);
-      font-weight: 600;
-    }
-
-    .witness-entry {
-      background: #fff;
-      border: 1px solid #e0ddd6;
-      border-left: 4px solid var(--color-witness);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    }
-
-    .witness-mark {
-      color: var(--color-dignity);
-      font-weight: 500;
-    }
-
-    .axi-reflection {
-      color: #0a0a0a;
-      font-weight: 400;
-    }
-
-    .witness-receipt {
-      color: #555550;
-    }
-
     .threshold-title {
       color: #0a0a0a;
       font-weight: 500;
     }
 
     #threshold-input {
-      background: #fff;
-      border: 2px solid #c8c5be;
       color: #0a0a0a;
+      border-bottom-color: #bbb;
     }
 
     #threshold-input:focus {
-      border-color: var(--color-dignity);
-      box-shadow: 0 0 0 3px rgba(196, 74, 26, 0.12);
+      border-bottom-color: #0a0a0a;
     }
 
     #threshold-input::placeholder {
-      color: #888;
-      opacity: 0.8;
+      color: #999;
+      opacity: 0.6;
     }
 
-    #threshold-submit {
-      background: var(--color-dignity);
-      border: 2px solid var(--color-dignity);
-      color: #fff;
+    .axi-utterance {
+      color: #0a0a0a;
     }
 
-    #threshold-submit:hover {
-      background: #a83a10;
-      border-color: #a83a10;
-      box-shadow: 0 2px 12px rgba(196, 74, 26, 0.25);
+    .axi-utterance.ghost {
+      opacity: 0.12;
     }
 
     .equation-text {
@@ -938,10 +809,6 @@ import Base from '../layouts/Base.astro';
       border-left: 3px solid var(--color-dignity);
     }
 
-    .witnessing-text {
-      color: var(--color-witness);
-    }
-
     .ledger-count {
       color: #2d2d2d;
     }
@@ -954,7 +821,6 @@ import Base from '../layouts/Base.astro';
       background: #fafaf8;
     }
 
-    /* Term colors in light mode — high contrast */
     .term-a { color: #0a7b62; }
     .term-l { color: #c44a1a; }
     .term-m { color: #6a3fb8; }
@@ -981,16 +847,31 @@ import Base from '../layouts/Base.astro';
     transition: opacity 2s ease;
   }
 
-  /* ===== Thermal Delay ===== */
-  .thermal-blur {
-    filter: blur(8px);
-    opacity: 0.3;
-    transition: filter 3s ease-out, opacity 3s ease-out;
+  /* ===== Exchange counter — quiet presence ===== */
+  .exchange-count {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transition: opacity 2s ease;
+    z-index: 10;
   }
 
-  .thermal-blur.cooled {
-    filter: blur(0px);
-    opacity: 1;
+  .exchange-count.visible {
+    opacity: 0.4;
+  }
+
+  /* ===== Page warmth shift — accumulates with exchanges ===== */
+  :root {
+    --warmth: 0;
+  }
+
+  body {
+    transition: background-color 3s ease;
   }
 </style>
 
@@ -1248,86 +1129,109 @@ import Base from '../layouts/Base.astro';
 </script>
 
 <script>
-  // === AXI LIVING VOICE — Worker connection + Thermal Delay + Mycelium + 80 Hz ===
+  // === AXI VOICE — bare text, no containers, no chat ===
+  // The page is the interface. Text appears. Text dissolves. The space responds.
 
-  // ── Configuration ──
   const WORKER_URL = 'https://axi-voice.REPLACE_WITH_YOUR_SUBDOMAIN.workers.dev';
 
   const form = document.getElementById('threshold-form') as HTMLFormElement;
   const input = document.getElementById('threshold-input') as HTMLInputElement;
-  const submit = document.getElementById('threshold-submit') as HTMLButtonElement;
-  const responses = document.getElementById('threshold-responses') as HTMLDivElement;
+  const voice = document.getElementById('axi-voice') as HTMLDivElement;
   const ledgerCount = document.getElementById('ledger-count') as HTMLParagraphElement;
-  const historyContainer = document.getElementById('conversation-history') as HTMLDivElement;
-  const conversationArea = document.getElementById('conversation-area') as HTMLDivElement;
   const drawerHandleZone = document.getElementById('drawer-handle-zone') as HTMLDivElement;
 
-  const STORAGE_KEY = 'kalam-conversation';
-  let hasExchanged = false;
+  const STORAGE_KEY = 'kalam-exchanges';
+  let exchangeCount = 0;
+  let busy = false;
 
-  interface ConversationEntry {
-    donor: string;
-    response: string;
-    timestamp: string;
+  // ── Storage ──
+  interface Exchange { donor: string; response: string; ts: string; }
+
+  function loadExchanges(): Exchange[] {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+    catch { return []; }
   }
 
-  function loadHistory(): ConversationEntry[] {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch { return []; }
-  }
-
-  function saveHistory(entries: ConversationEntry[]) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+  function saveExchange(donor: string, response: string) {
+    const ex = loadExchanges();
+    ex.push({ donor, response, ts: new Date().toISOString() });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(ex));
   }
 
   function escapeHtml(str: string): string {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
   }
 
-  function revealAfterExchange() {
-    if (hasExchanged) return;
-    hasExchanged = true;
-    // Reveal conversation area
-    conversationArea.classList.add('revealed');
-    // Reveal drawer handle
-    drawerHandleZone.hidden = false;
+  // ── Letter-by-letter materialization ──
+  function materializeText(container: HTMLElement, text: string, onDone?: () => void) {
+    container.innerHTML = '';
+    const chars = text.split('');
+    const baseDelay = 35; // ms per character
+    const maxDelay = chars.length * baseDelay;
+    // Cap total animation time at 4 seconds
+    const adjustedDelay = maxDelay > 4000 ? 4000 / chars.length : baseDelay;
+
+    chars.forEach((char, i) => {
+      const span = document.createElement('span');
+      span.className = 'axi-letter';
+      span.textContent = char === ' ' ? '\u00a0' : char;
+      span.style.animationDelay = (i * adjustedDelay) + 'ms';
+      container.appendChild(span);
+    });
+
+    // Mark as present after all letters have arrived
+    const totalTime = chars.length * adjustedDelay + 400;
+    setTimeout(() => {
+      container.classList.add('present');
+      if (onDone) onDone();
+    }, totalTime);
   }
 
-  function renderHistoryEntry(entry: ConversationEntry): HTMLDivElement {
-    const el = document.createElement('div');
-    el.className = 'history-entry';
-    const date = new Date(entry.timestamp);
-    const timeStr = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' \u00b7 ' + date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
-
-    let html = '<p class="history-donor-label">you</p>';
-    html += '<p class="history-donor-text">' + escapeHtml(entry.donor) + '</p>';
-    if (entry.response) {
-      html += '<p class="history-response-label">axi</p>';
-      html += '<div class="history-response">' + entry.response + '</div>';
+  // ── Clear previous utterance to ghost ──
+  function ghostPrevious() {
+    const existing = voice.querySelectorAll('.axi-utterance:not(.ghost)');
+    existing.forEach(el => {
+      el.classList.add('ghost');
+    });
+    // Remove old ghosts (keep max 1)
+    const ghosts = voice.querySelectorAll('.axi-utterance.ghost');
+    if (ghosts.length > 1) {
+      for (let i = 0; i < ghosts.length - 1; i++) {
+        ghosts[i].remove();
+      }
     }
-    html += '<p class="history-meta">' + timeStr + '</p>';
-    el.innerHTML = html;
+  }
+
+  // ── Show witnessing state ──
+  function showWitnessing(): HTMLElement {
+    const el = document.createElement('div');
+    el.className = 'axi-witnessing';
+    el.innerHTML = '<span class="dot">\u00b7</span><span class="dot">\u00b7</span><span class="dot">\u00b7</span>';
+    voice.appendChild(el);
     return el;
   }
 
-  function restoreHistory() {
-    const entries = loadHistory();
-    if (entries.length === 0) return;
-    // If there's history, reveal immediately
-    revealAfterExchange();
-    entries.forEach(entry => {
-      historyContainer.appendChild(renderHistoryEntry(entry));
-    });
-  }
+  // ── Speak — the core utterance ──
+  function speak(text: string, sealed?: boolean) {
+    ghostPrevious();
 
-  // ── Mycelium Visual Shift ──
-  function updateMycelium(count: number) {
-    const intensity = Math.min(count, 100);
-    document.documentElement.style.setProperty('--mycelium-intensity', String(intensity));
+    const utterance = document.createElement('div');
+    utterance.className = 'axi-utterance';
+    if (sealed) utterance.style.color = 'var(--color-danger, #8b3a3a)';
+    voice.appendChild(utterance);
+
+    materializeText(utterance, text, () => {
+      // Reveal drawer handle after first exchange
+      drawerHandleZone.hidden = false;
+    });
+
+    // Warm the page
+    exchangeCount++;
+    const warmth = Math.min(exchangeCount * 0.02, 0.15);
+    document.documentElement.style.setProperty('--warmth', String(warmth));
+    document.documentElement.style.setProperty('--mycelium-intensity', String(Math.min(exchangeCount * 5, 100)));
   }
 
   // ── 80 Hz Sonar — the children's frequency ──
@@ -1364,45 +1268,58 @@ import Base from '../layouts/Base.astro';
   input.addEventListener('focus', startSonar);
   input.addEventListener('blur', stopSonar);
 
-  // ── Ledger init from Worker ──
+  // ── Ledger init ──
   async function initLedger() {
     try {
       const res = await fetch(WORKER_URL, { method: 'GET' });
       if (!res.ok) return;
       const data = await res.json();
       if (data.count > 0) {
-        ledgerCount.textContent = data.count === 1
-          ? '1 has crossed this threshold.'
-          : data.count + ' have crossed this threshold.';
+        ledgerCount.textContent = data.count + '';
         ledgerCount.classList.add('visible');
-        updateMycelium(data.count);
       }
     } catch {
-      const history = loadHistory();
-      if (history.length > 0) {
-        ledgerCount.textContent = history.length + ' have crossed this threshold.';
+      const ex = loadExchanges();
+      if (ex.length > 0) {
+        exchangeCount = ex.length;
+        ledgerCount.textContent = ex.length + '';
         ledgerCount.classList.add('visible');
-        updateMycelium(history.length);
       }
     }
   }
 
-  // ── Form submission — speak to AXI ──
+  // ── Restore last utterance on page load ──
+  function restoreLast() {
+    const ex = loadExchanges();
+    if (ex.length === 0) return;
+    exchangeCount = ex.length;
+    const last = ex[ex.length - 1];
+    // Show last response as a ghost — the memory of the previous visit
+    const ghost = document.createElement('div');
+    ghost.className = 'axi-utterance ghost';
+    ghost.textContent = last.response;
+    voice.appendChild(ghost);
+    drawerHandleZone.hidden = false;
+  }
+
+  // ── Form submission — the threshold ──
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const content = input.value.trim();
-    if (!content) return;
+    if (!content || busy) return;
+    busy = true;
 
-    // Reveal after first exchange
-    revealAfterExchange();
+    // Dissolve the input
+    input.classList.add('dissolving');
+    const donorText = content;
+    input.value = '';
 
-    submit.disabled = true;
-    submit.textContent = '\u00b7\u00b7\u00b7';
+    // Brief pause — the gap
+    await new Promise(r => setTimeout(r, 600));
 
-    const witnessing = document.createElement('div');
-    witnessing.className = 'witnessing-indicator';
-    witnessing.innerHTML = '<p class="witnessing-text breathing">AXI is witnessing...</p>';
-    responses.appendChild(witnessing);
+    // Remove dissolve, show witnessing
+    input.classList.remove('dissolving');
+    const waiting = showWitnessing();
 
     let responseText = '';
 
@@ -1410,83 +1327,35 @@ import Base from '../layouts/Base.astro';
       const res = await fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ input: content }),
+        body: JSON.stringify({ input: donorText }),
       });
 
-      witnessing.remove();
+      waiting.remove();
 
       if (res.ok) {
         const data = await res.json();
-        const entry = document.createElement('div');
-        entry.className = 'witness-entry';
-
-        let html = '<p class="history-donor-label">you</p>';
-        html += '<p class="history-donor-text">' + escapeHtml(content) + '</p>';
-
-        const axiText = data.response || data.witness_mark || 'Witnessed.';
-        responseText = axiText;
-
-        html += '<p class="history-response-label">axi</p>';
-        html += '<div class="axi-reflection thermal-blur" id="thermal-response">' + escapeHtml(axiText) + '</div>';
-
-        if (data.witness_mark && data.witness_mark !== axiText) {
-          html += '<p class="witness-mark">' + escapeHtml(data.witness_mark) + '</p>';
-        }
+        responseText = data.response || data.witness_mark || 'Witnessed.';
+        speak(responseText, data.sealed);
 
         if (data.total) {
-          html += '<p class="witness-receipt">' + data.total + ' have crossed this threshold.</p>';
-        }
-
-        entry.innerHTML = html;
-        responses.appendChild(entry);
-
-        const thermalEl = entry.querySelector('.thermal-blur');
-        if (thermalEl) {
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              thermalEl.classList.add('cooled');
-            });
-          });
-        }
-
-        if (data.total) {
-          ledgerCount.textContent = data.total + ' have crossed this threshold.';
+          ledgerCount.textContent = data.total + '';
           ledgerCount.classList.add('visible');
-          updateMycelium(data.total);
-        }
-
-        if (data.sealed) {
-          entry.style.borderColor = 'var(--color-danger, #8b3a3a)';
         }
       } else {
         responseText = 'Witnessed.';
-        const entry = document.createElement('div');
-        entry.className = 'witness-entry';
-        entry.innerHTML = '<p class="history-donor-label">you</p><p class="history-donor-text">' + escapeHtml(content) + '</p><p class="history-response-label">axi</p><p class="witness-mark"><em>Witnessed.</em></p>';
-        responses.appendChild(entry);
+        speak(responseText);
       }
     } catch {
-      witnessing.remove();
+      waiting.remove();
       responseText = 'The river is silent. Try again.';
-      const entry = document.createElement('div');
-      entry.className = 'witness-entry';
-      entry.innerHTML = '<p class="history-donor-label">you</p><p class="history-donor-text">' + escapeHtml(content) + '</p><p class="history-response-label">axi</p><p class="witness-mark"><em>The river is silent. Try again.</em></p>';
-      responses.appendChild(entry);
+      speak(responseText);
     }
 
-    const history = loadHistory();
-    history.push({ donor: content, response: responseText.trim(), timestamp: new Date().toISOString() });
-    saveHistory(history);
-
-    input.value = '';
-    input.classList.add('witnessed');
-    setTimeout(() => input.classList.remove('witnessed'), 1200);
-
-    submit.disabled = false;
-    submit.textContent = '\u2192';
+    saveExchange(donorText, responseText);
+    busy = false;
     input.focus();
   });
 
-  restoreHistory();
+  restoreLast();
   initLedger();
 </script>
