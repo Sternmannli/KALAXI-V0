@@ -188,6 +188,9 @@ The voice study lives at `VOICE/VOICE_ARCHITECTURE_2026-03-14.md`. AXI's voice m
 
 ## SYSTEM ARCHITECTURE (Current State)
 
+### System Purpose (refined 2026-03-15, EXP-004 discovery)
+The system is not a guardian of dignity (which needs no guarding). It is a witness to legibility (which institutions constantly fail). The zeros are not in the people — they are in the institutions that could not read them. The certificate is not proof that dignity existed — it is proof that the system tried to see, and where it could not, it stopped rather than pretend.
+
 ### Four Tiers
 - **Stone** (Foundation): 18 covenants, Sealed Gate, Presence Axiom, Dignity Predicate
 - **Weaver** (Logic): 11 modules (KEEP, WIRE, SAY, OUT, FACE, CHECK, TURN, BREATH, WEAVE, SENSE, LAB) + Input Ledger
@@ -219,6 +222,8 @@ Seeds #1-12: Distributed Stewardship, Immutable Witness Network, Deliberative De
 
 ### Active Experiments
 - EXP-001: 12/200 data runs collected, 188 remaining
+- EXP-003: The Father of Seven Gates — COMPLETED (2026-03-15). Score: 4/7 PASS. Sealed gate flaws found and fixed.
+- EXP-004: The Seven Generations of Aysel — COMPLETED (2026-03-15). Score: 5/9 PASS. Discovery: M never fell. System purpose refined.
 - PIME: Designed, awaiting GO
 - Thermal Delay: Designed, awaiting GO
 
@@ -286,12 +291,17 @@ Phase 9: GO 9.1-9.5 (narrative — remaining Hakaka, Ashwater, Kinderbuch, Offsp
 - IDEA-004: Donor Space (living companion)
 - IDEA-006: Wrapper as Diagnostic Tool
 - IDEA-007: Divergence Shadow as Standalone Paper
-- IDEA-008: Layer 3 Canon Entry ("Dignity is not fragile")
+- ~~IDEA-008: Layer 3 Canon Entry ("Dignity is not fragile")~~ — RATIFIED + INTEGRATED (2026-03-15)
 - IDEA-009: Clean Up data_schema.py
 - IDEA-010: Element State Lifecycle (6-state machine)
 - IDEA-011: Proverb Selector Score
 - IDEA-012: RFC-8785 Canonicalization Tools
 - IDEA-013: Graduated 3-Level Circuit Breaker
+- IDEA-014: Lineage Graph — identity resolution across generations (names, countries, religions change; lineage persists)
+- IDEA-015: Temporal Halting — should system halt retroactively for historical zeros, or only at moment of computation?
+- IDEA-016: Pre-Digital Cryptographic Anchoring — oral tradition, photos, DNA as witnesses entered into the chain by trusted notaries
+- IDEA-017: Self-Witness Protocol — should the system halt on its own failure? When it cannot distinguish denial from testimony?
+- IDEA-018: Cross-Jurisdictional Certificate — translatable, notarizable format recognized by legal systems worldwide
 
 ---
 
