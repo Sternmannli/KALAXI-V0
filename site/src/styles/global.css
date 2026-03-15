@@ -412,28 +412,36 @@ nav a:hover {
   }
 }
 
-/* ===== Light mode ===== */
+/* ===== Light mode — Bold, high-contrast, Gen-Z aesthetic ===== */
 @media (prefers-color-scheme: light) {
   :root {
-    --bg-primary: #f7f2ec;
-    --bg-secondary: #efe9e2;
-    --bg-elevated: #e7e1d9;
-    --bg-inset: #e2dcd4;
-    --text-primary: #1a1a1a;
-    --text-secondary: #4a4540;
-    --text-dim: #7a756f;
-    --accent: #996e10;
-    --accent-warm: #b08418;
-    --accent-subtle: #d8c8b0;
-    --accent-glow: rgba(153, 110, 16, 0.08);
-    --color-dignity: #996e10;
-    --color-presence: #2e8870;
-    --color-pattern: #4a5699;
-    --color-wisdom: #946a1a;
-    --color-witness: #4a7090;
+    --bg-primary: #fafaf8;
+    --bg-secondary: #f0efec;
+    --bg-elevated: #e8e7e3;
+    --bg-inset: #f4f3f0;
+    --text-primary: #0a0a0a;
+    --text-secondary: #2d2d2d;
+    --text-dim: #555550;
+    --accent: #1a1a1a;
+    --accent-warm: #c44a1a;
+    --accent-subtle: #d0cdc6;
+    --accent-glow: rgba(196, 74, 26, 0.08);
+
+    /* Pillar colors — saturated, vivid, unapologetic */
+    --color-dignity: #c44a1a;     /* burnt orange — bold, warm */
+    --color-presence: #0a7b62;    /* deep teal — alive */
+    --color-pattern: #3a3fb8;     /* electric indigo — structured */
+    --color-wisdom: #9b6b00;      /* rich amber — deep */
+    --color-witness: #1a6b8a;     /* ocean blue — clear */
   }
 
   body::before {
-    opacity: 0.02;
+    opacity: 0.015;
+  }
+
+  /* Bold heading in light mode — near-black, heavier weight */
+  h1, h2, h3 {
+    color: #0a0a0a;
+    font-weight: 500;
   }
 }
