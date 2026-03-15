@@ -2,11 +2,13 @@
 interface Props {
   title?: string;
   description?: string;
+  hideFooter?: boolean;
 }
 
 const {
-  title = 'KALAM.CH — The Word',
+  title = 'kalam.ch — The Word',
   description = 'A living canon for human dignity. Patterns, not people.',
+  hideFooter = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -29,17 +31,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:locale" content="en" />
-    <meta property="og:site_name" content="KALAM.CH" />
+    <meta property="og:site_name" content="kalam.ch" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <!-- No tracking. No analytics scripts. No third-party requests. -->
+    <!-- No tracking. No analytics. No third-party requests. -->
     <!-- Dignity starts before the first pixel renders. -->
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=Amiri:ital@0;1&display=swap" rel="stylesheet" />
 
     <style is:global>
       @import '../styles/global.css';
@@ -47,5 +54,34 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <slot />
+
+    {!hideFooter && (
+      <footer class="site-footer" role="contentinfo">
+        <nav class="footer-links" aria-label="Site navigation">
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/canon">Canon</a>
+          <a href="/invitation">Invitation</a>
+        </nav>
+
+        <div class="footer-meta">
+          <p>Created by M. Farag · <span class="swiss-mark"><span class="swiss-cross" aria-hidden="true"></span> Zürich, Switzerland</span></p>
+          <p>Sovereign-Axis · v∞</p>
+        </div>
+
+        <div class="footer-contact">
+          <a href="mailto:info@kalam.ch">info@kalam.ch</a>
+          <a href="https://kalam.ch">kalam.ch</a>
+          <a href="https://github.com/Sternmannli/kalam-framework" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.reddit.com/u/Replikta" target="_blank" rel="noopener">Reddit</a>
+        </div>
+
+        <p class="legal-ribbon">
+          Built in alignment with the Universal Declaration of Human Rights,
+          the Swiss Federal Act on Data Protection (FADP),
+          and the EU Artificial Intelligence Act.
+        </p>
+      </footer>
+    )}
   </body>
 </html>

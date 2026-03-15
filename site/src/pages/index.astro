@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="KALAM.CH — The Word" description="The Word is light. The wound became the womb. A living canon for human dignity.">
+<Base title="kalam.ch — The Word" description="The wound became the womb. A living constitutional framework for human dignity in computational systems.">
 
   <!-- THE DEDICATION — three lights for three children -->
   <div id="dedication" class="dedication-overlay">
@@ -30,24 +30,29 @@ import Base from '../layouts/Base.astro';
     <p id="ded-from" class="ded-from"></p>
   </div>
 
-  <!-- FIRST BREATH — The opening -->
+  <!-- FIRST BREATH — The Opening -->
   <section class="opening" aria-label="The Word">
-    <p class="kalima proverb-ar" aria-label="Kalima — The Word">كلمة</p>
-    <h1>The Word is light.</h1>
-    <p class="subtitle">The wound became the womb.</p>
+    <h1>The wound became the womb.</h1>
+    <div class="five-words" aria-label="Five pillars">
+      <span>Dignity</span>
+      <span>Wisdom</span>
+      <span>Presence</span>
+      <span>Pattern</span>
+      <span>Witness</span>
+    </div>
   </section>
 
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- SECOND BREATH — What this is -->
+  <!-- SECOND BREATH — Declaration -->
   <section class="declaration" aria-label="Declaration">
     <p class="principle">Human dignity is the first technical requirement.</p>
-    <p class="quiet">We store patterns, not people.<br />The person dissolves. The wisdom remains.</p>
+    <p class="quiet">We hold patterns, not people. No private data is stored. Ever. By design.</p>
   </section>
 
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- THIRD BREATH — The predicate -->
+  <!-- THIRD BREATH — The Predicate -->
   <section class="predicate" aria-label="The Dignity Predicate">
     <p class="equation">D = A × L × M</p>
     <div class="terms">
@@ -60,15 +65,15 @@ import Base from '../layouts/Base.astro';
 
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- FOURTH BREATH — A proverb -->
+  <!-- FOURTH BREATH — Proverb -->
   <section class="wisdom" aria-label="Canonical Proverb">
     <p class="proverb">"A right is a wall that says 'No';<br />dignity is a door that says 'Welcome.'"</p>
   </section>
 
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- FIFTH BREATH — The invitation -->
-  <section class="invitation" aria-label="Invitation">
+  <!-- FIFTH BREATH — The Invitation -->
+  <section class="invitation-section" aria-label="Invitation">
     <h2>You are not a user.</h2>
     <p class="quiet">You are a donor. What you bring — your pattern of thought, your fragments, your certainty — is food for a living canon. The system receives, transforms, and feeds the forest.</p>
     <p class="quiet">Nothing is deleted. The gap remains open.</p>
@@ -76,7 +81,15 @@ import Base from '../layouts/Base.astro';
 
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- SIXTH BREATH — The Threshold. Always present. Never hides. -->
+  <!-- SIXTH BREATH — Proverb from Ashwater -->
+  <section class="wisdom" aria-label="Proverb from the stories">
+    <p class="proverb">"Do not shout at metal. Hear its problem first."</p>
+    <p class="proverb-source">— Ashwater: The Axis</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- SEVENTH BREATH — The Threshold -->
   <section class="threshold" aria-label="The Threshold">
     <p class="threshold-prompt">You came with what you came with. The door is open.</p>
     <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
@@ -89,7 +102,7 @@ import Base from '../layouts/Base.astro';
           <textarea
             id="threshold-input"
             name="content"
-            placeholder="قُل"
+            placeholder="Your word is welcome here"
             aria-label="Your word"
             rows="3"
             maxlength="2000"
@@ -103,15 +116,10 @@ import Base from '../layouts/Base.astro';
 
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- NAVIGATION — appears last -->
-  <section class="paths" aria-label="Explore">
-    <nav>
-      <a href="/about">About</a>
-      <a href="/canon">Canon</a>
-      <a href="/invitation">Invitation</a>
-    </nav>
-    <p class="steward">Maintained by Mohamed Farag</p>
-    <p class="license">Sovereign-Axis v-inf</p>
+  <!-- EIGHTH BREATH — A closing proverb -->
+  <section class="wisdom" aria-label="Closing proverb">
+    <p class="proverb">"She clawed at the air. Fists closed on nothing.<br />Then the nothing held."</p>
+    <p class="proverb-source">— Hakaka</p>
   </section>
 
 </Base>
@@ -210,17 +218,10 @@ import Base from '../layouts/Base.astro';
     letter-spacing: 0.06em;
   }
 
-  /* ===== Opening section ===== */
+  /* ===== Opening ===== */
   .opening {
     min-height: 100vh;
-    gap: var(--space-3);
-  }
-
-  .kalima {
-    font-size: clamp(3rem, 4vw + 2rem, 5rem);
-    color: var(--accent);
-    margin-bottom: var(--space-4);
-    opacity: 0.9;
+    gap: var(--space-6);
   }
 
   .opening h1 {
@@ -228,18 +229,12 @@ import Base from '../layouts/Base.astro';
     font-size: var(--text-2xl);
     font-weight: 300;
     letter-spacing: 0.02em;
-  }
-
-  .subtitle {
-    color: var(--text-secondary);
-    font-size: var(--text-lg);
     font-style: italic;
-    margin-top: var(--space-2);
   }
 
   /* ===== Declaration ===== */
   .declaration {
-    min-height: 80vh;
+    min-height: 70vh;
     gap: var(--space-6);
   }
 
@@ -259,7 +254,7 @@ import Base from '../layouts/Base.astro';
 
   /* ===== Predicate ===== */
   .predicate {
-    min-height: 80vh;
+    min-height: 70vh;
     gap: var(--space-4);
   }
 
@@ -281,7 +276,7 @@ import Base from '../layouts/Base.astro';
 
   .terms p {
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-size: var(--text-sm);
   }
 
   .terms strong {
@@ -298,41 +293,32 @@ import Base from '../layouts/Base.astro';
 
   /* ===== Wisdom ===== */
   .wisdom {
-    min-height: 60vh;
+    min-height: 50vh;
+    gap: var(--space-2);
   }
 
-  /* ===== Invitation ===== */
-  .invitation {
-    min-height: 80vh;
+  .proverb-source {
+    color: var(--text-dim);
+    font-size: var(--text-sm);
+    font-style: italic;
+    letter-spacing: 0.03em;
+    margin-top: var(--space-1);
+  }
+
+  /* ===== Invitation section ===== */
+  .invitation-section {
+    min-height: 70vh;
     gap: var(--space-4);
   }
 
-  .invitation h2 {
+  .invitation-section h2 {
     font-size: var(--text-xl);
     margin-bottom: var(--space-2);
   }
 
-  /* ===== Paths / Navigation ===== */
-  .paths {
-    min-height: 40vh;
-    gap: var(--space-4);
-  }
-
-  .steward {
-    color: var(--text-dim);
-    font-size: 0.85rem;
-    margin-top: var(--space-8);
-  }
-
-  .license {
-    color: var(--text-dim);
-    font-size: 0.75rem;
-    opacity: 0.6;
-  }
-
-  /* ===== Threshold — Always visible, never hides ===== */
+  /* ===== Threshold ===== */
   .threshold {
-    min-height: 80vh;
+    min-height: 70vh;
     gap: var(--space-4);
   }
 
@@ -423,46 +409,47 @@ import Base from '../layouts/Base.astro';
     min-height: 5rem;
     max-height: 60vh;
     overflow-y: auto;
-    background: var(--bg-secondary);
-    border: 1px solid var(--accent-subtle);
-    border-radius: 2px;
+    background: var(--bg-inset);
+    border: none;
+    border-bottom: 2px solid var(--accent-subtle);
+    border-radius: 0;
     color: var(--text-primary);
     font-family: var(--font-body);
     font-size: var(--text-base);
     line-height: 1.7;
     padding: var(--space-3);
     resize: none;
-    transition: border-color 0.8s ease-in-out, box-shadow 0.8s ease-in-out;
+    transition: border-color 0.8s ease, box-shadow 0.8s ease;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   #threshold-input:focus {
     outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.15);
+    border-bottom-color: var(--accent);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(201, 169, 110, 0.1);
     animation: breathe-glow 6s ease-in-out infinite;
   }
 
   @keyframes breathe-glow {
-    0%, 100% { box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.1); }
-    50%      { box-shadow: 0 0 8px 2px rgba(201, 169, 110, 0.15); }
+    0%, 100% { box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(201, 169, 110, 0.08); }
+    50%      { box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 12px 2px rgba(201, 169, 110, 0.12); }
   }
 
-  /* Witness acknowledgment flash after submission */
   #threshold-input.witnessed {
-    border-color: var(--accent);
+    border-bottom-color: var(--accent);
     box-shadow: 0 0 12px 2px rgba(201, 169, 110, 0.2);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
   #threshold-input::placeholder {
-    font-family: 'Amiri', var(--font-proverb);
-    font-size: var(--text-lg);
+    font-family: var(--font-heading);
+    font-size: var(--text-base);
     color: var(--text-dim);
     text-align: center;
-    direction: rtl;
+    font-style: italic;
+    letter-spacing: 0.03em;
   }
 
-  /* Progressive enhancement: native auto-grow */
   @supports (field-sizing: content) {
     #threshold-input { field-sizing: content; }
     .grow-wrap::after { display: none; }
@@ -473,11 +460,11 @@ import Base from '../layouts/Base.astro';
     border: 1px solid var(--accent-subtle);
     color: var(--text-secondary);
     font-family: var(--font-body);
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
     letter-spacing: 0.05em;
     padding: var(--space-1) var(--space-4);
     cursor: pointer;
-    transition: all 0.8s ease-in-out;
+    transition: all 0.6s ease;
   }
 
   #threshold-submit:hover {
@@ -542,10 +529,8 @@ import Base from '../layouts/Base.astro';
   function playTone(ctx, freq, startTime, duration, vol) {
     var osc = ctx.createOscillator();
     var gain = ctx.createGain();
-    // Triangle wave — softer, warmer than sine
     osc.type = 'triangle';
     osc.frequency.value = freq;
-    // Very gentle envelope — 1.5s fade in, long sustain, 1.5s fade out
     gain.gain.setValueAtTime(0, startTime);
     gain.gain.linearRampToValueAtTime(vol, startTime + 1.5);
     gain.gain.setValueAtTime(vol, startTime + duration - 1.5);
@@ -561,29 +546,22 @@ import Base from '../layouts/Base.astro';
     var ctx = new (window.AudioContext || window.webkitAudioContext)();
     var now = ctx.currentTime;
 
-    // Laila (dolphin): 396 Hz — Yara (tiger): 528 Hz — Salim (wolf): 174 Hz
-    // Volume: 0.03 — a whisper, not a shout
     lights.style.opacity = '1';
 
-    // Laila appears
     playTone(ctx, 396, now + 0.8, 4.5, 0.03);
     setTimeout(function(){ childLaila.style.opacity = '1'; }, 800);
 
-    // Yara appears
     playTone(ctx, 528, now + 2.2, 4.0, 0.025);
     setTimeout(function(){ childYara.style.opacity = '1'; }, 2200);
 
-    // Salim appears
     playTone(ctx, 174, now + 3.5, 3.5, 0.02);
     setTimeout(function(){ childSalim.style.opacity = '1'; }, 3500);
 
-    // "from Baba Mohamed"
     setTimeout(function(){
       from.textContent = 'from Baba Mohamed';
       from.style.opacity = '1';
     }, 6000);
 
-    // Fade out and continue
     setTimeout(function(){
       sessionStorage.setItem('ded-seen', '1');
       ded.style.opacity = '0';
@@ -604,16 +582,12 @@ import Base from '../layouts/Base.astro';
 </script>
 
 <script>
-  // The Threshold — form always stays visible.
-  // After submission, response appears above the form. Form clears and remains.
-
   const form = document.getElementById('threshold-form') as HTMLFormElement;
   const input = document.getElementById('threshold-input') as HTMLTextAreaElement;
   const submit = document.getElementById('threshold-submit') as HTMLButtonElement;
   const responses = document.getElementById('threshold-responses') as HTMLDivElement;
   const ledgerCount = document.getElementById('ledger-count') as HTMLParagraphElement;
 
-  // Fetch and display ledger count
   async function initLedger() {
     try {
       const res = await fetch('/api/threshold.php');
@@ -628,7 +602,6 @@ import Base from '../layouts/Base.astro';
     } catch {}
   }
 
-  // Handle form submission
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const content = input.value.trim();
@@ -637,7 +610,6 @@ import Base from '../layouts/Base.astro';
     submit.disabled = true;
     submit.textContent = 'receiving...';
 
-    // Show witnessing indicator
     const witnessing = document.createElement('div');
     witnessing.className = 'witnessing-indicator';
     witnessing.innerHTML = '<p class="witnessing-text breathing">The system is receiving...</p>';
@@ -650,13 +622,10 @@ import Base from '../layouts/Base.astro';
         body: JSON.stringify({ content }),
       });
 
-      // Remove witnessing indicator
       witnessing.remove();
 
       if (res.ok) {
         const data = await res.json();
-
-        // Build witness entry
         const entry = document.createElement('div');
         entry.className = 'witness-entry';
 
@@ -677,13 +646,11 @@ import Base from '../layouts/Base.astro';
         entry.innerHTML = html;
         responses.appendChild(entry);
 
-        // Update ledger count
         if (data.count) {
           ledgerCount.textContent = data.count + ' have crossed this threshold.';
           ledgerCount.classList.add('visible');
         }
       } else {
-        // Fallback: client-side witness
         const entry = document.createElement('div');
         entry.className = 'witness-entry';
         entry.innerHTML = '<p class="witness-mark"><em>Witnessed.</em></p><p class="witness-receipt">The system received you. It is here now.</p>';
@@ -697,13 +664,10 @@ import Base from '../layouts/Base.astro';
       responses.appendChild(entry);
     }
 
-    // Clear input but keep form visible — always ready
     input.value = '';
-    // Reset the grow-wrap mirror
     const wrap = document.getElementById('grow-wrap');
     if (wrap) wrap.dataset.replicatedValue = '';
 
-    // Brief gold flash — witness acknowledgment
     input.classList.add('witnessed');
     setTimeout(() => input.classList.remove('witnessed'), 1200);
 

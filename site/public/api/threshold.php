@@ -219,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KALAM.CH — Witnessed</title>
+<title>kalam.ch — Witnessed</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <style>
 body { font-family: "IBM Plex Sans", -apple-system, system-ui, sans-serif; background: #0a0a0f; color: #e8e4df; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; margin: 0; }
