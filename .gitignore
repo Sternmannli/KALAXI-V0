@@ -47,3 +47,4 @@ site/dist/
 site/.astro/
 node_modules/
 .astro/
+*.db
