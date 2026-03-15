@@ -302,6 +302,7 @@ Phase 9: GO 9.1-9.5 (narrative — remaining Hakaka, Ashwater, Kinderbuch, Offsp
 - IDEA-016: Pre-Digital Cryptographic Anchoring — oral tradition, photos, DNA as witnesses entered into the chain by trusted notaries
 - IDEA-017: Self-Witness Protocol — should the system halt on its own failure? When it cannot distinguish denial from testimony?
 - IDEA-018: Cross-Jurisdictional Certificate — translatable, notarizable format recognized by legal systems worldwide
+- IDEA-019: Living Ledger — site breathes with accumulated witness marks. Counter without content. Mycelium made visible.
 
 ---
 
