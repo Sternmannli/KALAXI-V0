@@ -19,6 +19,10 @@ jobs:
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp sshpass
 
+      - name: Create API config
+        run: |
+          echo "GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}" > site/dist/data/.config
+
       - name: Deploy via SFTP
         env:
           SSHPASS: ${{ secrets.FTP_PASSWORD }}
@@ -43,5 +47,15 @@ jobs:
           -mkdir invitation
           cd invitation
           put site/dist/invitation/index.html
+          cd /www/kalam.ch
+          -mkdir api
+          cd api
+          put site/dist/api/threshold.php
+          put site/dist/api/.htaccess
+          cd /www/kalam.ch
+          -mkdir data
+          cd data
+          put site/dist/data/.htaccess
+          put site/dist/data/.config
           quit
           SFTP_COMMANDS
