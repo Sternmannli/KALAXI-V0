@@ -190,6 +190,13 @@ import Base from '../layouts/Base.astro';
     opacity: 0.6;
   }
 
+  @media (prefers-color-scheme: light) {
+    .ded-touch {
+      color: var(--text-primary);
+      opacity: 0.5;
+    }
+  }
+
   .ded-lights {
     display: flex;
     gap: clamp(3rem, 8vw, 6rem);
@@ -297,6 +304,15 @@ import Base from '../layouts/Base.astro';
 
   .bg-proverb.visible {
     opacity: 0.12;
+  }
+
+  @media (prefers-color-scheme: light) {
+    .bg-proverb {
+      color: var(--text-dim);
+    }
+    .bg-proverb.visible {
+      opacity: 0.35;
+    }
   }
 
   /* ===== Centered Voice ===== */
@@ -834,6 +850,115 @@ import Base from '../layouts/Base.astro';
     transition: all 0.3s ease;
   }
   .more-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ===== Light Mode — Bold Output Overrides ===== */
+  @media (prefers-color-scheme: light) {
+    .history-entry {
+      background: #fff;
+      border: 1px solid #e0ddd6;
+      border-left: 4px solid var(--color-dignity);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .history-donor-label {
+      color: var(--color-dignity);
+      font-weight: 600;
+    }
+
+    .history-response-label {
+      color: var(--color-witness);
+      font-weight: 600;
+    }
+
+    .witness-entry {
+      background: #fff;
+      border: 1px solid #e0ddd6;
+      border-left: 4px solid var(--color-witness);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .witness-mark {
+      color: var(--color-dignity);
+      font-weight: 500;
+    }
+
+    .axi-reflection {
+      color: #0a0a0a;
+      font-weight: 400;
+    }
+
+    .witness-receipt {
+      color: #555550;
+    }
+
+    .threshold-title {
+      color: #0a0a0a;
+      font-weight: 500;
+    }
+
+    #threshold-input {
+      background: #fff;
+      border: 2px solid #c8c5be;
+      color: #0a0a0a;
+    }
+
+    #threshold-input:focus {
+      border-color: var(--color-dignity);
+      box-shadow: 0 0 0 3px rgba(196, 74, 26, 0.12);
+    }
+
+    #threshold-input::placeholder {
+      color: #888;
+      opacity: 0.8;
+    }
+
+    #threshold-submit {
+      background: var(--color-dignity);
+      border: 2px solid var(--color-dignity);
+      color: #fff;
+    }
+
+    #threshold-submit:hover {
+      background: #a83a10;
+      border-color: #a83a10;
+      box-shadow: 0 2px 12px rgba(196, 74, 26, 0.25);
+    }
+
+    .equation-text {
+      color: #0a0a0a;
+      font-weight: 500;
+    }
+
+    .proverb {
+      color: #2d2d2d;
+    }
+
+    .pillar-panel {
+      background: #fff;
+      border-left: 3px solid var(--color-dignity);
+    }
+
+    .witnessing-text {
+      color: var(--color-witness);
+    }
+
+    .ledger-count {
+      color: #2d2d2d;
+    }
+
+    .content-drawer {
+      background: #fafaf8;
+    }
+
+    .drawer-close {
+      background: #fafaf8;
+    }
+
+    /* Term colors in light mode — high contrast */
+    .term-a { color: #0a7b62; }
+    .term-l { color: #c44a1a; }
+    .term-m { color: #6a3fb8; }
+  }
 
   /* ===== Mycelium Visual Shift ===== */
   :root {
