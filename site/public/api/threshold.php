@@ -15,6 +15,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
+// --- Browser-testable AI endpoint: GET /api/threshold.php?ask=your+words ---
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['ask'])) {
+    $content = trim($_GET['ask']);
+    if (empty($content)) {
+        echo json_encode(['error' => 'Empty ask parameter']);
+        exit;
+    }
+    $groq_key = get_groq_key();
+    if (!$groq_key) {
+        echo json_encode(['error' => 'No Groq key']);
+        exit;
+    }
+    $result = call_groq($groq_key, $content);
+    echo json_encode([
+        'input' => $content,
+        'witness' => $result ? $result['witness'] : null,
+        'reflection' => $result ? $result['reflection'] : null,
+        'groq_worked' => $result ? true : false
+    ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+// --- Log viewer: GET /api/threshold.php?log ---
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['log'])) {
+    $log_path = __DIR__ . '/../data/api_errors.log';
+    $req_log = __DIR__ . '/../data/requests.log';
+    $out = ['errors' => '', 'requests' => ''];
+    if (file_exists($log_path)) $out['errors'] = file_get_contents($log_path);
+    if (file_exists($req_log)) $out['requests'] = file_get_contents($req_log);
+    echo json_encode($out, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 // --- Diagnostic endpoint: GET /api/threshold.php?test ---
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['test'])) {
     $diag = [];
@@ -94,7 +127,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 // --- POST: Receive input ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input = json_decode(file_get_contents('php://input'), true);
+    // Log every POST for debugging
+    $raw_body = file_get_contents('php://input');
+    $req_log = __DIR__ . '/../data/requests.log';
+    @file_put_contents($req_log, date('Y-m-d H:i:s') . " | POST | body=" . substr($raw_body, 0, 200) . " | method=" . $_SERVER['REQUEST_METHOD'] . " | content_type=" . ($_SERVER['CONTENT_TYPE'] ?? 'none') . "\n", FILE_APPEND);
+
+    $input = json_decode($raw_body, true);
     $content = isset($input['content']) ? trim($input['content']) : '';
 
     if (empty($content)) {
