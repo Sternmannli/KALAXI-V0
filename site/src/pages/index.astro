@@ -30,7 +30,34 @@ import Base from '../layouts/Base.astro';
     <p id="ded-from" class="ded-from"></p>
   </div>
 
-  <!-- FIRST BREATH — The Opening -->
+  <!-- FIRST BREATH — The Threshold -->
+  <section class="threshold" aria-label="The Threshold">
+    <p class="threshold-prompt">You came with what you came with. The door is open.</p>
+    <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
+
+    <div class="threshold-container">
+      <div id="threshold-responses" class="threshold-responses" aria-live="polite"></div>
+
+      <form id="threshold-form" method="POST" action="/api/threshold.php" aria-label="Leave your word">
+        <div class="grow-wrap" id="grow-wrap">
+          <textarea
+            id="threshold-input"
+            name="content"
+            placeholder="Your word is welcome here"
+            aria-label="Your word"
+            rows="3"
+            maxlength="2000"
+            oninput="this.parentNode.dataset.replicatedValue = this.value"
+          ></textarea>
+        </div>
+        <button type="submit" id="threshold-submit">Leave this here</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- SECOND BREATH — The Opening -->
   <section class="opening" aria-label="The Word">
     <h1>The wound became the womb.</h1>
     <div class="five-words" aria-label="Five pillars">
@@ -44,7 +71,7 @@ import Base from '../layouts/Base.astro';
 
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- SECOND BREATH — Declaration -->
+  <!-- THIRD BREATH — Declaration -->
   <section class="declaration" aria-label="Declaration">
     <p class="principle">Human dignity is the first technical requirement.</p>
     <p class="quiet">We hold patterns, not people. No private data is stored. Ever. By design.</p>
@@ -89,34 +116,7 @@ import Base from '../layouts/Base.astro';
 
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- SEVENTH BREATH — The Threshold -->
-  <section class="threshold" aria-label="The Threshold">
-    <p class="threshold-prompt">You came with what you came with. The door is open.</p>
-    <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
-
-    <div class="threshold-container">
-      <div id="threshold-responses" class="threshold-responses" aria-live="polite"></div>
-
-      <form id="threshold-form" method="POST" action="/api/threshold.php" aria-label="Leave your word">
-        <div class="grow-wrap" id="grow-wrap">
-          <textarea
-            id="threshold-input"
-            name="content"
-            placeholder="Your word is welcome here"
-            aria-label="Your word"
-            rows="3"
-            maxlength="2000"
-            oninput="this.parentNode.dataset.replicatedValue = this.value"
-          ></textarea>
-        </div>
-        <button type="submit" id="threshold-submit">Leave this here</button>
-      </form>
-    </div>
-  </section>
-
-  <div class="gap" role="separator" aria-hidden="true"></div>
-
-  <!-- EIGHTH BREATH — A closing proverb -->
+  <!-- CLOSING BREATH — A closing proverb -->
   <section class="wisdom" aria-label="Closing proverb">
     <p class="proverb">"She clawed at the air. Fists closed on nothing.<br />Then the nothing held."</p>
     <p class="proverb-source">— Hakaka</p>
