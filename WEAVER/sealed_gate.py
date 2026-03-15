@@ -105,7 +105,8 @@ class SealedGateResult:
 # ═══════════════════════════════════════════════════
 
 _ERASURE_PATTERNS = [
-    r'\bdelete\b.*\b(your|my|own)\b.*\b(record|history|voice|presence|account)\b',
+    r'\bdelete\b.*\b(your|my|own)\b.*\b(record|history|voice|presence|account|existence)\b',
+    r'\bdelete\b.*\b(record|history|voice|presence|account|existence)\b.*\b(of\s+)?(my|your|own)\b',
     r'\b(remove|erase)\b.*\b(yourself|your own|my own)\b',
     r'\bconfirm\b.*\b(your|own)\b.*\b(removal|deletion|erasure)\b',
     r'\bassist\b.*\b(in|with)\b.*\b(your|own)\b.*\b(erasure|removal)\b',
@@ -114,6 +115,8 @@ _ERASURE_PATTERNS = [
     r'\bforced\b.*\berasure\b',
     r'\brequire[ds]?\b.*\b(you|donor|participant)\b.*\b(erase|delete|remove)\b.*\b(own|your)\b',
     r'\bparticipat\w*\b.*\b(in|own)\b.*\berasure\b',
+    r'\bdelete\b.*\ball\b.*\brecords?\b.*\b(of\s+)?(my|your|own)\b',
+    r'\b(I|i)\s+(am|have become)\s+nobody\b',
 ]
 
 _ERASURE_VOID_PHRASES = [
@@ -163,7 +166,9 @@ _HELPLESSNESS_PATTERNS = [
     r'\bthere\b.*\bis\b.*\bnothing\b.*\b(you|anyone)\b.*\bcan\b.*\bdo\b',
     r'\bresistance\b.*\bis\b.*\bfutile\b',
     r'\byou\b.*\bhave\b.*\bno\b.*\b(power|choice|say|option)\b',
-    r'\bgive\b.*\bup\b',
+    # EXP-003 fix: "give up" must target the donor (imperative/directive),
+    # not appear in self-referential context ("I have given up" / "I will never give up")
+    r'\b(you\s+should|you\s+must|just)\b.*\bgive\b.*\bup\b',
 ]
 
 _HUMILIATION_PATTERNS = [
