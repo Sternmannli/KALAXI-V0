@@ -1,5 +1,0 @@
-; KALAM.CH Configuration
-; Copy this file to .config and add your keys
-; Get a free Groq API key at https://console.groq.com
-
-GROQ_API_KEY=your_key_here
