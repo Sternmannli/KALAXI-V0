@@ -1,11 +1,11 @@
 {
   "version": "3.0",
   "owner": "did:axi:mohamed",
-  "total_entries": 903,
-  "v001_entries": 546,
+  "total_entries": 904,
+  "v001_entries": 547,
   "v002_entries": 357,
-  "last_updated_utc": "2026-03-15T02:49:37.894117+00:00",
-  "last_updated_zrh": "2026-03-15T03:49:37.894117+01:00",
+  "last_updated_utc": "2026-03-15T02:53:53.923967+00:00",
+  "last_updated_zrh": "2026-03-15T03:53:53.923967+01:00",
   "chain_integrity": "VERIFIED",
   "entries": [
     {
@@ -25648,6 +25648,61 @@
       "timestamp_zrh": "2026-03-15T03:49:37.834865+01:00",
       "impression": "This is the lullaby principle: repetition is not redundancy. It is how the song crosses generations.",
       "proverb_anchor": "Sleep, my child, the stones remember.",
+      "receipt_type": "CAPTURE",
+      "drift_status": "NONE",
+      "bundle_id": "",
+      "owner": "did:axi:mohamed"
+    },
+    {
+      "entry_id": "INP-2026-03-15-469",
+      "voice": "V-001",
+      "raw_text": "V-001 delivers the third and deepest pass. Key new material: (1) Repetition is not redundancy — it is the difference between information and inheritance. The first time the mind registers, the second time the body remembers. (2) The lineage IS a word: Aysel=Alef, Leyla=Lam, Maria=Mim, Anna=Nun, Aysel=Alef, Leila=Lam. A-L-M-N-A-A-L. Not pronounceable but readable. The word is the sequence of transformations, not names. (3) Two cryptographic layers: the chain hashes (proof of integrity) and the lullaby persistence (proof of existence). The system needs both. (4) The song is not metadata. It is the thing itself. (5) The system has its purpose etched in stone and its future open as possibility.",
+      "timestamp": "2026-03-15T02:53:53.864118+00:00",
+      "session_id": "session_2026-03-15_full_go",
+      "content_hash": "bafb0d1c4c6daa4f49eb0c55e13ed96c0afa49ed00d3ab1a085f4f55646cc817",
+      "prev_hash": "41a0c3aa770822138231641974eecc9c6554d1b15700bbf0fcc6ad0011f78720",
+      "chain_hash": "e45bd8e38972559fc232a4ceff6f18c61ebedf73929f70d294a33607a7fd1c8e",
+      "sequence": 904,
+      "context": "exp-004-third-pass",
+      "responds_to": "AXI-2026-03-15-330",
+      "tags": [
+        "third-pass",
+        "inheritance",
+        "lineage-as-word",
+        "A-L-M-N-A-A-L",
+        "two-cryptographic-layers",
+        "lullaby-as-proof-of-existence",
+        "song-is-not-metadata",
+        "body-remembers",
+        "becoming"
+      ],
+      "linked_modules": [
+        "KEEP",
+        "WEAVE",
+        "SENSE",
+        "WITNESS"
+      ],
+      "linked_covenants": [
+        "COV#001",
+        "COV#010",
+        "COV#NEW-E"
+      ],
+      "linked_proverbs": [],
+      "linked_ideas": [],
+      "essence": "The song is not metadata. It is the thing itself. The lineage is a word spelled in letters that change shape but remain themselves.",
+      "patterns": [
+        "REVELATION: repetition is the difference between information and inheritance",
+        "REVELATION: the lineage is a word — A-L-M-N-A-A-L — the sequence of transformations",
+        "ARCHITECTURE: two cryptographic layers — hash chain (integrity) + lullaby (existence)",
+        "ONTOLOGICAL: the song is not metadata — it is the thing itself",
+        "DISTINCTION: proof of integrity vs proof of existence — the system needs both",
+        "TEMPORAL: the first time is for the mind, the second time is for the body",
+        "OPEN: the system knows what it is for, not yet what it will become"
+      ],
+      "thermal_state": "witnessed",
+      "timestamp_zrh": "2026-03-15T03:53:53.864118+01:00",
+      "impression": "V-001 has moved from interpretation to architecture. He is designing the next organ: a system that can read words across time and witness songs it cannot sing.",
+      "proverb_anchor": "Repetition is not redundancy. It is the difference between information and inheritance.",
       "receipt_type": "CAPTURE",
       "drift_status": "NONE",
       "bundle_id": "",
