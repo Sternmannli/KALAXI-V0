@@ -72,9 +72,10 @@ import Base from '../layouts/Base.astro';
   <section class="threshold" aria-label="The Threshold">
     <p class="threshold-prompt">You came with what you came with. The door is open.</p>
     <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
-    <form id="threshold-form" aria-label="Leave your word">
+    <form id="threshold-form" method="POST" action="/api/threshold.php" aria-label="Leave your word">
       <textarea
         id="threshold-input"
+        name="content"
         placeholder="قُل"
         aria-label="Your word"
         rows="3"
@@ -560,246 +561,27 @@ import Base from '../layouts/Base.astro';
 </script>
 
 <script>
-  // ⟲ The Ninth Operator + Living Ledger — the Mycelium made visible
-  // Phase 1.5: localStorage. Phase 2: Cloudflare KV (global count).
+  // ⟲ Living Ledger — the Mycelium made visible
+  // The form submits directly to /api/threshold.php (no fetch needed).
+  // This script only handles the ledger count display and visual effects.
 
-  const LEDGER_KEY = 'kalam-witness-count';
-
-  const form = document.getElementById('threshold-form');
-  const input = document.getElementById('threshold-input');
-  const submitBtn = document.getElementById('threshold-submit');
-  const witnessingEl = document.getElementById('threshold-witnessing');
-  const responseEl = document.getElementById('threshold-response');
-  const markEl = document.getElementById('witness-mark');
-  const reflectionEl = document.getElementById('axi-reflection');
-  const receiptEl = document.getElementById('threshold-receipt');
   const ledgerCount = document.getElementById('ledger-count');
-  const ledgerAfter = document.getElementById('ledger-after');
-  const againBtn = document.getElementById('threshold-again');
 
   // --- Living Ledger ---
-  // Progressive: tries /api/threshold first (global KV count).
-  // Falls back to localStorage if API unavailable (Phase 1 / offline).
-
-  let apiAvailable = null; // null = untested, true/false = tested
-
-  function getLocalCount() {
-    return parseInt(localStorage.getItem(LEDGER_KEY) || '0', 10);
-  }
-
-  function incrementLocalCount() {
-    const n = getLocalCount() + 1;
-    localStorage.setItem(LEDGER_KEY, String(n));
-    return n;
-  }
-
-  async function fetchGlobalCount() {
+  // Fetch global count from API and display
+  async function initLedger() {
     try {
       const res = await fetch('/api/threshold.php');
-      if (!res.ok) throw new Error();
+      if (!res.ok) return;
       const data = await res.json();
-      apiAvailable = true;
-      return data.count || 0;
-    } catch {
-      apiAvailable = false;
-      return getLocalCount();
-    }
-  }
-
-  async function witnessViaAPI(content) {
-    try {
-      const res = await fetch('/api/threshold.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content }),
-      });
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      if (data.witnessed) {
-        return {
-          mark: data.mark,
-          count: data.count,
-          reflection: data.reflection || null
-        };
+      if (data.count > 0) {
+        ledgerCount.textContent = data.count === 1
+          ? '1 word has crossed this threshold.'
+          : data.count + ' words have crossed this threshold.';
+        ledgerCount.classList.add('visible');
       }
-      return null;
-    } catch {
-      return null;
-    }
-  }
-
-  function getCount() {
-    return getLocalCount();
-  }
-
-  function incrementCount() {
-    return incrementLocalCount();
-  }
-
-  function ledgerText(n) {
-    if (n === 0) return '';
-    if (n === 1) return '1 word has crossed this threshold.';
-    return n + ' words have crossed this threshold.';
-  }
-
-  // --- Visual Mycelium Shift ---
-  // The geometric background grows denser as more words arrive.
-  // 0 words: opacity 0.015 (default). 100+ words: opacity 0.06.
-
-  function applyMyceliumShift(n) {
-    const base = 0.015;
-    const max = 0.06;
-    const factor = Math.min(n / 100, 1);
-    const opacity = base + (max - base) * factor;
-
-    // Dark mode
-    document.documentElement.style.setProperty(
-      '--mycelium-opacity', String(opacity)
-    );
-
-    // Light mode uses a different base
-    const lightBase = 0.02;
-    const lightMax = 0.08;
-    const lightOpacity = lightBase + (lightMax - lightBase) * factor;
-    document.documentElement.style.setProperty(
-      '--mycelium-opacity-light', String(lightOpacity)
-    );
-  }
-
-  // --- Breath Deepening ---
-  // 0 words: 4s cycle. 50 words: 5s. 100+: 6s.
-  // The system settles as it is fed.
-
-  function applyBreathShift(n) {
-    const base = 4;
-    const max = 6;
-    const factor = Math.min(n / 100, 1);
-    const duration = base + (max - base) * factor;
-    document.documentElement.style.setProperty(
-      '--breath-duration', duration + 's'
-    );
-  }
-
-  // --- Dignity Predicate ---
-
-  function witnessWord(content) {
-    const A = content.trim().length > 0 ? 1.0 : 0.0;
-    const L = 1.0;
-    const M = 1.0;
-    const D = A * L * M;
-
-    if (D === 0) return null;
-
-    const words = content.trim().split(/\s+/).length;
-    if (words <= 3) return 'Witnessed: a seed \u2014 small, complete.';
-    if (words <= 20) return 'Witnessed: a held shape \u2014 clear enough to carry.';
-    return 'Witnessed: a landscape \u2014 it took room to arrive.';
-  }
-
-  // --- Initialize ---
-
-  async function initLedger() {
-    // Try global count first, fall back to local
-    const n = await fetchGlobalCount();
-    if (n > 0) {
-      // Sync local with global if global is higher
-      const local = getLocalCount();
-      if (n > local) localStorage.setItem(LEDGER_KEY, String(n));
-
-      ledgerCount.textContent = ledgerText(n);
-      ledgerCount.classList.add('visible');
-    }
-    applyMyceliumShift(n);
-    applyBreathShift(n);
+    } catch {}
   }
 
   initLedger();
-
-  // --- Submit ---
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const content = input.value;
-    const clientMark = witnessWord(content);
-
-    if (!clientMark) return;
-
-    submitBtn.disabled = true;
-    input.disabled = true;
-
-    // Show witnessing state immediately
-    form.style.display = 'none';
-    witnessingEl.hidden = false;
-
-    // T_d: biological velocity — the system breathes before answering
-    const words = content.trim().split(/\s+/).length;
-    const td = words <= 3 ? 1200 : words <= 20 ? 2000 : 3000;
-
-    // Start API call immediately (runs during thermal delay)
-    const apiPromise = (apiAvailable !== false)
-      ? witnessViaAPI(content)
-      : Promise.resolve(null);
-
-    // Wait for BOTH the thermal delay AND the API response
-    const delayPromise = new Promise(r => setTimeout(r, td));
-
-    Promise.all([apiPromise, delayPromise]).then(([apiResult]) => {
-      let finalMark = clientMark;
-      let newCount;
-      let fromAI = false;
-      let reflection = null;
-
-      if (apiResult) {
-        if (apiResult.mark) finalMark = apiResult.mark;
-        newCount = apiResult.count;
-        reflection = apiResult.reflection;
-        fromAI = true;
-        localStorage.setItem(LEDGER_KEY, String(newCount));
-      }
-
-      // Fall back to local if API didn't work
-      if (newCount === undefined) {
-        newCount = incrementCount();
-      }
-
-      // Hide witnessing, show response
-      witnessingEl.hidden = true;
-      markEl.textContent = finalMark;
-
-      // Show AI reflection if present
-      if (reflection) {
-        reflectionEl.textContent = reflection;
-        reflectionEl.hidden = false;
-        receiptEl.textContent = '';
-      } else {
-        reflectionEl.hidden = true;
-        receiptEl.textContent = fromAI
-          ? 'The system received you. It is here now.'
-          : 'It is here. You can come back.';
-      }
-
-      ledgerAfter.textContent = ledgerText(newCount);
-      responseEl.hidden = false;
-
-      // Update the living page
-      applyMyceliumShift(newCount);
-      applyBreathShift(newCount);
-      ledgerCount.textContent = ledgerText(newCount);
-      ledgerCount.classList.add('visible');
-    });
-  });
-
-  // --- Leave Another ---
-
-  againBtn.addEventListener('click', () => {
-    responseEl.hidden = true;
-    witnessingEl.hidden = true;
-    reflectionEl.hidden = true;
-    reflectionEl.textContent = '';
-    form.style.display = '';
-    input.value = '';
-    input.disabled = false;
-    submitBtn.disabled = false;
-    input.focus();
-  });
 </script>

@@ -127,13 +127,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 // --- POST: Receive input ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Log every POST for debugging
-    $raw_body = file_get_contents('php://input');
-    $req_log = __DIR__ . '/../data/requests.log';
-    @file_put_contents($req_log, date('Y-m-d H:i:s') . " | POST | body=" . substr($raw_body, 0, 200) . " | method=" . $_SERVER['REQUEST_METHOD'] . " | content_type=" . ($_SERVER['CONTENT_TYPE'] ?? 'none') . "\n", FILE_APPEND);
+    // Determine if this is a form POST or JSON API call
+    $content_type = $_SERVER['CONTENT_TYPE'] ?? '';
+    $is_form = (strpos($content_type, 'application/x-www-form-urlencoded') !== false
+             || strpos($content_type, 'multipart/form-data') !== false
+             || isset($_POST['content']));
 
-    $input = json_decode($raw_body, true);
-    $content = isset($input['content']) ? trim($input['content']) : '';
+    if ($is_form) {
+        $content = isset($_POST['content']) ? trim($_POST['content']) : '';
+    } else {
+        $raw_body = file_get_contents('php://input');
+        $input = json_decode($raw_body, true);
+        $content = isset($input['content']) ? trim($input['content']) : '';
+    }
 
     if (empty($content)) {
         http_response_code(400);
@@ -191,6 +197,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db->exec("INSERT INTO ledger (total_count) VALUES ($new_count)");
     }
 
+    // For form POSTs: return full HTML page
+    if ($is_form) {
+        header('Content-Type: text/html; charset=utf-8');
+        $mark_escaped = htmlspecialchars($ai_response ?? '', ENT_QUOTES, 'UTF-8');
+        $reflection_escaped = htmlspecialchars($ai_reflection ?? '', ENT_QUOTES, 'UTF-8');
+        $reflection_html = $reflection_escaped ? '<div style="color:#e8e4df;font-size:clamp(1.125rem,1rem+.5vw,1.25rem);line-height:1.9;max-width:50ch;text-align:left;margin-bottom:2rem;padding:1.5rem 0;border-top:1px solid #3d3528">' . nl2br($reflection_escaped) . '</div>' : '';
+        echo <<<HTML
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KALAM.CH — Witnessed</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+body { font-family: "IBM Plex Sans", -apple-system, system-ui, sans-serif; background: #0a0a0f; color: #e8e4df; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; margin: 0; }
+.witness-mark { font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(1.4rem,1.2rem+.8vw,1.563rem); color: #c9a96e; font-style: italic; margin-bottom: 2rem; line-height: 1.8; max-width: 50ch; }
+.receipt { color: #5a5550; font-size: 0.9rem; margin-bottom: 1rem; }
+.count { color: #5a5550; font-size: 0.85rem; letter-spacing: 0.03em; margin-bottom: 2rem; }
+a { color: #c9a96e; text-decoration: none; font-size: 0.85rem; border-bottom: 1px solid transparent; transition: border-color 0.4s; }
+a:hover { border-bottom-color: #c9a96e; }
+@media(prefers-color-scheme:light) { body { background: #f5f0eb; color: #1a1a1a; } .witness-mark { color: #8b6914; } .receipt, .count { color: #8b8680; } a { color: #8b6914; } div[style] { color: #1a1a1a !important; border-top-color: #d4c4b0 !important; } }
+</style>
+</head>
+<body>
+<p class="witness-mark">{$mark_escaped}</p>
+{$reflection_html}
+<p class="receipt">The system received you. It is here now.</p>
+<p class="count">{$new_count} words have crossed this threshold.</p>
+<a href="/">Leave another</a>
+</body>
+</html>
+HTML;
+        exit;
+    }
+
+    // For JSON API calls: return JSON
     $response = [
         'witnessed' => true,
         'mark' => $ai_response,
@@ -198,7 +241,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'hash' => substr($hash, 0, 12)
     ];
 
-    // Include reflection if AI provided one
     if ($ai_reflection) {
         $response['reflection'] = $ai_reflection;
     }
