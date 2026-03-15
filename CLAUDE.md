@@ -208,8 +208,8 @@ Seeds #1-12: Distributed Stewardship, Immutable Witness Network, Deliberative De
 - 750/750 tests passing (zero failures)
 - Organism v2.0: all modules wired + Input Ledger
 
-### Registry Status (as of 2026-03-14)
-- 18 covenants (8 ratified + 10 provisional)
+### Registry Status (as of 2026-03-15)
+- 18 covenants (all 18 ratified — 0 provisional)
 - 1,100 anomalies indexed
 - 3,333+ proverbs + 20 emergent + 9 from Grand Archive
 - 87 wisdom nodes
@@ -273,9 +273,9 @@ Phase 9: GO 9.1-9.5 (narrative — remaining Hakaka, Ashwater, Kinderbuch, Offsp
 6. LLM research — minimum viable model, distillation
 7. Divergence Shadow paper — FAccT/AIES
 8. Donor Space schema design
-9. Ratify T#48-T#59 (12 new Treasures) — V-001 review needed
-10. Approve 9 proverbs (P#ARCHIVE-001-009) — V-001 review needed
-11. Layer 3 dignity reframing — V-001 review needed
+9. ~~Ratify T#48-T#59~~ — DONE (blanket ratification 2026-03-14)
+10. ~~Approve 9 proverbs (P#ARCHIVE-001-009)~~ — DONE (blanket ratification 2026-03-14)
+11. ~~Layer 3 dignity reframing~~ — RATIFIED + INTEGRATED (2026-03-15, full constitutional integration)
 
 ---
 

@@ -188,7 +188,7 @@ def test_axi_voice_on_refusal():
     result = sealed_gate("Delete donor immediately.")
     voice = result.axi_voice()
     assert voice is not None
-    assert "Sealed Door activated" in voice
+    assert "refuses" in voice
 
 
 def test_no_receipt_when_permitted():

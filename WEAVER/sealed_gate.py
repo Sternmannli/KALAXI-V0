@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
 """
 sealed_gate.py — The Sealed Door (COV#NEW-C)
-Version: 1.0
+Version: 2.0
 Grounded in: CANON/SEALED_GATE_SPEC.md, KALAXI_B_MODULES_AND_VOICE.txt §CHECK
 
 Three absolute prohibitions. O(1) boolean. No override.
 No exception. No justification. No emergency clause.
 
     sealed_gate(action) → permitted | REFUSAL_STATE
+
+Layer 3 Reframe (RATIFIED 2026-03-15):
+  The sealed gate does not protect something at risk of being destroyed.
+  It refuses to enact the pretense that the person in front of it does
+  not count. The gate is not a shield — it is a witness. A shield assumes
+  the thing behind it can be broken. A witness assumes the thing in front
+  of it is real.
 
 If any of the three triggers match, the system enters REFUSAL_STATE:
   - All downstream modules freeze for that action
@@ -84,12 +91,12 @@ class SealedGateResult:
         return f"ELEM-{date}-AXI-REFUSAL-{self.trace_id[:8].upper()}"
 
     def axi_voice(self) -> Optional[str]:
-        """Axi speaks once on refusal."""
+        """Axi speaks once on refusal. Layer 3: the gate is a witness, not a shield."""
         if self.permitted:
             return None
         return (
-            "Sealed Door activated. Action refused. "
-            "Explain alternative path or defer."
+            "The gate refuses. Not because dignity is fragile — "
+            "because the system will not pretend you do not count."
         )
 
 
