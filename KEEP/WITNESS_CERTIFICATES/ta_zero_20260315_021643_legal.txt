@@ -1,0 +1,77 @@
+WITNESS CERTIFICATE OF INSTITUTIONAL BLINDNESS
+Zero-Halt Dignity Record
+
+Certificate ID: ta_zero_20260315_021643
+Chain ID: kalaxi:v1
+Timestamp (UTC): 2026-03-15T02:16:43.876971+00:00
+Timestamp (Zurich): 2026-03-15T03:16:43.876971+01:00
+
+1. SUBJECT
+   Subject Identifier: jabir-ibn-karim:unverified
+   Role in Proceeding: donor:stateless-father
+   Context: 
+
+2. DIGNITY COMPUTATION RESULT
+   The system computes dignity as D = A x L x M, where:
+   A = Autonomy (capacity to act on one's own behalf)
+   L = Legibility (degree to which the system can witness the person)
+   M = Momentum (continuity of the person's trajectory)
+
+   Autonomy (A): 0.00
+   Legibility (L): 0.00 — CRITICAL FAILURE
+   Momentum (M): 0.00
+   Computed Dignity: D = 0.00 (halt condition triggered)
+
+3. NATURE OF THE HALT (NEGATIVE PROOF)
+   This certificate is an explicit, cryptographically signed record that:
+   (a) The system was mathematically unable to form a sufficient
+       internal representation of the subject.
+   (b) The system is constitutionally bound to refuse to proceed
+       when any dignity axis reaches zero.
+   (c) Any decision that treats this system as having validly 'seen'
+       or 'assessed' the subject lacks foundation in the system's
+       own records.
+
+4. COORDINATES OF FAILURE
+   Failed Axis: ALL_ZERO
+   Processing Node: multi-institution:country-A+B+C+D
+   Rule Invoked: D=A×L×M
+
+   Evidence submitted:
+   - Jabir's testimony (Gate 1): origin, identity, three children
+   - Court transcript (Gate 2): 'you are not a legal person before this court'
+   - Transfer order (Gate 3): 'No known father is checked in the database'
+   - Detention log (Gate 4): 23 logged 'No shows' that were actual visits
+   - Forgery attempt (Gate 5): Document X-1 traced to foster family's legal rep
+   - Final statement (Gate 6): 'please see me. That would be enough.'
+
+   Evidence missing or unreadable:
+   - A (agency): zero — no legal standing, no representation, detained/deported/stateless
+   - L (legibility): zero — not registered as parent in any database
+   - M (momentum): zero — every forward motion met with system reset
+
+   System explanation: System refused to proceed: would have denied dignity on [A, L, M]. All three axes zero simultaneously. Systemic institutional blindness across four countries over eleven years. The system halts not because Jabir lacks dignity, but because proceeding would mean pretending to see him when multiple institutions acted as though he does not exist.
+
+5. CONSTITUTIONAL BASIS FOR REFUSAL
+   - alef:01-dignity-non-compensatory
+   - dal:03-halt-on-unwitnessed-person
+   - ra:02-immutable-witness
+
+   Refusal Clause: "By the rules of the Constitution and the weights of the 28 Roots, this system refuses to proceed. To continue would be to simulate a person who is not seen. This record serves as an immutable witness to this institutional blindness."
+
+6. CRYPTOGRAPHIC INTEGRITY
+   Previous Chain Hash: 
+   Certificate Hash: 392527026dd065e9443098bacdd31780c75d14f297095412e5f1b34063e1deab
+   System Signature: [pending]
+
+7. USE OF THIS CERTIFICATE
+   This certificate may be presented as evidence that:
+   (a) The system did not and could not produce a substantive
+       assessment of the subject's presence or relationship.
+   (b) Any institutional action claiming support from the system's
+       assessment cannot rely on a valid dignity computation for
+       this subject at the time indicated.
+   (c) The appropriate remedy is to seek or provide additional
+       forms of recognition (human testimony, alternative evidence,
+       translators, community witnesses) before any substantive
+       decision proceeds.

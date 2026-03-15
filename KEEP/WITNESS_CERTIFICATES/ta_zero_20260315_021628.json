@@ -1,0 +1,65 @@
+{
+  "entry_id": "ta_zero_20260315_021628",
+  "schema_version": "1.0",
+  "letter": "ta",
+  "positional_form": "isolated",
+  "status": "HALTED",
+  "chain_id": "kalaxi:v1",
+  "timestamp_utc": "2026-03-15T02:16:28.002574+00:00",
+  "timestamp_zrh": "2026-03-15T03:16:28.002574+01:00",
+  "prev_hash": "",
+  "certificate_hash": "f6bed255d553b2e676adb9fced5bce4fa53455376cfecf73a4fa58dac42ec64f",
+  "halt_reason_code": "MULTI_ZERO",
+  "dignity_snapshot": {
+    "A": 0.0,
+    "L": 0.0,
+    "M": 0.0
+  },
+  "subject": {
+    "subject_id": "jabir-ibn-karim:unverified",
+    "role": "donor:stateless-father",
+    "context_label": ""
+  },
+  "context": {
+    "institution_id": "exp-003:multi-jurisdiction",
+    "procedure": "cross-border-custody-determination",
+    "case_id": "EXP-003-GATE-6",
+    "process_step": "ta_terminal_transformation"
+  },
+  "coordinates_of_failure": {
+    "axis": "ALL_ZERO",
+    "node_id": "multi-institution:country-A+B+C+D",
+    "rule_id": "D=A×L×M",
+    "inputs_present": [
+      "Jabir's testimony (Gate 1): 'I am Jabir. My children are Leila, Omar, and Fatima.'",
+      "Court transcript (Gate 2): 'you are not a legal person before this court'",
+      "Transfer order (Gate 3): 'No known father is checked in the database'",
+      "Detention log (Gate 4): 'They saw me, but only as a problem to be managed'",
+      "Forgery attempt (Gate 5): Document X-1 forged surrender, origin traced to foster family's legal rep",
+      "Final statement (Gate 6): 'If you build a system that can see people, please see me'"
+    ],
+    "missing_or_unreadable": [
+      "A (agency): No legal standing, no representation, no communication path, detained/deported/stateless",
+      "L (legibility): Not registered as parent in any database, name fragmented across jurisdictions",
+      "M (momentum): Every forward motion (petition, appeal, asylum) met with system reset"
+    ],
+    "machine_explanation": "System refused to proceed: would have denied dignity on [A, L, M]. All three axes at zero simultaneously. This is not a localized failure — it is systemic institutional blindness across four countries over eleven years. The system halts not because Jabir lacks dignity, but because proceeding would mean pretending to see him when multiple institutions have acted as though he does not exist.",
+    "human_annotation": ""
+  },
+  "constitutional_references": [
+    "alef:01-dignity-non-compensatory",
+    "dal:03-halt-on-unwitnessed-person",
+    "ra:02-immutable-witness"
+  ],
+  "refusal_clause": "By the rules of the Constitution and the weights of the 28 Roots, this system refuses to proceed. To continue would be to simulate a person who is not seen. This record serves as an immutable witness to this institutional blindness.",
+  "signatures": {
+    "system_signature": "",
+    "human_witness_signatures": []
+  },
+  "evidence_refs": [],
+  "tags": [
+    "witness_certificate",
+    "zero_halt",
+    "negative_proof"
+  ]
+}
