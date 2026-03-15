@@ -97,10 +97,12 @@ class RestorativeJustice:
         rj.complete_repair(path.repair_id, "Explanation provided, donor acknowledged")
     """
 
+    # Layer 3 Reframe (RATIFIED 2026-03-15): Dignity was never absent.
+    # Repairs address the system's failure to refuse denial — not "restore" what was never lost.
     REPAIR_TEMPLATES = {
-        "agency": "Restore choice: present alternatives, explain what happened, offer redo.",
-        "legibility": "Restore clarity: rephrase in donor's language, add context.",
-        "moral_standing": "Restore respect: acknowledge the person, remove condescension.",
+        "agency": "The system denied the donor's autonomy. Address: present alternatives, explain what happened, open a path. The capacity to choose was always there.",
+        "legibility": "The system denied the donor's frame. Address: rephrase in donor's language, add context. The donor's meaning was always real.",
+        "moral_standing": "The system denied the donor's worth. Address: acknowledge the person, remove condescension. The donor's standing was never diminished.",
     }
 
     def __init__(self):

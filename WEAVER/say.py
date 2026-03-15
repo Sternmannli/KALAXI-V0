@@ -110,7 +110,7 @@ def render(content, medium=None, felt_domain="output"):
             dignity_audit=audit_obj,
             voice_applied=False,
             blocked=True,
-            block_reason=f"Dignity check failed: {', '.join(failed)}",
+            block_reason=f"System refusal: dignity predicate D=0 on [{', '.join(failed)}]. The system will not proceed as though the donor does not count.",
         )
 
     # Step 2: Adapt to medium (form, never content)
