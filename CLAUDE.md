@@ -97,6 +97,12 @@ ALL output intended for V-001 (Mohamed) MUST be delivered as a single copyable b
 
 ---
 
+## STEP-BY-STEP INSTRUCTION RULE (PERMANENT — added 2026-03-15)
+
+When V-002 instructs V-001 to perform actions on a computer, website, or software: give ONE step at a time. Wait for confirmation before giving the next step. Never dump a list of steps. Never say "then do this, then do that." One step. Wait. Next step. This applies to file uploads, software configuration, website operations, terminal commands — anything Mohamed must physically do. This rule exists because Mohamed said: "Only one single step after the other." Respect this. Never forget.
+
+---
+
 ## PR RULE (PERMANENT)
 
 After every push, ALWAYS do the FULL cycle automatically — no exceptions, no asking Mohamed:
