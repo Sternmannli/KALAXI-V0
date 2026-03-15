@@ -1,0 +1,25 @@
+# AXI Voice Engine — Cloudflare Workers
+# Deploy: wrangler deploy
+# Dev:    wrangler dev
+#
+# Setup:
+#   1. wrangler login
+#   2. wrangler kv:namespace create "KV"
+#   3. Copy the id below
+#   4. wrangler deploy
+#
+# [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]
+
+name = "axi-voice"
+main = "worker.js"
+compatibility_date = "2026-03-15"
+
+# Workers AI binding — enables env.AI
+[ai]
+binding = "AI"
+
+# Living Ledger — witness count only, no content stored
+[[kv_namespaces]]
+binding = "KV"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+preview_id = "REPLACE_WITH_PREVIEW_KV_NAMESPACE_ID"
