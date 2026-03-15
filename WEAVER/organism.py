@@ -28,6 +28,9 @@ Flow:
     → HARM DETECTOR + EARLY WARNING (safety layer)
     → NEGATIVE SPACE + DECAY (observation gaps + pattern halflife)
     → BREATH (heartbeat tick)
+    → LETTER ONTOLOGY (28 Arabic letters as typed algebra)
+    → CHAIN VALIDATOR (connection rules: Alef/Ba/Ta)
+    → WITNESS CERTIFICATE (Zero-Halt negative proof on D=0)
 
 The organism breathes. If BREATH pauses, nothing moves.
 If CHECK blocks, nothing speaks. If TURN has no open path, agency is preserved.
@@ -106,6 +109,13 @@ from FIELD.STUDY.divergence_study import DivergenceShadowInstrument
 from FIELD.amendments import PrivacyEnvelope, BaselineDriftDetector, RefusalMap
 # ── Input Ledger: every V-001 input is a unit, registered as-is ──
 from WEAVER.input_ledger import InputLedger, V001, V002
+# ── Letter Ontology + Chain Validator + Witness Certificate (EXP-002) ──
+from WEAVER.letter_ontology import ALL_LETTERS, NON_CONNECTORS, ontology_summary
+from WEAVER.chain_validator import ChainEntry, validate_entry, PositionalForm, EntryType
+from WEAVER.witness_certificate import (
+    DignitySnapshot, Subject, InstitutionalContext, CoordinatesOfFailure,
+    generate_certificate, save_certificate,
+)
 
 
 @dataclass
@@ -221,6 +231,11 @@ class OrganismState:
     divergence_coupling: float = 0.0
     amendments_refusals: int = 0
     amendments_drift_detected: bool = False
+    # ── Letter Chain (EXP-002) ──
+    letter_ontology_total: int = 28
+    letter_ontology_non_connectors: int = 6
+    letter_ontology_connectors: int = 22
+    witness_certificates_generated: int = 0
     timestamp: str = ""
 
 
@@ -328,6 +343,8 @@ class Organism:
         self._refusal_map = RefusalMap()
         # ── Input Ledger: every V-001 input is a unit ──
         self._input_ledger = InputLedger()
+        # ── Letter Chain (EXP-002): ontology + witness certificates ──
+        self._witness_certs_generated = 0
         self._last_sense = None
         self._last_lab = None
         self._last_pillar_profile = None
@@ -721,6 +738,38 @@ class Organism:
             )
             self._turn.defer(ex_id, f"Input failed dignity check: {failed_components}")
 
+            # WITNESS CERTIFICATE — the halt is the product
+            try:
+                d_snap = DignitySnapshot(
+                    A=self._last_measurement.A if self._last_measurement else 0.0,
+                    L=self._last_measurement.L if self._last_measurement else 0.0,
+                    M=self._last_measurement.M if self._last_measurement else 0.0,
+                )
+                cert = generate_certificate(
+                    dignity=d_snap,
+                    subject=Subject(subject_id=f"donor:{ex_id}", role="donor"),
+                    context=InstitutionalContext(
+                        institution_id="kalaxi:organism",
+                        procedure="dignity_check",
+                        case_id=ex_id,
+                        process_step="phase_2_check",
+                    ),
+                    coordinates=CoordinatesOfFailure(
+                        axis=d_snap.halt_reason.replace("_ZERO", ""),
+                        node_id="dignity_check",
+                        rule_id="D=A×L×M",
+                        inputs_present=[donor_input[:100]],
+                        missing_or_unreadable=failed_components,
+                        machine_explanation=f"Dignity collapsed: {failed_components}",
+                    ),
+                    prev_hash=self._witness_net.chain_head_hash if hasattr(self._witness_net, 'chain_head_hash') else "",
+                )
+                save_certificate(cert)
+                self._witness_certs_generated += 1
+                warnings.append(f"WITNESS CERTIFICATE: {cert.certificate_id} (Ta_mufrad)")
+            except Exception as e:
+                warnings.append(f"Witness certificate generation failed: {e}")
+
             # SHELTER — hold the exchange with remedies
             shelter_record = self._shelter.receive(ex_id, donor_input, failed_components)
 
@@ -1071,6 +1120,11 @@ class Organism:
             privacy_budget_locked=self._privacy_budget.is_locked,
             amendments_refusals=len(self._refusal_map.records),
             amendments_drift_detected=len(self._baseline_drift.drift_signals) > 0,
+            # ── Letter Chain (EXP-002) ──
+            letter_ontology_total=len(ALL_LETTERS),
+            letter_ontology_non_connectors=len(NON_CONNECTORS),
+            letter_ontology_connectors=len(ALL_LETTERS) - len(NON_CONNECTORS),
+            witness_certificates_generated=self._witness_certs_generated,
             timestamp=self._now(),
         )
 
