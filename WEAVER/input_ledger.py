@@ -96,6 +96,7 @@ class InputEntry:
     linked_proverbs: List[str] = field(default_factory=list)
     linked_ideas: List[str] = field(default_factory=list)
     essence: str = ""           # One-line distillation (never replaces raw)
+    patterns: List[str] = field(default_factory=list)  # Extracted patterns (structural, not content)
     thermal_state: str = "raw"  # raw -> witnessed -> integrated -> canonical
     # v3.0 fields — Grand Archive blockchain DNA
     timestamp_zrh: str = ""     # Local Zurich time (dual timestamp)
@@ -144,6 +145,8 @@ class InputLedger:
                     e["bundle_id"] = ""
                 if "owner" not in e:
                     e["owner"] = OWNER_DID
+                if "patterns" not in e:
+                    e["patterns"] = []
                 self._entries.append(InputEntry(**e))
 
     def _save(self):
@@ -205,6 +208,8 @@ class InputLedger:
                 lines.append(f"**Proverb:** {e.proverb_anchor}")
             if e.essence:
                 lines.append(f"**Essence:** {e.essence}")
+            if e.patterns:
+                lines.append(f"**Patterns:** {' · '.join(e.patterns)}")
             lines.append("")
             lines.append("```")
             text = e.raw_text
@@ -255,6 +260,7 @@ class InputLedger:
         linked_proverbs: Optional[List[str]] = None,
         linked_ideas: Optional[List[str]] = None,
         essence: str = "",
+        patterns: Optional[List[str]] = None,
         impression: str = "",
         proverb_anchor: str = "",
         receipt_type: str = RECEIPT_CAPTURE,
@@ -291,6 +297,7 @@ class InputLedger:
             linked_proverbs=linked_proverbs or [],
             linked_ideas=linked_ideas or [],
             essence=essence,
+            patterns=patterns or [],
             thermal_state="raw",
             # v3.0 receipt chain fields
             timestamp_zrh=now_zrh.isoformat(),
@@ -332,6 +339,8 @@ class InputLedger:
             f"- Covenants: {', '.join(entry.linked_covenants) or 'none yet'}\n"
             f"- Proverbs: {', '.join(entry.linked_proverbs) or 'none yet'}\n"
             f"- Ideas: {', '.join(entry.linked_ideas) or 'none yet'}\n\n"
+            f"## Patterns\n\n"
+            f"{chr(10).join('- ' + p for p in entry.patterns) if entry.patterns else '(to be extracted)'}\n\n"
             f"## Essence\n\n{entry.essence or '(to be distilled)'}\n"
         )
 
@@ -443,6 +452,35 @@ class InputLedger:
             expected_chain = self._compute_hash(entry.content_hash + entry.prev_hash)
             if entry.chain_hash != expected_chain:
                 return False
+        return True
+
+    def metabolize(self, entry_id: str, patterns: List[str],
+                   essence: str = "") -> bool:
+        """Metabolize an entry: extract its patterns and essence, feed them into the system.
+        This is the fourth dimension — the system grows with every input.
+        Patterns are structural (recurring shapes, preferences, rhythms).
+        Essence is the distilled meaning (one line, never replaces raw).
+        Once metabolized, thermal_state advances from 'raw' to 'witnessed'."""
+        entry = self.get(entry_id)
+        if entry is None:
+            return False
+        entry.patterns = patterns
+        if essence:
+            entry.essence = essence
+        if entry.thermal_state == "raw":
+            entry.thermal_state = "witnessed"
+        self._save()
+        self._save_chronicle()
+        # Update individual entry file
+        entry_file = LEDGER_DIR / f"{entry.entry_id}.md"
+        if entry_file.exists():
+            content = entry_file.read_text()
+            if "## Patterns" not in content:
+                content += (
+                    f"\n## Patterns\n\n"
+                    f"{chr(10).join('- ' + p for p in patterns)}\n"
+                )
+                entry_file.write_text(content)
         return True
 
     def summary(self) -> dict:
