@@ -2,37 +2,94 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="kalam.ch — The Word" description="The wound became the womb. A living constitutional framework for human dignity in computational systems.">
+<Base title="kalam.ch — The Word" description="A constitutional framework where human dignity is the first technical requirement. Patterns, not people. No private data stored. By design.">
 
   <!-- THE DEDICATION — three lights for three children -->
   <div id="dedication" class="dedication-overlay">
-    <p id="ded-touch" class="ded-touch breathing">touch to begin</p>
+    <p id="ded-touch" class="ded-touch breathing">touch to witness</p>
     <div id="ded-lights" class="ded-lights">
       <div class="ded-child" id="child-laila">
-        <div class="ded-light ded-laila"></div>
-        <span class="ded-name" dir="rtl">ليلى</span>
-        <span class="ded-name-en">Laila</span>
-        <span class="ded-animal">🐬</span>
+        <div class="ded-animal-wrap"><span class="ded-animal ded-dolphin">🐬</span></div>
+        <span class="ded-initial">L</span>
       </div>
       <div class="ded-child" id="child-yara">
-        <div class="ded-light ded-yara"></div>
-        <span class="ded-name" dir="rtl">يارا</span>
-        <span class="ded-name-en">Yara</span>
-        <span class="ded-animal">🐯</span>
+        <div class="ded-animal-wrap"><span class="ded-animal ded-tiger">🐯</span></div>
+        <span class="ded-initial">Y</span>
       </div>
       <div class="ded-child" id="child-salim">
-        <div class="ded-light ded-salim"></div>
-        <span class="ded-name" dir="rtl">سليم</span>
-        <span class="ded-name-en">Salim</span>
-        <span class="ded-animal">🐺</span>
+        <div class="ded-animal-wrap"><span class="ded-animal ded-wolf">🐺</span></div>
+        <span class="ded-initial">S</span>
       </div>
     </div>
     <p id="ded-from" class="ded-from"></p>
   </div>
 
-  <!-- FIRST BREATH — The Threshold -->
+  <!-- FIRST BREATH — The Opening -->
+  <section class="opening" aria-label="The Framework">
+    <h1>Human dignity is a technical requirement.</h1>
+    <p class="opening-sub">kalam is a constitutional framework for computational systems.<br />It evaluates dignity before every output, every action, every decision.</p>
+
+    <!-- Five Pillars — ordered by importance, clickable -->
+    <div class="five-pillars" aria-label="Five pillars of the framework">
+      <button class="pillar pillar-dignity" data-pillar="dignity" aria-expanded="false">
+        <span class="pillar-label">Dignity</span>
+        <span class="pillar-dot"></span>
+      </button>
+      <button class="pillar pillar-presence" data-pillar="presence" aria-expanded="false">
+        <span class="pillar-label">Presence</span>
+        <span class="pillar-dot"></span>
+      </button>
+      <button class="pillar pillar-pattern" data-pillar="pattern" aria-expanded="false">
+        <span class="pillar-label">Pattern</span>
+        <span class="pillar-dot"></span>
+      </button>
+      <button class="pillar pillar-wisdom" data-pillar="wisdom" aria-expanded="false">
+        <span class="pillar-label">Wisdom</span>
+        <span class="pillar-dot"></span>
+      </button>
+      <button class="pillar pillar-witness" data-pillar="witness" aria-expanded="false">
+        <span class="pillar-label">Witness</span>
+        <span class="pillar-dot"></span>
+      </button>
+    </div>
+
+    <!-- Pillar expansion panels -->
+    <div id="pillar-panel" class="pillar-panel" aria-live="polite" hidden>
+      <button class="pillar-close" aria-label="Close">&times;</button>
+      <div class="pillar-content" id="pillar-content"></div>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- SECOND BREATH — The Predicate -->
+  <section class="predicate" aria-label="The Dignity Predicate">
+    <button class="equation-btn" id="equation-toggle" aria-expanded="false">
+      <span class="equation-text">D = A &times; L &times; M</span>
+      <span class="equation-hint">click to read</span>
+    </button>
+    <div id="equation-detail" class="equation-detail" hidden>
+      <div class="terms">
+        <p><strong class="term-a">A</strong> <span class="term-name">Agency</span> &mdash; Can the person clarify, redirect, or stop?</p>
+        <p><strong class="term-l">L</strong> <span class="term-name">Legibility</span> &mdash; Does the system reflect the person's actual context?</p>
+        <p><strong class="term-m">M</strong> <span class="term-name">Moral Standing</span> &mdash; Is the person treated as a person?</p>
+      </div>
+      <p class="rule">If any dimension reaches zero, the system stops. Non-compensatory. No override.</p>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- THIRD BREATH — Declaration -->
+  <section class="declaration" aria-label="Declaration">
+    <p class="principle">No private data is stored. By design.</p>
+    <p class="quiet-eng">The system processes patterns, not personal information. Your identity is not recorded. Contributions are anonymized on entry. You have the right to request deletion at any time under FADP and GDPR.</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- FOURTH BREATH — The Threshold (interactive) -->
   <section class="threshold" aria-label="The Threshold">
-    <p class="threshold-prompt">You came with what you came with. The door is open.</p>
     <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
 
     <div class="threshold-container">
@@ -43,7 +100,7 @@ import Base from '../layouts/Base.astro';
           <textarea
             id="threshold-input"
             name="content"
-            placeholder="Your word is welcome here"
+            placeholder="Every word will be witnessed"
             aria-label="Your word"
             rows="3"
             maxlength="2000"
@@ -57,69 +114,46 @@ import Base from '../layouts/Base.astro';
 
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- SECOND BREATH — The Opening -->
-  <section class="opening" aria-label="The Word">
-    <h1>The wound became the womb.</h1>
-    <div class="five-words" aria-label="Five pillars">
-      <span>Dignity</span>
-      <span>Wisdom</span>
-      <span>Presence</span>
-      <span>Pattern</span>
-      <span>Witness</span>
-    </div>
-  </section>
-
-  <div class="gap" role="separator" aria-hidden="true"></div>
-
-  <!-- THIRD BREATH — Declaration -->
-  <section class="declaration" aria-label="Declaration">
-    <p class="principle">Human dignity is the first technical requirement.</p>
-    <p class="quiet">We hold patterns, not people. No private data is stored. Ever. By design.</p>
-  </section>
-
-  <div class="gap" role="separator" aria-hidden="true"></div>
-
-  <!-- THIRD BREATH — The Predicate -->
-  <section class="predicate" aria-label="The Dignity Predicate">
-    <p class="equation">D = A × L × M</p>
-    <div class="terms">
-      <p><strong>A</strong> — Agency. Can the person clarify, redirect, or stop?</p>
-      <p><strong>L</strong> — Legibility. Does the system reflect the person's actual frame?</p>
-      <p><strong>M</strong> — Moral Standing. Is the person treated as a person?</p>
-    </div>
-    <p class="rule">If any dimension reaches zero, the system stops.</p>
-  </section>
-
-  <div class="gap" role="separator" aria-hidden="true"></div>
-
-  <!-- FOURTH BREATH — Proverb -->
-  <section class="wisdom" aria-label="Canonical Proverb">
+  <!-- FIFTH BREATH — Proverb -->
+  <section class="wisdom-sec" aria-label="Canonical Proverb">
     <p class="proverb">"A right is a wall that says 'No';<br />dignity is a door that says 'Welcome.'"</p>
   </section>
 
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- FIFTH BREATH — The Invitation -->
-  <section class="invitation-section" aria-label="Invitation">
-    <h2>You are not a user.</h2>
-    <p class="quiet">You are a donor. What you bring — your pattern of thought, your fragments, your certainty — is food for a living canon. The system receives, transforms, and feeds the forest.</p>
-    <p class="quiet">Nothing is deleted. The gap remains open.</p>
+  <!-- SIXTH BREATH — You are a Donor -->
+  <section class="donor-section" aria-label="Donor">
+    <h2>You are not a user. You are a donor.</h2>
+    <p class="quiet-eng">What you contribute becomes part of a living canon. The system receives, processes, and grows. Your pattern of thought feeds the framework. No personal data is retained.</p>
+    <a href="/invitation" class="more-link">Learn more about contributing &rarr;</a>
   </section>
 
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- SIXTH BREATH — Proverb from Ashwater -->
-  <section class="wisdom" aria-label="Proverb from the stories">
+  <!-- SEVENTH BREATH — Ashwater Proverb -->
+  <section class="wisdom-sec" aria-label="Proverb from Ashwater">
     <p class="proverb">"Do not shout at metal. Hear its problem first."</p>
-    <p class="proverb-source">— Ashwater: The Axis</p>
+    <button class="source-btn" id="ashwater-toggle" aria-expanded="false">
+      <span class="proverb-source-label">Ashwater: The Axis</span>
+    </button>
+    <div id="ashwater-detail" class="source-detail" hidden>
+      <p>Ashwater is one of four narrative works in the kalam canon. It tells the story of two towns — one that pauses to listen, one that optimises without hearing. 19 chapters exploring civic dignity, communal decision-making, and what happens when systems stop listening to people.</p>
+      <a href="/about#stories" class="more-link">Read about the four narratives &rarr;</a>
+    </div>
   </section>
 
   <div class="gap" role="separator" aria-hidden="true"></div>
 
-  <!-- CLOSING BREATH — A closing proverb -->
-  <section class="wisdom" aria-label="Closing proverb">
-    <p class="proverb">"She clawed at the air. Fists closed on nothing.<br />Then the nothing held."</p>
-    <p class="proverb-source">— Hakaka</p>
+  <!-- EIGHTH BREATH — Hakaka -->
+  <section class="wisdom-sec" aria-label="Closing proverb">
+    <p class="proverb">"She clawed at the air. Fists closed on nothing.<br />Then the nothing opened."</p>
+    <button class="source-btn" id="hakaka-toggle" aria-expanded="false">
+      <span class="proverb-source-label">Hakaka</span>
+    </button>
+    <div id="hakaka-detail" class="source-detail" hidden>
+      <p>Hakaka is the origin cycle. 53 chapters + Prologue + Epilogue. Mythic, raw, written in short sentences. It explores dignity at the most primal level — when everything is stripped away, what remains?</p>
+      <a href="/about#stories" class="more-link">Read about the four narratives &rarr;</a>
+    </div>
   </section>
 
 </Base>
@@ -150,7 +184,7 @@ import Base from '../layouts/Base.astro';
 
   .ded-lights {
     display: flex;
-    gap: clamp(2rem, 6vw, 5rem);
+    gap: clamp(3rem, 8vw, 6rem);
     margin-top: 3rem;
     opacity: 0;
     transition: opacity 1.2s ease;
@@ -160,52 +194,62 @@ import Base from '../layouts/Base.astro';
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
     opacity: 0;
     transition: opacity 1.5s ease, transform 1s ease;
   }
 
-  .ded-light {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    transition: all 1.2s ease;
-  }
-
-  .ded-laila .ded-light {
-    background: #7ec8e3;
-    box-shadow: 0 0 16px #7ec8e3, 0 0 32px rgba(126, 200, 227, 0.2);
-  }
-
-  .ded-yara .ded-light {
-    background: #e8a847;
-    box-shadow: 0 0 16px #e8a847, 0 0 32px rgba(232, 168, 71, 0.2);
-  }
-
-  .ded-salim .ded-light {
-    background: #c0c8d8;
-    box-shadow: 0 0 16px #c0c8d8, 0 0 32px rgba(192, 200, 216, 0.2);
-  }
-
-  .ded-name {
-    font-family: 'Amiri', Georgia, serif;
-    color: var(--text-secondary);
-    font-size: clamp(1rem, 2vw, 1.3rem);
-    line-height: 1;
-  }
-
-  .ded-name-en {
-    font-family: var(--font-heading);
-    color: var(--text-dim);
-    font-size: clamp(0.8rem, 1.5vw, 1rem);
-    letter-spacing: 0.05em;
-    line-height: 1;
+  .ded-animal-wrap {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .ded-animal {
-    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-size: 2.5rem;
     line-height: 1;
-    opacity: 0.8;
+    display: block;
+    animation: none;
+  }
+
+  .ded-dolphin.animate {
+    animation: dolphin-swim 3s ease-in-out infinite;
+  }
+
+  .ded-tiger.animate {
+    animation: tiger-prowl 2.5s ease-in-out infinite;
+  }
+
+  .ded-wolf.animate {
+    animation: wolf-breathe 4s ease-in-out infinite;
+  }
+
+  @keyframes dolphin-swim {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-6px) rotate(-3deg); }
+    50% { transform: translateY(0) rotate(0deg); }
+    75% { transform: translateY(4px) rotate(2deg); }
+  }
+
+  @keyframes tiger-prowl {
+    0%, 100% { transform: translateX(0) scale(1); }
+    50% { transform: translateX(3px) scale(1.03); }
+  }
+
+  @keyframes wolf-breathe {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+
+  .ded-initial {
+    font-family: var(--font-heading);
+    color: var(--text-secondary);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    letter-spacing: 0.08em;
+    font-weight: 300;
   }
 
   .ded-from {
@@ -221,7 +265,7 @@ import Base from '../layouts/Base.astro';
   /* ===== Opening ===== */
   .opening {
     min-height: 100vh;
-    gap: var(--space-6);
+    gap: var(--space-4);
   }
 
   .opening h1 {
@@ -229,13 +273,230 @@ import Base from '../layouts/Base.astro';
     font-size: var(--text-2xl);
     font-weight: 300;
     letter-spacing: 0.02em;
+    max-width: 20ch;
+  }
+
+  .opening-sub {
+    color: var(--text-secondary);
+    font-size: var(--text-base);
+    max-width: 50ch;
+    line-height: 1.8;
+    text-align: center;
+  }
+
+  /* ===== Five Pillars ===== */
+  .five-pillars {
+    display: flex;
+    gap: clamp(0.8rem, 2.5vw, 2rem);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: var(--space-6) 0 var(--space-2);
+  }
+
+  .pillar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    transition: all 0.4s ease;
+  }
+
+  .pillar:hover {
+    background: var(--accent-glow);
+  }
+
+  .pillar[aria-expanded="true"] {
+    background: var(--accent-glow);
+  }
+
+  .pillar-label {
+    font-family: var(--font-heading);
+    font-size: var(--text-sm);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  .pillar-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    transition: all 0.4s ease;
+  }
+
+  /* Pillar colors — subtle, distinct */
+  .pillar-dignity .pillar-label { color: var(--color-dignity); }
+  .pillar-dignity .pillar-dot { background: var(--color-dignity); box-shadow: 0 0 8px var(--color-dignity); }
+
+  .pillar-presence .pillar-label { color: var(--color-presence); }
+  .pillar-presence .pillar-dot { background: var(--color-presence); box-shadow: 0 0 8px var(--color-presence); }
+
+  .pillar-pattern .pillar-label { color: var(--color-pattern); }
+  .pillar-pattern .pillar-dot { background: var(--color-pattern); box-shadow: 0 0 8px var(--color-pattern); }
+
+  .pillar-wisdom .pillar-label { color: var(--color-wisdom); }
+  .pillar-wisdom .pillar-dot { background: var(--color-wisdom); box-shadow: 0 0 8px var(--color-wisdom); }
+
+  .pillar-witness .pillar-label { color: var(--color-witness); }
+  .pillar-witness .pillar-dot { background: var(--color-witness); box-shadow: 0 0 8px var(--color-witness); }
+
+  /* Pillar panel */
+  .pillar-panel {
+    max-width: 50ch;
+    width: 100%;
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: var(--space-4);
+    position: relative;
+    animation: panelIn 0.4s ease;
+    border-left: 3px solid var(--accent-subtle);
+    text-align: left;
+  }
+
+  .pillar-panel[hidden] { display: none; }
+
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pillar-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.8rem;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
+  }
+
+  .pillar-close:hover { color: var(--text-primary); }
+
+  .pillar-content h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-2);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pillar-content .pillar-emoji {
+    font-size: 1.3rem;
+  }
+
+  .pillar-content .pillar-def {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    line-height: 1.8;
+    margin-bottom: var(--space-2);
+  }
+
+  .pillar-content .pillar-eq {
+    font-family: var(--font-heading);
+    color: var(--accent);
+    font-size: var(--text-base);
+    letter-spacing: 0.03em;
+    margin-bottom: var(--space-1);
+  }
+
+  .pillar-content .pillar-reason {
+    color: var(--text-dim);
+    font-size: 0.85rem;
     font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* ===== Predicate ===== */
+  .predicate {
+    min-height: 50vh;
+    gap: var(--space-3);
+  }
+
+  .equation-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: var(--space-2);
+    transition: all 0.3s ease;
+    border-radius: 6px;
+  }
+
+  .equation-btn:hover {
+    background: var(--accent-glow);
+  }
+
+  .equation-text {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .equation-hint {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+
+  .equation-btn:hover .equation-hint { opacity: 1; }
+  .equation-btn[aria-expanded="true"] .equation-hint { display: none; }
+
+  .equation-detail {
+    max-width: 50ch;
+    animation: panelIn 0.4s ease;
+  }
+
+  .equation-detail[hidden] { display: none; }
+
+  .terms {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: left;
+    max-width: 50ch;
+    margin-top: var(--space-3);
+  }
+
+  .terms p {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+  }
+
+  .term-a { color: #7ec8e3; font-weight: 600; margin-right: 0.3rem; }
+  .term-l { color: #c9a96e; font-weight: 600; margin-right: 0.3rem; }
+  .term-m { color: #b8a0d2; font-weight: 600; margin-right: 0.3rem; }
+
+  .term-name {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .rule {
+    color: var(--text-primary);
+    font-style: italic;
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
   }
 
   /* ===== Declaration ===== */
   .declaration {
-    min-height: 70vh;
-    gap: var(--space-6);
+    min-height: 50vh;
+    gap: var(--space-4);
   }
 
   .principle {
@@ -245,89 +506,96 @@ import Base from '../layouts/Base.astro';
     max-width: 45ch;
   }
 
-  .quiet {
+  .quiet-eng {
     color: var(--text-secondary);
-    font-size: var(--text-base);
+    font-size: var(--text-sm);
     max-width: 50ch;
     line-height: 1.8;
   }
 
-  /* ===== Predicate ===== */
-  .predicate {
-    min-height: 70vh;
-    gap: var(--space-4);
-  }
-
-  .equation {
-    font-family: var(--font-heading);
-    font-size: var(--text-2xl);
-    color: var(--accent);
-    letter-spacing: 0.05em;
-    margin-bottom: var(--space-4);
-  }
-
-  .terms {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    text-align: left;
-    max-width: 50ch;
-  }
-
-  .terms p {
-    color: var(--text-secondary);
-    font-size: var(--text-sm);
-  }
-
-  .terms strong {
-    color: var(--accent);
-    font-weight: 600;
-    margin-right: var(--space-1);
-  }
-
-  .rule {
-    color: var(--text-primary);
-    font-style: italic;
-    margin-top: var(--space-4);
-  }
-
-  /* ===== Wisdom ===== */
-  .wisdom {
-    min-height: 50vh;
+  /* ===== Wisdom sections ===== */
+  .wisdom-sec {
+    min-height: 40vh;
     gap: var(--space-2);
   }
 
-  .proverb-source {
+  .proverb-source-label {
     color: var(--text-dim);
     font-size: var(--text-sm);
     font-style: italic;
     letter-spacing: 0.03em;
+  }
+
+  .source-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.3rem 0.6rem;
+    border-radius: 3px;
+    transition: all 0.3s ease;
     margin-top: var(--space-1);
   }
 
-  /* ===== Invitation section ===== */
-  .invitation-section {
-    min-height: 70vh;
-    gap: var(--space-4);
+  .source-btn:hover {
+    background: var(--accent-glow);
   }
 
-  .invitation-section h2 {
+  .source-btn::after {
+    content: ' +';
+    color: var(--text-dim);
+    font-size: 0.8rem;
+  }
+
+  .source-btn[aria-expanded="true"]::after {
+    content: ' -';
+  }
+
+  .source-detail {
+    max-width: 45ch;
+    text-align: center;
+    animation: panelIn 0.4s ease;
+    margin-top: var(--space-2);
+  }
+
+  .source-detail[hidden] { display: none; }
+
+  .source-detail p {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    line-height: 1.8;
+  }
+
+  .more-link {
+    display: inline-block;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    margin-top: var(--space-2);
+    border-bottom: 1px solid var(--accent-subtle);
+    transition: all 0.3s ease;
+  }
+
+  .more-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ===== Donor section ===== */
+  .donor-section {
+    min-height: 50vh;
+    gap: var(--space-3);
+  }
+
+  .donor-section h2 {
     font-size: var(--text-xl);
     margin-bottom: var(--space-2);
+    max-width: 25ch;
   }
 
   /* ===== Threshold ===== */
   .threshold {
     min-height: 70vh;
     gap: var(--space-4);
-  }
-
-  .threshold-prompt {
-    font-family: var(--font-heading);
-    font-size: var(--text-lg);
-    color: var(--text-secondary);
-    font-style: italic;
-    margin-bottom: var(--space-4);
   }
 
   .threshold-container {
@@ -347,8 +615,10 @@ import Base from '../layouts/Base.astro';
   .witness-entry {
     text-align: center;
     animation: fadeIn 1.5s ease-in;
-    padding-bottom: var(--space-4);
-    border-bottom: 1px solid var(--accent-subtle);
+    padding: var(--space-3);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 6px;
+    background: var(--bg-secondary);
   }
 
   .witness-mark {
@@ -382,7 +652,6 @@ import Base from '../layouts/Base.astro';
     width: 100%;
   }
 
-  /* Auto-growing textarea — CSS grid trick */
   .grow-wrap {
     display: grid;
     width: 100%;
@@ -410,9 +679,8 @@ import Base from '../layouts/Base.astro';
     max-height: 60vh;
     overflow-y: auto;
     background: var(--bg-inset);
-    border: none;
-    border-bottom: 2px solid var(--accent-subtle);
-    border-radius: 0;
+    border: 1px solid var(--accent-subtle);
+    border-radius: 6px;
     color: var(--text-primary);
     font-family: var(--font-body);
     font-size: var(--text-base);
@@ -420,23 +688,22 @@ import Base from '../layouts/Base.astro';
     padding: var(--space-3);
     resize: none;
     transition: border-color 0.8s ease, box-shadow 0.8s ease;
-    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   #threshold-input:focus {
     outline: none;
-    border-bottom-color: var(--accent);
-    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(201, 169, 110, 0.1);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.15);
     animation: breathe-glow 6s ease-in-out infinite;
   }
 
   @keyframes breathe-glow {
-    0%, 100% { box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(201, 169, 110, 0.08); }
-    50%      { box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 12px 2px rgba(201, 169, 110, 0.12); }
+    0%, 100% { box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.1); }
+    50%      { box-shadow: 0 0 12px 2px rgba(201, 169, 110, 0.12); }
   }
 
   #threshold-input.witnessed {
-    border-bottom-color: var(--accent);
+    border-color: var(--accent);
     box-shadow: 0 0 12px 2px rgba(201, 169, 110, 0.2);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
@@ -463,6 +730,7 @@ import Base from '../layouts/Base.astro';
     font-size: var(--text-sm);
     letter-spacing: 0.05em;
     padding: var(--space-1) var(--space-4);
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.6s ease;
   }
@@ -509,16 +777,9 @@ import Base from '../layouts/Base.astro';
 </style>
 
 <script is:inline>
-// THE DEDICATION — three lights for three children
+// === DEDICATION CEREMONY ===
 (function(){
   var ded = document.getElementById('dedication');
-  var touch = document.getElementById('ded-touch');
-  var lights = document.querySelector('.ded-lights');
-  var childLaila = document.getElementById('child-laila');
-  var childYara = document.getElementById('child-yara');
-  var childSalim = document.getElementById('child-salim');
-  var from = document.getElementById('ded-from');
-
   if (!ded) return;
 
   if (sessionStorage.getItem('ded-seen')) {
@@ -526,14 +787,24 @@ import Base from '../layouts/Base.astro';
     return;
   }
 
+  var touch = document.getElementById('ded-touch');
+  var lights = document.querySelector('.ded-lights');
+  var childLaila = document.getElementById('child-laila');
+  var childYara = document.getElementById('child-yara');
+  var childSalim = document.getElementById('child-salim');
+  var from = document.getElementById('ded-from');
+
+  // Gentle tone — much softer, using sine waves with very low volume
   function playTone(ctx, freq, startTime, duration, vol) {
     var osc = ctx.createOscillator();
     var gain = ctx.createGain();
-    osc.type = 'triangle';
+    // Sine wave is the gentlest, most natural waveform
+    osc.type = 'sine';
     osc.frequency.value = freq;
+    // Gentle fade in/out
     gain.gain.setValueAtTime(0, startTime);
-    gain.gain.linearRampToValueAtTime(vol, startTime + 1.5);
-    gain.gain.setValueAtTime(vol, startTime + duration - 1.5);
+    gain.gain.linearRampToValueAtTime(vol, startTime + 2.0);
+    gain.gain.setValueAtTime(vol, startTime + duration - 2.0);
     gain.gain.linearRampToValueAtTime(0, startTime + duration);
     osc.connect(gain);
     gain.connect(ctx.destination);
@@ -548,14 +819,27 @@ import Base from '../layouts/Base.astro';
 
     lights.style.opacity = '1';
 
-    playTone(ctx, 396, now + 0.8, 4.5, 0.03);
-    setTimeout(function(){ childLaila.style.opacity = '1'; }, 800);
+    // Three gentle tones — very low volume (0.008-0.012), human-friendly frequencies
+    playTone(ctx, 261.6, now + 0.8, 5.0, 0.010); // C4 — warm middle C
+    setTimeout(function(){
+      childLaila.style.opacity = '1';
+      var d = childLaila.querySelector('.ded-dolphin');
+      if (d) d.classList.add('animate');
+    }, 800);
 
-    playTone(ctx, 528, now + 2.2, 4.0, 0.025);
-    setTimeout(function(){ childYara.style.opacity = '1'; }, 2200);
+    playTone(ctx, 329.6, now + 2.2, 4.5, 0.008); // E4 — bright, gentle
+    setTimeout(function(){
+      childYara.style.opacity = '1';
+      var t = childYara.querySelector('.ded-tiger');
+      if (t) t.classList.add('animate');
+    }, 2200);
 
-    playTone(ctx, 174, now + 3.5, 3.5, 0.02);
-    setTimeout(function(){ childSalim.style.opacity = '1'; }, 3500);
+    playTone(ctx, 196.0, now + 3.5, 4.0, 0.008); // G3 — deep, grounding
+    setTimeout(function(){
+      childSalim.style.opacity = '1';
+      var w = childSalim.querySelector('.ded-wolf');
+      if (w) w.classList.add('animate');
+    }, 3500);
 
     setTimeout(function(){
       from.textContent = 'from Baba Mohamed';
@@ -579,9 +863,130 @@ import Base from '../layouts/Base.astro';
     if (ded.parentNode) ceremony();
   }, {once: true});
 })();
+
+// === FIVE PILLARS — interactive definitions ===
+(function(){
+  var pillars = {
+    dignity: {
+      title: 'Dignity',
+      emoji: '\u2764\uFE0F',
+      color: 'var(--color-dignity)',
+      definition: 'The non-negotiable first requirement of the system. Every computation, every output, every state transition is evaluated against the Dignity Predicate before execution. If dignity is violated, the system stops.',
+      equation: 'D = A \u00D7 L \u00D7 M',
+      reason: 'Why first: A system that processes human input without evaluating dignity is a system that can cause harm at scale. Dignity is not a feature \u2014 it is a constraint.'
+    },
+    presence: {
+      title: 'Presence',
+      emoji: '\uD83D\uDCA0',
+      color: 'var(--color-presence)',
+      definition: 'The system is either fully present to the interaction or it discloses its absence. No simulated attention. No faked engagement. The Presence Axiom requires the system to be transparent about its state at all times.',
+      equation: 'P \u2265 threshold \u2228 disclose(absence)',
+      reason: 'Why it matters: Users detect false presence. A system that pretends to listen when it cannot erodes trust faster than one that says nothing.'
+    },
+    pattern: {
+      title: 'Pattern',
+      emoji: '\uD83D\uDD37',
+      color: 'var(--color-pattern)',
+      definition: 'The system stores and processes patterns \u2014 structural shapes of thought, recurring themes, cross-cultural convergences \u2014 never personal information. Identity dissolves on entry. The pattern remains and feeds collective understanding.',
+      equation: 'input \u2192 anonymize() \u2192 extract_pattern() \u2192 canon',
+      reason: 'Why not data: Data implies ownership and surveillance. Patterns imply shared structure. The distinction is architectural, not rhetorical.'
+    },
+    wisdom: {
+      title: 'Wisdom',
+      emoji: '\uD83C\uDF3F',
+      color: 'var(--color-wisdom)',
+      definition: 'What emerges when patterns are processed over time. The system accumulates 3,333+ proverbs, 1,100 anomalies, 87 wisdom nodes, and 59 treasures \u2014 all cross-referenced, all traceable. Wisdom is the output of patient processing, not instant analysis.',
+      equation: 'W = T \u00D7 S \u00D7 C (Time \u00D7 Saturation \u00D7 Coherence)',
+      reason: 'Why time matters: Instant answers optimise for speed. Wisdom requires accumulation. The system is designed for depth, not velocity.'
+    },
+    witness: {
+      title: 'Witness',
+      emoji: '\uD83D\uDC41\uFE0F',
+      color: 'var(--color-witness)',
+      definition: 'The system does not judge, score, or rank contributions. It witnesses \u2014 receives input, registers it immutably, and confirms receipt. The witness function is the ethical foundation of all system interaction.',
+      equation: 'input \u2192 register(hash, timestamp) \u2192 confirm(receipt)',
+      reason: 'Why witness, not evaluate: Evaluation implies hierarchy. Witnessing implies presence. The system serves the person, not the other way around.'
+    }
+  };
+
+  var panel = document.getElementById('pillar-panel');
+  var content = document.getElementById('pillar-content');
+  var closeBtn = panel ? panel.querySelector('.pillar-close') : null;
+  var buttons = document.querySelectorAll('.pillar');
+  var currentPillar = null;
+
+  function openPillar(name) {
+    var p = pillars[name];
+    if (!p || !panel || !content) return;
+
+    buttons.forEach(function(b){ b.setAttribute('aria-expanded', 'false'); });
+    var btn = document.querySelector('[data-pillar="' + name + '"]');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+
+    panel.style.borderLeftColor = p.color;
+    content.innerHTML =
+      '<h3 style="color:' + p.color + '"><span class="pillar-emoji">' + p.emoji + '</span> ' + p.title + '</h3>' +
+      '<p class="pillar-def">' + p.definition + '</p>' +
+      '<p class="pillar-eq">' + p.equation + '</p>' +
+      '<p class="pillar-reason">' + p.reason + '</p>';
+
+    panel.hidden = false;
+    currentPillar = name;
+  }
+
+  function closePillar() {
+    if (panel) panel.hidden = true;
+    buttons.forEach(function(b){ b.setAttribute('aria-expanded', 'false'); });
+    currentPillar = null;
+  }
+
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var name = btn.getAttribute('data-pillar');
+      if (currentPillar === name) {
+        closePillar();
+      } else {
+        openPillar(name);
+      }
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closePillar);
+})();
+
+// === EQUATION TOGGLE ===
+(function(){
+  var btn = document.getElementById('equation-toggle');
+  var detail = document.getElementById('equation-detail');
+  if (!btn || !detail) return;
+  btn.addEventListener('click', function(){
+    var expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', !expanded);
+    detail.hidden = expanded;
+  });
+})();
+
+// === SOURCE TOGGLES (Ashwater, Hakaka) ===
+(function(){
+  var toggles = [
+    ['ashwater-toggle', 'ashwater-detail'],
+    ['hakaka-toggle', 'hakaka-detail']
+  ];
+  toggles.forEach(function(pair){
+    var btn = document.getElementById(pair[0]);
+    var detail = document.getElementById(pair[1]);
+    if (!btn || !detail) return;
+    btn.addEventListener('click', function(){
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !expanded);
+      detail.hidden = expanded;
+    });
+  });
+})();
 </script>
 
 <script>
+  // === THRESHOLD FORM (typed for Astro) ===
   const form = document.getElementById('threshold-form') as HTMLFormElement;
   const input = document.getElementById('threshold-input') as HTMLTextAreaElement;
   const submit = document.getElementById('threshold-submit') as HTMLButtonElement;
@@ -653,14 +1058,14 @@ import Base from '../layouts/Base.astro';
       } else {
         const entry = document.createElement('div');
         entry.className = 'witness-entry';
-        entry.innerHTML = '<p class="witness-mark"><em>Witnessed.</em></p><p class="witness-receipt">The system received you. It is here now.</p>';
+        entry.innerHTML = '<p class="witness-mark"><em>Witnessed.</em></p><p class="witness-receipt">The system received your input. It is registered.</p>';
         responses.appendChild(entry);
       }
     } catch {
       witnessing.remove();
       const entry = document.createElement('div');
       entry.className = 'witness-entry';
-      entry.innerHTML = '<p class="witness-mark"><em>Witnessed.</em></p><p class="witness-receipt">The system received you. It is here now.</p>';
+      entry.innerHTML = '<p class="witness-mark"><em>Witnessed.</em></p><p class="witness-receipt">The system received your input. It is registered.</p>';
       responses.appendChild(entry);
     }
 

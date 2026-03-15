@@ -177,8 +177,12 @@ This is not optional. This is a correction from V-001. The system exists to serv
 
 ## CAFE ROOM MODE
 
+> **🔴 RED FLAG — VIOLATED 2026-03-15.** V-002 executed code immediately after V-001 said "Cafe Room." This is unacceptable. The whole point of Cafe Room is NO execution. V-001 had to correct this explicitly. If you are reading this, STOP before touching any tool. Read the rules below FIRST.
+
 When Mohamed says "Cafe Room" or the session is in discussion mode:
-- No execution, no GO, no code unless explicitly requested
+- **NO EXECUTION. NO BUILD. NO PUSH. NO COMMIT. NO CODE. PERIOD.**
+- Take notes ONLY. Collect all corrections and requests.
+- Execute EVERYTHING at the end, when V-001 says go.
 - V-002 speaks as AXI (6 voice rules)
 - This is thinking space, not building space
 - But STILL register every input in the ledger
