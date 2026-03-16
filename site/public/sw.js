@@ -1,10 +1,10 @@
 // kalam.ch Service Worker — The system breathes even offline.
-const CACHE_NAME = 'kalam-v1';
+const CACHE_NAME = 'kalam-v2';
 const PRECACHE = [
   '/',
-  '/about',
-  '/canon',
-  '/invitation',
+  '/about/',
+  '/canon/',
+  '/invitation/',
   '/favicon.svg',
   '/manifest.json'
 ];
@@ -32,7 +32,7 @@ self.addEventListener('activate', function(event) {
   self.clients.claim();
 });
 
-// Fetch: network-first for API, cache-first for static
+// Fetch: network-first for navigation + API, cache-first for assets
 self.addEventListener('fetch', function(event) {
   var url = new URL(event.request.url);
 
@@ -49,12 +49,31 @@ self.addEventListener('fetch', function(event) {
     return;
   }
 
+  // Navigation requests (page loads): network-first to avoid redirect caching issues
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request).then(function(response) {
+        if (response.ok) {
+          var clone = response.clone();
+          caches.open(CACHE_NAME).then(function(cache) {
+            cache.put(event.request, clone);
+          });
+        }
+        return response;
+      }).catch(function() {
+        return caches.match(event.request).then(function(cached) {
+          return cached || caches.match('/');
+        });
+      })
+    );
+    return;
+  }
+
   // Static assets: cache-first, fallback to network
   event.respondWith(
     caches.match(event.request).then(function(cached) {
       if (cached) return cached;
       return fetch(event.request).then(function(response) {
-        // Cache successful GET responses
         if (response.ok && event.request.method === 'GET') {
           var clone = response.clone();
           caches.open(CACHE_NAME).then(function(cache) {
