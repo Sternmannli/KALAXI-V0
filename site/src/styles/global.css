@@ -484,3 +484,13 @@ nav a:hover {
     font-weight: 500;
   }
 }
+
+/* PWA standalone mode — respect device safe areas */
+@media (display-mode: standalone) {
+  .site-nav {
+    padding-top: env(safe-area-inset-top, 0.5rem);
+  }
+  body {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+}

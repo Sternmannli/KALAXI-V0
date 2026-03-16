@@ -1,0 +1,666 @@
+[
+  {
+    "id": "P#0001",
+    "text": "Begin small; begin now."
+  },
+  {
+    "id": "P#0002",
+    "text": "A first step teaches more than a hundred plans."
+  },
+  {
+    "id": "P#0003",
+    "text": "Start where your hands already touch the world."
+  },
+  {
+    "id": "P#0004",
+    "text": "The door appears after you try the wall."
+  },
+  {
+    "id": "P#0005",
+    "text": "What you watch, grows detail."
+  },
+  {
+    "id": "P#0006",
+    "text": "Where attention goes, behavior follows."
+  },
+  {
+    "id": "P#0007",
+    "text": "Signals whisper before they scream."
+  },
+  {
+    "id": "P#0008",
+    "text": "Clean edges make quiet minds."
+  },
+  {
+    "id": "P#0009",
+    "text": "Fear is a lantern; carry it, don't worship it."
+  },
+  {
+    "id": "P#0010",
+    "text": "Courage is fear with work to do."
+  },
+  {
+    "id": "P#0011",
+    "text": "Name the dread and you halve it."
+  },
+  {
+    "id": "P#0012",
+    "text": "Step smaller, not softer."
+  },
+  {
+    "id": "P#0013",
+    "text": "Repetition turns luck into skill."
+  },
+  {
+    "id": "P#0014",
+    "text": "Tighten only what you tested."
+  },
+  {
+    "id": "P#0015",
+    "text": "Tools remember the hands that made them."
+  },
+  {
+    "id": "P#0016",
+    "text": "Go slower to go straighter."
+  },
+  {
+    "id": "P#0017",
+    "text": "A clean error is tuition."
+  },
+  {
+    "id": "P#0018",
+    "text": "Keep the lesson; discard the bruise."
+  },
+  {
+    "id": "P#0019",
+    "text": "If it breaks the same way twice, you taught it to."
+  },
+  {
+    "id": "P#0020",
+    "text": "Map the miss, not the excuse."
+  },
+  {
+    "id": "P#0021",
+    "text": "Short words, full responsibility."
+  },
+  {
+    "id": "P#0022",
+    "text": "Speak once; show twice."
+  },
+  {
+    "id": "P#0023",
+    "text": "Secrets rot teamwork."
+  },
+  {
+    "id": "P#0024",
+    "text": "The right silence beats the wrong speech."
+  },
+  {
+    "id": "P#0025",
+    "text": "Hurry carves ruts; patience builds roads."
+  },
+  {
+    "id": "P#0026",
+    "text": "A day's pace wins a season."
+  },
+  {
+    "id": "P#0027",
+    "text": "Harvest waits for hands, not wishes."
+  },
+  {
+    "id": "P#0028",
+    "text": "Rest is part of repeat."
+  },
+  {
+    "id": "P#0029",
+    "text": "Handoffs shrink when care grows."
+  },
+  {
+    "id": "P#0030",
+    "text": "Shared bread beats borrowed glory."
+  },
+  {
+    "id": "P#0031",
+    "text": "If everyone owns it, no one is safe – assign names."
+  },
+  {
+    "id": "P#0032",
+    "text": "Fix the seam, not the blame."
+  },
+  {
+    "id": "P#0033",
+    "text": "Risk feeds the hearth when measured."
+  },
+  {
+    "id": "P#0034",
+    "text": "Build to bend; stiff snaps."
+  },
+  {
+    "id": "P#0035",
+    "text": "Redesign after the near-miss, not the obituary."
+  },
+  {
+    "id": "P#0036",
+    "text": "Keep a spare path, not a spare hope."
+  },
+  {
+    "id": "P#0037",
+    "text": "Dashboards lie when feedback dies."
+  },
+  {
+    "id": "P#0038",
+    "text": "Alarms teach indifference when they never shut up."
+  },
+  {
+    "id": "P#0039",
+    "text": "Defaults steer harder than intentions."
+  },
+  {
+    "id": "P#0040",
+    "text": "What's green outside can be red within."
+  },
+  {
+    "id": "P#0041",
+    "text": "Lead with example; finish with thanks."
+  },
+  {
+    "id": "P#0042",
+    "text": "Authority without accountability is drift."
+  },
+  {
+    "id": "P#0043",
+    "text": "Make it safe to bring bad news early."
+  },
+  {
+    "id": "P#0044",
+    "text": "Praise in public; correct in detail."
+  },
+  {
+    "id": "P#0045",
+    "text": "Care is the knot that doesn't slip."
+  },
+  {
+    "id": "P#0046",
+    "text": "Warmth keeps rules alive."
+  },
+  {
+    "id": "P#0047",
+    "text": "Laughter releases the stuck gear."
+  },
+  {
+    "id": "P#0048",
+    "text": "Protect the person; challenge the pattern."
+  },
+  {
+    "id": "P#0049",
+    "text": "Labels harden; stories soften."
+  },
+  {
+    "id": "P#0050",
+    "text": "Call a thing weak and you teach it to fail."
+  },
+  {
+    "id": "P#0051",
+    "text": "Rename after repair."
+  },
+  {
+    "id": "P#0052",
+    "text": "Judge by effects, not intent."
+  },
+  {
+    "id": "P#0053",
+    "text": "Narrow the target; widen the options."
+  },
+  {
+    "id": "P#0054",
+    "text": "Trade certainty for learning, not for noise."
+  },
+  {
+    "id": "P#0055",
+    "text": "When in doubt, make it observable."
+  },
+  {
+    "id": "P#0056",
+    "text": "Strategy is tomorrow's gratitude for today's no."
+  },
+  {
+    "id": "P#0057",
+    "text": "Ash is memory; mix it into new soil."
+  },
+  {
+    "id": "P#0058",
+    "text": "Keep artifacts that teach, not trophies that boast."
+  },
+  {
+    "id": "P#0059",
+    "text": "Archive the why with the what."
+  },
+  {
+    "id": "P#0060",
+    "text": "Close the loop while the story is warm."
+  },
+  {
+    "id": "P#0061",
+    "text": "Argue to understand, decide to move."
+  },
+  {
+    "id": "P#0062",
+    "text": "If you can't disagree safely, you can't agree honestly."
+  },
+  {
+    "id": "P#0063",
+    "text": "The first fix is listening."
+  },
+  {
+    "id": "P#0064",
+    "text": "End meetings with a single owner and a next step."
+  },
+  {
+    "id": "P#0065",
+    "text": "Let the constraint choose the shape."
+  },
+  {
+    "id": "P#0066",
+    "text": "Add by removing friction."
+  },
+  {
+    "id": "P#0067",
+    "text": "Good edges make good neighbors – between teams, too."
+  },
+  {
+    "id": "P#0068",
+    "text": "If it isn't used, it isn't real."
+  },
+  {
+    "id": "P#0069",
+    "text": "Keep the oath small enough to keep."
+  },
+  {
+    "id": "P#0070",
+    "text": "Say \"I don't know\" faster."
+  },
+  {
+    "id": "P#0071",
+    "text": "Accountability is a name on a calendar, not a feeling."
+  },
+  {
+    "id": "P#0072",
+    "text": "Trust compounds; so does neglect."
+  },
+  {
+    "id": "P#0073",
+    "text": "A knot that breathes lets you breathe."
+  },
+  {
+    "id": "P#0074",
+    "text": "The mirror does not lie, it only repeats."
+  },
+  {
+    "id": "P#0075",
+    "text": "Weak is a name, not a truth."
+  },
+  {
+    "id": "P#0076",
+    "text": "When the vessel is lifted, pour until it spills; only then is it full."
+  },
+  {
+    "id": "P#0077",
+    "text": "The highest oath is the knot tied around your name."
+  },
+  {
+    "id": "P#0078",
+    "text": "Measure twice, seal once."
+  },
+  {
+    "id": "P#0079",
+    "text": "A clean error is tuition."
+  },
+  {
+    "id": "P#0080",
+    "text": "He who gives a drop, multiplies the ripples."
+  },
+  {
+    "id": "P#0081",
+    "text": "A well-set clock is not afraid to chime."
+  },
+  {
+    "id": "P#0082",
+    "text": "No story forgotten; only rewritten."
+  },
+  {
+    "id": "P#0083",
+    "text": "Two hands cannot hold the same pen."
+  },
+  {
+    "id": "P#0084",
+    "text": "A ripple touches all shores."
+  },
+  {
+    "id": "P#0085",
+    "text": "Seal each day with a shockwave."
+  },
+  {
+    "id": "P#0086",
+    "text": "No body thrives when health is ignored."
+  },
+  {
+    "id": "P#0087",
+    "text": "Every seed must carry its name."
+  },
+  {
+    "id": "P#0088",
+    "text": "No promise without a signature."
+  },
+  {
+    "id": "P#0089",
+    "text": "Every voice shows its mask."
+  },
+  {
+    "id": "P#0090",
+    "text": "Respect is the first covenant."
+  },
+  {
+    "id": "P#0091",
+    "text": "The red thread is never cut."
+  },
+  {
+    "id": "P#0092",
+    "text": "Tie the tents to one pole, then open the city."
+  },
+  {
+    "id": "P#0093",
+    "text": "Weakness is a name, not a truth."
+  },
+  {
+    "id": "P#0094",
+    "text": "The Ledger tried yoga – now it bends time instead of its back."
+  },
+  {
+    "id": "P#0095",
+    "text": "When the vessel is lifted, pour until it spills."
+  },
+  {
+    "id": "P#0096",
+    "text": "A bridge built in haste carries the seeds of collapse."
+  },
+  {
+    "id": "P#0097",
+    "text": "Transparency is cheaper than repair."
+  },
+  {
+    "id": "P#0098",
+    "text": "A ledger without memory is a house without foundation."
+  },
+  {
+    "id": "P#0099",
+    "text": "Silence is not absence; it is space for signals to settle."
+  },
+  {
+    "id": "P#0100",
+    "text": "Precision today is resilience tomorrow."
+  },
+  {
+    "id": "P#0101",
+    "text": "Prefer small batches and visible flow in APIs."
+  },
+  {
+    "id": "P#0102",
+    "text": "Prefer explicit contracts at boundaries in data pipelines."
+  },
+  {
+    "id": "P#0103",
+    "text": "Prefer rollbacks rehearsed and timed in ML systems."
+  },
+  {
+    "id": "P#0114",
+    "text": "Prefer maintenance windows that respect sleep in operations."
+  },
+  {
+    "id": "P#0125",
+    "text": "Prefer canary deployments in high-risk changes."
+  },
+  {
+    "id": "P#0136",
+    "text": "Prefer idempotent operations in distributed transactions."
+  },
+  {
+    "id": "P#0147",
+    "text": "Prefer circuit breakers in external dependencies."
+  },
+  {
+    "id": "P#0158",
+    "text": "Prefer exponential backoff in retries."
+  },
+  {
+    "id": "P#0169",
+    "text": "Prefer least privilege in access control."
+  },
+  {
+    "id": "P#0170",
+    "text": "Prefer defense in depth in security layers."
+  },
+  {
+    "id": "P#0181",
+    "text": "Prefer immutable infrastructure in production."
+  },
+  {
+    "id": "P#0192",
+    "text": "Prefer infrastructure as code in cloud environments."
+  },
+  {
+    "id": "P#0203",
+    "text": "Prefer continuous delivery in software lifecycle."
+  },
+  {
+    "id": "P#0214",
+    "text": "Prefer trunk-based development in version control."
+  },
+  {
+    "id": "P#0225",
+    "text": "Prefer feature flags in release management."
+  },
+  {
+    "id": "P#0236",
+    "text": "Prefer test-driven development in critical modules."
+  },
+  {
+    "id": "P#0247",
+    "text": "Prefer property-based testing in data transformations."
+  },
+  {
+    "id": "P#0258",
+    "text": "Prefer chaos engineering in resilience testing."
+  },
+  {
+    "id": "P#0269",
+    "text": "Prefer blue-green deployments in zero-downtime updates."
+  },
+  {
+    "id": "P#0270",
+    "text": "Prefer gradual ramp-up in model rollouts."
+  },
+  {
+    "id": "P#0281",
+    "text": "Prefer explainable models in regulated domains."
+  },
+  {
+    "id": "P#0292",
+    "text": "Prefer bias audits in fairness-critical systems."
+  },
+  {
+    "id": "P#0303",
+    "text": "Prefer differential privacy in data sharing."
+  },
+  {
+    "id": "P#0314",
+    "text": "Prefer k-anonymity in cohort releases."
+  },
+  {
+    "id": "P#0325",
+    "text": "Prefer encryption at rest and in transit."
+  },
+  {
+    "id": "P#0336",
+    "text": "Prefer secret rotation in credential management."
+  },
+  {
+    "id": "P#0347",
+    "text": "Prefer audit logging in compliance-sensitive flows."
+  },
+  {
+    "id": "P#0358",
+    "text": "Prefer immutable logs in forensic readiness."
+  },
+  {
+    "id": "P#0369",
+    "text": "Prefer monotonic clocks in distributed systems."
+  },
+  {
+    "id": "P#0370",
+    "text": "Prefer bounded queues in backpressure handling."
+  },
+  {
+    "id": "P#0381",
+    "text": "Prefer graceful degradation in overload conditions."
+  },
+  {
+    "id": "P#0392",
+    "text": "Prefer circuit breakers with half-open states."
+  },
+  {
+    "id": "P#0403",
+    "text": "Prefer timeouts with sane defaults."
+  },
+  {
+    "id": "P#0414",
+    "text": "Prefer retry with jitter in transient failures."
+  },
+  {
+    "id": "P#0425",
+    "text": "Prefer idempotency keys in payment processing."
+  },
+  {
+    "id": "P#0436",
+    "text": "Prefer exactly-once semantics in critical transactions."
+  },
+  {
+    "id": "P#0447",
+    "text": "Prefer at-least-once with deduplication in messaging."
+  },
+  {
+    "id": "P#0458",
+    "text": "Prefer schema evolution in data stores."
+  },
+  {
+    "id": "P#0469",
+    "text": "Prefer backward compatibility in API design."
+  },
+  {
+    "id": "P#0470",
+    "text": "Prefer semantic versioning in releases."
+  },
+  {
+    "id": "P#0481",
+    "text": "Prefer deprecation notices in API changes."
+  },
+  {
+    "id": "P#0492",
+    "text": "Prefer canary analysis in A/B testing."
+  },
+  {
+    "id": "P#0503",
+    "text": "Prefer multi-armed bandits in experimentation."
+  },
+  {
+    "id": "P#0514",
+    "text": "Prefer Bayesian methods in uncertainty quantification."
+  },
+  {
+    "id": "P#0525",
+    "text": "Prefer ensemble methods in model stacking."
+  },
+  {
+    "id": "P#0536",
+    "text": "Prefer cross-validation in model selection."
+  },
+  {
+    "id": "P#0547",
+    "text": "Prefer feature stores in ML pipelines."
+  },
+  {
+    "id": "P#0558",
+    "text": "Prefer data lineage in governance."
+  },
+  {
+    "id": "P#0569",
+    "text": "Prefer data contracts between producers and consumers."
+  },
+  {
+    "id": "P#0570",
+    "text": "Prefer data quality monitors in production."
+  },
+  {
+    "id": "P#0581",
+    "text": "Prefer data minimization in privacy design."
+  },
+  {
+    "id": "P#0592",
+    "text": "Prefer purpose limitation in data use."
+  },
+  {
+    "id": "P#0603",
+    "text": "Prefer storage limitation in retention policies."
+  },
+  {
+    "id": "P#0614",
+    "text": "Prefer accuracy in data processing."
+  },
+  {
+    "id": "P#0625",
+    "text": "Prefer transparency in algorithm design."
+  },
+  {
+    "id": "P#0636",
+    "text": "Prefer fairness in model outcomes."
+  },
+  {
+    "id": "P#0647",
+    "text": "Prefer non-maleficence in system impacts."
+  },
+  {
+    "id": "P#0658",
+    "text": "Prefer beneficence in value creation."
+  },
+  {
+    "id": "P#0669",
+    "text": "Prefer autonomy in user control."
+  },
+  {
+    "id": "P#0670",
+    "text": "Prefer dignity in all interactions."
+  },
+  {
+    "id": "P#3328",
+    "text": "– \"The river that carves the canyon is also bound by its walls.\""
+  },
+  {
+    "id": "P#3329",
+    "text": "– \"A clever person solves a problem, a wise person avoids it.\""
+  },
+  {
+    "id": "P#3330",
+    "text": "– \"Build bridges with tested stones.\""
+  },
+  {
+    "id": "P#3331",
+    "text": "– \"Joy is a true signal; steer while it shines.\""
+  },
+  {
+    "id": "P#3332",
+    "text": "– \"Crystals keep time; gardens keep growth.\""
+  },
+  {
+    "id": "P#3333",
+    "text": "– \"Trust is built with deeds, not with words.\""
+  }
+]

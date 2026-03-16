@@ -153,9 +153,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $dignity = 1.0;
     $words = str_word_count($content);
     $hash = hash('sha256', $content . time());
+
+    // --- Sealed Gate: Three absolute prohibitions (before anything else) ---
+    require_once __DIR__ . '/lib/sealed_gate.php';
+    $gate = sealed_gate($content);
+    if ($gate->is_refused()) {
+        if ($is_form) {
+            header('Content-Type: text/html; charset=utf-8');
+            $receipt = htmlspecialchars($gate->refusal_receipt(), ENT_QUOTES, 'UTF-8');
+            $voice = htmlspecialchars($gate->axi_voice(), ENT_QUOTES, 'UTF-8');
+            echo <<<HTML
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>kalam.ch — Held</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><style>body{font-family:"IBM Plex Sans",sans-serif;background:#0a0a0f;color:#e8e4df;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;margin:0}.voice{font-family:"Cormorant Garamond",serif;font-size:1.4rem;color:#c9a96e;font-style:italic;margin-bottom:2rem;max-width:50ch;line-height:1.8}.receipt{color:#5a5550;font-size:.85rem}a{color:#c9a96e;text-decoration:none;font-size:.85rem}</style></head><body><p class="voice">{$voice}</p><p class="receipt">Receipt: {$receipt}</p><br><a href="/">Return</a></body></html>
+HTML;
+            exit;
+        }
+        echo json_encode([
+            'witnessed' => false,
+            'sealed' => true,
+            'receipt' => $gate->refusal_receipt(),
+            'message' => $gate->axi_voice(),
+            'prohibitions' => $gate->triggered_prohibitions,
+        ]);
+        exit;
+    }
+
+    // --- Dignity Predicate: D = A × L × M ---
+    require_once __DIR__ . '/lib/dignity.php';
+    $dignity_result = check_dignity($content, [], 'threshold');
+    $dignity = $dignity_result->D;
+
+    if ($dignity === 0.0) {
+        if ($is_form) {
+            header('Content-Type: text/html; charset=utf-8');
+            echo <<<HTML
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>kalam.ch — Held</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><style>body{font-family:"IBM Plex Sans",sans-serif;background:#0a0a0f;color:#e8e4df;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;margin:0}.voice{font-family:"Cormorant Garamond",serif;font-size:1.4rem;color:#c9a96e;font-style:italic;margin-bottom:2rem;max-width:50ch;line-height:1.8}a{color:#c9a96e;text-decoration:none;font-size:.85rem}</style></head><body><p class="voice">Your exchange has been held — not rejected, held.</p><br><a href="/">Return</a></body></html>
+HTML;
+            exit;
+        }
+        echo json_encode([
+            'witnessed' => false,
+            'halted' => true,
+            'D' => 0,
+            'components' => $dignity_result->audit_array()['component_detail'],
+            'message' => 'Your exchange has been held — not rejected, held.',
+        ]);
+        exit;
+    }
 
     // --- Try AI voice (Groq) ---
     $groq_key = get_groq_key();
@@ -244,16 +289,25 @@ HTML;
         exit;
     }
 
+    // --- Proverb selection from canon ---
+    require_once __DIR__ . '/lib/proverbs.php';
+    $proverb = select_proverb($content);
+
     // For JSON API calls: return JSON
     $response = [
         'witnessed' => true,
         'mark' => $ai_response,
         'count' => $new_count,
-        'hash' => substr($hash, 0, 12)
+        'hash' => substr($hash, 0, 12),
+        'dignity' => round($dignity, 3),
     ];
 
     if ($ai_reflection) {
         $response['reflection'] = $ai_reflection;
+    }
+
+    if ($proverb) {
+        $response['proverb'] = $proverb;
     }
 
     echo json_encode($response);
