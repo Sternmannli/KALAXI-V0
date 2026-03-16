@@ -101,11 +101,61 @@ import Base from '../layouts/Base.astro';
 
   <div class="gap" role="separator" aria-hidden="true"></div>
 
+  <!-- NEWSLETTER -->
+  <section class="content-section form-section">
+    <div class="text-block">
+      <h2>Stay Connected</h2>
+      <p>Receive occasional updates when the system grows — new patterns, new wisdom, new chapters. No spam. Ever.</p>
+      <form class="connect-form" id="newsletter-form">
+        <input type="email" name="email" placeholder="your email" required aria-label="Email for newsletter" />
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="form-status" id="newsletter-status"></p>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- FEEDBACK -->
+  <section class="content-section form-section">
+    <div class="text-block">
+      <h2>Send a Word</h2>
+      <p>Feedback, a thought, a correction, a question — anything that matters to you matters here.</p>
+      <form class="connect-form feedback-form" id="feedback-form">
+        <input type="text" name="name" placeholder="your name (optional)" aria-label="Your name" />
+        <input type="email" name="email" placeholder="your email" required aria-label="Your email" />
+        <textarea name="message" placeholder="your message" required rows="4" maxlength="5000" aria-label="Your message"></textarea>
+        <button type="submit">Send</button>
+      </form>
+      <p class="form-status" id="feedback-status"></p>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- COLLABORATION -->
+  <section class="content-section form-section">
+    <div class="text-block">
+      <h2>Propose a Collaboration</h2>
+      <p>If you see alignment — in research, design, policy, narrative, technology, or something we haven't imagined — tell us who you are and what you envision.</p>
+      <form class="connect-form collab-form" id="collab-form">
+        <input type="text" name="name" placeholder="your name" required aria-label="Your name" />
+        <input type="email" name="email" placeholder="your email" required aria-label="Your email" />
+        <input type="text" name="expertise" placeholder="your field or expertise" aria-label="Your expertise" />
+        <textarea name="message" placeholder="what do you have in mind? why kalam?" required rows="5" maxlength="5000" aria-label="Your proposal"></textarea>
+        <button type="submit">Propose</button>
+      </form>
+      <p class="form-status" id="collab-status"></p>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
   <!-- CONTACT -->
   <section class="content-section contact-section">
     <div class="text-block">
       <h2>Reach Us</h2>
-      <p>Questions, contributions, or just a word — the door is open.</p>
+      <p>Or simply write directly — the door is open.</p>
       <ul class="contact-list">
         <li><a href="mailto:info@kalam.ch">info@kalam.ch</a></li>
         <li><a href="https://kalam.ch">kalam.ch</a></li>
@@ -266,4 +316,160 @@ import Base from '../layouts/Base.astro';
   .contact-list li a:hover {
     color: var(--accent);
   }
+
+  /* ===== Forms ===== */
+  .form-section {
+    text-align: center;
+  }
+
+  .form-section .text-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .connect-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    width: 100%;
+    max-width: 40ch;
+    margin-top: var(--space-3);
+  }
+
+  .connect-form:not(.feedback-form):not(.collab-form) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .connect-form input,
+  .connect-form textarea {
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    width: 100%;
+    transition: border-color 0.3s ease;
+  }
+
+  .connect-form input:focus,
+  .connect-form textarea:focus {
+    outline: none;
+    border-color: var(--color-dignity);
+  }
+
+  .connect-form textarea {
+    resize: vertical;
+    min-height: 4rem;
+  }
+
+  .connect-form input::placeholder,
+  .connect-form textarea::placeholder {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .connect-form button {
+    background: var(--color-dignity);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    min-width: fit-content;
+  }
+
+  .connect-form button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .connect-form button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .form-status {
+    font-size: var(--text-sm);
+    margin-top: var(--space-2);
+    min-height: 1.5em;
+    transition: opacity 0.5s ease;
+  }
+
+  .form-status.success {
+    color: var(--color-presence);
+  }
+
+  .form-status.error {
+    color: var(--danger);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .connect-form input,
+    .connect-form textarea {
+      background: var(--bg-elevated);
+    }
+  }
 </style>
+
+<script is:inline>
+  // Form submission handler
+  function submitForm(formId, type, statusId) {
+    var form = document.getElementById(formId);
+    var status = document.getElementById(statusId);
+    if (!form || !status) return;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var formData = new FormData(form);
+      var data = { type: type };
+      formData.forEach(function(value, key) { data[key] = value; });
+
+      var btn = form.querySelector('button');
+      if (btn) { btn.disabled = true; btn.textContent = '...'; }
+      status.textContent = '';
+      status.className = 'form-status';
+
+      fetch('/api/connect.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, data: d }; }); })
+      .then(function(result) {
+        if (result.ok) {
+          status.textContent = result.data.message || 'Received.';
+          status.className = 'form-status success';
+          form.reset();
+        } else {
+          status.textContent = result.data.error || 'Something went wrong.';
+          status.className = 'form-status error';
+        }
+      })
+      .catch(function() {
+        status.textContent = 'Could not connect. Please try again.';
+        status.className = 'form-status error';
+      })
+      .finally(function() {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = type === 'newsletter' ? 'Subscribe' : type === 'feedback' ? 'Send' : 'Propose';
+        }
+      });
+    });
+  }
+
+  submitForm('newsletter-form', 'newsletter', 'newsletter-status');
+  submitForm('feedback-form', 'feedback', 'feedback-status');
+  submitForm('collab-form', 'collaboration', 'collab-status');
+</script>
