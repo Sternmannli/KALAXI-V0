@@ -55,7 +55,7 @@ jobs:
             cd www/kalam.ch || exit 1;
             mkdir -p data;
             rm -f data/kalam.db;
-            mirror --reverse --verbose --include-glob=*.html --include-glob=*.svg --include-glob=*.xml --include-glob=*.css --include-glob=*.js --include-glob=*.php --include-glob=.htaccess --include-glob=.config --include-glob=*.txt site/dist/ .;
+            mirror --reverse --verbose --include-glob=*.html --include-glob=*.svg --include-glob=*.xml --include-glob=*.css --include-glob=*.js --include-glob=*.php --include-glob=*.json --include-glob=*.png --include-glob=*.md --include-glob=.htaccess --include-glob=.config --include-glob=*.txt site/dist/ .;
             bye;
           "
           echo "--- Deploy complete ---"
