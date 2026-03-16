@@ -27,33 +27,51 @@ import Base from '../layouts/Base.astro';
   <!-- THRESHOLD — the living space -->
   <main class="threshold" id="threshold">
 
-    <!-- Geometric heritage pattern — Islamic tessellation as ambient identity -->
+    <!-- Animated gradient mesh — the ambient intelligence -->
+    <div class="gradient-mesh" id="gradient-mesh" aria-hidden="true"></div>
+
+    <!-- Particle field — constellation of five-pillar colors -->
+    <canvas id="particle-field" class="particle-field" aria-hidden="true"></canvas>
+
+    <!-- Heritage pattern — Islamic tessellation whisper beneath everything -->
     <div class="heritage-pattern" id="heritage-pattern" aria-hidden="true"></div>
 
-    <!-- The declaration — small, quiet, a whisper not a shout -->
-    <p class="declaration">Human dignity is a technical requirement.</p>
+    <!-- System status — the breathing dot -->
+    <div class="system-status" id="system-status">
+      <span class="status-dot" id="status-dot"></span>
+      <span class="status-label" id="status-label">witnessing</span>
+    </div>
 
-    <!-- Cultural accent — Arabic calligraphy -->
+    <!-- The declaration — gradient text, large, dignified -->
+    <p class="declaration-ambient" id="declaration">Human dignity is a technical requirement.</p>
+
+    <!-- Cultural accent — Arabic calligraphy watermark -->
     <p class="arabic-accent" aria-hidden="true">كرامة</p>
 
-    <!-- The voice — where AXI speaks -->
-    <div class="axi-voice" id="axi-voice" aria-live="polite"></div>
+    <!-- Response zone — where AXI speaks -->
+    <div class="response-zone" id="response-zone">
+      <div class="axi-voice" id="axi-voice" aria-live="polite"></div>
+      <div class="witness-mark" id="witness-mark" aria-live="polite"></div>
+    </div>
 
-    <!-- The input — bold, colored, alive -->
-    <form id="threshold-form" method="POST" action="#" aria-label="Speak to AXI" class="threshold-form">
-      <input
-        type="text"
-        id="threshold-input"
-        name="content"
-        placeholder="qul · speak"
-        aria-label="Your word"
-        maxlength="2000"
-        autocomplete="off"
-      />
-    </form>
-
-    <!-- Background rotating proverb — positioned away from content -->
-    <div class="bg-proverb" id="bg-proverb" aria-hidden="true"></div>
+    <!-- The input — glassmorphism, alive -->
+    <div class="input-zone glass" id="input-zone">
+      <div class="input-glow" aria-hidden="true"></div>
+      <form id="threshold-form" method="POST" action="#" aria-label="Speak to AXI" class="threshold-form">
+        <input
+          type="text"
+          id="threshold-input"
+          name="content"
+          placeholder="qul · speak"
+          aria-label="Your word"
+          maxlength="2000"
+          autocomplete="off"
+        />
+        <button type="submit" class="input-submit" id="submit-btn" aria-label="Send">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </button>
+      </form>
+    </div>
 
     <!-- Ledger count — quiet presence -->
     <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
@@ -192,22 +210,49 @@ import Base from '../layouts/Base.astro';
   .threshold {
     position: relative;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     align-items: center;
-    justify-content: center;
-    padding: var(--space-8) var(--page-padding);
+    justify-items: center;
+    padding: var(--space-6) var(--page-padding) var(--space-4);
     overflow: hidden;
-    gap: var(--space-3);
   }
 
-  /* ===== Heritage Pattern — Islamic geometric tessellation as ambient background ===== */
+  /* ===== Gradient Mesh — animated ambient intelligence ===== */
+  .gradient-mesh {
+    position: fixed;
+    inset: -50%;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(212,180,120,0.10) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(108,196,176,0.07) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(154,164,224,0.05) 0%, transparent 40%);
+    animation: meshDrift 30s ease-in-out infinite alternate;
+  }
+
+  @keyframes meshDrift {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    33% { transform: translate(2%, -3%) rotate(1deg) scale(1.02); }
+    66% { transform: translate(-1%, 2%) rotate(-0.5deg) scale(0.98); }
+    100% { transform: translate(1%, -1%) rotate(0.5deg) scale(1.01); }
+  }
+
+  /* ===== Particle Field ===== */
+  .particle-field {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ===== Heritage Pattern — whisper beneath everything ===== */
   .heritage-pattern {
     position: absolute;
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.04;
+    opacity: 0.02;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 0L80 40L40 80L0 40Z' fill='none' stroke='%23c9a96e' stroke-width='0.5'/%3E%3Cpath d='M40 10L70 40L40 70L10 40Z' fill='none' stroke='%23c9a96e' stroke-width='0.3'/%3E%3Cpath d='M40 20L60 40L40 60L20 40Z' fill='none' stroke='%23c9a96e' stroke-width='0.3'/%3E%3Ccircle cx='40' cy='40' r='3' fill='none' stroke='%23c9a96e' stroke-width='0.3'/%3E%3C/svg%3E");
     background-size: 80px 80px;
     animation: patternShift 120s linear infinite;
@@ -219,71 +264,141 @@ import Base from '../layouts/Base.astro';
   }
 
   @media (prefers-color-scheme: light) {
-    .heritage-pattern {
-      opacity: 0.06;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 0L80 40L40 80L0 40Z' fill='none' stroke='%23c44a1a' stroke-width='0.5'/%3E%3Cpath d='M40 10L70 40L40 70L10 40Z' fill='none' stroke='%23c44a1a' stroke-width='0.3'/%3E%3Cpath d='M40 20L60 40L40 60L20 40Z' fill='none' stroke='%23c44a1a' stroke-width='0.3'/%3E%3Ccircle cx='40' cy='40' r='3' fill='none' stroke='%23c44a1a' stroke-width='0.3'/%3E%3C/svg%3E");
+    .heritage-pattern { opacity: 0.03; }
+    .gradient-mesh {
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(196,74,26,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(10,123,98,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(58,63,184,0.03) 0%, transparent 40%);
     }
   }
 
-  /* ===== Declaration — small, quiet, a whisper ===== */
-  .declaration {
-    font-family: var(--font-heading);
-    font-size: var(--text-sm);
+  /* ===== System Status — breathing dot ===== */
+  .system-status {
+    position: fixed;
+    top: var(--space-3);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 10;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-presence);
+    box-shadow: 0 0 8px var(--color-presence);
+    animation: breathe var(--breath-duration) ease-in-out infinite;
+  }
+
+  .status-dot.processing {
+    background: var(--color-dignity);
+    box-shadow: 0 0 12px var(--color-dignity);
+    animation: statusPulse 0.8s ease-in-out infinite;
+  }
+
+  .status-dot.sealed {
+    background: var(--danger);
+    box-shadow: 0 0 12px var(--danger);
+    animation: none;
+  }
+
+  @keyframes statusPulse { 0%, 100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 1; transform: scale(1.4); } }
+
+  .status-label {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--color-dignity);
-    opacity: 0.85;
-    text-align: center;
+    color: var(--text-dim);
+  }
+
+  /* ===== Declaration — gradient text, dignified ===== */
+  .declaration-ambient {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0;
+    animation: declarationFade 3s ease 1s forwards;
     z-index: 1;
+    text-align: center;
     margin-bottom: 0;
   }
 
-  @media (prefers-color-scheme: light) {
-    .declaration { color: var(--color-dignity); opacity: 0.9; font-weight: 600; }
+  @keyframes declarationFade {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 0.7; transform: translateY(0); }
   }
 
-  /* ===== Arabic Accent — كرامة (karama = dignity) ===== */
+  @media (prefers-color-scheme: light) {
+    .declaration-ambient {
+      background: linear-gradient(135deg, #c44a1a 0%, #0a7b62 50%, #3a3fb8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+  }
+
+  /* ===== Arabic Accent — watermark ===== */
   .arabic-accent {
     font-family: 'Amiri', var(--font-proverb);
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(3rem, 8vw, 6rem);
     color: var(--color-dignity);
-    opacity: 0.22;
-    z-index: 1;
+    opacity: 0.04;
+    z-index: 0;
     letter-spacing: 0.05em;
     margin: 0;
     line-height: 1;
     direction: rtl;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
   }
 
-  @media (prefers-color-scheme: light) {
-    .arabic-accent { color: var(--color-dignity); opacity: 0.15; }
+  /* ===== Response Zone ===== */
+  .response-zone {
+    width: 100%;
+    max-width: 48ch;
+    min-height: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    padding: var(--space-4) 0;
   }
 
-  /* ===== AXI VOICE — colored, alive, individual ===== */
+  /* ===== AXI Voice ===== */
   .axi-voice {
     width: 100%;
-    min-height: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     position: relative;
-    z-index: 1;
-    padding: var(--space-4) 0;
   }
 
-  /* The utterance — colored, not grey */
   .axi-utterance {
     font-family: var(--font-heading);
-    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    font-size: clamp(1.3rem, 2.8vw, 1.8rem);
     color: var(--color-witness);
-    letter-spacing: 0.03em;
-    line-height: 1.9;
-    max-width: 36ch;
+    letter-spacing: 0.02em;
+    line-height: 1.8;
+    max-width: 42ch;
     text-align: center;
-    opacity: 0;
-    transition: opacity 2s ease;
   }
 
   @media (prefers-color-scheme: light) {
@@ -293,72 +408,144 @@ import Base from '../layouts/Base.astro';
   .axi-utterance.present { opacity: 1; }
 
   .axi-utterance.ghost {
-    opacity: 0.2;
+    opacity: 0.15;
     font-size: clamp(0.9rem, 1.5vw, 1.1rem);
     color: var(--text-dim);
-    transition: opacity 1.5s ease, font-size 1.5s ease, color 1s ease;
+    transition: opacity 1.5s ease, font-size 1.5s ease, transform 1s ease;
     margin-bottom: var(--space-2);
+    transform: translateY(-8px);
   }
 
-  /* Letter-by-letter assembly — with color shift */
-  .axi-letter {
-    display: inline-block;
+  /* Token streaming — word-by-word reveal */
+  .axi-token {
+    display: inline;
     opacity: 0;
-    transform: translateY(6px);
-    animation: letterArrive 0.5s ease forwards;
+    filter: blur(4px);
+    animation: tokenReveal 0.3s ease forwards;
   }
 
-  @keyframes letterArrive {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes tokenReveal {
+    from { opacity: 0; filter: blur(4px); }
+    to { opacity: 1; filter: blur(0); }
   }
 
-  /* Witnessing state — colored dots */
-  .axi-witnessing {
+  /* Cursor blink during generation */
+  .axi-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: var(--color-dignity);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: cursorBlink 0.8s step-end infinite;
+  }
+
+  @keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Processing bar — replaces three dots */
+  .axi-processing {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 0;
+  }
+
+  .axi-processing-bar {
+    width: 0;
+    height: 2px;
+    background: var(--gradient-accent);
+    animation: processingExpand 2s ease-in-out infinite;
+    border-radius: 1px;
+  }
+
+  @keyframes processingExpand {
+    0% { width: 0; opacity: 0; }
+    50% { width: 80px; opacity: 1; }
+    100% { width: 0; opacity: 0; }
+  }
+
+  .axi-processing-label {
     font-family: var(--font-heading);
-    font-size: var(--text-lg);
-    color: var(--color-dignity);
-    letter-spacing: 0.3em;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
   }
 
-  .axi-witnessing .dot { animation: dotPulse 1.5s ease-in-out infinite; }
-  .axi-witnessing .dot:nth-child(2) { animation-delay: 0.3s; color: var(--color-presence); }
-  .axi-witnessing .dot:nth-child(3) { animation-delay: 0.6s; color: var(--color-pattern); }
+  /* Witness mark — appears after response */
+  .witness-mark {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: var(--space-2);
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
 
-  @keyframes dotPulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+  .witness-mark.visible { opacity: 0.5; }
 
-  /* ===== The Input — bold, colored, alive ===== */
+  /* ===== Input Zone — glassmorphism ===== */
+  .input-zone {
+    position: relative;
+    width: 100%;
+    max-width: 42ch;
+    padding: var(--space-2) var(--space-3);
+    z-index: 1;
+    transition: all 0.5s var(--transition-smooth);
+  }
+
+  .input-zone:focus-within {
+    box-shadow: var(--shadow-glow-gold);
+    border-color: var(--border-active);
+  }
+
+  .input-glow {
+    position: absolute;
+    inset: -1px;
+    border-radius: 16px;
+    background: var(--gradient-accent);
+    opacity: 0;
+    filter: blur(24px);
+    transition: opacity 0.8s ease;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .input-zone:focus-within .input-glow {
+    opacity: 0.08;
+  }
+
   .threshold-form {
     width: 100%;
-    max-width: 32ch;
-    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   #threshold-input {
-    width: 100%;
+    flex: 1;
     background: transparent;
     border: none;
-    border-bottom: 2px solid var(--color-dignity);
     color: var(--text-primary);
     font-family: var(--font-heading);
     font-size: clamp(1.1rem, 2.2vw, 1.35rem);
     line-height: 1.5;
-    padding: 1rem 0;
+    padding: 0.75rem 0;
     text-align: center;
     letter-spacing: 0.05em;
-    transition: border-color 0.8s ease, box-shadow 0.8s ease;
+    caret-color: var(--color-dignity);
   }
 
-  #threshold-input:focus {
-    outline: none;
-    border-bottom-color: var(--color-presence);
-    box-shadow: 0 4px 20px rgba(108, 196, 176, 0.15);
-  }
+  #threshold-input:focus { outline: none; }
 
   #threshold-input.dissolving {
     opacity: 0;
     transform: translateY(-8px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
   #threshold-input::placeholder {
@@ -366,53 +553,69 @@ import Base from '../layouts/Base.astro';
     color: var(--color-dignity);
     font-style: italic;
     letter-spacing: 0.15em;
-    opacity: 0.5;
+    opacity: 0.4;
   }
 
-  @media (prefers-color-scheme: light) {
-    #threshold-input {
-      color: #0a0a0a;
-      border-bottom: 3px solid var(--color-dignity);
-    }
-    #threshold-input:focus {
-      border-bottom-color: var(--color-presence);
-      box-shadow: 0 4px 20px rgba(10, 123, 98, 0.12);
-    }
-    #threshold-input::placeholder {
-      color: var(--color-dignity);
-      opacity: 0.6;
-    }
-  }
-
-  /* ===== Background Proverb — positioned at bottom, no overlap ===== */
-  .bg-proverb {
-    position: absolute;
-    bottom: 6rem;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-    z-index: 0;
-    font-family: var(--font-proverb);
-    font-size: clamp(0.85rem, 1.2vw, 1rem);
-    font-style: italic;
-    color: var(--color-wisdom);
+  .input-submit {
+    background: none;
+    border: none;
+    color: var(--color-dignity);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    min-width: 36px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
-    text-align: center;
-    padding: 0 var(--space-8);
-    max-width: 45ch;
-    margin: 0 auto;
-    line-height: 1.8;
-    transition: opacity 3s ease;
+    transform: scale(0.8);
+    transition: all 0.3s var(--transition-smooth);
   }
 
-  .bg-proverb.visible { opacity: 0.55; }
+  .input-submit.visible {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  .input-submit:hover {
+    opacity: 1;
+    color: var(--color-presence);
+    background: rgba(212, 180, 120, 0.08);
+  }
+
+  /* Submit ripple */
+  .input-zone.submitted::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 20px;
+    background: var(--gradient-accent);
+    opacity: 0;
+    animation: submitRipple 1s ease forwards;
+    pointer-events: none;
+  }
+
+  @keyframes submitRipple {
+    0% { transform: scale(1); opacity: 0.2; }
+    100% { transform: scale(1.3); opacity: 0; }
+  }
 
   @media (prefers-color-scheme: light) {
-    .bg-proverb { color: var(--color-wisdom); }
-    .bg-proverb.visible { opacity: 0.4; }
+    .input-zone {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+    .input-zone:focus-within {
+      border-color: rgba(196, 74, 26, 0.3);
+      box-shadow: 0 0 40px rgba(196, 74, 26, 0.08);
+    }
+    #threshold-input { color: #0a0a0a; }
+    #threshold-input::placeholder { color: var(--color-dignity); opacity: 0.5; }
+    .input-submit { color: var(--color-dignity); }
   }
 
-  /* ===== Ledger count — colored, bottom-left ===== */
+  /* ===== Ledger count ===== */
   .ledger-count {
     position: fixed;
     bottom: 1.5rem;
@@ -426,15 +629,27 @@ import Base from '../layouts/Base.astro';
     z-index: 10;
   }
   .ledger-count.visible { opacity: 0.5; }
+  .ledger-count.incrementing { animation: countPulse 0.6s ease; }
 
-  @media (prefers-color-scheme: light) {
-    .ledger-count { color: var(--color-presence); }
-    .ledger-count.visible { opacity: 0.7; }
+  @keyframes countPulse {
+    0% { transform: scale(1); color: var(--color-presence); }
+    50% { transform: scale(1.3); color: var(--color-dignity); }
+    100% { transform: scale(1); color: var(--color-presence); }
   }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== Reduced motion ===== */
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-mesh { animation: none; }
+    .heritage-pattern { animation: none; }
+    .axi-token { animation: none; opacity: 1; filter: none; }
+    .axi-processing-bar { animation: none; width: 40px; opacity: 0.5; }
+    .declaration-ambient { animation: none; opacity: 0.7; }
+    .status-dot { animation: none; opacity: 0.7; }
   }
 
   /* ===== DRAWER HANDLE ===== */
@@ -826,44 +1041,115 @@ import Base from '../layouts/Base.astro';
   });
 })();
 
-// === BACKGROUND PROVERB ROTATION ===
+// === PARTICLE FIELD — constellation of five-pillar colors ===
 (function(){
-  var proverbs = [
-    "Begin small. Begin now.",
-    "A right is a wall that says \u2018No\u2019; dignity is a door that says \u2018Welcome.\u2019",
-    "Do not shout at metal. Hear its problem first.",
-    "She clawed at the air. Fists closed on nothing. Then the nothing opened.",
-    "Start where your hands already touch the world.",
-    "Care is the knot that doesn\u2019t slip.",
-    "The door appears after you try the wall.",
-    "Structure survives by yielding to forces, not opposing them.",
-    "A first step teaches more than a hundred plans.",
-    "What you carry forward changes what forward means."
-  ];
+  var canvas = document.getElementById('particle-field');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  if (!ctx) return;
 
-  var el = document.getElementById('bg-proverb');
-  if (!el) return;
-
-  var idx = Math.floor(Math.random() * proverbs.length);
-
-  function showProverb() {
-    el.classList.remove('visible');
-    setTimeout(function(){
-      el.textContent = proverbs[idx];
-      idx = (idx + 1) % proverbs.length;
-      el.classList.add('visible');
-    }, 3000); // 3s fade out, then new text fades in
+  // Respect reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    canvas.style.display = 'none';
+    return;
   }
 
-  // Start after 2 seconds
-  setTimeout(function(){
-    el.textContent = proverbs[idx];
-    el.classList.add('visible');
-    idx = (idx + 1) % proverbs.length;
+  var colors = [
+    'rgba(212,180,120,', // dignity gold
+    'rgba(108,196,176,', // presence teal
+    'rgba(154,164,224,', // pattern violet
+    'rgba(212,168,78,',  // wisdom amber
+    'rgba(168,196,216,'  // witness silver-blue
+  ];
 
-    // Rotate every 30 seconds
-    setInterval(showProverb, 30000);
-  }, 2000);
+  var particles = [];
+  var mouseX = -1000, mouseY = -1000;
+  var isMobile = window.innerWidth < 768;
+  var count = isMobile ? 30 : 55;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    isMobile = window.innerWidth < 768;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function init() {
+    particles = [];
+    for (var i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 2 + 1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        alpha: Math.random() * 0.3 + 0.1
+      });
+    }
+  }
+  init();
+
+  document.addEventListener('mousemove', function(e){ mouseX = e.clientX; mouseY = e.clientY; });
+  document.addEventListener('touchmove', function(e){
+    if (e.touches[0]) { mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; }
+  });
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+
+      // Mouse repulsion
+      var dx = p.x - mouseX, dy = p.y - mouseY;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 200 && dist > 0) {
+        var force = (200 - dist) / 200 * 0.3;
+        p.vx += (dx / dist) * force;
+        p.vy += (dy / dist) * force;
+      }
+
+      // Dampen velocity
+      p.vx *= 0.99;
+      p.vy *= 0.99;
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Wrap edges
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+
+      // Draw particle
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + p.alpha + ')';
+      ctx.fill();
+
+      // Draw connections
+      for (var j = i + 1; j < particles.length; j++) {
+        var q = particles[j];
+        var ddx = p.x - q.x, ddy = p.y - q.y;
+        var d2 = ddx * ddx + ddy * ddy;
+        if (d2 < 14400) { // 120px
+          var alpha = (1 - d2 / 14400) * 0.08;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = 'rgba(212,180,120,' + alpha + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
 })();
 </script>
 
@@ -872,7 +1158,7 @@ import Base from '../layouts/Base.astro';
   // The page is the interface. Text appears. Text dissolves. The space responds.
 
   // Worker URL — when deployed, this takes over. Until then, client-side voice speaks.
-  const WORKER_URL = 'https://axi-voice.kalam-ch.workers.dev';
+  const WORKER_URL = '/api/threshold';
 
   const form = document.getElementById('threshold-form') as HTMLFormElement;
   const input = document.getElementById('threshold-input') as HTMLInputElement;
@@ -898,27 +1184,37 @@ import Base from '../layouts/Base.astro';
     localStorage.setItem(STORAGE_KEY, JSON.stringify(ex));
   }
 
-  // ── Letter-by-letter materialization ──
-  function materializeText(container: HTMLElement, text: string, onDone?: () => void) {
+  // ── Token streaming — word-by-word reveal ──
+  function streamTokens(container: HTMLElement, text: string, onDone?: () => void) {
     container.innerHTML = '';
-    const chars = text.split('');
-    const baseDelay = 35;
-    const maxDelay = chars.length * baseDelay;
-    const adjustedDelay = maxDelay > 4000 ? 4000 / chars.length : baseDelay;
+    const cursor = document.createElement('span');
+    cursor.className = 'axi-cursor';
+    container.appendChild(cursor);
 
-    chars.forEach((char, i) => {
-      const span = document.createElement('span');
-      span.className = 'axi-letter';
-      span.textContent = char === ' ' ? '\u00a0' : char;
-      span.style.animationDelay = (i * adjustedDelay) + 'ms';
-      container.appendChild(span);
-    });
+    const words = text.split(/(\s+)/); // preserve whitespace
+    let i = 0;
+    const baseDelay = 55;
 
-    const totalTime = chars.length * adjustedDelay + 400;
-    setTimeout(() => {
-      container.classList.add('present');
-      if (onDone) onDone();
-    }, totalTime);
+    function addNext() {
+      if (i >= words.length) {
+        cursor.remove();
+        container.classList.add('present');
+        if (onDone) onDone();
+        return;
+      }
+      const token = document.createElement('span');
+      token.className = 'axi-token';
+      token.textContent = words[i];
+      token.style.animationDelay = '0ms';
+      container.insertBefore(token, cursor);
+      i++;
+      // Variable delay: longer pauses after punctuation
+      const word = words[i - 1];
+      const delay = /[.,;:!?—]/.test(word) ? baseDelay * 3 : baseDelay + Math.random() * 30;
+      setTimeout(addNext, delay);
+    }
+
+    addNext();
   }
 
   // ── Clear previous utterance to ghost ──
@@ -931,23 +1227,55 @@ import Base from '../layouts/Base.astro';
     }
   }
 
-  // ── Show witnessing state ──
+  // ── Show processing state ──
   function showWitnessing(): HTMLElement {
     const el = document.createElement('div');
-    el.className = 'axi-witnessing';
-    el.innerHTML = '<span class="dot">\u00b7</span><span class="dot">\u00b7</span><span class="dot">\u00b7</span>';
+    el.className = 'axi-processing';
+    el.innerHTML = '<span class="axi-processing-bar"></span><span class="axi-processing-label">witnessing</span>';
     voice.appendChild(el);
     return el;
+  }
+
+  // ── System status indicator ──
+  const statusDot = document.getElementById('status-dot');
+  const statusLabelEl = document.getElementById('status-label');
+  const witnessMarkEl = document.getElementById('witness-mark');
+
+  function setStatus(state: 'witnessing' | 'processing' | 'sealed' | 'present') {
+    if (statusDot) {
+      statusDot.className = 'status-dot' + (state !== 'witnessing' ? ' ' + state : '');
+    }
+    if (statusLabelEl) {
+      const labels: Record<string, string> = { witnessing: 'witnessing', processing: 'processing', sealed: 'sealed gate', present: 'present' };
+      statusLabelEl.textContent = labels[state] || state;
+    }
+  }
+
+  function showWitnessMark(text: string) {
+    if (witnessMarkEl) {
+      witnessMarkEl.textContent = text;
+      witnessMarkEl.classList.add('visible');
+    }
+  }
+
+  function hideWitnessMark() {
+    if (witnessMarkEl) {
+      witnessMarkEl.classList.remove('visible');
+      witnessMarkEl.textContent = '';
+    }
   }
 
   // ── Speak — the core utterance ──
   function speak(text: string, sealed?: boolean) {
     ghostPrevious();
+    hideWitnessMark();
     const utterance = document.createElement('div');
     utterance.className = 'axi-utterance';
-    if (sealed) utterance.style.color = 'var(--color-danger, #8b3a3a)';
+    if (sealed) utterance.style.color = 'var(--danger, #c45050)';
     voice.appendChild(utterance);
-    materializeText(utterance, text);
+    streamTokens(utterance, text, () => {
+      setStatus(sealed ? 'sealed' : 'witnessing');
+    });
 
     exchangeCount++;
     const warmth = Math.min(exchangeCount * 0.02, 0.15);
@@ -1108,13 +1436,27 @@ import Base from '../layouts/Base.astro';
   // Track used indices per register to avoid repetition
   const usedProverbs: Record<string, number[]> = {};
 
-  function axiVoiceLocal(text: string): { response: string; sealed: boolean } {
+  // Reflective preambles by register
+  const PREAMBLES: Record<string, string[]> = {
+    greeting: ['The threshold opens.', 'You are here. That is the first act.'],
+    grief: ['The weight is real.', 'This was carried before it was spoken.'],
+    anger: ['The fire has a source.', 'Something broke. You noticed.'],
+    fear: ['The body knows before the mind.', 'This is signal, not failure.'],
+    seeking: ['The question is the first tool.', 'Seeking is not lost. It is moving.'],
+    trust: ['Trust is built in the small acts.', 'The knot holds or it does not.'],
+    dignity: ['This is the foundation.', 'Before any system, the person.'],
+    work: ['The hands know.', 'Effort leaves marks. That is good.'],
+    general: ['Witnessed.', 'Received.', 'The word has arrived.'],
+  };
+
+  function axiVoiceLocal(text: string): { response: string; sealed: boolean; mark: string } {
     // Sealed Gate
     for (const pat of SEALED_PATTERNS) {
       if (pat.test(text)) {
         return {
           response: 'WITNESSED \u2014 the system has stopped. This cannot proceed. You are not refused. The action is refused.',
           sealed: true,
+          mark: '',
         };
       }
     }
@@ -1122,6 +1464,10 @@ import Base from '../layouts/Base.astro';
     // Detect register, pick a canonical proverb
     const register = detectRegister(text);
     const pool = CANONICAL_PROVERBS[register] || CANONICAL_PROVERBS.general;
+
+    // Pick preamble
+    const preambles = PREAMBLES[register] || PREAMBLES.general;
+    const preamble = preambles[Math.floor(Math.random() * preambles.length)];
 
     // Track usage to avoid repeating
     if (!usedProverbs[register]) usedProverbs[register] = [];
@@ -1133,7 +1479,29 @@ import Base from '../layouts/Base.astro';
     } while (usedProverbs[register].includes(idx) && usedProverbs[register].length < pool.length);
     usedProverbs[register].push(idx);
 
-    return { response: pool[idx], sealed: false };
+    const words = text.trim().split(/\s+/).length;
+    let response: string;
+
+    if (words <= 3) {
+      // Short input: preamble only — let silence speak
+      response = preamble;
+    } else if (words <= 15) {
+      // Medium: preamble + one proverb
+      response = preamble + ' ' + pool[idx];
+    } else {
+      // Long: preamble + proverb + second from general
+      const generalPool = CANONICAL_PROVERBS.general;
+      const secondIdx = Math.floor(Math.random() * generalPool.length);
+      response = preamble + ' ' + pool[idx] + ' ' + generalPool[secondIdx];
+    }
+
+    // Witness mark
+    let mark: string;
+    if (words <= 3) mark = 'witnessed: a seed — small, complete';
+    else if (words <= 20) mark = 'witnessed: a held shape — clear enough to carry';
+    else mark = 'witnessed: a landscape — it took room to arrive';
+
+    return { response, sealed: false, mark };
   }
 
   // ══════════════════════════════════════════════════════════════
@@ -1170,18 +1538,35 @@ import Base from '../layouts/Base.astro';
     voice.appendChild(ghost);
   }
 
+  // ── Submit button visibility ──
+  input.addEventListener('input', () => {
+    const btn = document.getElementById('submit-btn');
+    if (btn) btn.classList.toggle('visible', input.value.trim().length > 0);
+  });
+
   // ── Form submission — the threshold ──
+  const inputZone = document.getElementById('input-zone');
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const content = input.value.trim();
     if (!content || busy) return;
     busy = true;
+    setStatus('processing');
+
+    // Submit ripple
+    if (inputZone) {
+      inputZone.classList.add('submitted');
+      setTimeout(() => inputZone.classList.remove('submitted'), 1000);
+    }
 
     input.classList.add('dissolving');
     const donorText = content;
     input.value = '';
+    const btn = document.getElementById('submit-btn');
+    if (btn) btn.classList.remove('visible');
 
-    await new Promise(r => setTimeout(r, 600));
+    await new Promise(r => setTimeout(r, 500));
 
     input.classList.remove('dissolving');
     const waiting = showWitnessing();
@@ -1193,44 +1578,57 @@ import Base from '../layouts/Base.astro';
       const res = await fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ input: donorText }),
+        body: JSON.stringify({ content: donorText }),
       });
 
       waiting.remove();
 
       if (res.ok) {
         const data = await res.json();
-        responseText = data.response || data.witness_mark || 'Witnessed.';
-        sealed = !!data.sealed;
+        responseText = data.reflection || data.mark || 'Witnessed.';
+        sealed = false;
         speak(responseText, sealed);
 
-        if (data.total) {
-          ledgerCount.textContent = data.total + '';
+        // Show witness mark from server
+        if (data.mark) showWitnessMark(data.mark);
+
+        if (data.count) {
+          ledgerCount.textContent = data.count + '';
           ledgerCount.classList.add('visible');
+          ledgerCount.classList.add('incrementing');
+          setTimeout(() => ledgerCount.classList.remove('incrementing'), 600);
         }
       } else {
-        // Worker responded but not OK — use local voice
+        // Server responded but not OK — use local voice
         const local = axiVoiceLocal(donorText);
         responseText = local.response;
         sealed = local.sealed;
         speak(responseText, sealed);
+        if (local.mark) showWitnessMark(local.mark);
       }
     } catch {
-      // Worker unreachable — AXI speaks from the client
+      // Server unreachable — AXI speaks from the client
       waiting.remove();
 
-      // Dignity pause — the gap before speaking
-      await new Promise(r => setTimeout(r, 800 + Math.random() * 1200));
+      // Dignity pause — variable based on input length
+      const wordCount = donorText.split(/\s+/).length;
+      const baseDelay = 800;
+      const wordDelay = Math.min(wordCount * 100, 1500);
+      const jitter = Math.random() * 600;
+      await new Promise(r => setTimeout(r, baseDelay + wordDelay + jitter));
 
       const local = axiVoiceLocal(donorText);
       responseText = local.response;
       sealed = local.sealed;
       speak(responseText, sealed);
+      if (local.mark) showWitnessMark(local.mark);
 
       // Update local ledger count
       exchangeCount++;
       ledgerCount.textContent = exchangeCount + '';
       ledgerCount.classList.add('visible');
+      ledgerCount.classList.add('incrementing');
+      setTimeout(() => ledgerCount.classList.remove('incrementing'), 600);
     }
 
     saveExchange(donorText, responseText);

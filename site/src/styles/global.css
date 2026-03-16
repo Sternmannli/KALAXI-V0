@@ -57,6 +57,27 @@
 
   /* Animation */
   --breath-duration: 4s;
+
+  /* Advanced AI Design Tokens */
+  --gradient-accent: linear-gradient(135deg, #d4b478 0%, #6cc4b0 50%, #9aa4e0 100%);
+  --gradient-glow: radial-gradient(ellipse at 50% 50%, rgba(212,180,120,0.08) 0%, transparent 70%);
+  --glass-bg: rgba(22, 22, 32, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-blur: 16px;
+  --border-active: rgba(212, 180, 120, 0.3);
+  --shadow-glow-gold: 0 0 60px rgba(212, 180, 120, 0.12);
+  --shadow-glow-teal: 0 0 40px rgba(108, 196, 176, 0.10);
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --text-4xl: clamp(3.2rem, 2.5rem + 2vw, 4.5rem);
+}
+
+/* ===== Glass utility ===== */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
 }
 
 /* ===== Reset ===== */
