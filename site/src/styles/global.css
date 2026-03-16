@@ -403,6 +403,24 @@ nav a:hover {
   border-radius: 2px;
 }
 
+/* ===== Mobile Dark Mode Boost ===== */
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+  :root {
+    --text-secondary: #d0cbc4;
+    --text-dim: #9e9890;
+  }
+  .site-nav a { color: var(--text-primary); opacity: 0.85; font-size: 1rem; }
+  .site-nav a:hover { opacity: 1; }
+  .site-nav { padding: var(--space-2) var(--space-2); gap: var(--space-3); }
+  .footer-links a, .footer-contact a, .footer-meta p { color: var(--text-secondary); }
+}
+
+/* Dark mode contrast boost (all screens) */
+@media (prefers-color-scheme: dark) {
+  .site-nav a { color: #d0cbc4; }
+  .site-nav a:hover { color: var(--text-primary); }
+}
+
 /* ===== Accessibility ===== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
