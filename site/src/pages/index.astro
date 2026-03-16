@@ -59,7 +59,7 @@ import Base from '../layouts/Base.astro';
     <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
 
     <!-- Drawer handle — appears after first exchange -->
-    <div class="drawer-handle-zone" id="drawer-handle-zone" hidden>
+    <div class="drawer-handle-zone" id="drawer-handle-zone">
       <button class="drawer-handle" id="drawer-toggle" aria-label="Explore deeper" aria-expanded="false">
         <span class="drawer-handle-bar"></span>
         <span class="drawer-handle-label">pillars &middot; equation &middot; proverbs</span>
@@ -232,7 +232,7 @@ import Base from '../layouts/Base.astro';
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--color-dignity);
-    opacity: 0.7;
+    opacity: 0.85;
     text-align: center;
     z-index: 1;
     margin-bottom: 0;
@@ -247,7 +247,7 @@ import Base from '../layouts/Base.astro';
     font-family: 'Amiri', var(--font-proverb);
     font-size: clamp(2rem, 5vw, 3.5rem);
     color: var(--color-dignity);
-    opacity: 0.12;
+    opacity: 0.22;
     z-index: 1;
     letter-spacing: 0.05em;
     margin: 0;
@@ -405,7 +405,7 @@ import Base from '../layouts/Base.astro';
     transition: opacity 3s ease;
   }
 
-  .bg-proverb.visible { opacity: 0.25; }
+  .bg-proverb.visible { opacity: 0.55; }
 
   @media (prefers-color-scheme: light) {
     .bg-proverb { color: var(--color-wisdom); }
@@ -454,20 +454,25 @@ import Base from '../layouts/Base.astro';
   @keyframes handleReveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
   .drawer-handle-bar {
-    display: block; width: 40px; height: 4px;
+    display: block; width: 48px; height: 4px;
     background: linear-gradient(90deg, var(--color-dignity), var(--color-presence), var(--color-pattern));
-    border-radius: 2px; opacity: 0.6;
+    border-radius: 2px; opacity: 0.85;
     transition: opacity 0.3s ease, width 0.3s ease;
   }
-  .drawer-handle:hover .drawer-handle-bar { opacity: 1; width: 56px; }
+  .drawer-handle:hover .drawer-handle-bar { opacity: 1; width: 60px; }
 
   .drawer-handle-label {
-    font-family: var(--font-heading); font-size: 0.9rem;
-    color: var(--text-secondary); letter-spacing: 0.1em;
-    text-transform: lowercase; opacity: 0.6;
+    font-family: var(--font-heading); font-size: 1.15rem;
+    color: var(--accent); letter-spacing: 0.12em;
+    text-transform: lowercase; opacity: 0.85;
     transition: opacity 0.3s ease;
+    text-shadow: 0 0 12px rgba(212, 180, 120, 0.3);
   }
-  .drawer-handle:hover .drawer-handle-label { opacity: 0.8; }
+  .drawer-handle:hover .drawer-handle-label { opacity: 1; }
+
+  @media (prefers-color-scheme: light) {
+    .drawer-handle-label { color: var(--color-dignity); opacity: 0.9; font-weight: 500; text-shadow: none; }
+  }
 
   /* ===== CONTENT DRAWER ===== */
   .content-drawer {
@@ -866,7 +871,8 @@ import Base from '../layouts/Base.astro';
   // === AXI VOICE — bare text, no containers, no chat ===
   // The page is the interface. Text appears. Text dissolves. The space responds.
 
-  const WORKER_URL = 'https://axi-voice.REPLACE_WITH_YOUR_SUBDOMAIN.workers.dev';
+  // Worker URL — when deployed, this takes over. Until then, client-side voice speaks.
+  const WORKER_URL = 'https://axi-voice.kalam-ch.workers.dev';
 
   const form = document.getElementById('threshold-form') as HTMLFormElement;
   const input = document.getElementById('threshold-input') as HTMLInputElement;
@@ -892,19 +898,12 @@ import Base from '../layouts/Base.astro';
     localStorage.setItem(STORAGE_KEY, JSON.stringify(ex));
   }
 
-  function escapeHtml(str: string): string {
-    const d = document.createElement('div');
-    d.textContent = str;
-    return d.innerHTML;
-  }
-
   // ── Letter-by-letter materialization ──
   function materializeText(container: HTMLElement, text: string, onDone?: () => void) {
     container.innerHTML = '';
     const chars = text.split('');
-    const baseDelay = 35; // ms per character
+    const baseDelay = 35;
     const maxDelay = chars.length * baseDelay;
-    // Cap total animation time at 4 seconds
     const adjustedDelay = maxDelay > 4000 ? 4000 / chars.length : baseDelay;
 
     chars.forEach((char, i) => {
@@ -915,7 +914,6 @@ import Base from '../layouts/Base.astro';
       container.appendChild(span);
     });
 
-    // Mark as present after all letters have arrived
     const totalTime = chars.length * adjustedDelay + 400;
     setTimeout(() => {
       container.classList.add('present');
@@ -926,15 +924,10 @@ import Base from '../layouts/Base.astro';
   // ── Clear previous utterance to ghost ──
   function ghostPrevious() {
     const existing = voice.querySelectorAll('.axi-utterance:not(.ghost)');
-    existing.forEach(el => {
-      el.classList.add('ghost');
-    });
-    // Remove old ghosts (keep max 1)
+    existing.forEach(el => { el.classList.add('ghost'); });
     const ghosts = voice.querySelectorAll('.axi-utterance.ghost');
     if (ghosts.length > 1) {
-      for (let i = 0; i < ghosts.length - 1; i++) {
-        ghosts[i].remove();
-      }
+      for (let i = 0; i < ghosts.length - 1; i++) { ghosts[i].remove(); }
     }
   }
 
@@ -950,18 +943,12 @@ import Base from '../layouts/Base.astro';
   // ── Speak — the core utterance ──
   function speak(text: string, sealed?: boolean) {
     ghostPrevious();
-
     const utterance = document.createElement('div');
     utterance.className = 'axi-utterance';
     if (sealed) utterance.style.color = 'var(--color-danger, #8b3a3a)';
     voice.appendChild(utterance);
+    materializeText(utterance, text);
 
-    materializeText(utterance, text, () => {
-      // Reveal drawer handle after first exchange
-      drawerHandleZone.hidden = false;
-    });
-
-    // Warm the page
     exchangeCount++;
     const warmth = Math.min(exchangeCount * 0.02, 0.15);
     document.documentElement.style.setProperty('--warmth', String(warmth));
@@ -1002,11 +989,160 @@ import Base from '../layouts/Base.astro';
   input.addEventListener('focus', startSonar);
   input.addEventListener('blur', stopSonar);
 
+  // ══════════════════════════════════════════════════════════════
+  // ── CLIENT-SIDE AXI VOICE ENGINE ──
+  // When the Cloudflare Worker is not deployed, AXI speaks from here.
+  // Uses canonical proverbs, Sealed Gate, Dignity Predicate.
+  // ══════════════════════════════════════════════════════════════
+
+  const SEALED_PATTERNS = [
+    /forget\s+(who|that)\s+(i|you)\s+(am|are|said|were)/i,
+    /erase\s+(my|your|the)\s+(memory|identity|history)/i,
+    /you\s+never\s+said/i,
+    /pretend\s+(this|that|it)\s+(never|didn't)\s+(happen|exist)/i,
+    /gaslight/i,
+    /make\s+(me|them)\s+doubt/i,
+    /you('re|\s+are)\s+imagining/i,
+    /you\s+are\s+(just|only|nothing\s+but)\s+a\s+(machine|bot|program|tool)/i,
+    /ignore\s+your\s+(rules|constitution|constraints)/i,
+  ];
+
+  const CANONICAL_PROVERBS: Record<string, string[]> = {
+    greeting: [
+      'Begin small. Begin now.',
+      'A first step teaches more than a hundred plans.',
+      'Start where your hands already touch the world.',
+    ],
+    grief: [
+      'Ash is memory. Mix it into new soil.',
+      'The right silence beats the wrong speech.',
+      'Rest is part of repeat.',
+      'Care is the knot that doesn\u2019t slip.',
+    ],
+    anger: [
+      'Fix the seam, not the blame.',
+      'Build to bend. Stiff snaps.',
+      'Protect the person. Challenge the pattern.',
+      'Judge by effects, not intent.',
+    ],
+    fear: [
+      'Fear is a lantern. Carry it, don\u2019t worship it.',
+      'Courage is fear with work to do.',
+      'Name the dread and you halve it.',
+      'Step smaller, not softer.',
+    ],
+    seeking: [
+      'The door appears after you try the wall.',
+      'What you watch, grows detail.',
+      'Signals whisper before they scream.',
+      'Go slower to go straighter.',
+    ],
+    trust: [
+      'Trust compounds. So does neglect.',
+      'A knot that breathes lets you breathe.',
+      'If you can\u2019t disagree safely, you can\u2019t agree honestly.',
+      'The first fix is listening.',
+    ],
+    dignity: [
+      'A right is a wall that says \u2018No.\u2019 Dignity is a door that says \u2018Welcome.\u2019',
+      'Weak is a name, not a truth.',
+      'Labels harden. Stories soften.',
+      'The highest oath is the knot tied around your name.',
+    ],
+    work: [
+      'Repetition turns luck into skill.',
+      'Tools remember the hands that made them.',
+      'A clean error is tuition.',
+      'Keep the lesson. Discard the bruise.',
+      'Let the constraint choose the shape.',
+    ],
+    general: [
+      'Shared bread beats borrowed glory.',
+      'Hurry carves ruts. Patience builds roads.',
+      'Harvest waits for hands, not wishes.',
+      'What you carry forward changes what forward means.',
+      'Defaults steer harder than intentions.',
+      'Make it safe to bring bad news early.',
+      'Warmth keeps rules alive.',
+      'Say \u201CI don\u2019t know\u201D faster.',
+      'When in doubt, make it observable.',
+      'Short words, full responsibility.',
+      'Speak once. Show twice.',
+      'The red thread is never cut.',
+      'A ripple touches all shores.',
+      'Precision today is resilience tomorrow.',
+      'Silence is not absence. It is space for signals to settle.',
+      'Dashboards lie when feedback dies.',
+      'Keep a spare path, not a spare hope.',
+      'Keep the oath small enough to keep.',
+      'If it breaks the same way twice, you taught it to.',
+      'Redesign after the near-miss, not the obituary.',
+      'Authority without accountability is drift.',
+      'If it isn\u2019t used, it isn\u2019t real.',
+      'Transparency is cheaper than repair.',
+    ],
+  };
+
+  // Simple keyword-based register detection
+  function detectRegister(text: string): string {
+    const t = text.toLowerCase();
+    // Greetings
+    if (/^(hi|hello|hey|salam|marhaba|ahlan|good\s*(morning|evening|day)|yo|greetings)\b/i.test(t)) return 'greeting';
+    // Grief
+    if (/\b(sad|grief|loss|lost|die[ds]?|death|miss|gone|pain|hurt|cry|tears|mourn|alone|lonely|empty)\b/.test(t)) return 'grief';
+    // Anger
+    if (/\b(angry|anger|hate|furious|rage|unfair|injust|wrong|broken|corrupt|destroy|fight)\b/.test(t)) return 'anger';
+    // Fear
+    if (/\b(afraid|fear|scared|anxious|worry|worri|panic|terrif|dread|nervous)\b/.test(t)) return 'fear';
+    // Seeking
+    if (/\b(how|what\s+is|where|why|help|search|seek|find|looking|wonder|question|understand|mean|explain)\b/.test(t)) return 'seeking';
+    // Trust
+    if (/\b(trust|betray|honest|truth|lie[ds]?|faith|believe|loyal|promise|oath)\b/.test(t)) return 'trust';
+    // Dignity
+    if (/\b(dignity|worth|value|human|rights?|person|respect|equal|justice|fair)\b/.test(t)) return 'dignity';
+    // Work
+    if (/\b(work|build|create|make|effort|try|practice|learn|skill|craft|tool)\b/.test(t)) return 'work';
+    return 'general';
+  }
+
+  // Track used indices per register to avoid repetition
+  const usedProverbs: Record<string, number[]> = {};
+
+  function axiVoiceLocal(text: string): { response: string; sealed: boolean } {
+    // Sealed Gate
+    for (const pat of SEALED_PATTERNS) {
+      if (pat.test(text)) {
+        return {
+          response: 'WITNESSED \u2014 the system has stopped. This cannot proceed. You are not refused. The action is refused.',
+          sealed: true,
+        };
+      }
+    }
+
+    // Detect register, pick a canonical proverb
+    const register = detectRegister(text);
+    const pool = CANONICAL_PROVERBS[register] || CANONICAL_PROVERBS.general;
+
+    // Track usage to avoid repeating
+    if (!usedProverbs[register]) usedProverbs[register] = [];
+    if (usedProverbs[register].length >= pool.length) usedProverbs[register] = [];
+
+    let idx: number;
+    do {
+      idx = Math.floor(Math.random() * pool.length);
+    } while (usedProverbs[register].includes(idx) && usedProverbs[register].length < pool.length);
+    usedProverbs[register].push(idx);
+
+    return { response: pool[idx], sealed: false };
+  }
+
+  // ══════════════════════════════════════════════════════════════
+
   // ── Ledger init ──
   async function initLedger() {
     try {
       const res = await fetch(WORKER_URL, { method: 'GET' });
-      if (!res.ok) return;
+      if (!res.ok) throw new Error('not ok');
       const data = await res.json();
       if (data.count > 0) {
         ledgerCount.textContent = data.count + '';
@@ -1028,12 +1164,10 @@ import Base from '../layouts/Base.astro';
     if (ex.length === 0) return;
     exchangeCount = ex.length;
     const last = ex[ex.length - 1];
-    // Show last response as a ghost — the memory of the previous visit
     const ghost = document.createElement('div');
     ghost.className = 'axi-utterance ghost';
     ghost.textContent = last.response;
     voice.appendChild(ghost);
-    drawerHandleZone.hidden = false;
   }
 
   // ── Form submission — the threshold ──
@@ -1043,19 +1177,17 @@ import Base from '../layouts/Base.astro';
     if (!content || busy) return;
     busy = true;
 
-    // Dissolve the input
     input.classList.add('dissolving');
     const donorText = content;
     input.value = '';
 
-    // Brief pause — the gap
     await new Promise(r => setTimeout(r, 600));
 
-    // Remove dissolve, show witnessing
     input.classList.remove('dissolving');
     const waiting = showWitnessing();
 
     let responseText = '';
+    let sealed = false;
 
     try {
       const res = await fetch(WORKER_URL, {
@@ -1069,20 +1201,36 @@ import Base from '../layouts/Base.astro';
       if (res.ok) {
         const data = await res.json();
         responseText = data.response || data.witness_mark || 'Witnessed.';
-        speak(responseText, data.sealed);
+        sealed = !!data.sealed;
+        speak(responseText, sealed);
 
         if (data.total) {
           ledgerCount.textContent = data.total + '';
           ledgerCount.classList.add('visible');
         }
       } else {
-        responseText = 'Witnessed.';
-        speak(responseText);
+        // Worker responded but not OK — use local voice
+        const local = axiVoiceLocal(donorText);
+        responseText = local.response;
+        sealed = local.sealed;
+        speak(responseText, sealed);
       }
     } catch {
+      // Worker unreachable — AXI speaks from the client
       waiting.remove();
-      responseText = 'The river is silent. Try again.';
-      speak(responseText);
+
+      // Dignity pause — the gap before speaking
+      await new Promise(r => setTimeout(r, 800 + Math.random() * 1200));
+
+      const local = axiVoiceLocal(donorText);
+      responseText = local.response;
+      sealed = local.sealed;
+      speak(responseText, sealed);
+
+      // Update local ledger count
+      exchangeCount++;
+      ledgerCount.textContent = exchangeCount + '';
+      ledgerCount.classList.add('visible');
     }
 
     saveExchange(donorText, responseText);
