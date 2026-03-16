@@ -98,6 +98,54 @@ import Base from '../layouts/Base.astro';
 
   </main>
 
+  <!-- ===== CONNECT — visible on homepage, not hidden in drawer ===== -->
+  <section class="homepage-connect" id="homepage-connect">
+
+    <!-- Send a Word — the first connection point -->
+    <div class="connect-block connect-primary" id="send-the-word">
+      <h2 class="connect-title">Send a Word</h2>
+      <p class="connect-desc">A thought, a correction, a question — anything that matters to you matters here.</p>
+      <form class="connect-form stack-form" id="home-feedback-form">
+        <input type="text" name="name" placeholder="your name (optional)" aria-label="Your name" />
+        <input type="email" name="email" placeholder="your email" required aria-label="Your email" />
+        <textarea name="message" placeholder="your message" required rows="3" maxlength="5000" aria-label="Your message"></textarea>
+        <button type="submit">Send</button>
+      </form>
+      <p class="form-status" id="home-feedback-status"></p>
+    </div>
+
+    <!-- Propose a Collaboration -->
+    <div class="connect-block" id="propose-collaboration">
+      <h2 class="connect-title">Propose a Collaboration</h2>
+      <p class="connect-desc">Research, design, policy, narrative, technology — tell us who you are and what you envision.</p>
+      <form class="connect-form stack-form" id="home-collab-form">
+        <input type="text" name="name" placeholder="your name" required aria-label="Your name" />
+        <input type="email" name="email" placeholder="your email" required aria-label="Your email" />
+        <input type="text" name="expertise" placeholder="your field or expertise" aria-label="Your expertise" />
+        <textarea name="message" placeholder="what do you have in mind?" required rows="4" maxlength="5000" aria-label="Your proposal"></textarea>
+        <button type="submit">Propose</button>
+      </form>
+      <p class="form-status" id="home-collab-status"></p>
+    </div>
+
+    <!-- Reach Us -->
+    <div class="connect-block" id="reach-us">
+      <h2 class="connect-title">Reach Us</h2>
+      <p class="connect-desc">Receive occasional updates when the system grows. No spam. Ever.</p>
+      <form class="connect-form inline-form" id="home-newsletter-form">
+        <input type="email" name="email" placeholder="your email" required aria-label="Email for newsletter" />
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="form-status" id="home-newsletter-status"></p>
+      <div class="connect-links">
+        <a href="/about/">About the framework</a>
+        <a href="/canon/">The canon</a>
+        <a href="/invitation/">The invitation</a>
+      </div>
+    </div>
+
+  </section>
+
   <!-- DRAWER — the deep content. Yields when pulled. -->
   <div class="content-drawer" id="content-drawer" aria-hidden="true">
     <div class="drawer-inner">
@@ -190,41 +238,7 @@ import Base from '../layouts/Base.astro';
         </div>
       </section>
 
-      <!-- ===== CONNECT — newsletter, feedback, collaboration ===== -->
-      <section class="drawer-section connect-section" aria-label="Connect">
-        <h2 class="drawer-heading">Stay Connected</h2>
-        <p class="quiet-eng">Receive occasional updates when the system grows. No spam. Ever.</p>
-        <form class="connect-form inline-form" id="home-newsletter-form">
-          <input type="email" name="email" placeholder="your email" required aria-label="Email for newsletter" />
-          <button type="submit">Subscribe</button>
-        </form>
-        <p class="form-status" id="home-newsletter-status"></p>
-      </section>
-
-      <section class="drawer-section connect-section" aria-label="Feedback">
-        <h2 class="drawer-heading">Send a Word</h2>
-        <p class="quiet-eng">A thought, a correction, a question — anything that matters to you matters here.</p>
-        <form class="connect-form stack-form" id="home-feedback-form">
-          <input type="text" name="name" placeholder="your name (optional)" aria-label="Your name" />
-          <input type="email" name="email" placeholder="your email" required aria-label="Your email" />
-          <textarea name="message" placeholder="your message" required rows="3" maxlength="5000" aria-label="Your message"></textarea>
-          <button type="submit">Send</button>
-        </form>
-        <p class="form-status" id="home-feedback-status"></p>
-      </section>
-
-      <section class="drawer-section connect-section" aria-label="Collaboration">
-        <h2 class="drawer-heading">Propose a Collaboration</h2>
-        <p class="quiet-eng">Research, design, policy, narrative, technology — tell us who you are and what you envision.</p>
-        <form class="connect-form stack-form" id="home-collab-form">
-          <input type="text" name="name" placeholder="your name" required aria-label="Your name" />
-          <input type="email" name="email" placeholder="your email" required aria-label="Your email" />
-          <input type="text" name="expertise" placeholder="your field or expertise" aria-label="Your expertise" />
-          <textarea name="message" placeholder="what do you have in mind?" required rows="4" maxlength="5000" aria-label="Your proposal"></textarea>
-          <button type="submit">Propose</button>
-        </form>
-        <p class="form-status" id="home-collab-status"></p>
-      </section>
+      <!-- Connect sections moved to visible homepage above -->
 
     </div>
   </div>
@@ -756,11 +770,7 @@ import Base from '../layouts/Base.astro';
     content: '📎 ';
   }
 
-  /* ===== Connect forms in drawer ===== */
-  .connect-section .drawer-heading {
-    color: var(--accent);
-  }
-
+  /* ===== Connect forms ===== */
   .connect-form {
     display: flex;
     gap: var(--space-2);
@@ -1094,6 +1104,85 @@ import Base from '../layouts/Base.astro';
     .content-drawer { background: var(--bg-primary); }
     .drawer-close { background: var(--bg-primary); }
     .drawer-handle-label { color: var(--accent); text-shadow: 0 0 12px rgba(212, 180, 120, 0.3); }
+  }
+
+  /* ===== Homepage Connect — visible sections ===== */
+  .homepage-connect {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 var(--page-padding);
+    background: var(--bg-primary);
+  }
+
+  .connect-block {
+    width: 100%;
+    max-width: 50ch;
+    padding: var(--space-8) 0;
+    border-bottom: 1px solid var(--accent-subtle);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .connect-block:last-child { border-bottom: none; }
+
+  /* Primary block — Send a Word — extra prominence */
+  .connect-primary {
+    padding-top: var(--space-12, 5rem);
+    padding-bottom: var(--space-8);
+  }
+
+  .connect-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    color: var(--color-dignity);
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-2);
+    font-weight: 400;
+  }
+
+  .connect-primary .connect-title {
+    font-size: var(--text-2xl);
+  }
+
+  .connect-desc {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 40ch;
+    margin-bottom: var(--space-1);
+  }
+
+  .connect-links {
+    display: flex;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .connect-links a {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-dignity);
+    letter-spacing: 0.03em;
+    border-bottom: 1px solid var(--accent-subtle);
+    transition: all 0.3s ease;
+    padding-bottom: 2px;
+  }
+
+  .connect-links a:hover {
+    border-bottom-color: var(--color-dignity);
+    opacity: 0.8;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .homepage-connect { background: var(--bg-primary); }
   }
 
   /* ===== Mycelium ===== */
