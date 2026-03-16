@@ -84,6 +84,11 @@ import Base from '../layouts/Base.astro';
       </button>
     </div>
 
+    <!-- PWA install hint — shows only in browser, not in standalone -->
+    <div class="pwa-hint" id="pwa-hint">
+      Add to Home Screen for the full experience
+    </div>
+
   </main>
 
   <!-- DRAWER — the deep content. Yields when pulled. -->
@@ -187,12 +192,12 @@ import Base from '../layouts/Base.astro';
   /* ===== Dedication Overlay ===== */
   .dedication-overlay {
     position: fixed; inset: 0; z-index: 9999;
-    background: var(--bg-primary);
+    background: #fafaf8;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     cursor: pointer; transition: opacity 1.5s ease;
   }
-  .ded-touch { font-family: var(--font-heading); color: var(--text-secondary); font-size: var(--text-base); letter-spacing: 0.12em; text-transform: lowercase; opacity: 0.6; }
-  @media (prefers-color-scheme: light) { .ded-touch { color: var(--text-primary); opacity: 0.5; } }
+  .ded-touch { font-family: var(--font-heading); color: var(--text-primary); font-size: var(--text-base); letter-spacing: 0.12em; text-transform: lowercase; opacity: 0.5; }
+  @media (prefers-color-scheme: dark) { .ded-touch { color: var(--text-secondary); opacity: 0.6; } }
   .ded-lights { display: flex; gap: clamp(3rem, 8vw, 6rem); margin-top: 3rem; opacity: 0; transition: opacity 1.2s ease; }
   .ded-child { display: flex; flex-direction: column; align-items: center; gap: 1rem; opacity: 0; transition: opacity 1.5s ease, transform 1s ease; }
   .ded-animal-wrap { position: relative; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; }
@@ -224,10 +229,6 @@ import Base from '../layouts/Base.astro';
     inset: -50%;
     pointer-events: none;
     z-index: 0;
-    background:
-      radial-gradient(ellipse at 20% 30%, rgba(212,180,120,0.10) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 70%, rgba(108,196,176,0.07) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(154,164,224,0.05) 0%, transparent 40%);
     animation: meshDrift 30s ease-in-out infinite alternate;
   }
 
@@ -252,7 +253,6 @@ import Base from '../layouts/Base.astro';
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.02;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 0L80 40L40 80L0 40Z' fill='none' stroke='%23c9a96e' stroke-width='0.5'/%3E%3Cpath d='M40 10L70 40L40 70L10 40Z' fill='none' stroke='%23c9a96e' stroke-width='0.3'/%3E%3Cpath d='M40 20L60 40L40 60L20 40Z' fill='none' stroke='%23c9a96e' stroke-width='0.3'/%3E%3Ccircle cx='40' cy='40' r='3' fill='none' stroke='%23c9a96e' stroke-width='0.3'/%3E%3C/svg%3E");
     background-size: 80px 80px;
     animation: patternShift 120s linear infinite;
@@ -263,13 +263,20 @@ import Base from '../layouts/Base.astro';
     to { background-position: 80px 80px; }
   }
 
-  @media (prefers-color-scheme: light) {
-    .heritage-pattern { opacity: 0.03; }
+  .heritage-pattern { opacity: 0.03; }
+  .gradient-mesh {
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(196,74,26,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(10,123,98,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(58,63,184,0.03) 0%, transparent 40%);
+  }
+  @media (prefers-color-scheme: dark) {
+    .heritage-pattern { opacity: 0.02; }
     .gradient-mesh {
       background:
-        radial-gradient(ellipse at 20% 30%, rgba(196,74,26,0.06) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(10,123,98,0.04) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(58,63,184,0.03) 0%, transparent 40%);
+        radial-gradient(ellipse at 20% 30%, rgba(212,180,120,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(108,196,176,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(154,164,224,0.05) 0%, transparent 40%);
     }
   }
 
@@ -341,9 +348,9 @@ import Base from '../layouts/Base.astro';
     to { opacity: 0.7; transform: translateY(0); }
   }
 
-  @media (prefers-color-scheme: light) {
+  @media (prefers-color-scheme: dark) {
     .declaration-ambient {
-      background: linear-gradient(135deg, #c44a1a 0%, #0a7b62 50%, #3a3fb8 100%);
+      background: linear-gradient(135deg, #d4b478 0%, #6cc4b0 50%, #9aa4e0 100%);
       -webkit-background-clip: text;
       background-clip: text;
     }
@@ -394,15 +401,15 @@ import Base from '../layouts/Base.astro';
   .axi-utterance {
     font-family: var(--font-heading);
     font-size: clamp(1.3rem, 2.8vw, 1.8rem);
-    color: var(--color-witness);
+    color: var(--color-pattern);
+    font-weight: 500;
     letter-spacing: 0.02em;
     line-height: 1.8;
     max-width: 42ch;
     text-align: center;
   }
-
-  @media (prefers-color-scheme: light) {
-    .axi-utterance { color: var(--color-pattern); font-weight: 500; }
+  @media (prefers-color-scheme: dark) {
+    .axi-utterance { color: var(--color-witness); font-weight: 400; }
   }
 
   .axi-utterance.present { opacity: 1; }
@@ -492,11 +499,49 @@ import Base from '../layouts/Base.astro';
   .input-zone {
     position: relative;
     width: 100%;
-    max-width: 42ch;
-    padding: var(--space-2) var(--space-3);
+    max-width: 55ch;
+    padding: var(--space-3) var(--space-4);
     z-index: 1;
     transition: all 0.5s var(--transition-smooth);
   }
+
+  /* ===== Donor echo — shows what the donor typed ===== */
+  .donor-echo {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    opacity: 0.7;
+    text-align: center;
+    margin-bottom: var(--space-2);
+    font-style: italic;
+    max-width: 48ch;
+  }
+
+  /* ===== PWA install hint ===== */
+  .pwa-hint {
+    position: fixed;
+    bottom: var(--space-8);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 12px;
+    padding: var(--space-2) var(--space-3);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 90vw;
+    opacity: 0;
+    animation: hintFadeIn 1s ease 3s forwards;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  .pwa-hint:hover { opacity: 0.6; }
+  .pwa-hint.hidden { display: none; }
+  @keyframes hintFadeIn { from { opacity: 0; } to { opacity: 0.85; } }
+  @media (display-mode: standalone) { .pwa-hint { display: none; } }
 
   .input-zone:focus-within {
     box-shadow: var(--shadow-glow-gold);
@@ -601,18 +646,15 @@ import Base from '../layouts/Base.astro';
     100% { transform: scale(1.3); opacity: 0; }
   }
 
-  @media (prefers-color-scheme: light) {
+  .input-zone {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+  @media (prefers-color-scheme: dark) {
     .input-zone {
-      background: rgba(0, 0, 0, 0.03);
-      border-color: rgba(0, 0, 0, 0.08);
+      background: var(--glass-bg);
+      border-color: var(--glass-border);
     }
-    .input-zone:focus-within {
-      border-color: rgba(196, 74, 26, 0.3);
-      box-shadow: 0 0 40px rgba(196, 74, 26, 0.08);
-    }
-    #threshold-input { color: #0a0a0a; }
-    #threshold-input::placeholder { color: var(--color-dignity); opacity: 0.5; }
-    .input-submit { color: var(--color-dignity); }
   }
 
   /* ===== Ledger count ===== */
@@ -678,23 +720,18 @@ import Base from '../layouts/Base.astro';
 
   .drawer-handle-label {
     font-family: var(--font-heading); font-size: 1.15rem;
-    color: var(--accent); letter-spacing: 0.12em;
-    text-transform: lowercase; opacity: 0.85;
+    color: var(--color-dignity); letter-spacing: 0.12em;
+    text-transform: lowercase; opacity: 0.9; font-weight: 500;
     transition: opacity 0.3s ease;
-    text-shadow: 0 0 12px rgba(212, 180, 120, 0.3);
   }
   .drawer-handle:hover .drawer-handle-label { opacity: 1; }
-
-  @media (prefers-color-scheme: light) {
-    .drawer-handle-label { color: var(--color-dignity); opacity: 0.9; font-weight: 500; text-shadow: none; }
-  }
 
   /* ===== CONTENT DRAWER ===== */
   .content-drawer {
     position: fixed; bottom: 0; left: 0; right: 0;
     z-index: 200; height: 80vh;
-    background: var(--bg-primary);
-    border-top: 2px solid var(--color-dignity);
+    background: #fafaf8;
+    border-top: 3px solid var(--color-dignity);
     transform: translateY(100%);
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto; overscroll-behavior: contain;
@@ -705,7 +742,7 @@ import Base from '../layouts/Base.astro';
 
   .drawer-close {
     position: sticky; top: 0; float: right;
-    background: var(--bg-primary); border: none;
+    background: #fafaf8; border: none;
     color: var(--color-dignity); font-size: 1.8rem;
     cursor: pointer; padding: var(--space-1) var(--space-2);
     line-height: 1; z-index: 10;
@@ -752,7 +789,7 @@ import Base from '../layouts/Base.astro';
 
   .pillar-panel {
     max-width: 50ch; width: 100%;
-    background: var(--bg-secondary); border-radius: 8px;
+    background: #fff; border-radius: 8px;
     padding: var(--space-4); position: relative;
     animation: panelIn 0.4s ease;
     border-left: 4px solid var(--color-dignity);
@@ -806,16 +843,12 @@ import Base from '../layouts/Base.astro';
   .more-link { display: inline-block; color: var(--color-dignity); font-size: var(--text-sm); letter-spacing: 0.03em; margin-top: var(--space-2); border-bottom: 1px solid var(--color-dignity); transition: all 0.3s ease; }
   .more-link:hover { opacity: 0.7; }
 
-  /* ===== Light Mode ===== */
-  @media (prefers-color-scheme: light) {
-    .equation-text { color: var(--color-dignity); font-weight: 500; }
-    .proverb { color: var(--color-wisdom); }
-    .pillar-panel { background: #fff; border-left: 4px solid var(--color-dignity); }
-    .content-drawer { background: #fafaf8; border-top: 3px solid var(--color-dignity); }
-    .drawer-close { background: #fafaf8; color: var(--color-dignity); }
-    .term-a { color: var(--color-presence); }
-    .term-l { color: var(--color-dignity); }
-    .term-m { color: var(--color-pattern); }
+  /* ===== Dark Mode overrides ===== */
+  @media (prefers-color-scheme: dark) {
+    .pillar-panel { background: var(--bg-secondary); }
+    .content-drawer { background: var(--bg-primary); }
+    .drawer-close { background: var(--bg-primary); }
+    .drawer-handle-label { color: var(--accent); text-shadow: 0 0 12px rgba(212, 180, 120, 0.3); }
   }
 
   /* ===== Mycelium ===== */
@@ -823,9 +856,14 @@ import Base from '../layouts/Base.astro';
   body::after {
     content: ''; position: fixed; inset: 0;
     pointer-events: none; z-index: 0;
-    background: radial-gradient(ellipse at 50% 60%, rgba(196, 74, 26, 0.06) 0%, rgba(10, 123, 98, 0.03) 40%, transparent 70%);
+    background: radial-gradient(ellipse at 50% 60%, rgba(196, 74, 26, 0.04) 0%, rgba(10, 123, 98, 0.02) 40%, transparent 70%);
     opacity: calc(var(--mycelium-intensity) * 0.01);
     transition: opacity 2s ease;
+  }
+  @media (prefers-color-scheme: dark) {
+    body::after {
+      background: radial-gradient(ellipse at 50% 60%, rgba(212, 180, 120, 0.06) 0%, rgba(108, 196, 176, 0.03) 40%, transparent 70%);
+    }
   }
 </style>
 
@@ -1219,6 +1257,8 @@ import Base from '../layouts/Base.astro';
 
   // ── Clear previous utterance to ghost ──
   function ghostPrevious() {
+    // Remove old donor echoes
+    voice.querySelectorAll('.donor-echo').forEach(el => el.remove());
     const existing = voice.querySelectorAll('.axi-utterance:not(.ghost)');
     existing.forEach(el => { el.classList.add('ghost'); });
     const ghosts = voice.querySelectorAll('.axi-utterance.ghost');
@@ -1283,39 +1323,30 @@ import Base from '../layouts/Base.astro';
     document.documentElement.style.setProperty('--mycelium-intensity', String(Math.min(exchangeCount * 5, 100)));
   }
 
-  // ── 80 Hz Sonar — the children's frequency ──
-  let sonarCtx: AudioContext | null = null;
-  let sonarOsc: OscillatorNode | null = null;
-  let sonarGain: GainNode | null = null;
+  // ── Soft chime — brief confirmation on submit ──
+  let chimeCtx: AudioContext | null = null;
 
-  function startSonar() {
-    if (sonarOsc) return;
+  function playChime() {
     try {
-      if (!sonarCtx) sonarCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-      sonarOsc = sonarCtx.createOscillator();
-      sonarGain = sonarCtx.createGain();
-      sonarOsc.type = 'sine';
-      sonarOsc.frequency.value = 80;
-      sonarGain.gain.setValueAtTime(0, sonarCtx.currentTime);
-      sonarGain.gain.linearRampToValueAtTime(0.015, sonarCtx.currentTime + 1.0);
-      sonarOsc.connect(sonarGain);
-      sonarGain.connect(sonarCtx.destination);
-      sonarOsc.start();
+      if (!chimeCtx) chimeCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const now = chimeCtx.currentTime;
+
+      // Two soft tones — a gentle confirmation, not a hum
+      [523.25, 659.25].forEach((freq, i) => {
+        const osc = chimeCtx!.createOscillator();
+        const gain = chimeCtx!.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0, now + i * 0.12);
+        gain.gain.linearRampToValueAtTime(0.03, now + i * 0.12 + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.12 + 0.6);
+        osc.connect(gain);
+        gain.connect(chimeCtx!.destination);
+        osc.start(now + i * 0.12);
+        osc.stop(now + i * 0.12 + 0.7);
+      });
     } catch { /* Web Audio not available */ }
   }
-
-  function stopSonar() {
-    if (sonarGain && sonarCtx) {
-      sonarGain.gain.linearRampToValueAtTime(0, sonarCtx.currentTime + 0.5);
-      setTimeout(() => {
-        if (sonarOsc) { try { sonarOsc.stop(); } catch {} sonarOsc = null; }
-        sonarGain = null;
-      }, 600);
-    }
-  }
-
-  input.addEventListener('focus', startSonar);
-  input.addEventListener('blur', stopSonar);
 
   // ══════════════════════════════════════════════════════════════
   // ── CLIENT-SIDE AXI VOICE ENGINE ──
@@ -1554,17 +1585,24 @@ import Base from '../layouts/Base.astro';
     busy = true;
     setStatus('processing');
 
-    // Submit ripple
+    // Submit ripple + soft chime
     if (inputZone) {
       inputZone.classList.add('submitted');
       setTimeout(() => inputZone.classList.remove('submitted'), 1000);
     }
+    playChime();
 
     input.classList.add('dissolving');
     const donorText = content;
     input.value = '';
     const btn = document.getElementById('submit-btn');
     if (btn) btn.classList.remove('visible');
+
+    // Show what the donor typed — their words stay visible
+    const echo = document.createElement('div');
+    echo.className = 'donor-echo';
+    echo.textContent = '"' + donorText + '"';
+    voice.appendChild(echo);
 
     await new Promise(r => setTimeout(r, 500));
 
@@ -1638,4 +1676,25 @@ import Base from '../layouts/Base.astro';
 
   restoreLast();
   initLedger();
+
+  // ── PWA install hint ──
+  const pwaHint = document.getElementById('pwa-hint');
+  if (pwaHint) {
+    // Hide if already in standalone mode or previously dismissed
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (navigator as any).standalone;
+    if (isStandalone || localStorage.getItem('pwa-hint-dismissed')) {
+      pwaHint.classList.add('hidden');
+    }
+    pwaHint.addEventListener('click', () => {
+      pwaHint.classList.add('hidden');
+      localStorage.setItem('pwa-hint-dismissed', '1');
+    });
+    // Auto-hide after 8 seconds
+    setTimeout(() => {
+      if (!pwaHint.classList.contains('hidden')) {
+        pwaHint.style.opacity = '0';
+        setTimeout(() => pwaHint.classList.add('hidden'), 500);
+      }
+    }, 8000);
+  }
 </script>

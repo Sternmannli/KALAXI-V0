@@ -7,27 +7,27 @@
 /* Amiri: Arabic elements — calligraphic, traditional */
 
 :root {
-  /* Deep Night palette — warm charcoal, not flat black */
-  --bg-primary: #0d0d12;
-  --bg-secondary: #161620;
-  --bg-elevated: #1e1e2a;
-  --bg-inset: #0a0a0f;
-  --text-primary: #f0ece6;
-  --text-secondary: #b5afa8;
-  --text-dim: #7a746e;
-  --accent: #d4b478;
-  --accent-warm: #e0c48a;
-  --accent-subtle: #4a3d2e;
-  --accent-glow: rgba(212, 180, 120, 0.12);
+  /* Warm Light palette — default */
+  --bg-primary: #fafaf8;
+  --bg-secondary: #f0efec;
+  --bg-elevated: #e8e7e3;
+  --bg-inset: #f4f3f0;
+  --text-primary: #0a0a0a;
+  --text-secondary: #2d2d2d;
+  --text-dim: #555550;
+  --accent: #1a1a1a;
+  --accent-warm: #c44a1a;
+  --accent-subtle: #d0cdc6;
+  --accent-glow: rgba(196, 74, 26, 0.08);
   --danger: #c45050;
   --swiss-red: #d52b1e;
 
-  /* Five Pillar colors — vivid, distinct, ordered by importance */
-  --color-dignity: #d4b478;     /* warm gold — the foundation */
-  --color-presence: #6cc4b0;    /* teal — being here */
-  --color-pattern: #9aa4e0;     /* blue-violet — structure */
-  --color-wisdom: #d4a84e;      /* amber — accumulated knowledge */
-  --color-witness: #a8c4d8;     /* silver-blue — the act of seeing */
+  /* Five Pillar colors — saturated, vivid */
+  --color-dignity: #c44a1a;     /* burnt orange — bold, warm */
+  --color-presence: #0a7b62;    /* deep teal — alive */
+  --color-pattern: #3a3fb8;     /* electric indigo — structured */
+  --color-wisdom: #9b6b00;      /* rich amber — deep */
+  --color-witness: #1a6b8a;     /* ocean blue — clear */
 
   /* Typography */
   --font-heading: 'Cormorant Garamond', Georgia, serif;
@@ -59,16 +59,47 @@
   --breath-duration: 4s;
 
   /* Advanced AI Design Tokens */
-  --gradient-accent: linear-gradient(135deg, #d4b478 0%, #6cc4b0 50%, #9aa4e0 100%);
-  --gradient-glow: radial-gradient(ellipse at 50% 50%, rgba(212,180,120,0.08) 0%, transparent 70%);
-  --glass-bg: rgba(22, 22, 32, 0.5);
-  --glass-border: rgba(255, 255, 255, 0.06);
+  --gradient-accent: linear-gradient(135deg, #c44a1a 0%, #0a7b62 50%, #3a3fb8 100%);
+  --gradient-glow: radial-gradient(ellipse at 50% 50%, rgba(196,74,26,0.06) 0%, transparent 70%);
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.06);
   --glass-blur: 16px;
-  --border-active: rgba(212, 180, 120, 0.3);
-  --shadow-glow-gold: 0 0 60px rgba(212, 180, 120, 0.12);
-  --shadow-glow-teal: 0 0 40px rgba(108, 196, 176, 0.10);
+  --border-active: rgba(196, 74, 26, 0.3);
+  --shadow-glow-gold: 0 0 40px rgba(196, 74, 26, 0.08);
+  --shadow-glow-teal: 0 0 40px rgba(10, 123, 98, 0.08);
   --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   --text-4xl: clamp(3.2rem, 2.5rem + 2vw, 4.5rem);
+}
+
+/* ===== Dark mode ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #0d0d12;
+    --bg-secondary: #161620;
+    --bg-elevated: #1e1e2a;
+    --bg-inset: #0a0a0f;
+    --text-primary: #f0ece6;
+    --text-secondary: #b5afa8;
+    --text-dim: #7a746e;
+    --accent: #d4b478;
+    --accent-warm: #e0c48a;
+    --accent-subtle: #4a3d2e;
+    --accent-glow: rgba(212, 180, 120, 0.12);
+
+    --color-dignity: #d4b478;
+    --color-presence: #6cc4b0;
+    --color-pattern: #9aa4e0;
+    --color-wisdom: #d4a84e;
+    --color-witness: #a8c4d8;
+
+    --gradient-accent: linear-gradient(135deg, #d4b478 0%, #6cc4b0 50%, #9aa4e0 100%);
+    --gradient-glow: radial-gradient(ellipse at 50% 50%, rgba(212,180,120,0.08) 0%, transparent 70%);
+    --glass-bg: rgba(22, 22, 32, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.06);
+    --border-active: rgba(212, 180, 120, 0.3);
+    --shadow-glow-gold: 0 0 60px rgba(212, 180, 120, 0.12);
+    --shadow-glow-teal: 0 0 40px rgba(108, 196, 176, 0.10);
+  }
 }
 
 /* ===== Glass utility ===== */
@@ -109,20 +140,28 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  opacity: 0.025;
+  opacity: 0.015;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   background-size: 256px 256px;
   pointer-events: none;
   z-index: -1;
 }
 
+@media (prefers-color-scheme: dark) {
+  body::before { opacity: 0.025; }
+}
+
 /* ===== Typography ===== */
 h1, h2, h3 {
   font-family: var(--font-heading);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.2;
   letter-spacing: 0.01em;
   color: var(--text-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  h1, h2, h3 { font-weight: 400; }
 }
 
 h1 { font-size: var(--text-3xl); }
@@ -150,11 +189,15 @@ a:hover {
   font-family: var(--font-proverb);
   font-size: var(--text-lg);
   font-style: italic;
-  color: var(--accent);
+  color: var(--color-wisdom);
   text-align: center;
   line-height: 1.9;
   max-width: 50ch;
   margin: var(--space-6) auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  .proverb { color: var(--accent); }
 }
 
 .proverb-ar {
@@ -424,7 +467,7 @@ nav a:hover {
   border-radius: 2px;
 }
 
-/* ===== Mobile Dark Mode Boost ===== */
+/* ===== Mobile contrast boost (dark mode) ===== */
 @media (max-width: 768px) and (prefers-color-scheme: dark) {
   :root {
     --text-secondary: #d0cbc4;
@@ -436,12 +479,6 @@ nav a:hover {
   .footer-links a, .footer-contact a, .footer-meta p { color: var(--text-secondary); }
 }
 
-/* Dark mode contrast boost (all screens) */
-@media (prefers-color-scheme: dark) {
-  .site-nav a { color: #d0cbc4; }
-  .site-nav a:hover { color: var(--text-primary); }
-}
-
 /* ===== Accessibility ===== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -451,41 +488,7 @@ nav a:hover {
   }
 }
 
-/* ===== Light mode — Bold, high-contrast, Gen-Z aesthetic ===== */
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg-primary: #fafaf8;
-    --bg-secondary: #f0efec;
-    --bg-elevated: #e8e7e3;
-    --bg-inset: #f4f3f0;
-    --text-primary: #0a0a0a;
-    --text-secondary: #2d2d2d;
-    --text-dim: #555550;
-    --accent: #1a1a1a;
-    --accent-warm: #c44a1a;
-    --accent-subtle: #d0cdc6;
-    --accent-glow: rgba(196, 74, 26, 0.08);
-
-    /* Pillar colors — saturated, vivid, unapologetic */
-    --color-dignity: #c44a1a;     /* burnt orange — bold, warm */
-    --color-presence: #0a7b62;    /* deep teal — alive */
-    --color-pattern: #3a3fb8;     /* electric indigo — structured */
-    --color-wisdom: #9b6b00;      /* rich amber — deep */
-    --color-witness: #1a6b8a;     /* ocean blue — clear */
-  }
-
-  body::before {
-    opacity: 0.015;
-  }
-
-  /* Bold heading in light mode — near-black, heavier weight */
-  h1, h2, h3 {
-    color: #0a0a0a;
-    font-weight: 500;
-  }
-}
-
-/* PWA standalone mode — respect device safe areas */
+/* ===== PWA standalone mode — respect device safe areas ===== */
 @media (display-mode: standalone) {
   .site-nav {
     padding-top: env(safe-area-inset-top, 0.5rem);

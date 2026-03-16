@@ -35,7 +35,13 @@ jobs:
       - name: Create API config
         run: |
           mkdir -p site/dist/data
-          echo "GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}" > site/dist/data/.config
+          cat > site/dist/data/.config << CONF
+          GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}
+          DB_HOST=faragmoh.mysql.db.internal
+          DB_NAME=faragmoh_ty30
+          DB_USER=faragmoh_ty30
+          DB_PASS=${{ secrets.DB_PASSWORD }}
+          CONF
 
       - name: Deploy via lftp mirror
         env:
