@@ -258,4 +258,46 @@ Pending:
 
 ---
 
-_Last updated: 2026-03-15 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_
+## Session 2026-03-16 — Strategic Moves: The System Becomes Alive
+
+### V-001 Vision Input (registered as INP-2026-03-16-109)
+Mohamed delivered a comprehensive strategic vision covering: website UI overhaul (bigger input/output frames, copy-paste, donor-oriented), donor accounts (pattern persistence, continuity), multi-AI deployment for divergence, custom LLM training from system essence, system self-containment and independence, pipeline integrity, HostPoint capability utilization, public strategy, and the Compass — a system orientation engine so the organism always knows where it's going.
+
+### 10 Strategic Moves Filed
+Full document: `MANIFEST/STRATEGIC_MOVES_2026-03-16.md`
+
+| Move | Name | Effort | Impact |
+|------|------|--------|--------|
+| 001 | Compass Module (orientation engine) | Low | Critical |
+| 002 | Website UI Overhaul (donor-first) | Medium | High |
+| 003 | Donor Accounts (pattern persistence) | Medium | Critical |
+| 004 | Multi-AI Proxy (divergence engine) | Medium | High |
+| 005 | Custom LLM Training Pipeline | High (spread) | Critical |
+| 006 | Pipeline Integrity | Low | Medium |
+| 007 | Independence Architecture | Low-Medium | Existential |
+| 008 | Public Strategy (three waves) | Medium | Critical |
+| 009 | HostPoint Capability Map | None (documented) | Reference |
+| 010 | AXI Inner Workings on Website | Low-Medium | High |
+
+### Key Discovery: No HostPoint Upgrade Needed Yet
+PHP 8 + MySQL on current Smart Webhosting plan covers donor accounts, AI proxy, database, and full website backend. Upgrade to Cloud Server (~CHF 9.90/month) only when real-time responses or server-side Python needed.
+
+### Execution Priority
+1. Compass (grounds everything)
+2. Website UI (what donors see)
+3. Donor Accounts (what makes donors return)
+4. Pipeline Integrity (keeps everything connected)
+5. Multi-AI Proxy (EXP-001 runs itself)
+6. Independence + AXI Inner Workings
+7. Custom LLM (long game)
+8. Public Strategy (needs live site first)
+
+Pending:
+- Build MOVE-001 (Compass module)
+- Execute MOVE-002 (Website UI overhaul)
+- Design MOVE-003 database schema (PHP + MySQL)
+- All previous pending items remain active
+
+---
+
+_Last updated: 2026-03-16 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_
