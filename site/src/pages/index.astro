@@ -4,24 +4,9 @@ import Base from '../layouts/Base.astro';
 
 <Base title="kalam.ch — The Word" description="A constitutional framework where human dignity is the first technical requirement. No private data stored. By design.">
 
-  <!-- THE DEDICATION — three lights for three children -->
+  <!-- THE DEDICATION — a proverb for three threads -->
   <div id="dedication" class="dedication-overlay">
-    <p id="ded-touch" class="ded-touch breathing">touch to witness</p>
-    <div id="ded-lights" class="ded-lights">
-      <div class="ded-child" id="child-laila">
-        <div class="ded-animal-wrap"><span class="ded-animal ded-dolphin">🐬</span></div>
-        <span class="ded-initial">L</span>
-      </div>
-      <div class="ded-child" id="child-yara">
-        <div class="ded-animal-wrap"><span class="ded-animal ded-tiger">🐯</span></div>
-        <span class="ded-initial">Y</span>
-      </div>
-      <div class="ded-child" id="child-salim">
-        <div class="ded-animal-wrap"><span class="ded-animal ded-wolf">🐺</span></div>
-        <span class="ded-initial">S</span>
-      </div>
-    </div>
-    <p id="ded-from" class="ded-from"></p>
+    <p class="ded-proverb" id="ded-proverb">Three threads cross the river.<br/>The knot holds.</p>
   </div>
 
   <!-- THRESHOLD — the living space -->
@@ -251,21 +236,23 @@ import Base from '../layouts/Base.astro';
     position: fixed; inset: 0; z-index: 9999;
     background: var(--bg-primary);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    cursor: pointer; transition: opacity 1.5s ease;
+    cursor: pointer; transition: opacity 2s ease;
   }
-  .ded-touch { font-family: var(--font-heading); color: var(--text-primary); font-size: var(--text-lg); letter-spacing: 0.12em; text-transform: lowercase; opacity: 0.7; }
-  .ded-lights { display: flex; gap: clamp(3rem, 8vw, 6rem); margin-top: 3rem; opacity: 0; transition: opacity 1.2s ease; }
-  .ded-child { display: flex; flex-direction: column; align-items: center; gap: 1rem; opacity: 0; transition: opacity 1.5s ease, transform 1s ease; }
-  .ded-animal-wrap { position: relative; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; }
-  .ded-animal { font-size: 2.5rem; line-height: 1; display: block; animation: none; }
-  .ded-dolphin.animate { animation: dolphin-swim 3s ease-in-out infinite; }
-  .ded-tiger.animate { animation: tiger-prowl 2.5s ease-in-out infinite; }
-  .ded-wolf.animate { animation: wolf-breathe 4s ease-in-out infinite; }
-  @keyframes dolphin-swim { 0%, 100% { transform: translateY(0) rotate(0deg); } 25% { transform: translateY(-6px) rotate(-3deg); } 75% { transform: translateY(4px) rotate(2deg); } }
-  @keyframes tiger-prowl { 0%, 100% { transform: translateX(0) scale(1); } 50% { transform: translateX(3px) scale(1.03); } }
-  @keyframes wolf-breathe { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.05); opacity: 1; } }
-  .ded-initial { font-family: var(--font-heading); color: var(--text-primary); font-size: clamp(1.3rem, 2.5vw, 1.7rem); letter-spacing: 0.08em; font-weight: 300; }
-  .ded-from { font-family: var(--font-heading); color: var(--text-secondary); font-size: clamp(1rem, 1.8vw, 1.2rem); margin-top: 2.5rem; opacity: 0; transition: opacity 2s ease; letter-spacing: 0.06em; }
+  .ded-proverb {
+    font-family: var(--font-proverb, var(--font-heading));
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--text-primary);
+    text-align: center;
+    letter-spacing: 0.06em;
+    line-height: 2;
+    font-style: italic;
+    font-weight: 300;
+    opacity: 0;
+    animation: dedFadeIn 3s ease 0.5s forwards;
+    max-width: 30ch;
+    padding: 0 var(--space-4);
+  }
+  @keyframes dedFadeIn { from { opacity: 0; } to { opacity: 0.8; } }
 
   /* ===== THRESHOLD — the living space ===== */
   .threshold {
@@ -1202,7 +1189,7 @@ import Base from '../layouts/Base.astro';
 </style>
 
 <script is:inline>
-// === DEDICATION CEREMONY ===
+// === DEDICATION — proverb ===
 (function(){
   var ded = document.getElementById('dedication');
   if (!ded) return;
@@ -1212,75 +1199,20 @@ import Base from '../layouts/Base.astro';
     return;
   }
 
-  var touch = document.getElementById('ded-touch');
-  var lights = document.querySelector('.ded-lights');
-  var childLaila = document.getElementById('child-laila');
-  var childYara = document.getElementById('child-yara');
-  var childSalim = document.getElementById('child-salim');
-  var from = document.getElementById('ded-from');
-
-  function playTone(ctx, freq, startTime, duration, vol) {
-    var osc = ctx.createOscillator();
-    var gain = ctx.createGain();
-    osc.type = 'sine';
-    osc.frequency.value = freq;
-    gain.gain.setValueAtTime(0, startTime);
-    gain.gain.linearRampToValueAtTime(vol, startTime + 2.0);
-    gain.gain.setValueAtTime(vol, startTime + duration - 2.0);
-    gain.gain.linearRampToValueAtTime(0, startTime + duration);
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start(startTime);
-    osc.stop(startTime + duration);
+  function dismiss() {
+    sessionStorage.setItem('ded-seen', '1');
+    ded.style.opacity = '0';
+    setTimeout(function(){ ded.remove(); }, 2000);
   }
 
-  function ceremony() {
-    touch.style.opacity = '0';
-    var ctx = new (window.AudioContext || window.webkitAudioContext)();
-    var now = ctx.currentTime;
-    lights.style.opacity = '1';
+  // Auto-dismiss after the proverb has been read
+  setTimeout(dismiss, 5000);
 
-    playTone(ctx, 261.6, now + 0.8, 5.0, 0.010);
-    setTimeout(function(){
-      childLaila.style.opacity = '1';
-      var d = childLaila.querySelector('.ded-dolphin');
-      if (d) d.classList.add('animate');
-    }, 800);
-
-    playTone(ctx, 329.6, now + 2.2, 4.5, 0.008);
-    setTimeout(function(){
-      childYara.style.opacity = '1';
-      var t = childYara.querySelector('.ded-tiger');
-      if (t) t.classList.add('animate');
-    }, 2200);
-
-    playTone(ctx, 196.0, now + 3.5, 4.0, 0.008);
-    setTimeout(function(){
-      childSalim.style.opacity = '1';
-      var w = childSalim.querySelector('.ded-wolf');
-      if (w) w.classList.add('animate');
-    }, 3500);
-
-    setTimeout(function(){
-      from.textContent = 'from Baba Mohamed';
-      from.style.opacity = '1';
-    }, 6000);
-
-    setTimeout(function(){
-      sessionStorage.setItem('ded-seen', '1');
-      ded.style.opacity = '0';
-      setTimeout(function(){ ded.remove(); }, 1500);
-    }, 9500);
-  }
-
-  ded.addEventListener('click', function handler(){
-    ded.removeEventListener('click', handler);
-    ceremony();
-  });
-
+  // Or dismiss on click/key
+  ded.addEventListener('click', dismiss);
   document.addEventListener('keydown', function handler(){
     document.removeEventListener('keydown', handler);
-    if (ded.parentNode) ceremony();
+    if (ded.parentNode) dismiss();
   }, {once: true});
 })();
 
@@ -1817,7 +1749,7 @@ import Base from '../layouts/Base.astro';
     general: ['Witnessed.', 'Received.', 'The word has arrived.'],
   };
 
-  function axiVoiceLocal(text: string): { response: string; sealed: boolean; mark: string } {
+  function axiVoiceLocal(text: string, hasFile?: boolean): { response: string; sealed: boolean; mark: string } {
     // Sealed Gate
     for (const pat of SEALED_PATTERNS) {
       if (pat.test(text)) {
@@ -1827,6 +1759,15 @@ import Base from '../layouts/Base.astro';
           mark: '',
         };
       }
+    }
+
+    // File acknowledgment — local voice cannot read file contents
+    if (hasFile) {
+      return {
+        response: 'The file is received. The name is held. But the local threshold cannot yet read what is inside — that requires the full system. When the bridge is live, your file will be seen. For now, your word carries.',
+        sealed: false,
+        mark: 'witnessed: word + file — the file awaits the bridge',
+      };
     }
 
     // Detect register, pick a canonical proverb
@@ -2013,6 +1954,7 @@ import Base from '../layouts/Base.astro';
     voice.appendChild(echo);
 
     // Prepare file data if attached
+    const hadFile = !!attachedFile;
     let filePayload: { name: string; type: string; data: string } | null = null;
     if (attachedFile) {
       const fileData = await new Promise<string>((resolve) => {
@@ -2066,7 +2008,7 @@ import Base from '../layouts/Base.astro';
         }
       } else {
         // Server responded but not OK — use local voice
-        const local = axiVoiceLocal(donorText);
+        const local = axiVoiceLocal(donorText, hadFile);
         responseText = local.response;
         sealed = local.sealed;
         speak(responseText, sealed);
@@ -2083,7 +2025,7 @@ import Base from '../layouts/Base.astro';
       const jitter = Math.random() * 600;
       await new Promise(r => setTimeout(r, baseDelay + wordDelay + jitter));
 
-      const local = axiVoiceLocal(donorText);
+      const local = axiVoiceLocal(donorText, hadFile);
       responseText = local.response;
       sealed = local.sealed;
       speak(responseText, sealed);
