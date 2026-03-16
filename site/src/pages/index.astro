@@ -48,29 +48,36 @@ import Base from '../layouts/Base.astro';
     <!-- Cultural accent — Arabic calligraphy watermark -->
     <p class="arabic-accent" aria-hidden="true">كرامة</p>
 
-    <!-- Response zone — where AXI speaks -->
-    <div class="response-zone" id="response-zone">
-      <div class="axi-voice" id="axi-voice" aria-live="polite"></div>
+    <!-- Conversation zone — scrollable exchange history -->
+    <div class="conversation-zone" id="conversation-zone">
+      <div class="conversation-scroll" id="conversation-scroll">
+        <div class="axi-voice" id="axi-voice" aria-live="polite"></div>
+      </div>
       <div class="witness-mark" id="witness-mark" aria-live="polite"></div>
     </div>
 
-    <!-- The input — glassmorphism, alive -->
+    <!-- The input — large, multi-line, with attachment -->
     <div class="input-zone glass" id="input-zone">
       <div class="input-glow" aria-hidden="true"></div>
       <form id="threshold-form" method="POST" action="#" aria-label="Speak to AXI" class="threshold-form">
-        <input
-          type="text"
+        <label for="file-upload" class="input-attach" title="Attach image">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+          <input type="file" id="file-upload" accept="image/*" hidden />
+        </label>
+        <textarea
           id="threshold-input"
           name="content"
           placeholder="qul · speak"
           aria-label="Your word"
           maxlength="2000"
           autocomplete="off"
-        />
+          rows="2"
+        ></textarea>
         <button type="submit" class="input-submit" id="submit-btn" aria-label="Send">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
         </button>
       </form>
+      <div class="input-file-preview" id="file-preview" hidden></div>
     </div>
 
     <!-- Ledger count — quiet presence -->
@@ -214,11 +221,10 @@ import Base from '../layouts/Base.astro';
   .threshold {
     position: relative;
     min-height: 100vh;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-items: center;
-    padding: var(--space-6) var(--page-padding) var(--space-4);
+    padding: var(--space-4) var(--page-padding) var(--space-2);
     overflow: hidden;
   }
 
@@ -373,53 +379,103 @@ import Base from '../layouts/Base.astro';
     pointer-events: none;
   }
 
-  /* ===== Response Zone ===== */
-  .response-zone {
+  /* ===== Conversation Zone — scrollable exchange history ===== */
+  .conversation-zone {
     width: 100%;
-    max-width: 48ch;
-    min-height: 6rem;
+    max-width: 60ch;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     z-index: 1;
-    padding: var(--space-4) 0;
+    min-height: 200px;
+    max-height: 55vh;
+    position: relative;
   }
+
+  .conversation-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-3) 0;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .conversation-scroll::-webkit-scrollbar { width: 3px; }
+  .conversation-scroll::-webkit-scrollbar-thumb { background: var(--accent-subtle); border-radius: 2px; }
 
   /* ===== AXI Voice ===== */
   .axi-voice {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    gap: var(--space-3);
+  }
+
+  /* ===== Donor message bubble ===== */
+  .donor-echo {
+    align-self: flex-end;
+    background: var(--accent-glow);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 16px 16px 4px 16px;
+    padding: var(--space-2) var(--space-3);
+    max-width: 85%;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    line-height: 1.6;
+    word-wrap: break-word;
+  }
+
+  /* ===== AXI response bubble ===== */
+  .axi-response-frame {
+    align-self: flex-start;
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 16px 16px 16px 4px;
+    padding: var(--space-3);
+    max-width: 90%;
     position: relative;
+  }
+
+  .axi-response-frame::before {
+    content: 'AXI';
+    position: absolute;
+    top: -0.6rem;
+    left: var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-dignity);
+    background: var(--bg-secondary);
+    padding: 0 0.4rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .donor-echo {
+      background: rgba(212, 180, 120, 0.08);
+      border-color: rgba(212, 180, 120, 0.15);
+    }
+    .axi-response-frame { background: var(--bg-elevated); }
+    .axi-response-frame::before { background: var(--bg-elevated); }
   }
 
   .axi-utterance {
     font-family: var(--font-heading);
-    font-size: clamp(1.3rem, 2.8vw, 1.8rem);
-    color: var(--color-pattern);
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    line-height: 1.8;
-    max-width: 42ch;
-    text-align: center;
-  }
-  @media (prefers-color-scheme: dark) {
-    .axi-utterance { color: var(--color-witness); font-weight: 400; }
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    color: var(--text-primary);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.7;
+    text-align: left;
   }
 
   .axi-utterance.present { opacity: 1; }
 
   .axi-utterance.ghost {
-    opacity: 0.15;
-    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    opacity: 0.4;
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
     color: var(--text-dim);
-    transition: opacity 1.5s ease, font-size 1.5s ease, transform 1s ease;
-    margin-bottom: var(--space-2);
-    transform: translateY(-8px);
   }
 
   /* Token streaming — word-by-word reveal */
@@ -498,22 +554,10 @@ import Base from '../layouts/Base.astro';
   .input-zone {
     position: relative;
     width: 100%;
-    max-width: 55ch;
-    padding: var(--space-3) var(--space-4);
+    max-width: 60ch;
+    padding: var(--space-2) var(--space-3);
     z-index: 1;
     transition: all 0.5s var(--transition-smooth);
-  }
-
-  /* ===== Donor echo — shows what the donor typed ===== */
-  .donor-echo {
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    color: var(--text-secondary);
-    opacity: 0.7;
-    text-align: center;
-    margin-bottom: var(--space-2);
-    font-style: italic;
-    max-width: 48ch;
   }
 
   /* ===== PWA install hint ===== */
@@ -566,7 +610,7 @@ import Base from '../layouts/Base.astro';
   .threshold-form {
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: 0.5rem;
   }
 
@@ -575,29 +619,79 @@ import Base from '../layouts/Base.astro';
     background: transparent;
     border: none;
     color: var(--text-primary);
-    font-family: var(--font-heading);
-    font-size: clamp(1.1rem, 2.2vw, 1.35rem);
-    line-height: 1.5;
-    padding: 0.75rem 0;
-    text-align: center;
-    letter-spacing: 0.05em;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    padding: 0.6rem 0;
+    text-align: left;
     caret-color: var(--color-dignity);
+    resize: none;
+    min-height: 2.8rem;
+    max-height: 8rem;
+    overflow-y: auto;
   }
 
   #threshold-input:focus { outline: none; }
 
   #threshold-input.dissolving {
     opacity: 0;
-    transform: translateY(-8px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.4s ease;
   }
 
   #threshold-input::placeholder {
     font-family: var(--font-proverb);
     color: var(--color-dignity);
     font-style: italic;
-    letter-spacing: 0.15em;
-    opacity: 0.4;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+  }
+
+  .input-attach {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 50%;
+    min-width: 36px;
+    min-height: 36px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    align-self: flex-end;
+  }
+
+  .input-attach:hover { color: var(--color-dignity); background: var(--accent-glow); }
+
+  .input-file-preview {
+    display: flex;
+    gap: var(--space-2);
+    padding: var(--space-1) 0;
+    overflow-x: auto;
+  }
+
+  .input-file-preview img {
+    height: 60px;
+    border-radius: 8px;
+    border: 1px solid var(--accent-subtle);
+    object-fit: cover;
+  }
+
+  .input-file-preview .remove-file {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--danger);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .input-submit {
@@ -607,14 +701,16 @@ import Base from '../layouts/Base.astro';
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 50%;
-    min-width: 36px;
-    min-height: 36px;
+    min-width: 40px;
+    min-height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transform: scale(0.8);
     transition: all 0.3s var(--transition-smooth);
+    flex-shrink: 0;
+    align-self: flex-end;
   }
 
   .input-submit.visible {
@@ -1198,10 +1294,14 @@ import Base from '../layouts/Base.astro';
   const WORKER_URL = '/api/threshold';
 
   const form = document.getElementById('threshold-form') as HTMLFormElement;
-  const input = document.getElementById('threshold-input') as HTMLInputElement;
+  const input = document.getElementById('threshold-input') as HTMLTextAreaElement;
   const voice = document.getElementById('axi-voice') as HTMLDivElement;
+  const conversationScroll = document.getElementById('conversation-scroll') as HTMLDivElement;
   const ledgerCount = document.getElementById('ledger-count') as HTMLParagraphElement;
   const drawerHandleZone = document.getElementById('drawer-handle-zone') as HTMLDivElement;
+  const fileUpload = document.getElementById('file-upload') as HTMLInputElement;
+  const filePreview = document.getElementById('file-preview') as HTMLDivElement;
+  let attachedFile: File | null = null;
 
   const STORAGE_KEY = 'kalam-exchanges';
   let exchangeCount = 0;
@@ -1255,14 +1355,9 @@ import Base from '../layouts/Base.astro';
   }
 
   // ── Clear previous utterance to ghost ──
-  function ghostPrevious() {
-    // Remove old donor echoes
-    voice.querySelectorAll('.donor-echo').forEach(el => el.remove());
-    const existing = voice.querySelectorAll('.axi-utterance:not(.ghost)');
-    existing.forEach(el => { el.classList.add('ghost'); });
-    const ghosts = voice.querySelectorAll('.axi-utterance.ghost');
-    if (ghosts.length > 1) {
-      for (let i = 0; i < ghosts.length - 1; i++) { ghosts[i].remove(); }
+  function scrollToBottom() {
+    if (conversationScroll) {
+      conversationScroll.scrollTop = conversationScroll.scrollHeight;
     }
   }
 
@@ -1306,14 +1401,18 @@ import Base from '../layouts/Base.astro';
 
   // ── Speak — the core utterance ──
   function speak(text: string, sealed?: boolean) {
-    ghostPrevious();
     hideWitnessMark();
+    // Create AXI response frame
+    const frame = document.createElement('div');
+    frame.className = 'axi-response-frame';
     const utterance = document.createElement('div');
     utterance.className = 'axi-utterance';
     if (sealed) utterance.style.color = 'var(--danger, #c45050)';
-    voice.appendChild(utterance);
+    frame.appendChild(utterance);
+    voice.appendChild(frame);
     streamTokens(utterance, text, () => {
       setStatus(sealed ? 'sealed' : 'witnessing');
+      scrollToBottom();
     });
 
     exchangeCount++;
@@ -1561,17 +1660,68 @@ import Base from '../layouts/Base.astro';
     const ex = loadExchanges();
     if (ex.length === 0) return;
     exchangeCount = ex.length;
-    const last = ex[ex.length - 1];
-    const ghost = document.createElement('div');
-    ghost.className = 'axi-utterance ghost';
-    ghost.textContent = last.response;
-    voice.appendChild(ghost);
+    // Show last few exchanges
+    const recent = ex.slice(-3);
+    recent.forEach(item => {
+      const donorBubble = document.createElement('div');
+      donorBubble.className = 'donor-echo';
+      donorBubble.style.opacity = '0.5';
+      donorBubble.textContent = item.donor;
+      voice.appendChild(donorBubble);
+
+      const frame = document.createElement('div');
+      frame.className = 'axi-response-frame';
+      frame.style.opacity = '0.5';
+      const utt = document.createElement('div');
+      utt.className = 'axi-utterance ghost';
+      utt.textContent = item.response;
+      frame.appendChild(utt);
+      voice.appendChild(frame);
+    });
+    scrollToBottom();
   }
 
-  // ── Submit button visibility ──
+  // ── Textarea auto-resize + submit button visibility ──
   input.addEventListener('input', () => {
     const btn = document.getElementById('submit-btn');
     if (btn) btn.classList.toggle('visible', input.value.trim().length > 0);
+    // Auto-resize textarea
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 128) + 'px';
+  });
+
+  // Enter to submit (Shift+Enter for new line)
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      form.dispatchEvent(new Event('submit', { cancelable: true }));
+    }
+  });
+
+  // ── File attachment ──
+  fileUpload.addEventListener('change', () => {
+    const file = fileUpload.files?.[0];
+    if (!file) return;
+    attachedFile = file;
+    filePreview.hidden = false;
+    const wrap = document.createElement('div');
+    wrap.style.position = 'relative';
+    wrap.style.display = 'inline-block';
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    const rm = document.createElement('button');
+    rm.className = 'remove-file';
+    rm.textContent = '×';
+    rm.addEventListener('click', () => {
+      attachedFile = null;
+      filePreview.innerHTML = '';
+      filePreview.hidden = true;
+      fileUpload.value = '';
+    });
+    wrap.appendChild(img);
+    wrap.appendChild(rm);
+    filePreview.innerHTML = '';
+    filePreview.appendChild(wrap);
   });
 
   // ── Form submission — the threshold ──
@@ -1594,14 +1744,25 @@ import Base from '../layouts/Base.astro';
     input.classList.add('dissolving');
     const donorText = content;
     input.value = '';
+    input.style.height = 'auto';
     const btn = document.getElementById('submit-btn');
     if (btn) btn.classList.remove('visible');
 
-    // Show what the donor typed — their words stay visible
+    // Show what the donor typed as a message bubble
     const echo = document.createElement('div');
     echo.className = 'donor-echo';
-    echo.textContent = '"' + donorText + '"';
+    echo.textContent = donorText;
     voice.appendChild(echo);
+
+    // Clear attached file
+    if (attachedFile) {
+      attachedFile = null;
+      filePreview.innerHTML = '';
+      filePreview.hidden = true;
+      fileUpload.value = '';
+    }
+
+    scrollToBottom();
 
     await new Promise(r => setTimeout(r, 500));
 
