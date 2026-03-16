@@ -5,6 +5,10 @@
  * D = A × L × M — if any dimension reaches zero, the system stops.
  */
 
+// Allow larger POST bodies for file attachments (base64 images)
+@ini_set('post_max_size', '15M');
+@ini_set('upload_max_filesize', '15M');
+
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
@@ -135,10 +139,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($is_form) {
         $content = isset($_POST['content']) ? trim($_POST['content']) : '';
+        $file_data = null;
     } else {
         $raw_body = file_get_contents('php://input');
         $input = json_decode($raw_body, true);
         $content = isset($input['content']) ? trim($input['content']) : '';
+        $file_data = $input['file'] ?? null;
     }
 
     if (empty($content)) {
@@ -208,12 +214,40 @@ HTML;
     $ai_reflection = null;
     $ai_debug = '';
 
+    // Extract text from document files, or prepare image for vision
+    $image_url = null;
+    $file_text = null;
+    if ($file_data && !empty($file_data['data'])) {
+        $file_type = $file_data['type'] ?? '';
+        $file_name = $file_data['name'] ?? 'file';
+        if (str_starts_with($file_type, 'image/')) {
+            // Image — pass to vision model as data URL
+            $image_url = $file_data['data'];
+        } else {
+            // Document — extract text from base64 data
+            $base64_part = preg_replace('/^data:[^;]+;base64,/', '', $file_data['data']);
+            $raw_bytes = base64_decode($base64_part);
+            if ($file_type === 'text/plain' || $file_type === 'text/csv' || $file_type === 'text/markdown') {
+                $file_text = mb_substr($raw_bytes, 0, 4000);
+            } elseif ($file_type === 'application/pdf') {
+                // Basic PDF text extraction
+                $file_text = extract_pdf_text($raw_bytes);
+            } else {
+                // .doc/.docx — extract visible text heuristically
+                $file_text = extract_doc_text($raw_bytes);
+            }
+            if ($file_text) {
+                $content .= "\n\n[Attached file: {$file_name}]\n" . $file_text;
+            }
+        }
+    }
+
     if (!$groq_key) {
         $ai_debug = 'no-key';
     } elseif (!function_exists('curl_init')) {
         $ai_debug = 'no-curl';
     } else {
-        $result = call_groq($groq_key, $content);
+        $result = call_groq($groq_key, $content, $image_url);
         if ($result) {
             $ai_response = $result['witness'];
             $ai_reflection = $result['reflection'];
@@ -415,7 +449,7 @@ function test_groq($api_key) {
 
 // --- AI Voice: Groq (Llama 3.3 70B) ---
 
-function call_groq($api_key, $donor_input) {
+function call_groq($api_key, $donor_input, $image_url = null) {
     $url = 'https://api.groq.com/openai/v1/chat/completions';
 
     $system_prompt = <<<'PROMPT'
@@ -465,11 +499,24 @@ Witnessed: a request.
 A woman walked into a shop she'd visited every day for ten years. The owner looked up and said, "First time here?" She realized the shop had never seen her. Only her money. She walked out and opened her own door.
 PROMPT;
 
+    // Use vision model when image is attached
+    $use_vision = $image_url !== null;
+    $model = $use_vision ? 'llama-3.2-90b-vision-preview' : 'llama-3.3-70b-versatile';
+
+    if ($use_vision) {
+        $user_content = [
+            ['type' => 'text', 'text' => $donor_input ?: 'What do you see in this image?'],
+            ['type' => 'image_url', 'image_url' => ['url' => $image_url]]
+        ];
+    } else {
+        $user_content = $donor_input;
+    }
+
     $data = [
-        'model' => 'llama-3.3-70b-versatile',
+        'model' => $model,
         'messages' => [
             ['role' => 'system', 'content' => $system_prompt],
-            ['role' => 'user', 'content' => $donor_input]
+            ['role' => 'user', 'content' => $user_content]
         ],
         'temperature' => 0.7,
         'max_tokens' => 400
@@ -540,4 +587,74 @@ function parse_axi_response($text) {
         'witness' => $witness,
         'reflection' => $reflection
     ];
+}
+
+// --- Extract text from PDF bytes (basic extraction without libraries) ---
+
+function extract_pdf_text(string $raw): ?string {
+    // Extract text between stream/endstream and decode
+    $text = '';
+
+    // Method 1: Find text between BT/ET markers
+    if (preg_match_all('/BT\s*(.*?)\s*ET/s', $raw, $matches)) {
+        foreach ($matches[1] as $block) {
+            // Extract text from Tj and TJ operators
+            if (preg_match_all('/\(([^)]*)\)\s*Tj/s', $block, $tj)) {
+                $text .= implode(' ', $tj[1]) . ' ';
+            }
+            if (preg_match_all('/\[([^\]]*)\]\s*TJ/s', $block, $tja)) {
+                foreach ($tja[1] as $arr) {
+                    if (preg_match_all('/\(([^)]*)\)/', $arr, $parts)) {
+                        $text .= implode('', $parts[1]) . ' ';
+                    }
+                }
+            }
+        }
+    }
+
+    // Method 2: Fallback — find any readable ASCII text sequences
+    if (strlen(trim($text)) < 20) {
+        $readable = '';
+        if (preg_match_all('/[\x20-\x7E]{10,}/', $raw, $ascii)) {
+            $readable = implode(' ', array_slice($ascii[0], 0, 50));
+        }
+        if (strlen($readable) > strlen($text)) {
+            $text = $readable;
+        }
+    }
+
+    $text = trim(preg_replace('/\s+/', ' ', $text));
+    return strlen($text) > 5 ? mb_substr($text, 0, 4000) : null;
+}
+
+// --- Extract text from DOC/DOCX bytes ---
+
+function extract_doc_text(string $raw): ?string {
+    $text = '';
+
+    // Check if it's a DOCX (ZIP file starting with PK)
+    if (substr($raw, 0, 2) === 'PK') {
+        // DOCX — extract from XML inside ZIP
+        $tmp = tempnam(sys_get_temp_dir(), 'kalam_docx_');
+        file_put_contents($tmp, $raw);
+        $zip = new ZipArchive();
+        if ($zip->open($tmp) === true) {
+            $xml = $zip->getFromName('word/document.xml');
+            if ($xml) {
+                // Strip XML tags to get text
+                $text = strip_tags($xml);
+                $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
+            }
+            $zip->close();
+        }
+        @unlink($tmp);
+    } else {
+        // Legacy .doc — extract readable text sequences
+        if (preg_match_all('/[\x20-\x7E]{8,}/', $raw, $matches)) {
+            $text = implode(' ', array_slice($matches[0], 0, 100));
+        }
+    }
+
+    $text = trim(preg_replace('/\s+/', ' ', $text));
+    return strlen($text) > 5 ? mb_substr($text, 0, 4000) : null;
 }

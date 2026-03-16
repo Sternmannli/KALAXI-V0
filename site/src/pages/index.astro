@@ -60,9 +60,9 @@ import Base from '../layouts/Base.astro';
     <div class="input-zone glass" id="input-zone">
       <div class="input-glow" aria-hidden="true"></div>
       <form id="threshold-form" method="POST" action="#" aria-label="Speak to AXI" class="threshold-form">
-        <label for="file-upload" class="input-attach" title="Attach image">
+        <label for="file-upload" class="input-attach" title="Attach file">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
-          <input type="file" id="file-upload" accept="image/*" hidden />
+          <input type="file" id="file-upload" accept="image/*,.pdf,.doc,.docx,.txt,.csv,.md" hidden />
         </label>
         <textarea
           id="threshold-input"
@@ -188,6 +188,42 @@ import Base from '../layouts/Base.astro';
           <p>Hakaka is the origin cycle. 53 chapters + Prologue + Epilogue. Mythic, raw, written in short sentences. It explores dignity at the most primal level &mdash; when everything is stripped away, what remains?</p>
           <a href="/about#stories" class="more-link">Read about the four narratives &rarr;</a>
         </div>
+      </section>
+
+      <!-- ===== CONNECT — newsletter, feedback, collaboration ===== -->
+      <section class="drawer-section connect-section" aria-label="Connect">
+        <h2 class="drawer-heading">Stay Connected</h2>
+        <p class="quiet-eng">Receive occasional updates when the system grows. No spam. Ever.</p>
+        <form class="connect-form inline-form" id="home-newsletter-form">
+          <input type="email" name="email" placeholder="your email" required aria-label="Email for newsletter" />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="form-status" id="home-newsletter-status"></p>
+      </section>
+
+      <section class="drawer-section connect-section" aria-label="Feedback">
+        <h2 class="drawer-heading">Send a Word</h2>
+        <p class="quiet-eng">A thought, a correction, a question — anything that matters to you matters here.</p>
+        <form class="connect-form stack-form" id="home-feedback-form">
+          <input type="text" name="name" placeholder="your name (optional)" aria-label="Your name" />
+          <input type="email" name="email" placeholder="your email" required aria-label="Your email" />
+          <textarea name="message" placeholder="your message" required rows="3" maxlength="5000" aria-label="Your message"></textarea>
+          <button type="submit">Send</button>
+        </form>
+        <p class="form-status" id="home-feedback-status"></p>
+      </section>
+
+      <section class="drawer-section connect-section" aria-label="Collaboration">
+        <h2 class="drawer-heading">Propose a Collaboration</h2>
+        <p class="quiet-eng">Research, design, policy, narrative, technology — tell us who you are and what you envision.</p>
+        <form class="connect-form stack-form" id="home-collab-form">
+          <input type="text" name="name" placeholder="your name" required aria-label="Your name" />
+          <input type="email" name="email" placeholder="your email" required aria-label="Your email" />
+          <input type="text" name="expertise" placeholder="your field or expertise" aria-label="Your expertise" />
+          <textarea name="message" placeholder="what do you have in mind?" required rows="4" maxlength="5000" aria-label="Your proposal"></textarea>
+          <button type="submit">Propose</button>
+        </form>
+        <p class="form-status" id="home-collab-status"></p>
       </section>
 
     </div>
@@ -693,6 +729,120 @@ import Base from '../layouts/Base.astro';
     align-items: center;
     justify-content: center;
   }
+
+  .file-label {
+    display: inline-block;
+    padding: 0.4rem 0.75rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 8px;
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .donor-file-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+    opacity: 0.7;
+  }
+
+  .donor-file-label::before {
+    content: '📎 ';
+  }
+
+  /* ===== Connect forms in drawer ===== */
+  .connect-section .drawer-heading {
+    color: var(--accent);
+  }
+
+  .connect-form {
+    display: flex;
+    gap: var(--space-2);
+    width: 100%;
+    max-width: 40ch;
+    margin-top: var(--space-3);
+  }
+
+  .connect-form.inline-form {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .connect-form.stack-form {
+    flex-direction: column;
+  }
+
+  .connect-form input,
+  .connect-form textarea {
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    width: 100%;
+    transition: border-color 0.3s ease;
+  }
+
+  .connect-form input:focus,
+  .connect-form textarea:focus {
+    outline: none;
+    border-color: var(--color-dignity);
+  }
+
+  .connect-form textarea {
+    resize: vertical;
+    min-height: 3rem;
+  }
+
+  .connect-form input::placeholder,
+  .connect-form textarea::placeholder {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .connect-form button {
+    background: var(--color-dignity);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    min-width: fit-content;
+  }
+
+  .connect-form button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .connect-form button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .form-status {
+    font-size: var(--text-sm);
+    margin-top: var(--space-2);
+    min-height: 1.5em;
+  }
+
+  .form-status.success { color: var(--color-presence); }
+  .form-status.error { color: var(--danger); }
 
   .input-submit {
     background: none;
@@ -1702,13 +1852,27 @@ import Base from '../layouts/Base.astro';
   fileUpload.addEventListener('change', () => {
     const file = fileUpload.files?.[0];
     if (!file) return;
+    if (file.size > 10 * 1024 * 1024) {
+      alert('File too large. Maximum 10 MB.');
+      fileUpload.value = '';
+      return;
+    }
     attachedFile = file;
     filePreview.hidden = false;
     const wrap = document.createElement('div');
     wrap.style.position = 'relative';
     wrap.style.display = 'inline-block';
-    const img = document.createElement('img');
-    img.src = URL.createObjectURL(file);
+    const isImage = file.type.startsWith('image/');
+    if (isImage) {
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      wrap.appendChild(img);
+    } else {
+      const label = document.createElement('span');
+      label.className = 'file-label';
+      label.textContent = file.name;
+      wrap.appendChild(label);
+    }
     const rm = document.createElement('button');
     rm.className = 'remove-file';
     rm.textContent = '×';
@@ -1718,7 +1882,6 @@ import Base from '../layouts/Base.astro';
       filePreview.hidden = true;
       fileUpload.value = '';
     });
-    wrap.appendChild(img);
     wrap.appendChild(rm);
     filePreview.innerHTML = '';
     filePreview.appendChild(wrap);
@@ -1752,10 +1915,23 @@ import Base from '../layouts/Base.astro';
     const echo = document.createElement('div');
     echo.className = 'donor-echo';
     echo.textContent = donorText;
+    if (attachedFile) {
+      const attachLabel = document.createElement('span');
+      attachLabel.className = 'donor-file-label';
+      attachLabel.textContent = attachedFile.name;
+      echo.appendChild(attachLabel);
+    }
     voice.appendChild(echo);
 
-    // Clear attached file
+    // Prepare file data if attached
+    let filePayload: { name: string; type: string; data: string } | null = null;
     if (attachedFile) {
+      const fileData = await new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.readAsDataURL(attachedFile!);
+      });
+      filePayload = { name: attachedFile.name, type: attachedFile.type, data: fileData };
       attachedFile = null;
       filePreview.innerHTML = '';
       filePreview.hidden = true;
@@ -1772,11 +1948,14 @@ import Base from '../layouts/Base.astro';
     let responseText = '';
     let sealed = false;
 
+    const payload: any = { content: donorText };
+    if (filePayload) payload.file = filePayload;
+
     try {
       const res = await fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content: donorText }),
+        body: JSON.stringify(payload),
       });
 
       waiting.remove();
@@ -1881,4 +2060,52 @@ import Base from '../layouts/Base.astro';
       }
     }, 10000);
   }
+
+  // ── Connect forms (newsletter, feedback, collaboration) ──
+  function submitConnectForm(formId: string, type: string, statusId: string) {
+    const form = document.getElementById(formId) as HTMLFormElement | null;
+    const status = document.getElementById(statusId) as HTMLParagraphElement | null;
+    if (!form || !status) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const data: Record<string, string> = { type };
+      formData.forEach((value, key) => { data[key] = value as string; });
+
+      const btn = form.querySelector('button') as HTMLButtonElement | null;
+      if (btn) { btn.disabled = true; btn.textContent = '...'; }
+      status.textContent = '';
+      status.className = 'form-status';
+
+      try {
+        const res = await fetch('/api/connect.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        if (res.ok) {
+          status.textContent = result.message || 'Received.';
+          status.className = 'form-status success';
+          form.reset();
+        } else {
+          status.textContent = result.error || 'Something went wrong.';
+          status.className = 'form-status error';
+        }
+      } catch {
+        status.textContent = 'Could not connect. Please try again.';
+        status.className = 'form-status error';
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = type === 'newsletter' ? 'Subscribe' : type === 'feedback' ? 'Send' : 'Propose';
+        }
+      }
+    });
+  }
+
+  submitConnectForm('home-newsletter-form', 'newsletter', 'home-newsletter-status');
+  submitConnectForm('home-feedback-form', 'feedback', 'home-feedback-status');
+  submitConnectForm('home-collab-form', 'collaboration', 'home-collab-status');
 </script>
