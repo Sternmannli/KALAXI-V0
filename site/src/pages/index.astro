@@ -192,12 +192,11 @@ import Base from '../layouts/Base.astro';
   /* ===== Dedication Overlay ===== */
   .dedication-overlay {
     position: fixed; inset: 0; z-index: 9999;
-    background: #fafaf8;
+    background: var(--bg-primary);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     cursor: pointer; transition: opacity 1.5s ease;
   }
-  .ded-touch { font-family: var(--font-heading); color: var(--text-primary); font-size: var(--text-base); letter-spacing: 0.12em; text-transform: lowercase; opacity: 0.5; }
-  @media (prefers-color-scheme: dark) { .ded-touch { color: var(--text-secondary); opacity: 0.6; } }
+  .ded-touch { font-family: var(--font-heading); color: var(--text-primary); font-size: var(--text-lg); letter-spacing: 0.12em; text-transform: lowercase; opacity: 0.7; }
   .ded-lights { display: flex; gap: clamp(3rem, 8vw, 6rem); margin-top: 3rem; opacity: 0; transition: opacity 1.2s ease; }
   .ded-child { display: flex; flex-direction: column; align-items: center; gap: 1rem; opacity: 0; transition: opacity 1.5s ease, transform 1s ease; }
   .ded-animal-wrap { position: relative; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; }
@@ -1677,24 +1676,48 @@ import Base from '../layouts/Base.astro';
   restoreLast();
   initLedger();
 
-  // ── PWA install hint ──
+  // ── PWA install ──
   const pwaHint = document.getElementById('pwa-hint');
+  let deferredPrompt: any = null;
+
+  // Capture the beforeinstallprompt event (Android Chrome)
+  window.addEventListener('beforeinstallprompt', (e: Event) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (pwaHint) {
+      pwaHint.textContent = 'Tap to install kalam.ch as an app';
+      pwaHint.classList.remove('hidden');
+    }
+  });
+
   if (pwaHint) {
-    // Hide if already in standalone mode or previously dismissed
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (navigator as any).standalone;
     if (isStandalone || localStorage.getItem('pwa-hint-dismissed')) {
       pwaHint.classList.add('hidden');
     }
-    pwaHint.addEventListener('click', () => {
+
+    pwaHint.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        // Android: trigger native install prompt immediately
+        deferredPrompt.prompt();
+        const result = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        if (result.outcome === 'accepted') {
+          localStorage.setItem('pwa-hint-dismissed', '1');
+        }
+      } else {
+        // iOS: can't auto-install, dismiss the hint
+        localStorage.setItem('pwa-hint-dismissed', '1');
+      }
       pwaHint.classList.add('hidden');
-      localStorage.setItem('pwa-hint-dismissed', '1');
     });
-    // Auto-hide after 8 seconds
+
+    // Auto-hide after 10 seconds
     setTimeout(() => {
       if (!pwaHint.classList.contains('hidden')) {
         pwaHint.style.opacity = '0';
         setTimeout(() => pwaHint.classList.add('hidden'), 500);
       }
-    }, 8000);
+    }, 10000);
   }
 </script>
