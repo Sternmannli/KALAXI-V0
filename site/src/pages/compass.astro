@@ -1,0 +1,241 @@
+---
+import Base from '../layouts/Base.astro';
+import state from '../../public/data/system-state.json';
+---
+
+<Base title="Compass — kalam.ch" description="System orientation. Where we are. Where we're going. What's next.">
+
+  <section class="page-header">
+    <h1>The Compass</h1>
+    <p class="quiet">The system witnesses its own position. Generated {new Date(state.generated).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}.</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Position -->
+  <section class="content-section" id="position">
+    <div class="text-block">
+      <h2>Position — Where We Are</h2>
+      <div class="compass-grid">
+        <div class="compass-cell">
+          <span class="compass-number">{state.summary.python_files}</span>
+          <span class="compass-label">Python files</span>
+        </div>
+        <div class="compass-cell">
+          <span class="compass-number">{state.summary.test_files}</span>
+          <span class="compass-label">Test files</span>
+        </div>
+        <div class="compass-cell">
+          <span class="compass-number">{state.summary.covenants}</span>
+          <span class="compass-label">Covenants</span>
+        </div>
+        <div class="compass-cell">
+          <span class="compass-number">{state.summary.ledger_entries.toLocaleString()}</span>
+          <span class="compass-label">Ledger entries</span>
+        </div>
+        <div class="compass-cell">
+          <span class="compass-number">{state.summary.seeds_integrated}</span>
+          <span class="compass-label">Seeds integrated</span>
+        </div>
+        <div class="compass-cell">
+          <span class="compass-number">{state.summary.proverbs}</span>
+          <span class="compass-label">Proverbs</span>
+        </div>
+        <div class="compass-cell">
+          <span class="compass-number">{state.summary.core_modules}</span>
+          <span class="compass-label">Core modules</span>
+        </div>
+        <div class="compass-cell">
+          <span class="compass-number">{Object.keys(state.summary.experiments).length}</span>
+          <span class="compass-label">Experiments</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Heading -->
+  <section class="content-section" id="heading">
+    <div class="text-block">
+      <h2>Heading — Where We're Going</h2>
+      <p class="compass-blocker">{state.heading.single_blocker}</p>
+      <p class="quiet">Target: {state.heading.deployment_target}</p>
+
+      <h3>Experiments</h3>
+      <ul class="compass-experiments">
+        {Object.entries(state.summary.experiments).map(([id, status]: [string, any]) => (
+          <li>
+            <span class="exp-id">{id}</span>
+            <span class={`exp-status status-${status === 'completed' ? 'complete' : status === 'has_results' ? 'complete' : 'active'}`}>{status}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Next Steps -->
+  <section class="content-section" id="next-steps">
+    <div class="text-block">
+      <h2>Next Step — What To Do Now</h2>
+      <ol class="compass-steps">
+        {state.next_steps.map((step: string) => (
+          <li>{step}</li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Blockers -->
+  <section class="content-section" id="blockers">
+    <div class="text-block">
+      <h2>Blockers — What's In The Way</h2>
+      <ul class="compass-blockers">
+        {state.blockers.map((b: string) => (
+          <li>{b}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Vitals -->
+  <section class="content-section" id="vitals">
+    <div class="text-block">
+      <h2>Vitals — System Health</h2>
+      <ul class="compass-vitals">
+        {Object.entries(state.vitals).map(([key, val]: [string, any]) => (
+          <li>
+            <span class="vital-label">{key.replace(/_/g, ' ')}</span>
+            <span class={`vital-value ${val === true ? 'vital-yes' : val === false ? 'vital-no' : ''}`}>
+              {typeof val === 'boolean' ? (val ? 'YES' : 'NO') : val}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Connection footer -->
+  <section class="connection-footer">
+    <p class="quiet">The Compass witnesses position. The donor decides direction.</p>
+    <p class="ledger-count" id="ledger-count"></p>
+  </section>
+
+  <style>
+    .compass-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .compass-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .compass-number {
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: #c9a96e;
+      line-height: 1;
+    }
+
+    .compass-label {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .compass-blocker {
+      font-size: 1.1rem;
+      color: #c9a96e;
+      font-style: italic;
+      margin: 1rem 0;
+    }
+
+    .compass-experiments {
+      list-style: none;
+      padding: 0;
+    }
+
+    .compass-experiments li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .compass-steps {
+      padding-left: 1.2rem;
+    }
+
+    .compass-steps li {
+      margin-bottom: 0.6rem;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .compass-blockers {
+      list-style: none;
+      padding: 0;
+    }
+
+    .compass-blockers li {
+      padding: 0.5rem 0;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .compass-vitals {
+      list-style: none;
+      padding: 0;
+    }
+
+    .compass-vitals li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .vital-label {
+      text-transform: capitalize;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .vital-value {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .vital-yes {
+      color: #6eaa5e;
+    }
+
+    .vital-no {
+      color: #c96e6e;
+    }
+  </style>
+
+  <script is:inline>
+    fetch('/api/axi.php')
+      .then(r => r.json())
+      .then(d => {
+        const el = document.getElementById('ledger-count');
+        if (el && d.count) el.textContent = d.count + ' have crossed the threshold.';
+      })
+      .catch(() => {});
+  </script>
+
+</Base>
