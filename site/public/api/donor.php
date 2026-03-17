@@ -142,12 +142,20 @@ if ($action === 'verify') {
     }
 
     if ($row['used']) {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            header('Location: /?auth_error=used');
+            exit;
+        }
         http_response_code(410);
         echo json_encode(['error' => 'Token already used']);
         exit;
     }
 
-    if (strtotime($row['expires_at']) < time()) {
+    if (strtotime($row['expires_at'] . ' UTC') < time()) {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            header('Location: /?auth_error=expired');
+            exit;
+        }
         http_response_code(410);
         echo json_encode(['error' => 'Token expired']);
         exit;

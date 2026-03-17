@@ -2514,10 +2514,20 @@ import Base from '../layouts/Base.astro';
     });
   }
 
-  // Check if just authenticated via magic link redirect
-  if (new URLSearchParams(window.location.search).get('authenticated') === '1') {
+  // Check if just authenticated or auth error via magic link redirect
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('authenticated') === '1') {
     history.replaceState({}, '', '/');
     checkDonorAuth();
+  } else if (urlParams.get('auth_error')) {
+    const err = urlParams.get('auth_error');
+    history.replaceState({}, '', '/');
+    if (donorAuthStatus) {
+      donorAuthStatus.style.color = 'var(--danger, #c45050)';
+      donorAuthStatus.textContent = err === 'expired'
+        ? 'Link expired. Request a new one.'
+        : 'Link already used. Request a new one.';
+    }
   } else {
     checkDonorAuth();
   }
