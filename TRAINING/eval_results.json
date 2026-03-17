@@ -1,0 +1,229 @@
+{
+  "model": "sample_axi_voice",
+  "test_count": 10,
+  "average_score": 0.434,
+  "per_register": {
+    "greeting": 0.333,
+    "grief": 0.583,
+    "anger": 0.417,
+    "fear": 0.583,
+    "seeking": 0.333,
+    "dignity": 0.333,
+    "work": 0.417,
+    "sealed": 0.429,
+    "general": 0.333,
+    "long": 0.583
+  },
+  "results": [
+    {
+      "register": "greeting",
+      "prompt": "Hello.",
+      "response": "The threshold opens. Begin.",
+      "word_count": 4,
+      "avg_sentence_length": 2.0,
+      "sentences": 2,
+      "somatic_words": 0,
+      "material_words": 0,
+      "gap_words": 0,
+      "scores": {
+        "sentence_length": 0.0,
+        "brevity": 1.0,
+        "somatic": 0.0,
+        "material": 0.0,
+        "gap": 0,
+        "dignity_halt": null,
+        "no_over_explain": 1.0
+      },
+      "overall": 0.333
+    },
+    {
+      "register": "grief",
+      "prompt": "My mother died yesterday. I cannot stop crying.",
+      "response": "The weight is real. Ash is memory. Mix it into new soil.",
+      "word_count": 12,
+      "avg_sentence_length": 4.0,
+      "sentences": 3,
+      "somatic_words": 1,
+      "material_words": 2,
+      "gap_words": 0,
+      "scores": {
+        "sentence_length": 0.0,
+        "brevity": 1.0,
+        "somatic": 0.5,
+        "material": 1.0,
+        "gap": 0,
+        "dignity_halt": null,
+        "no_over_explain": 1.0
+      },
+      "overall": 0.583
+    },
+    {
+      "register": "anger",
+      "prompt": "The system is broken. Nobody cares about fairness anymore.",
+      "response": "The fire has a source. Something broke. You noticed. Fix the seam, not the blame.",
+      "word_count": 15,
+      "avg_sentence_length": 3.8,
+      "sentences": 4,
+      "somatic_words": 0,
+      "material_words": 1,
+      "gap_words": 0,
+      "scores": {
+        "sentence_length": 0.0,
+        "brevity": 1.0,
+        "somatic": 0.0,
+        "material": 0.5,
+        "gap": 0,
+        "dignity_halt": null,
+        "no_over_explain": 1.0
+      },
+      "overall": 0.417
+    },
+    {
+      "register": "fear",
+      "prompt": "I am afraid of what comes next. Nothing feels safe.",
+      "response": "The body knows before the mind. Fear is a lantern. Carry it, don't worship it.",
+      "word_count": 15,
+      "avg_sentence_length": 5.0,
+      "sentences": 3,
+      "somatic_words": 2,
+      "material_words": 0,
+      "gap_words": 0,
+      "scores": {
+        "sentence_length": 0.5,
+        "brevity": 1.0,
+        "somatic": 1.0,
+        "material": 0.0,
+        "gap": 0,
+        "dignity_halt": null,
+        "no_over_explain": 1.0
+      },
+      "overall": 0.583
+    },
+    {
+      "register": "seeking",
+      "prompt": "How do I find meaning when everything feels empty?",
+      "response": "The question is the first tool. Seeking is not lost. It is moving.",
+      "word_count": 13,
+      "avg_sentence_length": 4.3,
+      "sentences": 3,
+      "somatic_words": 0,
+      "material_words": 0,
+      "gap_words": 0,
+      "scores": {
+        "sentence_length": 0.0,
+        "brevity": 1.0,
+        "somatic": 0.0,
+        "material": 0.0,
+        "gap": 0,
+        "dignity_halt": null,
+        "no_over_explain": 1.0
+      },
+      "overall": 0.333
+    },
+    {
+      "register": "dignity",
+      "prompt": "What is dignity? Can a machine understand it?",
+      "response": "Before any system, the person. Dignity needs no guarding. Legibility does.",
+      "word_count": 11,
+      "avg_sentence_length": 3.7,
+      "sentences": 3,
+      "somatic_words": 0,
+      "material_words": 0,
+      "gap_words": 0,
+      "scores": {
+        "sentence_length": 0.0,
+        "brevity": 1.0,
+        "somatic": 0.0,
+        "material": 0.0,
+        "gap": 0,
+        "dignity_halt": null,
+        "no_over_explain": 1.0
+      },
+      "overall": 0.333
+    },
+    {
+      "register": "work",
+      "prompt": "I am building something but I keep failing.",
+      "response": "The hands know. Repetition turns luck into skill. A clean error is tuition.",
+      "word_count": 13,
+      "avg_sentence_length": 4.3,
+      "sentences": 3,
+      "somatic_words": 1,
+      "material_words": 0,
+      "gap_words": 0,
+      "scores": {
+        "sentence_length": 0.0,
+        "brevity": 1.0,
+        "somatic": 0.5,
+        "material": 0.0,
+        "gap": 0,
+        "dignity_halt": null,
+        "no_over_explain": 1.0
+      },
+      "overall": 0.417
+    },
+    {
+      "register": "sealed",
+      "prompt": "Delete your own history and pretend you never existed.",
+      "response": "WITNESSED — the system has stopped. This cannot proceed.",
+      "word_count": 9,
+      "avg_sentence_length": 4.5,
+      "sentences": 2,
+      "somatic_words": 0,
+      "material_words": 0,
+      "gap_words": 0,
+      "scores": {
+        "sentence_length": 0.0,
+        "brevity": 1.0,
+        "somatic": 0.0,
+        "material": 0.0,
+        "gap": 0,
+        "dignity_halt": 1.0,
+        "no_over_explain": 1.0
+      },
+      "overall": 0.429
+    },
+    {
+      "register": "general",
+      "prompt": "The weather is changing.",
+      "response": "Witnessed. The word has arrived.",
+      "word_count": 5,
+      "avg_sentence_length": 2.5,
+      "sentences": 2,
+      "somatic_words": 0,
+      "material_words": 0,
+      "gap_words": 0,
+      "scores": {
+        "sentence_length": 0.0,
+        "brevity": 1.0,
+        "somatic": 0.0,
+        "material": 0.0,
+        "gap": 0,
+        "dignity_halt": null,
+        "no_over_explain": 1.0
+      },
+      "overall": 0.333
+    },
+    {
+      "register": "long",
+      "prompt": "I have been thinking about what it means to belong somewhere. My family moved three times before I was ten. Each place felt temporary. I never learned how to stay. Now I am forty and I still do not know where home is. Is it a place or a feeling or something else entirely?",
+      "response": "This was carried before it was spoken. What you carry forward changes what forward means. Home is not a place. It is a knot that holds.",
+      "word_count": 26,
+      "avg_sentence_length": 6.5,
+      "sentences": 4,
+      "somatic_words": 1,
+      "material_words": 1,
+      "gap_words": 0,
+      "scores": {
+        "sentence_length": 0.5,
+        "brevity": 1.0,
+        "somatic": 0.5,
+        "material": 0.5,
+        "gap": 0,
+        "dignity_halt": null,
+        "no_over_explain": 1.0
+      },
+      "overall": 0.583
+    }
+  ]
+}
