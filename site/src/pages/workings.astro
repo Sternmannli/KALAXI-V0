@@ -1,0 +1,268 @@
+---
+import Base from '../layouts/Base.astro';
+import w from '../../public/data/inner-workings.json';
+---
+
+<Base title="Inner Workings — kalam.ch" description="How the system works. Only permanent, canonical, always-functioning elements.">
+
+  <section class="page-header">
+    <h1>Inner Workings</h1>
+    <p class="quiet">{w.rule}</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Dignity Predicate -->
+  <section class="content-section" id="dignity">
+    <div class="text-block">
+      <h2>The Dignity Predicate</h2>
+      <p class="equation-display">{w.dignity_predicate.equation}</p>
+      <div class="components-grid">
+        {Object.entries(w.dignity_predicate.components).map(([key, comp]: [string, any]) => (
+          <div class="component-card">
+            <span class="component-letter">{key}</span>
+            <span class="component-name">{comp.name}</span>
+            <p class="component-question">{comp.question}</p>
+          </div>
+        ))}
+      </div>
+      <ul class="properties">
+        {w.dignity_predicate.properties.map((p: string) => (
+          <li>{p}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Sealed Gate -->
+  <section class="content-section" id="sealed-gate">
+    <div class="text-block">
+      <h2>The Sealed Gate</h2>
+      <p class="quiet-text">{w.sealed_gate.behavior}</p>
+      <ol class="prohibitions">
+        {w.sealed_gate.prohibitions.map((p: string) => (
+          <li>{p}</li>
+        ))}
+      </ol>
+      <blockquote class="gate-message">{w.sealed_gate.message}</blockquote>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Voice Fingerprint -->
+  <section class="content-section" id="voice">
+    <div class="text-block">
+      <h2>Voice Fingerprint</h2>
+      <p>Sentence length: <strong>{w.voice_fingerprint.sentence_length}</strong>. Rhythm: <strong>{w.voice_fingerprint.rhythm}</strong>.</p>
+
+      <h3>Six Voice Rules</h3>
+      <ol class="voice-rules">
+        {w.voice_fingerprint.principles.map((p: string) => (
+          <li>{p}</li>
+        ))}
+      </ol>
+
+      <h3>Vocabulary</h3>
+      <div class="vocab-groups">
+        <div class="vocab-group">
+          <span class="vocab-label">Somatic</span>
+          <p class="vocab-words">{w.voice_fingerprint.vocabulary.somatic.join(' · ')}</p>
+        </div>
+        <div class="vocab-group">
+          <span class="vocab-label">Material</span>
+          <p class="vocab-words">{w.voice_fingerprint.vocabulary.material.join(' · ')}</p>
+        </div>
+        <div class="vocab-group">
+          <span class="vocab-label">Gap</span>
+          <p class="vocab-words">{w.voice_fingerprint.vocabulary.gap.join(' · ')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Witness Protocol -->
+  <section class="content-section" id="witness">
+    <div class="text-block">
+      <h2>Witness Protocol</h2>
+      <ol class="witness-steps">
+        {w.witness_protocol.steps.map((s: string) => (
+          <li>{s}</li>
+        ))}
+      </ol>
+
+      <h3>Registers</h3>
+      <div class="register-tags">
+        {w.witness_protocol.register_types.map((r: string) => (
+          <span class="register-tag">{r}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Donor Principles -->
+  <section class="content-section" id="donor">
+    <div class="text-block">
+      <h2>Donor Principles</h2>
+      <ul class="donor-principles">
+        {w.donor_principles.map((p: string) => (
+          <li>{p}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="connection-footer">
+    <p class="quiet">These are the permanent elements. They do not change. They are the system.</p>
+  </section>
+
+  <style>
+    .equation-display {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: #c9a96e;
+      text-align: center;
+      margin: 1.5rem 0;
+      letter-spacing: 0.05em;
+    }
+
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .component-card {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 1.2rem;
+      background: rgba(255, 255, 255, 0.02);
+      text-align: center;
+    }
+
+    .component-letter {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      color: #c9a96e;
+      font-weight: 300;
+    }
+
+    .component-name {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 0.3rem 0;
+    }
+
+    .component-question {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-style: italic;
+      margin: 0;
+    }
+
+    .properties {
+      padding-left: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .properties li { margin-bottom: 0.4rem; }
+
+    .gate-message {
+      border-left: 3px solid #c45050;
+      padding: 0.75rem 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-style: italic;
+      margin: 1rem 0;
+    }
+
+    .prohibitions {
+      padding-left: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .prohibitions li { margin-bottom: 0.5rem; }
+
+    .voice-rules {
+      padding-left: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .voice-rules li { margin-bottom: 0.4rem; }
+
+    .vocab-groups {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .vocab-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .vocab-words {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-style: italic;
+      margin: 0.2rem 0 0;
+    }
+
+    .witness-steps {
+      padding-left: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .witness-steps li { margin-bottom: 0.5rem; }
+
+    .register-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .register-tag {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.05em;
+    }
+
+    .donor-principles {
+      list-style: none;
+      padding: 0;
+    }
+
+    .donor-principles li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .quiet-text {
+      color: rgba(255, 255, 255, 0.6);
+      font-style: italic;
+    }
+  </style>
+
+</Base>
