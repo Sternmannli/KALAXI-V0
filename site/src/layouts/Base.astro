@@ -64,22 +64,37 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </style>
   </head>
   <body>
-    <!-- Top Navigation — always visible -->
+    <!-- Top Navigation — hamburger on mobile, compact on desktop -->
     <nav class="site-nav" aria-label="Main navigation">
-      <a href="/">home</a>
-      <a href="/about">about</a>
-      <a href="/canon">canon</a>
-      <a href="/hakaka">hakaka</a>
-      <a href="/ashwater">ashwater</a>
-      <a href="/kinderbuch">kinderbuch</a>
-      <a href="/kalaxi1">the same river</a>
-      <a href="/r7m">r7m</a>
-      <a href="/science">science</a>
-      <a href="/compass">compass</a>
-      <a href="/workings">workings</a>
-      <a href="/museum">museum</a>
-      <a href="/invitation">invitation</a>
+      <a href="/" class="nav-home">kalam</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="/about">about</a>
+        <a href="/canon">canon</a>
+        <a href="/hakaka">hakaka</a>
+        <a href="/ashwater">ashwater</a>
+        <a href="/kinderbuch">kinderbuch</a>
+        <a href="/kalaxi1">the same river</a>
+        <a href="/r7m">r7m</a>
+        <a href="/science">science</a>
+        <a href="/compass">compass</a>
+        <a href="/workings">workings</a>
+        <a href="/museum">museum</a>
+        <a href="/invitation">invitation</a>
+      </div>
     </nav>
+    <script is:inline>
+      document.getElementById('nav-toggle')?.addEventListener('click', function() {
+        const links = document.getElementById('nav-links');
+        const open = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!open));
+        links?.classList.toggle('nav-open');
+      });
+    </script>
 
     <slot />
 
