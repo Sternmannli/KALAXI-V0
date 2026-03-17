@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Silence — kalam.ch" description="Dignity sometimes requires absence." hideFooter={true}>
+
+  <main class="silence-room" id="silence-room">
+    <p class="silence-text">Dignity sometimes requires absence.<br/>Stay here as long as you need.</p>
+  </main>
+
+</Base>
+
+<style>
+  .silence-room {
+    position: fixed;
+    inset: 0;
+    background: #0a0a0f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    z-index: 100;
+  }
+
+  .silence-text {
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: #e6dcc4;
+    text-align: center;
+    line-height: 2;
+    letter-spacing: 0.06em;
+    font-weight: 300;
+    opacity: 0;
+    animation: silenceFadeIn 6s ease 2s forwards;
+    max-width: 30ch;
+  }
+
+  @keyframes silenceFadeIn {
+    from { opacity: 0; }
+    to { opacity: 0.6; }
+  }
+
+  /* Override nav for this page — make it nearly invisible */
+  :global(.site-nav) {
+    opacity: 0.15;
+    transition: opacity 0.5s ease;
+  }
+
+  :global(.site-nav:hover),
+  :global(.site-nav:focus-within) {
+    opacity: 0.8;
+  }
+</style>

@@ -1,6 +1,27 @@
 /* KALAM.CH — Dignity-First Design System */
 /* Stone + Kintsugi: carved, not coded. Gold only for seams. */
 
+/* ===== Skip Link — accessibility ===== */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-dignity);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 8px 8px;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.85rem;
+  z-index: 10000;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 /* ===== Fonts (loaded via Base.astro <link>) ===== */
 /* Cormorant Garamond: headings — scholarly, dignified */
 /* IBM Plex Sans: body — clean, multilingual */
