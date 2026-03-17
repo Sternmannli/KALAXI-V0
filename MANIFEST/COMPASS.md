@@ -1,13 +1,13 @@
 # COMPASS — System Orientation
 
-> Generated: 2026-03-17T09:04:27.929870+00:00
+> Generated: 2026-03-17T09:10:33.436153+00:00
 > This file is auto-generated. Do not edit manually.
 
 ---
 
 ## POSITION — Where We Are
 
-- **Python Files:** 136
+- **Python Files:** 137
 - **Test Files:** 38
 - **Narrative Files:** 5
 - **Covenants:** 13
