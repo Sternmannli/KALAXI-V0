@@ -1,0 +1,31 @@
+name: Server Command
+
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: 'Command to run on Hostpoint server'
+        required: true
+        type: string
+      working_dir:
+        description: 'Working directory (default: ~/www/kalam.ch)'
+        required: false
+        default: '~/www/kalam.ch'
+        type: string
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: Execute on server
+        env:
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+          FTP_HOST: ${{ secrets.FTP_SERVER }}
+          CMD: ${{ inputs.command }}
+          WDIR: ${{ inputs.working_dir }}
+        run: |
+          sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "cd $WDIR && $CMD"
