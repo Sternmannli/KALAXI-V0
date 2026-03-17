@@ -145,21 +145,7 @@ import Base from '../layouts/Base.astro';
     <!-- The input — large, multi-line, with attachment -->
     <div class="input-zone glass" id="input-zone">
       <div class="input-glow" aria-hidden="true"></div>
-      <!-- Mood/Mode selector — what register are you speaking from? -->
-      <div class="mood-selector" id="mood-selector" role="radiogroup" aria-label="Speaking mode">
-        <button type="button" class="mood-btn selected" data-mood="witness" title="I bring something to be seen" aria-pressed="true">
-          <span class="mood-icon">&#x1F441;</span><span class="mood-label">Witness</span>
-        </button>
-        <button type="button" class="mood-btn" data-mood="question" title="I need the system to hear me" aria-pressed="false">
-          <span class="mood-icon">&#x2753;</span><span class="mood-label">Question</span>
-        </button>
-        <button type="button" class="mood-btn" data-mood="offering" title="I bring a gift" aria-pressed="false">
-          <span class="mood-icon">&#x1F331;</span><span class="mood-label">Offering</span>
-        </button>
-        <button type="button" class="mood-btn" data-mood="wound" title="I speak from the place that hurts" aria-pressed="false">
-          <span class="mood-icon">&#x1F54A;</span><span class="mood-label">Wound</span>
-        </button>
-      </div>
+      <!-- Register is detected automatically from the donor's words. No pre-selection needed. -->
       <form id="threshold-form" method="POST" action="/api/axi.php" aria-label="Speak to AXI" class="threshold-form">
         <label for="file-upload" class="input-attach" title="Attach file">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
@@ -1365,50 +1351,7 @@ import Base from '../layouts/Base.astro';
 
   /* ===== Guide overlay ===== */
 
-  /* ===== Mood/Mode selector ===== */
-  .mood-selector {
-    display: flex;
-    gap: 0.25rem;
-    padding: 0.4rem 0.25rem;
-    border-bottom: 1px solid var(--accent-subtle);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .mood-selector::-webkit-scrollbar { display: none; }
-
-  .mood-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    background: none;
-    border: 1px solid transparent;
-    border-radius: 20px;
-    padding: 0.3rem 0.65rem;
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .mood-btn:hover { color: var(--text-secondary); border-color: var(--accent-subtle); }
-
-  .mood-btn.selected {
-    color: var(--text-primary);
-    border-color: var(--accent-subtle);
-    background: var(--accent-glow);
-  }
-
-  .mood-icon { font-size: 0.9rem; line-height: 1; }
-  .mood-label { letter-spacing: 0.03em; }
-
-  @media (max-width: 768px) {
-    .mood-btn { padding: 0.35rem 0.55rem; font-size: 0.7rem; }
-    .mood-icon { font-size: 0.85rem; }
-  }
+  /* Mood selector removed — register is detected from the donor's words */
 
   .input-zone:focus-within {
     box-shadow: var(--shadow-glow-gold);
@@ -2786,25 +2729,13 @@ import Base from '../layouts/Base.astro';
     frame.appendChild(el);
   }
 
-  // Add metadata line to response frame
+  // Add metadata line to response frame — minimal, no internal state leaking
   function addMetaLine(frame: HTMLElement, register: string, wordCount: number) {
     const meta = document.createElement('div');
     meta.className = 'axi-meta-line';
-    if (register !== 'general') {
-      const tag = document.createElement('span');
-      tag.className = 'axi-meta-tag';
-      tag.textContent = register;
-      meta.appendChild(tag);
-    }
-    const modeTag = document.createElement('span');
-    modeTag.className = 'axi-meta-tag';
-    modeTag.textContent = selectedMood;
-    meta.appendChild(modeTag);
-    if (wordCount > 0) {
-      const wc = document.createElement('span');
-      wc.textContent = wordCount + ' words received';
-      meta.appendChild(wc);
-    }
+    const dot = document.createElement('span');
+    dot.textContent = 'witnessed';
+    meta.appendChild(dot);
     frame.appendChild(meta);
   }
 
@@ -2842,27 +2773,8 @@ import Base from '../layouts/Base.astro';
     } catch { /* Web Audio not available */ }
   }
 
-  // ── Mood selector ──
-  const moodBtns = document.querySelectorAll('.mood-btn');
-  moodBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      moodBtns.forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
-      btn.classList.add('selected');
-      btn.setAttribute('aria-pressed', 'true');
-      selectedMood = (btn as HTMLElement).dataset.mood || 'witness';
-      // Update placeholder to match mood
-      const placeholders: Record<string, string> = {
-        witness: 'qul · speak',
-        question: 'ask · the system listens',
-        offering: 'gift · what do you bring?',
-        wound: 'speak from the place that hurts',
-      };
-      input.placeholder = placeholders[selectedMood] || 'qul · speak';
-      // AXI shifts her colors to match the donor's mode
-      setAxiMode(selectedMood);
-      input.focus();
-    });
-  });
+  // Mood selector removed — register detected automatically from donor's words
+  // selectedMood stays 'witness' (default) for API payload compatibility
 
   // ── Device detection ──
   const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -3685,13 +3597,7 @@ import Base from '../layouts/Base.astro';
     // Show what the donor typed as a message bubble (soft entrance via CSS animation)
     const echo = document.createElement('div');
     echo.className = 'donor-echo';
-    if (selectedMood !== 'witness') {
-      const moodTag = document.createElement('span');
-      moodTag.className = 'echo-mood-tag';
-      const moodIcons: Record<string, string> = { question: '\u2753', offering: '\uD83C\uDF31', wound: '\uD83D\uDD4A' };
-      moodTag.textContent = moodIcons[selectedMood] || '';
-      echo.appendChild(moodTag);
-    }
+    // No emoji decoration — the donor's words stand alone
     const echoText = document.createTextNode(donorText);
     echo.appendChild(echoText);
     if (hadFile && filePayload) {
