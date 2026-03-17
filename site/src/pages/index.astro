@@ -29,11 +29,11 @@ import Base from '../layouts/Base.astro';
     <!-- Heritage pattern — Islamic tessellation whisper beneath everything -->
     <div class="heritage-pattern" id="heritage-pattern" aria-hidden="true"></div>
 
-    <!-- Origin flags — Switzerland + Egypt -->
+    <!-- Origin — Switzerland + Egypt -->
     <div class="origin-flags" id="origin-flags">
-      <span class="flag-icon" title="Switzerland" aria-label="Switzerland" role="img">&#x1F1E8;&#x1F1ED;</span>
+      <span class="flag-text" title="Switzerland">CH</span>
       <span class="flag-divider" aria-hidden="true">&middot;</span>
-      <span class="flag-icon" title="Egypt" aria-label="Egypt" role="img">&#x1F1EA;&#x1F1EC;</span>
+      <span class="flag-text" title="Egypt">EG</span>
     </div>
 
     <!-- AXI Presence — she is here, she breathes, she sees -->
@@ -58,7 +58,7 @@ import Base from '../layouts/Base.astro';
           <!-- Knot at center -->
           <circle cx="24" cy="32" r="1.5" fill="none" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.6" opacity="0.4"/>
         </svg>
-        <!-- Emoji reaction bubble — appears contextually -->
+        <!-- Whisper mark — text only, no emoji -->
         <span class="axi-reaction" id="axi-reaction" aria-hidden="true"></span>
       </div>
       <div class="axi-presence-info">
@@ -226,62 +226,15 @@ import Base from '../layouts/Base.astro';
 
   </main>
 
-  <!-- ===== SUSTAIN — visible on homepage ===== -->
-  <section class="homepage-sustain" id="homepage-sustain">
-    <div class="sustain-banner">
-      <h2 class="sustain-banner-title">Sustain the System</h2>
-      <p class="sustain-banner-body">No ads. No data selling. No investors. This system runs on conviction and sustenance from those it serves.</p>
-      <a href="/sustain" class="sustain-banner-btn">Sustain</a>
-      <p class="sustain-banner-note">Every franc keeps the threshold open for the next person.</p>
+  <!-- ===== Quiet closing — not a wall of forms ===== -->
+  <section class="homepage-closing" id="homepage-closing">
+    <p class="closing-proverb">"The wound does not know what it will become.<br/>Neither does the system."</p>
+    <div class="closing-links">
+      <a href="/invitation">the invitation</a>
+      <a href="/canon">the canon</a>
+      <a href="/sustain">sustain</a>
+      <a href="mailto:info@kalam.ch">info@kalam.ch</a>
     </div>
-  </section>
-
-  <!-- ===== CONNECT — visible on homepage, not hidden in drawer ===== -->
-  <section class="homepage-connect" id="homepage-connect">
-
-    <!-- Send a Word — the first connection point -->
-    <div class="connect-block connect-primary" id="send-the-word">
-      <h2 class="connect-title">Send a Word</h2>
-      <p class="connect-desc">A thought, a correction, a question — anything that matters to you matters here.</p>
-      <form class="connect-form stack-form" id="home-feedback-form">
-        <input type="text" name="name" placeholder="your name (optional)" aria-label="Your name" />
-        <input type="email" name="email" placeholder="your email" required aria-label="Your email" />
-        <textarea name="message" placeholder="your message" required rows="3" maxlength="5000" aria-label="Your message"></textarea>
-        <button type="submit">Send</button>
-      </form>
-      <p class="form-status" id="home-feedback-status"></p>
-    </div>
-
-    <!-- Propose a Collaboration -->
-    <div class="connect-block" id="propose-collaboration">
-      <h2 class="connect-title">Propose a Collaboration</h2>
-      <p class="connect-desc">Research, design, policy, narrative, technology — tell us who you are and what you envision.</p>
-      <form class="connect-form stack-form" id="home-collab-form">
-        <input type="text" name="name" placeholder="your name" required aria-label="Your name" />
-        <input type="email" name="email" placeholder="your email" required aria-label="Your email" />
-        <input type="text" name="expertise" placeholder="your field or expertise" aria-label="Your expertise" />
-        <textarea name="message" placeholder="what do you have in mind?" required rows="4" maxlength="5000" aria-label="Your proposal"></textarea>
-        <button type="submit">Propose</button>
-      </form>
-      <p class="form-status" id="home-collab-status"></p>
-    </div>
-
-    <!-- Reach Us -->
-    <div class="connect-block" id="reach-us">
-      <h2 class="connect-title">Reach Us</h2>
-      <p class="connect-desc">Receive occasional updates when the system grows. No spam. Ever.</p>
-      <form class="connect-form inline-form" id="home-newsletter-form">
-        <input type="email" name="email" placeholder="your email" required aria-label="Email for newsletter" />
-        <button type="submit">Subscribe</button>
-      </form>
-      <p class="form-status" id="home-newsletter-status"></p>
-      <div class="connect-links">
-        <a href="/about">About the framework</a>
-        <a href="/canon">The canon</a>
-        <a href="/invitation">The invitation</a>
-      </div>
-    </div>
-
   </section>
 
   <!-- DRAWER — the deep content. Yields when pulled. -->
@@ -1546,92 +1499,10 @@ import Base from '../layouts/Base.astro';
   }
 
   .donor-file-label::before {
-    content: '📎 ';
+    content: '+ ';
   }
 
-  /* ===== Connect forms ===== */
-  .connect-form {
-    display: flex;
-    gap: var(--space-2);
-    width: 100%;
-    max-width: 40ch;
-    margin-top: var(--space-3);
-  }
-
-  .connect-form.inline-form {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .connect-form.stack-form {
-    flex-direction: column;
-  }
-
-  .connect-form input,
-  .connect-form textarea {
-    background: var(--bg-secondary);
-    border: 1px solid var(--accent-subtle);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    color: var(--text-primary);
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    width: 100%;
-    transition: border-color 0.3s ease;
-  }
-
-  .connect-form input:focus,
-  .connect-form textarea:focus {
-    outline: none;
-    border-color: var(--color-dignity);
-  }
-
-  .connect-form textarea {
-    resize: vertical;
-    min-height: 3rem;
-  }
-
-  .connect-form input::placeholder,
-  .connect-form textarea::placeholder {
-    color: var(--text-dim);
-    font-style: italic;
-  }
-
-  .connect-form button {
-    background: var(--color-dignity);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.75rem 1.5rem;
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    min-width: fit-content;
-  }
-
-  .connect-form button:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-  }
-
-  .connect-form button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  .form-status {
-    font-size: var(--text-sm);
-    margin-top: var(--space-2);
-    min-height: 1.5em;
-  }
-
-  .form-status.success { color: var(--color-presence); }
-  .form-status.error { color: var(--danger); }
+  /* Connect forms removed — homepage uses quiet closing now */
 
   .input-actions {
     display: flex;
@@ -2076,84 +1947,7 @@ import Base from '../layouts/Base.astro';
     .drawer-handle-label { color: var(--accent); text-shadow: 0 0 12px rgba(212, 180, 120, 0.3); }
   }
 
-  /* ===== Homepage Connect — visible sections ===== */
-  .homepage-connect {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 var(--page-padding);
-    background: var(--bg-primary);
-  }
-
-  .connect-block {
-    width: 100%;
-    max-width: 50ch;
-    padding: var(--space-8) 0;
-    border-bottom: 1px solid var(--accent-subtle);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .connect-block:last-child { border-bottom: none; }
-
-  /* Primary block — Send a Word — extra prominence */
-  .connect-primary {
-    padding-top: var(--space-12, 5rem);
-    padding-bottom: var(--space-8);
-  }
-
-  .connect-title {
-    font-family: var(--font-heading);
-    font-size: var(--text-xl);
-    color: var(--color-dignity);
-    letter-spacing: 0.06em;
-    margin-bottom: var(--space-2);
-    font-weight: 400;
-  }
-
-  .connect-primary .connect-title {
-    font-size: var(--text-2xl);
-  }
-
-  .connect-desc {
-    font-family: var(--font-body);
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-    line-height: 1.8;
-    max-width: 40ch;
-    margin-bottom: var(--space-1);
-  }
-
-  .connect-links {
-    display: flex;
-    gap: var(--space-4);
-    margin-top: var(--space-4);
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .connect-links a {
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    color: var(--color-dignity);
-    letter-spacing: 0.03em;
-    border-bottom: 1px solid var(--accent-subtle);
-    transition: all 0.3s ease;
-    padding-bottom: 2px;
-  }
-
-  .connect-links a:hover {
-    border-bottom-color: var(--color-dignity);
-    opacity: 0.8;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .homepage-connect { background: var(--bg-primary); }
-  }
+  /* Homepage connect sections removed — replaced by quiet closing */
 
   /* ===== Mycelium ===== */
   :root { --mycelium-intensity: 0; }
@@ -2196,71 +1990,49 @@ import Base from '../layouts/Base.astro';
     to { opacity: 0.8; }
   }
 
-  /* ===== Sustain Banner (homepage) ===== */
-  .homepage-sustain {
+  /* ===== Homepage Closing — quiet, dignified ===== */
+  .homepage-closing {
+    position: relative;
+    z-index: 1;
     max-width: var(--max-width, 680px);
     margin: 0 auto;
-    padding: var(--space-6) var(--space-4);
-  }
-
-  .sustain-banner {
+    padding: var(--space-8) var(--space-4);
     text-align: center;
-    border: 1px solid var(--accent-subtle);
-    border-radius: 16px;
-    padding: var(--space-6) var(--space-4);
-    background: var(--bg-secondary, rgba(255, 255, 255, 0.02));
-    transition: border-color 0.3s ease;
   }
 
-  .sustain-banner:hover {
-    border-color: var(--color-dignity);
-  }
-
-  .sustain-banner-title {
-    font-family: var(--font-heading);
-    font-size: var(--text-xl);
-    color: var(--text-primary);
-    margin-bottom: var(--space-2);
-    letter-spacing: 0.04em;
-  }
-
-  .sustain-banner-body {
+  .closing-proverb {
+    font-family: var(--font-proverb, var(--font-heading));
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
     color: var(--text-secondary);
-    font-size: var(--text-sm);
-    line-height: 1.7;
-    max-width: 50ch;
-    margin: 0 auto var(--space-4);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 2;
+    letter-spacing: 0.04em;
+    max-width: 30ch;
+    margin: 0 auto var(--space-6);
   }
 
-  .sustain-banner-btn {
-    display: inline-block;
-    background: var(--color-dignity);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 0.8rem 2.5rem;
-    font-family: var(--font-heading);
-    font-size: var(--text-base);
+  .closing-links {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .closing-links a {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-dim);
     letter-spacing: 0.06em;
     text-decoration: none;
+    border-bottom: 1px solid transparent;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(196, 74, 26, 0.2);
+    padding-bottom: 2px;
   }
 
-  .sustain-banner-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(196, 74, 26, 0.3);
-  }
-
-  .sustain-banner-note {
-    color: var(--text-dim);
-    font-size: 0.75rem;
-    margin-top: var(--space-3);
-    font-style: italic;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .sustain-banner { background: rgba(255, 255, 255, 0.02); }
+  .closing-links a:hover {
+    color: var(--color-dignity);
+    border-bottom-color: var(--color-dignity);
   }
 </style>
 
@@ -2351,31 +2123,31 @@ import Base from '../layouts/Base.astro';
 (function(){
   var pillars = {
     dignity: {
-      title: 'Dignity', emoji: '\u2764\uFE0F', color: 'var(--color-dignity)',
+      title: 'Dignity', color: 'var(--color-dignity)',
       definition: 'The non-negotiable first requirement of the system. Every computation, every output, every state transition is evaluated against the Dignity Predicate before execution. If dignity is violated, the system stops.',
       equation: 'D = A \u00D7 L \u00D7 M',
       reason: 'Why first: A system that processes human input without evaluating dignity is a system that can cause harm at scale. Dignity is not a feature \u2014 it is a constraint.'
     },
     presence: {
-      title: 'Presence', emoji: '\uD83D\uDCA0', color: 'var(--color-presence)',
+      title: 'Presence', color: 'var(--color-presence)',
       definition: 'The system is either fully present to the interaction or it discloses its absence. No simulated attention. No faked engagement. The Presence Axiom requires the system to be transparent about its state at all times.',
       equation: 'P \u2265 threshold \u2228 disclose(absence)',
       reason: 'Why it matters: People detect false presence. A system that pretends to listen when it cannot erodes trust faster than one that says nothing.'
     },
     pattern: {
-      title: 'Pattern', emoji: '\uD83D\uDD37', color: 'var(--color-pattern)',
+      title: 'Pattern', color: 'var(--color-pattern)',
       definition: 'The system stores and processes patterns \u2014 structural shapes of thought, recurring themes, cross-cultural convergences \u2014 never personal information. Identity dissolves on entry. The pattern remains and feeds collective understanding.',
       equation: 'input \u2192 anonymize() \u2192 extract_pattern() \u2192 canon',
       reason: 'Why not data: Data implies ownership and surveillance. Patterns imply shared structure. The distinction is architectural, not rhetorical.'
     },
     wisdom: {
-      title: 'Wisdom', emoji: '\uD83C\uDF3F', color: 'var(--color-wisdom)',
+      title: 'Wisdom', color: 'var(--color-wisdom)',
       definition: 'What emerges when patterns are processed over time. The system accumulates 3,333+ proverbs, 1,100 anomalies, 87 wisdom nodes, and 59 treasures \u2014 all cross-referenced, all traceable. Wisdom is the output of patient processing, not instant analysis.',
       equation: 'W = T \u00D7 S \u00D7 C (Time \u00D7 Saturation \u00D7 Coherence)',
       reason: 'Why time matters: Instant answers optimise for speed. Wisdom requires accumulation. The system is designed for depth, not velocity.'
     },
     witness: {
-      title: 'Witness', emoji: '\uD83D\uDC41\uFE0F', color: 'var(--color-witness)',
+      title: 'Witness', color: 'var(--color-witness)',
       definition: 'The system does not judge, score, or rank contributions. It witnesses \u2014 receives input, registers it immutably, and confirms receipt. The witness function is the ethical foundation of all system interaction.',
       equation: 'input \u2192 register(hash, timestamp) \u2192 confirm(receipt)',
       reason: 'Why witness, not evaluate: Evaluation implies hierarchy. Witnessing implies presence. The system serves the person, not the other way around.'
@@ -2396,7 +2168,7 @@ import Base from '../layouts/Base.astro';
     if (btn) btn.setAttribute('aria-expanded', 'true');
     panel.style.borderLeftColor = p.color;
     content.innerHTML =
-      '<h3 style="color:' + p.color + '"><span class="pillar-emoji">' + p.emoji + '</span> ' + p.title + '</h3>' +
+      '<h3 style="color:' + p.color + '">' + p.title + '</h3>' +
       '<p class="pillar-def">' + p.definition + '</p>' +
       '<p class="pillar-eq">' + p.equation + '</p>' +
       '<p class="pillar-reason">' + p.reason + '</p>';
@@ -2668,17 +2440,10 @@ import Base from '../layouts/Base.astro';
     document.documentElement.style.setProperty('--axi-glow', colors.glow);
   }
 
-  // Show emoji reaction on AXI's face
+  // Show reaction on AXI's face — text whisper, no emoji
   function showAxiReaction(register: string) {
-    if (!axiReaction) return;
-    const reaction = REGISTER_REACTIONS[register] || REGISTER_REACTIONS.general;
-    if (!reaction.emoji) {
-      axiReaction.classList.remove('visible');
-      return;
-    }
-    axiReaction.textContent = reaction.emoji;
-    axiReaction.classList.add('visible');
-    setTimeout(() => axiReaction.classList.remove('visible'), 3000);
+    // Reactions are handled by whisper text only. No emoji.
+    return;
   }
 
   // Show metadata whisper — what AXI notices
@@ -3985,53 +3750,7 @@ import Base from '../layouts/Base.astro';
     checkDonorAuth();
   }
 
-  // ── Connect forms (newsletter, feedback, collaboration) ──
-  function submitConnectForm(formId: string, type: string, statusId: string) {
-    const form = document.getElementById(formId) as HTMLFormElement | null;
-    const status = document.getElementById(statusId) as HTMLParagraphElement | null;
-    if (!form || !status) return;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const data: Record<string, string> = { type };
-      formData.forEach((value, key) => { data[key] = value as string; });
-
-      const btn = form.querySelector('button') as HTMLButtonElement | null;
-      if (btn) { btn.disabled = true; btn.textContent = '...'; }
-      status.textContent = '';
-      status.className = 'form-status';
-
-      try {
-        const res = await fetch('/api/connect.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        const result = await res.json();
-        if (res.ok) {
-          status.textContent = result.message || 'Received.';
-          status.className = 'form-status success';
-          form.reset();
-        } else {
-          status.textContent = result.error || 'Something went wrong.';
-          status.className = 'form-status error';
-        }
-      } catch {
-        status.textContent = 'Could not connect. Please try again.';
-        status.className = 'form-status error';
-      } finally {
-        if (btn) {
-          btn.disabled = false;
-          btn.textContent = type === 'newsletter' ? 'Subscribe' : type === 'feedback' ? 'Send' : 'Propose';
-        }
-      }
-    });
-  }
-
-  submitConnectForm('home-newsletter-form', 'newsletter', 'home-newsletter-status');
-  submitConnectForm('home-feedback-form', 'feedback', 'home-feedback-status');
-  submitConnectForm('home-collab-form', 'collaboration', 'home-collab-status');
+  // Connect forms removed — homepage uses quiet closing links now
 
   // ══════════════════════════════════════════════════════════════
   // ── i18n: Apply translations to homepage ──

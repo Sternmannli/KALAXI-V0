@@ -92,6 +92,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- Top Navigation — hamburger on mobile, compact on desktop -->
     <nav class="site-nav" aria-label="Main navigation">
       <a href="/" class="nav-home">kalam</a>
+      <!-- Language picker — always visible, not buried in menu -->
+      <div class="lang-picker" id="lang-picker">
+        <button class="lang-toggle" id="lang-toggle" aria-label="Language" aria-expanded="false">
+          <span id="lang-current">EN</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="lang-menu" id="lang-menu" hidden></div>
+      </div>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
         <span class="nav-toggle-bar"></span>
         <span class="nav-toggle-bar"></span>
@@ -113,14 +121,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <a href="/invitation">invitation</a>
         <a href="/silence">silence</a>
         <a href="/sustain" class="nav-sustain">sustain</a>
-        <!-- Language picker -->
-        <div class="lang-picker" id="lang-picker">
-          <button class="lang-toggle" id="lang-toggle" aria-label="Language" aria-expanded="false">
-            <span id="lang-current">EN</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div class="lang-menu" id="lang-menu" hidden></div>
-        </div>
       </div>
     </nav>
     <script is:inline>
@@ -218,9 +218,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <div class="footer-meta">
           <p>Created by M. Farag</p>
           <p class="footer-origins">
-            <span class="swiss-mark">🇪🇬 Cairo, Egypt</span>
+            <span class="swiss-mark">Cairo, Egypt</span>
             &nbsp;&middot;&nbsp;
-            <span class="swiss-mark"><span class="swiss-flag" aria-hidden="true"></span> Zürich, Switzerland</span>
+            <span class="swiss-mark">Zürich, Switzerland</span>
           </p>
         </div>
 
