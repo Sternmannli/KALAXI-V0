@@ -1,0 +1,40 @@
+name: Merge feature branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to merge into main'
+        required: true
+        default: 'claude/general-session-0OBWK'
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create and merge PR
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PAT }}
+          script: |
+            const branch = context.payload.inputs.branch;
+
+            // Create PR
+            const pr = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Merge ${branch}`,
+              head: branch,
+              base: 'main',
+              body: 'Auto-merge triggered by V-002.\n\n[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]'
+            });
+            console.log(`PR #${pr.data.number} created`);
+
+            // Merge immediately
+            await github.rest.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.data.number,
+              merge_method: 'squash'
+            });
+            console.log(`PR #${pr.data.number} merged`);
