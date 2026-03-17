@@ -16,32 +16,6 @@ import Base from '../layouts/Base.astro';
     </div>
   </div>
 
-  <!-- GUIDE — first-visit walkthrough -->
-  <div id="guide-overlay" class="guide-overlay" hidden>
-    <div class="guide-card">
-      <div class="guide-step" id="guide-step-1">
-        <p class="guide-title">This is kalam.</p>
-        <p class="guide-text">A safety layer for human dignity. The system checks that every interaction respects you — your agency, your legibility, your standing as a person.</p>
-        <button class="guide-next" id="guide-next-1">Next</button>
-      </div>
-      <div class="guide-step" id="guide-step-2" hidden>
-        <p class="guide-title">How it works</p>
-        <p class="guide-text">Type something in the input below. Choose your mode — witness, question, offering, or wound. The system responds from its canon of 3,333 proverbs and constitutional principles.</p>
-        <button class="guide-next" id="guide-next-2">Next</button>
-      </div>
-      <div class="guide-step" id="guide-step-3" hidden>
-        <p class="guide-title">You are a contributor</p>
-        <p class="guide-text">What you bring becomes part of a living pattern. No personal data is stored. The system sees patterns, not people. You can leave at any time.</p>
-        <button class="guide-next" id="guide-done">Begin</button>
-      </div>
-      <div class="guide-dots">
-        <span class="guide-dot active" data-step="1"></span>
-        <span class="guide-dot" data-step="2"></span>
-        <span class="guide-dot" data-step="3"></span>
-      </div>
-      <button class="guide-skip" id="guide-skip">Skip</button>
-    </div>
-  </div>
 
   <!-- THRESHOLD — the living space -->
   <main class="threshold" id="main-content">
@@ -1390,88 +1364,6 @@ import Base from '../layouts/Base.astro';
   @media (display-mode: standalone) { .pwa-hint { display: none; } }
 
   /* ===== Guide overlay ===== */
-  .guide-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9998;
-    background: rgba(10, 10, 15, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-4);
-    animation: fadeIn 0.5s ease;
-  }
-
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-  .guide-card {
-    background: var(--bg-secondary, #1a1a1f);
-    border: 1px solid var(--accent-subtle);
-    border-radius: 16px;
-    padding: var(--space-6) var(--space-4);
-    max-width: 420px;
-    width: 100%;
-    text-align: center;
-    position: relative;
-  }
-
-  .guide-title {
-    font-family: var(--font-heading);
-    font-size: clamp(1.3rem, 3vw, 1.6rem);
-    color: var(--text-primary);
-    margin-bottom: var(--space-2);
-  }
-
-  .guide-text {
-    font-family: var(--font-body);
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: var(--space-4);
-  }
-
-  .guide-next {
-    background: var(--color-dignity);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.6rem 2rem;
-    font-family: var(--font-body);
-    font-size: var(--text-base);
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-  }
-  .guide-next:hover { opacity: 0.85; }
-
-  .guide-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: var(--space-3);
-  }
-
-  .guide-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent-subtle);
-    transition: background 0.3s ease;
-  }
-
-  .guide-dot.active { background: var(--color-dignity); }
-
-  .guide-skip {
-    position: absolute;
-    top: var(--space-2);
-    right: var(--space-3);
-    background: none;
-    border: none;
-    color: var(--text-dim);
-    font-size: 0.75rem;
-    cursor: pointer;
-    letter-spacing: 0.05em;
-  }
-  .guide-skip:hover { color: var(--text-secondary); }
 
   /* ===== Mood/Mode selector ===== */
   .mood-selector {
@@ -3976,58 +3868,6 @@ import Base from '../layouts/Base.astro';
   restoreLast();
   initLedger();
 
-  // ── First-visit guide ──
-  const guideOverlay = document.getElementById('guide-overlay');
-  const hasVisited = localStorage.getItem('kalam-visited');
-
-  if (!hasVisited && guideOverlay) {
-    // Show guide after dedication overlay dismisses (listen for its removal)
-    const dedEl = document.getElementById('dedication');
-    const showGuide = () => {
-      guideOverlay.hidden = false;
-      localStorage.setItem('kalam-guided', '1');
-    };
-
-    if (dedEl && !dedEl.classList.contains('dismissed')) {
-      const obs = new MutationObserver(() => {
-        if (dedEl.classList.contains('dismissed') || dedEl.hidden) {
-          obs.disconnect();
-          setTimeout(showGuide, 500);
-        }
-      });
-      obs.observe(dedEl, { attributes: true, attributeFilter: ['class', 'hidden'] });
-    } else {
-      showGuide();
-    }
-
-    // Step navigation
-    const steps = [
-      document.getElementById('guide-step-1'),
-      document.getElementById('guide-step-2'),
-      document.getElementById('guide-step-3'),
-    ];
-    const dots = guideOverlay.querySelectorAll('.guide-dot');
-    let currentStep = 0;
-
-    function goToStep(n: number) {
-      steps.forEach((s, i) => { if (s) s.hidden = i !== n; });
-      dots.forEach((d, i) => d.classList.toggle('active', i === n));
-      currentStep = n;
-    }
-
-    document.getElementById('guide-next-1')?.addEventListener('click', () => goToStep(1));
-    document.getElementById('guide-next-2')?.addEventListener('click', () => goToStep(2));
-    document.getElementById('guide-done')?.addEventListener('click', () => {
-      guideOverlay.style.opacity = '0';
-      guideOverlay.style.transition = 'opacity 0.4s ease';
-      setTimeout(() => { guideOverlay.hidden = true; }, 400);
-    });
-    document.getElementById('guide-skip')?.addEventListener('click', () => {
-      guideOverlay.style.opacity = '0';
-      guideOverlay.style.transition = 'opacity 0.4s ease';
-      setTimeout(() => { guideOverlay.hidden = true; }, 400);
-    });
-  }
 
   // ── PWA install ──
   const pwaHint = document.getElementById('pwa-hint');
