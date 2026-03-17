@@ -1,13 +1,9 @@
-name: Sync Site Patterns — Organism Feedback Loop
-
-# The organism breathes both ways.
-# kalam.ch collects donor patterns → this workflow pulls them back into the repo.
-# No personal data. Only anonymized statistics.
+name: Sync Site Patterns
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Daily at 03:00 UTC
-  workflow_dispatch:       # Manual trigger
+    - cron: '0 3 * * *'
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -57,10 +53,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No new pattern data. The organism rests."
           else
-            git commit -m "[V-002 · SYNC] Site patterns $(date -u +%Y-%m-%d)
-
-The organism breathes. Donor patterns flow back from kalam.ch.
-
-[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]"
+            git commit -m "[V-002 SYNC] Site patterns $(date -u +%Y-%m-%d)"
             git push
           fi

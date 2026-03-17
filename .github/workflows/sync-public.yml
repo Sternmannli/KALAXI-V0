@@ -1,8 +1,4 @@
-name: Sync to Public Repo — kalam-framework
-
-# When relevant code changes in KALAXI-V0 (private), automatically
-# clean, strip internal vocabulary, and push to kalam-framework (public).
-# Zero leak tolerance.
+name: Sync to Public Repo
 
 on:
   push:
@@ -29,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Sternmannli/kalam-framework
-          token: ${{ secrets.PUBLIC_REPO_TOKEN }}
+          token: ${{ secrets.PAT }}
           path: public
 
       - name: Setup Python
@@ -57,11 +53,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No public-relevant changes. Nothing to sync."
           else
-            git commit -m "Sync from upstream $(date -u +%Y-%m-%d)
-
-Automated sync of public-facing code from the KALAXI system.
-Clean engineering. Zero internal vocabulary.
-
-[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]"
+            git commit -m "Sync from upstream $(date -u +%Y-%m-%d)"
             git push
           fi
