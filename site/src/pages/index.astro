@@ -2338,6 +2338,8 @@ import Base from '../layouts/Base.astro';
     localStorage.setItem('kalam-visited', '1');
     ded.classList.add('dismissed');
     ded.style.opacity = '0';
+    document.removeEventListener('keydown', dedKeyDown);
+    document.removeEventListener('keyup', dedKeyUp);
     setTimeout(function(){ ded.remove(); }, 2000);
   }
 
@@ -2385,16 +2387,18 @@ import Base from '../layouts/Base.astro';
   ded.addEventListener('touchend', stopHold);
   ded.addEventListener('touchcancel', stopHold);
 
-  // Keyboard: hold Enter or Space
-  document.addEventListener('keydown', function handler(e) {
+  // Keyboard: hold Enter or Space (removed after dismiss so textarea works)
+  function dedKeyDown(e) {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       if (!holdStart) startHold();
     }
-  });
-  document.addEventListener('keyup', function handler(e) {
+  }
+  function dedKeyUp(e) {
     if (e.key === 'Enter' || e.key === ' ') stopHold();
-  });
+  }
+  document.addEventListener('keydown', dedKeyDown);
+  document.addEventListener('keyup', dedKeyUp);
 
   // Accessibility fallback: auto-dismiss after 8 seconds if no interaction
   autoTimer = setTimeout(dismiss, 8000);
