@@ -41,6 +41,7 @@ jobs:
           DB_NAME=faragmoh_ty30
           DB_USER=faragmoh_ty30
           DB_PASS=${{ secrets.DB_PASSWORD }}
+          EXPORT_KEY=${{ secrets.EXPORT_KEY }}
           CONF
 
       - name: Deploy via lftp mirror
