@@ -17,6 +17,9 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Install sshpass
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
@@ -28,4 +31,23 @@ jobs:
           CMD: ${{ inputs.command }}
           WDIR: ${{ inputs.working_dir }}
         run: |
-          sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "cd $WDIR && $CMD"
+          sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "cd $WDIR && $CMD" | tee output.txt
+
+      - name: Save output as issue comment
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OUTPUT=$(cat output.txt 2>/dev/null || echo "(no output)")
+          TITLE="Server Command Result: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          BODY=$(cat <<ISSUEEOF
+          **Command:** \`${{ inputs.command }}\`
+          **Directory:** \`${{ inputs.working_dir }}\`
+          **Run:** [#${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+          \`\`\`
+          ${OUTPUT}
+          \`\`\`
+          ISSUEEOF
+          )
+          gh issue create --title "$TITLE" --body "$BODY" --label "server-output" --repo ${{ github.repository }}
