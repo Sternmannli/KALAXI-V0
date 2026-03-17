@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import r7m from '../../public/data/r7m-index.json';
+
+const tierOrder = ['stone', 'weaver', 'honey', 'hand', 'cross'] as const;
+---
+
+<Base title="R7M — kalam.ch" description="The Womb. 59 treasures, 10 formulas, 14 architectural concepts.">
+
+  <section class="page-header">
+    <h1>R7M — The Womb <span class="arabic-hint">(رحم)</span></h1>
+    <p class="quiet">{r7m.essence}</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Tier sections -->
+  {tierOrder.map((tierKey) => {
+    const tier = (r7m.tiers as any)[tierKey];
+    if (!tier) return null;
+    return (
+      <section class="r7m-tier" id={`tier-${tierKey}`}>
+        <h2 class="tier-heading">{tier.name}</h2>
+        <div class="treasure-grid">
+          {tier.treasures.map((t: any) => (
+            <div class="treasure-card" id={t.id.replace('#', '')}>
+              <h3 class="treasure-id">{t.id}</h3>
+              <h4 class="treasure-title">{t.title}</h4>
+              {t.formula && <p class="treasure-formula">{t.formula}</p>}
+              {t.vow && <p class="treasure-vow">"{t.vow}"</p>}
+              <p class="treasure-principle">{t.principle}</p>
+              {t.covenants && t.covenants.length > 0 && (
+                <div class="treasure-links">
+                  {t.covenants.map((c: string) => (
+                    <span class="cov-ref">{c}</span>
+                  ))}
+                </div>
+              )}
+              {t.narrative_links && t.narrative_links.length > 0 && (
+                <div class="treasure-links">
+                  {t.narrative_links.map((n: string) => {
+                    const parts = n.split(':');
+                    const book = parts[0].replace('NAR-', '').toLowerCase();
+                    const chapter = parts[1] ? `#${parts[1].replace('ch', 'ch-')}` : '';
+                    return <a href={`/${book}${chapter}`} class="nar-ref">{n}</a>;
+                  })}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  })}
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Equations -->
+  <section class="content-section" id="equations">
+    <div class="text-block">
+      <h2>Formulas</h2>
+      {r7m.equations.map((eq: any) => (
+        <div class="equation-row">
+          <span class="eq-id">{eq.id}</span>
+          <span class="eq-name">{eq.name}</span>
+          <code class="eq-formula">{eq.formula}</code>
+          {eq.treasure && <span class="eq-treasure">{eq.treasure}</span>}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Architectural Concepts -->
+  <section class="content-section" id="concepts">
+    <div class="text-block">
+      <h2>Architectural Concepts</h2>
+      {r7m.concepts.map((ac: any) => (
+        <div class="concept-row">
+          <span class="ac-id">{ac.id}</span>
+          <strong>{ac.name}</strong>
+          <p class="ac-desc">{ac.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Origins -->
+  <section class="content-section" id="origins">
+    <div class="text-block">
+      <h2>Origins</h2>
+      <p class="quiet">The deep archive. Where this system came from.</p>
+      {r7m.origins.map((o: any) => (
+        <div class="origin-row">
+          <span class="origin-date">{o.date}</span>
+          <strong>{o.title}</strong>
+          <p class="origin-desc">{o.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Connection footer -->
+  <section class="connection-footer">
+    <p class="quiet">Connected to <a href="/api/axi.php?r7m">the hub</a>. 59 treasures. 10 formulas. 14 concepts.</p>
+    <p class="ledger-count" id="ledger-count"></p>
+  </section>
+
+  <script is:inline>
+    fetch('/api/axi.php')
+      .then(r => r.json())
+      .then(d => {
+        const el = document.getElementById('ledger-count');
+        if (el && d.count) el.textContent = d.count + ' have crossed the threshold.';
+      })
+      .catch(() => {});
+  </script>
+
+</Base>

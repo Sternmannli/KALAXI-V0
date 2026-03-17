@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import ashwater from '../../public/data/ashwater.json';
+---
+
+<Base title="Ashwater — kalam.ch" description="The civic narrative. Tactile, communal, three-beat rhythm.">
+
+  <section class="page-header">
+    <h1>Ashwater — The Axis</h1>
+    <p class="quiet">{ashwater.subtitle}</p>
+    <p class="voice-line">Voice: {ashwater.voice} — {ashwater.core_images.join(', ')}</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Table of Contents -->
+  <nav class="narrative-toc" aria-label="Chapters">
+    {ashwater.chapters.map((ch: any) => (
+      <a href={`#ch-${ch.number}`} class="toc-link">
+        <span class="toc-num">{ch.type === 'prologue' ? '◊' : ch.number}</span>
+        {ch.title}
+      </a>
+    ))}
+  </nav>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Chapters -->
+  {ashwater.chapters.map((ch: any) => (
+    <article class="narrative-chapter" id={`ch-${ch.number}`}>
+      <h3 class="chapter-heading">
+        <span class="chapter-type">{ch.type === 'prologue' ? 'Prologue' : `Chapter ${ch.number}`}</span>
+        {ch.title}
+      </h3>
+      <div class="narrative-text">
+        {ch.text.split('\n\n').map((p: string) => (
+          <p>{p}</p>
+        ))}
+      </div>
+      <div class="gap" role="separator" aria-hidden="true"></div>
+    </article>
+  ))}
+
+  <!-- Connection footer -->
+  <section class="connection-footer">
+    <p class="quiet">Connected to <a href="/api/axi.php?manifest">the hub</a>. Part of the living system.</p>
+    <p class="ledger-count" id="ledger-count"></p>
+  </section>
+
+  <script is:inline>
+    fetch('/api/axi.php')
+      .then(r => r.json())
+      .then(d => {
+        const el = document.getElementById('ledger-count');
+        if (el && d.count) el.textContent = d.count + ' have crossed the threshold.';
+      })
+      .catch(() => {});
+  </script>
+
+</Base>

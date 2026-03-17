@@ -37,6 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
+// Load narrative/topology functions
+require_once __DIR__ . '/lib/narratives.php';
+
 // ═══════════════════════════════════════════════════════════════════
 // SECTION 1 — SEALED GATE (Three Absolute Prohibitions)
 // Source: WEAVER/sealed_gate.py v2.0 · COV#NEW-C
@@ -955,6 +958,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['certificate'])) {
     $cert = witness_certificate_view($db, (int) $_GET['certificate']);
     if (!$cert) { http_response_code(404); echo json_encode(['error' => 'Certificate not found']); exit; }
     echo json_encode($cert, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+// --- Manifest: GET ?manifest ---
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['manifest'])) {
+    echo json_encode(load_manifest(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+// --- Narrative: GET ?narrative=hakaka[&chapter=1] ---
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['narrative'])) {
+    $nar_id = 'NAR-' . strtoupper(trim($_GET['narrative']));
+    if (isset($_GET['chapter'])) {
+        $ch = load_narrative_chapter($nar_id, (int) $_GET['chapter']);
+        if (!$ch) { http_response_code(404); echo json_encode(['error' => 'Chapter not found']); exit; }
+        echo json_encode($ch, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+    $nar = load_narrative($nar_id);
+    if (!$nar) { http_response_code(404); echo json_encode(['error' => 'Narrative not found']); exit; }
+    echo json_encode($nar, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+// --- R7M: GET ?r7m ---
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['r7m'])) {
+    $r7m = load_r7m();
+    if (!$r7m) { http_response_code(404); echo json_encode(['error' => 'R7M not indexed']); exit; }
+    echo json_encode($r7m, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+// --- Seeds: GET ?seeds ---
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['seeds'])) {
+    echo json_encode(load_seeds(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     exit;
 }
 

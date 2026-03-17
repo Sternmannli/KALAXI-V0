@@ -488,6 +488,320 @@ nav a:hover {
   }
 }
 
+/* ===== Narrative Pages ===== */
+.narrative-toc {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-padding);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+}
+
+.toc-link {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s var(--transition-smooth);
+}
+
+.toc-link:hover {
+  border-bottom-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.toc-num {
+  color: var(--accent);
+  margin-right: 0.25em;
+}
+
+.narrative-chapter {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-6) var(--page-padding);
+}
+
+.chapter-heading {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  line-height: 1.3;
+}
+
+.chapter-type {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-1);
+}
+
+.narrative-text {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.9;
+  color: var(--text-primary);
+}
+
+.narrative-text p {
+  margin-bottom: var(--space-2);
+}
+
+.chapter-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+}
+
+.treasure-link, .nar-ref {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 0.15em 0.5em;
+  border: 1px solid var(--accent-subtle);
+  border-radius: 3px;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.treasure-link:hover, .nar-ref:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.voice-line {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.connection-footer {
+  max-width: var(--max-width);
+  margin: var(--space-8) auto var(--space-4);
+  padding: 0 var(--page-padding);
+  text-align: center;
+}
+
+.ledger-count {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  margin-top: var(--space-1);
+}
+
+/* ===== R7M Page ===== */
+.r7m-tier {
+  max-width: 80ch;
+  margin: 0 auto var(--space-8);
+  padding: 0 var(--page-padding);
+}
+
+.tier-heading {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-1);
+  border-bottom: 2px solid var(--accent-subtle);
+}
+
+.treasure-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.treasure-card {
+  padding: var(--space-3);
+  border-left: 3px solid var(--accent-subtle);
+  background: var(--bg-inset);
+  border-radius: 0 4px 4px 0;
+}
+
+.treasure-id {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--accent);
+  font-weight: 500;
+  margin: 0 0 0.25em;
+}
+
+.treasure-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-1);
+}
+
+.treasure-formula {
+  font-family: 'Courier New', monospace;
+  font-size: var(--text-sm);
+  color: var(--color-pattern);
+  background: var(--bg-secondary);
+  padding: 0.25em 0.5em;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: var(--space-1);
+}
+
+.treasure-vow {
+  font-family: var(--font-proverb);
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+.treasure-principle {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.treasure-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin-top: var(--space-1);
+}
+
+.cov-ref {
+  font-size: 0.85em;
+  color: var(--text-dim);
+  background: var(--bg-secondary);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+}
+
+.arabic-hint {
+  font-family: var(--font-proverb);
+  font-weight: 400;
+}
+
+/* Equations */
+.equation-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-2);
+  padding: var(--space-1) 0;
+  border-bottom: 1px solid var(--bg-elevated);
+}
+
+.eq-id {
+  font-size: var(--text-sm);
+  color: var(--accent);
+  font-weight: 500;
+  min-width: 5em;
+}
+
+.eq-name {
+  font-weight: 500;
+  min-width: 12em;
+}
+
+.eq-formula {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  color: var(--color-pattern);
+}
+
+.eq-treasure {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+}
+
+/* Concepts */
+.concept-row {
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--bg-elevated);
+}
+
+.ac-id {
+  font-size: var(--text-sm);
+  color: var(--accent);
+  font-weight: 500;
+  margin-right: var(--space-1);
+}
+
+.ac-desc {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-top: 0.25em;
+}
+
+/* Origins */
+.origin-row {
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--bg-elevated);
+}
+
+.origin-date {
+  font-size: var(--text-sm);
+  color: var(--accent);
+  margin-right: var(--space-1);
+}
+
+.origin-desc {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-top: 0.25em;
+}
+
+/* ===== Museum Page ===== */
+.museum-artifact {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--bg-elevated);
+}
+
+.artifact-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+.artifact-date {
+  font-size: var(--text-sm);
+  color: var(--accent);
+  min-width: 7em;
+}
+
+.superseded-note {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  font-style: italic;
+  margin-top: var(--space-1);
+}
+
+.superseded-note code {
+  font-size: 0.9em;
+  background: var(--bg-secondary);
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+}
+
+/* Timeline */
+.timeline {
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--accent-subtle);
+}
+
+.timeline-entry {
+  padding: var(--space-1) 0;
+  font-size: var(--text-sm);
+}
+
+.tl-date {
+  color: var(--accent);
+  font-weight: 500;
+  min-width: 7em;
+  display: inline-block;
+}
+
 /* ===== PWA standalone mode — respect device safe areas ===== */
 @media (display-mode: standalone) {
   .site-nav {
