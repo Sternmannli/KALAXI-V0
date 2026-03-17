@@ -48,7 +48,7 @@ jobs:
           git config user.name "V-002 [Organism]"
           git config user.email "axi@kalam.ch"
 
-          git add KEEP/SITE_PATTERNS/
+          git add KEEP/SITE_PATTERNS/ 2>/dev/null || true
 
           if git diff --cached --quiet; then
             echo "No new pattern data. The organism rests."
