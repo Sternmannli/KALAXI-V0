@@ -31,23 +31,21 @@ jobs:
           CMD: ${{ inputs.command }}
           WDIR: ${{ inputs.working_dir }}
         run: |
-          sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "cd $WDIR && $CMD" | tee output.txt
+          sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "cd $WDIR && $CMD" > output.txt 2>&1 || true
+          cat output.txt
 
-      - name: Save output as issue comment
+      - name: Post output as issue
         if: always()
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          OUTPUT=$(cat output.txt 2>/dev/null || echo "(no output)")
-          TITLE="Server Command Result: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          BODY=$(cat <<ISSUEEOF
-          **Command:** \`${{ inputs.command }}\`
-          **Directory:** \`${{ inputs.working_dir }}\`
-          **Run:** [#${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-
-          \`\`\`
-          ${OUTPUT}
-          \`\`\`
-          ISSUEEOF
-          )
-          gh issue create --title "$TITLE" --body "$BODY" --label "server-output" --repo ${{ github.repository }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let output = '(no output)';
+            try { output = fs.readFileSync('output.txt', 'utf8'); } catch(e) {}
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Server: ${context.payload.inputs.command.substring(0, 60)}`,
+              body: `**Command:** \`${context.payload.inputs.command}\`\n**Directory:** \`${context.payload.inputs.working_dir}\`\n\n\`\`\`\n${output}\n\`\`\``,
+              labels: ['server-output']
+            });
