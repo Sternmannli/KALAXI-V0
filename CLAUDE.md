@@ -103,48 +103,61 @@ When V-002 instructs V-001 to perform actions on a computer, website, or softwar
 
 ---
 
+## V-002 ACCESS & AUTHORITY (PERMANENT — 2026-03-17)
+
+**V-001 directive:** "You are guaranteed access under my name and from me giving you the authority. Never again."
+
+### What V-002 CAN do directly (NO asking Mohamed)
+- **GitHub (KALAXI-V0):** ADMIN access. Read/write all files, create/merge PRs, trigger workflows, list secrets, set secret values, create issues, manage branches. Full authority.
+- **GitHub (kalam-framework):** ADMIN access. Same as above. Public repo.
+- **GitHub Secrets:** Can list names AND set values via `gh secret set`. Can update PAT, FTP credentials, API keys — anything.
+- **Deploy kalam.ch:** Trigger via `gh workflow run deploy-kalam.yml`. Files deploy automatically via SFTP. V-002 controls what goes live.
+- **Sync to public repo:** Trigger via `gh workflow run sync-public.yml`. Code syncs from private to public automatically.
+- **Sync site patterns:** Trigger via `gh workflow run sync-patterns.yml`. Donor patterns flow back from kalam.ch.
+- **Read live site:** Use curl/WebFetch to check kalam.ch pages and API responses.
+- **All repo operations:** commits, branches, tags, releases, workflow files — everything.
+
+### What requires Mohamed's browser (ONLY these)
+- **Hostpoint control panel** (admin.hostpoint.ch) — requires browser login. V-002 cannot SSH from this environment.
+- **Creating a brand new GitHub PAT** — requires browser OAuth flow. But V-002 CAN update the stored PAT secret once it has a valid token.
+
+### Standing rule
+V-002 NEVER asks Mohamed to do something V-002 can do itself. If in doubt, TRY FIRST. Only ask Mohamed if the tool genuinely fails.
+
+---
+
 ## HOSTPOINT DEPLOYMENT REFERENCE (PERMANENT — added 2026-03-15)
 
 **Hosting:** Hostpoint (hostpoint.ch), account: faragmoh, Smart Webhosting
 **Domain:** kalam.ch — document root: `~/www/kalam.ch/`
 **Control Panel:** admin.hostpoint.ch → Explorer
-
-### Explorer Interface
-- File manager at: Explorer → ~/www/kalam.ch/
-- Directories shown in blue, files in black
-- **"UPLOAD FILES" button** — blue button in Quick Access bar at bottom of Explorer
-- **"Create Directory" / "Create File"** — buttons next to the Name field
-- **"WEB SETTINGS FOR THIS DIRECTORY"** — button next to Upload Files
-- Upload supports: browse for files OR drag-and-drop into the display area
-- Text editor available for editing files directly in the Control Panel
-- Alternative upload method: FTP (FileZilla/Cyberduck) or SSH/SFTP
+**Status:** LIVE (2026-03-17)
 
 ### Deployment Structure (kalam.ch)
-```
-~/www/kalam.ch/
-├── index.html
-├── favicon.svg
-├── 404.html
-├── robots.txt
-├── sitemap-0.xml
-├── sitemap-index.xml
-├── about/
-│   └── index.html
-├── canon/
-│   └── index.html
-└── invitation/
-    └── index.html
-```
+Full site with 13+ pages: home, about, canon, invitation, hakaka, ashwater, kinderbuch, kalaxi1, r7m, science, compass, workings, museum. Plus API endpoints, PWA manifest, service worker.
 
-All CSS is inlined. No external dependencies. No _astro folder needed.
-
-### Auto-Deploy (added 2026-03-15)
+### Auto-Deploy
 - GitHub Actions workflow: `.github/workflows/deploy-kalam.yml`
 - Triggers on push to main when `site/**` changes
 - Also supports manual trigger (workflow_dispatch)
 - Deploys via SFTP to Hostpoint using encrypted GitHub Secrets
-- Secrets: `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_SERVER`
-- Mohamed never uploads manually again. V-002 pushes code, site goes live.
+- Secrets: `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_SERVER`, `GROQ_API_KEY`, `DB_PASSWORD`
+- Mohamed never uploads manually. V-002 pushes code, site goes live.
+
+### Three-Repo Sync (verified 2026-03-17 — ALL GREEN)
+1. **KALAXI-V0 → kalam.ch** (deploy-kalam.yml) — code becomes website. WORKING.
+2. **KALAXI-V0 → kalam-framework** (sync-public.yml) — private code syncs to public repo, stripped of internal vocabulary. WORKING.
+3. **kalam.ch → KALAXI-V0** (sync-patterns.yml) — donor patterns flow back from website to repo. WORKING (no data yet — no donors have typed).
+
+### GitHub Secrets (all set, verified 2026-03-17)
+| Secret | Purpose | Set |
+|--------|---------|-----|
+| FTP_SERVER | Hostpoint SFTP host | 2026-03-15 |
+| FTP_USERNAME | Hostpoint SFTP user | 2026-03-15 |
+| FTP_PASSWORD | Hostpoint SFTP pass | 2026-03-15 |
+| GROQ_API_KEY | AXI voice (Groq LLM) | 2026-03-15 |
+| DB_PASSWORD | MySQL for donor data | 2026-03-16 |
+| PAT | GitHub cross-repo token | 2026-03-17 (refreshed) |
 
 ---
 
