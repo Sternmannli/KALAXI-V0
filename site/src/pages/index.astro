@@ -2444,6 +2444,7 @@ import Base from '../layouts/Base.astro';
   function dismiss() {
     sessionStorage.setItem('ded-seen', '1');
     localStorage.setItem('kalam-visited', '1');
+    ded.classList.add('dismissed');
     ded.style.opacity = '0';
     setTimeout(function(){ ded.remove(); }, 2000);
   }
