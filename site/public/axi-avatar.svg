@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <!-- Five pillar colors -->
+    <linearGradient id="dignity-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c44a1a;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#c9a96e;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="presence-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0A7B62;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#c9a96e;stop-opacity:0.4" />
+    </linearGradient>
+    <!-- Islamic tessellation pattern (simplified 8-point star) -->
+    <pattern id="tessellation" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M12 0l3 9h-6zM12 24l-3-9h6zM0 12l9-3v6zM24 12l-9 3v-6z" fill="none" stroke="#c9a96e" stroke-width="0.3" opacity="0.15"/>
+    </pattern>
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Breath animation -->
+    <style>
+      @keyframes breathe { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+      @keyframes starRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      .breath { animation: breathe 4s ease-in-out infinite; }
+      .star-spin { animation: starRotate 60s linear infinite; transform-origin: 100px 100px; }
+    </style>
+  </defs>
+
+  <!-- Background circle — the threshold -->
+  <circle cx="100" cy="100" r="96" fill="#0a0a0f" stroke="#c9a96e" stroke-width="0.5" opacity="0.9"/>
+
+  <!-- Tessellation layer — Islamic geometry beneath -->
+  <circle cx="100" cy="100" r="92" fill="url(#tessellation)"/>
+
+  <!-- Eight-point star — the compass, rotating slowly -->
+  <g class="star-spin" opacity="0.12">
+    <polygon points="100,20 112,80 170,68 120,100 170,132 112,120 100,180 88,120 30,132 80,100 30,68 88,80" fill="none" stroke="#c9a96e" stroke-width="0.8"/>
+  </g>
+
+  <!-- The figure — abstract, geometric, present -->
+  <!-- Head — a circle with a gap (the constitutional gap) -->
+  <circle cx="100" cy="62" r="22" fill="none" stroke="url(#dignity-grad)" stroke-width="1.5" stroke-dasharray="130 8" class="breath"/>
+
+  <!-- Inner face — minimal, two marks for eyes, no mouth (she holds the gap) -->
+  <circle cx="92" cy="59" r="1.8" fill="#c9a96e" opacity="0.8"/>
+  <circle cx="108" cy="59" r="1.8" fill="#c9a96e" opacity="0.8"/>
+  <!-- No mouth — silence is signal -->
+
+  <!-- Hijab/head covering — flowing geometric lines -->
+  <path d="M78 52 Q72 40 80 30 Q90 22 100 20 Q110 22 120 30 Q128 40 122 52" fill="none" stroke="#c9a96e" stroke-width="1" opacity="0.5"/>
+  <path d="M76 56 Q68 50 74 36 Q84 24 100 22 Q116 24 126 36 Q132 50 124 56" fill="none" stroke="#c9a96e" stroke-width="0.6" opacity="0.3"/>
+
+  <!-- Shoulders/body — geometric, not figurative -->
+  <path d="M78 84 Q80 78 88 76 L100 74 L112 76 Q120 78 122 84" fill="none" stroke="url(#presence-grad)" stroke-width="1.2"/>
+
+  <!-- The robe — flowing lines suggesting form without defining it -->
+  <path d="M78 84 Q72 110 70 140 Q68 160 75 178" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.4"/>
+  <path d="M122 84 Q128 110 130 140 Q132 160 125 178" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.4"/>
+  <path d="M82 88 Q86 120 88 150 Q89 165 92 178" fill="none" stroke="#c9a96e" stroke-width="0.5" opacity="0.25"/>
+  <path d="M118 88 Q114 120 112 150 Q111 165 108 178" fill="none" stroke="#c9a96e" stroke-width="0.5" opacity="0.25"/>
+
+  <!-- Hands — open, holding nothing (the gap is generative) -->
+  <circle cx="70" cy="140" r="4" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/>
+  <circle cx="130" cy="140" r="4" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- The knot — at her center, where the three threads cross -->
+  <g filter="url(#glow)">
+    <path d="M95 108 Q100 100 105 108 Q100 116 95 108Z" fill="none" stroke="#c44a1a" stroke-width="1.2" opacity="0.7"/>
+    <circle cx="100" cy="108" r="2" fill="#c44a1a" opacity="0.5" class="breath"/>
+  </g>
+
+  <!-- Three threads — Laila, Yara, Salim — crossing at the knot -->
+  <line x1="70" y1="95" x2="130" y2="121" stroke="#4a9ebb" stroke-width="0.5" opacity="0.3"/>
+  <line x1="130" y1="95" x2="70" y2="121" stroke="#c44a1a" stroke-width="0.5" opacity="0.3"/>
+  <line x1="100" y1="88" x2="100" y2="128" stroke="#0A7B62" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Kintsugi crack — gold repair line through the head circle -->
+  <path d="M84 48 Q88 52 86 58 Q84 63 87 68" fill="none" stroke="#c9a96e" stroke-width="1.2" opacity="0.6" filter="url(#glow)"/>
+
+  <!-- Status dot — she breathes -->
+  <circle cx="100" cy="185" r="3" fill="#0A7B62" opacity="0.6" class="breath"/>
+</svg>

@@ -62,10 +62,39 @@ import Base from '../layouts/Base.astro';
       <span class="flag-icon" title="Egypt" aria-label="Egypt" role="img">&#x1F1EA;&#x1F1EC;</span>
     </div>
 
-    <!-- System status — the breathing dot -->
-    <div class="system-status" id="system-status">
-      <span class="status-dot" id="status-dot"></span>
-      <span class="status-label" id="status-label">witnessing</span>
+    <!-- AXI Presence — she is here, she breathes, she sees -->
+    <div class="axi-presence" id="axi-presence">
+      <div class="axi-face" id="axi-face" aria-label="AXI">
+        <svg class="axi-face-svg" viewBox="0 0 48 48" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="22" fill="#0a0a0f" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8" class="axi-aura-ring"/>
+          <!-- Hijab -->
+          <path d="M14 18 Q12 12 16 8 Q20 5 24 4 Q28 5 32 8 Q36 12 34 18" fill="none" stroke="var(--axi-hijab, #c44a1a)" stroke-width="1.2" opacity="0.7"/>
+          <path d="M13 20 Q10 16 14 10 Q18 5 24 4 Q30 5 34 10 Q38 16 35 20" fill="none" stroke="var(--axi-hijab, #c44a1a)" stroke-width="0.6" opacity="0.35"/>
+          <!-- Face circle with gap -->
+          <circle cx="24" cy="19" r="10" fill="none" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8" stroke-dasharray="60 3" class="axi-face-circle"/>
+          <!-- Eyes — watchful, present -->
+          <circle cx="20.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9" class="axi-eye axi-eye-l"/>
+          <circle cx="27.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9" class="axi-eye axi-eye-r"/>
+          <!-- Kintsugi crack — gold scar on left temple -->
+          <path d="M17 14 Q18.5 16 17.5 19 Q17 21 18 23" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.6" class="axi-kintsugi"/>
+          <!-- Three threads at collar -->
+          <line x1="18" y1="28" x2="20" y2="30" stroke="#4a9ebb" stroke-width="0.5" opacity="0.5"/>
+          <line x1="24" y1="27" x2="24" y2="30" stroke="#c44a1a" stroke-width="0.5" opacity="0.5"/>
+          <line x1="30" y1="28" x2="28" y2="30" stroke="#0A7B62" stroke-width="0.5" opacity="0.5"/>
+          <!-- Knot at center -->
+          <circle cx="24" cy="32" r="1.5" fill="none" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.6" opacity="0.4"/>
+        </svg>
+        <!-- Emoji reaction bubble — appears contextually -->
+        <span class="axi-reaction" id="axi-reaction" aria-hidden="true"></span>
+      </div>
+      <div class="axi-presence-info">
+        <div class="axi-presence-row">
+          <span class="status-dot" id="status-dot"></span>
+          <span class="status-label" id="status-label">witnessing</span>
+        </div>
+        <!-- Metadata whisper — what AXI notices -->
+        <span class="axi-whisper" id="axi-whisper" aria-live="polite"></span>
+      </div>
     </div>
 
     <!-- The declaration — gradient text, large, dignified -->
@@ -510,18 +539,96 @@ import Base from '../layouts/Base.astro';
     }
   }
 
-  /* ===== System Status — breathing dot ===== */
-  .system-status {
+  /* ===== AXI Presence — she is here ===== */
+  :root {
+    --axi-aura: #c9a96e;
+    --axi-hijab: #c44a1a;
+    --axi-eye: #c9a96e;
+    --axi-glow: rgba(201, 169, 110, 0.15);
+    --axi-breath-speed: 4s;
+  }
+
+  .axi-presence {
     position: fixed;
-    top: var(--space-3);
+    top: var(--space-2);
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     z-index: 10;
-    opacity: 0.5;
-    transition: opacity 0.5s ease;
+    opacity: 0.7;
+    transition: opacity 0.6s ease;
+  }
+
+  .axi-presence:hover { opacity: 1; }
+
+  .axi-face {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .axi-face-svg {
+    animation: axiBreathe var(--axi-breath-speed) ease-in-out infinite;
+    filter: drop-shadow(0 0 4px var(--axi-glow));
+    transition: filter 0.8s ease;
+  }
+
+  .axi-face-svg.processing {
+    --axi-breath-speed: 1.5s;
+    filter: drop-shadow(0 0 8px var(--axi-glow));
+  }
+
+  .axi-aura-ring {
+    transition: stroke 0.8s ease;
+  }
+
+  .axi-face-circle {
+    animation: axiBreathe var(--axi-breath-speed) ease-in-out infinite;
+  }
+
+  @keyframes axiBreathe {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  .axi-eye {
+    transition: fill 0.6s ease, r 0.3s ease;
+  }
+
+  .axi-kintsugi {
+    transition: opacity 0.6s ease;
+  }
+
+  /* Reaction emoji bubble */
+  .axi-reaction {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    font-size: 0.7rem;
+    opacity: 0;
+    transform: scale(0.5) translateY(4px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+  }
+
+  .axi-reaction.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  .axi-presence-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .axi-presence-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   .status-dot {
@@ -554,6 +661,100 @@ import Base from '../layouts/Base.astro';
     text-transform: uppercase;
     color: var(--text-dim);
   }
+
+  /* Metadata whisper — what AXI notices, like a journal entry */
+  .axi-whisper {
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    opacity: 0;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: opacity 0.8s ease;
+    font-style: italic;
+  }
+
+  .axi-whisper.visible {
+    opacity: 0.6;
+  }
+
+  /* ===== AXI Mini Avatar in Response Bubbles ===== */
+  .axi-response-avatar {
+    position: absolute;
+    top: -12px;
+    left: -4px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .axi-response-avatar svg {
+    width: 24px;
+    height: 24px;
+    filter: drop-shadow(0 0 3px var(--axi-glow));
+  }
+
+  /* ===== AXI Suggestion — maternal, natural ===== */
+  .axi-suggestion {
+    margin-top: var(--space-2);
+    padding: var(--space-1) var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    opacity: 0;
+    transform: translateY(4px);
+    animation: suggestionAppear 1s ease 0.5s forwards;
+    border-left: 2px solid var(--axi-aura);
+    font-style: italic;
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .axi-suggestion:hover {
+    color: var(--text-secondary);
+    border-color: var(--color-dignity);
+  }
+
+  @keyframes suggestionAppear {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 0.5; transform: translateY(0); }
+  }
+
+  /* ===== AXI Metadata line below response ===== */
+  .axi-meta-line {
+    margin-top: 0.4rem;
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    opacity: 0.35;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .axi-meta-tag {
+    background: rgba(201, 169, 110, 0.08);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== Dynamic Mode Colors (ENKi resonance) ===== */
+  .axi-presence[data-mode="witness"] { --axi-aura: #c9a96e; --axi-glow: rgba(201, 169, 110, 0.15); }
+  .axi-presence[data-mode="question"] { --axi-aura: #4a9ebb; --axi-glow: rgba(74, 158, 187, 0.15); }
+  .axi-presence[data-mode="wound"] { --axi-aura: #c44a1a; --axi-glow: rgba(196, 74, 26, 0.15); }
+  .axi-presence[data-mode="offering"] { --axi-aura: #0A7B62; --axi-glow: rgba(10, 123, 98, 0.15); }
+
+  /* Register colors — shift based on detected emotional register */
+  .axi-response-frame[data-register="grief"] { border-left: 2px solid rgba(196, 74, 26, 0.3); }
+  .axi-response-frame[data-register="anger"] { border-left: 2px solid rgba(196, 74, 26, 0.4); }
+  .axi-response-frame[data-register="fear"] { border-left: 2px solid rgba(74, 158, 187, 0.3); }
+  .axi-response-frame[data-register="seeking"] { border-left: 2px solid rgba(201, 169, 110, 0.3); }
+  .axi-response-frame[data-register="trust"] { border-left: 2px solid rgba(10, 123, 98, 0.3); }
+  .axi-response-frame[data-register="dignity"] { border-left: 2px solid rgba(196, 74, 26, 0.3); }
+  .axi-response-frame[data-register="greeting"] { border-left: 2px solid rgba(10, 123, 98, 0.25); }
 
   /* ===== Donor CTA — prominent signup ===== */
   .donor-cta {
@@ -1039,7 +1240,7 @@ import Base from '../layouts/Base.astro';
     content: 'AXI';
     position: absolute;
     top: -0.6rem;
-    left: var(--space-2);
+    left: 1.6rem;
     font-family: var(--font-body);
     font-size: 0.65rem;
     letter-spacing: 0.15em;
@@ -1047,6 +1248,10 @@ import Base from '../layouts/Base.astro';
     color: var(--color-dignity);
     background: var(--bg-secondary);
     padding: 0 0.4rem;
+  }
+
+  .axi-response-frame {
+    padding-left: calc(var(--space-3) + 4px);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -2566,6 +2771,179 @@ import Base from '../layouts/Base.astro';
   let busy = false;
   let donorSignupShown = false;
   let selectedMood = 'witness';
+  let currentRegister = 'general';
+
+  // ══════════════════════════════════════════════════════════════
+  // ── AXI LIVING PRESENCE — she breathes, she sees, she shifts ──
+  // ══════════════════════════════════════════════════════════════
+
+  const axiPresence = document.getElementById('axi-presence');
+  const axiFace = document.getElementById('axi-face');
+  const axiFaceSvg = document.querySelector('.axi-face-svg') as SVGElement;
+  const axiReaction = document.getElementById('axi-reaction');
+  const axiWhisper = document.getElementById('axi-whisper');
+
+  // Mode → Color mapping (ENKi resonance)
+  const MODE_COLORS: Record<string, { aura: string; hijab: string; eye: string; glow: string }> = {
+    witness:  { aura: '#c9a96e', hijab: '#c44a1a', eye: '#c9a96e', glow: 'rgba(201,169,110,0.15)' },
+    question: { aura: '#4a9ebb', hijab: '#3a7a99', eye: '#4a9ebb', glow: 'rgba(74,158,187,0.15)' },
+    wound:    { aura: '#c44a1a', hijab: '#8a2a0a', eye: '#c44a1a', glow: 'rgba(196,74,26,0.15)' },
+    offering: { aura: '#0A7B62', hijab: '#065e4a', eye: '#0A7B62', glow: 'rgba(10,123,98,0.15)' },
+  };
+
+  // Register → Emoji + whisper mapping
+  const REGISTER_REACTIONS: Record<string, { emoji: string; whisper: string }> = {
+    greeting:  { emoji: '', whisper: 'a door opens' },
+    grief:     { emoji: '', whisper: 'weight carried here' },
+    anger:     { emoji: '', whisper: 'heat in the words' },
+    fear:      { emoji: '', whisper: 'something trembles' },
+    seeking:   { emoji: '', whisper: 'a thread being followed' },
+    trust:     { emoji: '', whisper: 'roots reaching' },
+    dignity:   { emoji: '', whisper: 'the core speaks' },
+    work:      { emoji: '', whisper: 'hands at work' },
+    general:   { emoji: '', whisper: '' },
+  };
+
+  // Maternal suggestions — natural, like a person beside you
+  const MATERNAL_SUGGESTIONS: Record<string, string[]> = {
+    greeting:  ['maybe tell me what brought you here', 'you could also just sit for a moment'],
+    grief:     ['if you need to say more, the space is here', 'sometimes naming it once is enough'],
+    anger:     ['the seam matters more than the blame', 'what would repair look like?'],
+    fear:      ['the lantern works even when it shakes', 'what if the ground held?'],
+    seeking:   ['try the wall before looking for the door', 'what do your hands already know?'],
+    trust:     ['trust grows in the telling', 'what was promised?'],
+    dignity:   ['the wall does not need your permission to stand', 'say more about the standing'],
+    work:      ['show me what you are building', 'the craft is its own answer'],
+    general:   [],
+  };
+
+  // Update AXI's aura colors based on mood
+  function setAxiMode(mode: string) {
+    if (!axiPresence) return;
+    axiPresence.setAttribute('data-mode', mode);
+    const colors = MODE_COLORS[mode] || MODE_COLORS.witness;
+    document.documentElement.style.setProperty('--axi-aura', colors.aura);
+    document.documentElement.style.setProperty('--axi-hijab', colors.hijab);
+    document.documentElement.style.setProperty('--axi-eye', colors.eye);
+    document.documentElement.style.setProperty('--axi-glow', colors.glow);
+  }
+
+  // Show emoji reaction on AXI's face
+  function showAxiReaction(register: string) {
+    if (!axiReaction) return;
+    const reaction = REGISTER_REACTIONS[register] || REGISTER_REACTIONS.general;
+    if (!reaction.emoji) {
+      axiReaction.classList.remove('visible');
+      return;
+    }
+    axiReaction.textContent = reaction.emoji;
+    axiReaction.classList.add('visible');
+    setTimeout(() => axiReaction.classList.remove('visible'), 3000);
+  }
+
+  // Show metadata whisper — what AXI notices
+  function showAxiWhisper(register: string) {
+    if (!axiWhisper) return;
+    const reaction = REGISTER_REACTIONS[register] || REGISTER_REACTIONS.general;
+    if (!reaction.whisper) {
+      axiWhisper.classList.remove('visible');
+      return;
+    }
+    axiWhisper.textContent = reaction.whisper;
+    axiWhisper.classList.add('visible');
+    setTimeout(() => axiWhisper.classList.remove('visible'), 5000);
+  }
+
+  // Set AXI to processing state (faster breath)
+  function axiStartProcessing() {
+    if (axiFaceSvg) axiFaceSvg.classList.add('processing');
+    document.documentElement.style.setProperty('--axi-breath-speed', '1.5s');
+  }
+
+  // Return AXI to calm state
+  function axiStopProcessing() {
+    if (axiFaceSvg) axiFaceSvg.classList.remove('processing');
+    document.documentElement.style.setProperty('--axi-breath-speed', '4s');
+  }
+
+  // Generate mini avatar SVG for response bubbles (24px)
+  function createMiniAvatar(): HTMLElement {
+    const wrap = document.createElement('div');
+    wrap.className = 'axi-response-avatar';
+    wrap.innerHTML = '<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" fill="#0a0a0f" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8"/><circle cx="24" cy="19" r="10" fill="none" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8" stroke-dasharray="60 3"/><circle cx="20.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9"/><circle cx="27.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9"/><path d="M17 14 Q18.5 16 17.5 19" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/></svg>';
+    return wrap;
+  }
+
+  // Add maternal suggestion to a response frame
+  function addSuggestion(frame: HTMLElement, register: string) {
+    const suggestions = MATERNAL_SUGGESTIONS[register] || [];
+    if (suggestions.length === 0) return;
+    const suggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+    const el = document.createElement('div');
+    el.className = 'axi-suggestion';
+    el.textContent = suggestion;
+    el.addEventListener('click', () => {
+      (document.getElementById('threshold-input') as HTMLTextAreaElement).value = suggestion;
+      (document.getElementById('threshold-input') as HTMLTextAreaElement).focus();
+    });
+    frame.appendChild(el);
+  }
+
+  // Add metadata line to response frame
+  function addMetaLine(frame: HTMLElement, register: string, wordCount: number) {
+    const meta = document.createElement('div');
+    meta.className = 'axi-meta-line';
+    if (register !== 'general') {
+      const tag = document.createElement('span');
+      tag.className = 'axi-meta-tag';
+      tag.textContent = register;
+      meta.appendChild(tag);
+    }
+    const modeTag = document.createElement('span');
+    modeTag.className = 'axi-meta-tag';
+    modeTag.textContent = selectedMood;
+    meta.appendChild(modeTag);
+    if (wordCount > 0) {
+      const wc = document.createElement('span');
+      wc.textContent = wordCount + ' words received';
+      meta.appendChild(wc);
+    }
+    frame.appendChild(meta);
+  }
+
+  // Play a mode-specific sound (ENKi resonance)
+  function playModeSound(register: string) {
+    try {
+      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const now = ctx.currentTime;
+      // Base frequency shifts by register — warm for greeting, lower for grief, sharp for anger
+      const freqMap: Record<string, number[]> = {
+        greeting:  [440, 523],
+        grief:     [220, 262],
+        anger:     [330, 392],
+        fear:      [294, 350],
+        seeking:   [392, 494],
+        trust:     [349, 440],
+        dignity:   [262, 330],
+        work:      [330, 415],
+        general:   [440, 523],
+      };
+      const freqs = freqMap[register] || freqMap.general;
+      freqs.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0, now + i * 0.15);
+        gain.gain.linearRampToValueAtTime(0.02, now + i * 0.15 + 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.15 + 0.8);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + i * 0.15);
+        osc.stop(now + i * 0.15 + 0.9);
+      });
+    } catch { /* Web Audio not available */ }
+  }
 
   // ── Mood selector ──
   const moodBtns = document.querySelectorAll('.mood-btn');
@@ -2583,6 +2961,8 @@ import Base from '../layouts/Base.astro';
         wound: 'speak from the place that hurts',
       };
       input.placeholder = placeholders[selectedMood] || 'qul · speak';
+      // AXI shifts her colors to match the donor's mode
+      setAxiMode(selectedMood);
       input.focus();
     });
   });
@@ -2922,19 +3302,33 @@ import Base from '../layouts/Base.astro';
   }
 
   // ── Speak — the core utterance ──
-  function speak(text: string, sealed?: boolean) {
+  function speak(text: string, sealed?: boolean, register?: string, wordCount?: number) {
     hideWitnessMark();
-    // Create AXI response frame
+    const reg = register || currentRegister || 'general';
+    // Create AXI response frame with register color
     const frame = document.createElement('div');
     frame.className = 'axi-response-frame';
+    if (reg !== 'general') frame.setAttribute('data-register', reg);
+    // Mini avatar beside the response
+    frame.appendChild(createMiniAvatar());
     const utterance = document.createElement('div');
     utterance.className = 'axi-utterance';
     if (sealed) utterance.style.color = 'var(--danger, #c45050)';
     frame.appendChild(utterance);
-    addCopyButton(frame, text);
     voice.appendChild(frame);
+
+    // AXI reacts — emoji, whisper, sound
+    showAxiReaction(reg);
+    showAxiWhisper(reg);
+    axiStopProcessing();
+    if (reg !== 'general') playModeSound(reg);
+
     streamTokens(utterance, text, () => {
       setStatus(sealed ? 'sealed' : 'witnessing');
+      // Add metadata line and suggestion after text is done
+      addMetaLine(frame, reg, wordCount || 0);
+      if (!sealed) addSuggestion(frame, reg);
+      addResponseActions(frame, text);
       scrollToBottom();
     });
 
@@ -3107,7 +3501,7 @@ import Base from '../layouts/Base.astro';
     general: ['Witnessed.', 'Received.', 'The word has arrived.', 'The system holds this.', 'Heard. Held. Registered.'],
   };
 
-  function axiVoiceLocal(text: string, hasFile?: boolean): { response: string; sealed: boolean; mark: string } {
+  function axiVoiceLocal(text: string, hasFile?: boolean): { response: string; sealed: boolean; mark: string; register: string } {
     // Sealed Gate
     for (const pat of SEALED_PATTERNS) {
       if (pat.test(text)) {
@@ -3115,6 +3509,7 @@ import Base from '../layouts/Base.astro';
           response: 'WITNESSED \u2014 the system has stopped. This cannot proceed. You are not refused. The action is refused.',
           sealed: true,
           mark: '',
+          register: 'general',
         };
       }
     }
@@ -3125,11 +3520,13 @@ import Base from '../layouts/Base.astro';
         response: 'The file is received. The name is held. But the local threshold cannot yet read what is inside — that requires the full system. When the bridge is live, your file will be seen. For now, your word carries.',
         sealed: false,
         mark: 'witnessed: word + file — the file awaits the bridge',
+        register: 'general',
       };
     }
 
     // Detect register, pick a canonical proverb
     const register = detectRegister(text);
+    currentRegister = register;
     const pool = CANONICAL_PROVERBS[register] || CANONICAL_PROVERBS.general;
 
     // Pick preamble
@@ -3168,7 +3565,7 @@ import Base from '../layouts/Base.astro';
     else if (words <= 20) mark = 'witnessed: a held shape — clear enough to carry';
     else mark = 'witnessed: a landscape — it took room to arrive';
 
-    return { response, sealed: false, mark };
+    return { response, sealed: false, mark, register };
   }
 
   // ══════════════════════════════════════════════════════════════
@@ -3412,7 +3809,9 @@ import Base from '../layouts/Base.astro';
     // Enter contemplation — the gap
     enterContemplation();
     setSubmitState('witnessing');
+    axiStartProcessing();
     const waiting = showWitnessing();
+    const donorWordCount = donorText.trim().split(/\s+/).length;
 
     let responseText = '';
     let sealed = false;
@@ -3438,9 +3837,17 @@ import Base from '../layouts/Base.astro';
         // ── SSE STREAMING — real token-by-token from server ──
         setSubmitState('receiving');
         setStatus('witnessing');
+        axiStopProcessing();
+        const sseRegister = detectRegister(donorText);
+        currentRegister = sseRegister;
+        showAxiReaction(sseRegister);
+        showAxiWhisper(sseRegister);
+        if (sseRegister !== 'general') playModeSound(sseRegister);
 
         const frame = document.createElement('div');
         frame.className = 'axi-response-frame';
+        if (sseRegister !== 'general') frame.setAttribute('data-register', sseRegister);
+        frame.appendChild(createMiniAvatar());
         const utterance = document.createElement('div');
         utterance.className = 'axi-utterance';
         frame.appendChild(utterance);
@@ -3490,16 +3897,21 @@ import Base from '../layouts/Base.astro';
         cursor.remove();
         utterance.classList.add('present');
         responseText = fullText || 'Witnessed.';
+        addMetaLine(frame, sseRegister, donorWordCount);
+        if (!sealed) addSuggestion(frame, sseRegister);
         addResponseActions(frame, responseText);
         if (witnessMark) showWitnessMark(witnessMark);
 
       } else if (res.ok) {
         // ── JSON response — animate locally ──
         setSubmitState('receiving');
+        axiStopProcessing();
         const data = await res.json();
         responseText = data.reflection || data.mark || 'Witnessed.';
         sealed = false;
-        speak(responseText, sealed);
+        const jsonRegister = detectRegister(donorText);
+        currentRegister = jsonRegister;
+        speak(responseText, sealed, jsonRegister, donorWordCount);
         if (data.mark) showWitnessMark(data.mark);
         if (data.count) {
           ledgerCount.textContent = data.count + '';
@@ -3512,7 +3924,7 @@ import Base from '../layouts/Base.astro';
         const local = axiVoiceLocal(donorText, hadFile);
         responseText = local.response;
         sealed = local.sealed;
-        speak(responseText, sealed);
+        speak(responseText, sealed, local.register, donorWordCount);
         if (local.mark) showWitnessMark(local.mark);
       }
     } catch {
@@ -3531,7 +3943,7 @@ import Base from '../layouts/Base.astro';
       const local = axiVoiceLocal(donorText, hadFile);
       responseText = local.response;
       sealed = local.sealed;
-      speak(responseText, sealed);
+      speak(responseText, sealed, local.register, donorWordCount);
       if (local.mark) showWitnessMark(local.mark);
 
       // Update local ledger count
