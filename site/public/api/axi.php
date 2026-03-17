@@ -1208,6 +1208,44 @@ HTML;
         exit;
     }
 
+    // === MOVE-003: Record interaction for authenticated donors ===
+    $donor_profile = null;
+    session_start();
+    if (!empty($_SESSION['donor_id'])) {
+        $donor_db = get_mysql();
+        if ($donor_db) {
+            $donor_id = (int) $_SESSION['donor_id'];
+            $register = detect_register($content);
+            $response_text = $ai_reflection ?? $ai_response ?? '';
+
+            // Save interaction
+            $stmt = $donor_db->prepare('INSERT INTO interactions (donor_id, input_text, axi_response, register, witness_mark, content_hash)
+                                        VALUES (?, ?, ?, ?, ?, ?)');
+            $stmt->execute([$donor_id, $content, $response_text, $register, $ai_response, $hash]);
+
+            // Update donor interaction count and pattern
+            $stmt = $donor_db->prepare('UPDATE donors SET interaction_count = interaction_count + 1, last_seen = CURRENT_TIMESTAMP WHERE id = ?');
+            $stmt->execute([$donor_id]);
+
+            // Update pattern_json with register frequency
+            $stmt = $donor_db->prepare('SELECT pattern_json FROM donors WHERE id = ?');
+            $stmt->execute([$donor_id]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $pattern = $row && $row['pattern_json'] ? json_decode($row['pattern_json'], true) : ['registers' => []];
+            $pattern['registers'][$register] = ($pattern['registers'][$register] ?? 0) + 1;
+            $pattern['last_register'] = $register;
+            $pattern['updated'] = gmdate('c');
+
+            $stmt = $donor_db->prepare('UPDATE donors SET pattern_json = ? WHERE id = ?');
+            $stmt->execute([json_encode($pattern), $donor_id]);
+
+            // Load donor profile for personalized response
+            $stmt = $donor_db->prepare('SELECT display_name, interaction_count FROM donors WHERE id = ?');
+            $stmt->execute([$donor_id]);
+            $donor_profile = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+    }
+
     // JSON API response
     $response = [
         'witnessed' => true,
@@ -1220,6 +1258,14 @@ HTML;
     if ($ai_reflection) $response['reflection'] = $ai_reflection;
     if ($proverb) $response['proverb'] = $proverb;
     if ($ledger_entry) $response['chain'] = $ledger_entry['chain_snippet'];
+
+    // Include donor context if authenticated
+    if ($donor_profile) {
+        $response['donor'] = [
+            'name' => $donor_profile['display_name'],
+            'interactions' => (int) $donor_profile['interaction_count'],
+        ];
+    }
 
     echo json_encode($response);
     exit;
