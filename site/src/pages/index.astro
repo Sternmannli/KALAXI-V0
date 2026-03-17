@@ -27,34 +27,26 @@ import Base from '../layouts/Base.astro';
       <span class="status-label" id="status-label">witnessing</span>
     </div>
 
-    <!-- Donor badge — top right, shows auth state -->
-    <div class="donor-badge" id="donor-badge">
-      <button class="donor-btn" id="donor-btn" aria-label="Sign in">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-        <span class="donor-label" id="donor-label">sign in</span>
-      </button>
-    </div>
+    <!-- The declaration — gradient text, large, dignified -->
+    <p class="declaration-ambient" id="declaration">Human dignity is a technical requirement.</p>
 
-    <!-- Donor panel — auth form or profile -->
-    <div class="donor-panel" id="donor-panel" hidden>
-      <button class="donor-panel-close" id="donor-panel-close" aria-label="Close">&times;</button>
-
-      <!-- Not authenticated: sign-in form -->
+    <!-- Donor signup — prominent, visible, first thing after declaration -->
+    <div class="donor-cta" id="donor-cta">
       <div class="donor-auth" id="donor-auth">
-        <p class="donor-panel-title">You are not a user. You are a donor.</p>
-        <p class="donor-panel-sub">Enter your email. A sign-in link arrives. No password.</p>
-        <form id="donor-auth-form" class="donor-form">
+        <p class="donor-cta-title">Become a donor</p>
+        <p class="donor-cta-sub">You are not a user. You are a donor. No password needed.</p>
+        <form id="donor-auth-form" class="donor-cta-form">
           <input type="email" name="email" id="donor-email" placeholder="your email" required aria-label="Email" />
           <input type="text" name="display_name" id="donor-name" placeholder="your name (optional)" aria-label="Name" />
-          <button type="submit">Send link</button>
+          <button type="submit">Join</button>
         </form>
         <p class="donor-status" id="donor-auth-status"></p>
       </div>
 
-      <!-- Authenticated: profile -->
+      <!-- Authenticated: profile (replaces form) -->
       <div class="donor-profile" id="donor-profile" hidden>
-        <p class="donor-panel-title" id="donor-greeting"></p>
-        <p class="donor-panel-sub" id="donor-stats"></p>
+        <p class="donor-cta-title" id="donor-greeting"></p>
+        <p class="donor-cta-sub" id="donor-stats"></p>
         <div class="donor-actions">
           <button id="donor-export-btn" class="donor-action">Export my data</button>
           <button id="donor-history-btn" class="donor-action">My exchanges</button>
@@ -62,9 +54,6 @@ import Base from '../layouts/Base.astro';
         </div>
       </div>
     </div>
-
-    <!-- The declaration — gradient text, large, dignified -->
-    <p class="declaration-ambient" id="declaration">Human dignity is a technical requirement.</p>
 
     <!-- Cultural accent — Arabic calligraphy watermark -->
     <p class="arabic-accent" aria-hidden="true">كرامة</p>
@@ -412,123 +401,93 @@ import Base from '../layouts/Base.astro';
     color: var(--text-dim);
   }
 
-  /* ===== Donor Badge + Panel ===== */
-  .donor-badge {
-    position: fixed;
-    top: var(--space-3);
-    right: var(--space-3);
-    z-index: 10;
-  }
-
-  .donor-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: none;
-    border: 1px solid var(--accent-subtle);
-    border-radius: 20px;
-    padding: 0.35rem 0.75rem;
-    color: var(--text-dim);
-    font-family: var(--font-body);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .donor-btn:hover { color: var(--color-dignity); border-color: var(--color-dignity); }
-  .donor-btn.authenticated { color: var(--color-presence); border-color: var(--color-presence); }
-
-  .donor-label { text-transform: uppercase; }
-
-  .donor-panel {
-    position: fixed;
-    top: calc(var(--space-3) + 2.5rem);
-    right: var(--space-3);
-    z-index: 20;
-    background: var(--bg-secondary);
-    border: 1px solid var(--accent-subtle);
-    border-radius: 12px;
+  /* ===== Donor CTA — prominent signup ===== */
+  .donor-cta {
+    position: relative;
+    z-index: 1;
+    width: min(380px, calc(100% - 2rem));
+    margin: var(--space-3) auto var(--space-2);
     padding: var(--space-3);
-    width: min(340px, calc(100vw - 2rem));
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(196, 74, 26, 0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    animation: ctaFadeIn 2s ease 2s forwards;
   }
 
-  @media (prefers-color-scheme: dark) {
-    .donor-panel { background: var(--bg-elevated); }
+  @keyframes ctaFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  .donor-panel-close {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.75rem;
-    background: none;
-    border: none;
-    color: var(--text-dim);
-    font-size: 1.4rem;
-    cursor: pointer;
-    padding: 0.25rem;
-  }
-
-  .donor-panel-title {
+  .donor-cta-title {
     font-family: var(--font-heading);
-    font-size: 1rem;
-    color: var(--text-primary);
-    margin: 0 0 0.5rem;
+    font-size: var(--text-lg);
+    color: var(--color-dignity);
+    margin: 0 0 0.3rem;
+    text-align: center;
+    letter-spacing: 0.04em;
   }
 
-  .donor-panel-sub {
+  .donor-cta-sub {
     font-family: var(--font-body);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
     margin: 0 0 1rem;
     line-height: 1.5;
+    text-align: center;
   }
 
-  .donor-form {
+  .donor-cta-form {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
   }
 
-  .donor-form input {
+  .donor-cta-form input {
     background: var(--bg-primary);
     border: 1px solid var(--accent-subtle);
-    border-radius: 6px;
-    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+    padding: 0.7rem 0.85rem;
     color: var(--text-primary);
     font-family: var(--font-body);
-    font-size: 0.85rem;
+    font-size: 0.95rem;
   }
 
-  .donor-form input:focus {
+  .donor-cta-form input:focus {
     outline: none;
     border-color: var(--color-dignity);
+    box-shadow: 0 0 0 2px rgba(196, 74, 26, 0.15);
   }
 
-  .donor-form input::placeholder {
+  .donor-cta-form input::placeholder {
     color: var(--text-dim);
     font-style: italic;
   }
 
-  .donor-form button {
+  .donor-cta-form button {
     background: var(--color-dignity);
     color: #fff;
     border: none;
-    border-radius: 6px;
-    padding: 0.6rem;
+    border-radius: 8px;
+    padding: 0.75rem;
     font-family: var(--font-body);
-    font-size: 0.85rem;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     cursor: pointer;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.2s ease;
   }
 
-  .donor-form button:hover { opacity: 0.85; }
+  .donor-cta-form button:hover { opacity: 0.9; transform: translateY(-1px); }
 
   .donor-status {
     font-size: 0.8rem;
     margin-top: 0.5rem;
     min-height: 1.2em;
+    text-align: center;
   }
 
   .donor-actions {
@@ -552,6 +511,13 @@ import Base from '../layouts/Base.astro';
 
   .donor-action:hover { border-color: var(--color-dignity); }
   .donor-action-dim { color: var(--text-dim); }
+
+  @media (prefers-color-scheme: light) {
+    .donor-cta {
+      background: rgba(0, 0, 0, 0.02);
+      border-color: rgba(196, 74, 26, 0.15);
+    }
+  }
 
   /* ===== Declaration — gradient text, dignified ===== */
   .declaration-ambient {
@@ -2413,11 +2379,7 @@ import Base from '../layouts/Base.astro';
   // ══════════════════════════════════════════════════════════════
 
   const DONOR_API = '/api/donor.php';
-  const donorBadge = document.getElementById('donor-badge');
-  const donorBtn = document.getElementById('donor-btn');
-  const donorLabel = document.getElementById('donor-label');
-  const donorPanel = document.getElementById('donor-panel') as HTMLDivElement;
-  const donorPanelClose = document.getElementById('donor-panel-close');
+  const donorCta = document.getElementById('donor-cta') as HTMLDivElement;
   const donorAuth = document.getElementById('donor-auth') as HTMLDivElement;
   const donorProfile = document.getElementById('donor-profile') as HTMLDivElement;
   const donorAuthForm = document.getElementById('donor-auth-form') as HTMLFormElement;
@@ -2426,18 +2388,6 @@ import Base from '../layouts/Base.astro';
   const donorStats = document.getElementById('donor-stats') as HTMLParagraphElement;
 
   let donorAuthenticated = false;
-
-  // Toggle panel
-  if (donorBtn) {
-    donorBtn.addEventListener('click', () => {
-      if (donorPanel) donorPanel.hidden = !donorPanel.hidden;
-    });
-  }
-  if (donorPanelClose) {
-    donorPanelClose.addEventListener('click', () => {
-      if (donorPanel) donorPanel.hidden = true;
-    });
-  }
 
   // Check auth state on load
   async function checkDonorAuth() {
@@ -2453,8 +2403,6 @@ import Base from '../layouts/Base.astro';
 
   function showDonorProfile(donor: any) {
     donorAuthenticated = true;
-    if (donorBtn) donorBtn.classList.add('authenticated');
-    if (donorLabel) donorLabel.textContent = donor.display_name || 'donor';
     if (donorAuth) donorAuth.hidden = true;
     if (donorProfile) donorProfile.hidden = false;
     if (donorGreeting) {
@@ -2509,7 +2457,7 @@ import Base from '../layouts/Base.astro';
           donorAuthStatus.style.color = 'var(--danger, #c45050)';
         }
       } finally {
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send link'; }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Join'; }
       }
     });
   }
@@ -2550,7 +2498,6 @@ import Base from '../layouts/Base.astro';
             voice.appendChild(frame);
           });
           scrollToBottom();
-          if (donorPanel) donorPanel.hidden = true;
         }
       } catch { /* silent */ }
     });
@@ -2562,11 +2509,8 @@ import Base from '../layouts/Base.astro';
     logoutBtn.addEventListener('click', async () => {
       await fetch(DONOR_API + '?action=logout', { method: 'POST', credentials: 'include' });
       donorAuthenticated = false;
-      if (donorBtn) donorBtn.classList.remove('authenticated');
-      if (donorLabel) donorLabel.textContent = 'sign in';
       if (donorAuth) donorAuth.hidden = false;
       if (donorProfile) donorProfile.hidden = true;
-      if (donorPanel) donorPanel.hidden = true;
     });
   }
 
