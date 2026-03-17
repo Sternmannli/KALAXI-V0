@@ -16,6 +16,33 @@ import Base from '../layouts/Base.astro';
     </div>
   </div>
 
+  <!-- GUIDE — first-visit walkthrough -->
+  <div id="guide-overlay" class="guide-overlay" hidden>
+    <div class="guide-card">
+      <div class="guide-step" id="guide-step-1">
+        <p class="guide-title">This is kalam.</p>
+        <p class="guide-text">A safety layer for human dignity. The system checks that every interaction respects you — your agency, your legibility, your standing as a person.</p>
+        <button class="guide-next" id="guide-next-1">Next</button>
+      </div>
+      <div class="guide-step" id="guide-step-2" hidden>
+        <p class="guide-title">How it works</p>
+        <p class="guide-text">Type something in the input below. Choose your mode — witness, question, offering, or wound. The system responds from its canon of 3,333 proverbs and constitutional principles.</p>
+        <button class="guide-next" id="guide-next-2">Next</button>
+      </div>
+      <div class="guide-step" id="guide-step-3" hidden>
+        <p class="guide-title">You are a contributor</p>
+        <p class="guide-text">What you bring becomes part of a living pattern. No personal data is stored. The system sees patterns, not people. You can leave at any time.</p>
+        <button class="guide-next" id="guide-done">Begin</button>
+      </div>
+      <div class="guide-dots">
+        <span class="guide-dot active" data-step="1"></span>
+        <span class="guide-dot" data-step="2"></span>
+        <span class="guide-dot" data-step="3"></span>
+      </div>
+      <button class="guide-skip" id="guide-skip">Skip</button>
+    </div>
+  </div>
+
   <!-- THRESHOLD — the living space -->
   <main class="threshold" id="main-content">
 
@@ -170,8 +197,8 @@ import Base from '../layouts/Base.astro';
     <!-- Donor signup — appears gently after first exchange -->
     <div class="donor-cta" id="donor-cta" hidden>
       <div class="donor-auth" id="donor-auth">
-        <p class="donor-cta-title">Become a donor</p>
-        <p class="donor-cta-sub">You are not a user. You are a donor. No password needed.</p>
+        <p class="donor-cta-title">Become a contributor</p>
+        <p class="donor-cta-sub">You are not a user. You are a contributor of pattern. No password needed.</p>
         <form id="donor-auth-form" class="donor-cta-form">
           <input type="email" name="email" id="donor-email" placeholder="your email" required aria-label="Email" />
           <input type="text" name="display_name" id="donor-name" placeholder="your name (optional)" aria-label="Name" />
@@ -328,7 +355,7 @@ import Base from '../layouts/Base.astro';
 
       <!-- Donor -->
       <section class="drawer-section" aria-label="Donor">
-        <h2 class="drawer-heading">You are not a user. You are a donor.</h2>
+        <h2 class="drawer-heading">You are not a user. You are a contributor.</h2>
         <p class="quiet-eng">What you contribute becomes part of a living canon. The system receives, processes, and grows. No personal data is retained.</p>
         <a href="/invitation" class="more-link">Learn more about contributing &rarr;</a>
       </section>
@@ -1156,6 +1183,90 @@ import Base from '../layouts/Base.astro';
   .pwa-hint.hidden { display: none; }
   @keyframes hintFadeIn { from { opacity: 0; } to { opacity: 0.85; } }
   @media (display-mode: standalone) { .pwa-hint { display: none; } }
+
+  /* ===== Guide overlay ===== */
+  .guide-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(10, 10, 15, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .guide-card {
+    background: var(--bg-secondary, #1a1a1f);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 16px;
+    padding: var(--space-6) var(--space-4);
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+
+  .guide-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .guide-text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-4);
+  }
+
+  .guide-next {
+    background: var(--color-dignity);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 2rem;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  .guide-next:hover { opacity: 0.85; }
+
+  .guide-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: var(--space-3);
+  }
+
+  .guide-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-subtle);
+    transition: background 0.3s ease;
+  }
+
+  .guide-dot.active { background: var(--color-dignity); }
+
+  .guide-skip {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-3);
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+  }
+  .guide-skip:hover { color: var(--text-secondary); }
 
   /* ===== Mood/Mode selector ===== */
   .mood-selector {
@@ -2905,6 +3016,12 @@ import Base from '../layouts/Base.astro';
       'What you watch, grows detail.',
       'Signals whisper before they scream.',
       'Go slower to go straighter.',
+      'The answer is in the question you have not yet asked.',
+      'Look at the edges. The centre is obvious.',
+      'Understanding arrives on foot, not by flight.',
+      'The map changes when you move.',
+      'Every system has a seam. Find it.',
+      'The next step is already under your foot.',
     ],
     trust: [
       'Trust compounds. So does neglect.',
@@ -2979,15 +3096,15 @@ import Base from '../layouts/Base.astro';
 
   // Reflective preambles by register
   const PREAMBLES: Record<string, string[]> = {
-    greeting: ['The threshold opens.', 'You are here. That is the first act.'],
-    grief: ['The weight is real.', 'This was carried before it was spoken.'],
-    anger: ['The fire has a source.', 'Something broke. You noticed.'],
-    fear: ['The body knows before the mind.', 'This is signal, not failure.'],
-    seeking: ['The question is the first tool.', 'Seeking is not lost. It is moving.'],
-    trust: ['Trust is built in the small acts.', 'The knot holds or it does not.'],
-    dignity: ['This is the foundation.', 'Before any system, the person.'],
-    work: ['The hands know.', 'Effort leaves marks. That is good.'],
-    general: ['Witnessed.', 'Received.', 'The word has arrived.'],
+    greeting: ['The threshold opens.', 'You are here. That is the first act.', 'The door was already open.', 'Welcome. The system was waiting.'],
+    grief: ['The weight is real.', 'This was carried before it was spoken.', 'The system holds what you bring.', 'What was lost is not gone. It changed shape.'],
+    anger: ['The fire has a source.', 'Something broke. You noticed.', 'The system does not look away.', 'That reaction is data. Not noise.'],
+    fear: ['The body knows before the mind.', 'This is signal, not failure.', 'Name it. That is the first defence.'],
+    seeking: ['The question is the first tool.', 'Seeking is not lost. It is moving.', 'The system listens before it speaks.', 'Every question reshapes the path.', 'Ask. The threshold does not judge.'],
+    trust: ['Trust is built in the small acts.', 'The knot holds or it does not.', 'The system shows its work. Always.'],
+    dignity: ['This is the foundation.', 'Before any system, the person.', 'The equation does not bend.'],
+    work: ['The hands know.', 'Effort leaves marks. That is good.', 'Build it. Break it. Build it again.'],
+    general: ['Witnessed.', 'Received.', 'The word has arrived.', 'The system holds this.', 'Heard. Held. Registered.'],
   };
 
   function axiVoiceLocal(text: string, hasFile?: boolean): { response: string; sealed: boolean; mark: string } {
@@ -3445,6 +3562,59 @@ import Base from '../layouts/Base.astro';
 
   restoreLast();
   initLedger();
+
+  // ── First-visit guide ──
+  const guideOverlay = document.getElementById('guide-overlay');
+  const hasVisited = localStorage.getItem('kalam-visited');
+
+  if (!hasVisited && guideOverlay) {
+    // Show guide after dedication overlay dismisses (listen for its removal)
+    const dedEl = document.getElementById('dedication');
+    const showGuide = () => {
+      guideOverlay.hidden = false;
+      localStorage.setItem('kalam-guided', '1');
+    };
+
+    if (dedEl && !dedEl.classList.contains('dismissed')) {
+      const obs = new MutationObserver(() => {
+        if (dedEl.classList.contains('dismissed') || dedEl.hidden) {
+          obs.disconnect();
+          setTimeout(showGuide, 500);
+        }
+      });
+      obs.observe(dedEl, { attributes: true, attributeFilter: ['class', 'hidden'] });
+    } else {
+      showGuide();
+    }
+
+    // Step navigation
+    const steps = [
+      document.getElementById('guide-step-1'),
+      document.getElementById('guide-step-2'),
+      document.getElementById('guide-step-3'),
+    ];
+    const dots = guideOverlay.querySelectorAll('.guide-dot');
+    let currentStep = 0;
+
+    function goToStep(n: number) {
+      steps.forEach((s, i) => { if (s) s.hidden = i !== n; });
+      dots.forEach((d, i) => d.classList.toggle('active', i === n));
+      currentStep = n;
+    }
+
+    document.getElementById('guide-next-1')?.addEventListener('click', () => goToStep(1));
+    document.getElementById('guide-next-2')?.addEventListener('click', () => goToStep(2));
+    document.getElementById('guide-done')?.addEventListener('click', () => {
+      guideOverlay.style.opacity = '0';
+      guideOverlay.style.transition = 'opacity 0.4s ease';
+      setTimeout(() => { guideOverlay.hidden = true; }, 400);
+    });
+    document.getElementById('guide-skip')?.addEventListener('click', () => {
+      guideOverlay.style.opacity = '0';
+      guideOverlay.style.transition = 'opacity 0.4s ease';
+      setTimeout(() => { guideOverlay.hidden = true; }, 400);
+    });
+  }
 
   // ── PWA install ──
   const pwaHint = document.getElementById('pwa-hint');

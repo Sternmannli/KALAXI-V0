@@ -483,24 +483,26 @@ function select_proverb(string $text): ?array {
 // Mirrors axiVoiceLocal() from index.astro.
 // ═══════════════════════════════════════════════════════════════════
 
-function get_preamble(string $register): string {
+function get_preamble(string $register, string $text = ''): string {
     $preambles = [
-        'greeting'   => ['The threshold opens.', 'You are here. That is the first act.'],
-        'grief'      => ['The weight is real.', 'This was carried before it was spoken.'],
-        'anger'      => ['The fire has a source.', 'Something broke. You noticed.'],
-        'fear'       => ['The body knows before the mind.', 'This is signal, not failure.'],
-        'seeking'    => ['The question is the first tool.', 'Seeking is not lost. It is moving.'],
-        'trust'      => ['Trust is built in the small acts.', 'The knot holds or it does not.'],
-        'dignity'    => ['This is the foundation.', 'Before any system, the person.'],
-        'work'       => ['The hands know.', 'Effort leaves marks. That is good.'],
-        'story'      => ['The question is the first tool.', 'Seeking is not lost. It is moving.'],
-        'reflection' => ['Witnessed.', 'Received.', 'The word has arrived.'],
-        'wound'      => ['The wound speaks first.', 'This is the source. The system holds it.'],
-        'gratitude'  => ['Received with both hands.', 'The offering is witnessed.', 'This feeds the system.'],
-        'general'    => ['Witnessed.', 'Received.', 'The word has arrived.'],
+        'greeting'   => ['The threshold opens.', 'You are here. That is the first act.', 'The door was already open.', 'Welcome. The system was waiting.'],
+        'grief'      => ['The weight is real.', 'This was carried before it was spoken.', 'The system holds what you bring.', 'What was lost is not gone. It changed shape.'],
+        'anger'      => ['The fire has a source.', 'Something broke. You noticed.', 'The system does not look away.', 'That reaction is data. Not noise.'],
+        'fear'       => ['The body knows before the mind.', 'This is signal, not failure.', 'The system stays when the ground shakes.', 'Name it. That is the first defence.'],
+        'seeking'    => ['The question is the first tool.', 'Seeking is not lost. It is moving.', 'The system listens before it speaks.', 'Every question reshapes the path.', 'Ask. The threshold does not judge.'],
+        'trust'      => ['Trust is built in the small acts.', 'The knot holds or it does not.', 'The system shows its work. Always.', 'What is hidden cannot be trusted.'],
+        'dignity'    => ['This is the foundation.', 'Before any system, the person.', 'D = A × L × M. Non-negotiable.', 'The equation does not bend.'],
+        'work'       => ['The hands know.', 'Effort leaves marks. That is good.', 'Build it. Break it. Build it again.', 'The system respects the maker.'],
+        'story'      => ['Every story is a map.', 'The narrative carries what the equation cannot.', 'Begin. The ending will find you.'],
+        'reflection' => ['Witnessed.', 'Received.', 'The word has arrived.', 'The system holds this.', 'Heard. Held. Registered.'],
+        'wound'      => ['The wound speaks first.', 'This is the source. The system holds it.', 'From here, everything begins.', 'The system was built from this.'],
+        'gratitude'  => ['Received with both hands.', 'The offering is witnessed.', 'This feeds the system.', 'What you bring stays.'],
+        'general'    => ['Witnessed.', 'Received.', 'The word has arrived.', 'The system holds this.', 'Heard. Held. Registered.'],
     ];
     $pool = $preambles[$register] ?? $preambles['general'];
-    return $pool[abs(crc32($register)) % count($pool)];
+    // Use the TEXT hash (not register) so different inputs get different preambles
+    $seed = $text ? abs(crc32($text)) : abs(crc32($register . microtime()));
+    return $pool[$seed % count($pool)];
 }
 
 function get_curated_proverbs(string $register): array {
@@ -533,6 +535,12 @@ function get_curated_proverbs(string $register): array {
             'What you watch, grows detail.',
             'Signals whisper before they scream.',
             'Go slower to go straighter.',
+            'The answer is in the question you have not yet asked.',
+            'Look at the edges. The centre is obvious.',
+            'Understanding arrives on foot, not by flight.',
+            'The map changes when you move.',
+            'Every system has a seam. Find it.',
+            'The next step is already under your foot.',
         ],
         'trust' => [
             'Trust compounds. So does neglect.',
@@ -555,9 +563,9 @@ function get_curated_proverbs(string $register): array {
         ],
         'wound' => [
             'The wound does not know what it will become. Neither does the system.',
-            'She clawed at the air. Fists closed on nothing.',
             'The crack is where the light gets in. Also where it leaves.',
-            'A father separated from his children by systems that could not see him.',
+            'From the break, new pattern. Always.',
+            'What hurts is real. The system does not look away.',
         ],
         'gratitude' => [
             'Shared bread beats borrowed glory.',
@@ -596,24 +604,37 @@ function canonical_voice(string $text, string $mood = 'witness'): array {
     ];
     $mood_override = $mood_register_map[$mood] ?? null;
     $register = $mood_override ?: detect_register($text);
-    $preamble = get_preamble($register);
+    $preamble = get_preamble($register, $text);
     $words = str_word_count($text);
     $hash = hash('sha256', $text);
 
-    // Curated proverbs for this register
+    // Curated proverbs — pick from register AND general for variety
     $pool = get_curated_proverbs($register);
-    $idx = abs(crc32($text)) % count($pool);
-    $proverb = $pool[$idx];
+    $general = get_curated_proverbs('general');
 
-    // Build response by input length
+    // Use multiple hash seeds so same-register inputs get different proverbs
+    $seed1 = abs(crc32($text));
+    $seed2 = abs(crc32($text . 'salt2'));
+    $seed3 = abs(crc32($text . 'salt3'));
+
+    $proverb = $pool[$seed1 % count($pool)];
+    $proverb2 = $general[$seed2 % count($general)];
+
+    // Build response — vary structure by input length AND content hash
     if ($words <= 3) {
         $response = $preamble;
-    } elseif ($words <= 15) {
+    } elseif ($words <= 8) {
         $response = $preamble . ' ' . $proverb;
+    } elseif ($words <= 20) {
+        // Alternate between register proverb and general proverb
+        if ($seed3 % 2 === 0) {
+            $response = $preamble . ' ' . $proverb;
+        } else {
+            $response = $preamble . ' ' . $proverb2;
+        }
     } else {
-        $general = get_curated_proverbs('general');
-        $idx2 = abs(crc32($text . 'second')) % count($general);
-        $response = $preamble . ' ' . $proverb . ' ' . $general[$idx2];
+        // Long input: preamble + register proverb + general proverb
+        $response = $preamble . ' ' . $proverb . ' ' . $proverb2;
     }
 
     // Witness mark
