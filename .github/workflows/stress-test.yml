@@ -113,7 +113,7 @@ jobs:
 
           # --- Wave 4: Rapid-fire single page (50 requests to home) ---
           D="${D}### Wave 4: Rapid-Fire Home (50 requests)\n"
-          seq 50 | parallel -j 50 'curl -s -o /dev/null -w "%{http_code}\n" https://kalam.ch/' > /tmp/rapid.txt 2>/dev/null
+          seq 50 | parallel -j 50 'curl -s -o /dev/null -w "%{http_code}\n" https://kalam.ch/' > /tmp/rapid.txt 2>/dev/null || true
           RAPID_OK=$(grep "200" /tmp/rapid.txt | wc -l)
           RAPID_FAIL=$((50 - RAPID_OK))
           if [ "$RAPID_FAIL" -le 2 ]; then
@@ -592,26 +592,39 @@ jobs:
 
           # --- Test 6: Narrative file count ---
           D="${D}\n### Narrative Integrity\n"
-          for dir in HAKAKA ASHWATER KINDERBUCH KALAXI_1; do
-            if [ -d "private/NARRATIVES/${dir}" ]; then
-              COUNT=$(find "private/NARRATIVES/${dir}" -type f | wc -l)
-              D="${D}  ${dir}: ${COUNT} files\n"
-            else
-              D="${D}  ${dir}: ❌ missing\n"
-            fi
-          done
-          PASS=$((PASS+1))
-
-          # --- Test 7: Proverb count ---
-          D="${D}\n### Wisdom Store\n"
-          if [ -d "private/HONEY" ]; then
-            PROV_FILES=$(find private/HONEY -type f | wc -l)
-            D="${D}  HONEY tier: ${PROV_FILES} files\n"
+          if [ -d "private/NARRATIVE" ]; then
+            NAR_COUNT=$(find "private/NARRATIVE" -type f | wc -l)
+            D="${D}  NARRATIVE directory: ${NAR_COUNT} files\n"
+            for f in Hakaka_Complete.md Ashwater.md Kinderbuch.md; do
+              if [ -f "private/NARRATIVE/${f}" ]; then
+                D="${D}  ${f}: ✅ present\n"
+              else
+                D="${D}  ${f}: ❌ missing\n"
+              fi
+            done
             PASS=$((PASS+1))
-            D="${D}✅ Wisdom store intact\n"
           else
             FAIL=$((FAIL+1))
-            D="${D}❌ HONEY tier missing\n"
+            D="${D}  NARRATIVE: ❌ directory missing\n"
+          fi
+
+          # --- Test 7: Wisdom store (WEAVER modules) ---
+          D="${D}\n### Wisdom Store\n"
+          WISDOM_FILES=0
+          for f in private/WEAVER/wisdom_mirror.py private/WEAVER/proverb_stress_test.py private/WEAVER/proverb_compressor.py; do
+            if [ -f "$f" ]; then
+              WISDOM_FILES=$((WISDOM_FILES+1))
+              D="${D}  $(basename $f): ✅ present\n"
+            else
+              D="${D}  $(basename $f): ❌ missing\n"
+            fi
+          done
+          if [ "$WISDOM_FILES" -ge 2 ]; then
+            PASS=$((PASS+1))
+            D="${D}✅ Wisdom store intact (${WISDOM_FILES} modules)\n"
+          else
+            FAIL=$((FAIL+1))
+            D="${D}❌ Wisdom store incomplete (${WISDOM_FILES} modules)\n"
           fi
 
           echo -e "$D"
@@ -765,7 +778,7 @@ jobs:
           echo "## Storm 1: Hammer the Surface (HTTP Concurrency)" >> /tmp/storm_report.md
           echo "**Result:** ${{ needs.storm-surface.outputs.result }}" >> /tmp/storm_report.md
           echo '```' >> /tmp/storm_report.md
-          cat storm1-results/storm1.txt 2>/dev/null || echo "(no data)"
+          cat storm1-results/storm1.txt >> /tmp/storm_report.md 2>/dev/null || echo "(no data)" >> /tmp/storm_report.md
           echo "" >> /tmp/storm_report.md
           echo '```' >> /tmp/storm_report.md
           echo "" >> /tmp/storm_report.md
@@ -773,7 +786,7 @@ jobs:
           echo "## Storm 2: Hammer the API (Endpoint Stress)" >> /tmp/storm_report.md
           echo "**Result:** ${{ needs.storm-api.outputs.result }}" >> /tmp/storm_report.md
           echo '```' >> /tmp/storm_report.md
-          cat storm2-results/storm2.txt 2>/dev/null || echo "(no data)"
+          cat storm2-results/storm2.txt >> /tmp/storm_report.md 2>/dev/null || echo "(no data)" >> /tmp/storm_report.md
           echo "" >> /tmp/storm_report.md
           echo '```' >> /tmp/storm_report.md
           echo "" >> /tmp/storm_report.md
@@ -781,7 +794,7 @@ jobs:
           echo "## Storm 3: Shake the Bridge (Server SSH)" >> /tmp/storm_report.md
           echo "**Result:** ${{ needs.storm-bridge.outputs.result }}" >> /tmp/storm_report.md
           echo '```' >> /tmp/storm_report.md
-          cat storm3-results/storm3.txt 2>/dev/null || echo "(no data)"
+          cat storm3-results/storm3.txt >> /tmp/storm_report.md 2>/dev/null || echo "(no data)" >> /tmp/storm_report.md
           echo "" >> /tmp/storm_report.md
           echo '```' >> /tmp/storm_report.md
           echo "" >> /tmp/storm_report.md
@@ -789,7 +802,7 @@ jobs:
           echo "## Storm 4: Chain Reaction (Cross-Repo)" >> /tmp/storm_report.md
           echo "**Result:** ${{ needs.storm-chain.outputs.result }}" >> /tmp/storm_report.md
           echo '```' >> /tmp/storm_report.md
-          cat storm4-results/storm4.txt 2>/dev/null || echo "(no data)"
+          cat storm4-results/storm4.txt >> /tmp/storm_report.md 2>/dev/null || echo "(no data)" >> /tmp/storm_report.md
           echo "" >> /tmp/storm_report.md
           echo '```' >> /tmp/storm_report.md
           echo "" >> /tmp/storm_report.md
@@ -797,7 +810,7 @@ jobs:
           echo "## Storm 5: Workflow Cascade" >> /tmp/storm_report.md
           echo "**Result:** ${{ needs.storm-cascade.outputs.result }}" >> /tmp/storm_report.md
           echo '```' >> /tmp/storm_report.md
-          cat storm5-results/storm5.txt 2>/dev/null || echo "(no data)"
+          cat storm5-results/storm5.txt >> /tmp/storm_report.md 2>/dev/null || echo "(no data)" >> /tmp/storm_report.md
           echo "" >> /tmp/storm_report.md
           echo '```' >> /tmp/storm_report.md
           echo "" >> /tmp/storm_report.md
