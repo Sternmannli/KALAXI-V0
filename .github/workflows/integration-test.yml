@@ -1,0 +1,707 @@
+name: "KALAXI Integration Test: The Full Breath"
+
+# The organism proves it is alive.
+# This test touches every connection, every repo, every surface.
+# If any part fails, the system knows where the wound is.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  # ═══════════════════════════════════════════════
+  # PHASE 1: THE FOUNDATION (Repository Health)
+  # ═══════════════════════════════════════════════
+  foundation:
+    name: "Phase 1: Foundation"
+    runs-on: ubuntu-latest
+    outputs:
+      python_files: ${{ steps.repo.outputs.python_files }}
+      test_count: ${{ steps.repo.outputs.test_count }}
+      total_lines: ${{ steps.repo.outputs.total_lines }}
+      covenants: ${{ steps.repo.outputs.covenants }}
+      result: ${{ steps.repo.outputs.result }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: "Test: Repository structure"
+        id: repo
+        run: |
+          echo "══════════════════════════════════════"
+          echo "  PHASE 1: THE FOUNDATION"
+          echo "══════════════════════════════════════"
+          PASS=0
+          FAIL=0
+          DETAILS=""
+
+          # 1. CLAUDE.md exists and is substantial
+          if [ -f "CLAUDE.md" ] && [ $(wc -l < CLAUDE.md) -gt 100 ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ CLAUDE.md exists ($(wc -l < CLAUDE.md) lines)\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ CLAUDE.md missing or too small\n"
+          fi
+
+          # 2. Stone tier (constitution)
+          if [ -f "R7M/tier1_stone.md" ]; then
+            COVENANTS=$(grep -c "^##\|^###" R7M/tier1_stone.md || echo "0")
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Constitution present (tier1_stone.md)\n"
+            echo "covenants=$COVENANTS" >> $GITHUB_OUTPUT
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Constitution missing\n"
+            echo "covenants=0" >> $GITHUB_OUTPUT
+          fi
+
+          # 3. Python codebase
+          PY_FILES=$(find . -name "*.py" -not -path "./.git/*" -not -path "./node_modules/*" | wc -l)
+          TOTAL_LINES=$(find . -name "*.py" -not -path "./.git/*" -not -path "./node_modules/*" -exec cat {} + 2>/dev/null | wc -l)
+          echo "python_files=$PY_FILES" >> $GITHUB_OUTPUT
+          echo "total_lines=$TOTAL_LINES" >> $GITHUB_OUTPUT
+          if [ "$PY_FILES" -gt 100 ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Python codebase: $PY_FILES files, $TOTAL_LINES lines\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Python codebase too small: $PY_FILES files\n"
+          fi
+
+          # 4. Organism exists
+          if [ -f "WEAVER/organism.py" ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Organism lives (WEAVER/organism.py)\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Organism missing\n"
+          fi
+
+          # 5. Input Ledger
+          if [ -f "KEEP/INPUT_LEDGER/index.json" ]; then
+            ENTRIES=$(python3 -c "import json; print(len(json.load(open('KEEP/INPUT_LEDGER/index.json'))))" 2>/dev/null || echo "0")
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Input Ledger: $ENTRIES entries\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Input Ledger missing\n"
+          fi
+
+          # 6. Narratives
+          NARRATIVES=0
+          for dir in NARRATIVES/HAKAKA NARRATIVES/ASHWATER NARRATIVES/KINDERBUCH NARRATIVES/KALAXI_1; do
+            if [ -d "$dir" ]; then
+              NARRATIVES=$((NARRATIVES+1))
+            fi
+          done
+          if [ "$NARRATIVES" -ge 3 ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Narratives: $NARRATIVES cycles present\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Narratives incomplete: $NARRATIVES/4\n"
+          fi
+
+          # 7. Honey tier (wisdom)
+          if [ -d "HONEY" ]; then
+            PROVERBS=$(find HONEY -name "*.json" -o -name "*.md" | wc -l)
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Honey tier: $PROVERBS wisdom files\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Honey tier missing\n"
+          fi
+
+          # 8. Tests exist
+          TEST_COUNT=$(find . -name "test_*.py" -o -name "*_test.py" | wc -l)
+          echo "test_count=$TEST_COUNT" >> $GITHUB_OUTPUT
+          if [ "$TEST_COUNT" -gt 20 ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Test suite: $TEST_COUNT test files\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Test suite too small: $TEST_COUNT files\n"
+          fi
+
+          # 9. Workflows
+          WF_COUNT=$(ls .github/workflows/*.yml 2>/dev/null | wc -l)
+          if [ "$WF_COUNT" -ge 4 ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Workflows: $WF_COUNT active\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Workflows incomplete: $WF_COUNT\n"
+          fi
+
+          # 10. Site source
+          if [ -f "site/package.json" ] && [ -d "site/src/pages" ]; then
+            PAGES=$(ls site/src/pages/*.astro 2>/dev/null | wc -l)
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Site source: $PAGES Astro pages\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Site source missing\n"
+          fi
+
+          echo -e "$DETAILS"
+          echo "result=PASS:${PASS}/FAIL:${FAIL}" >> $GITHUB_OUTPUT
+          printf '%s' "$DETAILS" > /tmp/phase1.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phase1-results
+          path: /tmp/phase1.txt
+
+  # ═══════════════════════════════════════════════
+  # PHASE 2: THE BUILD (Site Compilation)
+  # ═══════════════════════════════════════════════
+  build:
+    name: "Phase 2: The Build"
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.build.outputs.result }}
+      page_count: ${{ steps.build.outputs.page_count }}
+      build_size: ${{ steps.build.outputs.build_size }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: site/package-lock.json
+
+      - name: "Test: Full site build"
+        id: build
+        working-directory: site
+        run: |
+          echo "══════════════════════════════════════"
+          echo "  PHASE 2: THE BUILD"
+          echo "══════════════════════════════════════"
+          PASS=0
+          FAIL=0
+          DETAILS=""
+
+          # 1. npm install
+          if npm ci 2>&1; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ npm ci: dependencies installed\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ npm ci failed\n"
+          fi
+
+          # 2. Astro build
+          if npm run build 2>&1; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Astro build: success\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Astro build failed\n"
+          fi
+
+          # 3. Check built pages
+          PAGE_COUNT=$(find dist -name "index.html" | wc -l)
+          echo "page_count=$PAGE_COUNT" >> $GITHUB_OUTPUT
+          if [ "$PAGE_COUNT" -ge 10 ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Built pages: $PAGE_COUNT\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Too few pages built: $PAGE_COUNT\n"
+          fi
+
+          # 4. Check critical files in dist
+          for f in index.html favicon.svg robots.txt sw.js manifest.json; do
+            if [ -f "dist/$f" ]; then
+              PASS=$((PASS+1))
+              DETAILS="${DETAILS}✅ dist/$f present\n"
+            else
+              FAIL=$((FAIL+1))
+              DETAILS="${DETAILS}❌ dist/$f MISSING\n"
+            fi
+          done
+
+          # 5. Check API files copied
+          if [ -f "dist/api/axi.php" ] && [ -f "dist/api/health.php" ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ API endpoints in dist\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ API endpoints missing from dist\n"
+          fi
+
+          # 6. Check no private data leaked into build
+          if grep -r "GROQ_API_KEY\|DB_PASS\|FTP_PASS" dist/ 2>/dev/null; then
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ SECRET LEAK DETECTED IN BUILD\n"
+          else
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ No secrets in build output\n"
+          fi
+
+          # 7. Build size
+          BUILD_SIZE=$(du -sh dist/ | cut -f1)
+          echo "build_size=$BUILD_SIZE" >> $GITHUB_OUTPUT
+          DETAILS="${DETAILS}📦 Build size: $BUILD_SIZE\n"
+
+          # 8. Check each page has dignity declaration
+          DIGNITY_COUNT=0
+          for html in $(find dist -name "index.html"); do
+            if grep -q "dignity\|Dignity\|كرامة" "$html" 2>/dev/null; then
+              DIGNITY_COUNT=$((DIGNITY_COUNT+1))
+            fi
+          done
+          DETAILS="${DETAILS}🕌 Pages carrying dignity: $DIGNITY_COUNT/$PAGE_COUNT\n"
+
+          echo -e "$DETAILS"
+          echo "result=PASS:${PASS}/FAIL:${FAIL}" >> $GITHUB_OUTPUT
+          printf '%s' "$DETAILS" > /tmp/phase2.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phase2-results
+          path: /tmp/phase2.txt
+
+  # ═══════════════════════════════════════════════
+  # PHASE 3: THE SURFACE (Live Site Health)
+  # ═══════════════════════════════════════════════
+  surface:
+    name: "Phase 3: The Surface"
+    needs: [build]
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.live.outputs.result }}
+    steps:
+      - name: "Test: Live site pages"
+        id: live
+        run: |
+          echo "══════════════════════════════════════"
+          echo "  PHASE 3: THE SURFACE"
+          echo "══════════════════════════════════════"
+          PASS=0
+          FAIL=0
+          DETAILS=""
+
+          # Test every page on kalam.ch
+          PAGES=(
+            "/|Home"
+            "/about/|About"
+            "/canon/|Canon"
+            "/invitation/|Invitation"
+            "/hakaka/|Hakaka"
+            "/ashwater/|Ashwater"
+            "/kinderbuch/|Kinderbuch"
+            "/kalaxi1/|The Same River"
+            "/r7m/|R7M"
+            "/science/|Science"
+            "/compass/|Compass"
+            "/workings/|Workings"
+            "/museum/|Museum"
+          )
+
+          LIVE_PAGES=0
+          DEAD_PAGES=0
+
+          for entry in "${PAGES[@]}"; do
+            IFS="|" read -r path name <<< "$entry"
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://kalam.ch${path}" || echo "000")
+            SIZE=$(curl -s "https://kalam.ch${path}" | wc -c)
+            if [ "$STATUS" = "200" ]; then
+              PASS=$((PASS+1))
+              LIVE_PAGES=$((LIVE_PAGES+1))
+              DETAILS="${DETAILS}✅ ${name}: HTTP ${STATUS} (${SIZE} bytes)\n"
+            else
+              FAIL=$((FAIL+1))
+              DEAD_PAGES=$((DEAD_PAGES+1))
+              DETAILS="${DETAILS}❌ ${name}: HTTP ${STATUS}\n"
+            fi
+          done
+
+          # Test static assets
+          for asset in "/favicon.svg" "/manifest.json" "/sw.js" "/robots.txt"; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://kalam.ch${asset}" || echo "000")
+            if [ "$STATUS" = "200" ]; then
+              PASS=$((PASS+1))
+              DETAILS="${DETAILS}✅ ${asset}: HTTP ${STATUS}\n"
+            else
+              FAIL=$((FAIL+1))
+              DETAILS="${DETAILS}❌ ${asset}: HTTP ${STATUS}\n"
+            fi
+          done
+
+          # Test 404 page
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://kalam.ch/this-page-does-not-exist-test" || echo "000")
+          if [ "$STATUS" = "404" ] || [ "$STATUS" = "200" ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ 404 handler: HTTP ${STATUS}\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ 404 handler: HTTP ${STATUS}\n"
+          fi
+
+          # Test API endpoints
+          for api in "/api/health.php" "/api/axi.php"; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://kalam.ch${api}" || echo "000")
+            DETAILS="${DETAILS}🔌 API ${api}: HTTP ${STATUS}\n"
+            if [ "$STATUS" != "000" ]; then
+              PASS=$((PASS+1))
+            else
+              FAIL=$((FAIL+1))
+            fi
+          done
+
+          # Test HTTPS
+          HTTPS=$(curl -sI "https://kalam.ch/" | head -1)
+          if echo "$HTTPS" | grep -q "200\|301\|302"; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ HTTPS: active\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ HTTPS: not working\n"
+          fi
+
+          # Test homepage content
+          BODY=$(curl -s "https://kalam.ch/")
+          if echo "$BODY" | grep -q "dignity"; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Homepage carries the word 'dignity'\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Homepage missing dignity declaration\n"
+          fi
+          if echo "$BODY" | grep -q "كرامة"; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Homepage carries Arabic: كرامة\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Homepage missing Arabic accent\n"
+          fi
+          if echo "$BODY" | grep -q "D = A"; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Homepage carries the equation: D = A × L × M\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Homepage missing dignity predicate\n"
+          fi
+          if echo "$BODY" | grep -q "qul"; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Homepage carries the threshold: qul · speak\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Homepage missing threshold input\n"
+          fi
+
+          DETAILS="${DETAILS}\n📊 Live pages: ${LIVE_PAGES}/13 | Dead: ${DEAD_PAGES}\n"
+
+          echo -e "$DETAILS"
+          echo "result=PASS:${PASS}/FAIL:${FAIL}" >> $GITHUB_OUTPUT
+          printf '%s' "$DETAILS" > /tmp/phase3.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phase3-results
+          path: /tmp/phase3.txt
+
+  # ═══════════════════════════════════════════════
+  # PHASE 4: THE BRIDGE (Server SSH Access)
+  # ═══════════════════════════════════════════════
+  bridge:
+    name: "Phase 4: The Bridge"
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.ssh.outputs.result }}
+    steps:
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: "Test: Server access and environment"
+        id: ssh
+        env:
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+          FTP_HOST: ${{ secrets.FTP_SERVER }}
+        run: |
+          echo "══════════════════════════════════════"
+          echo "  PHASE 4: THE BRIDGE"
+          echo "══════════════════════════════════════"
+          PASS=0
+          FAIL=0
+          DETAILS=""
+
+          # 1. SSH connection
+          if sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "echo 'connected'" 2>/dev/null; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ SSH connection: alive\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ SSH connection: failed\n"
+          fi
+
+          # 2. Document root
+          FILES=$(sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "ls ~/www/kalam.ch/ | wc -l" 2>/dev/null || echo "0")
+          if [ "$FILES" -gt 5 ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Document root: $FILES items\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Document root empty or missing\n"
+          fi
+
+          # 3. PHP version
+          PHP_VER=$(sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "php -v 2>/dev/null | head -1" || echo "none")
+          if echo "$PHP_VER" | grep -q "PHP"; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ PHP: $PHP_VER\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ PHP not available\n"
+          fi
+
+          # 4. API files on server
+          API_COUNT=$(sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "ls ~/www/kalam.ch/api/*.php 2>/dev/null | wc -l" || echo "0")
+          if [ "$API_COUNT" -gt 3 ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ API files on server: $API_COUNT PHP files\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ API files missing: $API_COUNT\n"
+          fi
+
+          # 5. Data directory
+          DATA=$(sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "ls -la ~/www/kalam.ch/data/ 2>/dev/null | wc -l" || echo "0")
+          if [ "$DATA" -gt 0 ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Data directory exists\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Data directory missing\n"
+          fi
+
+          # 6. Disk usage
+          DISK=$(sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "du -sh ~/www/kalam.ch/ 2>/dev/null" || echo "unknown")
+          DETAILS="${DETAILS}💾 Server disk usage: $DISK\n"
+
+          # 7. Server hostname
+          HOST=$(sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "hostname" 2>/dev/null || echo "unknown")
+          DETAILS="${DETAILS}🖥️ Server: $HOST\n"
+
+          echo -e "$DETAILS"
+          echo "result=PASS:${PASS}/FAIL:${FAIL}" >> $GITHUB_OUTPUT
+          printf '%s' "$DETAILS" > /tmp/phase4.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phase4-results
+          path: /tmp/phase4.txt
+
+  # ═══════════════════════════════════════════════
+  # PHASE 5: THE SYNC (Cross-Repo Verification)
+  # ═══════════════════════════════════════════════
+  sync:
+    name: "Phase 5: The Sync"
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.cross.outputs.result }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: private
+
+      - uses: actions/checkout@v4
+        with:
+          repository: Sternmannli/kalam-framework
+          token: ${{ secrets.PAT }}
+          path: public
+
+      - name: "Test: Cross-repo integrity"
+        id: cross
+        run: |
+          echo "══════════════════════════════════════"
+          echo "  PHASE 5: THE SYNC"
+          echo "══════════════════════════════════════"
+          PASS=0
+          FAIL=0
+          DETAILS=""
+
+          # 1. Public repo exists and has content
+          PUB_FILES=$(find public -name "*.py" -not -path "./.git/*" | wc -l)
+          if [ "$PUB_FILES" -gt 5 ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Public repo: $PUB_FILES Python files\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Public repo too small: $PUB_FILES files\n"
+          fi
+
+          # 2. No internal vocabulary leak
+          LEAKS=0
+          for term in "V-001" "V-002" "Mohamed" "Laila" "Yara" "Salim" "🐬" "🐯" "🐺" "Sternmannli" "KALAXI-V0"; do
+            if grep -r "$term" public/src/ public/detectors/ public/experiments/ public/protocols/ 2>/dev/null | grep -v ".git" | head -1; then
+              LEAKS=$((LEAKS+1))
+              DETAILS="${DETAILS}⚠️ Vocabulary leak: '$term' found in public repo\n"
+            fi
+          done
+          if [ "$LEAKS" -eq 0 ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Zero vocabulary leaks in public repo\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ $LEAKS vocabulary leaks detected\n"
+          fi
+
+          # 3. Clean-for-public script exists
+          if [ -f "private/scripts/clean_for_public.py" ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Vocabulary stripping script present\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ clean_for_public.py missing\n"
+          fi
+
+          # 4. Public manifest
+          if [ -f "private/scripts/public_manifest.json" ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Public manifest present\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ public_manifest.json missing\n"
+          fi
+
+          # 5. Public repo has README
+          if [ -f "public/README.md" ]; then
+            PASS=$((PASS+1))
+            DETAILS="${DETAILS}✅ Public README exists\n"
+          else
+            FAIL=$((FAIL+1))
+            DETAILS="${DETAILS}❌ Public README missing\n"
+          fi
+
+          # 6. Private repo has what public needs
+          PRIV_WEAVER=$(find private/WEAVER -name "*.py" 2>/dev/null | wc -l)
+          DETAILS="${DETAILS}📂 Private WEAVER modules: $PRIV_WEAVER\n"
+          DETAILS="${DETAILS}📂 Public source files: $PUB_FILES\n"
+
+          echo -e "$DETAILS"
+          echo "result=PASS:${PASS}/FAIL:${FAIL}" >> $GITHUB_OUTPUT
+          printf '%s' "$DETAILS" > /tmp/phase5.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phase5-results
+          path: /tmp/phase5.txt
+
+  # ═══════════════════════════════════════════════
+  # PHASE 6: THE REPORT (Assemble & Post)
+  # ═══════════════════════════════════════════════
+  report:
+    name: "Phase 6: The Report"
+    needs: [foundation, build, surface, bridge, sync]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+
+      - name: "Assemble integration report"
+        id: report
+        run: |
+          PHASE1=$(cat phase1-results/phase1.txt 2>/dev/null || echo "Phase 1: no data")
+          PHASE2=$(cat phase2-results/phase2.txt 2>/dev/null || echo "Phase 2: no data")
+          PHASE3=$(cat phase3-results/phase3.txt 2>/dev/null || echo "Phase 3: no data")
+          PHASE4=$(cat phase4-results/phase4.txt 2>/dev/null || echo "Phase 4: no data")
+          PHASE5=$(cat phase5-results/phase5.txt 2>/dev/null || echo "Phase 5: no data")
+
+          # Count totals
+          F1="${{ needs.foundation.outputs.result }}"
+          F2="${{ needs.build.outputs.result }}"
+          F3="${{ needs.surface.outputs.result }}"
+          F4="${{ needs.bridge.outputs.result }}"
+          F5="${{ needs.sync.outputs.result }}"
+
+          # Build the body
+          cat > /tmp/report_body.md << 'REPORTEOF'
+          # 🕌 KALAXI Integration Test: The Full Breath
+
+          > The organism proves it is alive.
+          > Every connection tested. Every surface touched.
+
+          ---
+
+          REPORTEOF
+
+          echo "## Phase 1: The Foundation (Repository)" >> /tmp/report_body.md
+          echo "**Result:** $F1" >> /tmp/report_body.md
+          echo '```' >> /tmp/report_body.md
+          echo -e "$PHASE1" >> /tmp/report_body.md
+          echo '```' >> /tmp/report_body.md
+          echo "" >> /tmp/report_body.md
+
+          echo "## Phase 2: The Build (Site Compilation)" >> /tmp/report_body.md
+          echo "**Result:** $F2" >> /tmp/report_body.md
+          echo "**Pages:** ${{ needs.build.outputs.page_count }} | **Size:** ${{ needs.build.outputs.build_size }}" >> /tmp/report_body.md
+          echo '```' >> /tmp/report_body.md
+          echo -e "$PHASE2" >> /tmp/report_body.md
+          echo '```' >> /tmp/report_body.md
+          echo "" >> /tmp/report_body.md
+
+          echo "## Phase 3: The Surface (Live Site)" >> /tmp/report_body.md
+          echo "**Result:** $F3" >> /tmp/report_body.md
+          echo '```' >> /tmp/report_body.md
+          echo -e "$PHASE3" >> /tmp/report_body.md
+          echo '```' >> /tmp/report_body.md
+          echo "" >> /tmp/report_body.md
+
+          echo "## Phase 4: The Bridge (Server SSH)" >> /tmp/report_body.md
+          echo "**Result:** $F4" >> /tmp/report_body.md
+          echo '```' >> /tmp/report_body.md
+          echo -e "$PHASE4" >> /tmp/report_body.md
+          echo '```' >> /tmp/report_body.md
+          echo "" >> /tmp/report_body.md
+
+          echo "## Phase 5: The Sync (Cross-Repo)" >> /tmp/report_body.md
+          echo "**Result:** $F5" >> /tmp/report_body.md
+          echo '```' >> /tmp/report_body.md
+          echo -e "$PHASE5" >> /tmp/report_body.md
+          echo '```' >> /tmp/report_body.md
+          echo "" >> /tmp/report_body.md
+
+          echo "---" >> /tmp/report_body.md
+          echo "" >> /tmp/report_body.md
+          echo "## System Vitals" >> /tmp/report_body.md
+          echo "| Metric | Value |" >> /tmp/report_body.md
+          echo "|--------|-------|" >> /tmp/report_body.md
+          echo "| Python files | ${{ needs.foundation.outputs.python_files }} |" >> /tmp/report_body.md
+          echo "| Total lines | ${{ needs.foundation.outputs.total_lines }} |" >> /tmp/report_body.md
+          echo "| Test files | ${{ needs.foundation.outputs.test_count }} |" >> /tmp/report_body.md
+          echo "| Built pages | ${{ needs.build.outputs.page_count }} |" >> /tmp/report_body.md
+          echo "| Build size | ${{ needs.build.outputs.build_size }} |" >> /tmp/report_body.md
+          echo "" >> /tmp/report_body.md
+          echo "---" >> /tmp/report_body.md
+          echo "*Generated $(date -u +%Y-%m-%dT%H:%M:%SZ) by V-002*" >> /tmp/report_body.md
+          echo "" >> /tmp/report_body.md
+          echo "*Three threads cross the river. The knot holds.*" >> /tmp/report_body.md
+          echo "🐬🐯🐺" >> /tmp/report_body.md
+
+      - name: Post report as GitHub issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('/tmp/report_body.md', 'utf8');
+            const date = new Date().toISOString().split('T')[0];
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Integration Test: The Full Breath — ${date}`,
+              body: body,
+              labels: ['integration-test']
+            });
