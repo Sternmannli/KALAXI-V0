@@ -1,0 +1,140 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Bank Transfer — kalam.ch" description="Full bank transfer details for sustaining kalam.ch">
+
+  <section class="page-header">
+    <h1>Bank Transfer</h1>
+    <p class="quiet">All the details you need to send a transfer.</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <section class="content-section">
+    <div class="text-block">
+
+      <div class="bank-card">
+        <div class="bank-row">
+          <span class="bank-label">Bank</span>
+          <span class="bank-value">Commercial International Bank (CIB)</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Country</span>
+          <span class="bank-value">Egypt</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Account Holder</span>
+          <span class="bank-value">MOHAMED MOSTAFA MOHAMED F</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">IBAN</span>
+          <span class="bank-value bank-mono">EG88 0010 0005 0000 0100 0521 3442 5</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Account No.</span>
+          <span class="bank-value bank-mono">100052134425</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">SWIFT / BIC</span>
+          <span class="bank-value bank-mono">CIBEEGCX</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Currency</span>
+          <span class="bank-value">USD (US Dollar)</span>
+        </div>
+      </div>
+
+      <p class="bank-note">Copy these details into your bank's transfer form. International transfers (SWIFT) may take 2-5 business days. Your bank may charge a transfer fee.</p>
+
+      <p class="bank-note">Reference / purpose of payment: <strong>kalam.ch sustain</strong></p>
+
+      <div class="bank-back">
+        <a href="/sustain">&larr; Back to Sustain</a>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <section class="wisdom-section">
+    <p class="proverb">"The river does not ask who drinks."</p>
+  </section>
+
+</Base>
+
+<style>
+  .bank-card {
+    border: 1px solid var(--accent-subtle);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: var(--space-4) 0;
+  }
+
+  .bank-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid var(--accent-subtle);
+    gap: var(--space-3);
+  }
+
+  .bank-row:last-child { border-bottom: none; }
+
+  .bank-label {
+    color: var(--text-dim);
+    font-size: var(--text-sm);
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+
+  .bank-value {
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    text-align: right;
+    word-break: break-all;
+  }
+
+  .bank-mono {
+    font-family: var(--font-heading);
+    letter-spacing: 0.06em;
+  }
+
+  .bank-note {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    margin-top: var(--space-3);
+  }
+
+  .bank-back {
+    margin-top: var(--space-6);
+    text-align: center;
+  }
+
+  .bank-back a {
+    color: var(--color-dignity);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    transition: opacity 0.3s ease;
+  }
+
+  .bank-back a:hover { opacity: 0.7; }
+
+  @media (prefers-color-scheme: dark) {
+    .bank-card { background: rgba(255, 255, 255, 0.02); }
+  }
+
+  @media (max-width: 768px) {
+    .bank-row {
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .bank-value {
+      text-align: left;
+      font-size: var(--text-sm);
+    }
+  }
+</style>

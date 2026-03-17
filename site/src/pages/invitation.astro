@@ -2,11 +2,11 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="Invitation — kalam.ch" description="You are not a user. You are a donor. Join a living canon for human dignity.">
+<Base title="Invitation — kalam.ch" description="You are not a user. You are a contributor. Join a living canon for human dignity.">
 
   <section class="page-header">
     <h1>Invitation</h1>
-    <p class="quiet">You are not a user. You are a <strong>Donor</strong>.</p>
+    <p class="quiet">You are not a user. You are a <strong>Contributor</strong>.</p>
   </section>
 
   <div class="gap" role="separator" aria-hidden="true"></div>
@@ -68,12 +68,23 @@ import Base from '../layouts/Base.astro';
   <section class="content-section">
     <div class="text-block">
       <h2>How It Works</h2>
-      <ol class="process">
-        <li>Your contribution enters the <strong>Threshold</strong> — an append-only offering.</li>
-        <li>The steward tends the garden — reviewing with care, not speed.</li>
-        <li>If ratified, your pattern joins the canon permanently.</li>
-        <li>If composted, it is archived with dignity — never deleted.</li>
-      </ol>
+      <div class="three-steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <p class="step-text">You share a scenario, story, or principle — <strong>anonymously</strong>.</p>
+        </div>
+        <div class="step-arrow" aria-hidden="true">&darr;</div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <p class="step-text">The system evaluates where <strong>dignity is at risk</strong>.</p>
+        </div>
+        <div class="step-arrow" aria-hidden="true">&darr;</div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <p class="step-text">If it teaches something new, it becomes <strong>part of the canon</strong>.</p>
+        </div>
+      </div>
+      <p class="step-note">If not ratified, your contribution is archived with dignity — never deleted.</p>
     </div>
   </section>
 
@@ -168,57 +179,17 @@ import Base from '../layouts/Base.astro';
 </Base>
 
 <style>
-  .page-header {
-    min-height: 50vh;
-    gap: var(--space-3);
-  }
-
-  .quiet {
-    color: var(--text-secondary);
-    max-width: 50ch;
-  }
-
+  /* Page-specific overrides */
   .quiet strong {
     color: var(--text-primary);
   }
 
-  .privacy-line {
-    color: var(--text-dim);
-    font-size: var(--text-sm);
-    letter-spacing: 0.03em;
-    margin-top: var(--space-2);
-  }
-
-  .content-section {
-    min-height: auto;
-    padding: var(--space-8) var(--page-padding);
-    text-align: left;
-    max-width: var(--max-width);
-    margin: 0 auto;
-  }
-
-  .wisdom-section {
-    min-height: 40vh;
+  .text-block h2 {
+    color: var(--accent);
   }
 
   .oath-section {
     min-height: 40vh;
-  }
-
-  .text-block {
-    margin-bottom: var(--space-4);
-  }
-
-  .text-block h2 {
-    font-size: var(--text-xl);
-    margin-bottom: var(--space-4);
-    color: var(--accent);
-  }
-
-  .text-block p {
-    color: var(--text-primary);
-    margin-bottom: var(--space-3);
-    line-height: 1.8;
   }
 
   .text-block strong {
@@ -255,25 +226,58 @@ import Base from '../layouts/Base.astro';
     margin-bottom: 0;
   }
 
-  /* Process */
-  .process {
-    counter-reset: process;
+  /* Three Steps */
+  .three-steps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin: var(--space-3) 0;
   }
 
-  .process li {
-    counter-increment: process;
-    padding-left: var(--space-3);
-    position: relative;
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    max-width: 36ch;
+    width: 100%;
   }
 
-  .process li::before {
-    content: counter(process);
-    position: absolute;
-    left: 0;
-    color: var(--accent-warm);
+  .step-num {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-dignity);
+    color: #fff;
     font-family: var(--font-heading);
     font-size: var(--text-base);
     font-weight: 600;
+  }
+
+  .step-text {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 0.2rem;
+  }
+
+  .step-arrow {
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    margin: 0.3rem 0;
+    text-align: center;
+  }
+
+  .step-note {
+    font-size: var(--text-sm);
+    color: var(--text-dim);
+    text-align: center;
+    font-style: italic;
+    margin-top: var(--space-2);
   }
 
   /* Promises */

@@ -16,9 +16,9 @@ import Base from '../layouts/Base.astro';
   <section class="content-section">
     <div class="text-block">
       <h2>The Origin</h2>
-      <p>Kalaxi was born from a wound — a father separated from his children by systems that could not see him. Not a system failure. A legibility failure. The zeros were never in the person. They were in the institutions that could not read him.</p>
-      <p>From that wound came a question: what if a system's first technical requirement was dignity?</p>
-      <p class="proverb-inline">"The wound does not know what it will become. Neither does the system. That is why dignity cannot be conditional."</p>
+      <p>Kalaxi was born from a structural observation: institutions fail to see people. Not a system failure — a legibility failure. The zeros were never in the person. They were in the institutions that could not read them.</p>
+      <p>From that observation came a question: what if a system's first technical requirement was dignity?</p>
+      <p class="proverb-inline">"Dignity cannot be conditional. That is the first law."</p>
     </div>
   </section>
 
@@ -45,7 +45,7 @@ import Base from '../layouts/Base.astro';
         <dt>Weaver</dt>
         <dd>11 modules that do the work: memory, verification, synthesis, voice, pacing, self-awareness, and the Input Ledger.</dd>
         <dt>Honey</dt>
-        <dd>The growing knowledge: 1,100 anomalies, 3,333+ proverbs, 87 wisdom nodes, and 59 treasures from donor contributions.</dd>
+        <dd>The growing knowledge: 1,100 anomalies, 3,333+ proverbs, 87 wisdom nodes, and 59 treasures from contributor patterns.</dd>
         <dt>Hand</dt>
         <dd>How donors interact: the Threshold, receipts, the Living Ledger, and the Ninth Operator ceremony.</dd>
       </dl>
@@ -107,7 +107,7 @@ import Base from '../layouts/Base.astro';
           <span class="milestone-marker"></span>
           <div>
             <strong>3,333+ Proverbs in the Canon</strong>
-            <p>Wisdom from anomalies, donor contributions, and cross-cultural patterns.</p>
+            <p>Wisdom from anomalies, contributor patterns, and cross-cultural patterns.</p>
           </div>
         </li>
         <li>
@@ -204,49 +204,9 @@ import Base from '../layouts/Base.astro';
 </Base>
 
 <style>
-  .page-header {
-    min-height: 50vh;
-    gap: var(--space-3);
-  }
-
-  .quiet {
-    color: var(--text-secondary);
-    max-width: 50ch;
-  }
-
-  .privacy-line {
-    color: var(--text-dim);
-    font-size: var(--text-sm);
-    letter-spacing: 0.03em;
-    margin-top: var(--space-2);
-  }
-
-  .content-section {
-    min-height: auto;
-    padding: var(--space-8) var(--page-padding);
-    text-align: left;
-    max-width: var(--max-width);
-    margin: 0 auto;
-  }
-
-  .wisdom-section {
-    min-height: 40vh;
-  }
-
-  .text-block {
-    margin-bottom: var(--space-4);
-  }
-
+  /* Page-specific overrides */
   .text-block h2 {
-    font-size: var(--text-xl);
-    margin-bottom: var(--space-4);
     color: var(--accent);
-  }
-
-  .text-block p {
-    color: var(--text-primary);
-    margin-bottom: var(--space-3);
-    line-height: 1.8;
   }
 
   .text-block strong {

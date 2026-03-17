@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import QRCode from '../components/QRCode.astro';
 ---
 
 <Base title="Sustain — kalam.ch" description="This system witnessed you. You may sustain it. No ads, no data selling, no premium tier.">
@@ -15,7 +16,7 @@ import Base from '../layouts/Base.astro';
   <section class="content-section">
     <div class="text-block">
       <h2 id="sustain-why-title">Why We Ask</h2>
-      <p id="sustain-why-body">kalam.ch runs on conviction, not capital. There are no investors, no grants, no corporate sponsors. The system exists because one person built it from a wound &mdash; "a father separated from his children by systems that could not see him" &mdash; and others chose to keep it alive.</p>
+      <p id="sustain-why-body">kalam.ch runs on conviction, not capital. There are no investors, no grants, no corporate sponsors. The system exists because people chose to build it and others chose to keep it alive.</p>
       <p>Every contribution is sustenance, not payment. You are not buying a product. You are feeding something that tries to see people where institutions could not.</p>
     </div>
   </section>
@@ -84,7 +85,7 @@ import Base from '../layouts/Base.astro';
           <span class="cost-amount">CHF 9.15<span class="cost-period">/month</span></span>
         </div>
       </div>
-      <p class="quiet cost-note">The founder — Mohamed Farag — works without compensation. This is not a business. It is a practice.</p>
+      <p class="quiet cost-note">The founder works without compensation. This is not a business. It is a practice.</p>
     </div>
   </section>
 
@@ -112,31 +113,38 @@ import Base from '../layouts/Base.astro';
         <button class="freq-btn" data-freq="monthly" id="freq-monthly">Monthly</button>
       </div>
 
-      <!-- Payment buttons -->
-      <div class="payment-methods">
-        <button class="sustain-btn" id="btn-stripe" aria-label="Sustain with card">
-          <span class="sustain-btn-label" id="sustain-button-label">Sustain</span>
-          <span class="sustain-btn-amount" id="sustain-btn-amount">CHF 10</span>
-        </button>
-        <p class="payment-note">Secure payment via Stripe. We never see your card details.</p>
-      </div>
-
-      <!-- Alternative methods -->
+      <!-- Payment methods -->
       <div class="alt-methods">
-        <p class="alt-title">Other ways to sustain:</p>
+        <p class="alt-title">Choose how to sustain:</p>
         <div class="alt-grid">
-          <a href="https://paypal.me/kalamch" target="_blank" rel="noopener" class="alt-method">
-            <strong>PayPal</strong>
-            <span>paypal.me/kalamch</span>
+          <a href="https://paypal.me/MohamedFarag102" target="_blank" rel="noopener" class="alt-method">
+            <div class="alt-method-inner">
+              <div class="alt-method-info">
+                <strong>PayPal</strong>
+                <span>paypal.me/MohamedFarag102</span>
+              </div>
+              <QRCode url="https://paypal.me/MohamedFarag102" label="Scan for PayPal" size={90} />
+            </div>
           </a>
-          <div class="alt-method">
-            <strong>Bank Transfer (IBAN)</strong>
-            <span class="iban">CH93 0070 0110 0000 0000 0</span>
-            <span class="iban-note">M. Farag, Zürich</span>
-          </div>
-          <div class="alt-method">
-            <strong>TWINT</strong>
-            <span>+41 XX XXX XX XX</span>
+          <a href="/bank-transfer" class="alt-method">
+            <div class="alt-method-inner">
+              <div class="alt-method-info">
+                <strong>Bank Transfer</strong>
+                <span class="iban">EG88 0010 0005 0000 0100 0521 3442 5</span>
+                <span class="iban-note">CIB Bank, Egypt → Full details</span>
+              </div>
+              <QRCode url="https://kalam.ch/bank-transfer" label="Scan for details" size={90} />
+            </div>
+          </a>
+          <div class="alt-method twint-method">
+            <div class="alt-method-inner">
+              <div class="alt-method-info">
+                <strong>TWINT</strong>
+                <span class="twint-number">+41 78 353 17 77</span>
+                <span class="twint-instruction">Open TWINT app → Send money → Enter this number</span>
+              </div>
+              <button class="twint-copy-btn" id="twint-copy" aria-label="Copy TWINT number">Copy</button>
+            </div>
           </div>
         </div>
       </div>
@@ -166,7 +174,7 @@ import Base from '../layouts/Base.astro';
       <p>When contributions exceed operating costs, the excess funds:</p>
       <ol>
         <li><strong>Keep the system alive</strong> &mdash; hosting, domain, infrastructure.</li>
-        <li><strong>Grow the system</strong> &mdash; better server capacity when donors increase, enabling real-time features.</li>
+        <li><strong>Grow the system</strong> &mdash; better server capacity when contributors increase, enabling real-time features.</li>
         <li><strong>Fund the research</strong> &mdash; the arXiv paper, experiment infrastructure, the custom LLM.</li>
         <li><strong>Support the founder</strong> &mdash; eventually. Right now, every franc goes to the system.</li>
       </ol>
@@ -334,44 +342,7 @@ import Base from '../layouts/Base.astro';
     color: #fff;
   }
 
-  /* Sustain button */
-  .payment-methods { text-align: center; margin-bottom: var(--space-4); }
-
-  .sustain-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: var(--color-dignity);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 1rem 2.5rem;
-    font-family: var(--font-heading);
-    font-size: var(--text-lg);
-    letter-spacing: 0.04em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(196, 74, 26, 0.25);
-  }
-
-  .sustain-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 28px rgba(196, 74, 26, 0.35);
-  }
-
-  .sustain-btn-amount {
-    opacity: 0.85;
-    font-size: var(--text-base);
-  }
-
-  .payment-note {
-    color: var(--text-dim);
-    font-size: 0.75rem;
-    margin-top: var(--space-2);
-    letter-spacing: 0.02em;
-  }
-
-  /* Alternative methods */
+  /* Payment methods */
   .alt-methods { margin-top: var(--space-6); }
   .alt-title { color: var(--text-dim); font-size: var(--text-sm); text-align: center; margin-bottom: var(--space-3); }
 
@@ -382,23 +353,53 @@ import Base from '../layouts/Base.astro';
   }
 
   .alt-method {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
+    display: block;
     padding: var(--space-2) var(--space-3);
     border: 1px solid var(--accent-subtle);
     border-radius: 8px;
     text-decoration: none;
     color: var(--text-primary);
     transition: border-color 0.3s ease;
+    cursor: pointer;
   }
 
   a.alt-method:hover { border-color: var(--color-dignity); }
+
+  .alt-method-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .alt-method-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+    min-width: 0;
+  }
 
   .alt-method strong { font-size: var(--text-sm); }
   .alt-method span { font-size: 0.8rem; color: var(--text-secondary); }
   .iban { font-family: var(--font-heading); letter-spacing: 0.08em; font-size: 0.85rem !important; color: var(--text-primary) !important; }
   .iban-note { font-size: 0.7rem !important; color: var(--text-dim) !important; }
+
+  .twint-number { font-family: var(--font-heading); letter-spacing: 0.06em; font-size: 0.95rem !important; color: var(--text-primary) !important; }
+  .twint-instruction { font-size: 0.7rem !important; color: var(--text-dim) !important; font-style: italic; line-height: 1.4; }
+  .twint-copy-btn {
+    background: var(--bg-elevated, #2a2a2a);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .twint-copy-btn:hover { border-color: var(--color-dignity); color: var(--text-primary); }
 
   /* Thank you state */
   .sustain-thanks {
@@ -434,7 +435,6 @@ import Base from '../layouts/Base.astro';
   @media (max-width: 768px) {
     .amount-selector { gap: 0.4rem; }
     .amount-btn { min-width: 70px; padding: 0.5rem 0.8rem; font-size: var(--text-sm); }
-    .sustain-btn { padding: 0.8rem 1.8rem; font-size: var(--text-base); }
   }
 </style>
 
@@ -481,34 +481,17 @@ import Base from '../layouts/Base.astro';
     });
   });
 
-  // ── Stripe checkout (when integrated) ──
-  const stripeBtn = document.getElementById('btn-stripe');
-  if (stripeBtn) {
-    stripeBtn.addEventListener('click', async () => {
-      // Phase 1: redirect to Stripe Checkout (server creates session)
-      // Phase 0 (now): show thank-you with manual instructions
-      try {
-        const res = await fetch('/api/sustain.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ amount: selectedAmount, frequency, currency: 'chf' }),
-        });
-        if (res.ok) {
-          const data = await res.json();
-          if (data.checkout_url) {
-            window.location.href = data.checkout_url;
-            return;
-          }
-        }
-      } catch { /* Stripe not yet configured — show manual methods */ }
+  // ── Stripe checkout (reserved for Phase 1 when STRIPE_SECRET_KEY is set) ──
+  // Currently: PayPal, TWINT, and bank transfer are the active methods.
 
-      // Fallback: scroll to alternative methods
-      const altMethods = document.querySelector('.alt-methods');
-      if (altMethods) {
-        altMethods.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        altMethods.classList.add('highlight');
-        setTimeout(() => altMethods.classList.remove('highlight'), 2000);
-      }
+  // ── TWINT copy button ──
+  const twintCopyBtn = document.getElementById('twint-copy');
+  if (twintCopyBtn) {
+    twintCopyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('+41783531777').then(() => {
+        twintCopyBtn.textContent = 'Copied';
+        setTimeout(() => { twintCopyBtn.textContent = 'Copy'; }, 2000);
+      });
     });
   }
 

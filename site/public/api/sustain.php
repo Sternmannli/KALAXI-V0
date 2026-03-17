@@ -112,7 +112,7 @@ echo json_encode([
     'methods' => [
         [
             'type' => 'paypal',
-            'url' => 'https://paypal.me/kalamch/' . $amount,
+            'url' => 'https://paypal.me/MohamedFarag102/' . $amount,
             'label' => 'PayPal',
         ],
         [

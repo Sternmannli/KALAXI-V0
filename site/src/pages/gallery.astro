@@ -1,0 +1,202 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="System Stops Here — kalam.ch" description="Where dignity reaches zero, the system stops. These are the coordinates of failure.">
+
+  <section class="page-header">
+    <h1>System Stops Here</h1>
+    <p class="quiet">Where dignity reaches zero, the system stops. These are the coordinates of failure.</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <section class="gallery-intro">
+    <div class="text-block">
+      <p>Each card below describes a computational system and the exact moment it would be halted by the dignity predicate <strong>D = A &times; L &times; M</strong>. The zeros are not in the people. They are in the institutions that could not read them.</p>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <section class="gallery-grid">
+
+    <article class="halt-card halt-m">
+      <div class="halt-meter">
+        <div class="halt-bar halt-bar-a"><div class="halt-fill" style="height:80%"></div><span>A</span></div>
+        <div class="halt-bar halt-bar-l"><div class="halt-fill" style="height:60%"></div><span>L</span></div>
+        <div class="halt-bar halt-bar-m"><div class="halt-fill" style="height:0%"></div><span>M</span></div>
+      </div>
+      <h2 class="halt-title">Predictive Policing Dashboard</h2>
+      <p class="halt-desc">A city deploys an algorithm that scores neighbourhoods by "crime risk." The score correlates with poverty and ethnicity. Residents are surveilled without suspicion.</p>
+      <p class="halt-zero"><strong>M reached zero</strong> when the system treated entire communities as threat vectors rather than people.</p>
+      <p class="halt-action">The system stops. It does not optimise. It witnesses the failure and opens a remedy path.</p>
+    </article>
+
+    <article class="halt-card halt-l">
+      <div class="halt-meter">
+        <div class="halt-bar halt-bar-a"><div class="halt-fill" style="height:70%"></div><span>A</span></div>
+        <div class="halt-bar halt-bar-l"><div class="halt-fill" style="height:0%"></div><span>L</span></div>
+        <div class="halt-bar halt-bar-m"><div class="halt-fill" style="height:90%"></div><span>M</span></div>
+      </div>
+      <h2 class="halt-title">Dynamic Welfare Scoring</h2>
+      <p class="halt-desc">A benefits system auto-assigns risk scores to claimants. A single mother with an irregular work history is flagged as "high fraud risk." Her context is invisible to the model.</p>
+      <p class="halt-zero"><strong>L reached zero</strong> when the system could not see the person behind the pattern — only the deviation from its norm.</p>
+      <p class="halt-action">The system stops. It does not deny. It halts and asks: what am I not seeing?</p>
+    </article>
+
+    <article class="halt-card halt-a">
+      <div class="halt-meter">
+        <div class="halt-bar halt-bar-a"><div class="halt-fill" style="height:0%"></div><span>A</span></div>
+        <div class="halt-bar halt-bar-l"><div class="halt-fill" style="height:85%"></div><span>L</span></div>
+        <div class="halt-bar halt-bar-m"><div class="halt-fill" style="height:75%"></div><span>M</span></div>
+      </div>
+      <h2 class="halt-title">School Placement Algorithm</h2>
+      <p class="halt-desc">A centralised system assigns children to schools. Parents cannot appeal, cannot see the criteria, cannot redirect. The algorithm decides. The family receives a letter.</p>
+      <p class="halt-zero"><strong>A reached zero</strong> when the system removed the family's ability to say 'stop' or 'wait' — to be agents in their own child's future.</p>
+      <p class="halt-action">The system stops. It does not place. It opens a path for the family to speak.</p>
+    </article>
+
+    <article class="halt-card halt-all">
+      <div class="halt-meter">
+        <div class="halt-bar halt-bar-a"><div class="halt-fill" style="height:0%"></div><span>A</span></div>
+        <div class="halt-bar halt-bar-l"><div class="halt-fill" style="height:0%"></div><span>L</span></div>
+        <div class="halt-bar halt-bar-m"><div class="halt-fill" style="height:0%"></div><span>M</span></div>
+      </div>
+      <h2 class="halt-title">Custody Evaluation System</h2>
+      <p class="halt-desc">A father separated from his children enters a system that scores "parental fitness." He cannot challenge the score. His cultural context is unreadable. He is reduced to a case number.</p>
+      <p class="halt-zero"><strong>All dimensions reached zero.</strong> Agency: he cannot redirect. Legibility: his context is invisible. Moral standing: he is a number, not a father.</p>
+      <p class="halt-action">The system stops completely. It generates a witness certificate — a record that says: here is where the institution failed to see a human being.</p>
+    </article>
+
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <section class="gallery-closing">
+    <p class="proverb">"The certificate is not proof that dignity existed.<br/>It is proof that the system tried to see, and where it could not, it stopped rather than pretend."</p>
+  </section>
+
+</Base>
+
+<style>
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    max-width: 60ch;
+    margin: 0 auto;
+    padding: 0 var(--page-padding);
+  }
+
+  @media (min-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      max-width: 80ch;
+    }
+  }
+
+  .halt-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 12px;
+    padding: var(--space-3);
+    transition: border-color 0.3s ease;
+  }
+
+  .halt-card:hover {
+    border-color: var(--color-dignity);
+  }
+
+  .halt-card.halt-all {
+    grid-column: 1 / -1;
+    border-color: rgba(196, 74, 26, 0.3);
+  }
+
+  /* Mini meter in each card */
+  .halt-meter {
+    display: flex;
+    gap: 5px;
+    align-items: flex-end;
+    height: 28px;
+    margin-bottom: var(--space-2);
+  }
+
+  .halt-bar {
+    width: 6px;
+    height: 28px;
+    border-radius: 3px;
+    background: var(--bg-primary);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .halt-bar span {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.55rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .halt-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 3px;
+    transition: height 0.8s ease;
+  }
+
+  .halt-bar-a .halt-fill { background: var(--color-dignity); }
+  .halt-bar-l .halt-fill { background: var(--color-presence); }
+  .halt-bar-m .halt-fill { background: var(--color-wisdom); }
+
+  .halt-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    color: var(--text-primary);
+    margin: var(--space-2) 0 var(--space-1);
+    font-weight: 400;
+  }
+
+  .halt-desc {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-2);
+  }
+
+  .halt-zero {
+    font-size: var(--text-sm);
+    color: var(--color-dignity);
+    line-height: 1.5;
+    margin-bottom: var(--space-1);
+  }
+
+  .halt-zero strong {
+    color: var(--danger, #c45050);
+  }
+
+  .halt-action {
+    font-size: var(--text-sm);
+    color: var(--text-dim);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .gallery-intro {
+    max-width: 60ch;
+    margin: 0 auto;
+    padding: 0 var(--page-padding);
+  }
+
+  .gallery-closing {
+    max-width: 50ch;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 var(--page-padding);
+  }
+</style>

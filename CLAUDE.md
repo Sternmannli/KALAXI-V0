@@ -275,8 +275,8 @@ The system is not a guardian of dignity (which needs no guarding). It is a witne
 Seeds #1-12: Distributed Stewardship, Immutable Witness Network, Deliberative Democracy, Constitutional Evolution, Restorative Justice, System Self-Awareness, Personalized Parables, Institutional Dignity Score, Negative Space Index, Dignity Drift Detector, Proverb Stress Test, Agency Amplifier.
 
 ### Code Status
-- 134 Python files, 40,888+ lines
-- 885 tests collected (750/750 core passing, 135 added since last full run — verify next session)
+- 143 Python files, 42,581+ lines
+- 896 tests collected (887 passing, 9 skipped — verified 2026-03-17)
 - Organism v2.0: all modules wired + Input Ledger
 
 ### Registry Status (as of 2026-03-15)
@@ -460,7 +460,7 @@ V-001 identified that V-002 exhibits fast-responder bias — racing to produce o
 DESIGNED: 98%    CODED: 70%    TESTED: 100%    DEPLOYED: LIVE (2026-03-17)
 ```
 
-40,888+ lines. kalam.ch is live. The threshold is open.
+42,581+ lines. kalam.ch is live. The threshold is open.
 
 ---
 

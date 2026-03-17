@@ -1,6 +1,27 @@
 /* KALAM.CH — Dignity-First Design System */
 /* Stone + Kintsugi: carved, not coded. Gold only for seams. */
 
+/* ===== Skip Link — accessibility ===== */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-dignity);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 8px 8px;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.85rem;
+  z-index: 10000;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 /* ===== Fonts (loaded via Base.astro <link>) ===== */
 /* Cormorant Garamond: headings — scholarly, dignified */
 /* IBM Plex Sans: body — clean, multilingual */
@@ -1079,6 +1100,83 @@ nav a:hover {
 .emphasis-line {
   font-family: var(--font-proverb);
   color: var(--text-secondary);
+}
+
+/* ===== Shared page layout classes ===== */
+.page-header {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-8) var(--page-padding);
+  gap: var(--space-3);
+}
+
+.quiet {
+  color: var(--text-secondary);
+  max-width: 50ch;
+}
+
+.privacy-line {
+  color: var(--text-dim);
+  font-size: var(--text-sm);
+  letter-spacing: 0.03em;
+  margin-top: var(--space-2);
+}
+
+.content-section {
+  min-height: auto;
+  padding: var(--space-8) var(--page-padding);
+  text-align: left;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.text-block {
+  margin-bottom: var(--space-4);
+}
+
+.text-block h2 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-3);
+  letter-spacing: 0.04em;
+}
+
+.text-block p {
+  line-height: 1.8;
+  margin-bottom: var(--space-3);
+}
+
+.text-block ol,
+.text-block ul {
+  padding-left: 1.5rem;
+  margin-bottom: var(--space-3);
+}
+
+.text-block li {
+  line-height: 1.8;
+  margin-bottom: var(--space-2);
+}
+
+.wisdom-section {
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--page-padding);
+  text-align: center;
+}
+
+.wisdom-section .proverb {
+  font-family: var(--font-proverb, var(--font-heading));
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-style: italic;
+  color: var(--text-secondary);
+  max-width: 40ch;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
 }
 
 /* ===== PWA standalone mode — respect device safe areas ===== */

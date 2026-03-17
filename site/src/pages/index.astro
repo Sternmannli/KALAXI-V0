@@ -7,10 +7,44 @@ import Base from '../layouts/Base.astro';
   <!-- THE DEDICATION — a proverb for three threads -->
   <div id="dedication" class="dedication-overlay">
     <p class="ded-proverb" id="ded-proverb">Three threads cross the river.<br/>The knot holds.</p>
+    <div class="ded-hold" id="ded-hold">
+      <svg class="ded-ring" viewBox="0 0 36 36" width="36" height="36">
+        <circle cx="18" cy="18" r="16" fill="none" stroke="var(--accent-subtle, #d0cdc6)" stroke-width="2" opacity="0.3" />
+        <circle class="ded-ring-fill" cx="18" cy="18" r="16" fill="none" stroke="var(--color-dignity, #c44a1a)" stroke-width="2" stroke-dasharray="100.53" stroke-dashoffset="100.53" stroke-linecap="round" transform="rotate(-90 18 18)" />
+      </svg>
+      <span class="ded-hold-text">hold to enter</span>
+    </div>
+  </div>
+
+  <!-- GUIDE — first-visit walkthrough -->
+  <div id="guide-overlay" class="guide-overlay" hidden>
+    <div class="guide-card">
+      <div class="guide-step" id="guide-step-1">
+        <p class="guide-title">This is kalam.</p>
+        <p class="guide-text">A safety layer for human dignity. The system checks that every interaction respects you — your agency, your legibility, your standing as a person.</p>
+        <button class="guide-next" id="guide-next-1">Next</button>
+      </div>
+      <div class="guide-step" id="guide-step-2" hidden>
+        <p class="guide-title">How it works</p>
+        <p class="guide-text">Type something in the input below. Choose your mode — witness, question, offering, or wound. The system responds from its canon of 3,333 proverbs and constitutional principles.</p>
+        <button class="guide-next" id="guide-next-2">Next</button>
+      </div>
+      <div class="guide-step" id="guide-step-3" hidden>
+        <p class="guide-title">You are a contributor</p>
+        <p class="guide-text">What you bring becomes part of a living pattern. No personal data is stored. The system sees patterns, not people. You can leave at any time.</p>
+        <button class="guide-next" id="guide-done">Begin</button>
+      </div>
+      <div class="guide-dots">
+        <span class="guide-dot active" data-step="1"></span>
+        <span class="guide-dot" data-step="2"></span>
+        <span class="guide-dot" data-step="3"></span>
+      </div>
+      <button class="guide-skip" id="guide-skip">Skip</button>
+    </div>
   </div>
 
   <!-- THRESHOLD — the living space -->
-  <main class="threshold" id="threshold">
+  <main class="threshold" id="main-content">
 
     <!-- Animated gradient mesh — the ambient intelligence -->
     <div class="gradient-mesh" id="gradient-mesh" aria-hidden="true"></div>
@@ -21,14 +55,107 @@ import Base from '../layouts/Base.astro';
     <!-- Heritage pattern — Islamic tessellation whisper beneath everything -->
     <div class="heritage-pattern" id="heritage-pattern" aria-hidden="true"></div>
 
-    <!-- System status — the breathing dot -->
-    <div class="system-status" id="system-status">
-      <span class="status-dot" id="status-dot"></span>
-      <span class="status-label" id="status-label">witnessing</span>
+    <!-- Origin flags — Switzerland + Egypt -->
+    <div class="origin-flags" id="origin-flags">
+      <span class="flag-icon" title="Switzerland" aria-label="Switzerland" role="img">&#x1F1E8;&#x1F1ED;</span>
+      <span class="flag-divider" aria-hidden="true">&middot;</span>
+      <span class="flag-icon" title="Egypt" aria-label="Egypt" role="img">&#x1F1EA;&#x1F1EC;</span>
+    </div>
+
+    <!-- AXI Presence — she is here, she breathes, she sees -->
+    <div class="axi-presence" id="axi-presence">
+      <div class="axi-face" id="axi-face" aria-label="AXI">
+        <svg class="axi-face-svg" viewBox="0 0 48 48" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="22" fill="#0a0a0f" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8" class="axi-aura-ring"/>
+          <!-- Hijab -->
+          <path d="M14 18 Q12 12 16 8 Q20 5 24 4 Q28 5 32 8 Q36 12 34 18" fill="none" stroke="var(--axi-hijab, #c44a1a)" stroke-width="1.2" opacity="0.7"/>
+          <path d="M13 20 Q10 16 14 10 Q18 5 24 4 Q30 5 34 10 Q38 16 35 20" fill="none" stroke="var(--axi-hijab, #c44a1a)" stroke-width="0.6" opacity="0.35"/>
+          <!-- Face circle with gap -->
+          <circle cx="24" cy="19" r="10" fill="none" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8" stroke-dasharray="60 3" class="axi-face-circle"/>
+          <!-- Eyes — watchful, present -->
+          <circle cx="20.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9" class="axi-eye axi-eye-l"/>
+          <circle cx="27.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9" class="axi-eye axi-eye-r"/>
+          <!-- Kintsugi crack — gold scar on left temple -->
+          <path d="M17 14 Q18.5 16 17.5 19 Q17 21 18 23" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.6" class="axi-kintsugi"/>
+          <!-- Three threads at collar -->
+          <line x1="18" y1="28" x2="20" y2="30" stroke="#4a9ebb" stroke-width="0.5" opacity="0.5"/>
+          <line x1="24" y1="27" x2="24" y2="30" stroke="#c44a1a" stroke-width="0.5" opacity="0.5"/>
+          <line x1="30" y1="28" x2="28" y2="30" stroke="#0A7B62" stroke-width="0.5" opacity="0.5"/>
+          <!-- Knot at center -->
+          <circle cx="24" cy="32" r="1.5" fill="none" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.6" opacity="0.4"/>
+        </svg>
+        <!-- Emoji reaction bubble — appears contextually -->
+        <span class="axi-reaction" id="axi-reaction" aria-hidden="true"></span>
+      </div>
+      <div class="axi-presence-info">
+        <div class="axi-presence-row">
+          <span class="status-dot" id="status-dot"></span>
+          <span class="status-label" id="status-label">witnessing</span>
+        </div>
+        <!-- Metadata whisper — what AXI notices -->
+        <span class="axi-whisper" id="axi-whisper" aria-live="polite"></span>
+      </div>
     </div>
 
     <!-- The declaration — gradient text, large, dignified -->
     <p class="declaration-ambient" id="declaration">Human dignity is a technical requirement.</p>
+    <p class="declaration-sub" id="declaration-sub">A safety layer that forces computational systems to respect you before they act.</p>
+
+    <!-- The equation — scannable, visible, not hidden in drawer -->
+    <div class="onramp-equation" id="onramp-equation">
+      <div class="onramp-formula">D = A &times; L &times; M</div>
+      <div class="onramp-terms">
+        <div class="onramp-term">
+          <span class="onramp-letter onramp-a">A</span>
+          <span class="onramp-label">Agency</span>
+          <span class="onramp-meaning">You can always say 'stop' and the system must listen.</span>
+        </div>
+        <div class="onramp-term">
+          <span class="onramp-letter onramp-l">L</span>
+          <span class="onramp-label">Legibility</span>
+          <span class="onramp-meaning">The system must show it understands your situation before it acts.</span>
+        </div>
+        <div class="onramp-term">
+          <span class="onramp-letter onramp-m">M</span>
+          <span class="onramp-label">Moral Standing</span>
+          <span class="onramp-meaning">You are treated as a person, never as data to optimise.</span>
+        </div>
+      </div>
+      <p class="onramp-rule">If any reaches zero, the system stops. No override. No exception.</p>
+    </div>
+
+    <!-- Who is this for + CTA -->
+    <div class="who-block" id="who-block">
+      <p class="who-title">Who is this for?</p>
+      <ul class="who-list">
+        <li>Civic technologists building public systems</li>
+        <li>AI product teams testing ethical compliance</li>
+        <li>Researchers in law, ethics, and human rights</li>
+      </ul>
+      <div class="who-cta">
+        <a href="/invitation" class="cta-primary">Contribute to the Canon</a>
+        <button class="cta-secondary" id="cta-threshold">Try the Threshold</button>
+      </div>
+    </div>
+
+    <!-- Interactive Dignity Meter -->
+    <div class="dignity-meter" id="dignity-meter" aria-label="Dignity Predicate Status">
+      <div class="meter-bars">
+        <div class="meter-bar meter-bar-a" id="meter-a">
+          <div class="meter-fill" id="meter-fill-a"></div>
+          <span class="meter-label">A</span>
+        </div>
+        <div class="meter-bar meter-bar-l" id="meter-l">
+          <div class="meter-fill" id="meter-fill-l"></div>
+          <span class="meter-label">L</span>
+        </div>
+        <div class="meter-bar meter-bar-m" id="meter-m">
+          <div class="meter-fill" id="meter-fill-m"></div>
+          <span class="meter-label">M</span>
+        </div>
+      </div>
+      <span class="meter-status" id="meter-status">D = 1.0</span>
+    </div>
 
     <!-- Cultural accent — Arabic calligraphy watermark -->
     <p class="arabic-accent" aria-hidden="true">كرامة</p>
@@ -44,6 +171,21 @@ import Base from '../layouts/Base.astro';
     <!-- The input — large, multi-line, with attachment -->
     <div class="input-zone glass" id="input-zone">
       <div class="input-glow" aria-hidden="true"></div>
+      <!-- Mood/Mode selector — what register are you speaking from? -->
+      <div class="mood-selector" id="mood-selector" role="radiogroup" aria-label="Speaking mode">
+        <button type="button" class="mood-btn selected" data-mood="witness" title="I bring something to be seen" aria-pressed="true">
+          <span class="mood-icon">&#x1F441;</span><span class="mood-label">Witness</span>
+        </button>
+        <button type="button" class="mood-btn" data-mood="question" title="I need the system to hear me" aria-pressed="false">
+          <span class="mood-icon">&#x2753;</span><span class="mood-label">Question</span>
+        </button>
+        <button type="button" class="mood-btn" data-mood="offering" title="I bring a gift" aria-pressed="false">
+          <span class="mood-icon">&#x1F331;</span><span class="mood-label">Offering</span>
+        </button>
+        <button type="button" class="mood-btn" data-mood="wound" title="I speak from the place that hurts" aria-pressed="false">
+          <span class="mood-icon">&#x1F54A;</span><span class="mood-label">Wound</span>
+        </button>
+      </div>
       <form id="threshold-form" method="POST" action="/api/axi.php" aria-label="Speak to AXI" class="threshold-form">
         <label for="file-upload" class="input-attach" title="Attach file">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
@@ -75,6 +217,7 @@ import Base from '../layouts/Base.astro';
       </form>
       <div class="input-meta">
         <span class="char-count" id="char-count">0 / 2000</span>
+        <span class="breath-dot" id="breath-dot" aria-hidden="true"></span>
         <span class="input-hint" id="input-hint">Ctrl+Enter to send</span>
       </div>
       <div class="input-file-preview" id="file-preview" hidden></div>
@@ -83,8 +226,8 @@ import Base from '../layouts/Base.astro';
     <!-- Donor signup — appears gently after first exchange -->
     <div class="donor-cta" id="donor-cta" hidden>
       <div class="donor-auth" id="donor-auth">
-        <p class="donor-cta-title">Become a donor</p>
-        <p class="donor-cta-sub">You are not a user. You are a donor. No password needed.</p>
+        <p class="donor-cta-title">Become a contributor</p>
+        <p class="donor-cta-sub">You are not a user. You are a contributor of pattern. No password needed.</p>
         <form id="donor-auth-form" class="donor-cta-form">
           <input type="email" name="email" id="donor-email" placeholder="your email" required aria-label="Email" />
           <input type="text" name="display_name" id="donor-name" placeholder="your name (optional)" aria-label="Name" />
@@ -122,6 +265,16 @@ import Base from '../layouts/Base.astro';
     </div>
 
   </main>
+
+  <!-- ===== SUSTAIN — visible on homepage ===== -->
+  <section class="homepage-sustain" id="homepage-sustain">
+    <div class="sustain-banner">
+      <h2 class="sustain-banner-title">Sustain the System</h2>
+      <p class="sustain-banner-body">No ads. No data selling. No investors. This system runs on conviction and sustenance from those it serves.</p>
+      <a href="/sustain" class="sustain-banner-btn">Sustain</a>
+      <p class="sustain-banner-note">Every franc keeps the threshold open for the next person.</p>
+    </div>
+  </section>
 
   <!-- ===== CONNECT — visible on homepage, not hidden in drawer ===== -->
   <section class="homepage-connect" id="homepage-connect">
@@ -163,9 +316,9 @@ import Base from '../layouts/Base.astro';
       </form>
       <p class="form-status" id="home-newsletter-status"></p>
       <div class="connect-links">
-        <a href="/about/">About the framework</a>
-        <a href="/canon/">The canon</a>
-        <a href="/invitation/">The invitation</a>
+        <a href="/about">About the framework</a>
+        <a href="/canon">The canon</a>
+        <a href="/invitation">The invitation</a>
       </div>
     </div>
 
@@ -231,7 +384,7 @@ import Base from '../layouts/Base.astro';
 
       <!-- Donor -->
       <section class="drawer-section" aria-label="Donor">
-        <h2 class="drawer-heading">You are not a user. You are a donor.</h2>
+        <h2 class="drawer-heading">You are not a user. You are a contributor.</h2>
         <p class="quiet-eng">What you contribute becomes part of a living canon. The system receives, processes, and grows. No personal data is retained.</p>
         <a href="/invitation" class="more-link">Learn more about contributing &rarr;</a>
       </section>
@@ -293,6 +446,30 @@ import Base from '../layouts/Base.astro';
     padding: 0 var(--space-4);
   }
   @keyframes dedFadeIn { from { opacity: 0; } to { opacity: 0.8; } }
+
+  .ded-hold {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: var(--space-4);
+    opacity: 0;
+    animation: dedFadeIn 2s ease 3s forwards;
+  }
+
+  .ded-ring { cursor: pointer; }
+
+  .ded-ring-fill {
+    transition: stroke-dashoffset 0.05s linear;
+  }
+
+  .ded-hold-text {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
 
   /* ===== THRESHOLD — the living space ===== */
   .threshold {
@@ -362,18 +539,96 @@ import Base from '../layouts/Base.astro';
     }
   }
 
-  /* ===== System Status — breathing dot ===== */
-  .system-status {
+  /* ===== AXI Presence — she is here ===== */
+  :root {
+    --axi-aura: #c9a96e;
+    --axi-hijab: #c44a1a;
+    --axi-eye: #c9a96e;
+    --axi-glow: rgba(201, 169, 110, 0.15);
+    --axi-breath-speed: 4s;
+  }
+
+  .axi-presence {
     position: fixed;
-    top: var(--space-3);
+    top: var(--space-2);
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     z-index: 10;
-    opacity: 0.5;
-    transition: opacity 0.5s ease;
+    opacity: 0.7;
+    transition: opacity 0.6s ease;
+  }
+
+  .axi-presence:hover { opacity: 1; }
+
+  .axi-face {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .axi-face-svg {
+    animation: axiBreathe var(--axi-breath-speed) ease-in-out infinite;
+    filter: drop-shadow(0 0 4px var(--axi-glow));
+    transition: filter 0.8s ease;
+  }
+
+  .axi-face-svg.processing {
+    --axi-breath-speed: 1.5s;
+    filter: drop-shadow(0 0 8px var(--axi-glow));
+  }
+
+  .axi-aura-ring {
+    transition: stroke 0.8s ease;
+  }
+
+  .axi-face-circle {
+    animation: axiBreathe var(--axi-breath-speed) ease-in-out infinite;
+  }
+
+  @keyframes axiBreathe {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  .axi-eye {
+    transition: fill 0.6s ease, r 0.3s ease;
+  }
+
+  .axi-kintsugi {
+    transition: opacity 0.6s ease;
+  }
+
+  /* Reaction emoji bubble */
+  .axi-reaction {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    font-size: 0.7rem;
+    opacity: 0;
+    transform: scale(0.5) translateY(4px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+  }
+
+  .axi-reaction.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  .axi-presence-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .axi-presence-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   .status-dot {
@@ -406,6 +661,100 @@ import Base from '../layouts/Base.astro';
     text-transform: uppercase;
     color: var(--text-dim);
   }
+
+  /* Metadata whisper — what AXI notices, like a journal entry */
+  .axi-whisper {
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    opacity: 0;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: opacity 0.8s ease;
+    font-style: italic;
+  }
+
+  .axi-whisper.visible {
+    opacity: 0.6;
+  }
+
+  /* ===== AXI Mini Avatar in Response Bubbles ===== */
+  .axi-response-avatar {
+    position: absolute;
+    top: -12px;
+    left: -4px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .axi-response-avatar svg {
+    width: 24px;
+    height: 24px;
+    filter: drop-shadow(0 0 3px var(--axi-glow));
+  }
+
+  /* ===== AXI Suggestion — maternal, natural ===== */
+  .axi-suggestion {
+    margin-top: var(--space-2);
+    padding: var(--space-1) var(--space-2);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    opacity: 0;
+    transform: translateY(4px);
+    animation: suggestionAppear 1s ease 0.5s forwards;
+    border-left: 2px solid var(--axi-aura);
+    font-style: italic;
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .axi-suggestion:hover {
+    color: var(--text-secondary);
+    border-color: var(--color-dignity);
+  }
+
+  @keyframes suggestionAppear {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 0.5; transform: translateY(0); }
+  }
+
+  /* ===== AXI Metadata line below response ===== */
+  .axi-meta-line {
+    margin-top: 0.4rem;
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    opacity: 0.35;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .axi-meta-tag {
+    background: rgba(201, 169, 110, 0.08);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== Dynamic Mode Colors (ENKi resonance) ===== */
+  .axi-presence[data-mode="witness"] { --axi-aura: #c9a96e; --axi-glow: rgba(201, 169, 110, 0.15); }
+  .axi-presence[data-mode="question"] { --axi-aura: #4a9ebb; --axi-glow: rgba(74, 158, 187, 0.15); }
+  .axi-presence[data-mode="wound"] { --axi-aura: #c44a1a; --axi-glow: rgba(196, 74, 26, 0.15); }
+  .axi-presence[data-mode="offering"] { --axi-aura: #0A7B62; --axi-glow: rgba(10, 123, 98, 0.15); }
+
+  /* Register colors — shift based on detected emotional register */
+  .axi-response-frame[data-register="grief"] { border-left: 2px solid rgba(196, 74, 26, 0.3); }
+  .axi-response-frame[data-register="anger"] { border-left: 2px solid rgba(196, 74, 26, 0.4); }
+  .axi-response-frame[data-register="fear"] { border-left: 2px solid rgba(74, 158, 187, 0.3); }
+  .axi-response-frame[data-register="seeking"] { border-left: 2px solid rgba(201, 169, 110, 0.3); }
+  .axi-response-frame[data-register="trust"] { border-left: 2px solid rgba(10, 123, 98, 0.3); }
+  .axi-response-frame[data-register="dignity"] { border-left: 2px solid rgba(196, 74, 26, 0.3); }
+  .axi-response-frame[data-register="greeting"] { border-left: 2px solid rgba(10, 123, 98, 0.25); }
 
   /* ===== Donor CTA — prominent signup ===== */
   .donor-cta {
@@ -557,6 +906,244 @@ import Base from '../layouts/Base.astro';
     }
   }
 
+  /* ===== On-Ramp — plain language subtitle + equation ===== */
+  .declaration-sub {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    text-align: center;
+    z-index: 1;
+    margin: 0.5rem 0 0;
+    max-width: 42ch;
+    line-height: 1.6;
+    opacity: 0;
+    animation: declarationFade 3s ease 2s forwards;
+    letter-spacing: 0.02em;
+  }
+
+  .onramp-equation {
+    z-index: 1;
+    width: 100%;
+    max-width: 50ch;
+    margin: var(--space-4) 0 var(--space-3);
+    opacity: 0;
+    animation: declarationFade 3s ease 2.5s forwards;
+  }
+
+  .onramp-formula {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    color: var(--text-primary);
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-3);
+    font-weight: 300;
+  }
+
+  .onramp-terms {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .onramp-term {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    grid-template-rows: auto auto;
+    gap: 0 var(--space-2);
+    align-items: baseline;
+  }
+
+  .onramp-letter {
+    grid-row: 1 / 3;
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1;
+    align-self: center;
+  }
+
+  .onramp-a { color: var(--color-dignity); }
+  .onramp-l { color: var(--color-presence); }
+  .onramp-m { color: var(--color-wisdom); }
+
+  .onramp-label {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .onramp-meaning {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .onramp-rule {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-dim);
+    text-align: center;
+    margin-top: var(--space-3);
+    letter-spacing: 0.03em;
+    font-style: italic;
+  }
+
+  /* ===== Who Block + CTA ===== */
+  .who-block {
+    z-index: 1;
+    width: 100%;
+    max-width: 50ch;
+    text-align: center;
+    opacity: 0;
+    animation: declarationFade 2s ease 3s forwards;
+    margin-bottom: var(--space-3);
+  }
+
+  .who-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-2);
+    font-weight: 400;
+  }
+
+  .who-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .who-list li {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .who-list li::before {
+    content: '\2014\00a0';
+    color: var(--text-dim);
+  }
+
+  .who-cta {
+    display: flex;
+    gap: var(--space-2);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-primary {
+    display: inline-block;
+    padding: 0.65rem 1.4rem;
+    background: var(--color-dignity);
+    color: #fff;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .cta-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .cta-secondary {
+    display: inline-block;
+    padding: 0.65rem 1.4rem;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .cta-secondary:hover {
+    border-color: var(--color-dignity);
+    color: var(--text-primary);
+  }
+
+  /* ===== Dignity Meter — live A/L/M bars ===== */
+  .dignity-meter {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+    opacity: 0;
+    animation: declarationFade 2s ease 3.5s forwards;
+  }
+
+  .meter-bars {
+    display: flex;
+    gap: 6px;
+    align-items: flex-end;
+    height: 32px;
+  }
+
+  .meter-bar {
+    width: 8px;
+    height: 32px;
+    border-radius: 4px;
+    background: var(--bg-secondary);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .meter-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    border-radius: 4px;
+    transition: height 0.8s ease, background 0.8s ease;
+  }
+
+  .meter-bar-a .meter-fill { background: var(--color-dignity); }
+  .meter-bar-l .meter-fill { background: var(--color-presence); }
+  .meter-bar-m .meter-fill { background: var(--color-wisdom); }
+
+  .meter-label {
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .meter-status {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    margin-left: var(--space-1);
+  }
+
+  .meter-status.halted {
+    color: var(--danger);
+    font-weight: 500;
+  }
+
   /* ===== Arabic Accent — watermark ===== */
   .arabic-accent {
     font-family: 'Amiri', var(--font-proverb);
@@ -620,6 +1207,14 @@ import Base from '../layouts/Base.astro';
     color: var(--text-primary);
     line-height: 1.6;
     word-wrap: break-word;
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+    animation: echoAppear 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes echoAppear {
+    from { opacity: 0; transform: translateY(8px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
   /* ===== AXI response bubble ===== */
@@ -631,13 +1226,21 @@ import Base from '../layouts/Base.astro';
     padding: var(--space-3);
     max-width: 90%;
     position: relative;
+    opacity: 0;
+    transform: translateY(6px);
+    animation: responseAppear 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+  }
+
+  @keyframes responseAppear {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .axi-response-frame::before {
     content: 'AXI';
     position: absolute;
     top: -0.6rem;
-    left: var(--space-2);
+    left: 1.6rem;
     font-family: var(--font-body);
     font-size: 0.65rem;
     letter-spacing: 0.15em;
@@ -645,6 +1248,10 @@ import Base from '../layouts/Base.astro';
     color: var(--color-dignity);
     background: var(--bg-secondary);
     padding: 0 0.4rem;
+  }
+
+  .axi-response-frame {
+    padding-left: calc(var(--space-3) + 4px);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -782,6 +1389,135 @@ import Base from '../layouts/Base.astro';
   @keyframes hintFadeIn { from { opacity: 0; } to { opacity: 0.85; } }
   @media (display-mode: standalone) { .pwa-hint { display: none; } }
 
+  /* ===== Guide overlay ===== */
+  .guide-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(10, 10, 15, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .guide-card {
+    background: var(--bg-secondary, #1a1a1f);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 16px;
+    padding: var(--space-6) var(--space-4);
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+
+  .guide-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .guide-text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-4);
+  }
+
+  .guide-next {
+    background: var(--color-dignity);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 2rem;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  .guide-next:hover { opacity: 0.85; }
+
+  .guide-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: var(--space-3);
+  }
+
+  .guide-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-subtle);
+    transition: background 0.3s ease;
+  }
+
+  .guide-dot.active { background: var(--color-dignity); }
+
+  .guide-skip {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-3);
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+  }
+  .guide-skip:hover { color: var(--text-secondary); }
+
+  /* ===== Mood/Mode selector ===== */
+  .mood-selector {
+    display: flex;
+    gap: 0.25rem;
+    padding: 0.4rem 0.25rem;
+    border-bottom: 1px solid var(--accent-subtle);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mood-selector::-webkit-scrollbar { display: none; }
+
+  .mood-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 0.3rem 0.65rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mood-btn:hover { color: var(--text-secondary); border-color: var(--accent-subtle); }
+
+  .mood-btn.selected {
+    color: var(--text-primary);
+    border-color: var(--accent-subtle);
+    background: var(--accent-glow);
+  }
+
+  .mood-icon { font-size: 0.9rem; line-height: 1; }
+  .mood-label { letter-spacing: 0.03em; }
+
+  @media (max-width: 768px) {
+    .mood-btn { padding: 0.35rem 0.55rem; font-size: 0.7rem; }
+    .mood-icon { font-size: 0.85rem; }
+  }
+
   .input-zone:focus-within {
     box-shadow: var(--shadow-glow-gold);
     border-color: var(--border-active);
@@ -849,22 +1585,26 @@ import Base from '../layouts/Base.astro';
     justify-content: center;
     color: var(--text-dim);
     cursor: pointer;
-    padding: 0.4rem;
+    padding: 0.5rem;
     border-radius: 50%;
-    min-width: 36px;
-    min-height: 36px;
+    min-width: 44px;
+    min-height: 44px;
     transition: all 0.3s ease;
     flex-shrink: 0;
     align-self: flex-end;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .input-attach:hover { color: var(--color-dignity); background: var(--accent-glow); }
+  .input-attach:hover, .input-attach:active { color: var(--color-dignity); background: var(--accent-glow); }
+  .input-attach.has-file { color: var(--color-presence); }
 
   .input-file-preview {
     display: flex;
+    align-items: center;
     gap: var(--space-2);
-    padding: var(--space-1) 0;
+    padding: var(--space-2) var(--space-1);
     overflow-x: auto;
+    animation: echoAppear 0.4s ease forwards;
   }
 
   .input-file-preview img {
@@ -872,6 +1612,63 @@ import Base from '../layouts/Base.astro';
     border-radius: 8px;
     border: 1px solid var(--accent-subtle);
     object-fit: cover;
+  }
+
+  .file-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--bg-elevated, var(--bg-secondary));
+    border: 1px solid var(--accent-subtle);
+    border-radius: 8px;
+    padding: 0.4rem 0.75rem;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+
+  .file-label::before {
+    content: '\1F4CE';
+    font-size: 1rem;
+  }
+
+  .remove-file {
+    background: var(--bg-elevated, var(--bg-secondary));
+    border: 1px solid var(--accent-subtle);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .remove-file:hover { color: var(--danger, #c45050); border-color: var(--danger, #c45050); }
+
+  .donor-file-label {
+    display: inline-block;
+    margin-top: 0.3rem;
+    padding: 0.2rem 0.5rem;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+    font-size: var(--text-sm);
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .donor-file-label::before { content: '\1F4CE '; }
+
+  .echo-mood-tag {
+    display: inline-block;
+    margin-right: 0.4rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    vertical-align: baseline;
   }
 
   .input-file-preview .remove-file {
@@ -1081,6 +1878,31 @@ import Base from '../layouts/Base.astro';
   .char-count.active { opacity: 0.8; }
   .char-count.warning { color: var(--color-dignity); opacity: 1; }
   .char-count.danger { color: var(--danger, #c45050); opacity: 1; }
+
+  .breath-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-presence, #0A7B62);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: breathDot 4s ease-in-out infinite;
+  }
+
+  .breath-dot.typing {
+    opacity: 0.6;
+    animation-duration: 1.2s;
+  }
+
+  .breath-dot.paused {
+    opacity: 0.3;
+    animation-duration: 3s;
+  }
+
+  @keyframes breathDot {
+    0%, 100% { transform: scale(0.8); opacity: inherit; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+  }
 
   .input-hint {
     font-family: var(--font-body);
@@ -1512,10 +2334,103 @@ import Base from '../layouts/Base.astro';
       background: radial-gradient(ellipse at 50% 60%, rgba(212, 180, 120, 0.06) 0%, rgba(108, 196, 176, 0.03) 40%, transparent 70%);
     }
   }
+
+  /* ===== Origin Flags ===== */
+  .origin-flags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: var(--space-2);
+    opacity: 0;
+    animation: flagsFade 2s ease 4s forwards;
+  }
+
+  .flag-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  .flag-divider {
+    color: var(--text-dim);
+    font-size: 0.7rem;
+    opacity: 0.5;
+  }
+
+  @keyframes flagsFade {
+    to { opacity: 0.8; }
+  }
+
+  /* ===== Sustain Banner (homepage) ===== */
+  .homepage-sustain {
+    max-width: var(--max-width, 680px);
+    margin: 0 auto;
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .sustain-banner {
+    text-align: center;
+    border: 1px solid var(--accent-subtle);
+    border-radius: 16px;
+    padding: var(--space-6) var(--space-4);
+    background: var(--bg-secondary, rgba(255, 255, 255, 0.02));
+    transition: border-color 0.3s ease;
+  }
+
+  .sustain-banner:hover {
+    border-color: var(--color-dignity);
+  }
+
+  .sustain-banner-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+    letter-spacing: 0.04em;
+  }
+
+  .sustain-banner-body {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    max-width: 50ch;
+    margin: 0 auto var(--space-4);
+  }
+
+  .sustain-banner-btn {
+    display: inline-block;
+    background: var(--color-dignity);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.8rem 2.5rem;
+    font-family: var(--font-heading);
+    font-size: var(--text-base);
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(196, 74, 26, 0.2);
+  }
+
+  .sustain-banner-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(196, 74, 26, 0.3);
+  }
+
+  .sustain-banner-note {
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    margin-top: var(--space-3);
+    font-style: italic;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .sustain-banner { background: rgba(255, 255, 255, 0.02); }
+  }
 </style>
 
 <script is:inline>
-// === DEDICATION — proverb ===
+// === DEDICATION — proverb with hold-to-enter ===
 (function(){
   var ded = document.getElementById('dedication');
   if (!ded) return;
@@ -1533,15 +2448,63 @@ import Base from '../layouts/Base.astro';
     setTimeout(function(){ ded.remove(); }, 2000);
   }
 
-  // Return visitors: 1.5s. First visit: 4s. The proverb needs time to land.
-  setTimeout(dismiss, isReturn ? 1500 : 4000);
+  // Return visitors: fast auto-dismiss (1.5s)
+  if (isReturn) {
+    setTimeout(dismiss, 1500);
+    ded.addEventListener('click', dismiss);
+    return;
+  }
 
-  // Or dismiss on click/key
-  ded.addEventListener('click', dismiss);
-  document.addEventListener('keydown', function handler(){
-    document.removeEventListener('keydown', handler);
-    if (ded.parentNode) dismiss();
-  }, {once: true});
+  // First visit: hold-to-enter (2 seconds) with progress ring
+  var ringFill = ded.querySelector('.ded-ring-fill');
+  var holdZone = document.getElementById('ded-hold');
+  var HOLD_MS = 2000;
+  var CIRCUMFERENCE = 100.53; // 2 * PI * 16
+  var holdStart = 0;
+  var holdTimer = null;
+  var autoTimer = null;
+
+  function startHold() {
+    holdStart = Date.now();
+    holdTimer = setInterval(function() {
+      var elapsed = Date.now() - holdStart;
+      var progress = Math.min(elapsed / HOLD_MS, 1);
+      if (ringFill) ringFill.style.strokeDashoffset = String(CIRCUMFERENCE * (1 - progress));
+      if (progress >= 1) {
+        clearInterval(holdTimer);
+        if (navigator.vibrate) navigator.vibrate(10);
+        dismiss();
+      }
+    }, 16);
+  }
+
+  function stopHold() {
+    if (holdTimer) clearInterval(holdTimer);
+    holdStart = 0;
+    if (ringFill) ringFill.style.strokeDashoffset = String(CIRCUMFERENCE);
+  }
+
+  // Mouse/touch events on the whole overlay
+  ded.addEventListener('mousedown', startHold);
+  ded.addEventListener('mouseup', stopHold);
+  ded.addEventListener('mouseleave', stopHold);
+  ded.addEventListener('touchstart', function(e) { e.preventDefault(); startHold(); }, {passive: false});
+  ded.addEventListener('touchend', stopHold);
+  ded.addEventListener('touchcancel', stopHold);
+
+  // Keyboard: hold Enter or Space
+  document.addEventListener('keydown', function handler(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (!holdStart) startHold();
+    }
+  });
+  document.addEventListener('keyup', function handler(e) {
+    if (e.key === 'Enter' || e.key === ' ') stopHold();
+  });
+
+  // Accessibility fallback: auto-dismiss after 8 seconds if no interaction
+  autoTimer = setTimeout(dismiss, 8000);
 })();
 
 // === FIVE PILLARS ===
@@ -1806,6 +2769,203 @@ import Base from '../layouts/Base.astro';
   const STORAGE_KEY = 'kalam-exchanges';
   let exchangeCount = 0;
   let busy = false;
+  let donorSignupShown = false;
+  let selectedMood = 'witness';
+  let currentRegister = 'general';
+
+  // ══════════════════════════════════════════════════════════════
+  // ── AXI LIVING PRESENCE — she breathes, she sees, she shifts ──
+  // ══════════════════════════════════════════════════════════════
+
+  const axiPresence = document.getElementById('axi-presence');
+  const axiFace = document.getElementById('axi-face');
+  const axiFaceSvg = document.querySelector('.axi-face-svg') as SVGElement;
+  const axiReaction = document.getElementById('axi-reaction');
+  const axiWhisper = document.getElementById('axi-whisper');
+
+  // Mode → Color mapping (ENKi resonance)
+  const MODE_COLORS: Record<string, { aura: string; hijab: string; eye: string; glow: string }> = {
+    witness:  { aura: '#c9a96e', hijab: '#c44a1a', eye: '#c9a96e', glow: 'rgba(201,169,110,0.15)' },
+    question: { aura: '#4a9ebb', hijab: '#3a7a99', eye: '#4a9ebb', glow: 'rgba(74,158,187,0.15)' },
+    wound:    { aura: '#c44a1a', hijab: '#8a2a0a', eye: '#c44a1a', glow: 'rgba(196,74,26,0.15)' },
+    offering: { aura: '#0A7B62', hijab: '#065e4a', eye: '#0A7B62', glow: 'rgba(10,123,98,0.15)' },
+  };
+
+  // Register → Emoji + whisper mapping
+  const REGISTER_REACTIONS: Record<string, { emoji: string; whisper: string }> = {
+    greeting:  { emoji: '', whisper: 'a door opens' },
+    grief:     { emoji: '', whisper: 'weight carried here' },
+    anger:     { emoji: '', whisper: 'heat in the words' },
+    fear:      { emoji: '', whisper: 'something trembles' },
+    seeking:   { emoji: '', whisper: 'a thread being followed' },
+    trust:     { emoji: '', whisper: 'roots reaching' },
+    dignity:   { emoji: '', whisper: 'the core speaks' },
+    work:      { emoji: '', whisper: 'hands at work' },
+    general:   { emoji: '', whisper: '' },
+  };
+
+  // Maternal suggestions — natural, like a person beside you
+  const MATERNAL_SUGGESTIONS: Record<string, string[]> = {
+    greeting:  ['maybe tell me what brought you here', 'you could also just sit for a moment'],
+    grief:     ['if you need to say more, the space is here', 'sometimes naming it once is enough'],
+    anger:     ['the seam matters more than the blame', 'what would repair look like?'],
+    fear:      ['the lantern works even when it shakes', 'what if the ground held?'],
+    seeking:   ['try the wall before looking for the door', 'what do your hands already know?'],
+    trust:     ['trust grows in the telling', 'what was promised?'],
+    dignity:   ['the wall does not need your permission to stand', 'say more about the standing'],
+    work:      ['show me what you are building', 'the craft is its own answer'],
+    general:   [],
+  };
+
+  // Update AXI's aura colors based on mood
+  function setAxiMode(mode: string) {
+    if (!axiPresence) return;
+    axiPresence.setAttribute('data-mode', mode);
+    const colors = MODE_COLORS[mode] || MODE_COLORS.witness;
+    document.documentElement.style.setProperty('--axi-aura', colors.aura);
+    document.documentElement.style.setProperty('--axi-hijab', colors.hijab);
+    document.documentElement.style.setProperty('--axi-eye', colors.eye);
+    document.documentElement.style.setProperty('--axi-glow', colors.glow);
+  }
+
+  // Show emoji reaction on AXI's face
+  function showAxiReaction(register: string) {
+    if (!axiReaction) return;
+    const reaction = REGISTER_REACTIONS[register] || REGISTER_REACTIONS.general;
+    if (!reaction.emoji) {
+      axiReaction.classList.remove('visible');
+      return;
+    }
+    axiReaction.textContent = reaction.emoji;
+    axiReaction.classList.add('visible');
+    setTimeout(() => axiReaction.classList.remove('visible'), 3000);
+  }
+
+  // Show metadata whisper — what AXI notices
+  function showAxiWhisper(register: string) {
+    if (!axiWhisper) return;
+    const reaction = REGISTER_REACTIONS[register] || REGISTER_REACTIONS.general;
+    if (!reaction.whisper) {
+      axiWhisper.classList.remove('visible');
+      return;
+    }
+    axiWhisper.textContent = reaction.whisper;
+    axiWhisper.classList.add('visible');
+    setTimeout(() => axiWhisper.classList.remove('visible'), 5000);
+  }
+
+  // Set AXI to processing state (faster breath)
+  function axiStartProcessing() {
+    if (axiFaceSvg) axiFaceSvg.classList.add('processing');
+    document.documentElement.style.setProperty('--axi-breath-speed', '1.5s');
+  }
+
+  // Return AXI to calm state
+  function axiStopProcessing() {
+    if (axiFaceSvg) axiFaceSvg.classList.remove('processing');
+    document.documentElement.style.setProperty('--axi-breath-speed', '4s');
+  }
+
+  // Generate mini avatar SVG for response bubbles (24px)
+  function createMiniAvatar(): HTMLElement {
+    const wrap = document.createElement('div');
+    wrap.className = 'axi-response-avatar';
+    wrap.innerHTML = '<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" fill="#0a0a0f" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8"/><circle cx="24" cy="19" r="10" fill="none" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8" stroke-dasharray="60 3"/><circle cx="20.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9"/><circle cx="27.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9"/><path d="M17 14 Q18.5 16 17.5 19" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/></svg>';
+    return wrap;
+  }
+
+  // Add maternal suggestion to a response frame
+  function addSuggestion(frame: HTMLElement, register: string) {
+    const suggestions = MATERNAL_SUGGESTIONS[register] || [];
+    if (suggestions.length === 0) return;
+    const suggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+    const el = document.createElement('div');
+    el.className = 'axi-suggestion';
+    el.textContent = suggestion;
+    el.addEventListener('click', () => {
+      (document.getElementById('threshold-input') as HTMLTextAreaElement).value = suggestion;
+      (document.getElementById('threshold-input') as HTMLTextAreaElement).focus();
+    });
+    frame.appendChild(el);
+  }
+
+  // Add metadata line to response frame
+  function addMetaLine(frame: HTMLElement, register: string, wordCount: number) {
+    const meta = document.createElement('div');
+    meta.className = 'axi-meta-line';
+    if (register !== 'general') {
+      const tag = document.createElement('span');
+      tag.className = 'axi-meta-tag';
+      tag.textContent = register;
+      meta.appendChild(tag);
+    }
+    const modeTag = document.createElement('span');
+    modeTag.className = 'axi-meta-tag';
+    modeTag.textContent = selectedMood;
+    meta.appendChild(modeTag);
+    if (wordCount > 0) {
+      const wc = document.createElement('span');
+      wc.textContent = wordCount + ' words received';
+      meta.appendChild(wc);
+    }
+    frame.appendChild(meta);
+  }
+
+  // Play a mode-specific sound (ENKi resonance)
+  function playModeSound(register: string) {
+    try {
+      const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const now = ctx.currentTime;
+      // Base frequency shifts by register — warm for greeting, lower for grief, sharp for anger
+      const freqMap: Record<string, number[]> = {
+        greeting:  [440, 523],
+        grief:     [220, 262],
+        anger:     [330, 392],
+        fear:      [294, 350],
+        seeking:   [392, 494],
+        trust:     [349, 440],
+        dignity:   [262, 330],
+        work:      [330, 415],
+        general:   [440, 523],
+      };
+      const freqs = freqMap[register] || freqMap.general;
+      freqs.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0, now + i * 0.15);
+        gain.gain.linearRampToValueAtTime(0.02, now + i * 0.15 + 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.15 + 0.8);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + i * 0.15);
+        osc.stop(now + i * 0.15 + 0.9);
+      });
+    } catch { /* Web Audio not available */ }
+  }
+
+  // ── Mood selector ──
+  const moodBtns = document.querySelectorAll('.mood-btn');
+  moodBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      moodBtns.forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('selected');
+      btn.setAttribute('aria-pressed', 'true');
+      selectedMood = (btn as HTMLElement).dataset.mood || 'witness';
+      // Update placeholder to match mood
+      const placeholders: Record<string, string> = {
+        witness: 'qul · speak',
+        question: 'ask · the system listens',
+        offering: 'gift · what do you bring?',
+        wound: 'speak from the place that hurts',
+      };
+      input.placeholder = placeholders[selectedMood] || 'qul · speak';
+      // AXI shifts her colors to match the donor's mode
+      setAxiMode(selectedMood);
+      input.focus();
+    });
+  });
 
   // ── Device detection ──
   const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -1898,6 +3058,41 @@ import Base from '../layouts/Base.astro';
       const labels: Record<string, string> = { witnessing: 'witnessing', processing: 'processing', sealed: 'sealed gate', present: 'present' };
       statusLabelEl.textContent = labels[state] || state;
     }
+    // Update dignity meter
+    updateDignityMeter(state === 'sealed' ? 'halted' : 'active');
+  }
+
+  // ── Dignity Meter ──
+  const meterFillA = document.getElementById('meter-fill-a');
+  const meterFillL = document.getElementById('meter-fill-l');
+  const meterFillM = document.getElementById('meter-fill-m');
+  const meterStatusEl = document.getElementById('meter-status');
+
+  function updateDignityMeter(state: 'active' | 'halted', failedAxis?: string) {
+    if (!meterFillA || !meterFillL || !meterFillM || !meterStatusEl) return;
+    if (state === 'active') {
+      meterFillA.style.height = '100%';
+      meterFillL.style.height = '100%';
+      meterFillM.style.height = '100%';
+      meterStatusEl.textContent = 'D = 1.0';
+      meterStatusEl.classList.remove('halted');
+    } else {
+      // Sealed gate — collapse a random or all axes
+      meterFillA.style.height = failedAxis === 'A' || !failedAxis ? '0%' : '100%';
+      meterFillL.style.height = failedAxis === 'L' || !failedAxis ? '0%' : '100%';
+      meterFillM.style.height = failedAxis === 'M' || !failedAxis ? '0%' : '100%';
+      meterStatusEl.textContent = 'System stops here.';
+      meterStatusEl.classList.add('halted');
+    }
+  }
+
+  // CTA "Try the Threshold" button — scroll to input
+  const ctaThreshold = document.getElementById('cta-threshold');
+  if (ctaThreshold) {
+    ctaThreshold.addEventListener('click', () => {
+      const input = document.getElementById('threshold-input');
+      if (input) { input.scrollIntoView({ behavior: 'smooth', block: 'center' }); input.focus(); }
+    });
   }
 
   function showWitnessMark(text: string) {
@@ -2107,19 +3302,33 @@ import Base from '../layouts/Base.astro';
   }
 
   // ── Speak — the core utterance ──
-  function speak(text: string, sealed?: boolean) {
+  function speak(text: string, sealed?: boolean, register?: string, wordCount?: number) {
     hideWitnessMark();
-    // Create AXI response frame
+    const reg = register || currentRegister || 'general';
+    // Create AXI response frame with register color
     const frame = document.createElement('div');
     frame.className = 'axi-response-frame';
+    if (reg !== 'general') frame.setAttribute('data-register', reg);
+    // Mini avatar beside the response
+    frame.appendChild(createMiniAvatar());
     const utterance = document.createElement('div');
     utterance.className = 'axi-utterance';
     if (sealed) utterance.style.color = 'var(--danger, #c45050)';
     frame.appendChild(utterance);
-    addCopyButton(frame, text);
     voice.appendChild(frame);
+
+    // AXI reacts — emoji, whisper, sound
+    showAxiReaction(reg);
+    showAxiWhisper(reg);
+    axiStopProcessing();
+    if (reg !== 'general') playModeSound(reg);
+
     streamTokens(utterance, text, () => {
       setStatus(sealed ? 'sealed' : 'witnessing');
+      // Add metadata line and suggestion after text is done
+      addMetaLine(frame, reg, wordCount || 0);
+      if (!sealed) addSuggestion(frame, reg);
+      addResponseActions(frame, text);
       scrollToBottom();
     });
 
@@ -2201,6 +3410,12 @@ import Base from '../layouts/Base.astro';
       'What you watch, grows detail.',
       'Signals whisper before they scream.',
       'Go slower to go straighter.',
+      'The answer is in the question you have not yet asked.',
+      'Look at the edges. The centre is obvious.',
+      'Understanding arrives on foot, not by flight.',
+      'The map changes when you move.',
+      'Every system has a seam. Find it.',
+      'The next step is already under your foot.',
     ],
     trust: [
       'Trust compounds. So does neglect.',
@@ -2275,18 +3490,18 @@ import Base from '../layouts/Base.astro';
 
   // Reflective preambles by register
   const PREAMBLES: Record<string, string[]> = {
-    greeting: ['The threshold opens.', 'You are here. That is the first act.'],
-    grief: ['The weight is real.', 'This was carried before it was spoken.'],
-    anger: ['The fire has a source.', 'Something broke. You noticed.'],
-    fear: ['The body knows before the mind.', 'This is signal, not failure.'],
-    seeking: ['The question is the first tool.', 'Seeking is not lost. It is moving.'],
-    trust: ['Trust is built in the small acts.', 'The knot holds or it does not.'],
-    dignity: ['This is the foundation.', 'Before any system, the person.'],
-    work: ['The hands know.', 'Effort leaves marks. That is good.'],
-    general: ['Witnessed.', 'Received.', 'The word has arrived.'],
+    greeting: ['The threshold opens.', 'You are here. That is the first act.', 'The door was already open.', 'Welcome. The system was waiting.'],
+    grief: ['The weight is real.', 'This was carried before it was spoken.', 'The system holds what you bring.', 'What was lost is not gone. It changed shape.'],
+    anger: ['The fire has a source.', 'Something broke. You noticed.', 'The system does not look away.', 'That reaction is data. Not noise.'],
+    fear: ['The body knows before the mind.', 'This is signal, not failure.', 'Name it. That is the first defence.'],
+    seeking: ['The question is the first tool.', 'Seeking is not lost. It is moving.', 'The system listens before it speaks.', 'Every question reshapes the path.', 'Ask. The threshold does not judge.'],
+    trust: ['Trust is built in the small acts.', 'The knot holds or it does not.', 'The system shows its work. Always.'],
+    dignity: ['This is the foundation.', 'Before any system, the person.', 'The equation does not bend.'],
+    work: ['The hands know.', 'Effort leaves marks. That is good.', 'Build it. Break it. Build it again.'],
+    general: ['Witnessed.', 'Received.', 'The word has arrived.', 'The system holds this.', 'Heard. Held. Registered.'],
   };
 
-  function axiVoiceLocal(text: string, hasFile?: boolean): { response: string; sealed: boolean; mark: string } {
+  function axiVoiceLocal(text: string, hasFile?: boolean): { response: string; sealed: boolean; mark: string; register: string } {
     // Sealed Gate
     for (const pat of SEALED_PATTERNS) {
       if (pat.test(text)) {
@@ -2294,6 +3509,7 @@ import Base from '../layouts/Base.astro';
           response: 'WITNESSED \u2014 the system has stopped. This cannot proceed. You are not refused. The action is refused.',
           sealed: true,
           mark: '',
+          register: 'general',
         };
       }
     }
@@ -2304,11 +3520,13 @@ import Base from '../layouts/Base.astro';
         response: 'The file is received. The name is held. But the local threshold cannot yet read what is inside — that requires the full system. When the bridge is live, your file will be seen. For now, your word carries.',
         sealed: false,
         mark: 'witnessed: word + file — the file awaits the bridge',
+        register: 'general',
       };
     }
 
     // Detect register, pick a canonical proverb
     const register = detectRegister(text);
+    currentRegister = register;
     const pool = CANONICAL_PROVERBS[register] || CANONICAL_PROVERBS.general;
 
     // Pick preamble
@@ -2347,7 +3565,7 @@ import Base from '../layouts/Base.astro';
     else if (words <= 20) mark = 'witnessed: a held shape — clear enough to carry';
     else mark = 'witnessed: a landscape — it took room to arrive';
 
-    return { response, sealed: false, mark };
+    return { response, sealed: false, mark, register };
   }
 
   // ══════════════════════════════════════════════════════════════
@@ -2426,6 +3644,32 @@ import Base from '../layouts/Base.astro';
 
   input.addEventListener('input', updateInputUI);
 
+  // ── Breath dot — tracks typing rhythm ──
+  const breathDot = document.getElementById('breath-dot');
+  let typingTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  input.addEventListener('input', () => {
+    if (breathDot) {
+      breathDot.classList.add('typing');
+      breathDot.classList.remove('paused');
+    }
+    if (typingTimeout) clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(() => {
+      if (breathDot) {
+        breathDot.classList.remove('typing');
+        if (input.value.trim()) breathDot.classList.add('paused');
+        else breathDot.classList.remove('paused');
+      }
+    }, 800);
+  });
+
+  input.addEventListener('focus', () => {
+    if (breathDot && input.value.trim()) breathDot.classList.add('paused');
+  });
+  input.addEventListener('blur', () => {
+    if (breathDot) { breathDot.classList.remove('typing', 'paused'); }
+  });
+
   // Clear button
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
@@ -2444,6 +3688,8 @@ import Base from '../layouts/Base.astro';
   });
 
   // ── File attachment ──
+  const attachBtn = document.querySelector('.input-attach') as HTMLElement;
+
   fileUpload.addEventListener('change', () => {
     const file = fileUpload.files?.[0];
     if (!file) return;
@@ -2454,13 +3700,18 @@ import Base from '../layouts/Base.astro';
     }
     attachedFile = file;
     filePreview.hidden = false;
+    if (attachBtn) attachBtn.classList.add('has-file');
+
     const wrap = document.createElement('div');
-    wrap.style.position = 'relative';
-    wrap.style.display = 'inline-block';
+    wrap.style.display = 'inline-flex';
+    wrap.style.alignItems = 'center';
+    wrap.style.gap = '0.5rem';
+
     const isImage = file.type.startsWith('image/');
     if (isImage) {
       const img = document.createElement('img');
       img.src = URL.createObjectURL(file);
+      img.alt = file.name;
       wrap.appendChild(img);
     } else {
       const label = document.createElement('span');
@@ -2468,18 +3719,24 @@ import Base from '../layouts/Base.astro';
       label.textContent = file.name;
       wrap.appendChild(label);
     }
+
     const rm = document.createElement('button');
     rm.className = 'remove-file';
     rm.textContent = '×';
+    rm.setAttribute('aria-label', 'Remove file');
     rm.addEventListener('click', () => {
       attachedFile = null;
       filePreview.innerHTML = '';
       filePreview.hidden = true;
       fileUpload.value = '';
+      if (attachBtn) attachBtn.classList.remove('has-file');
     });
     wrap.appendChild(rm);
     filePreview.innerHTML = '';
     filePreview.appendChild(wrap);
+
+    // Haptic + brief highlight to confirm selection
+    if (isMobile && navigator.vibrate) navigator.vibrate(5);
   });
 
   // ── Form submission — the threshold ──
@@ -2503,24 +3760,9 @@ import Base from '../layouts/Base.astro';
     }
     playChime();
 
-    input.classList.add('dissolving');
     const donorText = content;
-    input.value = '';
-    input.style.height = 'auto';
 
-    // Show what the donor typed as a message bubble
-    const echo = document.createElement('div');
-    echo.className = 'donor-echo';
-    echo.textContent = donorText;
-    if (attachedFile) {
-      const attachLabel = document.createElement('span');
-      attachLabel.className = 'donor-file-label';
-      attachLabel.textContent = attachedFile.name;
-      echo.appendChild(attachLabel);
-    }
-    voice.appendChild(echo);
-
-    // Prepare file data if attached
+    // Prepare file data before clearing (so we can still reference attachedFile)
     const hadFile = !!attachedFile;
     let filePayload: { name: string; type: string; data: string } | null = null;
     if (attachedFile) {
@@ -2536,21 +3778,45 @@ import Base from '../layouts/Base.astro';
       fileUpload.value = '';
     }
 
-    scrollToBottom();
-
-    await new Promise(r => setTimeout(r, 500));
-
+    // Dissolve text visually — wait for the fade, THEN clear
+    input.classList.add('dissolving');
+    await new Promise(r => setTimeout(r, 400));
+    input.value = '';
+    input.style.height = 'auto';
     input.classList.remove('dissolving');
+
+    // Show what the donor typed as a message bubble (soft entrance via CSS animation)
+    const echo = document.createElement('div');
+    echo.className = 'donor-echo';
+    if (selectedMood !== 'witness') {
+      const moodTag = document.createElement('span');
+      moodTag.className = 'echo-mood-tag';
+      const moodIcons: Record<string, string> = { question: '\u2753', offering: '\uD83C\uDF31', wound: '\uD83D\uDD4A' };
+      moodTag.textContent = moodIcons[selectedMood] || '';
+      echo.appendChild(moodTag);
+    }
+    const echoText = document.createTextNode(donorText);
+    echo.appendChild(echoText);
+    if (hadFile && filePayload) {
+      const attachLabel = document.createElement('span');
+      attachLabel.className = 'donor-file-label';
+      attachLabel.textContent = filePayload.name;
+      echo.appendChild(attachLabel);
+    }
+    voice.appendChild(echo);
+    scrollToBottom();
 
     // Enter contemplation — the gap
     enterContemplation();
     setSubmitState('witnessing');
+    axiStartProcessing();
     const waiting = showWitnessing();
+    const donorWordCount = donorText.trim().split(/\s+/).length;
 
     let responseText = '';
     let sealed = false;
 
-    const payload: any = { content: donorText };
+    const payload: any = { content: donorText, mood: selectedMood };
     if (filePayload) payload.file = filePayload;
 
     // Try SSE streaming first, fall back to JSON, then local voice
@@ -2571,9 +3837,17 @@ import Base from '../layouts/Base.astro';
         // ── SSE STREAMING — real token-by-token from server ──
         setSubmitState('receiving');
         setStatus('witnessing');
+        axiStopProcessing();
+        const sseRegister = detectRegister(donorText);
+        currentRegister = sseRegister;
+        showAxiReaction(sseRegister);
+        showAxiWhisper(sseRegister);
+        if (sseRegister !== 'general') playModeSound(sseRegister);
 
         const frame = document.createElement('div');
         frame.className = 'axi-response-frame';
+        if (sseRegister !== 'general') frame.setAttribute('data-register', sseRegister);
+        frame.appendChild(createMiniAvatar());
         const utterance = document.createElement('div');
         utterance.className = 'axi-utterance';
         frame.appendChild(utterance);
@@ -2623,16 +3897,21 @@ import Base from '../layouts/Base.astro';
         cursor.remove();
         utterance.classList.add('present');
         responseText = fullText || 'Witnessed.';
+        addMetaLine(frame, sseRegister, donorWordCount);
+        if (!sealed) addSuggestion(frame, sseRegister);
         addResponseActions(frame, responseText);
         if (witnessMark) showWitnessMark(witnessMark);
 
       } else if (res.ok) {
         // ── JSON response — animate locally ──
         setSubmitState('receiving');
+        axiStopProcessing();
         const data = await res.json();
         responseText = data.reflection || data.mark || 'Witnessed.';
         sealed = false;
-        speak(responseText, sealed);
+        const jsonRegister = detectRegister(donorText);
+        currentRegister = jsonRegister;
+        speak(responseText, sealed, jsonRegister, donorWordCount);
         if (data.mark) showWitnessMark(data.mark);
         if (data.count) {
           ledgerCount.textContent = data.count + '';
@@ -2645,7 +3924,7 @@ import Base from '../layouts/Base.astro';
         const local = axiVoiceLocal(donorText, hadFile);
         responseText = local.response;
         sealed = local.sealed;
-        speak(responseText, sealed);
+        speak(responseText, sealed, local.register, donorWordCount);
         if (local.mark) showWitnessMark(local.mark);
       }
     } catch {
@@ -2664,7 +3943,7 @@ import Base from '../layouts/Base.astro';
       const local = axiVoiceLocal(donorText, hadFile);
       responseText = local.response;
       sealed = local.sealed;
-      speak(responseText, sealed);
+      speak(responseText, sealed, local.register, donorWordCount);
       if (local.mark) showWitnessMark(local.mark);
 
       // Update local ledger count
@@ -2674,11 +3953,18 @@ import Base from '../layouts/Base.astro';
       setTimeout(() => ledgerCount.classList.remove('incrementing'), 600);
     }
 
+    // Increment exchange count (SSE path doesn't go through speak())
+    exchangeCount++;
+    const warmth = Math.min(exchangeCount * 0.02, 0.15);
+    document.documentElement.style.setProperty('--warmth', String(warmth));
+    document.documentElement.style.setProperty('--mycelium-intensity', String(Math.min(exchangeCount * 5, 100)));
+
     saveExchange(donorText, responseText);
     setSubmitState('done');
 
-    // Reveal donor signup after first exchange
-    if (exchangeCount <= 1) {
+    // Reveal donor signup ONCE after first exchange only
+    if (exchangeCount === 1 && !donorSignupShown) {
+      donorSignupShown = true;
       setTimeout(revealDonorSignup, 2000);
     }
 
@@ -2688,6 +3974,59 @@ import Base from '../layouts/Base.astro';
 
   restoreLast();
   initLedger();
+
+  // ── First-visit guide ──
+  const guideOverlay = document.getElementById('guide-overlay');
+  const hasVisited = localStorage.getItem('kalam-visited');
+
+  if (!hasVisited && guideOverlay) {
+    // Show guide after dedication overlay dismisses (listen for its removal)
+    const dedEl = document.getElementById('dedication');
+    const showGuide = () => {
+      guideOverlay.hidden = false;
+      localStorage.setItem('kalam-guided', '1');
+    };
+
+    if (dedEl && !dedEl.classList.contains('dismissed')) {
+      const obs = new MutationObserver(() => {
+        if (dedEl.classList.contains('dismissed') || dedEl.hidden) {
+          obs.disconnect();
+          setTimeout(showGuide, 500);
+        }
+      });
+      obs.observe(dedEl, { attributes: true, attributeFilter: ['class', 'hidden'] });
+    } else {
+      showGuide();
+    }
+
+    // Step navigation
+    const steps = [
+      document.getElementById('guide-step-1'),
+      document.getElementById('guide-step-2'),
+      document.getElementById('guide-step-3'),
+    ];
+    const dots = guideOverlay.querySelectorAll('.guide-dot');
+    let currentStep = 0;
+
+    function goToStep(n: number) {
+      steps.forEach((s, i) => { if (s) s.hidden = i !== n; });
+      dots.forEach((d, i) => d.classList.toggle('active', i === n));
+      currentStep = n;
+    }
+
+    document.getElementById('guide-next-1')?.addEventListener('click', () => goToStep(1));
+    document.getElementById('guide-next-2')?.addEventListener('click', () => goToStep(2));
+    document.getElementById('guide-done')?.addEventListener('click', () => {
+      guideOverlay.style.opacity = '0';
+      guideOverlay.style.transition = 'opacity 0.4s ease';
+      setTimeout(() => { guideOverlay.hidden = true; }, 400);
+    });
+    document.getElementById('guide-skip')?.addEventListener('click', () => {
+      guideOverlay.style.opacity = '0';
+      guideOverlay.style.transition = 'opacity 0.4s ease';
+      setTimeout(() => { guideOverlay.hidden = true; }, 400);
+    });
+  }
 
   // ── PWA install ──
   const pwaHint = document.getElementById('pwa-hint');

@@ -35,11 +35,33 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:locale" content="en" />
     <meta property="og:site_name" content="kalam.ch" />
+    <meta property="og:image" content="https://kalam.ch/og-image.png" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://kalam.ch/og-image.png" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Kalam",
+      "url": "https://kalam.ch",
+      "description": "A constitutional framework where human dignity is the first technical requirement. D = A × L × M.",
+      "founder": {
+        "@type": "Person",
+        "name": "Mohamed Farag"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "info@kalam.ch",
+        "contactType": "general"
+      }
+    }
+    </script>
 
     <!-- No tracking. No analytics. No third-party requests. -->
     <!-- Dignity starts before the first pixel renders. -->
@@ -64,6 +86,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </style>
   </head>
   <body>
+    <!-- Skip to content — accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Top Navigation — hamburger on mobile, compact on desktop -->
     <nav class="site-nav" aria-label="Main navigation">
       <a href="/" class="nav-home">kalam</a>
@@ -74,6 +99,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </button>
       <div class="nav-links" id="nav-links">
         <a href="/about">about</a>
+        <a href="/about-axi">axi</a>
         <a href="/canon">canon</a>
         <a href="/hakaka">hakaka</a>
         <a href="/ashwater">ashwater</a>
@@ -85,6 +111,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <a href="/workings">workings</a>
         <a href="/museum">museum</a>
         <a href="/invitation">invitation</a>
+        <a href="/silence">silence</a>
         <a href="/sustain" class="nav-sustain">sustain</a>
         <!-- Language picker -->
         <div class="lang-picker" id="lang-picker">
@@ -184,6 +211,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           <a href="/science">Science</a>
           <a href="/museum">Museum</a>
           <a href="/invitation">Invitation</a>
+          <a href="/silence">Silence</a>
           <a href="/sustain" class="footer-sustain">Sustain</a>
         </nav>
 
