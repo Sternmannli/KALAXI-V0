@@ -1,0 +1,63 @@
+---
+import QRCode from 'qrcode';
+
+interface Props {
+  url: string;
+  label: string;
+  size?: number;
+}
+
+const { url, label, size = 120 } = Astro.props;
+
+const svgString = await QRCode.toString(url, {
+  type: 'svg',
+  width: size,
+  margin: 1,
+  color: {
+    dark: '#1a1a1a',
+    light: '#ffffff',
+  },
+  errorCorrectionLevel: 'M',
+});
+---
+
+<div class="qr-block">
+  <a href={url} target="_blank" rel="noopener" class="qr-link" title={`Scan for ${label}`}>
+    <div class="qr-svg" set:html={svgString} />
+  </a>
+  <span class="qr-label">{label}</span>
+</div>
+
+<style>
+  .qr-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .qr-link {
+    display: block;
+    padding: 6px;
+    background: #fff;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .qr-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .qr-svg :global(svg) {
+    display: block;
+    border-radius: 4px;
+  }
+
+  .qr-label {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+</style>
