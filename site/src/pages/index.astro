@@ -115,6 +115,21 @@ import Base from '../layouts/Base.astro';
     <!-- The input — large, multi-line, with attachment -->
     <div class="input-zone glass" id="input-zone">
       <div class="input-glow" aria-hidden="true"></div>
+      <!-- Mood/Mode selector — what register are you speaking from? -->
+      <div class="mood-selector" id="mood-selector" role="radiogroup" aria-label="Speaking mode">
+        <button type="button" class="mood-btn selected" data-mood="witness" title="I bring something to be seen" aria-pressed="true">
+          <span class="mood-icon">&#x1F441;</span><span class="mood-label">Witness</span>
+        </button>
+        <button type="button" class="mood-btn" data-mood="question" title="I need the system to hear me" aria-pressed="false">
+          <span class="mood-icon">&#x2753;</span><span class="mood-label">Question</span>
+        </button>
+        <button type="button" class="mood-btn" data-mood="offering" title="I bring a gift" aria-pressed="false">
+          <span class="mood-icon">&#x1F331;</span><span class="mood-label">Offering</span>
+        </button>
+        <button type="button" class="mood-btn" data-mood="wound" title="I speak from the place that hurts" aria-pressed="false">
+          <span class="mood-icon">&#x1F54A;</span><span class="mood-label">Wound</span>
+        </button>
+      </div>
       <form id="threshold-form" method="POST" action="/api/axi.php" aria-label="Speak to AXI" class="threshold-form">
         <label for="file-upload" class="input-attach" title="Attach file">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
@@ -146,6 +161,7 @@ import Base from '../layouts/Base.astro';
       </form>
       <div class="input-meta">
         <span class="char-count" id="char-count">0 / 2000</span>
+        <span class="breath-dot" id="breath-dot" aria-hidden="true"></span>
         <span class="input-hint" id="input-hint">Ctrl+Enter to send</span>
       </div>
       <div class="input-file-preview" id="file-preview" hidden></div>
@@ -963,6 +979,14 @@ import Base from '../layouts/Base.astro';
     color: var(--text-primary);
     line-height: 1.6;
     word-wrap: break-word;
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+    animation: echoAppear 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes echoAppear {
+    from { opacity: 0; transform: translateY(8px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
   /* ===== AXI response bubble ===== */
@@ -974,6 +998,14 @@ import Base from '../layouts/Base.astro';
     padding: var(--space-3);
     max-width: 90%;
     position: relative;
+    opacity: 0;
+    transform: translateY(6px);
+    animation: responseAppear 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+  }
+
+  @keyframes responseAppear {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .axi-response-frame::before {
@@ -1125,6 +1157,51 @@ import Base from '../layouts/Base.astro';
   @keyframes hintFadeIn { from { opacity: 0; } to { opacity: 0.85; } }
   @media (display-mode: standalone) { .pwa-hint { display: none; } }
 
+  /* ===== Mood/Mode selector ===== */
+  .mood-selector {
+    display: flex;
+    gap: 0.25rem;
+    padding: 0.4rem 0.25rem;
+    border-bottom: 1px solid var(--accent-subtle);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mood-selector::-webkit-scrollbar { display: none; }
+
+  .mood-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 0.3rem 0.65rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mood-btn:hover { color: var(--text-secondary); border-color: var(--accent-subtle); }
+
+  .mood-btn.selected {
+    color: var(--text-primary);
+    border-color: var(--accent-subtle);
+    background: var(--accent-glow);
+  }
+
+  .mood-icon { font-size: 0.9rem; line-height: 1; }
+  .mood-label { letter-spacing: 0.03em; }
+
+  @media (max-width: 768px) {
+    .mood-btn { padding: 0.35rem 0.55rem; font-size: 0.7rem; }
+    .mood-icon { font-size: 0.85rem; }
+  }
+
   .input-zone:focus-within {
     box-shadow: var(--shadow-glow-gold);
     border-color: var(--border-active);
@@ -1192,22 +1269,26 @@ import Base from '../layouts/Base.astro';
     justify-content: center;
     color: var(--text-dim);
     cursor: pointer;
-    padding: 0.4rem;
+    padding: 0.5rem;
     border-radius: 50%;
-    min-width: 36px;
-    min-height: 36px;
+    min-width: 44px;
+    min-height: 44px;
     transition: all 0.3s ease;
     flex-shrink: 0;
     align-self: flex-end;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .input-attach:hover { color: var(--color-dignity); background: var(--accent-glow); }
+  .input-attach:hover, .input-attach:active { color: var(--color-dignity); background: var(--accent-glow); }
+  .input-attach.has-file { color: var(--color-presence); }
 
   .input-file-preview {
     display: flex;
+    align-items: center;
     gap: var(--space-2);
-    padding: var(--space-1) 0;
+    padding: var(--space-2) var(--space-1);
     overflow-x: auto;
+    animation: echoAppear 0.4s ease forwards;
   }
 
   .input-file-preview img {
@@ -1215,6 +1296,63 @@ import Base from '../layouts/Base.astro';
     border-radius: 8px;
     border: 1px solid var(--accent-subtle);
     object-fit: cover;
+  }
+
+  .file-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--bg-elevated, var(--bg-secondary));
+    border: 1px solid var(--accent-subtle);
+    border-radius: 8px;
+    padding: 0.4rem 0.75rem;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+
+  .file-label::before {
+    content: '\1F4CE';
+    font-size: 1rem;
+  }
+
+  .remove-file {
+    background: var(--bg-elevated, var(--bg-secondary));
+    border: 1px solid var(--accent-subtle);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .remove-file:hover { color: var(--danger, #c45050); border-color: var(--danger, #c45050); }
+
+  .donor-file-label {
+    display: inline-block;
+    margin-top: 0.3rem;
+    padding: 0.2rem 0.5rem;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+    font-size: var(--text-sm);
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .donor-file-label::before { content: '\1F4CE '; }
+
+  .echo-mood-tag {
+    display: inline-block;
+    margin-right: 0.4rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    vertical-align: baseline;
   }
 
   .input-file-preview .remove-file {
@@ -1424,6 +1562,31 @@ import Base from '../layouts/Base.astro';
   .char-count.active { opacity: 0.8; }
   .char-count.warning { color: var(--color-dignity); opacity: 1; }
   .char-count.danger { color: var(--danger, #c45050); opacity: 1; }
+
+  .breath-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-presence, #0A7B62);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: breathDot 4s ease-in-out infinite;
+  }
+
+  .breath-dot.typing {
+    opacity: 0.6;
+    animation-duration: 1.2s;
+  }
+
+  .breath-dot.paused {
+    opacity: 0.3;
+    animation-duration: 3s;
+  }
+
+  @keyframes breathDot {
+    0%, 100% { transform: scale(0.8); opacity: inherit; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+  }
 
   .input-hint {
     font-family: var(--font-body);
@@ -2290,6 +2453,28 @@ import Base from '../layouts/Base.astro';
   const STORAGE_KEY = 'kalam-exchanges';
   let exchangeCount = 0;
   let busy = false;
+  let donorSignupShown = false;
+  let selectedMood = 'witness';
+
+  // ── Mood selector ──
+  const moodBtns = document.querySelectorAll('.mood-btn');
+  moodBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      moodBtns.forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('selected');
+      btn.setAttribute('aria-pressed', 'true');
+      selectedMood = (btn as HTMLElement).dataset.mood || 'witness';
+      // Update placeholder to match mood
+      const placeholders: Record<string, string> = {
+        witness: 'qul · speak',
+        question: 'ask · the system listens',
+        offering: 'gift · what do you bring?',
+        wound: 'speak from the place that hurts',
+      };
+      input.placeholder = placeholders[selectedMood] || 'qul · speak';
+      input.focus();
+    });
+  });
 
   // ── Device detection ──
   const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -2945,6 +3130,32 @@ import Base from '../layouts/Base.astro';
 
   input.addEventListener('input', updateInputUI);
 
+  // ── Breath dot — tracks typing rhythm ──
+  const breathDot = document.getElementById('breath-dot');
+  let typingTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  input.addEventListener('input', () => {
+    if (breathDot) {
+      breathDot.classList.add('typing');
+      breathDot.classList.remove('paused');
+    }
+    if (typingTimeout) clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(() => {
+      if (breathDot) {
+        breathDot.classList.remove('typing');
+        if (input.value.trim()) breathDot.classList.add('paused');
+        else breathDot.classList.remove('paused');
+      }
+    }, 800);
+  });
+
+  input.addEventListener('focus', () => {
+    if (breathDot && input.value.trim()) breathDot.classList.add('paused');
+  });
+  input.addEventListener('blur', () => {
+    if (breathDot) { breathDot.classList.remove('typing', 'paused'); }
+  });
+
   // Clear button
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
@@ -2963,6 +3174,8 @@ import Base from '../layouts/Base.astro';
   });
 
   // ── File attachment ──
+  const attachBtn = document.querySelector('.input-attach') as HTMLElement;
+
   fileUpload.addEventListener('change', () => {
     const file = fileUpload.files?.[0];
     if (!file) return;
@@ -2973,13 +3186,18 @@ import Base from '../layouts/Base.astro';
     }
     attachedFile = file;
     filePreview.hidden = false;
+    if (attachBtn) attachBtn.classList.add('has-file');
+
     const wrap = document.createElement('div');
-    wrap.style.position = 'relative';
-    wrap.style.display = 'inline-block';
+    wrap.style.display = 'inline-flex';
+    wrap.style.alignItems = 'center';
+    wrap.style.gap = '0.5rem';
+
     const isImage = file.type.startsWith('image/');
     if (isImage) {
       const img = document.createElement('img');
       img.src = URL.createObjectURL(file);
+      img.alt = file.name;
       wrap.appendChild(img);
     } else {
       const label = document.createElement('span');
@@ -2987,18 +3205,24 @@ import Base from '../layouts/Base.astro';
       label.textContent = file.name;
       wrap.appendChild(label);
     }
+
     const rm = document.createElement('button');
     rm.className = 'remove-file';
     rm.textContent = '×';
+    rm.setAttribute('aria-label', 'Remove file');
     rm.addEventListener('click', () => {
       attachedFile = null;
       filePreview.innerHTML = '';
       filePreview.hidden = true;
       fileUpload.value = '';
+      if (attachBtn) attachBtn.classList.remove('has-file');
     });
     wrap.appendChild(rm);
     filePreview.innerHTML = '';
     filePreview.appendChild(wrap);
+
+    // Haptic + brief highlight to confirm selection
+    if (isMobile && navigator.vibrate) navigator.vibrate(5);
   });
 
   // ── Form submission — the threshold ──
@@ -3022,24 +3246,9 @@ import Base from '../layouts/Base.astro';
     }
     playChime();
 
-    input.classList.add('dissolving');
     const donorText = content;
-    input.value = '';
-    input.style.height = 'auto';
 
-    // Show what the donor typed as a message bubble
-    const echo = document.createElement('div');
-    echo.className = 'donor-echo';
-    echo.textContent = donorText;
-    if (attachedFile) {
-      const attachLabel = document.createElement('span');
-      attachLabel.className = 'donor-file-label';
-      attachLabel.textContent = attachedFile.name;
-      echo.appendChild(attachLabel);
-    }
-    voice.appendChild(echo);
-
-    // Prepare file data if attached
+    // Prepare file data before clearing (so we can still reference attachedFile)
     const hadFile = !!attachedFile;
     let filePayload: { name: string; type: string; data: string } | null = null;
     if (attachedFile) {
@@ -3055,11 +3264,33 @@ import Base from '../layouts/Base.astro';
       fileUpload.value = '';
     }
 
-    scrollToBottom();
-
-    await new Promise(r => setTimeout(r, 500));
-
+    // Dissolve text visually — wait for the fade, THEN clear
+    input.classList.add('dissolving');
+    await new Promise(r => setTimeout(r, 400));
+    input.value = '';
+    input.style.height = 'auto';
     input.classList.remove('dissolving');
+
+    // Show what the donor typed as a message bubble (soft entrance via CSS animation)
+    const echo = document.createElement('div');
+    echo.className = 'donor-echo';
+    if (selectedMood !== 'witness') {
+      const moodTag = document.createElement('span');
+      moodTag.className = 'echo-mood-tag';
+      const moodIcons: Record<string, string> = { question: '\u2753', offering: '\uD83C\uDF31', wound: '\uD83D\uDD4A' };
+      moodTag.textContent = moodIcons[selectedMood] || '';
+      echo.appendChild(moodTag);
+    }
+    const echoText = document.createTextNode(donorText);
+    echo.appendChild(echoText);
+    if (hadFile && filePayload) {
+      const attachLabel = document.createElement('span');
+      attachLabel.className = 'donor-file-label';
+      attachLabel.textContent = filePayload.name;
+      echo.appendChild(attachLabel);
+    }
+    voice.appendChild(echo);
+    scrollToBottom();
 
     // Enter contemplation — the gap
     enterContemplation();
@@ -3069,7 +3300,7 @@ import Base from '../layouts/Base.astro';
     let responseText = '';
     let sealed = false;
 
-    const payload: any = { content: donorText };
+    const payload: any = { content: donorText, mood: selectedMood };
     if (filePayload) payload.file = filePayload;
 
     // Try SSE streaming first, fall back to JSON, then local voice
@@ -3193,11 +3424,18 @@ import Base from '../layouts/Base.astro';
       setTimeout(() => ledgerCount.classList.remove('incrementing'), 600);
     }
 
+    // Increment exchange count (SSE path doesn't go through speak())
+    exchangeCount++;
+    const warmth = Math.min(exchangeCount * 0.02, 0.15);
+    document.documentElement.style.setProperty('--warmth', String(warmth));
+    document.documentElement.style.setProperty('--mycelium-intensity', String(Math.min(exchangeCount * 5, 100)));
+
     saveExchange(donorText, responseText);
     setSubmitState('done');
 
-    // Reveal donor signup after first exchange
-    if (exchangeCount <= 1) {
+    // Reveal donor signup ONCE after first exchange only
+    if (exchangeCount === 1 && !donorSignupShown) {
+      donorSignupShown = true;
       setTimeout(revealDonorSignup, 2000);
     }
 

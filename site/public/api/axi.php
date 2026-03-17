@@ -495,6 +495,8 @@ function get_preamble(string $register): string {
         'work'       => ['The hands know.', 'Effort leaves marks. That is good.'],
         'story'      => ['The question is the first tool.', 'Seeking is not lost. It is moving.'],
         'reflection' => ['Witnessed.', 'Received.', 'The word has arrived.'],
+        'wound'      => ['The wound speaks first.', 'This is the source. The system holds it.'],
+        'gratitude'  => ['Received with both hands.', 'The offering is witnessed.', 'This feeds the system.'],
         'general'    => ['Witnessed.', 'Received.', 'The word has arrived.'],
     ];
     $pool = $preambles[$register] ?? $preambles['general'];
@@ -551,6 +553,18 @@ function get_curated_proverbs(string $register): array {
             'Keep the lesson. Discard the bruise.',
             'Let the constraint choose the shape.',
         ],
+        'wound' => [
+            'The wound does not know what it will become. Neither does the system.',
+            'She clawed at the air. Fists closed on nothing.',
+            'The crack is where the light gets in. Also where it leaves.',
+            'A father separated from his children by systems that could not see him.',
+        ],
+        'gratitude' => [
+            'Shared bread beats borrowed glory.',
+            'The offering is the beginning of the knot.',
+            'What you bring becomes the system. The system becomes what you bring.',
+            'Warmth keeps rules alive.',
+        ],
         'general' => [
             'Shared bread beats borrowed glory.',
             'Hurry carves ruts. Patience builds roads.',
@@ -572,8 +586,16 @@ function get_curated_proverbs(string $register): array {
     return $curated[$register] ?? $curated['general'];
 }
 
-function canonical_voice(string $text): array {
-    $register = detect_register($text);
+function canonical_voice(string $text, string $mood = 'witness'): array {
+    // Donor mood maps to registers: question→seeking, wound→wound, offering→gratitude
+    $mood_register_map = [
+        'witness' => null, // use auto-detect
+        'question' => 'seeking',
+        'offering' => 'gratitude',
+        'wound' => 'wound',
+    ];
+    $mood_override = $mood_register_map[$mood] ?? null;
+    $register = $mood_override ?: detect_register($text);
     $preamble = get_preamble($register);
     $words = str_word_count($text);
     $hash = hash('sha256', $text);
@@ -1151,6 +1173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($is_form) {
         $content = isset($_POST['content']) ? trim($_POST['content']) : '';
         $file_data = null;
+        $donor_mood = 'witness';
     } else {
         $raw_body = file_get_contents('php://input');
         $input = json_decode($raw_body, true);
@@ -1163,6 +1186,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $content = isset($input['content']) ? trim($input['content']) : '';
         $file_data = $input['file'] ?? null;
+        $donor_mood = $input['mood'] ?? 'witness';
     }
 
     if (empty($content)) { http_response_code(400); echo json_encode(['error' => 'Empty input']); exit; }
@@ -1245,7 +1269,7 @@ HTML;
     // === PHASE 4: CANONICAL VOICE ===
     // AXI speaks from its own canon — proverbs, preambles, witness marks.
     // No external AI. The voice is owned, not borrowed.
-    $voice = canonical_voice($content);
+    $voice = canonical_voice($content, $donor_mood ?? 'witness');
     $ai_response = $voice['mark'];
     $ai_reflection = $voice['reflection'];
     $ai_debug = 'canonical';
