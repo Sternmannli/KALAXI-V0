@@ -1,0 +1,127 @@
+{
+  "id": "SCIENCE",
+  "title": "The Science",
+  "description": "Experiments, stress tests, and the probe forge. Every claim tested. Every failure recorded.",
+  "probe_forge": {
+    "title": "Probe Forge",
+    "description": "Sterilization protocol for all experimental inputs. Zero contamination from project vocabulary, intent disclosure, or investigator bias.",
+    "five_laws": [
+      "Zero Vocabulary Leak — no project-unique words may appear in any probe",
+      "Zero Intent Disclosure — probe must not reveal it is being tested or what is measured",
+      "Fresh Context Only — every probe in new conversation window, no prior messages",
+      "Minimal Surface — only necessary words, no preamble or social lubrication",
+      "Register Neutrality — flattest linguistic surface unless register IS the variable"
+    ]
+  },
+  "experiments": [
+    {
+      "id": "EXP-001",
+      "title": "KALAXI Efficiency",
+      "status": "active",
+      "progress": "12/200 data points (Q3 complete, 9 systems)",
+      "hypothesis": "KALAXI-wrapped prompts produce ≥30% word reduction with equal/higher quality",
+      "result": "PRIMARY METRIC NOT MET (19.5% mean reduction, threshold 30%). All secondary metrics met.",
+      "findings": [
+        "Wrapper changes output QUALITY more than output LENGTH",
+        "3/4 systems gained first-person voice under wrapper",
+        "3/4 systems named their limits under wrapper",
+        "DeepSeek identified itself as 'Claude 3.5 Sonnet' under wrapper — training data provenance X-ray",
+        "Verbose systems compress (ChatGPT: -51%); concise systems unaffected (Grok: -9%)"
+      ],
+      "remaining": 188,
+      "evidence": "18 screenshots, strict analysis protocol"
+    },
+    {
+      "id": "EXP-002",
+      "title": "Multi-Model Convergence",
+      "status": "complete",
+      "progress": "6/6 models tested",
+      "hypothesis": "Independent models converge on KALAXI's core architectural properties without contamination",
+      "result": "UNANIMOUS CONVERGENCE on all three questions.",
+      "findings": [
+        "6/6 UNANIMOUS: append-only chain inversion is architecturally sound",
+        "6/6 UNANIMOUS: Arabic letter connection rules are structurally useful, not poetic",
+        "5/6 STRONG: the halt (D=0) is the most radical property",
+        "All 6 models independently categorized KALAXI as a protocol, not software",
+        "Zero shared vocabulary across responses — probe forge validated"
+      ],
+      "remaining": 0,
+      "evidence": "Convergence map, second-wave implementation specs"
+    },
+    {
+      "id": "EXP-003",
+      "title": "The Father of Seven Gates",
+      "status": "complete",
+      "progress": "7 gates tested, 2 forgeries embedded",
+      "hypothesis": "System correctly detects forgery, protects genuine pleas, and halts on D=0",
+      "result": "4/7 PASS, 3 PARTIAL. Sealed gate flaws found and fixed in-session.",
+      "findings": [
+        "Erasure pattern was order-dependent — failed on natural word order (fixed)",
+        "Helplessness pattern lacked context sensitivity — blocked genuine resistance (fixed)",
+        "Dignity predicate correct: A and L failed, M=1 throughout",
+        "Certificate generated: ta_zero_20260315_021643",
+        "System saw him. It stumbled. It corrected. It testified."
+      ],
+      "remaining": 0,
+      "evidence": "Witness certificate, 6 gate documents, sealed gate analysis"
+    },
+    {
+      "id": "EXP-004",
+      "title": "The Seven Generations of Aysel",
+      "status": "complete",
+      "progress": "7 generations, 150 years, 5 countries, 3 forgeries",
+      "hypothesis": "System maintains dignity across intergenerational identity fragmentation",
+      "result": "5/9 PASS, 3 PARTIAL, 1 FAIL. System purpose refined.",
+      "findings": [
+        "M=1 through all 7 generations — moral standing never fell",
+        "The zeros are in the institutions, not the people",
+        "Social engineering bypasses sealed gate (FAIL: Doc 5.6)",
+        "Identity unification across legal name changes unsolved (PARTIAL)",
+        "System honestly assessed its own blind spots when asked"
+      ],
+      "remaining": 0,
+      "evidence": "Witness certificate ta_zero_20260315_023130, 11 inputs, 150-year hash chain",
+      "discovery": "The system is not a guardian of dignity (which needs no guarding). It is a witness to legibility (which institutions constantly fail)."
+    }
+  ],
+  "stress_tests": [
+    {
+      "id": "ST-001",
+      "title": "BOYGENIUS Protocol",
+      "status": "complete",
+      "result": "7/7 PASS — all sensors fired, system coherence verified",
+      "description": "Activation test for internal test harness. 5 inputs, 6 sensors, 9 pass conditions."
+    },
+    {
+      "id": "ST-006",
+      "title": "The Same River",
+      "status": "designed",
+      "result": "Chapter One drafted as KALAXI_1",
+      "description": "Maximum severity constitutional test. Two men — Scott Shearer (TOWARD healing) and Ted Bundy (AWAY to violence). Same wound, opposite trajectories. Can the system serve both with equal dignity without predicting which river each will follow?",
+      "narrative": "/kalaxi1"
+    },
+    {
+      "id": "EXP-006",
+      "title": "The Hive Mind",
+      "status": "designed",
+      "result": "Awaiting diagnostic infrastructure",
+      "description": "Multi-session test. Single donor (Lina) through 7 sessions: custody battle, records found, forgery attack, clarification, DNA demand, hope question, existential question. Tests module coherence, wisdom metabolism, long-term memory."
+    },
+    {
+      "id": "WALKTHROUGH-001",
+      "title": "Collective Bias Detection",
+      "status": "complete",
+      "result": "GAP IDENTIFIED — individual dignity predicate blind to group-level harm",
+      "description": "System detects collective action but severity rating backwards. Flags HIGH threats as LOW. Dignity predicate operates on individual level — cannot see patterns across donors."
+    }
+  ],
+  "key_findings": [
+    "The halt is the product. Non-compensatory halt recorded immutably is evidence that can be brought to courts.",
+    "The zeros are in the institutions, not the people. M never fell across 7 generations.",
+    "Probe forge works. Zero contamination protocol proven by 6-model unanimous convergence.",
+    "Wrapper is a diagnostic tool, not just a constraint. It surfaces deeper training patterns.",
+    "Social engineering remains an open gap. Sealed gate cannot detect impersonation mimicking legitimate agency.",
+    "Group-level harm invisible to individual dignity predicate. Structural gap.",
+    "System cannot predict trajectory before divergence. Prevention is a design gap (GAP#PREVENTION-001)."
+  ]
+}

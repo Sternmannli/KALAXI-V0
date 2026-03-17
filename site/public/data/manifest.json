@@ -33,7 +33,7 @@
       "id": "NAR-KALAXI1",
       "type": "narrative",
       "path": "/data/kalaxi1.json",
-      "page": null,
+      "page": "/kalaxi1",
       "chapters": 1,
       "lang": "en",
       "status": "growing"
@@ -57,6 +57,13 @@
       "type": "growth",
       "path": "/data/narrative-seeds.json",
       "status": "active"
+    },
+    {
+      "id": "SCIENCE",
+      "type": "science",
+      "path": "/data/science.json",
+      "page": "/science",
+      "status": "active"
     }
   ],
   "connections": [
@@ -65,6 +72,7 @@
     { "from": "PROVERBS", "to": "NAR-HAKAKA", "type": "wisdom-to-narrative" },
     { "from": "SEEDS", "to": "NAR-HAKAKA", "type": "growth-feed" },
     { "from": "SEEDS", "to": "NAR-ASHWATER", "type": "growth-feed" },
-    { "from": "SEEDS", "to": "NAR-KINDERBUCH", "type": "growth-feed" }
+    { "from": "SEEDS", "to": "NAR-KINDERBUCH", "type": "growth-feed" },
+    { "from": "SCIENCE", "to": "NAR-KALAXI1", "type": "stress-test-to-narrative" }
   ]
 }

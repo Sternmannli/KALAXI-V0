@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import kalaxi1 from '../../public/data/kalaxi1.json';
+---
+
+<Base title="The Same River — kalam.ch" description="KALAXI_1: Scott Shearer and Ted Bundy. Same wound, opposite rivers. The outcome of stress test ST-006.">
+
+  <section class="page-header">
+    <h1>The Same River</h1>
+    <p class="quiet">KALAXI_1 — from stress test ST-006</p>
+    <p class="voice-line">Voice: {kalaxi1.voice} — {kalaxi1.core_images.join(', ')}</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <section class="narrative-chapter">
+    <div class="narrative-preface">
+      <p>Two men. Same wound. One carries it toward other people. One carries it away from them.</p>
+      <p>The system cannot tell which is which at t=0. That is the point.</p>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  {kalaxi1.chapters.map((ch: any) => (
+    <article class="narrative-chapter" id={`ch-${ch.number}`}>
+      <h3 class="chapter-heading">
+        <span class="chapter-type">Chapter {ch.number}</span>
+        {ch.title}
+      </h3>
+      <div class="narrative-text">
+        {ch.text.split('\n\n').map((p: string) => {
+          if (p.trim().startsWith('---')) {
+            return <div class="section-break" role="separator" aria-hidden="true"></div>;
+          }
+          if (p.trim().startsWith('*') && p.trim().endsWith('*')) {
+            return <p class="emphasis-line"><em>{p.trim().replace(/^\*|\*$/g, '')}</em></p>;
+          }
+          const trimmed = p.trim();
+          if (trimmed.startsWith('I.') || trimmed.startsWith('II.') || trimmed.startsWith('III.') || trimmed.startsWith('IV.') || trimmed.startsWith('V.') || trimmed.startsWith('VI.')) {
+            const parts = trimmed.split('\n');
+            return <h4 class="section-heading">{parts[0]}</h4>;
+          }
+          return <p>{p}</p>;
+        })}
+      </div>
+      <div class="gap" role="separator" aria-hidden="true"></div>
+    </article>
+  ))}
+
+  <section class="narrative-chapter">
+    <div class="narrative-postface">
+      <p class="quiet">Status: <em>growing</em>. This is chapter one. The river has not reached the sea.</p>
+      <p class="quiet">Origin: <a href="/science#st-006">Stress test ST-006</a> — constitutional test of maximum severity.</p>
+    </div>
+  </section>
+
+  <!-- Connection footer -->
+  <section class="connection-footer">
+    <p class="quiet">Connected to <a href="/api/axi.php?manifest">the hub</a>. Part of the living system.</p>
+    <p class="ledger-count" id="ledger-count"></p>
+  </section>
+
+  <script is:inline>
+    fetch('/api/axi.php')
+      .then(r => r.json())
+      .then(d => {
+        const el = document.getElementById('ledger-count');
+        if (el && d.count) el.textContent = d.count + ' have crossed the threshold.';
+      })
+      .catch(() => {});
+  </script>
+
+</Base>
