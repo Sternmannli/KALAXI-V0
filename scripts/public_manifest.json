@@ -1,0 +1,50 @@
+{
+  "description": "Manifest for public repo sync — defines which files from KALAXI-V0 go to kalam-framework",
+  "files": [
+    {
+      "source": "WEAVER/organism.py",
+      "target": "src/core",
+      "note": "The organism — core system logic"
+    },
+    {
+      "source": "WEAVER/dignity.py",
+      "target": "src/core",
+      "note": "Dignity predicate: D = A × L × M"
+    },
+    {
+      "source": "WEAVER/sealed_gate.py",
+      "target": "src/core",
+      "note": "Three absolute prohibitions"
+    },
+    {
+      "source": "WEAVER/say.py",
+      "target": "src/core",
+      "note": "Voice module — six rules"
+    },
+    {
+      "source": "WEAVER/keep.py",
+      "target": "src/core",
+      "note": "Memory module — immutable witness"
+    },
+    {
+      "source": "WEAVER/presence_axiom.py",
+      "target": "src/core",
+      "note": "Layer 0 axiom — presence as foundation"
+    },
+    {
+      "source": "R7M/tier1_stone.md",
+      "target": "docs",
+      "note": "Constitutional foundation — 18 covenants"
+    },
+    {
+      "source": "R7M/ESSENCE.md",
+      "target": "docs",
+      "note": "System essence definition"
+    },
+    {
+      "source": "PROTOCOLS/PROBE_FORGE.md",
+      "target": "docs",
+      "note": "Five laws for testing AI models"
+    }
+  ]
+}
