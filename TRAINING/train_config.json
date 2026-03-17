@@ -1,0 +1,21 @@
+{
+  "model": "Qwen/Qwen2-0.5B-Instruct",
+  "train_data": "/home/user/KALAXI-V0/TRAINING/axi_training.jsonl",
+  "eval_data": "/home/user/KALAXI-V0/TRAINING/axi_eval.jsonl",
+  "train_examples": 855,
+  "eval_examples": 96,
+  "epochs": 3,
+  "learning_rate": 0.0002,
+  "batch_size": 4,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "max_length": 512,
+  "output_dir": "/home/user/KALAXI-V0/TRAINING/checkpoints",
+  "gradient_accumulation_steps": 4,
+  "warmup_ratio": 0.1,
+  "weight_decay": 0.01,
+  "fp16": true,
+  "logging_steps": 10,
+  "save_strategy": "epoch"
+}
