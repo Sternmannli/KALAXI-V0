@@ -8,10 +8,9 @@ import sys
 import json
 from datetime import datetime
 
-sys.path.insert(0, '.')
-from dignity_check import check_dignity
-from gap004_mediator import check_and_surface, surface_conflict
-from canon_integrity import CanonIntegrityScanner
+from WEAVER.dignity_check import check_dignity
+from WEAVER.gap004_mediator import check_and_surface, surface_conflict
+from WEAVER.canon_integrity import CanonIntegrityScanner
 
 def evaluate_proposal(proposal_text: str, proposal_id: str = None) -> dict:
     print("="*70)
