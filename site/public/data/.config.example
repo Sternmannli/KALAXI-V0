@@ -3,3 +3,19 @@
 ; Get a free Groq API key at https://console.groq.com
 
 GROQ_API_KEY=your_key_here
+
+; Database (HostPoint MySQL)
+DB_HOST=localhost
+DB_NAME=kalam
+DB_USER=your_user
+DB_PASS=your_pass
+
+; Migration token (change this)
+MIGRATE_TOKEN=kalam-setup-2026
+
+; Magic link email (SMTP via HostPoint)
+SMTP_HOST=mail.hostpoint.ch
+SMTP_PORT=587
+SMTP_USER=info@kalam.ch
+SMTP_PASS=your_smtp_pass
+SMTP_FROM=info@kalam.ch

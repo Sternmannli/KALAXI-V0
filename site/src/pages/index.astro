@@ -27,6 +27,42 @@ import Base from '../layouts/Base.astro';
       <span class="status-label" id="status-label">witnessing</span>
     </div>
 
+    <!-- Donor badge — top right, shows auth state -->
+    <div class="donor-badge" id="donor-badge">
+      <button class="donor-btn" id="donor-btn" aria-label="Sign in">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        <span class="donor-label" id="donor-label">sign in</span>
+      </button>
+    </div>
+
+    <!-- Donor panel — auth form or profile -->
+    <div class="donor-panel" id="donor-panel" hidden>
+      <button class="donor-panel-close" id="donor-panel-close" aria-label="Close">&times;</button>
+
+      <!-- Not authenticated: sign-in form -->
+      <div class="donor-auth" id="donor-auth">
+        <p class="donor-panel-title">You are not a user. You are a donor.</p>
+        <p class="donor-panel-sub">Enter your email. A sign-in link arrives. No password.</p>
+        <form id="donor-auth-form" class="donor-form">
+          <input type="email" name="email" id="donor-email" placeholder="your email" required aria-label="Email" />
+          <input type="text" name="display_name" id="donor-name" placeholder="your name (optional)" aria-label="Name" />
+          <button type="submit">Send link</button>
+        </form>
+        <p class="donor-status" id="donor-auth-status"></p>
+      </div>
+
+      <!-- Authenticated: profile -->
+      <div class="donor-profile" id="donor-profile" hidden>
+        <p class="donor-panel-title" id="donor-greeting"></p>
+        <p class="donor-panel-sub" id="donor-stats"></p>
+        <div class="donor-actions">
+          <button id="donor-export-btn" class="donor-action">Export my data</button>
+          <button id="donor-history-btn" class="donor-action">My exchanges</button>
+          <button id="donor-logout-btn" class="donor-action donor-action-dim">Sign out</button>
+        </div>
+      </div>
+    </div>
+
     <!-- The declaration — gradient text, large, dignified -->
     <p class="declaration-ambient" id="declaration">Human dignity is a technical requirement.</p>
 
@@ -375,6 +411,147 @@ import Base from '../layouts/Base.astro';
     text-transform: uppercase;
     color: var(--text-dim);
   }
+
+  /* ===== Donor Badge + Panel ===== */
+  .donor-badge {
+    position: fixed;
+    top: var(--space-3);
+    right: var(--space-3);
+    z-index: 10;
+  }
+
+  .donor-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: none;
+    border: 1px solid var(--accent-subtle);
+    border-radius: 20px;
+    padding: 0.35rem 0.75rem;
+    color: var(--text-dim);
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .donor-btn:hover { color: var(--color-dignity); border-color: var(--color-dignity); }
+  .donor-btn.authenticated { color: var(--color-presence); border-color: var(--color-presence); }
+
+  .donor-label { text-transform: uppercase; }
+
+  .donor-panel {
+    position: fixed;
+    top: calc(var(--space-3) + 2.5rem);
+    right: var(--space-3);
+    z-index: 20;
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 12px;
+    padding: var(--space-3);
+    width: min(340px, calc(100vw - 2rem));
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .donor-panel { background: var(--bg-elevated); }
+  }
+
+  .donor-panel-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0.25rem;
+  }
+
+  .donor-panel-title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem;
+  }
+
+  .donor-panel-sub {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin: 0 0 1rem;
+    line-height: 1.5;
+  }
+
+  .donor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .donor-form input {
+    background: var(--bg-primary);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 6px;
+    padding: 0.6rem 0.75rem;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+  }
+
+  .donor-form input:focus {
+    outline: none;
+    border-color: var(--color-dignity);
+  }
+
+  .donor-form input::placeholder {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .donor-form button {
+    background: var(--color-dignity);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+
+  .donor-form button:hover { opacity: 0.85; }
+
+  .donor-status {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    min-height: 1.2em;
+  }
+
+  .donor-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .donor-action {
+    background: var(--bg-primary);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+  }
+
+  .donor-action:hover { border-color: var(--color-dignity); }
+  .donor-action-dim { color: var(--text-dim); }
 
   /* ===== Declaration — gradient text, dignified ===== */
   .declaration-ambient {
@@ -2229,6 +2406,176 @@ import Base from '../layouts/Base.astro';
         setTimeout(() => pwaHint.classList.add('hidden'), 500);
       }
     }, 10000);
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // ── DONOR ACCOUNTS (MOVE-003) ──
+  // ══════════════════════════════════════════════════════════════
+
+  const DONOR_API = '/api/donor.php';
+  const donorBadge = document.getElementById('donor-badge');
+  const donorBtn = document.getElementById('donor-btn');
+  const donorLabel = document.getElementById('donor-label');
+  const donorPanel = document.getElementById('donor-panel') as HTMLDivElement;
+  const donorPanelClose = document.getElementById('donor-panel-close');
+  const donorAuth = document.getElementById('donor-auth') as HTMLDivElement;
+  const donorProfile = document.getElementById('donor-profile') as HTMLDivElement;
+  const donorAuthForm = document.getElementById('donor-auth-form') as HTMLFormElement;
+  const donorAuthStatus = document.getElementById('donor-auth-status') as HTMLParagraphElement;
+  const donorGreeting = document.getElementById('donor-greeting') as HTMLParagraphElement;
+  const donorStats = document.getElementById('donor-stats') as HTMLParagraphElement;
+
+  let donorAuthenticated = false;
+
+  // Toggle panel
+  if (donorBtn) {
+    donorBtn.addEventListener('click', () => {
+      if (donorPanel) donorPanel.hidden = !donorPanel.hidden;
+    });
+  }
+  if (donorPanelClose) {
+    donorPanelClose.addEventListener('click', () => {
+      if (donorPanel) donorPanel.hidden = true;
+    });
+  }
+
+  // Check auth state on load
+  async function checkDonorAuth() {
+    try {
+      const res = await fetch(DONOR_API + '?action=profile', { credentials: 'include' });
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data.authenticated && data.donor) {
+        showDonorProfile(data.donor);
+      }
+    } catch { /* not authenticated or server unavailable */ }
+  }
+
+  function showDonorProfile(donor: any) {
+    donorAuthenticated = true;
+    if (donorBtn) donorBtn.classList.add('authenticated');
+    if (donorLabel) donorLabel.textContent = donor.display_name || 'donor';
+    if (donorAuth) donorAuth.hidden = true;
+    if (donorProfile) donorProfile.hidden = false;
+    if (donorGreeting) {
+      const name = donor.display_name || 'Donor';
+      const count = donor.interaction_count || 0;
+      donorGreeting.textContent = count === 0
+        ? `${name}, welcome.`
+        : `${name}, you have returned.`;
+    }
+    if (donorStats) {
+      donorStats.textContent = `${donor.interaction_count || 0} exchanges since ${new Date(donor.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}`;
+    }
+  }
+
+  // Register / send magic link
+  if (donorAuthForm) {
+    donorAuthForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const emailInput = document.getElementById('donor-email') as HTMLInputElement;
+      const nameInput = document.getElementById('donor-name') as HTMLInputElement;
+      const submitBtn = donorAuthForm.querySelector('button') as HTMLButtonElement;
+
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '...'; }
+      if (donorAuthStatus) { donorAuthStatus.textContent = ''; donorAuthStatus.className = 'donor-status'; }
+
+      try {
+        const res = await fetch(DONOR_API + '?action=register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            email: emailInput.value,
+            display_name: nameInput.value || undefined,
+          }),
+        });
+        const data = await res.json();
+        if (res.ok) {
+          if (donorAuthStatus) {
+            donorAuthStatus.textContent = data.message || 'Link sent. Check your email.';
+            donorAuthStatus.style.color = 'var(--color-presence)';
+          }
+          donorAuthForm.reset();
+        } else {
+          if (donorAuthStatus) {
+            donorAuthStatus.textContent = data.error || 'Something went wrong.';
+            donorAuthStatus.style.color = 'var(--danger, #c45050)';
+          }
+        }
+      } catch {
+        if (donorAuthStatus) {
+          donorAuthStatus.textContent = 'Could not connect. Try again.';
+          donorAuthStatus.style.color = 'var(--danger, #c45050)';
+        }
+      } finally {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send link'; }
+      }
+    });
+  }
+
+  // Export data (COV#015)
+  const exportBtn = document.getElementById('donor-export-btn');
+  if (exportBtn) {
+    exportBtn.addEventListener('click', () => {
+      window.location.href = DONOR_API + '?action=export';
+    });
+  }
+
+  // History
+  const historyBtn = document.getElementById('donor-history-btn');
+  if (historyBtn) {
+    historyBtn.addEventListener('click', async () => {
+      try {
+        const res = await fetch(DONOR_API + '?action=history&limit=20', { credentials: 'include' });
+        const data = await res.json();
+        if (data.interactions && data.interactions.length > 0) {
+          // Show history in conversation zone
+          voice.innerHTML = '';
+          data.interactions.reverse().forEach((item: any) => {
+            const echo = document.createElement('div');
+            echo.className = 'donor-echo';
+            echo.style.opacity = '0.6';
+            echo.textContent = item.input_text;
+            voice.appendChild(echo);
+
+            const frame = document.createElement('div');
+            frame.className = 'axi-response-frame';
+            frame.style.opacity = '0.6';
+            const utt = document.createElement('div');
+            utt.className = 'axi-utterance ghost';
+            utt.textContent = item.axi_response;
+            frame.appendChild(utt);
+            addCopyButton(frame, item.axi_response);
+            voice.appendChild(frame);
+          });
+          scrollToBottom();
+          if (donorPanel) donorPanel.hidden = true;
+        }
+      } catch { /* silent */ }
+    });
+  }
+
+  // Logout
+  const logoutBtn = document.getElementById('donor-logout-btn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+      await fetch(DONOR_API + '?action=logout', { method: 'POST', credentials: 'include' });
+      donorAuthenticated = false;
+      if (donorBtn) donorBtn.classList.remove('authenticated');
+      if (donorLabel) donorLabel.textContent = 'sign in';
+      if (donorAuth) donorAuth.hidden = false;
+      if (donorProfile) donorProfile.hidden = true;
+      if (donorPanel) donorPanel.hidden = true;
+    });
+  }
+
+  // Check if just authenticated via magic link redirect
+  if (new URLSearchParams(window.location.search).get('authenticated') === '1') {
+    history.replaceState({}, '', '/');
+    checkDonorAuth();
+  } else {
+    checkDonorAuth();
   }
 
   // ── Connect forms (newsletter, feedback, collaboration) ──

@@ -108,6 +108,62 @@ try {
     $results[] = 'connections: ' . $e->getMessage();
 }
 
+// Table 4: Donors (MOVE-003)
+try {
+    $db->exec("CREATE TABLE IF NOT EXISTS donors (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        email VARCHAR(255) NOT NULL UNIQUE,
+        display_name VARCHAR(100) DEFAULT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        interaction_count INT NOT NULL DEFAULT 0,
+        pattern_json JSON DEFAULT NULL COMMENT 'Accumulated pattern: registers, themes, rhythms',
+        export_token VARCHAR(64) DEFAULT NULL COMMENT 'Token for data export (COV#015)',
+        INDEX idx_email (email)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Donor profiles. Pattern persists across visits.'");
+    $results[] = 'donors: OK';
+} catch (PDOException $e) {
+    $results[] = 'donors: ' . $e->getMessage();
+}
+
+// Table 5: Donor interactions (MOVE-003)
+try {
+    $db->exec("CREATE TABLE IF NOT EXISTS interactions (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        donor_id INT NOT NULL,
+        input_text TEXT NOT NULL,
+        axi_response TEXT NOT NULL,
+        register VARCHAR(30) DEFAULT NULL COMMENT 'Detected register: grief, seeking, dignity, etc.',
+        witness_mark VARCHAR(200) DEFAULT NULL,
+        content_hash VARCHAR(64) NOT NULL COMMENT 'SHA-256 of input',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (donor_id) REFERENCES donors(id) ON DELETE CASCADE,
+        INDEX idx_donor (donor_id),
+        INDEX idx_created (created_at)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Donor interactions. Their words belong to them.'");
+    $results[] = 'interactions: OK';
+} catch (PDOException $e) {
+    $results[] = 'interactions: ' . $e->getMessage();
+}
+
+// Table 6: Magic link tokens (MOVE-003)
+try {
+    $db->exec("CREATE TABLE IF NOT EXISTS auth_tokens (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        donor_id INT NOT NULL,
+        token VARCHAR(64) NOT NULL UNIQUE,
+        expires_at TIMESTAMP NOT NULL,
+        used TINYINT(1) NOT NULL DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (donor_id) REFERENCES donors(id) ON DELETE CASCADE,
+        INDEX idx_token (token),
+        INDEX idx_expires (expires_at)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Magic link tokens for passwordless auth.'");
+    $results[] = 'auth_tokens: OK';
+} catch (PDOException $e) {
+    $results[] = 'auth_tokens: ' . $e->getMessage();
+}
+
 echo json_encode([
     'status' => 'migration complete',
     'tables' => $results,
