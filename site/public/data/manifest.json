@@ -1,0 +1,78 @@
+{
+  "version": "1.0.0",
+  "hub": "/api/axi.php",
+  "satellites": [
+    {
+      "id": "NAR-HAKAKA",
+      "type": "narrative",
+      "path": "/data/hakaka.json",
+      "page": "/hakaka",
+      "chapters": 13,
+      "lang": "en",
+      "status": "complete"
+    },
+    {
+      "id": "NAR-ASHWATER",
+      "type": "narrative",
+      "path": "/data/ashwater.json",
+      "page": "/ashwater",
+      "chapters": 20,
+      "lang": "en",
+      "status": "complete"
+    },
+    {
+      "id": "NAR-KINDERBUCH",
+      "type": "narrative",
+      "path": "/data/kinderbuch.json",
+      "page": "/kinderbuch",
+      "chapters": 20,
+      "lang": "de",
+      "status": "complete"
+    },
+    {
+      "id": "NAR-KALAXI1",
+      "type": "narrative",
+      "path": "/data/kalaxi1.json",
+      "page": "/kalaxi1",
+      "chapters": 1,
+      "lang": "en",
+      "status": "growing"
+    },
+    {
+      "id": "R7M-INDEX",
+      "type": "archive",
+      "path": "/data/r7m-index.json",
+      "page": "/r7m",
+      "status": "complete"
+    },
+    {
+      "id": "PROVERBS",
+      "type": "wisdom",
+      "path": "/data/proverbs.json",
+      "count": 166,
+      "status": "canonical"
+    },
+    {
+      "id": "SEEDS",
+      "type": "growth",
+      "path": "/data/narrative-seeds.json",
+      "status": "active"
+    },
+    {
+      "id": "SCIENCE",
+      "type": "science",
+      "path": "/data/science.json",
+      "page": "/science",
+      "status": "active"
+    }
+  ],
+  "connections": [
+    { "from": "R7M-INDEX", "to": "NAR-HAKAKA", "type": "treasure-to-source" },
+    { "from": "R7M-INDEX", "to": "NAR-ASHWATER", "type": "treasure-to-source" },
+    { "from": "PROVERBS", "to": "NAR-HAKAKA", "type": "wisdom-to-narrative" },
+    { "from": "SEEDS", "to": "NAR-HAKAKA", "type": "growth-feed" },
+    { "from": "SEEDS", "to": "NAR-ASHWATER", "type": "growth-feed" },
+    { "from": "SEEDS", "to": "NAR-KINDERBUCH", "type": "growth-feed" },
+    { "from": "SCIENCE", "to": "NAR-KALAXI1", "type": "stress-test-to-narrative" }
+  ]
+}

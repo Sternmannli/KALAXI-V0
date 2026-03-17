@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import hakaka from '../../public/data/hakaka.json';
+---
+
+<Base title="Hakaka — kalam.ch" description="The complete narrative. Mythic, raw, stone-and-bone.">
+
+  <section class="page-header">
+    <h1>Hakaka</h1>
+    <p class="quiet">{hakaka.subtitle}</p>
+    <p class="voice-line">Voice: {hakaka.voice} — {hakaka.core_images.join(', ')}</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Table of Contents -->
+  <nav class="narrative-toc" aria-label="Chapters">
+    {hakaka.chapters.map((ch: any) => (
+      <a href={`#ch-${ch.number}`} class="toc-link">
+        <span class="toc-num">{ch.type === 'prologue' ? '◊' : ch.type === 'epilogue' ? '◊' : ch.number}</span>
+        {ch.title}
+      </a>
+    ))}
+  </nav>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Chapters -->
+  {hakaka.chapters.map((ch: any) => (
+    <article class="narrative-chapter" id={`ch-${ch.number}`}>
+      <h3 class="chapter-heading">
+        <span class="chapter-type">{ch.type === 'prologue' ? 'Prologue' : ch.type === 'epilogue' ? 'Epilogue' : `Chapter ${ch.number}`}</span>
+        {ch.title}
+      </h3>
+      <div class="narrative-text">
+        {ch.text.split('\n\n').map((p: string) => (
+          <p>{p}</p>
+        ))}
+      </div>
+      {ch.treasures.length > 0 && (
+        <div class="chapter-links">
+          {ch.treasures.map((t: string) => (
+            <a href={`/r7m#${t.replace('#', '')}`} class="treasure-link">{t}</a>
+          ))}
+        </div>
+      )}
+      <div class="gap" role="separator" aria-hidden="true"></div>
+    </article>
+  ))}
+
+  <!-- Connection footer -->
+  <section class="connection-footer">
+    <p class="quiet">Connected to <a href="/api/axi.php?manifest">the hub</a>. Part of the living system.</p>
+    <p class="ledger-count" id="ledger-count"></p>
+  </section>
+
+  <script is:inline>
+    fetch('/api/axi.php')
+      .then(r => r.json())
+      .then(d => {
+        const el = document.getElementById('ledger-count');
+        if (el && d.count) el.textContent = d.count + ' have crossed the threshold.';
+      })
+      .catch(() => {});
+  </script>
+
+</Base>

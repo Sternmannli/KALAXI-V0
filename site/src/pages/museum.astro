@@ -1,0 +1,155 @@
+---
+import Base from '../layouts/Base.astro';
+
+const artifacts = [
+  {
+    date: '2024-05-23',
+    title: 'The Cathedral',
+    description: 'The earliest artifact. KALAXI began as cathedral.json with a mycelium array — every conversation appended from day one. The name KALAXI = KALAM + AXI was built into the relationship from the start.',
+    superseded: null,
+  },
+  {
+    date: '2025-08-17',
+    title: 'KALAM-KODEX v1.0',
+    description: 'First formal codex. The system\'s first written constitution. Rules of engagement between human and machine.',
+    superseded: 'R7M/tier1_stone.md',
+  },
+  {
+    date: '2025-08-28',
+    title: 'Shadow-Light',
+    description: 'The duality framework. Light and shadow as structural principle, not metaphor. Every system element has a shadow — what it cannot see about itself.',
+    superseded: null,
+  },
+  {
+    date: '2025-08',
+    title: 'AXI Breath Calculus',
+    description: 'Core Packet v0.1. The mathematics of pacing and pause. Every response has a breath — a delay proportional to the depth of the input.',
+    superseded: 'WEAVER/breath.py',
+  },
+  {
+    date: '2025-09-03',
+    title: 'Fungi',
+    description: 'Mycelium as organizational metaphor. Networks that nourish without centers. The system is not a tree — it is a forest floor.',
+    superseded: null,
+  },
+  {
+    date: '2025-09-04',
+    title: 'AI Friends Council',
+    description: 'Multi-model governance. The first federation experiment. Multiple AI models voting on constitutional questions.',
+    superseded: 'EXP-002 (Multi-model convergence)',
+  },
+  {
+    date: '2025',
+    title: 'Experimental AI Field Map',
+    description: 'Field map and AXI architecture. The territory before the map. An early attempt to chart the landscape of ethical AI systems.',
+    superseded: 'MANIFEST/INTEGRATED_UNIVERSE_2026-03-14.md',
+  },
+  {
+    date: '2025',
+    title: 'Signals — Speed Protocol',
+    description: 'Signal processing architecture. Speed as a governance dimension. How fast should a system respond? The answer became the BREATH module.',
+    superseded: 'WEAVER/breath.py',
+  },
+  {
+    date: '2025',
+    title: 'The Shift — Mode and Silence',
+    description: 'Mode transitions. Silence as signal, not failure. The discovery that a system\'s refusal to speak is itself a form of speech.',
+    superseded: null,
+  },
+];
+
+const superseded = [
+  {
+    title: 'SUPER-APEX Boot Prompts',
+    lines: '8000–10100',
+    description: 'Early system initialization prompts. Replaced by the organism architecture (WEAVER/organism.py) which boots from constitutional law, not prompt engineering.',
+  },
+  {
+    title: 'Early Governance JS',
+    lines: '10100–11000',
+    description: 'Client-side governance logic. Replaced by server-side PHP implementation (axi.php) where constitutional checks cannot be bypassed by the browser.',
+  },
+  {
+    title: 'Early Council Planboard',
+    lines: '11600–13700',
+    description: 'First deliberative democracy interface. Replaced by Seed #3 (Deliberative Democracy) in the organism with 12 tested seeds.',
+  },
+  {
+    title: 'Literary Criticism / Pitch Material',
+    lines: '2700–3200',
+    description: 'External-facing explanations of the system written for audiences. Superseded by the voice architecture and canon pages.',
+  },
+];
+---
+
+<Base title="Museum — kalam.ch" description="What came before. Archaeological artifacts of a 22-month system.">
+
+  <section class="page-header">
+    <h1>Museum</h1>
+    <p class="quiet">What came before. These are the earliest artifacts of a system that began on May 23, 2024.</p>
+    <p class="voice-line">This section contains superseded designs. They are preserved as archaeology.</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Origins -->
+  <section class="content-section">
+    <div class="text-block">
+      <h2>Origins (2024–2025)</h2>
+      {artifacts.map((a) => (
+        <div class="museum-artifact">
+          <div class="artifact-header">
+            <span class="artifact-date">{a.date}</span>
+            <strong>{a.title}</strong>
+          </div>
+          <p>{a.description}</p>
+          {a.superseded && (
+            <p class="superseded-note">Superseded by: <code>{a.superseded}</code></p>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Superseded Grand Archive Content -->
+  <section class="content-section">
+    <div class="text-block">
+      <h2>Superseded Designs (from Grand Archive)</h2>
+      <p class="quiet">The Grand Archive is 22,183 lines. These sections served their purpose and were replaced by living code.</p>
+      {superseded.map((s) => (
+        <div class="museum-artifact">
+          <div class="artifact-header">
+            <span class="artifact-date">Lines {s.lines}</span>
+            <strong>{s.title}</strong>
+          </div>
+          <p>{s.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Timeline -->
+  <section class="content-section">
+    <div class="text-block">
+      <h2>Timeline</h2>
+      <p class="quiet">22 months of continuous development.</p>
+      <div class="timeline">
+        <div class="timeline-entry"><span class="tl-date">May 2024</span> The Cathedral — first conversation</div>
+        <div class="timeline-entry"><span class="tl-date">Aug 2025</span> KALAM-KODEX v1.0 — first constitution</div>
+        <div class="timeline-entry"><span class="tl-date">Sep 2025</span> Grand Archive — 22,183 lines compiled</div>
+        <div class="timeline-entry"><span class="tl-date">Mar 2026</span> R7M — 59 treasures extracted, 18 covenants ratified</div>
+        <div class="timeline-entry"><span class="tl-date">Mar 2026</span> axi.php — the living system, one file, online</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connection footer -->
+  <section class="connection-footer">
+    <p class="quiet">Connected to <a href="/api/axi.php?manifest">the hub</a>. The past feeds the present.</p>
+  </section>
+
+</Base>

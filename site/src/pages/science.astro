@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import science from '../../public/data/science.json';
+---
+
+<Base title="Science — kalam.ch" description="Experiments, stress tests, and the probe forge. Every claim tested. Every failure recorded.">
+
+  <section class="page-header">
+    <h1>The Science</h1>
+    <p class="quiet">{science.description}</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Probe Forge -->
+  <section class="content-section" id="probe-forge">
+    <div class="text-block">
+      <h2>{science.probe_forge.title}</h2>
+      <p>{science.probe_forge.description}</p>
+      <ol class="forge-laws">
+        {science.probe_forge.five_laws.map((law: string) => (
+          <li>{law}</li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Experiments -->
+  <section class="content-section" id="experiments">
+    <div class="text-block">
+      <h2>Experiments</h2>
+
+      {science.experiments.map((exp: any) => (
+        <div class="experiment-card" id={exp.id.toLowerCase()}>
+          <div class="exp-header">
+            <span class="exp-id">{exp.id}</span>
+            <h3>{exp.title}</h3>
+            <span class={`exp-status status-${exp.status}`}>{exp.status}</span>
+          </div>
+
+          <p class="exp-hypothesis"><strong>Hypothesis:</strong> {exp.hypothesis}</p>
+          <p class="exp-progress">{exp.progress}</p>
+          <p class="exp-result"><strong>Result:</strong> {exp.result}</p>
+
+          <ul class="exp-findings">
+            {exp.findings.map((f: string) => (
+              <li>{f}</li>
+            ))}
+          </ul>
+
+          {exp.discovery && (
+            <blockquote class="exp-discovery">{exp.discovery}</blockquote>
+          )}
+
+          <div class="exp-meta">
+            {exp.remaining > 0 && <span>{exp.remaining} runs remaining</span>}
+            <span>{exp.evidence}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Stress Tests -->
+  <section class="content-section" id="stress-tests">
+    <div class="text-block">
+      <h2>Stress Tests</h2>
+
+      {science.stress_tests.map((st: any) => (
+        <div class="experiment-card" id={st.id.toLowerCase().replace('#', '')}>
+          <div class="exp-header">
+            <span class="exp-id">{st.id}</span>
+            <h3>{st.title}</h3>
+            <span class={`exp-status status-${st.status}`}>{st.status}</span>
+          </div>
+
+          <p>{st.description}</p>
+          <p class="exp-result"><strong>Result:</strong> {st.result}</p>
+
+          {st.narrative && (
+            <p><a href={st.narrative} class="nar-ref">Read the narrative →</a></p>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Key Findings -->
+  <section class="content-section" id="findings">
+    <div class="text-block">
+      <h2>Key Findings Across All Experiments</h2>
+      <ol class="key-findings">
+        {science.key_findings.map((f: string) => (
+          <li>{f}</li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Connection footer -->
+  <section class="connection-footer">
+    <p class="quiet">Connected to <a href="/api/axi.php?manifest">the hub</a>. Science feeds the system. The system feeds the science.</p>
+    <p class="ledger-count" id="ledger-count"></p>
+  </section>
+
+  <script is:inline>
+    fetch('/api/axi.php')
+      .then(r => r.json())
+      .then(d => {
+        const el = document.getElementById('ledger-count');
+        if (el && d.count) el.textContent = d.count + ' have crossed the threshold.';
+      })
+      .catch(() => {});
+  </script>
+
+</Base>

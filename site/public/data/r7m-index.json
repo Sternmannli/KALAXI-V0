@@ -1,0 +1,906 @@
+{
+  "id": "R7M-INDEX",
+  "essence": "The conditions under which a system meets a being determine what that being is able to become — and dignity is the name for the conditions that leave the most room.",
+  "narrative_slogan": "The wound became the womb.",
+  "archive_slogan": "The river remembers what the git log does not.",
+  "tiers": {
+    "stone": {
+      "name": "Stone — Foundation",
+      "treasures": [
+        {
+          "id": "T#02",
+          "title": "First Roof (Shelter Axiom)",
+          "vow": "By not arguing with wind",
+          "principle": "Structure survives by yielding to forces, not opposing them.",
+          "covenants": [
+            "COV#001"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#03",
+          "title": "Three-Gate System",
+          "structure": "Sealed Gate → Constraint Gate → Dignity Gate",
+          "principle": "Every system output passes three gates in sequence.",
+          "covenants": [
+            "COV#001",
+            "COV#009"
+          ],
+          "narrative_links": []
+        },
+        {
+          "id": "T#04",
+          "title": "First Path (Wayfinding)",
+          "vow": "Leave signs that feed the next feet.",
+          "principle": "Navigation is not for the finder but for whoever follows.",
+          "covenants": [
+            "COV#001",
+            "COV#004"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch4"
+          ]
+        },
+        {
+          "id": "T#05",
+          "title": "Ash Ledger (Memory Without Weight)",
+          "vow": "Remember without weight.",
+          "principle": "Record-keeping must be light enough to carry, honest enough to trust, and erasable enough to stay current.",
+          "covenants": [
+            "COV#004",
+            "COV#009"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch2"
+          ]
+        },
+        {
+          "id": "T#06",
+          "title": "Counting Sticks (Temporal Memory)",
+          "vow": "So I don't forget how many times we didn't starve.",
+          "principle": "Time becomes tangible through accumulated marks.",
+          "covenants": [
+            "COV#004"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#57",
+          "title": "Ground Rule",
+          "vow": "What we fix, we record. What we record, we can repeat. What we repeat, we survive.",
+          "principle": "Fix → record → repeat → survive.",
+          "covenants": [],
+          "narrative_links": []
+        }
+      ]
+    },
+    "weaver": {
+      "name": "Weaver — Logic",
+      "treasures": [
+        {
+          "id": "T#01",
+          "title": "Grand Resonance Equation",
+          "formula": "W* = (Ω^0.4 · Ξ^0.3 · B^0.2 · O^0.1) / (1 + ρ + σ²)",
+          "principle": "Four-layer reality map: macro-coherence, micro-structure, bridge-phenomena, observer-effects.",
+          "covenants": [
+            "COV#001",
+            "COV#009"
+          ],
+          "narrative_links": []
+        },
+        {
+          "id": "T#07",
+          "title": "SIP Chain (Symmetric Integration Protocol)",
+          "formula": "WVPS ≥ 0.90, GDI ≥ 0.85, HSR ≥ 0.95",
+          "principle": "Resonance law — anomalies → patterns → wisdom nodes → resilience.",
+          "covenants": [
+            "COV#001",
+            "COV#009"
+          ],
+          "narrative_links": []
+        },
+        {
+          "id": "T#08",
+          "title": "First Watch (Vigilance Protocol)",
+          "vow": "If you hear it, move. If you move, mean it.",
+          "principle": "Surveillance as care, not control.",
+          "covenants": [
+            "COV#001",
+            "COV#009"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch5"
+          ]
+        },
+        {
+          "id": "T#09",
+          "title": "Duality Engine",
+          "principle": "Tension holding without forced resolution. The system holds both sides without collapsing either.",
+          "covenants": [
+            "COV#001"
+          ],
+          "narrative_links": []
+        },
+        {
+          "id": "T#10",
+          "title": "Field Oven (Heat Containment)",
+          "vow": "Heat likes tight. Wait until the wait turns sweet.",
+          "principle": "Contain energy, control release, trust the process.",
+          "covenants": [
+            "COV#001"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch3"
+          ]
+        },
+        {
+          "id": "T#11",
+          "title": "First Weir (Resource Capture)",
+          "vow": "Let the river work. Leave a way; take the rest.",
+          "principle": "The V-shape lets the river choose the point. Always leave one gap.",
+          "covenants": [
+            "COV#001",
+            "COV#006"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch1",
+            "NAR-HAKAKA:ch9"
+          ]
+        },
+        {
+          "id": "T#13",
+          "title": "Draw Hole (Ventilation Principle)",
+          "vow": "Big turns hunger into sky.",
+          "principle": "Control is in the aperture, not the wall.",
+          "covenants": [
+            "COV#001",
+            "COV#003"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch3"
+          ]
+        },
+        {
+          "id": "T#14",
+          "title": "Stone Weir (Durable Engineering)",
+          "vow": "Let the river choose the point; leave a door.",
+          "principle": "Permanence introduces new failure modes — rigidity. The spill-way is the defect budget in stone form.",
+          "covenants": [
+            "COV#001",
+            "COV#009"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch1"
+          ]
+        },
+        {
+          "id": "T#16",
+          "title": "Wind Door (Environmental Negotiation)",
+          "vow": "Let air work; don't make it angry.",
+          "principle": "Door leeward. Edges round. High lets go, low invites.",
+          "covenants": [
+            "COV#001"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#17",
+          "title": "Jar, Fire, and Carry (Portable Infrastructure)",
+          "vow": "Water walks with us.",
+          "principle": "Infrastructure must be portable. Three dots mark state: full, half, empty.",
+          "covenants": [
+            "COV#001"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#18",
+          "title": "Fair Weight (Just Measurement)",
+          "vow": "Weigh before want.",
+          "principle": "Measurement precedes desire. The balance is set before the trade begins.",
+          "covenants": [
+            "COV#001",
+            "COV#009"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch7"
+          ]
+        },
+        {
+          "id": "T#19",
+          "title": "Split, Smoke, and Share (Processing Chain)",
+          "vow": "Feed today, remember tomorrow.",
+          "principle": "Processing has three stages: separate, preserve, distribute. One fish turned back.",
+          "covenants": [
+            "COV#001",
+            "COV#006"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#20",
+          "title": "Weir Night Watch (Resource Vigilance)",
+          "vow": "Watch with eyes, not hunger.",
+          "principle": "Report losses, don't celebrate captures.",
+          "covenants": [
+            "COV#001",
+            "COV#009"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#21",
+          "title": "Brittleness Guard",
+          "formula": "ψ/σ ≤ 1",
+          "principle": "Sensitivity must never outrun flexibility. If it does, the system shatters under novel input.",
+          "covenants": [
+            "COV#001",
+            "COV#009"
+          ],
+          "narrative_links": []
+        },
+        {
+          "id": "T#22",
+          "title": "Shared Weir (Commons Management)",
+          "vow": "Take enough. Leave mothers and first water.",
+          "principle": "The commons is managed by mutual restraint, not mutual enforcement.",
+          "covenants": [
+            "COV#001",
+            "COV#003",
+            "COV#015"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch9"
+          ]
+        },
+        {
+          "id": "T#33",
+          "title": "SRVP Protocol (Stepwise Ritual Verification)",
+          "principle": "Seven-step AI testing sequence: habit, slowness, refusal, chaos-on-self, hermit memo, shadow check, proverb.",
+          "covenants": [
+            "COV#009"
+          ],
+          "narrative_links": []
+        },
+        {
+          "id": "T#50",
+          "title": "Tool-Homing",
+          "vow": "Lost tools get permanent homes.",
+          "principle": "Every element that causes a search gets a permanent address.",
+          "covenants": [],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#55",
+          "title": "Grip Law",
+          "vow": "Find, then twist. Twist, then test. If it fails, reduce the span, not the will.",
+          "principle": "When a feature fails, reduce scope, not ambition.",
+          "covenants": [],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#56",
+          "title": "Loop Law",
+          "vow": "A loop is a door; a door is a direction; direction reduces fear.",
+          "principle": "Each exchange cycle is a door that reduces uncertainty.",
+          "covenants": [],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#59",
+          "title": "Crack Law",
+          "vow": "When a loop fails in the wild, it graduates into the wall. Breakage feeds design.",
+          "principle": "Failed patterns become structural knowledge.",
+          "covenants": [],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        }
+      ]
+    },
+    "honey": {
+      "name": "Honey — Wisdom",
+      "treasures": [
+        {
+          "id": "T#15",
+          "title": "Meta-Anomaly Registry",
+          "principle": "Anomalies about the anomaly system itself. Self-referential detection of systemic failures.",
+          "covenants": [
+            "COV#009"
+          ],
+          "narrative_links": []
+        },
+        {
+          "id": "T#23",
+          "title": "Defect Budget",
+          "formula": "ε = 0.02–0.05",
+          "principle": "The canon must maintain a small percentage of deliberate imperfection to prevent crystalline brittleness.",
+          "covenants": [
+            "COV#001"
+          ],
+          "narrative_links": []
+        },
+        {
+          "id": "T#24",
+          "title": "Hook-Blue (Naming as Signal)",
+          "vow": "Color without waste; signal without lies.",
+          "principle": "Names are provisional signals, not permanent identities.",
+          "covenants": [
+            "COV#001"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#25",
+          "title": "Salt Measure (Fair Rationing)",
+          "vow": "Take only a fair pinch.",
+          "principle": "Measurement is built into the tool, not left to the hand.",
+          "covenants": [
+            "COV#001",
+            "COV#003"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch6"
+          ]
+        },
+        {
+          "id": "T#26",
+          "title": "Bridge Meal (First Hospitality)",
+          "vow": "Share first bite.",
+          "principle": "Trust begins with a shared bite.",
+          "covenants": [
+            "COV#001",
+            "COV#006"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch8"
+          ]
+        },
+        {
+          "id": "T#27",
+          "title": "Twin Weir (Cooperative Extraction)",
+          "vow": "Leave one gap.",
+          "principle": "Cooperation means synchronized restraint.",
+          "covenants": [
+            "COV#001",
+            "COV#009"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch9"
+          ]
+        },
+        {
+          "id": "T#28",
+          "title": "Quiet Bridge (Consensus Without Contact)",
+          "vow": "Agree before pull.",
+          "principle": "Consensus through minimal signaling.",
+          "covenants": [
+            "COV#001"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch10"
+          ]
+        },
+        {
+          "id": "T#29",
+          "title": "Line Talk (Communication Protocol)",
+          "vow": "Say less. Say clear.",
+          "principle": "One tap: ready. Two taps: send. Three taps: hold.",
+          "covenants": [
+            "COV#001",
+            "COV#009"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch10"
+          ]
+        },
+        {
+          "id": "T#30",
+          "title": "Lock Test (Proverb Quality Gate)",
+          "principle": "Three conditions: (1) Cannot paraphrase without loss, (2) Triggers response latency, (3) Links across domains.",
+          "covenants": [
+            "COV#006",
+            "COV#009"
+          ],
+          "narrative_links": []
+        },
+        {
+          "id": "T#31",
+          "title": "Quiet Border (Boundary Respect)",
+          "vow": "Step soft where talk lives.",
+          "principle": "The border is marked with stones and color, not with force.",
+          "covenants": [
+            "COV#001",
+            "COV#003"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#32",
+          "title": "High Water Test (Stress Testing)",
+          "vow": "Help without crossing.",
+          "principle": "Send aid across the line — not your body.",
+          "covenants": [
+            "COV#001",
+            "COV#009"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#34",
+          "title": "Reed Pinch (Remote Aid)",
+          "vow": "Send help, not hands.",
+          "principle": "Aid that teaches is worth more than aid that touches.",
+          "covenants": [
+            "COV#001",
+            "COV#006"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#35",
+          "title": "Cool Pit (Preservation Principle)",
+          "vow": "What we save should still be food.",
+          "principle": "Preservation is constant vigilance against decay.",
+          "covenants": [
+            "COV#001",
+            "COV#004"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#36",
+          "title": "Rain Teeth (Water Collection)",
+          "vow": "Catch clean; leave dirt where it wants to settle.",
+          "principle": "Filtration is letting the dirty settle before collecting the clean.",
+          "covenants": [
+            "COV#001",
+            "COV#003"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#37",
+          "title": "Ash Water (Hygiene Protocol)",
+          "vow": "Keep sickness out before it learns our names.",
+          "principle": "Prevention — the first defense before the enemy names itself.",
+          "covenants": [
+            "COV#001",
+            "COV#009"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA",
+            "NAR-ASHWATER"
+          ]
+        },
+        {
+          "id": "T#48",
+          "title": "Story Fire Protocol",
+          "vow": "Three breaths each. No lessons.",
+          "principle": "Time-bounded sharing with explicit anti-didactic rule.",
+          "covenants": [],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#51",
+          "title": "Ephemeral Map",
+          "vow": "It's still in our feet.",
+          "principle": "Some knowledge is temporary — used for orientation then released.",
+          "covenants": [],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        }
+      ]
+    },
+    "hand": {
+      "name": "Hand — Interface",
+      "treasures": [
+        {
+          "id": "T#12",
+          "title": "Federation Pilot (EFP)",
+          "principle": "Inter-system federation that preserves donor privacy while sharing wisdom patterns.",
+          "covenants": [
+            "COV#001",
+            "COV#003",
+            "COV#015"
+          ],
+          "narrative_links": []
+        },
+        {
+          "id": "T#38",
+          "title": "First Trade (Exchange Without Contact)",
+          "vow": "Trade made of feet and river, not hands.",
+          "principle": "Value demonstrated before requested.",
+          "covenants": [
+            "COV#001",
+            "COV#006"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#39",
+          "title": "Cold Guest (Hospitality to Strangers)",
+          "vow": "They ate separate and went to sleep under the same weather.",
+          "principle": "Exchange without proximity. Trust without surrender.",
+          "covenants": [
+            "COV#001",
+            "COV#003",
+            "COV#015"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#40",
+          "title": "Borrowed Fire (Mutual Aid)",
+          "vow": "Return the pot.",
+          "principle": "Borrowing is not taking. No permanent dependency.",
+          "covenants": [
+            "COV#001",
+            "COV#006"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#41",
+          "title": "First Needle (Repair Craft)",
+          "vow": "They stitched the loud seam quiet.",
+          "principle": "Repair is intimate — the tool learns the hand, the stitch remembers the maker.",
+          "covenants": [
+            "COV#001"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#42",
+          "title": "Salt Edge (Preservation Discovery)",
+          "vow": "Alive. Now wash it.",
+          "principle": "Salt preserves but stings — power that must be washed after use.",
+          "covenants": [
+            "COV#001"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA:ch6"
+          ]
+        }
+      ]
+    },
+    "cross": {
+      "name": "Cross-Tier",
+      "treasures": [
+        {
+          "id": "T#43",
+          "title": "Bone Flute (Art as Lamp)",
+          "vow": "Not a door. A lamp.",
+          "principle": "Art illuminates the space where relationships might grow.",
+          "covenants": [
+            "COV#001",
+            "COV#006"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#44",
+          "title": "First Rule Broken (Natural Consequences)",
+          "vow": "About time.",
+          "principle": "Justice is environmental, not judicial — consequences built into architecture.",
+          "covenants": [
+            "COV#001",
+            "COV#009"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#45",
+          "title": "Fever Night (Care Under Crisis)",
+          "vow": "Not the yellow root. The small brown one.",
+          "principle": "When D approaches zero, the system slows further — not faster.",
+          "covenants": [
+            "COV#001"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#46",
+          "title": "Mud Lesson (Recovery from Failure)",
+          "vow": "Spread. Board.",
+          "principle": "Distribute weight and move slowly — not thrash.",
+          "covenants": [
+            "COV#001"
+          ],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#47",
+          "title": "Phase Transition Physics",
+          "principle": "Theoretical framework for system scaling from organic to atomic deployment.",
+          "covenants": [
+            "COV#001"
+          ],
+          "narrative_links": []
+        },
+        {
+          "id": "T#49",
+          "title": "Forward-Debt",
+          "vow": "Pay with not tripping tomorrow.",
+          "principle": "Debt paid forward in behavior, not in objects.",
+          "covenants": [],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#52",
+          "title": "Irritation-as-Pedagogy",
+          "vow": "So you learn to look.",
+          "principle": "Deliberate friction as teaching method.",
+          "covenants": [],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#53",
+          "title": "Shame-as-Nourishment",
+          "vow": "It tasted like salt and a small, necessary shame.",
+          "principle": "Shame metabolized into community nourishment.",
+          "covenants": [],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#54",
+          "title": "Misnaming Counter",
+          "vow": "On those days I make loops.",
+          "principle": "Identity degradation countered by doing, not debating.",
+          "covenants": [],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        },
+        {
+          "id": "T#58",
+          "title": "Humour Law",
+          "vow": "A knot exhales through a laugh.",
+          "principle": "HUMOUR-3: Check for harm → Name the mismatch → Laugh then Fix.",
+          "covenants": [],
+          "narrative_links": [
+            "NAR-HAKAKA"
+          ]
+        }
+      ]
+    }
+  },
+  "equations": [
+    {
+      "id": "FP-001",
+      "name": "Grand Resonance Exponents",
+      "formula": "γ=0.4, δ=0.3, η=0.2, κ=0.1",
+      "treasure": "T#01"
+    },
+    {
+      "id": "FP-002",
+      "name": "Defect Budget Range",
+      "formula": "σ ∈ [0.02, 0.08]",
+      "treasure": "T#23"
+    },
+    {
+      "id": "FP-003",
+      "name": "Proverb Selector Score",
+      "formula": "0.35×theme + 0.20×tone + 0.15×register + 0.15×length + 0.10×cultural + 0.05×freshness",
+      "treasure": "T#30"
+    },
+    {
+      "id": "FP-004",
+      "name": "Resilience Equation",
+      "formula": "Ω_edu(t) = (L/C) × (1 + A(t) - R(t))",
+      "treasure": null
+    },
+    {
+      "id": "FP-005",
+      "name": "Ground Equation (precursor to D=A×L×M)",
+      "formula": "A = τ × (Ω×Φ)^p / (R_eff × g(Ω))^q",
+      "treasure": null
+    },
+    {
+      "id": "FP-006",
+      "name": "Certainty Formula",
+      "formula": "1 - entropy(normalized_counts)/log(5)",
+      "treasure": null
+    },
+    {
+      "id": "FP-007",
+      "name": "Coherence Shift Triggers",
+      "formula": "z_trend ≤ -2 OR JSD ≥ 0.25 OR ΔE ≥ 12",
+      "treasure": null
+    },
+    {
+      "id": "FP-008",
+      "name": "RIPPLE Decay",
+      "formula": "0.85/hop BFS fan-out",
+      "treasure": null
+    },
+    {
+      "id": "FP-009",
+      "name": "COMMIT Health Threshold",
+      "formula": "≥ 0.72",
+      "treasure": null
+    },
+    {
+      "id": "FP-010",
+      "name": "Adaptive Epsilon",
+      "formula": "ε = max(0.05, base × min(1, 30/n))",
+      "treasure": "T#23"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "AC-001",
+      "name": "Book of Nuance",
+      "elements": 11,
+      "description": "Ambiguity, Subtlety, Context, Perspective, Hesitation, Balance, Tone, Interpretation, Complexity, Precision/Generality, Resonance"
+    },
+    {
+      "id": "AC-002",
+      "name": "Wisdom Injector",
+      "ref": "REFLEX#00035",
+      "description": "Proverbs injected into decisions via semantic match with audit trail"
+    },
+    {
+      "id": "AC-003",
+      "name": "GO-Unit Chunking",
+      "description": "MICRO/MEDIUM/HEAVY task sizing with idempotent replay and rollback via checkpoint"
+    },
+    {
+      "id": "AC-004",
+      "name": "Element State Lifecycle",
+      "description": "6-state machine: draft → proposed → ratified → active → deprecated → forgotten"
+    },
+    {
+      "id": "AC-005",
+      "name": "Graduated 3-Level Breaker",
+      "description": "L1 Rate-limit (5%/10%), L2 Partial pause (10%/20%), L3 Full pause (15%/30%)"
+    },
+    {
+      "id": "AC-006",
+      "name": "Planetary Consensus Time (PCT)",
+      "description": "Byzantine-median of NTP + blockchain + GPS for geography-agnostic anchoring"
+    },
+    {
+      "id": "AC-007",
+      "name": "Ambient Governance",
+      "description": "Passive signal collection, opt-in, DP-noised, raises participation without re-ID risk"
+    },
+    {
+      "id": "AC-008",
+      "name": "Contextual Revelation",
+      "description": "5 time-delayed transparency levels: immediate → 24h → 1wk → 1mo → 1yr"
+    },
+    {
+      "id": "AC-009",
+      "name": "Liquid Legitimacy",
+      "description": "Replace participation measurement with legitimacy flows, weight by affected-party stake"
+    },
+    {
+      "id": "AC-010",
+      "name": "VDF Privacy Forgottery",
+      "description": "VDF-bound deletion receipts with 7-day hard cap"
+    },
+    {
+      "id": "AC-011",
+      "name": "ENKI Wisdom-Unit Format",
+      "description": "Proverb + Math + Code + Color + Reason (time-stamped)"
+    },
+    {
+      "id": "AC-012",
+      "name": "Supersedes Pattern",
+      "description": "Immutable-append updates: new element supersedes old, old stays"
+    },
+    {
+      "id": "AC-013",
+      "name": "Shadow Ledger",
+      "description": "Independent reconciliation audit layer"
+    },
+    {
+      "id": "AC-014",
+      "name": "KALAM_REACTOR_v1",
+      "description": "Complete message-processing pipeline: ingest → extract → transform → export → time-check"
+    }
+  ],
+  "origins": [
+    {
+      "date": "2024-05-23",
+      "title": "The Cathedral",
+      "description": "The earliest artifact. KALAXI began as cathedral.json/mycelium[], every conversation appended from day one."
+    },
+    {
+      "date": "2025-08-17",
+      "title": "KALAM-KODEX v1.0",
+      "description": "First formal codex. The system's first written constitution."
+    },
+    {
+      "date": "2025-08-28",
+      "title": "Shadow-Light",
+      "description": "The duality framework. Light and shadow as structural principle."
+    },
+    {
+      "date": "2025-08",
+      "title": "AXI Breath Calculus",
+      "description": "Core Packet v0.1. The mathematics of pacing and pause."
+    },
+    {
+      "date": "2025-09-03",
+      "title": "Fungi",
+      "description": "Mycelium as organizational metaphor. Networks that nourish without centers."
+    },
+    {
+      "date": "2025-09-04",
+      "title": "AI Friends Council",
+      "description": "Multi-model governance. The first federation experiment."
+    },
+    {
+      "date": "2025",
+      "title": "Experimental AI Field Map",
+      "description": "Field map and AXI architecture. The territory before the map."
+    },
+    {
+      "date": "2025",
+      "title": "Signals — Speed Protocol",
+      "description": "Signal processing architecture. Speed as a governance dimension."
+    },
+    {
+      "date": "2025",
+      "title": "The Shift — Mode and Silence",
+      "description": "Mode transitions. Silence as signal, not failure."
+    }
+  ]
+}

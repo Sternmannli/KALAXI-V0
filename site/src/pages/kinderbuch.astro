@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import kinderbuch from '../../public/data/kinderbuch.json';
+---
+
+<Base title="Kinderbuch — kalam.ch" description="Die Geschichte von Hakaka. Kapitel 1–20.">
+
+  <section class="page-header">
+    <h1>Die Geschichte von Hakaka</h1>
+    <p class="quiet">{kinderbuch.subtitle}</p>
+    <p class="voice-line">Stimme: {kinderbuch.voice} — {kinderbuch.core_images.join(', ')}</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Inhaltsverzeichnis -->
+  <nav class="narrative-toc" aria-label="Kapitel">
+    {kinderbuch.chapters.map((ch: any) => (
+      <a href={`#ch-${ch.number}`} class="toc-link">
+        <span class="toc-num">{ch.number}</span>
+        {ch.title}
+      </a>
+    ))}
+  </nav>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Kapitel -->
+  {kinderbuch.chapters.map((ch: any) => (
+    <article class="narrative-chapter" id={`ch-${ch.number}`} lang="de">
+      <h3 class="chapter-heading">
+        <span class="chapter-type">Kapitel {ch.number}</span>
+        {ch.title}
+      </h3>
+      <div class="narrative-text">
+        {ch.text.split('\n\n').map((p: string) => (
+          <p>{p}</p>
+        ))}
+      </div>
+      <div class="gap" role="separator" aria-hidden="true"></div>
+    </article>
+  ))}
+
+  <!-- Connection footer -->
+  <section class="connection-footer">
+    <p class="quiet">Verbunden mit <a href="/api/axi.php?manifest">dem Zentrum</a>. Teil des lebendigen Systems.</p>
+    <p class="ledger-count" id="ledger-count"></p>
+  </section>
+
+  <script is:inline>
+    fetch('/api/axi.php')
+      .then(r => r.json())
+      .then(d => {
+        const el = document.getElementById('ledger-count');
+        if (el && d.count) el.textContent = d.count + ' haben die Schwelle übertreten.';
+      })
+      .catch(() => {});
+  </script>
+
+</Base>
