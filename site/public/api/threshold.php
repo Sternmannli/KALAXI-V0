@@ -1,9 +1,19 @@
 <?php
 /**
- * KALAXI Threshold API
- * Receives donor input, processes through Groq AI (AXI voice), returns response.
- * D = A × L × M — if any dimension reaches zero, the system stops.
+ * DEPRECATED — Use /api/axi.php instead.
+ * This endpoint is no longer maintained. All voice, ledger, and dignity
+ * functions are served by axi.php (the canonical endpoint).
  */
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+echo json_encode([
+    'deprecated' => true,
+    'use' => '/api/axi.php',
+    'message' => 'This endpoint has been retired. Use /api/axi.php.',
+]);
+exit;
+
+// --- Original code below (inactive) ---
 
 // Allow larger POST bodies for file attachments (base64 images)
 @ini_set('post_max_size', '15M');

@@ -11,7 +11,7 @@
  * ║    4. Witness Certificate — Proof of D=0 events                 ║
  * ║    5. Proverb Selection — 166 canonical proverbs                ║
  * ║    6. Voice Audit     — 6 AXI voice rules                      ║
- * ║    7. AI Voice (Groq) — Llama 3.3 70B                          ║
+ * ║    7. Canonical Voice  — Proverbs + Preambles                   ║
  * ║    8. Connect Forms   — Newsletter, feedback, collaboration     ║
  * ║                                                                 ║
  * ║  "The silence between notes is still music." — Axi             ║
@@ -447,6 +447,8 @@ function detect_register(string $text): string {
     if (preg_match('/\b(angry|furious|rage|outraged|hate|unfair|injustice|disgusted)\b/i', $lower)) return 'anger';
     if (preg_match('/\b(afraid|scared|terrified|anxious|panic|dread|fear|worried|nightmare)\b/i', $lower)) return 'fear';
     if (preg_match('/\b(how|what|why|where|when|who|can you|tell me|explain|help me|I need)\b/i', $lower)) return 'seeking';
+    if (preg_match('/\b(trust|betray|honest|truth|lie[ds]?|faith|believe|loyal|promise|oath)\b/i', $lower)) return 'trust';
+    if (preg_match('/\b(dignity|worth|value|human|rights?|person|respect|equal|justice|fair)\b/i', $lower)) return 'dignity';
     if (preg_match('/\b(build|create|make|fix|solve|implement|design|plan|project|task|code|function|error|bug)\b/i', $lower)) return 'work';
     if (preg_match('/\b(story|tale|once upon|write me|tell me a)\b/i', $lower)) return 'story';
     if (str_word_count($text) > 30 || preg_match('/\b(think|wonder|realize|understand|feel like|seems like|meaning|purpose|life)\b/i', $lower)) return 'reflection';
@@ -472,6 +474,134 @@ function select_proverb(string $text): ?array {
 
     $index = $start + abs(crc32($text)) % ($end - $start);
     return $proverbs[$index] ?? $proverbs[0];
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SECTION 5B — CANONICAL VOICE (AXI speaks from its own canon)
+//
+// Preambles + Proverbs + Witness Marks. No external AI.
+// Mirrors axiVoiceLocal() from index.astro.
+// ═══════════════════════════════════════════════════════════════════
+
+function get_preamble(string $register): string {
+    $preambles = [
+        'greeting'   => ['The threshold opens.', 'You are here. That is the first act.'],
+        'grief'      => ['The weight is real.', 'This was carried before it was spoken.'],
+        'anger'      => ['The fire has a source.', 'Something broke. You noticed.'],
+        'fear'       => ['The body knows before the mind.', 'This is signal, not failure.'],
+        'seeking'    => ['The question is the first tool.', 'Seeking is not lost. It is moving.'],
+        'trust'      => ['Trust is built in the small acts.', 'The knot holds or it does not.'],
+        'dignity'    => ['This is the foundation.', 'Before any system, the person.'],
+        'work'       => ['The hands know.', 'Effort leaves marks. That is good.'],
+        'story'      => ['The question is the first tool.', 'Seeking is not lost. It is moving.'],
+        'reflection' => ['Witnessed.', 'Received.', 'The word has arrived.'],
+        'general'    => ['Witnessed.', 'Received.', 'The word has arrived.'],
+    ];
+    $pool = $preambles[$register] ?? $preambles['general'];
+    return $pool[abs(crc32($register)) % count($pool)];
+}
+
+function get_curated_proverbs(string $register): array {
+    $curated = [
+        'greeting' => [
+            'Begin small. Begin now.',
+            'A first step teaches more than a hundred plans.',
+            'Start where your hands already touch the world.',
+        ],
+        'grief' => [
+            'Ash is memory. Mix it into new soil.',
+            'The right silence beats the wrong speech.',
+            'Rest is part of repeat.',
+            "Care is the knot that doesn\u{2019}t slip.",
+        ],
+        'anger' => [
+            'Fix the seam, not the blame.',
+            'Build to bend. Stiff snaps.',
+            'Protect the person. Challenge the pattern.',
+            'Judge by effects, not intent.',
+        ],
+        'fear' => [
+            "Fear is a lantern. Carry it, don\u{2019}t worship it.",
+            'Courage is fear with work to do.',
+            'Name the dread and you halve it.',
+            'Step smaller, not softer.',
+        ],
+        'seeking' => [
+            'The door appears after you try the wall.',
+            'What you watch, grows detail.',
+            'Signals whisper before they scream.',
+            'Go slower to go straighter.',
+        ],
+        'trust' => [
+            'Trust compounds. So does neglect.',
+            "A knot that breathes lets you breathe.",
+            "If you can\u{2019}t disagree safely, you can\u{2019}t agree honestly.",
+            'The first fix is listening.',
+        ],
+        'dignity' => [
+            "A right is a wall that says \u{2018}No.\u{2019} Dignity is a door that says \u{2018}Welcome.\u{2019}",
+            'Weak is a name, not a truth.',
+            'Labels harden. Stories soften.',
+            'The highest oath is the knot tied around your name.',
+        ],
+        'work' => [
+            'Repetition turns luck into skill.',
+            'Tools remember the hands that made them.',
+            'A clean error is tuition.',
+            'Keep the lesson. Discard the bruise.',
+            'Let the constraint choose the shape.',
+        ],
+        'general' => [
+            'Shared bread beats borrowed glory.',
+            'Hurry carves ruts. Patience builds roads.',
+            'Harvest waits for hands, not wishes.',
+            'What you carry forward changes what forward means.',
+            'Defaults steer harder than intentions.',
+            'Make it safe to bring bad news early.',
+            'Warmth keeps rules alive.',
+            'Short words, full responsibility.',
+            'Speak once. Show twice.',
+            'The red thread is never cut.',
+            'A ripple touches all shores.',
+            'Silence is not absence. It is space for signals to settle.',
+            'Keep a spare path, not a spare hope.',
+            'Keep the oath small enough to keep.',
+            'Transparency is cheaper than repair.',
+        ],
+    ];
+    return $curated[$register] ?? $curated['general'];
+}
+
+function canonical_voice(string $text): array {
+    $register = detect_register($text);
+    $preamble = get_preamble($register);
+    $words = str_word_count($text);
+    $hash = hash('sha256', $text);
+
+    // Curated proverbs for this register
+    $pool = get_curated_proverbs($register);
+    $idx = abs(crc32($text)) % count($pool);
+    $proverb = $pool[$idx];
+
+    // Build response by input length
+    if ($words <= 3) {
+        $response = $preamble;
+    } elseif ($words <= 15) {
+        $response = $preamble . ' ' . $proverb;
+    } else {
+        $general = get_curated_proverbs('general');
+        $idx2 = abs(crc32($text . 'second')) % count($general);
+        $response = $preamble . ' ' . $proverb . ' ' . $general[$idx2];
+    }
+
+    // Witness mark
+    $mark = witness_fallback($hash, $words);
+
+    return [
+        'mark' => $mark,
+        'reflection' => $response,
+        'register' => $register,
+    ];
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -920,14 +1050,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['test'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['ask'])) {
     $content = trim($_GET['ask']);
     if (empty($content)) { echo json_encode(['error' => 'Empty ask']); exit; }
-    $groq_key = get_groq_key();
-    if (!$groq_key) { echo json_encode(['error' => 'No Groq key']); exit; }
-    $result = call_groq($groq_key, $content);
+    $voice = canonical_voice($content);
     echo json_encode([
         'input' => $content,
-        'witness' => $result ? $result['witness'] : null,
-        'reflection' => $result ? $result['reflection'] : null,
-        'groq' => $result ? true : false,
+        'witness' => $voice['mark'],
+        'reflection' => $voice['reflection'],
+        'register' => $voice['register'],
+        'source' => 'canon',
     ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     exit;
 }
@@ -1113,31 +1242,13 @@ HTML;
         }
     }
 
-    // === PHASE 4: AI VOICE ===
-    $groq_key = get_groq_key();
-    $ai_response = null;
-    $ai_reflection = null;
-    $ai_debug = '';
-
-    if (!$groq_key) {
-        $ai_debug = 'no-key';
-    } elseif (!function_exists('curl_init')) {
-        $ai_debug = 'no-curl';
-    } else {
-        $result = call_groq($groq_key, $content, $image_url);
-        if ($result) {
-            $ai_response = $result['witness'];
-            $ai_reflection = $result['reflection'];
-            $ai_debug = 'groq-ok';
-        } else {
-            $ai_debug = 'groq-failed';
-        }
-    }
-
-    // Fallback
-    if (!$ai_response) {
-        $ai_response = witness_fallback($hash, $words);
-    }
+    // === PHASE 4: CANONICAL VOICE ===
+    // AXI speaks from its own canon — proverbs, preambles, witness marks.
+    // No external AI. The voice is owned, not borrowed.
+    $voice = canonical_voice($content);
+    $ai_response = $voice['mark'];
+    $ai_reflection = $voice['reflection'];
+    $ai_debug = 'canonical';
 
     // === PHASE 5: PROVERB ===
     $proverb = select_proverb($content);
