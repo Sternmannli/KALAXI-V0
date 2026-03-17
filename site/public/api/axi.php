@@ -30,7 +30,7 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Headers: Content-Type, Accept');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(204);
@@ -1357,7 +1357,53 @@ HTML;
         }
     }
 
-    // JSON API response
+    // ── SSE Streaming Mode ──
+    // When client requests text/event-stream, stream the response word by word.
+    // This creates real-time token-by-token output — not fake animation.
+    $accept = $_SERVER['HTTP_ACCEPT'] ?? '';
+    if (strpos($accept, 'text/event-stream') !== false) {
+        header('Content-Type: text/event-stream');
+        header('Cache-Control: no-cache');
+        header('Connection: keep-alive');
+        header('X-Accel-Buffering: no'); // nginx
+
+        // Disable output buffering
+        @ini_set('output_buffering', 'off');
+        @ini_set('zlib.output_compression', false);
+        while (ob_get_level()) ob_end_flush();
+
+        // Dignity-latency: 800ms minimum pause. The gap is not a bug.
+        usleep(800000);
+
+        $full_text = $ai_reflection ?? $ai_response ?? 'Witnessed.';
+        $tokens = preg_split('/(\s+)/', $full_text, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+        foreach ($tokens as $token) {
+            echo "data: " . json_encode(['token' => $token]) . "\n\n";
+            flush();
+            // Variable delay: longer pauses after punctuation (three-beat rhythm)
+            if (preg_match('/[.,;:!?—]/', $token)) {
+                usleep(120000); // 120ms after punctuation
+            } else {
+                usleep(45000 + rand(0, 20000)); // 45-65ms per word
+            }
+        }
+
+        // Final event with metadata
+        $final = [
+            'done' => true,
+            'witness' => $ai_response,
+            'count' => $new_count,
+            'hash' => substr($hash, 0, 12),
+            'dignity' => round($D, 3),
+        ];
+        if ($proverb) $final['proverb'] = $proverb;
+        echo "data: " . json_encode($final) . "\n\n";
+        flush();
+        exit;
+    }
+
+    // ── JSON API response (fallback) ──
     $response = [
         'witnessed' => true,
         'mark' => $ai_response,

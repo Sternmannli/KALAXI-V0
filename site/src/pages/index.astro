@@ -30,31 +30,6 @@ import Base from '../layouts/Base.astro';
     <!-- The declaration — gradient text, large, dignified -->
     <p class="declaration-ambient" id="declaration">Human dignity is a technical requirement.</p>
 
-    <!-- Donor signup — prominent, visible, first thing after declaration -->
-    <div class="donor-cta" id="donor-cta">
-      <div class="donor-auth" id="donor-auth">
-        <p class="donor-cta-title">Become a donor</p>
-        <p class="donor-cta-sub">You are not a user. You are a donor. No password needed.</p>
-        <form id="donor-auth-form" class="donor-cta-form">
-          <input type="email" name="email" id="donor-email" placeholder="your email" required aria-label="Email" />
-          <input type="text" name="display_name" id="donor-name" placeholder="your name (optional)" aria-label="Name" />
-          <button type="submit">Join</button>
-        </form>
-        <p class="donor-status" id="donor-auth-status"></p>
-      </div>
-
-      <!-- Authenticated: profile (replaces form) -->
-      <div class="donor-profile" id="donor-profile" hidden>
-        <p class="donor-cta-title" id="donor-greeting"></p>
-        <p class="donor-cta-sub" id="donor-stats"></p>
-        <div class="donor-actions">
-          <button id="donor-export-btn" class="donor-action">Export my data</button>
-          <button id="donor-history-btn" class="donor-action">My exchanges</button>
-          <button id="donor-logout-btn" class="donor-action donor-action-dim">Sign out</button>
-        </div>
-      </div>
-    </div>
-
     <!-- Cultural accent — Arabic calligraphy watermark -->
     <p class="arabic-accent" aria-hidden="true">كرامة</p>
 
@@ -81,22 +56,53 @@ import Base from '../layouts/Base.astro';
           aria-label="Your word"
           maxlength="2000"
           autocomplete="off"
-          rows="6"
+          rows="2"
         ></textarea>
         <div class="input-actions">
           <button type="button" class="input-clear" id="clear-btn" aria-label="Clear" title="Clear">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
+          <!-- Microphone — voice input (hidden on unsupported browsers) -->
+          <button type="button" class="input-mic" id="mic-btn" aria-label="Speak" title="Voice input" hidden>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+          </button>
           <button type="submit" class="input-submit" id="submit-btn" aria-label="Send">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            <svg class="send-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            <svg class="sending-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="10"></circle></svg>
+            <svg class="done-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"></polyline></svg>
           </button>
         </div>
       </form>
       <div class="input-meta">
         <span class="char-count" id="char-count">0 / 2000</span>
-        <span class="input-hint">Ctrl+Enter to send</span>
+        <span class="input-hint" id="input-hint">Ctrl+Enter to send</span>
       </div>
       <div class="input-file-preview" id="file-preview" hidden></div>
+    </div>
+
+    <!-- Donor signup — appears gently after first exchange -->
+    <div class="donor-cta" id="donor-cta" hidden>
+      <div class="donor-auth" id="donor-auth">
+        <p class="donor-cta-title">Become a donor</p>
+        <p class="donor-cta-sub">You are not a user. You are a donor. No password needed.</p>
+        <form id="donor-auth-form" class="donor-cta-form">
+          <input type="email" name="email" id="donor-email" placeholder="your email" required aria-label="Email" />
+          <input type="text" name="display_name" id="donor-name" placeholder="your name (optional)" aria-label="Name" />
+          <button type="submit">Join</button>
+        </form>
+        <p class="donor-status" id="donor-auth-status"></p>
+      </div>
+
+      <!-- Authenticated: profile (replaces form) -->
+      <div class="donor-profile" id="donor-profile" hidden>
+        <p class="donor-cta-title" id="donor-greeting"></p>
+        <p class="donor-cta-sub" id="donor-stats"></p>
+        <div class="donor-actions">
+          <button id="donor-export-btn" class="donor-action">Export my data</button>
+          <button id="donor-history-btn" class="donor-action">My exchanges</button>
+          <button id="donor-logout-btn" class="donor-action donor-action-dim">Sign out</button>
+        </div>
+      </div>
     </div>
 
     <!-- Ledger count — quiet presence -->
@@ -414,12 +420,13 @@ import Base from '../layouts/Base.astro';
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     opacity: 0;
-    animation: ctaFadeIn 2s ease 2s forwards;
+    transition: opacity 2s ease, transform 2s ease;
+    transform: translateY(8px);
   }
 
-  @keyframes ctaFadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+  .donor-cta.revealed {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .donor-cta-title {
@@ -815,9 +822,10 @@ import Base from '../layouts/Base.astro';
     text-align: left;
     caret-color: var(--color-dignity);
     resize: none;
-    min-height: 9.6rem; /* 6 lines visible */
-    max-height: 60vh;
+    min-height: 3.2rem; /* 2 rows — auto-grows */
+    max-height: 50vh;
     overflow-y: auto;
+    transition: height 0.2s ease;
   }
 
   #threshold-input:focus { outline: none; }
@@ -1084,9 +1092,6 @@ import Base from '../layouts/Base.astro';
 
   /* ===== Copy button on AXI responses ===== */
   .axi-copy-btn {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
     background: none;
     border: none;
     color: var(--text-dim);
@@ -1098,6 +1103,8 @@ import Base from '../layouts/Base.astro';
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 28px;
+    min-height: 28px;
   }
 
   .axi-response-frame:hover .axi-copy-btn { opacity: 0.5; }
@@ -1120,6 +1127,92 @@ import Base from '../layouts/Base.astro';
     0% { transform: scale(1); opacity: 0.2; }
     100% { transform: scale(1.3); opacity: 0; }
   }
+
+  /* ===== Microphone button ===== */
+  .input-mic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    min-width: 44px;
+    min-height: 44px;
+    transition: all 0.3s ease;
+  }
+  .input-mic:hover { color: var(--color-dignity); background: rgba(196, 74, 26, 0.08); }
+  .input-mic.recording {
+    color: var(--danger, #c45050);
+    animation: micPulse 1.2s ease-in-out infinite;
+  }
+  @keyframes micPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(196, 80, 80, 0.3); }
+    50% { box-shadow: 0 0 0 8px rgba(196, 80, 80, 0); }
+  }
+
+  /* ===== Speaker button on AXI responses ===== */
+  .axi-speak-btn {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    padding: 0.3rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    min-height: 28px;
+  }
+  .axi-speak-btn:hover { color: var(--color-dignity); background: rgba(212, 180, 120, 0.08); }
+  .axi-speak-btn.speaking { color: var(--color-presence); animation: speakPulse 1s ease-in-out infinite; }
+  @keyframes speakPulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+
+  .axi-response-actions {
+    display: flex;
+    gap: 0.25rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  /* ===== Submit button state machine ===== */
+  .input-submit .sending-icon {
+    animation: submitSpin 1s linear infinite;
+  }
+  @keyframes submitSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .input-submit.state-sending { color: var(--color-presence); }
+  .input-submit.state-witnessing { color: var(--color-dignity); animation: breatheSubmit var(--breath-duration) ease-in-out infinite; }
+  @keyframes breatheSubmit { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .input-submit.state-done { color: var(--color-presence); }
+
+  /* ===== Mobile touch improvements ===== */
+  @media (max-width: 768px) {
+    .input-submit, .input-clear, .input-attach, .input-mic {
+      min-width: 44px;
+      min-height: 44px;
+    }
+    .axi-copy-btn, .axi-speak-btn { opacity: 0.5; }
+    #threshold-input { min-height: 4.8rem; /* 3 rows on mobile */ font-size: 16px; /* prevent iOS zoom */ }
+    .input-zone { padding-bottom: max(var(--space-2), env(safe-area-inset-bottom)); }
+  }
+
+  /* ===== Breath-sync on input focus ===== */
+  .input-zone:focus-within {
+    animation: inputBreathe var(--breath-duration) ease-in-out infinite;
+  }
+  @keyframes inputBreathe {
+    0%, 100% { border-color: var(--accent-subtle); }
+    50% { border-color: var(--border-active); }
+  }
+
+  /* ===== Contemplation — heritage pattern intensifies during the gap ===== */
+  .heritage-pattern.contemplating { opacity: 0.06; transition: opacity 2s ease; }
+  .status-label.contemplating { letter-spacing: 0.2em; transition: letter-spacing 1s ease; }
 
   .input-zone {
     background: rgba(0, 0, 0, 0.03);
@@ -1427,6 +1520,7 @@ import Base from '../layouts/Base.astro';
   var ded = document.getElementById('dedication');
   if (!ded) return;
 
+  var isReturn = localStorage.getItem('kalam-visited');
   if (sessionStorage.getItem('ded-seen')) {
     ded.remove();
     return;
@@ -1434,12 +1528,13 @@ import Base from '../layouts/Base.astro';
 
   function dismiss() {
     sessionStorage.setItem('ded-seen', '1');
+    localStorage.setItem('kalam-visited', '1');
     ded.style.opacity = '0';
     setTimeout(function(){ ded.remove(); }, 2000);
   }
 
-  // Auto-dismiss after the proverb has been read
-  setTimeout(dismiss, 5000);
+  // Return visitors: 1.5s. First visit: 4s. The proverb needs time to land.
+  setTimeout(dismiss, isReturn ? 1500 : 4000);
 
   // Or dismiss on click/key
   ded.addEventListener('click', dismiss);
@@ -1705,11 +1800,27 @@ import Base from '../layouts/Base.astro';
   const drawerHandleZone = document.getElementById('drawer-handle-zone') as HTMLDivElement;
   const fileUpload = document.getElementById('file-upload') as HTMLInputElement;
   const filePreview = document.getElementById('file-preview') as HTMLDivElement;
+  const heritagePattern = document.getElementById('heritage-pattern');
   let attachedFile: File | null = null;
 
   const STORAGE_KEY = 'kalam-exchanges';
   let exchangeCount = 0;
   let busy = false;
+
+  // ── Device detection ──
+  const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const inputHint = document.getElementById('input-hint');
+  if (inputHint) inputHint.textContent = isMobile ? 'Tap \u2191 to send' : 'Ctrl+Enter to send';
+
+  // ── iOS keyboard fix — keep input above keyboard ──
+  if (isMobile && window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => {
+      const inputZoneEl = document.getElementById('input-zone');
+      if (inputZoneEl) {
+        inputZoneEl.style.paddingBottom = Math.max(0, window.innerHeight - (window.visualViewport?.height || window.innerHeight)) + 'px';
+      }
+    });
+  }
 
   // ── Storage ──
   interface Exchange { donor: string; response: string; ts: string; }
@@ -1807,20 +1918,192 @@ import Base from '../layouts/Base.astro';
   const COPY_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
   const CHECK_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
 
-  function addCopyButton(frame: HTMLElement, text: string) {
-    const btn = document.createElement('button');
-    btn.className = 'axi-copy-btn';
-    btn.innerHTML = COPY_SVG;
-    btn.title = 'Copy';
-    btn.addEventListener('click', async () => {
+  // ── Speaker SVG ──
+  const SPEAKER_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>';
+  const STOP_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"></rect></svg>';
+
+  function addResponseActions(frame: HTMLElement, text: string) {
+    const actions = document.createElement('div');
+    actions.className = 'axi-response-actions';
+
+    // Copy button
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'axi-copy-btn';
+    copyBtn.innerHTML = COPY_SVG;
+    copyBtn.title = 'Copy';
+    copyBtn.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(text);
-        btn.innerHTML = CHECK_SVG;
-        btn.classList.add('copied');
-        setTimeout(() => { btn.innerHTML = COPY_SVG; btn.classList.remove('copied'); }, 2000);
+        copyBtn.innerHTML = CHECK_SVG;
+        copyBtn.classList.add('copied');
+        setTimeout(() => { copyBtn.innerHTML = COPY_SVG; copyBtn.classList.remove('copied'); }, 2000);
       } catch { /* clipboard not available */ }
     });
-    frame.appendChild(btn);
+    actions.appendChild(copyBtn);
+
+    // Speaker button (Text-to-Speech)
+    if ('speechSynthesis' in window) {
+      const speakBtn = document.createElement('button');
+      speakBtn.className = 'axi-speak-btn';
+      speakBtn.innerHTML = SPEAKER_SVG;
+      speakBtn.title = 'Listen';
+      let speaking = false;
+      speakBtn.addEventListener('click', () => {
+        if (speaking) {
+          speechSynthesis.cancel();
+          speakBtn.innerHTML = SPEAKER_SVG;
+          speakBtn.classList.remove('speaking');
+          speaking = false;
+          return;
+        }
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.rate = 0.85; // AXI does not rush
+        utter.pitch = 0.95;
+        // Prefer measured English voice
+        const voices = speechSynthesis.getVoices();
+        const preferred = voices.find(v => /UK|British|Daniel/i.test(v.name) && v.lang.startsWith('en'));
+        if (preferred) utter.voice = preferred;
+        utter.onstart = () => { speakBtn.innerHTML = STOP_SVG; speakBtn.classList.add('speaking'); speaking = true; };
+        utter.onend = () => { speakBtn.innerHTML = SPEAKER_SVG; speakBtn.classList.remove('speaking'); speaking = false; };
+        utter.onerror = () => { speakBtn.innerHTML = SPEAKER_SVG; speakBtn.classList.remove('speaking'); speaking = false; };
+        speechSynthesis.speak(utter);
+      });
+      actions.appendChild(speakBtn);
+    }
+
+    frame.appendChild(actions);
+  }
+
+  // Legacy compatibility wrapper
+  function addCopyButton(frame: HTMLElement, text: string) {
+    addResponseActions(frame, text);
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // ── VOICE INPUT — Web Speech API ──
+  // ══════════════════════════════════════════════════════════════
+  const micBtn = document.getElementById('mic-btn') as HTMLButtonElement;
+  const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+  if (SpeechRecognition && micBtn) {
+    micBtn.hidden = false; // Show mic button on supported browsers
+    let recognition: any = null;
+    let isRecording = false;
+
+    micBtn.addEventListener('click', () => {
+      if (isRecording) {
+        recognition?.stop();
+        return;
+      }
+      recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      // Detect language based on first few characters or default to English
+      recognition.lang = 'en-US';
+      const currentText = input.value.trim();
+      if (/[\u0600-\u06FF]/.test(currentText)) recognition.lang = 'ar-SA';
+      else if (/[äöüÄÖÜß]/.test(currentText)) recognition.lang = 'de-DE';
+
+      let finalTranscript = input.value;
+
+      recognition.onstart = () => {
+        isRecording = true;
+        micBtn.classList.add('recording');
+        if (navigator.vibrate) navigator.vibrate(10);
+      };
+
+      recognition.onresult = (event: any) => {
+        let interim = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          if (event.results[i].isFinal) {
+            finalTranscript += (finalTranscript ? ' ' : '') + event.results[i][0].transcript;
+          } else {
+            interim += event.results[i][0].transcript;
+          }
+        }
+        input.value = finalTranscript + (interim ? ' ' + interim : '');
+        updateInputUI();
+      };
+
+      recognition.onend = () => {
+        isRecording = false;
+        micBtn.classList.remove('recording');
+      };
+
+      recognition.onerror = () => {
+        isRecording = false;
+        micBtn.classList.remove('recording');
+      };
+
+      recognition.start();
+    });
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // ── SUBMIT BUTTON STATE MACHINE ──
+  // ══════════════════════════════════════════════════════════════
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+
+  function setSubmitState(state: 'idle' | 'sending' | 'witnessing' | 'receiving' | 'done') {
+    if (!submitBtn) return;
+    const sendIcon = submitBtn.querySelector('.send-icon') as HTMLElement;
+    const sendingIcon = submitBtn.querySelector('.sending-icon') as HTMLElement;
+    const doneIcon = submitBtn.querySelector('.done-icon') as HTMLElement;
+
+    submitBtn.className = 'input-submit';
+    if (sendIcon) sendIcon.style.display = 'none';
+    if (sendingIcon) sendingIcon.style.display = 'none';
+    if (doneIcon) doneIcon.style.display = 'none';
+
+    switch (state) {
+      case 'idle':
+        if (sendIcon) sendIcon.style.display = '';
+        break;
+      case 'sending':
+        submitBtn.classList.add('visible', 'state-sending');
+        if (sendingIcon) sendingIcon.style.display = '';
+        break;
+      case 'witnessing':
+        submitBtn.classList.add('visible', 'state-witnessing');
+        if (sendingIcon) sendingIcon.style.display = '';
+        break;
+      case 'receiving':
+        submitBtn.classList.add('visible');
+        if (sendIcon) sendIcon.style.display = '';
+        break;
+      case 'done':
+        submitBtn.classList.add('visible', 'state-done');
+        if (doneIcon) doneIcon.style.display = '';
+        setTimeout(() => setSubmitState('idle'), 1500);
+        break;
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // ── CONTEMPLATION STATES — the gap ──
+  // ══════════════════════════════════════════════════════════════
+  function enterContemplation() {
+    if (heritagePattern) heritagePattern.classList.add('contemplating');
+    if (statusLabelEl) statusLabelEl.classList.add('contemplating');
+  }
+
+  function exitContemplation() {
+    if (heritagePattern) heritagePattern.classList.remove('contemplating');
+    if (statusLabelEl) statusLabelEl.classList.remove('contemplating');
+  }
+
+  // ── Reveal donor signup after first exchange ──
+  function revealDonorSignup() {
+    const donorCtaEl = document.getElementById('donor-cta');
+    if (donorCtaEl && !donorAuthenticated) {
+      donorCtaEl.hidden = false;
+      // Trigger reveal animation after DOM shows element
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          donorCtaEl.classList.add('revealed');
+        });
+      });
+    }
   }
 
   // ── Speak — the core utterance ──
@@ -2208,6 +2491,10 @@ import Base from '../layouts/Base.astro';
     if (!content || busy) return;
     busy = true;
     setStatus('processing');
+    setSubmitState('sending');
+
+    // Haptic feedback on mobile
+    if (isMobile && navigator.vibrate) navigator.vibrate(10);
 
     // Submit ripple + soft chime
     if (inputZone) {
@@ -2220,8 +2507,6 @@ import Base from '../layouts/Base.astro';
     const donorText = content;
     input.value = '';
     input.style.height = 'auto';
-    const btn = document.getElementById('submit-btn');
-    if (btn) btn.classList.remove('visible');
 
     // Show what the donor typed as a message bubble
     const echo = document.createElement('div');
@@ -2256,6 +2541,10 @@ import Base from '../layouts/Base.astro';
     await new Promise(r => setTimeout(r, 500));
 
     input.classList.remove('dissolving');
+
+    // Enter contemplation — the gap
+    enterContemplation();
+    setSubmitState('witnessing');
     const waiting = showWitnessing();
 
     let responseText = '';
@@ -2264,32 +2553,95 @@ import Base from '../layouts/Base.astro';
     const payload: any = { content: donorText };
     if (filePayload) payload.file = filePayload;
 
+    // Try SSE streaming first, fall back to JSON, then local voice
     try {
       const res = await fetch(WORKER_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'text/event-stream, application/json',
+        },
         body: JSON.stringify(payload),
       });
 
       waiting.remove();
+      exitContemplation();
 
-      if (res.ok) {
+      if (res.ok && res.headers.get('content-type')?.includes('text/event-stream')) {
+        // ── SSE STREAMING — real token-by-token from server ──
+        setSubmitState('receiving');
+        setStatus('witnessing');
+
+        const frame = document.createElement('div');
+        frame.className = 'axi-response-frame';
+        const utterance = document.createElement('div');
+        utterance.className = 'axi-utterance';
+        frame.appendChild(utterance);
+        voice.appendChild(frame);
+
+        const cursor = document.createElement('span');
+        cursor.className = 'axi-cursor';
+        utterance.appendChild(cursor);
+
+        const reader = res.body?.getReader();
+        const decoder = new TextDecoder();
+        let fullText = '';
+        let witnessMark = '';
+
+        if (reader) {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            const chunk = decoder.decode(value, { stream: true });
+            const lines = chunk.split('\n');
+            for (const line of lines) {
+              if (!line.startsWith('data: ')) continue;
+              try {
+                const event = JSON.parse(line.slice(6));
+                if (event.token) {
+                  const token = document.createElement('span');
+                  token.className = 'axi-token';
+                  token.textContent = event.token;
+                  utterance.insertBefore(token, cursor);
+                  fullText += event.token;
+                  scrollToBottom();
+                }
+                if (event.done) {
+                  witnessMark = event.witness || '';
+                  if (event.count) {
+                    ledgerCount.textContent = event.count + '';
+                    ledgerCount.classList.add('visible', 'incrementing');
+                    setTimeout(() => ledgerCount.classList.remove('incrementing'), 600);
+                  }
+                }
+                if (event.sealed) { sealed = true; utterance.style.color = 'var(--danger, #c45050)'; }
+              } catch { /* skip malformed events */ }
+            }
+          }
+        }
+
+        cursor.remove();
+        utterance.classList.add('present');
+        responseText = fullText || 'Witnessed.';
+        addResponseActions(frame, responseText);
+        if (witnessMark) showWitnessMark(witnessMark);
+
+      } else if (res.ok) {
+        // ── JSON response — animate locally ──
+        setSubmitState('receiving');
         const data = await res.json();
         responseText = data.reflection || data.mark || 'Witnessed.';
         sealed = false;
         speak(responseText, sealed);
-
-        // Show witness mark from server
         if (data.mark) showWitnessMark(data.mark);
-
         if (data.count) {
           ledgerCount.textContent = data.count + '';
-          ledgerCount.classList.add('visible');
-          ledgerCount.classList.add('incrementing');
+          ledgerCount.classList.add('visible', 'incrementing');
           setTimeout(() => ledgerCount.classList.remove('incrementing'), 600);
         }
       } else {
         // Server responded but not OK — use local voice
+        setSubmitState('receiving');
         const local = axiVoiceLocal(donorText, hadFile);
         responseText = local.response;
         sealed = local.sealed;
@@ -2299,6 +2651,8 @@ import Base from '../layouts/Base.astro';
     } catch {
       // Server unreachable — AXI speaks from the client
       waiting.remove();
+      exitContemplation();
+      setSubmitState('receiving');
 
       // Dignity pause — variable based on input length
       const wordCount = donorText.split(/\s+/).length;
@@ -2316,12 +2670,18 @@ import Base from '../layouts/Base.astro';
       // Update local ledger count
       exchangeCount++;
       ledgerCount.textContent = exchangeCount + '';
-      ledgerCount.classList.add('visible');
-      ledgerCount.classList.add('incrementing');
+      ledgerCount.classList.add('visible', 'incrementing');
       setTimeout(() => ledgerCount.classList.remove('incrementing'), 600);
     }
 
     saveExchange(donorText, responseText);
+    setSubmitState('done');
+
+    // Reveal donor signup after first exchange
+    if (exchangeCount <= 1) {
+      setTimeout(revealDonorSignup, 2000);
+    }
+
     busy = false;
     input.focus();
   });
@@ -2403,6 +2763,9 @@ import Base from '../layouts/Base.astro';
 
   function showDonorProfile(donor: any) {
     donorAuthenticated = true;
+    // Reveal the CTA container and show profile
+    const donorCtaEl = document.getElementById('donor-cta');
+    if (donorCtaEl) { donorCtaEl.hidden = false; donorCtaEl.classList.add('revealed'); }
     if (donorAuth) donorAuth.hidden = true;
     if (donorProfile) donorProfile.hidden = false;
     if (donorGreeting) {
