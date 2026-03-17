@@ -13,6 +13,10 @@ on:
         default: '~/www/kalam.ch'
         type: string
 
+permissions:
+  issues: write
+  contents: read
+
 jobs:
   run:
     runs-on: ubuntu-latest
