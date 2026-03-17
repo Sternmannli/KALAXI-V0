@@ -336,6 +336,97 @@ section {
   }
 }
 
+/* ===== Language Picker ===== */
+.lang-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: 1px solid var(--accent-subtle);
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lang-toggle:hover { border-color: var(--color-dignity); color: var(--text-primary); }
+
+.lang-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+  border: 1px solid var(--accent-subtle);
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  min-width: 160px;
+  max-height: 60vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  animation: langMenuIn 0.2s ease;
+}
+
+.lang-menu[hidden] { display: none; }
+
+@keyframes langMenuIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lang-option {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lang-option:hover { background: var(--accent-glow); color: var(--text-primary); }
+.lang-option.active { color: var(--color-dignity); font-weight: 500; }
+
+.lang-option .lang-code {
+  display: inline-block;
+  width: 2rem;
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ===== Sustain nav link — subtle accent ===== */
+.nav-sustain {
+  color: var(--color-dignity) !important;
+  font-weight: 500;
+}
+
+.footer-sustain { color: var(--color-dignity) !important; }
+
+/* ===== RTL support ===== */
+[dir="rtl"] .site-nav { flex-direction: row-reverse; }
+[dir="rtl"] .nav-links { text-align: right; }
+[dir="rtl"] .lang-menu { right: auto; left: 0; }
+
+@media (prefers-color-scheme: dark) {
+  .lang-menu { background: var(--bg-secondary); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); }
+}
+
 /* Generic nav (footer etc) */
 nav {
   display: flex;

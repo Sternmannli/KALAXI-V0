@@ -2942,4 +2942,62 @@ import Base from '../layouts/Base.astro';
   submitConnectForm('home-newsletter-form', 'newsletter', 'home-newsletter-status');
   submitConnectForm('home-feedback-form', 'feedback', 'home-feedback-status');
   submitConnectForm('home-collab-form', 'collaboration', 'home-collab-status');
+
+  // ══════════════════════════════════════════════════════════════
+  // ── i18n: Apply translations to homepage ──
+  // ══════════════════════════════════════════════════════════════
+  (function() {
+    // Inline translation map for homepage elements (avoids async import)
+    const T: Record<string, Record<string, string>> = {
+      de: { declaration: 'Menschenwürde ist eine technische Anforderung.', placeholder: 'qul · sprich', becomeDonor: 'Spender werden', donorSub: 'Du bist kein Benutzer. Du bist ein Spender. Kein Passwort nötig.', join: 'Beitreten', yourEmail: 'deine E-Mail', yourName: 'dein Name (optional)', witnessing: 'bezeugen' },
+      ar: { declaration: 'كرامة الإنسان متطلب تقني.', placeholder: 'قُل · تكلّم', becomeDonor: 'كن متبرعاً', donorSub: 'أنت لست مستخدماً. أنت متبرع. لا حاجة لكلمة مرور.', join: 'انضم', yourEmail: 'بريدك الإلكتروني', yourName: 'اسمك (اختياري)', witnessing: 'شهادة' },
+      fr: { declaration: 'La dignité humaine est une exigence technique.', placeholder: 'qul · parle', becomeDonor: 'Devenir donateur', donorSub: 'Vous n\'êtes pas un utilisateur. Vous êtes un donateur.', join: 'Rejoindre', yourEmail: 'votre email', yourName: 'votre nom (optionnel)', witnessing: 'témoin' },
+      es: { declaration: 'La dignidad humana es un requisito técnico.', placeholder: 'qul · habla', becomeDonor: 'Ser donante', donorSub: 'No eres un usuario. Eres un donante. Sin contraseña.', join: 'Unirse', yourEmail: 'tu email', yourName: 'tu nombre (opcional)', witnessing: 'testificando' },
+      pt: { declaration: 'A dignidade humana é um requisito técnico.', placeholder: 'qul · fale', becomeDonor: 'Seja um doador', donorSub: 'Você não é um usuário. Você é um doador.', join: 'Participar', yourEmail: 'seu email', yourName: 'seu nome (opcional)', witnessing: 'testemunhando' },
+      it: { declaration: 'La dignità umana è un requisito tecnico.', placeholder: 'qul · parla', becomeDonor: 'Diventa donatore', donorSub: 'Non sei un utente. Sei un donatore.', join: 'Unisciti', yourEmail: 'la tua email', yourName: 'il tuo nome (opzionale)', witnessing: 'testimoniando' },
+      tr: { declaration: 'İnsan onuru teknik bir gerekliliktir.', placeholder: 'qul · konuş', becomeDonor: 'Bağışçı ol', donorSub: 'Sen bir kullanıcı değilsin. Sen bir bağışçısın.', join: 'Katıl', yourEmail: 'e-postan', yourName: 'adın (isteğe bağlı)', witnessing: 'şahitlik' },
+      ru: { declaration: 'Человеческое достоинство — техническое требование.', placeholder: 'قُل · говори', becomeDonor: 'Стать донором', donorSub: 'Вы не пользователь. Вы — донор.', join: 'Присоединиться', yourEmail: 'ваш email', yourName: 'ваше имя (необязательно)', witnessing: 'свидетельство' },
+      zh: { declaration: '人的尊严是一项技术要求。', placeholder: 'qul · 说', becomeDonor: '成为捐献者', donorSub: '你不是用户，你是捐献者。无需密码。', join: '加入', yourEmail: '你的邮箱', yourName: '你的名字（可选）', witnessing: '见证' },
+      ja: { declaration: '人間の尊厳は技術的要件です。', placeholder: 'qul · 話す', becomeDonor: '寄贈者になる', donorSub: 'あなたはユーザーではありません。寄贈者です。', join: '参加', yourEmail: 'メールアドレス', yourName: 'お名前（任意）', witnessing: '証言' },
+      ko: { declaration: '인간의 존엄성은 기술적 요구사항입니다.', placeholder: 'qul · 말하세요', becomeDonor: '기증자 되기', donorSub: '당신은 사용자가 아닙니다. 기증자입니다.', join: '참여', yourEmail: '이메일', yourName: '이름 (선택)', witnessing: '증언' },
+      hi: { declaration: 'मानवीय गरिमा एक तकनीकी आवश्यकता है।', placeholder: 'qul · बोलो', becomeDonor: 'दाता बनें', donorSub: 'आप उपयोगकर्ता नहीं हैं। आप दाता हैं।', join: 'जुड़ें', yourEmail: 'आपका ईमेल', yourName: 'आपका नाम (वैकल्पिक)', witnessing: 'साक्ष्य' },
+      bn: { declaration: 'মানবিক মর্যাদা একটি প্রযুক্তিগত প্রয়োজন।', placeholder: 'qul · বলুন', becomeDonor: 'দাতা হন', donorSub: 'আপনি ব্যবহারকারী নন। আপনি দাতা।', join: 'যোগ দিন', yourEmail: 'আপনার ইমেইল', yourName: 'আপনার নাম (ঐচ্ছিক)', witnessing: 'সাক্ষ্য' },
+      sw: { declaration: 'Heshima ya binadamu ni hitaji la kitaalamu.', placeholder: 'qul · sema', becomeDonor: 'Kuwa mtoaji', donorSub: 'Wewe si mtumiaji. Wewe ni mtoaji.', join: 'Jiunge', yourEmail: 'barua pepe yako', yourName: 'jina lako (hiari)', witnessing: 'kushuhudia' },
+      fa: { declaration: 'کرامت انسانی یک الزام فنی است.', placeholder: 'قُل · بگو', becomeDonor: 'اهداکننده شو', donorSub: 'تو کاربر نیستی. تو اهداکننده‌ای.', join: 'بپیوند', yourEmail: 'ایمیل شما', yourName: 'نام شما (اختیاری)', witnessing: 'شهادت' },
+      ur: { declaration: 'انسانی وقار ایک تکنیکی ضرورت ہے۔', placeholder: 'قُل · بولو', becomeDonor: 'عطیہ دہندہ بنیں', donorSub: 'آپ صارف نہیں ہیں۔ آپ عطیہ دہندہ ہیں۔', join: 'شامل ہوں', yourEmail: 'آپ کا ای میل', yourName: 'آپ کا نام (اختیاری)', witnessing: 'گواہی' },
+      nl: { declaration: 'Menselijke waardigheid is een technische vereiste.', placeholder: 'qul · spreek', becomeDonor: 'Word donateur', donorSub: 'Je bent geen gebruiker. Je bent een donateur.', join: 'Doe mee', yourEmail: 'je email', yourName: 'je naam (optioneel)', witnessing: 'getuigend' },
+      pl: { declaration: 'Godność człowieka jest wymogiem technicznym.', placeholder: 'qul · mów', becomeDonor: 'Zostań darczyńcą', donorSub: 'Nie jesteś użytkownikiem. Jesteś darczyńcą.', join: 'Dołącz', yourEmail: 'twój email', yourName: 'twoje imię (opcjonalnie)', witnessing: 'świadectwo' },
+      uk: { declaration: 'Людська гідність — технічна вимога.', placeholder: 'قُل · говори', becomeDonor: 'Стати донором', donorSub: 'Ви не користувач. Ви — донор.', join: 'Приєднатися', yourEmail: 'ваш email', yourName: 'ваше ім\'я (необов\'язково)', witnessing: 'свідчення' },
+    };
+
+    const lang = localStorage.getItem('kalam-lang') || 'en';
+    if (lang === 'en' || !T[lang]) return;
+    const t = T[lang];
+
+    // Apply translations to homepage elements
+    const decl = document.getElementById('declaration');
+    if (decl && t.declaration) decl.textContent = t.declaration;
+
+    const inp = document.getElementById('threshold-input') as HTMLTextAreaElement;
+    if (inp && t.placeholder) inp.placeholder = t.placeholder;
+
+    const statusLabel = document.getElementById('status-label');
+    if (statusLabel && t.witnessing) statusLabel.textContent = t.witnessing;
+
+    // Donor CTA
+    const ctaTitle = document.querySelector('.donor-cta-title');
+    if (ctaTitle && t.becomeDonor) ctaTitle.textContent = t.becomeDonor;
+
+    const ctaSub = document.querySelector('.donor-cta-sub');
+    if (ctaSub && t.donorSub) ctaSub.textContent = t.donorSub;
+
+    const joinBtn = document.querySelector('.donor-cta-form button');
+    if (joinBtn && t.join) joinBtn.textContent = t.join;
+
+    const emailInput = document.getElementById('donor-email') as HTMLInputElement;
+    if (emailInput && t.yourEmail) emailInput.placeholder = t.yourEmail;
+
+    const nameInput = document.getElementById('donor-name') as HTMLInputElement;
+    if (nameInput && t.yourName) nameInput.placeholder = t.yourName;
+  })();
 </script>

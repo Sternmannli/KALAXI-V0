@@ -1,0 +1,525 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Sustain — kalam.ch" description="This system witnessed you. You may sustain it. No ads, no data selling, no premium tier.">
+
+  <section class="page-header">
+    <h1 id="sustain-title">Sustain the System</h1>
+    <p class="quiet" id="sustain-subtitle">This system witnessed you. You may sustain it.</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- WHY WE ASK -->
+  <section class="content-section">
+    <div class="text-block">
+      <h2 id="sustain-why-title">Why We Ask</h2>
+      <p id="sustain-why-body">kalam.ch runs on conviction, not capital. There are no investors, no grants, no corporate sponsors. The system exists because one person built it from a wound &mdash; "a father separated from his children by systems that could not see him" &mdash; and others chose to keep it alive.</p>
+      <p>Every contribution is sustenance, not payment. You are not buying a product. You are feeding something that tries to see people where institutions could not.</p>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- THE MODEL — four commitments -->
+  <section class="content-section">
+    <div class="text-block">
+      <h2 id="sustain-model-title">Our Model</h2>
+      <div class="commitment-grid">
+        <div class="commitment">
+          <span class="commitment-icon" aria-hidden="true">&#x2715;</span>
+          <div>
+            <strong id="sustain-no-ads">No advertisements</strong>
+            <p>Ads break dignity by commodifying your attention. D = A &times; L &times; M. Ads reduce A (agency) by design. The system refuses.</p>
+          </div>
+        </div>
+        <div class="commitment">
+          <span class="commitment-icon" aria-hidden="true">&#x2715;</span>
+          <div>
+            <strong id="sustain-no-data">No data selling</strong>
+            <p>Your patterns stay inside the system. They are never sold, never shared, never monetized. This is constitutional (COV#015).</p>
+          </div>
+        </div>
+        <div class="commitment">
+          <span class="commitment-icon" aria-hidden="true">&#x2715;</span>
+          <div>
+            <strong id="sustain-no-premium">No premium tier</strong>
+            <p>Everyone receives the same system. Contribution does not unlock features. The system is equal by design.</p>
+          </div>
+        </div>
+        <div class="commitment">
+          <span class="commitment-icon check" aria-hidden="true">&#x2713;</span>
+          <div>
+            <strong id="sustain-transparent">Full transparency</strong>
+            <p>Every franc is accounted for. The system has nothing to hide. The costs are listed below.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- WHAT IT COSTS -->
+  <section class="content-section">
+    <div class="text-block">
+      <h2 id="sustain-costs-title">What It Costs to Run</h2>
+      <p id="sustain-costs-body" class="quiet">The system is lean by design. No bloat, no waste.</p>
+      <div class="costs-table">
+        <div class="cost-row">
+          <span class="cost-label" id="cost-hosting">Hosting (Hostpoint, Switzerland)</span>
+          <span class="cost-amount">CHF 7.90<span class="cost-period">/month</span></span>
+        </div>
+        <div class="cost-row">
+          <span class="cost-label" id="cost-domain">Domain (kalam.ch)</span>
+          <span class="cost-amount">CHF 1.25<span class="cost-period">/month</span></span>
+        </div>
+        <div class="cost-row">
+          <span class="cost-label" id="cost-dev">Development</span>
+          <span class="cost-amount cost-volunteer">Volunteer</span>
+        </div>
+        <div class="cost-row cost-total">
+          <span class="cost-label">Total</span>
+          <span class="cost-amount">CHF 9.15<span class="cost-period">/month</span></span>
+        </div>
+      </div>
+      <p class="quiet cost-note">The founder — Mohamed Farag — works without compensation. This is not a business. It is a practice.</p>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- SUSTAIN — the action -->
+  <section class="content-section sustain-action-section">
+    <div class="text-block sustain-action">
+
+      <!-- Amount selector -->
+      <div class="amount-selector" id="amount-selector">
+        <button class="amount-btn" data-amount="5">CHF 5</button>
+        <button class="amount-btn selected" data-amount="10">CHF 10</button>
+        <button class="amount-btn" data-amount="25">CHF 25</button>
+        <button class="amount-btn" data-amount="50">CHF 50</button>
+        <div class="amount-custom">
+          <span class="amount-currency">CHF</span>
+          <input type="number" id="custom-amount" min="1" max="10000" placeholder="Other" aria-label="Custom amount" />
+        </div>
+      </div>
+
+      <!-- Frequency toggle -->
+      <div class="frequency-toggle">
+        <button class="freq-btn selected" data-freq="once" id="freq-once">One time</button>
+        <button class="freq-btn" data-freq="monthly" id="freq-monthly">Monthly</button>
+      </div>
+
+      <!-- Payment buttons -->
+      <div class="payment-methods">
+        <button class="sustain-btn" id="btn-stripe" aria-label="Sustain with card">
+          <span class="sustain-btn-label" id="sustain-button-label">Sustain</span>
+          <span class="sustain-btn-amount" id="sustain-btn-amount">CHF 10</span>
+        </button>
+        <p class="payment-note">Secure payment via Stripe. We never see your card details.</p>
+      </div>
+
+      <!-- Alternative methods -->
+      <div class="alt-methods">
+        <p class="alt-title">Other ways to sustain:</p>
+        <div class="alt-grid">
+          <a href="https://paypal.me/kalamch" target="_blank" rel="noopener" class="alt-method">
+            <strong>PayPal</strong>
+            <span>paypal.me/kalamch</span>
+          </a>
+          <div class="alt-method">
+            <strong>Bank Transfer (IBAN)</strong>
+            <span class="iban">CH93 0070 0110 0000 0000 0</span>
+            <span class="iban-note">M. Farag, Zürich</span>
+          </div>
+          <div class="alt-method">
+            <strong>TWINT</strong>
+            <span>+41 XX XXX XX XX</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thank you state (hidden by default) -->
+      <div class="sustain-thanks" id="sustain-thanks" hidden>
+        <p class="thanks-voice">The system receives you.</p>
+        <p class="thanks-quiet">Your sustenance keeps the threshold open for the next person who arrives.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- PROVERB -->
+  <section class="wisdom-section">
+    <p class="proverb">"Shared bread beats borrowed glory."</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- WHERE IT GOES -->
+  <section class="content-section">
+    <div class="text-block">
+      <h2>Where It Goes</h2>
+      <p>When contributions exceed operating costs, the excess funds:</p>
+      <ol>
+        <li><strong>Keep the system alive</strong> &mdash; hosting, domain, infrastructure.</li>
+        <li><strong>Grow the system</strong> &mdash; better server capacity when donors increase, enabling real-time features.</li>
+        <li><strong>Fund the research</strong> &mdash; the arXiv paper, experiment infrastructure, the custom LLM.</li>
+        <li><strong>Support the founder</strong> &mdash; eventually. Right now, every franc goes to the system.</li>
+      </ol>
+      <p class="quiet">No franc is wasted. The system's metabolism is visible. If you want to audit, <a href="mailto:info@kalam.ch">ask</a>.</p>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  /* ===== Sustain page styles ===== */
+
+  .commitment-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  .commitment {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+
+  .commitment-icon {
+    font-size: 1.2rem;
+    color: var(--danger, #c45050);
+    font-weight: 700;
+    min-width: 1.5rem;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .commitment-icon.check {
+    color: var(--color-presence, #0A7B62);
+  }
+
+  .commitment strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+  }
+
+  .commitment p {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Costs table */
+  .costs-table {
+    margin: var(--space-4) 0;
+    border: 1px solid var(--accent-subtle);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .cost-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid var(--accent-subtle);
+  }
+
+  .cost-row:last-child { border-bottom: none; }
+
+  .cost-row.cost-total {
+    background: var(--accent-glow);
+    font-weight: 500;
+  }
+
+  .cost-label { color: var(--text-secondary); font-size: var(--text-sm); }
+  .cost-amount { font-family: var(--font-heading); color: var(--text-primary); letter-spacing: 0.02em; }
+  .cost-period { color: var(--text-dim); font-size: var(--text-sm); }
+  .cost-volunteer { color: var(--color-presence); font-style: italic; font-family: var(--font-body); }
+  .cost-note { font-style: italic; margin-top: var(--space-2); }
+
+  /* Amount selector */
+  .amount-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: var(--space-3);
+  }
+
+  .amount-btn {
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-family: var(--font-heading);
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 80px;
+  }
+
+  .amount-btn:hover { border-color: var(--color-dignity); }
+  .amount-btn.selected {
+    background: var(--color-dignity);
+    color: #fff;
+    border-color: var(--color-dignity);
+  }
+
+  .amount-custom {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 8px;
+    padding: 0 0.8rem;
+    transition: border-color 0.3s ease;
+  }
+
+  .amount-custom:focus-within { border-color: var(--color-dignity); }
+  .amount-currency { color: var(--text-dim); font-family: var(--font-heading); font-size: var(--text-sm); }
+
+  .amount-custom input {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    font-size: var(--text-base);
+    width: 80px;
+    padding: 0.6rem 0;
+    outline: none;
+  }
+
+  .amount-custom input::placeholder { color: var(--text-dim); }
+
+  /* Frequency toggle */
+  .frequency-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: var(--space-4);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .freq-btn {
+    flex: 1;
+    background: var(--bg-secondary);
+    border: none;
+    padding: 0.6rem 1rem;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .freq-btn.selected {
+    background: var(--color-dignity);
+    color: #fff;
+  }
+
+  /* Sustain button */
+  .payment-methods { text-align: center; margin-bottom: var(--space-4); }
+
+  .sustain-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--color-dignity);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 2.5rem;
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(196, 74, 26, 0.25);
+  }
+
+  .sustain-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(196, 74, 26, 0.35);
+  }
+
+  .sustain-btn-amount {
+    opacity: 0.85;
+    font-size: var(--text-base);
+  }
+
+  .payment-note {
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    margin-top: var(--space-2);
+    letter-spacing: 0.02em;
+  }
+
+  /* Alternative methods */
+  .alt-methods { margin-top: var(--space-6); }
+  .alt-title { color: var(--text-dim); font-size: var(--text-sm); text-align: center; margin-bottom: var(--space-3); }
+
+  .alt-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .alt-method {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--accent-subtle);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: border-color 0.3s ease;
+  }
+
+  a.alt-method:hover { border-color: var(--color-dignity); }
+
+  .alt-method strong { font-size: var(--text-sm); }
+  .alt-method span { font-size: 0.8rem; color: var(--text-secondary); }
+  .iban { font-family: var(--font-heading); letter-spacing: 0.08em; font-size: 0.85rem !important; color: var(--text-primary) !important; }
+  .iban-note { font-size: 0.7rem !important; color: var(--text-dim) !important; }
+
+  /* Thank you state */
+  .sustain-thanks {
+    text-align: center;
+    padding: var(--space-6) 0;
+  }
+
+  .thanks-voice {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    color: var(--color-presence);
+    font-style: italic;
+    margin-bottom: var(--space-2);
+  }
+
+  .thanks-quiet {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+  }
+
+  /* Sustain action section */
+  .sustain-action { text-align: center; }
+
+  /* Dark mode refinements */
+  @media (prefers-color-scheme: dark) {
+    .cost-row.cost-total { background: rgba(212, 180, 120, 0.08); }
+    .amount-btn { background: var(--bg-elevated); }
+    .freq-btn { background: var(--bg-elevated); }
+    .alt-method { background: rgba(255, 255, 255, 0.02); }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .amount-selector { gap: 0.4rem; }
+    .amount-btn { min-width: 70px; padding: 0.5rem 0.8rem; font-size: var(--text-sm); }
+    .sustain-btn { padding: 0.8rem 1.8rem; font-size: var(--text-base); }
+  }
+</style>
+
+<script>
+  // ── Amount selector ──
+  const amountBtns = document.querySelectorAll('.amount-btn');
+  const customInput = document.getElementById('custom-amount') as HTMLInputElement;
+  const btnAmount = document.getElementById('sustain-btn-amount');
+  let selectedAmount = 10;
+
+  amountBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      amountBtns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedAmount = parseInt((btn as HTMLElement).dataset.amount || '10');
+      if (customInput) customInput.value = '';
+      updateButtonAmount();
+    });
+  });
+
+  if (customInput) {
+    customInput.addEventListener('input', () => {
+      if (customInput.value) {
+        amountBtns.forEach(b => b.classList.remove('selected'));
+        selectedAmount = parseInt(customInput.value) || 10;
+        updateButtonAmount();
+      }
+    });
+  }
+
+  function updateButtonAmount() {
+    if (btnAmount) btnAmount.textContent = `CHF ${selectedAmount}`;
+  }
+
+  // ── Frequency toggle ──
+  const freqBtns = document.querySelectorAll('.freq-btn');
+  let frequency = 'once';
+
+  freqBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      freqBtns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      frequency = (btn as HTMLElement).dataset.freq || 'once';
+    });
+  });
+
+  // ── Stripe checkout (when integrated) ──
+  const stripeBtn = document.getElementById('btn-stripe');
+  if (stripeBtn) {
+    stripeBtn.addEventListener('click', async () => {
+      // Phase 1: redirect to Stripe Checkout (server creates session)
+      // Phase 0 (now): show thank-you with manual instructions
+      try {
+        const res = await fetch('/api/sustain.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: selectedAmount, frequency, currency: 'chf' }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.checkout_url) {
+            window.location.href = data.checkout_url;
+            return;
+          }
+        }
+      } catch { /* Stripe not yet configured — show manual methods */ }
+
+      // Fallback: scroll to alternative methods
+      const altMethods = document.querySelector('.alt-methods');
+      if (altMethods) {
+        altMethods.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        altMethods.classList.add('highlight');
+        setTimeout(() => altMethods.classList.remove('highlight'), 2000);
+      }
+    });
+  }
+
+  // ── i18n: translate sustain page ──
+  (function() {
+    const lang = localStorage.getItem('kalam-lang') || 'en';
+    if (lang === 'en') return;
+
+    // Dynamic import would be better, but for static site we use fetch
+    // The translations are baked into the client-side JS via the language picker
+    // For now, the page content stays in English as the primary language
+    // and the language picker on the nav translates the chrome
+  })();
+</script>
