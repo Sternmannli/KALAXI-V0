@@ -114,6 +114,8 @@ from FIELD.STUDY.divergence_study import DivergenceShadowInstrument
 from FIELD.amendments import PrivacyEnvelope, BaselineDriftDetector, RefusalMap
 # ── Input Ledger: every V-001 input is a unit, registered as-is ──
 from WEAVER.input_ledger import InputLedger, V001, V002
+# ── Compass: system orientation engine ──
+from WEAVER.compass import Compass
 # ── Letter Ontology + Chain Validator + Witness Certificate (EXP-002) ──
 from WEAVER.letter_ontology import ALL_LETTERS, NON_CONNECTORS, ontology_summary
 from WEAVER.chain_validator import ChainEntry, validate_entry, PositionalForm, EntryType
@@ -236,6 +238,11 @@ class OrganismState:
     divergence_coupling: float = 0.0
     amendments_refusals: int = 0
     amendments_drift_detected: bool = False
+    # ── Compass (MOVE-001) ──
+    compass_calibrated: bool = False
+    compass_readings: int = 0
+    compass_blockers: int = 0
+    compass_deployed: bool = False
     # ── Letter Chain (EXP-002) ──
     letter_ontology_total: int = 28
     letter_ontology_non_connectors: int = 6
@@ -351,6 +358,8 @@ class Organism:
         self._refusal_map = RefusalMap()
         # ── Input Ledger: every V-001 input is a unit ──
         self._input_ledger = InputLedger()
+        # ── Compass: orientation engine (MOVE-001) ──
+        self._compass = Compass()
         # ── Letter Chain (EXP-002): ontology + witness certificates ──
         self._witness_certs_generated = 0
         self._last_sense = None
@@ -1128,6 +1137,11 @@ class Organism:
             privacy_budget_locked=self._privacy_budget.is_locked,
             amendments_refusals=len(self._refusal_map.records),
             amendments_drift_detected=len(self._baseline_drift.drift_signals) > 0,
+            # ── Compass (MOVE-001) ──
+            compass_calibrated=self._compass.state().get("calibrated", False),
+            compass_readings=self._compass.state().get("readings", 0),
+            compass_blockers=self._compass.state().get("blockers_count", 0),
+            compass_deployed=self._compass.state().get("deployed", False),
             # ── Letter Chain (EXP-002) ──
             letter_ontology_total=len(ALL_LETTERS),
             letter_ontology_non_connectors=len(NON_CONNECTORS),
