@@ -64,6 +64,13 @@
       "path": "/data/science.json",
       "page": "/science",
       "status": "active"
+    },
+    {
+      "id": "SYSTEM-STATE",
+      "type": "compass",
+      "path": "/data/system-state.json",
+      "page": "/compass",
+      "status": "active"
     }
   ],
   "connections": [
