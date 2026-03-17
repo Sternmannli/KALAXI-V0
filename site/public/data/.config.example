@@ -4,6 +4,12 @@
 
 GROQ_API_KEY=your_key_here
 
+; Multi-AI Proxy — Divergence Engine (MOVE-004)
+; Add keys for any/all of these. More models = richer divergence data.
+GEMINI_API_KEY=
+TOGETHER_API_KEY=
+MISTRAL_API_KEY=
+
 ; Database (HostPoint MySQL)
 DB_HOST=localhost
 DB_NAME=kalam
