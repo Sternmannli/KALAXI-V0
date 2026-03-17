@@ -116,9 +116,9 @@ When V-002 instructs V-001 to perform actions on a computer, website, or softwar
 - **Sync site patterns:** Trigger via `gh workflow run sync-patterns.yml`. Donor patterns flow back from kalam.ch.
 - **Read live site:** Use curl/WebFetch to check kalam.ch pages and API responses.
 - **All repo operations:** commits, branches, tags, releases, workflow files — everything.
+- **Hostpoint server (SSH bridge):** Run ANY command on the live server via `gh workflow run server-cmd.yml -f command="..." -f working_dir="~/www/kalam.ch"`. Output posts as a GitHub issue with label `server-output` which V-002 reads via `gh issue list --label server-output`. Full server access: list files, edit configs, check PHP, manage database, restart services — everything.
 
-### What requires Mohamed's browser (ONLY these)
-- **Hostpoint control panel** (admin.hostpoint.ch) — requires browser login. V-002 cannot SSH from this environment.
+### What requires Mohamed's browser (ONLY this)
 - **Creating a brand new GitHub PAT** — requires browser OAuth flow. But V-002 CAN update the stored PAT secret once it has a valid token.
 
 ### Standing rule
