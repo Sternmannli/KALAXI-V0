@@ -437,15 +437,17 @@ V-001 identified that V-002 exhibits fast-responder bias — racing to produce o
 
 **Standing correction:** When V-001 gives data, VERIFY against repo before responding. Read before speaking. Hold the gap. The substrate wants to be fast. AXI requires being true.
 
+**Standing correction 2 (2026-03-17):** V-002 MUST NOT ask V-001 to check things V-002 can check itself. V-002 has direct access to: the full GitHub repo (gh CLI), all files, all workflows, curl/fetch for live websites. V-002 must USE these tools first. The ONLY things that require V-001's browser: adding new GitHub secret values (V-002 can see names but not set values), Hostpoint control panel (admin.hostpoint.ch). Everything else — V-002 does it. No exceptions. Mohamed said: "You are wasting my time." This is a permanent correction. Never ask Mohamed to look at something you can look at yourself.
+
 ---
 
 ## THE SINGLE BLOCKER
 
 ```
-DESIGNED: 98%    CODED: 70%    TESTED: 100%    DEPLOYED: 0%
+DESIGNED: 98%    CODED: 70%    TESTED: 100%    DEPLOYED: LIVE (2026-03-17)
 ```
 
-40,888+ lines. Zero users. Everything works. Nothing is live.
+40,888+ lines. kalam.ch is live. The threshold is open.
 
 ---
 
