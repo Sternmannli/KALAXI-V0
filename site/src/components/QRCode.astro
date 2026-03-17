@@ -22,8 +22,8 @@ const svgString = await QRCode.toString(url, {
 ---
 
 <div class="qr-block">
-  <a href={url} target="_blank" rel="noopener" class="qr-link" title={`Scan for ${label}`}>
-    <div class="qr-svg" set:html={svgString} />
+  <a href={url} target="_blank" rel="noopener" class="qr-link" title={`Scan for ${label}`} aria-label={`QR code: ${label}`}>
+    <div class="qr-svg" role="img" aria-label={`QR code linking to ${label}`} set:html={svgString} />
   </a>
   <span class="qr-label">{label}</span>
 </div>

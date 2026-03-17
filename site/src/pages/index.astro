@@ -23,9 +23,9 @@ import Base from '../layouts/Base.astro';
 
     <!-- Origin flags — Switzerland + Egypt -->
     <div class="origin-flags" id="origin-flags">
-      <span class="flag-icon" title="Switzerland">&#x1F1E8;&#x1F1ED;</span>
-      <span class="flag-divider">&middot;</span>
-      <span class="flag-icon" title="Egypt">&#x1F1EA;&#x1F1EC;</span>
+      <span class="flag-icon" title="Switzerland" aria-label="Switzerland" role="img">&#x1F1E8;&#x1F1ED;</span>
+      <span class="flag-divider" aria-hidden="true">&middot;</span>
+      <span class="flag-icon" title="Egypt" aria-label="Egypt" role="img">&#x1F1EA;&#x1F1EC;</span>
     </div>
 
     <!-- System status — the breathing dot -->
@@ -180,9 +180,9 @@ import Base from '../layouts/Base.astro';
       </form>
       <p class="form-status" id="home-newsletter-status"></p>
       <div class="connect-links">
-        <a href="/about/">About the framework</a>
-        <a href="/canon/">The canon</a>
-        <a href="/invitation/">The invitation</a>
+        <a href="/about">About the framework</a>
+        <a href="/canon">The canon</a>
+        <a href="/invitation">The invitation</a>
       </div>
     </div>
 
