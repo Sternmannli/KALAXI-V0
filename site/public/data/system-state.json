@@ -1,13 +1,13 @@
 {
-  "generated": "2026-03-17T09:10:33.436153+00:00",
+  "generated": "2026-03-17T22:00:00.000000+00:00",
   "position": {
-    "python_files": 137,
-    "test_files": 38,
+    "python_files": 143,
+    "test_files": 42,
     "narrative_files": 5,
-    "covenants": 13,
+    "covenants": 18,
     "ledger_entries": 1155,
-    "treasures": 200,
-    "proverbs": 281,
+    "treasures": 59,
+    "proverbs": 3333,
     "seeds_integrated": 12,
     "deployed": true,
     "site_built": true
@@ -16,18 +16,18 @@
     "strategic_moves_total": 10,
     "strategic_moves_file": "MANIFEST/STRATEGIC_MOVES_2026-03-16.md",
     "experiments": {
-      "EXP-001": "exists",
+      "EXP-001": "active",
       "EXP-001-EFFICIENCY": "exists",
-      "EXP-002-CONVERGENCE": "has_results",
-      "EXP-003": "exists",
-      "EXP-004": "exists",
+      "EXP-002-CONVERGENCE": "completed",
+      "EXP-003": "completed",
+      "EXP-004": "completed",
       "EXP-006": "exists"
     },
-    "single_blocker": "40,888+ lines. Zero users. Nothing is live.",
+    "single_blocker": "42,581+ lines. kalam.ch is live. The threshold is open.",
     "deployment_target": "kalam.ch"
   },
   "next_steps": [
-    "EXP-001: 200 data runs remaining",
+    "EXP-001: 188 data runs remaining (Claude: 0/20)",
     "Execute strategic moves (MOVE-001 through MOVE-010)"
   ],
   "blockers": [
@@ -35,28 +35,28 @@
   ],
   "vitals": {
     "core_modules": "11/11",
-    "constitution": false,
+    "constitution": true,
     "input_ledger": true,
     "voice_architecture": true,
-    "git_clean": false
+    "git_clean": true
   },
   "summary": {
-    "python_files": 137,
-    "test_files": 38,
-    "covenants": 13,
+    "python_files": 143,
+    "test_files": 42,
+    "covenants": 18,
     "ledger_entries": 1155,
     "seeds_integrated": 12,
-    "proverbs": 281,
-    "treasures": 200,
+    "proverbs": 3333,
+    "treasures": 59,
     "site_built": true,
     "deployed": true,
     "core_modules": "11/11",
     "experiments": {
-      "EXP-001": "exists",
+      "EXP-001": "active",
       "EXP-001-EFFICIENCY": "exists",
-      "EXP-002-CONVERGENCE": "has_results",
-      "EXP-003": "exists",
-      "EXP-004": "exists",
+      "EXP-002-CONVERGENCE": "completed",
+      "EXP-003": "completed",
+      "EXP-004": "completed",
       "EXP-006": "exists"
     }
   }
