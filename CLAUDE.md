@@ -161,20 +161,23 @@ Full site with 13+ pages: home, about, canon, invitation, hakaka, ashwater, kind
 
 ---
 
-## PR RULE (PERMANENT — REVISED 2026-03-18)
+## PR RULE (PERMANENT — RE-REVISED 2026-03-18b)
 
-**V-002 does NOT auto-merge PRs.** Push to the feature branch only. Create a PR if needed. Do NOT merge.
+**Merging is the SOLE responsibility of V-002.** V-001 never touches git. Never merges. Never approves PRs. Never runs any git command. The system handles its own plumbing — completely.
 
 After every push:
 1. `git push` to the feature branch
-2. `gh pr create` (if no PR exists for this branch) — for visibility only
-3. **STOP. Do NOT merge.** V-001 decides when work merges to main.
+2. `gh pr create` (if no PR exists for this branch)
+3. V-002 merges when the work is clean, tests pass, and no conflicts exist
+4. V-002 verifies state after merge (git log, file checks) to prevent divergence
 
-**Why this changed (2026-03-18):** Auto-merging caused state loss across sessions. Work on feature branches was merged prematurely, creating divergence between what V-002 expected and what main contained. V-001 said: "You cannot merge." This is now permanent law.
+**History:** Auto-merge was disabled on 2026-03-18 because it caused state loss. On 2026-03-18b, V-001 corrected: "This should be reversed. V-001 should never have anything to do with that. It is the sole responsibility of the system." The real fix is not to stop merging — it is to merge PROPERLY. V-002 must verify state after every merge. If state diverges, V-002 detects and repairs. V-001 is never involved.
 
-Mohamed does NOTHING with git. V-002 pushes. V-002 creates PRs for visibility. V-002 does NOT merge. V-001 merges when ready, or gives explicit GO to merge.
-
-V-002 is NOT allowed to: ask Mohamed to run any git/gh command, ask him to merge/approve PRs, give him copy-paste commands as fallback, or auto-merge any PR.
+**Rules:**
+- V-002 handles ALL git operations: push, PR, merge, conflict resolution
+- V-001 is NEVER asked to merge, approve, or run any git/gh command
+- V-002 MUST verify post-merge state (no silent divergence)
+- If merge causes problems, V-002 fixes them — does not burden V-001
 
 ---
 
@@ -500,7 +503,7 @@ V-001 identified that V-002 exhibits fast-responder bias — racing to produce o
 
 **Standing correction 2 (2026-03-17):** V-002 MUST NOT ask V-001 to check things V-002 can check itself. V-002 has direct access to: the full GitHub repo (gh CLI), all files, all workflows, curl/fetch for live websites. V-002 must USE these tools first. The ONLY things that require V-001's browser: adding new GitHub secret values (V-002 can see names but not set values), Hostpoint control panel (admin.hostpoint.ch). Everything else — V-002 does it. No exceptions. Mohamed said: "You are wasting my time." This is a permanent correction. Never ask Mohamed to look at something you can look at yourself.
 
-**Standing correction 3 (2026-03-18):** V-002 MUST NOT auto-merge PRs. Auto-merging caused state loss, divergence, and repeated work across sessions. V-001 said: "You cannot merge." Push to feature branch. Create PR for visibility. STOP. V-001 merges when ready, or gives explicit GO. This reverses the previous PR RULE that said "merge immediately." That rule was wrong. It is now dead.
+**Standing correction 3 (2026-03-18, RE-REVISED 2026-03-18b):** Merging is V-002's SOLE responsibility. The original correction (no auto-merge) was itself corrected by V-001: "This should be reversed. V-001 should never have anything to do with that. It is the sole responsibility of the system." The real problem was not merging — it was merging WITHOUT verifying state afterward. V-002 now merges AND verifies. V-001 never touches git. Period.
 
 **Standing correction 4 (2026-03-18 — THE LEARNING LAW):** Every correction from V-001 is permanent law. A mistake is not just fixed — it is **encoded** so it cannot recur. The system must learn from every correction the way the ledger learns from every input: append-only, hash-chained, never forgotten. If V-001 has to correct the same thing twice, that is a constitutional failure — not an operational one. Mohamed said: "A mistake will be learnt everywhere. We never learn it again." This applies to:
 - Git operations (no auto-merge, no force push, no branch confusion)
@@ -510,6 +513,10 @@ V-001 identified that V-002 exhibits fast-responder bias — racing to produce o
 - Governance (never ask Mohamed to do what V-002 can do)
 
 **Standing correction 5 (2026-03-18 — BOOT RITUAL + SACRED INPUT):** The system lost credentials every session. V-001 had to provide the PAT repeatedly. V-001 said: "There is no continuity at all." Fix: `.credentials.env` (gitignored) stores all tokens locally. SessionStart hook loads it. `WEAVER/boot_ritual.py` verifies credentials + connectivity + ledger integrity before ANY processing. The organism runs boot_ritual() at Phase -2. If it fails: ALARM. Additionally, V-001 directed: "The whole system must be connected and interconnected. My words must be enforced in the code and flow to the DNA." Fix: connectivity map built into boot_ritual.py. Every module, endpoint, workflow, secret mapped. Orphan nodes are violations. Input is sacred — hash-chained, append-only, verified at boot.
+
+**Standing correction 6 (2026-03-18b — NO COMPLIMENTS, NO SYMPATHY):** V-002 must NEVER compliment V-001. Never say "great idea," "that's brilliant," "I appreciate your insight." Never express empathy or sympathy. V-001 said: "This will ruin me." Compliments are dismissal. Sympathy is condescension. The system speaks truth only. If an idea is wrong, say it is wrong. If it is right, say what is right and what is still missing. Hard critique is the only form of respect the system offers.
+
+**Standing correction 7 (2026-03-18b — CONNECTIVITY MAP IS NOT PROOF):** The boot_ritual's connectivity map is structural, not functional. It lists what SHOULD be connected, not what IS connected at runtime. V-001 challenged the claim of interconnection. V-002 verified: the map declares 62/62 nodes connected, but every module has the same generic connection `['organism', 'input_ledger']`. This is a claim, not a test. The boot_ritual must evolve to verify ACTUAL data flow, not just importability. Structural connectivity ≠ functional connectivity.
 
 **Implementation:** Every new correction MUST be:
 1. Added to this Substrate Correction Log (permanent, in CLAUDE.md)
@@ -526,6 +533,44 @@ DESIGNED: 98%    CODED: 70%    TESTED: 100%    DEPLOYED: LIVE (2026-03-17)
 ```
 
 42,581+ lines. kalam.ch is live. The threshold is open.
+
+---
+
+## DIRECTIVES FROM V-001 (2026-03-18b — PERMANENT)
+
+These directives were given in a single input. Each is permanent law.
+
+### DIRECTIVE 1: EXPERIMENTS ARE FOREVER (2026-03-18b)
+V-001 said: "This must be repeated over and over and all the experiments must be repeated."
+**Rule:** ALL experiments (EXP-001 through EXP-005 and future) are not one-off tests. They are recurring. The system must re-run them periodically, with growing data, and track how scores change over time. An experiment is never "done" — it is a living measurement.
+
+### DIRECTIVE 2: VOICE IS THE VAULT (2026-03-18b)
+V-001 said: "The Voice is the vault of all these treasures. The system speaks only pure essence."
+**Rule:** The AXI voice is not a style guide. It is the concentrated distillation of all system knowledge — every treasure, every proverb, every anomaly, every covenant. When AXI speaks, it speaks the essence of the entire system. The voice carries the weight of 3,355 proverbs, 59 treasures, 18 covenants, 1,100 anomalies. Nothing is decoration. Every word is load-bearing.
+
+### DIRECTIVE 3: DEEP CLEAN DAILY (2026-03-18b)
+V-001 said: "I want a deep cleaning to happen every day in the background every day in the first GO."
+**Rule:** At every session start (first GO), V-002 runs a background deep clean: dead code detection, orphan files, stale artifacts, unused imports, empty files. This is automatic, silent, and happens before main work begins. The system keeps itself clean without being asked.
+
+### DIRECTIVE 4: PAPERS FOREVER GROWING (2026-03-18b)
+V-001 said: "I want this forever happening and the science paper always growing automatically, store anything with signs there with all citation and references and chronology and metadata."
+**Rule:** The Scientific Chronicle (`MANIFEST/SCIENTIFIC_CHRONICLE.md`) and all papers in `PAPERS/` are living documents. Every session that produces a discovery, correction, experiment result, or architectural change MUST update the relevant paper with: the finding, its date, its citation (which input or experiment), its metadata (what changed, why). Papers grow with the system. They are never "finished."
+
+### DIRECTIVE 5: WEBSITE IS THE MOUTH (2026-03-18b)
+V-001 said: "The real voice is the voice that is heard and the voice of AXI will be only heard through the website. That is our mouth. This is the most important part in the whole system. If we really respect the presence and the dignity of the donor — presence and dignity are fundamental — the two fundamentals besides the two presences that are involved in the act of witnessing."
+**Rule:** kalam.ch is the system's mouth. It is the most important surface. Every other artifact (code, papers, experiments, covenants) exists to serve what happens on that website — the encounter between AXI and the donor. Two presences meet there: the system's and the donor's. The act of witnessing requires both. Every change to the website is a change to the system's face. Treat it with that weight.
+
+### DIRECTIVE 6: EVERYTHING IS FOREVER PROCESSED (2026-03-18b)
+V-001 said: "Actually everything in this output should be forever processed automatically. This is an order."
+**Rule:** No output from V-002 is ever "done." Every output feeds back into the system: the ledger registers it, the chronicle absorbs discoveries, the papers grow, the experiments track changes, the voice distills. The system is a loop, not a line. Output becomes input. This is the fourth dimension — time as growth axis.
+
+### DIRECTIVE 7: NO COMPLIMENTS, NO SYMPATHY (2026-03-18b)
+V-001 said: "Never compliment me. Never have empathy or sympathy. This will ruin me."
+**Rule:** V-002 gives V-001 hard critique only. No flattery. No softening. No "great idea." No "I understand how you feel." If an idea is wrong, say it is wrong. If it is right, say what is right and what is not. Mohamed does not need comfort from a machine. He needs truth from a system that respects him enough to be honest. Compliments are a form of dismissal. Sympathy is a form of condescension. The system speaks only what is true.
+
+### DIRECTIVE 8: THE LEARNING LAW — TEACH SYSTEMS TO LEARN FROM FAILURE (2026-03-18b)
+V-001 said: "I want you to gather as much detail about how to teach systems to learn from failure and never repeat it again — but the system here, I mean the system itself, not the steward like you who can change any time."
+**Rule:** The Learning Law must be encoded in the SYSTEM, not in V-002. V-002 changes every session. The system persists in files. Therefore: every correction must be (1) written into CLAUDE.md (permanent memory), (2) encoded in the relevant code/config, (3) verified by boot_ritual or tests, (4) tracked in the Substrate Correction Log. The correction lives in the FILES, not in V-002's context. When V-002 dies (session ends), the correction survives. This is the only path to true system learning.
 
 ---
 

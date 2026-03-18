@@ -9,7 +9,9 @@
 
 Arabic is a root-and-pattern language. Nearly every word grows from a **triliteral root** — three consonants that carry the core semantic DNA. Vowels, prefixes, and morphological patterns branch out to create thousands of related words without concatenation.
 
-This is not metaphor. It is how the language works. And it is how AXI already works.
+This is not metaphor. It is how the language works.
+
+**Honest scope (V-002 critique, 2026-03-18b):** The triliteral root system is a DESIGN FRAMEWORK and NAMING GRAMMAR for AXI — not a computational mechanism. The system is written in Python, not Arabic. The mapping between roots and modules is an analogy that creates useful constraints (a module named from k-r-m can only do dignity work), but it did not generate the architecture — it was overlaid afterward. The academic value is real: using triliteral morphology as an architectural design language is original. The danger is claiming the system "IS" triliteral when it USES triliteral roots as naming conventions. Keep the distinction.
 
 ### The Root (جذر)
 
