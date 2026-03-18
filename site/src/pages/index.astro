@@ -4,105 +4,11 @@ import Base from '../layouts/Base.astro';
 
 <Base title="kalam.ch — The Word" description="A constitutional framework where human dignity is the first technical requirement. No private data stored. By design.">
 
-  <!-- THE DEDICATION — a proverb for three threads -->
-  <div id="dedication" class="dedication-overlay">
-    <p class="ded-proverb" id="ded-proverb">Three threads cross the river.<br/>The knot holds.</p>
-    <div class="ded-hold" id="ded-hold">
-      <svg class="ded-ring" viewBox="0 0 36 36" width="36" height="36">
-        <circle cx="18" cy="18" r="16" fill="none" stroke="var(--accent-subtle, #d0cdc6)" stroke-width="2" opacity="0.3" />
-        <circle class="ded-ring-fill" cx="18" cy="18" r="16" fill="none" stroke="var(--color-dignity, #c44a1a)" stroke-width="2" stroke-dasharray="100.53" stroke-dashoffset="100.53" stroke-linecap="round" transform="rotate(-90 18 18)" />
-      </svg>
-      <span class="ded-hold-text">hold to enter</span>
-    </div>
-  </div>
-
 
   <!-- THRESHOLD — the living space -->
   <main class="threshold" id="main-content">
 
-    <!-- Clean background — no heavy overlays -->
-
-    <!-- Origin — Switzerland + Egypt -->
-    <div class="origin-flags" id="origin-flags">
-      <span class="flag-text" title="Switzerland">CH</span>
-      <span class="flag-divider" aria-hidden="true">&middot;</span>
-      <span class="flag-text" title="Egypt">EG</span>
-    </div>
-
-    <!-- AXI — present, not performing -->
-    <div class="axi-presence" id="axi-presence">
-      <div class="axi-presence-info">
-        <div class="axi-presence-row">
-          <span class="status-dot" id="status-dot"></span>
-          <span class="status-label" id="status-label">present</span>
-        </div>
-        <span class="axi-whisper" id="axi-whisper" aria-live="polite"></span>
-      </div>
-    </div>
-
-    <!-- The declaration -->
-    <p class="declaration-ambient" id="declaration">The question is the first tool.</p>
-    <p class="declaration-sub" id="declaration-sub">Before the system acts, it must see you. Not your data. You.</p>
-
-    <!-- The equation — scannable, visible, not hidden in drawer -->
-    <div class="onramp-equation" id="onramp-equation">
-      <div class="onramp-formula">D = A &times; L &times; M</div>
-      <div class="onramp-terms">
-        <div class="onramp-term">
-          <span class="onramp-letter onramp-a">A</span>
-          <span class="onramp-label">Agency</span>
-          <span class="onramp-meaning">You can say stop. The system listens.</span>
-        </div>
-        <div class="onramp-term">
-          <span class="onramp-letter onramp-l">L</span>
-          <span class="onramp-label">Legibility</span>
-          <span class="onramp-meaning">The system reads your situation. Not your profile.</span>
-        </div>
-        <div class="onramp-term">
-          <span class="onramp-letter onramp-m">M</span>
-          <span class="onramp-label">Moral Standing</span>
-          <span class="onramp-meaning">You are a person. Not a row in a table.</span>
-        </div>
-      </div>
-      <p class="onramp-rule">Any zero, the system stops. No override.</p>
-    </div>
-
-    <!-- The invitation — not a sales pitch -->
-    <div class="who-block" id="who-block">
-      <p class="who-title">Who carries this?</p>
-      <ul class="who-list">
-        <li>Those who build systems that touch people</li>
-        <li>Those who test whether machines still see the human</li>
-        <li>Those who study what dignity means in practice</li>
-      </ul>
-      <div class="who-cta">
-        <a href="/invitation" class="cta-primary">Enter</a>
-      </div>
-    </div>
-
-    <!-- Interactive Dignity Meter -->
-    <div class="dignity-meter" id="dignity-meter" aria-label="Dignity Predicate Status">
-      <div class="meter-bars">
-        <div class="meter-bar meter-bar-a" id="meter-a">
-          <div class="meter-fill" id="meter-fill-a"></div>
-          <span class="meter-label">A</span>
-        </div>
-        <div class="meter-bar meter-bar-l" id="meter-l">
-          <div class="meter-fill" id="meter-fill-l"></div>
-          <span class="meter-label">L</span>
-        </div>
-        <div class="meter-bar meter-bar-m" id="meter-m">
-          <div class="meter-fill" id="meter-fill-m"></div>
-          <span class="meter-label">M</span>
-        </div>
-      </div>
-      <span class="meter-status" id="meter-status">D = 1.0</span>
-    </div>
-
-    <!-- Cultural accent — Arabic calligraphy watermark -->
-    <p class="arabic-accent" aria-hidden="true">كرامة</p>
-
-    <!-- Conversation zone — scrollable exchange history -->
+    <!-- Conversation zone — the only thing that matters -->
     <div class="conversation-zone" id="conversation-zone">
       <div class="conversation-scroll" id="conversation-scroll">
         <div class="axi-voice" id="axi-voice" aria-live="polite"></div>
@@ -151,157 +57,10 @@ import Base from '../layouts/Base.astro';
       <div class="input-file-preview" id="file-preview" hidden></div>
     </div>
 
-    <!-- Donor signup — appears gently after first exchange -->
-    <div class="donor-cta" id="donor-cta" hidden>
-      <button class="donor-dismiss" id="donor-dismiss" aria-label="Close">&times;</button>
-      <div class="donor-auth" id="donor-auth">
-        <p class="donor-cta-title">Become a contributor</p>
-        <p class="donor-cta-sub">You are not a user. You are a contributor of pattern. No password needed.</p>
-        <form id="donor-auth-form" class="donor-cta-form">
-          <input type="email" name="email" id="donor-email" placeholder="your email" required aria-label="Email" />
-          <input type="text" name="display_name" id="donor-name" placeholder="your name (optional)" aria-label="Name" />
-          <button type="submit">Join</button>
-        </form>
-        <p class="donor-status" id="donor-auth-status"></p>
-      </div>
-
-      <!-- Authenticated: profile (replaces form) -->
-      <div class="donor-profile" id="donor-profile" hidden>
-        <p class="donor-cta-title" id="donor-greeting"></p>
-        <p class="donor-cta-sub" id="donor-stats"></p>
-        <div class="donor-actions">
-          <button id="donor-export-btn" class="donor-action">Export my data</button>
-          <button id="donor-history-btn" class="donor-action">My exchanges</button>
-          <button id="donor-logout-btn" class="donor-action donor-action-dim">Sign out</button>
-        </div>
-      </div>
-    </div>
-
     <!-- Ledger count — quiet presence -->
     <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
 
-    <!-- Drawer handle — appears after first exchange -->
-    <div class="drawer-handle-zone" id="drawer-handle-zone">
-      <button class="drawer-handle" id="drawer-toggle" aria-label="Explore deeper" aria-expanded="false">
-        <span class="drawer-handle-bar"></span>
-        <span class="drawer-handle-label">pillars &middot; equation &middot; proverbs</span>
-      </button>
-    </div>
-
-    <!-- PWA install hint — shows only in browser, not in standalone -->
-    <div class="pwa-hint" id="pwa-hint">
-      Add to Home Screen for the full experience
-    </div>
-
   </main>
-
-  <!-- ===== Quiet closing — not a wall of forms ===== -->
-  <section class="homepage-closing" id="homepage-closing">
-    <p class="closing-proverb">"The wound does not know what it will become.<br/>Neither does the system."</p>
-    <div class="closing-links">
-      <a href="/invitation">the invitation</a>
-      <a href="/canon">the canon</a>
-      <a href="/sustain">sustain</a>
-      <a href="mailto:info@kalam.ch">info@kalam.ch</a>
-    </div>
-  </section>
-
-  <!-- DRAWER — the deep content. Yields when pulled. -->
-  <div class="content-drawer" id="content-drawer" aria-hidden="true">
-    <div class="drawer-inner">
-
-      <button class="drawer-close" id="drawer-close" aria-label="Close">&times;</button>
-
-      <!-- Five Pillars -->
-      <section class="drawer-section" aria-label="Five Pillars">
-        <div class="five-pillars" aria-label="Five pillars of the framework">
-          <button class="pillar pillar-dignity" data-pillar="dignity" aria-expanded="false">
-            <span class="pillar-label">Dignity</span>
-            <span class="pillar-dot"></span>
-          </button>
-          <button class="pillar pillar-presence" data-pillar="presence" aria-expanded="false">
-            <span class="pillar-label">Presence</span>
-            <span class="pillar-dot"></span>
-          </button>
-          <button class="pillar pillar-pattern" data-pillar="pattern" aria-expanded="false">
-            <span class="pillar-label">Pattern</span>
-            <span class="pillar-dot"></span>
-          </button>
-          <button class="pillar pillar-wisdom" data-pillar="wisdom" aria-expanded="false">
-            <span class="pillar-label">Wisdom</span>
-            <span class="pillar-dot"></span>
-          </button>
-          <button class="pillar pillar-witness" data-pillar="witness" aria-expanded="false">
-            <span class="pillar-label">Witness</span>
-            <span class="pillar-dot"></span>
-          </button>
-        </div>
-        <div id="pillar-panel" class="pillar-panel" aria-live="polite" hidden>
-          <button class="pillar-close" aria-label="Close">&times;</button>
-          <div class="pillar-content" id="pillar-content"></div>
-        </div>
-      </section>
-
-      <!-- The Predicate -->
-      <section class="drawer-section" aria-label="The Dignity Predicate">
-        <button class="equation-btn" id="equation-toggle" aria-expanded="false">
-          <span class="equation-text">D = A &times; L &times; M</span>
-          <span class="equation-hint">touch to read</span>
-        </button>
-        <div id="equation-detail" class="equation-detail" hidden>
-          <div class="terms">
-            <p><strong class="term-a">A</strong> <span class="term-name">Agency</span> &mdash; Can the person clarify, redirect, or stop?</p>
-            <p><strong class="term-l">L</strong> <span class="term-name">Legibility</span> &mdash; Does the system reflect the person's actual context?</p>
-            <p><strong class="term-m">M</strong> <span class="term-name">Moral Standing</span> &mdash; Is the person treated as a person?</p>
-          </div>
-          <p class="rule">If any dimension reaches zero, the system stops. Non-compensatory. No override.</p>
-        </div>
-      </section>
-
-      <!-- Declaration -->
-      <section class="drawer-section" aria-label="Declaration">
-        <p class="principle">No private data is stored. By design.</p>
-        <p class="quiet-eng">The system processes patterns, not personal information. Your identity is not recorded.</p>
-      </section>
-
-      <!-- Donor -->
-      <section class="drawer-section" aria-label="Donor">
-        <h2 class="drawer-heading">You are not a user. You are a contributor.</h2>
-        <p class="quiet-eng">What you give becomes part of a living canon. The system receives, holds, grows.</p>
-        <a href="/invitation" class="more-link">Learn more about contributing &rarr;</a>
-      </section>
-
-      <!-- Proverbs -->
-      <section class="drawer-section" aria-label="Proverbs">
-        <p class="proverb">"A right is a wall that says 'No';<br />dignity is a door that says 'Welcome.'"</p>
-
-        <div class="drawer-gap"></div>
-
-        <p class="proverb">"Do not shout at metal. Hear its problem first."</p>
-        <button class="source-btn" id="ashwater-toggle" aria-expanded="false">
-          <span class="proverb-source-label">Ashwater: The Axis</span>
-        </button>
-        <div id="ashwater-detail" class="source-detail" hidden>
-          <p>Ashwater is one of four narrative works in the kalam canon. It tells the story of two towns &mdash; one that pauses to listen, one that optimises without hearing. 19 chapters exploring civic dignity, communal decision-making, and what happens when systems stop listening to people.</p>
-          <a href="/about#stories" class="more-link">Read about the four narratives &rarr;</a>
-        </div>
-
-        <div class="drawer-gap"></div>
-
-        <p class="proverb">"She clawed at the air. Fists closed on nothing.<br />Then the nothing opened."</p>
-        <button class="source-btn" id="hakaka-toggle" aria-expanded="false">
-          <span class="proverb-source-label">Hakaka</span>
-        </button>
-        <div id="hakaka-detail" class="source-detail" hidden>
-          <p>Hakaka is the origin cycle. 53 chapters + Prologue + Epilogue. Mythic, raw, written in short sentences. It explores dignity at the most primal level &mdash; when everything is stripped away, what remains?</p>
-          <a href="/about#stories" class="more-link">Read about the four narratives &rarr;</a>
-        </div>
-      </section>
-
-      <!-- Connect sections moved to visible homepage above -->
-
-    </div>
-  </div>
 
 </Base>
 
@@ -353,14 +112,13 @@ import Base from '../layouts/Base.astro';
     text-transform: uppercase;
   }
 
-  /* ===== THRESHOLD — the living space ===== */
+  /* ===== THRESHOLD — full-viewport chat layout ===== */
   .threshold {
     position: relative;
-    min-height: 100vh;
+    height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: var(--space-4) var(--page-padding) var(--space-2);
+    padding: 0;
     overflow: hidden;
   }
 
@@ -962,13 +720,14 @@ import Base from '../layouts/Base.astro';
   .conversation-zone {
     width: 100%;
     max-width: 60ch;
+    margin: 0 auto;
     flex: 1;
     display: flex;
     flex-direction: column;
     z-index: 1;
-    min-height: 40vh;
-    max-height: 65vh;
+    overflow: hidden;
     position: relative;
+    padding: var(--space-4) var(--page-padding);
   }
 
   .conversation-scroll {
@@ -1364,8 +1123,11 @@ import Base from '../layouts/Base.astro';
     position: relative;
     width: 100%;
     max-width: 60ch;
-    padding: var(--space-2) var(--space-3);
+    margin: 0 auto;
+    padding: var(--space-2) var(--page-padding);
+    padding-bottom: max(var(--space-2), env(safe-area-inset-bottom));
     z-index: 1;
+    flex-shrink: 0;
     transition: all 0.5s var(--transition-smooth);
   }
 
@@ -2435,13 +2197,7 @@ import Base from '../layouts/Base.astro';
     document.documentElement.style.setProperty('--axi-breath-speed', '4s');
   }
 
-  // Generate mini avatar SVG for response bubbles (24px)
-  function createMiniAvatar(): HTMLElement {
-    const wrap = document.createElement('div');
-    wrap.className = 'axi-response-avatar';
-    wrap.innerHTML = '<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" fill="#0a0a0f" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8"/><circle cx="24" cy="19" r="10" fill="none" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8" stroke-dasharray="60 3"/><circle cx="20.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9"/><circle cx="27.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9"/><path d="M17 14 Q18.5 16 17.5 19" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/></svg>';
-    return wrap;
-  }
+  // No avatar — AXI speaks through words, not images
 
   // Add maternal suggestion to a response frame
   function addSuggestion(frame: HTMLElement, register: string) {
@@ -2458,15 +2214,7 @@ import Base from '../layouts/Base.astro';
     frame.appendChild(el);
   }
 
-  // Add metadata line to response frame — minimal, no internal state leaking
-  function addMetaLine(frame: HTMLElement, register: string, wordCount: number) {
-    const meta = document.createElement('div');
-    meta.className = 'axi-meta-line';
-    const dot = document.createElement('span');
-    dot.textContent = 'witnessed';
-    meta.appendChild(dot);
-    frame.appendChild(meta);
-  }
+  // Metadata line removed — AXI's words are enough
 
   // Play a mode-specific sound (ENKi resonance)
   function playModeSound(register: string) {
@@ -3103,7 +2851,6 @@ import Base from '../layouts/Base.astro';
     frame.className = 'axi-response-frame';
     if (reg !== 'general') frame.setAttribute('data-register', reg);
     // Mini avatar beside the response
-    frame.appendChild(createMiniAvatar());
     const utterance = document.createElement('div');
     utterance.className = 'axi-utterance';
     if (sealed) utterance.style.color = 'var(--danger, #c45050)';
@@ -3111,20 +2858,12 @@ import Base from '../layouts/Base.astro';
     voice.appendChild(frame);
 
     // AXI reacts — emoji, whisper, sound
-    showAxiReaction(reg);
-    showAxiWhisper(reg);
     axiStopProcessing();
-    if (reg !== 'general') playModeSound(reg);
 
     streamTokens(utterance, text, () => {
       setStatus(sealed ? 'sealed' : 'witnessing');
-      // Add metadata line and suggestion after text is done
-      addMetaLine(frame, reg, wordCount || 0);
-      if (!sealed) addSuggestion(frame, reg);
       addResponseActions(frame, text);
-      addGapButton(frame, exchangeCount);
-      addKintsugiThread(frame, 1.0, 1.0, 1.0); // Default for local voice
-      haptic80Hz(); // Children's frequency on witness completion
+      haptic80Hz();
       scrollToBottom();
     });
 
@@ -3596,22 +3335,7 @@ import Base from '../layouts/Base.astro';
     voice.appendChild(echo);
     scrollToBottom();
 
-    // ── Ninth Operator Ceremony — founding wound pause ──
-    // 800ms dignity latency, then the river remembers
-    await new Promise(r => setTimeout(r, 800));
-    const ceremonyResult = await showCeremony(donorText);
-    if (ceremonyResult === 'hold') {
-      // Donor chose to rewrite — restore text, remove echo
-      input.value = donorText;
-      updateInputUI();
-      echo.remove();
-      busy = false;
-      setStatus('idle');
-      setSubmitState('idle');
-      return;
-    }
-
-    // Enter contemplation — the gap
+    // Brief breath before processing
     enterContemplation();
     setSubmitState('witnessing');
     axiStartProcessing();
@@ -3645,15 +3369,11 @@ import Base from '../layouts/Base.astro';
         axiStopProcessing();
         const sseRegister = detectRegister(donorText);
         currentRegister = sseRegister;
-        showAxiReaction(sseRegister);
-        showAxiWhisper(sseRegister);
-        if (sseRegister !== 'general') playModeSound(sseRegister);
 
         const frame = document.createElement('div');
         frame.className = 'axi-response-frame';
         if (sseRegister !== 'general') frame.setAttribute('data-register', sseRegister);
-        frame.appendChild(createMiniAvatar());
-        const utterance = document.createElement('div');
+            const utterance = document.createElement('div');
         utterance.className = 'axi-utterance';
         frame.appendChild(utterance);
         voice.appendChild(frame);
@@ -3692,10 +3412,6 @@ import Base from '../layouts/Base.astro';
                     ledgerCount.classList.add('visible', 'incrementing');
                     setTimeout(() => ledgerCount.classList.remove('incrementing'), 600);
                   }
-                  // Kintsugi Thread — A/L/M river lines
-                  if (event.A !== undefined) {
-                    addKintsugiThread(frame, event.A, event.L, event.M);
-                  }
                 }
                 if (event.sealed) { sealed = true; utterance.style.color = 'var(--danger, #c45050)'; }
               } catch { /* skip malformed events */ }
@@ -3706,12 +3422,9 @@ import Base from '../layouts/Base.astro';
         cursor.remove();
         utterance.classList.add('present');
         responseText = fullText || 'Witnessed.';
-        addMetaLine(frame, sseRegister, donorWordCount);
-        if (!sealed) addSuggestion(frame, sseRegister);
         addResponseActions(frame, responseText);
-        addGapButton(frame, exchangeCount);
         if (witnessMark) showWitnessMark(witnessMark);
-        haptic80Hz(); // Children's frequency on witness completion
+        haptic80Hz();
 
       } else if (res.ok) {
         // ── JSON response — animate locally ──
@@ -3724,13 +3437,6 @@ import Base from '../layouts/Base.astro';
         currentRegister = jsonRegister;
         speak(responseText, sealed, jsonRegister, donorWordCount);
         if (data.mark) showWitnessMark(data.mark);
-        // Kintsugi Thread from server A/L/M (override the default 1.0s from speak())
-        if (data.A !== undefined) {
-          const lastFrame = voice.querySelector('.axi-response-frame:last-child');
-          const existingThread = lastFrame?.querySelector('.kintsugi-thread');
-          if (existingThread) existingThread.remove();
-          if (lastFrame) addKintsugiThread(lastFrame as HTMLElement, data.A, data.L, data.M);
-        }
         if (data.count) {
           ledgerCount.textContent = data.count + '';
           ledgerCount.classList.add('visible', 'incrementing');
