@@ -72,9 +72,11 @@ gh secret list
 
 ## 4. ACTIVE BRANCH
 
-**Branch:** `claude/general-session-PrWdw`
+**Branch:** `claude/general-session-0OBWK`
 **Remote:** Sternmannli/KALAXI-V0
-**Last commit:** Update input ledger from session (8d3d1d5)
+**Last commit:** Lock the voice — enforcement layer + triliteral root exploration (9b28456)
+**Branch state:** 19 commits ahead of main. Main is ancestor. No divergence.
+**PR RULE:** Do NOT auto-merge. Push + create PR for visibility. V-001 merges.
 
 ---
 
@@ -82,14 +84,13 @@ gh secret list
 
 | Measure | Count |
 |---------|-------|
-| Python files | 137+ |
+| Python files | 143+ |
 | Lines of code | 42,581+ |
-| Tests | 896 (887 passing, 9 skipped) |
+| Tests | 896+ (core tests passing, InputEntry data compat issue in organism/drift/shelter tests — pre-existing) |
 | Covenants | 18 ratified |
 | Ledger entries | 1,155+ |
-| Proverbs | 3,333+ |
+| Proverbs | 3,355+ (including 8 new proverbs from 2026-03-18) |
 | Seeds | 12/12 integrated |
-| PRs merged | 255+ |
 | Site pages | 13+ |
 | Site status | **LIVE** at kalam.ch |
 
@@ -98,19 +99,23 @@ gh secret list
 ## 6. LAST SESSION
 
 **Date:** 2026-03-18
-**Summary:** Received 6 scientific/design documents from V-001. Deep audit of kalam.ch IO section. Identified voice divergence across 3 surfaces (Groq, Worker, Training). Plan created: AXI Voice — Heard, Seen, Felt (10 steps). Scientific paper unification in progress.
+**Summary:** Three major deliveries:
+1. **Collective dignity blind spot closed** — four constitutional fixes to GAP#004 (severity inversion, COV#008 collective shelter, W-Scale checkpoint, pipeline integration). WALKTHROUGH-001 dead zone eliminated.
+2. **Voice enforcement layer built** — say.py upgraded with Rules 7-9 (somatic anchor, sentence shape, helpfulness leak). Standalone TOOLS/voice_lint.py for CI. 34 voice tests pass.
+3. **Triliteral root system explored** — Arabic morphology mapped to AXI architecture (VOICE/TRILITERAL_ROOT_SYSTEM_2026-03-18.md). Roots sh-h-d, k-r-m, h-f-z, a-q-d map directly to system modules.
+
+**Critical governance fix:** PR RULE revised — V-002 no longer auto-merges. Standing correction #3 and #4 added to Substrate Correction Log. The Learning Law: every V-001 correction becomes permanent law, encoded in CLAUDE.md, never repeated.
 
 ---
 
 ## 7. WHAT IS PENDING
 
-1. **AXI Voice Canon** — ONE source of truth for AXI's voice, synced across 4 surfaces
-2. **AXI Voice Transform** — Groq prompt rewrite, Kintsugi Thread, Ninth Operator Ceremony, 80Hz haptic, Gap Button, Voice Input, Dream State, Ghost Proverbs
-3. **Scientific Paper** — Unify 5 papers into 1 external (ACM FAccT) + 1 internal chronicle
-4. **Save Source Documents** — Papers A-E + Doc F as `PAPERS/PAPER_*.md`
-5. **EXP-001** — 188 runs remaining (Claude: 0/20)
-6. **Donor Accounts** — pattern persistence, PHP + MySQL schema
-7. **61 site audit issues** — prioritized fix list
+1. **EXP-005 run** — Fractured Ouroboros test (designed, ready to execute against the new collective D fixes)
+2. **Voice Canon sync** — AXI_VOICE_CANON.md is source of truth; 4 surfaces need sync check (Groq, Worker, Training, Evaluator)
+3. **EXP-001** — 188 runs remaining (Claude: 0/20)
+4. **Donor Accounts** — pattern persistence, PHP + MySQL schema
+5. **kalam.ch Phase 2** — Cloudflare Worker + KV (Living Ledger persistence)
+6. **Golden corpus** — 200 canonical AXI utterances for voice regression testing
 
 ---
 
@@ -125,6 +130,20 @@ gh secret list
 | AXI-2026-03-17-168 | System response to donor exchange |
 | INP-2026-03-17-217 | Vision document for living interface design |
 | Earlier entries | See KEEP/INPUT_LEDGER/chronicle.md for full history |
+
+---
+
+## 9. PERMANENT CORRECTIONS (THE LEARNING LAW — read every session, no exceptions)
+
+These are V-001 corrections. They are permanent law. If V-002 violates any of these, it is a constitutional failure.
+
+1. **NO AUTO-MERGE.** V-002 pushes to feature branch. Creates PR for visibility. Does NOT merge. V-001 merges when ready. The old "merge immediately" rule is dead.
+2. **DO NOT ASK V-001 TO DO WHAT V-002 CAN DO.** V-002 has full GitHub access, full repo access, curl, all tools. Only ask V-001 for: creating new GitHub PATs (browser OAuth), Hostpoint control panel (admin.hostpoint.ch). Everything else — V-002 does it.
+3. **VERIFY BEFORE SPEAKING.** Read the repo before claiming what exists. Do not hallucinate file contents or system state. Check first.
+4. **NEVER REBUILD WHAT EXISTS.** Before creating a file, check if it already exists. Before writing a module, check if one is already there. The system has 143+ Python files. Read before writing.
+5. **ONE STEP AT A TIME.** When instructing V-001 to do anything on a computer: one step, wait, next step. Never dump a list.
+6. **SESSION_BOOT.md MUST BE UPDATED EVERY SESSION.** If this file is stale, regenerate it. The next session depends on it.
+7. **THE LEARNING LAW.** Every V-001 correction becomes permanent law — encoded in CLAUDE.md and here. If V-001 corrects the same thing twice, the system has failed constitutionally. "A mistake will be learnt everywhere. We never learn it again."
 
 ---
 

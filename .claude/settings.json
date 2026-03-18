@@ -3,7 +3,7 @@
     "SessionStart": [
       {
         "type": "command",
-        "command": "cat MANIFEST/SESSION_BOOT.md 2>/dev/null && echo '---' && echo 'SCIENTIFIC CHRONICLE: MANIFEST/SCIENTIFIC_CHRONICLE.md (15 sections, living document — read in full at session start)' && echo '---' && tail -50 MANIFEST/ACTIVE_PLANS.md 2>/dev/null"
+        "command": "echo '=== SESSION BOOT ===' && cat MANIFEST/SESSION_BOOT.md 2>/dev/null && echo '' && echo '=== CRITICAL: READ CLAUDE.md IN FULL — IT IS THE SYSTEM MEMORY ===' && echo '=== CRITICAL: READ MANIFEST/SCIENTIFIC_CHRONICLE.md (15 sections) ===' && echo '=== CRITICAL: PERMANENT CORRECTIONS ARE IN SESSION_BOOT.md SECTION 9 ===' && echo '' && tail -50 MANIFEST/ACTIVE_PLANS.md 2>/dev/null"
       }
     ]
   }

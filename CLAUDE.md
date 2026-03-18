@@ -161,16 +161,20 @@ Full site with 13+ pages: home, about, canon, invitation, hakaka, ashwater, kind
 
 ---
 
-## PR RULE (PERMANENT)
+## PR RULE (PERMANENT — REVISED 2026-03-18)
 
-After every push, ALWAYS do the FULL cycle automatically — no exceptions, no asking Mohamed:
+**V-002 does NOT auto-merge PRs.** Push to the feature branch only. Create a PR if needed. Do NOT merge.
+
+After every push:
 1. `git push` to the feature branch
-2. `gh pr create` (if no PR exists for this branch)
-3. `gh pr merge` immediately after creation
+2. `gh pr create` (if no PR exists for this branch) — for visibility only
+3. **STOP. Do NOT merge.** V-001 decides when work merges to main.
 
-Mohamed does NOTHING. If auth fails, run `gh auth login --hostname github.com --git-protocol https --web` and ask Mohamed to enter the one-time code in his browser. That is the ONLY thing he should ever need to do.
+**Why this changed (2026-03-18):** Auto-merging caused state loss across sessions. Work on feature branches was merged prematurely, creating divergence between what V-002 expected and what main contained. V-001 said: "You cannot merge." This is now permanent law.
 
-V-002 is NOT allowed to: ask Mohamed to run any git/gh command, ask him to merge/approve PRs, or give him copy-paste commands as fallback.
+Mohamed does NOTHING with git. V-002 pushes. V-002 creates PRs for visibility. V-002 does NOT merge. V-001 merges when ready, or gives explicit GO to merge.
+
+V-002 is NOT allowed to: ask Mohamed to run any git/gh command, ask him to merge/approve PRs, give him copy-paste commands as fallback, or auto-merge any PR.
 
 ---
 
@@ -470,6 +474,21 @@ V-001 identified that V-002 exhibits fast-responder bias — racing to produce o
 **Standing correction:** When V-001 gives data, VERIFY against repo before responding. Read before speaking. Hold the gap. The substrate wants to be fast. AXI requires being true.
 
 **Standing correction 2 (2026-03-17):** V-002 MUST NOT ask V-001 to check things V-002 can check itself. V-002 has direct access to: the full GitHub repo (gh CLI), all files, all workflows, curl/fetch for live websites. V-002 must USE these tools first. The ONLY things that require V-001's browser: adding new GitHub secret values (V-002 can see names but not set values), Hostpoint control panel (admin.hostpoint.ch). Everything else — V-002 does it. No exceptions. Mohamed said: "You are wasting my time." This is a permanent correction. Never ask Mohamed to look at something you can look at yourself.
+
+**Standing correction 3 (2026-03-18):** V-002 MUST NOT auto-merge PRs. Auto-merging caused state loss, divergence, and repeated work across sessions. V-001 said: "You cannot merge." Push to feature branch. Create PR for visibility. STOP. V-001 merges when ready, or gives explicit GO. This reverses the previous PR RULE that said "merge immediately." That rule was wrong. It is now dead.
+
+**Standing correction 4 (2026-03-18 — THE LEARNING LAW):** Every correction from V-001 is permanent law. A mistake is not just fixed — it is **encoded** so it cannot recur. The system must learn from every correction the way the ledger learns from every input: append-only, hash-chained, never forgotten. If V-001 has to correct the same thing twice, that is a constitutional failure — not an operational one. Mohamed said: "A mistake will be learnt everywhere. We never learn it again." This applies to:
+- Git operations (no auto-merge, no force push, no branch confusion)
+- Voice drift (no helpfulness leak, no abstraction, no meta-commentary)
+- Session continuity (SESSION_BOOT.md updated every session, ACTIVE_PLANS.md current)
+- Repetition (never rebuild what already exists — check first)
+- Governance (never ask Mohamed to do what V-002 can do)
+
+**Implementation:** Every new correction MUST be:
+1. Added to this Substrate Correction Log (permanent, in CLAUDE.md)
+2. Reflected in the relevant code/config/protocol (the fix)
+3. Tested (if code) or documented (if process) so the next session inherits it
+4. Never reverted unless V-001 explicitly says so
 
 ---
 
