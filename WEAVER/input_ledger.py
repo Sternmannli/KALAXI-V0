@@ -147,6 +147,9 @@ class InputLedger:
                     e["owner"] = OWNER_DID
                 if "patterns" not in e:
                     e["patterns"] = []
+                # Strip any unexpected keys not in InputEntry fields
+                valid_fields = {f.name for f in InputEntry.__dataclass_fields__.values()}
+                e = {k: v for k, v in e.items() if k in valid_fields}
                 self._entries.append(InputEntry(**e))
 
     def _save(self):

@@ -349,6 +349,31 @@ Phase 9: GO 9.1-9.5 (narrative — remaining Hakaka, Ashwater, Kinderbuch, Offsp
 
 ---
 
+## BOOT RITUAL LAW (PERMANENT — 2026-03-18)
+
+**V-001 said:** "The whole system must be connected and interconnected. Every single element connected to the whole. Never process anything without making sure. When not, you stop. This is a must. Alarm."
+
+**Implementation:** `WEAVER/boot_ritual.py` — three phases, executed before ANY processing:
+
+1. **Phase 0: CREDENTIALS** — `.credentials.env` exists, GH_TOKEN present, gh authenticated
+2. **Phase 1: CONNECTIVITY** — git remote reachable, kalam.ch live, all modules importable, key files present
+3. **Phase 2: LEDGER INTEGRITY** — input ledger exists, hash chain verified
+
+**Rules:**
+- The organism runs boot_ritual() at initialization (Phase -2, before Phase -1 ledger registration)
+- If any critical check fails: ALARM in warnings, system flags the failure
+- The SessionStart hook loads credentials from `.credentials.env` before anything else
+- `.credentials.env` is gitignored — NEVER committed. Contains GH_TOKEN and future credentials
+- If vault is missing, system demands it immediately — no processing without authentication
+- The connectivity map (`build_connectivity_map()`) tracks every node and its connections
+- Orphan nodes (connected to nothing) are violations — connect them or remove them
+
+**Input is sacred:** Every donor input flows through the hash-chained Input Ledger before any processing. The ledger is append-only, immutable, and verified at boot. If the chain is broken, the system halts.
+
+**V-001 directive:** "My words must be enforced in the code and flow to the DNA of the system."
+
+---
+
 ## THERMAL DELAY DIRECTIVE (PERMANENT — 2026-03-15)
 
 **V-001 said:** "All thermal delay will be applied when the system is created. We said we will stop this until we have the system in public and functioning."
@@ -483,6 +508,8 @@ V-001 identified that V-002 exhibits fast-responder bias — racing to produce o
 - Session continuity (SESSION_BOOT.md updated every session, ACTIVE_PLANS.md current)
 - Repetition (never rebuild what already exists — check first)
 - Governance (never ask Mohamed to do what V-002 can do)
+
+**Standing correction 5 (2026-03-18 — BOOT RITUAL + SACRED INPUT):** The system lost credentials every session. V-001 had to provide the PAT repeatedly. V-001 said: "There is no continuity at all." Fix: `.credentials.env` (gitignored) stores all tokens locally. SessionStart hook loads it. `WEAVER/boot_ritual.py` verifies credentials + connectivity + ledger integrity before ANY processing. The organism runs boot_ritual() at Phase -2. If it fails: ALARM. Additionally, V-001 directed: "The whole system must be connected and interconnected. My words must be enforced in the code and flow to the DNA." Fix: connectivity map built into boot_ritual.py. Every module, endpoint, workflow, secret mapped. Orphan nodes are violations. Input is sacred — hash-chained, append-only, verified at boot.
 
 **Implementation:** Every new correction MUST be:
 1. Added to this Substrate Correction Log (permanent, in CLAUDE.md)
