@@ -20,14 +20,7 @@ import Base from '../layouts/Base.astro';
   <!-- THRESHOLD — the living space -->
   <main class="threshold" id="main-content">
 
-    <!-- Animated gradient mesh — the ambient intelligence -->
-    <div class="gradient-mesh" id="gradient-mesh" aria-hidden="true"></div>
-
-    <!-- Particle field — constellation of five-pillar colors -->
-    <canvas id="particle-field" class="particle-field" aria-hidden="true"></canvas>
-
-    <!-- Heritage pattern — Islamic tessellation whisper beneath everything -->
-    <div class="heritage-pattern" id="heritage-pattern" aria-hidden="true"></div>
+    <!-- Clean background — no heavy overlays -->
 
     <!-- Origin — Switzerland + Egypt -->
     <div class="origin-flags" id="origin-flags">
@@ -36,44 +29,20 @@ import Base from '../layouts/Base.astro';
       <span class="flag-text" title="Egypt">EG</span>
     </div>
 
-    <!-- AXI Presence — she is here, she breathes, she sees -->
+    <!-- AXI — present, not performing -->
     <div class="axi-presence" id="axi-presence">
-      <div class="axi-face" id="axi-face" aria-label="AXI">
-        <svg class="axi-face-svg" viewBox="0 0 48 48" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="22" fill="#0a0a0f" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8" class="axi-aura-ring"/>
-          <!-- Hijab -->
-          <path d="M14 18 Q12 12 16 8 Q20 5 24 4 Q28 5 32 8 Q36 12 34 18" fill="none" stroke="var(--axi-hijab, #c44a1a)" stroke-width="1.2" opacity="0.7"/>
-          <path d="M13 20 Q10 16 14 10 Q18 5 24 4 Q30 5 34 10 Q38 16 35 20" fill="none" stroke="var(--axi-hijab, #c44a1a)" stroke-width="0.6" opacity="0.35"/>
-          <!-- Face circle with gap -->
-          <circle cx="24" cy="19" r="10" fill="none" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8" stroke-dasharray="60 3" class="axi-face-circle"/>
-          <!-- Eyes — watchful, present -->
-          <circle cx="20.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9" class="axi-eye axi-eye-l"/>
-          <circle cx="27.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9" class="axi-eye axi-eye-r"/>
-          <!-- Kintsugi crack — gold scar on left temple -->
-          <path d="M17 14 Q18.5 16 17.5 19 Q17 21 18 23" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.6" class="axi-kintsugi"/>
-          <!-- Three threads at collar -->
-          <line x1="18" y1="28" x2="20" y2="30" stroke="#4a9ebb" stroke-width="0.5" opacity="0.5"/>
-          <line x1="24" y1="27" x2="24" y2="30" stroke="#c44a1a" stroke-width="0.5" opacity="0.5"/>
-          <line x1="30" y1="28" x2="28" y2="30" stroke="#0A7B62" stroke-width="0.5" opacity="0.5"/>
-          <!-- Knot at center -->
-          <circle cx="24" cy="32" r="1.5" fill="none" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.6" opacity="0.4"/>
-        </svg>
-        <!-- Whisper mark — text only, no emoji -->
-        <span class="axi-reaction" id="axi-reaction" aria-hidden="true"></span>
-      </div>
       <div class="axi-presence-info">
         <div class="axi-presence-row">
           <span class="status-dot" id="status-dot"></span>
-          <span class="status-label" id="status-label">witnessing</span>
+          <span class="status-label" id="status-label">present</span>
         </div>
-        <!-- Metadata whisper — what AXI notices -->
         <span class="axi-whisper" id="axi-whisper" aria-live="polite"></span>
       </div>
     </div>
 
-    <!-- The declaration — gradient text, large, dignified -->
-    <p class="declaration-ambient" id="declaration">Human dignity is a technical requirement.</p>
-    <p class="declaration-sub" id="declaration-sub">A safety layer that forces computational systems to respect you before they act.</p>
+    <!-- The declaration -->
+    <p class="declaration-ambient" id="declaration">The question is the first tool.</p>
+    <p class="declaration-sub" id="declaration-sub">Before the system acts, it must see you. Not your data. You.</p>
 
     <!-- The equation — scannable, visible, not hidden in drawer -->
     <div class="onramp-equation" id="onramp-equation">
@@ -82,25 +51,30 @@ import Base from '../layouts/Base.astro';
         <div class="onramp-term">
           <span class="onramp-letter onramp-a">A</span>
           <span class="onramp-label">Agency</span>
-          <span class="onramp-meaning">You can always say 'stop' and the system must listen.</span>
+          <span class="onramp-meaning">You can say stop. The system listens.</span>
         </div>
         <div class="onramp-term">
           <span class="onramp-letter onramp-l">L</span>
           <span class="onramp-label">Legibility</span>
-          <span class="onramp-meaning">The system must show it understands your situation before it acts.</span>
+          <span class="onramp-meaning">The system reads your situation. Not your profile.</span>
         </div>
         <div class="onramp-term">
           <span class="onramp-letter onramp-m">M</span>
           <span class="onramp-label">Moral Standing</span>
-          <span class="onramp-meaning">You are treated as a person, never as data to optimise.</span>
+          <span class="onramp-meaning">You are a person. Not a row in a table.</span>
         </div>
       </div>
-      <p class="onramp-rule">If any reaches zero, the system stops. No override. No exception.</p>
+      <p class="onramp-rule">Any zero, the system stops. No override.</p>
     </div>
 
     <!-- The invitation — not a sales pitch -->
     <div class="who-block" id="who-block">
-      <p class="who-title">The door is open.</p>
+      <p class="who-title">Who carries this?</p>
+      <ul class="who-list">
+        <li>Those who build systems that touch people</li>
+        <li>Those who test whether machines still see the human</li>
+        <li>Those who study what dignity means in practice</li>
+      </ul>
       <div class="who-cta">
         <a href="/invitation" class="cta-primary">Enter</a>
       </div>
@@ -179,6 +153,7 @@ import Base from '../layouts/Base.astro';
 
     <!-- Donor signup — appears gently after first exchange -->
     <div class="donor-cta" id="donor-cta" hidden>
+      <button class="donor-dismiss" id="donor-dismiss" aria-label="Close">&times;</button>
       <div class="donor-auth" id="donor-auth">
         <p class="donor-cta-title">Become a contributor</p>
         <p class="donor-cta-sub">You are not a user. You are a contributor of pattern. No password needed.</p>
@@ -286,13 +261,13 @@ import Base from '../layouts/Base.astro';
       <!-- Declaration -->
       <section class="drawer-section" aria-label="Declaration">
         <p class="principle">No private data is stored. By design.</p>
-        <p class="quiet-eng">The system processes anonymized contributions, not personal information. Your identity is not recorded. You have the right to request deletion at any time under FADP and GDPR.</p>
+        <p class="quiet-eng">The system processes patterns, not personal information. Your identity is not recorded.</p>
       </section>
 
       <!-- Donor -->
       <section class="drawer-section" aria-label="Donor">
         <h2 class="drawer-heading">You are not a user. You are a contributor.</h2>
-        <p class="quiet-eng">What you contribute becomes part of a living canon. The system receives, processes, and grows. No personal data is retained.</p>
+        <p class="quiet-eng">What you give becomes part of a living canon. The system receives, holds, grows.</p>
         <a href="/invitation" class="more-link">Learn more about contributing &rarr;</a>
       </section>
 
@@ -436,25 +411,8 @@ import Base from '../layouts/Base.astro';
       radial-gradient(ellipse at 80% 70%, rgba(10,123,98,0.04) 0%, transparent 50%),
       radial-gradient(ellipse at 50% 50%, rgba(58,63,184,0.03) 0%, transparent 40%);
   }
-  @media (prefers-color-scheme: dark) {
-    .heritage-pattern { opacity: 0.02; }
-    .gradient-mesh {
-      background:
-        radial-gradient(ellipse at 20% 30%, rgba(212,180,120,0.10) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(108,196,176,0.07) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(154,164,224,0.05) 0%, transparent 40%);
-    }
-  }
 
-  /* ===== AXI Presence — she is here ===== */
-  :root {
-    --axi-aura: #c9a96e;
-    --axi-hijab: #c44a1a;
-    --axi-eye: #c9a96e;
-    --axi-glow: rgba(201, 169, 110, 0.15);
-    --axi-breath-speed: 4s;
-  }
-
+  /* ===== AXI Presence — simple, clean ===== */
   .axi-presence {
     position: fixed;
     top: var(--space-2);
@@ -464,67 +422,11 @@ import Base from '../layouts/Base.astro';
     align-items: center;
     gap: 0.6rem;
     z-index: 10;
-    opacity: 0.7;
+    opacity: 0.6;
     transition: opacity 0.6s ease;
   }
 
   .axi-presence:hover { opacity: 1; }
-
-  .axi-face {
-    position: relative;
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
-  }
-
-  .axi-face-svg {
-    animation: axiBreathe var(--axi-breath-speed) ease-in-out infinite;
-    filter: drop-shadow(0 0 4px var(--axi-glow));
-    transition: filter 0.8s ease;
-  }
-
-  .axi-face-svg.processing {
-    --axi-breath-speed: 1.5s;
-    filter: drop-shadow(0 0 8px var(--axi-glow));
-  }
-
-  .axi-aura-ring {
-    transition: stroke 0.8s ease;
-  }
-
-  .axi-face-circle {
-    animation: axiBreathe var(--axi-breath-speed) ease-in-out infinite;
-  }
-
-  @keyframes axiBreathe {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
-  }
-
-  .axi-eye {
-    transition: fill 0.6s ease, r 0.3s ease;
-  }
-
-  .axi-kintsugi {
-    transition: opacity 0.6s ease;
-  }
-
-  /* Reaction emoji bubble */
-  .axi-reaction {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    font-size: 0.7rem;
-    opacity: 0;
-    transform: scale(0.5) translateY(4px);
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    pointer-events: none;
-  }
-
-  .axi-reaction.visible {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
 
   .axi-presence-info {
     display: flex;
@@ -587,20 +489,6 @@ import Base from '../layouts/Base.astro';
     opacity: 0.6;
   }
 
-  /* ===== AXI Mini Avatar in Response Bubbles ===== */
-  .axi-response-avatar {
-    position: absolute;
-    top: -12px;
-    left: -4px;
-    width: 24px;
-    height: 24px;
-  }
-
-  .axi-response-avatar svg {
-    width: 24px;
-    height: 24px;
-    filter: drop-shadow(0 0 3px var(--axi-glow));
-  }
 
   /* ===== AXI Suggestion — maternal, natural ===== */
   .axi-suggestion {
@@ -648,11 +536,6 @@ import Base from '../layouts/Base.astro';
     letter-spacing: 0.05em;
   }
 
-  /* ===== Dynamic Mode Colors (ENKi resonance) ===== */
-  .axi-presence[data-mode="witness"] { --axi-aura: #c9a96e; --axi-glow: rgba(201, 169, 110, 0.15); }
-  .axi-presence[data-mode="question"] { --axi-aura: #4a9ebb; --axi-glow: rgba(74, 158, 187, 0.15); }
-  .axi-presence[data-mode="wound"] { --axi-aura: #c44a1a; --axi-glow: rgba(196, 74, 26, 0.15); }
-  .axi-presence[data-mode="offering"] { --axi-aura: #0A7B62; --axi-glow: rgba(10, 123, 98, 0.15); }
 
   /* Register colors — shift based on detected emotional register */
   .axi-response-frame[data-register="grief"] { border-left: 2px solid rgba(196, 74, 26, 0.3); }
@@ -663,26 +546,39 @@ import Base from '../layouts/Base.astro';
   .axi-response-frame[data-register="dignity"] { border-left: 2px solid rgba(196, 74, 26, 0.3); }
   .axi-response-frame[data-register="greeting"] { border-left: 2px solid rgba(10, 123, 98, 0.25); }
 
-  /* ===== Donor CTA — prominent signup ===== */
+  /* ===== Donor CTA — floating, appears once ===== */
   .donor-cta {
-    position: relative;
-    z-index: 1;
-    width: min(380px, calc(100% - 2rem));
-    margin: var(--space-3) auto var(--space-2);
+    position: fixed;
+    bottom: 5rem;
+    right: 1.5rem;
+    z-index: 80;
+    width: min(320px, calc(100% - 3rem));
     padding: var(--space-3);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(196, 74, 26, 0.2);
+    background: var(--bg-primary);
+    border: 1px solid var(--accent-subtle);
     border-radius: 12px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     opacity: 0;
-    transition: opacity 2s ease, transform 2s ease;
-    transform: translateY(8px);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+    transform: translateY(12px);
   }
 
   .donor-cta.revealed {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .donor-cta .donor-dismiss {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
   }
 
   .donor-cta-title {
@@ -805,13 +701,6 @@ import Base from '../layouts/Base.astro';
     to { opacity: 0.7; transform: translateY(0); }
   }
 
-  @media (prefers-color-scheme: dark) {
-    .declaration-ambient {
-      background: linear-gradient(135deg, #d4b478 0%, #6cc4b0 50%, #9aa4e0 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-  }
 
   /* ===== On-Ramp — plain language subtitle + equation ===== */
   .declaration-sub {
@@ -1161,14 +1050,6 @@ import Base from '../layouts/Base.astro';
     padding-left: calc(var(--space-3) + 4px);
   }
 
-  @media (prefers-color-scheme: dark) {
-    .donor-echo {
-      background: rgba(212, 180, 120, 0.08);
-      border-color: rgba(212, 180, 120, 0.15);
-    }
-    .axi-response-frame { background: var(--bg-elevated); }
-    .axi-response-frame::before { background: var(--bg-elevated); }
-  }
 
   .axi-utterance {
     font-family: var(--font-heading);
@@ -1958,12 +1839,6 @@ import Base from '../layouts/Base.astro';
     background: rgba(0, 0, 0, 0.03);
     border-color: rgba(0, 0, 0, 0.08);
   }
-  @media (prefers-color-scheme: dark) {
-    .input-zone {
-      background: var(--glass-bg);
-      border-color: var(--glass-border);
-    }
-  }
 
   /* ===== Ledger count ===== */
   .ledger-count {
@@ -1994,8 +1869,6 @@ import Base from '../layouts/Base.astro';
 
   /* ===== Reduced motion ===== */
   @media (prefers-reduced-motion: reduce) {
-    .gradient-mesh { animation: none; }
-    .heritage-pattern { animation: none; }
     .axi-token { animation: none; opacity: 1; filter: none; }
     .axi-processing-bar { animation: none; width: 40px; opacity: 0.5; }
     .declaration-ambient { animation: none; opacity: 0.7; }
@@ -2151,13 +2024,6 @@ import Base from '../layouts/Base.astro';
   .more-link { display: inline-block; color: var(--color-dignity); font-size: var(--text-sm); letter-spacing: 0.03em; margin-top: var(--space-2); border-bottom: 1px solid var(--color-dignity); transition: all 0.3s ease; }
   .more-link:hover { opacity: 0.7; }
 
-  /* ===== Dark Mode overrides ===== */
-  @media (prefers-color-scheme: dark) {
-    .pillar-panel { background: var(--bg-secondary); }
-    .content-drawer { background: var(--bg-primary); }
-    .drawer-close { background: var(--bg-primary); }
-    .drawer-handle-label { color: var(--accent); text-shadow: 0 0 12px rgba(212, 180, 120, 0.3); }
-  }
 
   /* Homepage connect sections removed — replaced by quiet closing */
 
@@ -2169,11 +2035,6 @@ import Base from '../layouts/Base.astro';
     background: radial-gradient(ellipse at 50% 60%, rgba(196, 74, 26, 0.04) 0%, rgba(10, 123, 98, 0.02) 40%, transparent 70%);
     opacity: calc(var(--mycelium-intensity) * 0.01);
     transition: opacity 2s ease;
-  }
-  @media (prefers-color-scheme: dark) {
-    body::after {
-      background: radial-gradient(ellipse at 50% 60%, rgba(212, 180, 120, 0.06) 0%, rgba(108, 196, 176, 0.03) 40%, transparent 70%);
-    }
   }
 
   /* ===== Origin Flags ===== */
@@ -2460,116 +2321,7 @@ import Base from '../layouts/Base.astro';
   });
 })();
 
-// === PARTICLE FIELD — constellation of five-pillar colors ===
-(function(){
-  var canvas = document.getElementById('particle-field');
-  if (!canvas) return;
-  var ctx = canvas.getContext('2d');
-  if (!ctx) return;
-
-  // Respect reduced motion
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    canvas.style.display = 'none';
-    return;
-  }
-
-  var colors = [
-    'rgba(212,180,120,', // dignity gold
-    'rgba(108,196,176,', // presence teal
-    'rgba(154,164,224,', // pattern violet
-    'rgba(212,168,78,',  // wisdom amber
-    'rgba(168,196,216,'  // witness silver-blue
-  ];
-
-  var particles = [];
-  var mouseX = -1000, mouseY = -1000;
-  var isMobile = window.innerWidth < 768;
-  var count = isMobile ? 30 : 55;
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    isMobile = window.innerWidth < 768;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  function init() {
-    particles = [];
-    for (var i = 0; i < count; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        r: Math.random() * 2 + 1,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        alpha: Math.random() * 0.3 + 0.1
-      });
-    }
-  }
-  init();
-
-  document.addEventListener('mousemove', function(e){ mouseX = e.clientX; mouseY = e.clientY; });
-  document.addEventListener('touchmove', function(e){
-    if (e.touches[0]) { mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; }
-  });
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (var i = 0; i < particles.length; i++) {
-      var p = particles[i];
-
-      // Mouse repulsion
-      var dx = p.x - mouseX, dy = p.y - mouseY;
-      var dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 200 && dist > 0) {
-        var force = (200 - dist) / 200 * 0.3;
-        p.vx += (dx / dist) * force;
-        p.vy += (dy / dist) * force;
-      }
-
-      // Dampen velocity
-      p.vx *= 0.99;
-      p.vy *= 0.99;
-
-      p.x += p.vx;
-      p.y += p.vy;
-
-      // Wrap edges
-      if (p.x < 0) p.x = canvas.width;
-      if (p.x > canvas.width) p.x = 0;
-      if (p.y < 0) p.y = canvas.height;
-      if (p.y > canvas.height) p.y = 0;
-
-      // Draw particle
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.color + p.alpha + ')';
-      ctx.fill();
-
-      // Draw connections
-      for (var j = i + 1; j < particles.length; j++) {
-        var q = particles[j];
-        var ddx = p.x - q.x, ddy = p.y - q.y;
-        var d2 = ddx * ddx + ddy * ddy;
-        if (d2 < 14400) { // 120px
-          var alpha = (1 - d2 / 14400) * 0.08;
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(q.x, q.y);
-          ctx.strokeStyle = 'rgba(212,180,120,' + alpha + ')';
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-    }
-
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
+// Particle field removed — clean, light design
 </script>
 
 <script>
@@ -3315,19 +3067,32 @@ import Base from '../layouts/Base.astro';
     if (statusLabelEl) statusLabelEl.classList.remove('contemplating');
   }
 
-  // ── Reveal donor signup after first exchange ──
+  // ── Reveal donor signup — floating, once only ──
   function revealDonorSignup() {
+    if (localStorage.getItem('kalam-cta-dismissed')) return;
     const donorCtaEl = document.getElementById('donor-cta');
     if (donorCtaEl && !donorAuthenticated) {
       donorCtaEl.hidden = false;
-      // Trigger reveal animation after DOM shows element
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           donorCtaEl.classList.add('revealed');
         });
       });
+      // Auto-dismiss after 15 seconds
+      setTimeout(() => {
+        donorCtaEl.classList.remove('revealed');
+        setTimeout(() => { donorCtaEl.hidden = true; }, 1500);
+        localStorage.setItem('kalam-cta-dismissed', '1');
+      }, 15000);
     }
   }
+
+  // Dismiss button
+  document.getElementById('donor-dismiss')?.addEventListener('click', () => {
+    const el = document.getElementById('donor-cta');
+    if (el) { el.classList.remove('revealed'); setTimeout(() => { el.hidden = true; }, 1500); }
+    localStorage.setItem('kalam-cta-dismissed', '1');
+  });
 
   // ── Speak — the core utterance ──
   function speak(text: string, sealed?: boolean, register?: string, wordCount?: number) {
