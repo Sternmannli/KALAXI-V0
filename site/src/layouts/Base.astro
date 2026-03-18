@@ -23,8 +23,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <title>{title}</title>
 
-    <meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0d0d12" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fafaf8" />
 
     <link rel="canonical" href={canonicalURL} />
 
@@ -92,14 +91,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- Top Navigation — hamburger on mobile, compact on desktop -->
     <nav class="site-nav" aria-label="Main navigation">
       <a href="/" class="nav-home">kalam</a>
-      <!-- Language picker — always visible, not buried in menu -->
-      <div class="lang-picker" id="lang-picker">
-        <button class="lang-toggle" id="lang-toggle" aria-label="Language" aria-expanded="false">
-          <span id="lang-current">EN</span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </button>
-        <div class="lang-menu" id="lang-menu" hidden></div>
-      </div>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
         <span class="nav-toggle-bar"></span>
         <span class="nav-toggle-bar"></span>
@@ -131,68 +122,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         links?.classList.toggle('nav-open');
       });
 
-      // ── Language Picker ──
-      (function() {
-        var LANGS = [
-          ['en','English'],['de','Deutsch'],['ar','العربية'],['fr','Français'],
-          ['es','Español'],['pt','Português'],['it','Italiano'],['tr','Türkçe'],
-          ['ru','Русский'],['zh','中文'],['ja','日本語'],['ko','한국어'],
-          ['hi','हिन्दी'],['bn','বাংলা'],['sw','Kiswahili'],['fa','فارسی'],
-          ['ur','اردو'],['nl','Nederlands'],['pl','Polski'],['uk','Українська']
-        ];
-        var RTL = ['ar','fa','ur'];
-        var toggle = document.getElementById('lang-toggle');
-        var menu = document.getElementById('lang-menu');
-        var current = document.getElementById('lang-current');
-        if (!toggle || !menu || !current) return;
-
-        var saved = localStorage.getItem('kalam-lang') || 'en';
-        current.textContent = saved.toUpperCase();
-
-        // Build menu
-        LANGS.forEach(function(l) {
-          var btn = document.createElement('button');
-          btn.className = 'lang-option' + (l[0] === saved ? ' active' : '');
-          btn.innerHTML = '<span class="lang-code">' + l[0] + '</span> ' + l[1];
-          btn.addEventListener('click', function() {
-            localStorage.setItem('kalam-lang', l[0]);
-            current.textContent = l[0].toUpperCase();
-            // Set document direction for RTL languages
-            document.documentElement.dir = RTL.indexOf(l[0]) >= 0 ? 'rtl' : 'ltr';
-            document.documentElement.lang = l[0];
-            menu.hidden = true;
-            toggle.setAttribute('aria-expanded', 'false');
-            // Dispatch event for pages to pick up language change
-            window.dispatchEvent(new CustomEvent('kalam-lang-change', { detail: { lang: l[0] } }));
-            // Refresh page to apply translations
-            location.reload();
-          });
-          menu.appendChild(btn);
-        });
-
-        // Set initial direction
-        if (RTL.indexOf(saved) >= 0) {
-          document.documentElement.dir = 'rtl';
-          document.documentElement.lang = saved;
-        } else if (saved !== 'en') {
-          document.documentElement.lang = saved;
-        }
-
-        // Toggle menu
-        toggle.addEventListener('click', function() {
-          var open = menu.hidden;
-          menu.hidden = !open;
-          toggle.setAttribute('aria-expanded', String(open));
-        });
-
-        // Close on outside click
-        document.addEventListener('click', function(e) {
-          if (!toggle.contains(e.target) && !menu.contains(e.target)) {
-            menu.hidden = true;
-            toggle.setAttribute('aria-expanded', 'false');
-          }
-        });
-      })();
     </script>
 
     <slot />

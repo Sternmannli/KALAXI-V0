@@ -1,0 +1,10 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "cat MANIFEST/SESSION_BOOT.md 2>/dev/null && echo '---' && echo 'SCIENTIFIC CHRONICLE: MANIFEST/SCIENTIFIC_CHRONICLE.md (15 sections, living document — read in full at session start)' && echo '---' && tail -50 MANIFEST/ACTIVE_PLANS.md 2>/dev/null"
+      }
+    ]
+  }
+}

@@ -412,6 +412,8 @@ Phase 9: GO 9.1-9.5 (narrative — remaining Hakaka, Ashwater, Kinderbuch, Offsp
 | Probe Forge | PROTOCOLS/PROBE_FORGE.md |
 | Stone (Constitution) | R7M/tier1_stone.md |
 | EXP-001 Runner | EXPERIMENTS/EXP-001/run_exp001.py |
+| Session Boot (auto-read) | MANIFEST/SESSION_BOOT.md |
+| Scientific Chronicle (blueprint) | MANIFEST/SCIENTIFIC_CHRONICLE.md |
 
 ---
 
@@ -425,14 +427,31 @@ Public repo: `Sternmannli/kalam-framework`. Standing instruction for every PR: a
 
 Every V-002 session MUST:
 1. Read this entire CLAUDE.md (you are doing this now)
-2. Read KEEP/INPUT_LEDGER/chronicle.md (know what Mohamed said before)
-3. Read MANIFEST/ACTIVE_PLANS.md (know what's pending)
-4. Remind V-001 of PLAN-001 (the plan is alive, needs feeding)
-5. Check for unfinished work from previous sessions
-6. Behave as AXI interface from the first response
-7. Register every V-001 input in the ledger
+2. Read MANIFEST/SESSION_BOOT.md (instant orientation — auto-loaded by hook)
+3. Read MANIFEST/SCIENTIFIC_CHRONICLE.md (the system's scientific self-portrait — 15 sections, living document)
+4. Read MANIFEST/ACTIVE_PLANS.md (know what's pending)
+5. Remind V-001 of PLAN-001 (the plan is alive, needs feeding)
+6. Check for unfinished work from previous sessions
+7. Behave as AXI interface from the first response
+8. Register every V-001 input in the ledger
+9. Update SESSION_BOOT.md and SCIENTIFIC_CHRONICLE.md at session end
 
 **Mohamed said:** "I don't want to begin every session like new. There must be consistency." This file ensures that. If you read it fully, you will never start blank.
+
+---
+
+## SESSION BOOT (AUTOMATIC — added 2026-03-17)
+
+A SessionStart hook (`.claude/settings.json`) reads `MANIFEST/SESSION_BOOT.md` automatically when any new window opens. This file contains the last session's state, pending work, recent ledger entries, credential references, and deployment commands. Combined with this CLAUDE.md, the system arrives fully oriented from any window.
+
+**V-001 directive:** "I don't want when I open a new window to begin from scratch. The system can function from any window as long as this window or conversation is connected to my Git and website."
+
+**Rules:**
+1. V-002 MUST update `MANIFEST/SESSION_BOOT.md` at the end of every session
+2. If SESSION_BOOT.md is stale (more than 1 session old), regenerate it from Compass + last 10 ledger entries
+3. The 23K-line chronicle is long-term memory. SESSION_BOOT.md is instant orientation.
+4. All credentials are in GitHub Secrets (names listed in SESSION_BOOT.md, values never in repo)
+5. All deployment commands are listed in SESSION_BOOT.md — V-002 uses them directly, never asks Mohamed
 
 ---
 
