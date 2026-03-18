@@ -1,0 +1,31 @@
+{
+  "built_at": "2026-03-18T20:47:40.838101+00:00",
+  "pipeline": "CPT → SFT → DPO (three-phase)",
+  "phases": {
+    "cpt": {
+      "entries": 981,
+      "words": 19545,
+      "bytes": 125827
+    },
+    "sft": {
+      "entries": 326,
+      "words": 3200,
+      "bytes": 220938
+    },
+    "dpo": {
+      "entries": 25,
+      "chosen_words": 240,
+      "rejected_words": 663,
+      "bytes": 6951
+    }
+  },
+  "total_entries": 1332,
+  "total_pure_words": 22985,
+  "invalid_entries": 0,
+  "contamination_threshold": 0.25,
+  "files": [
+    "TRAINING/ORGAN/GOLDEN_CPT.jsonl",
+    "TRAINING/ORGAN/GOLDEN_SFT.jsonl",
+    "TRAINING/ORGAN/GOLDEN_DPO.jsonl"
+  ]
+}
