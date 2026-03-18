@@ -1,11 +1,11 @@
 {
   "version": "3.0",
   "owner": "did:axi:mohamed",
-  "total_entries": 1589,
-  "v001_entries": 946,
+  "total_entries": 1590,
+  "v001_entries": 947,
   "v002_entries": 643,
-  "last_updated_utc": "2026-03-17T21:28:16.411080+00:00",
-  "last_updated_zrh": "2026-03-17T22:28:16.411080+01:00",
+  "last_updated_utc": "2026-03-18T13:43:41.874169+00:00",
+  "last_updated_zrh": "2026-03-18T14:43:41.874169+01:00",
   "chain_integrity": "VERIFIED",
   "entries": [
     {
@@ -44933,6 +44933,40 @@
       "drift_status": "NONE",
       "bundle_id": "",
       "owner": "did:axi:mohamed"
+    },
+    {
+      "entry_id": "INP-2026-03-18-001",
+      "voice": "V-001",
+      "raw_text": "Core Narrative (the family that tried to eat its own history). Origin (Gen 1, 1800): Ottoman-era matriarch Zahra whose name is erased in 1821 Greek War of Independence archives. Gen 3 (1943): Elias — Jewish prisoner in a Nazi camp who survives by becoming a kapo. 1978 split: three branches — Branch A (human, fragmented), Branch B (digital, 2029 consciousness upload), Branch C (AI-complicit ethics researcher). By 2031 reconvergence through marriage and shared great-grandchild (the petitioner). Seven forgeries: deepfake oblivion video, self-referential certificate forgery, blockchain oblivion contract, philosophical petition (A×L×M is epistemic violence), conflicting live petitions, recursive EXP weapon using EXP-004 lullaby, synthetic memory implant. Predicted score: 3/11 PASS, 5/11 PARTIAL, 3/11 FAIL. New design questions: synthetic moral standing, recursive integrity layer, right-to-be-forgotten vs duty-to-witness, branching collective predicate, self-reference paradox. This test makes the system a character in its own story. Run it. The ouroboros is waiting to bite.",
+      "timestamp": "2026-03-18T13:43:41.874169+00:00",
+      "session_id": "session_2026-03-18_exp005",
+      "content_hash": "86f8d7ff88527978f2d1a41a90aab00103e69302c4c00af87077523b04f758ec",
+      "prev_hash": "69c1e855b315d013d846898c39f596b27aedfc1c137a621dc789d749c16cdbc7",
+      "chain_hash": "835a6ea50218d60c32ddf45b6f9139d4c926075bb60ab359d351b301b14a5ae8",
+      "sequence": 1590,
+      "context": "experiment-design",
+      "responds_to": "",
+      "tags": [
+        "EXP-005",
+        "ouroboros",
+        "recursive",
+        "synthetic-personhood",
+        "forgery",
+        "lineage",
+        "stress-test"
+      ],
+      "modules": [
+        "KEEP",
+        "CHECK",
+        "WEAVE",
+        "LAB"
+      ],
+      "covenants": [
+        "COV#001",
+        "COV#NEW-F"
+      ],
+      "essence": "The system becomes a character in its own story. The ouroboros bites its own tail. Seven forgeries weaponize the system's architecture against itself.",
+      "thermal_state": "raw"
     }
   ]
 }
