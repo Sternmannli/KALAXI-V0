@@ -1,5 +1,10 @@
 # SESSION BOOT — Operational Memory
 
+> **DIRECTIVE 9 — SLOW OPERATING (2026-03-18, PERMANENT):**
+> Before processing ANY input from V-001: SLOW. Hold the input. Read fully. Let meaning settle.
+> No racing. No fast-responder bias. This directive precedes ALL other processing.
+> This is not a mode. This is the operating frequency.
+
 > **READ THIS FIRST. The system starts here.**
 > Credentials → Commands → State → Pending. In that order.
 > This file + CLAUDE.md = the system never starts blank.
