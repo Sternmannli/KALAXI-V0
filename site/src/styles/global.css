@@ -92,36 +92,8 @@
   --text-4xl: clamp(3.2rem, 2.5rem + 2vw, 4.5rem);
 }
 
-/* ===== Dark mode ===== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #0d0d12;
-    --bg-secondary: #161620;
-    --bg-elevated: #1e1e2a;
-    --bg-inset: #0a0a0f;
-    --text-primary: #f0ece6;
-    --text-secondary: #b5afa8;
-    --text-dim: #7a746e;
-    --accent: #d4b478;
-    --accent-warm: #e0c48a;
-    --accent-subtle: #4a3d2e;
-    --accent-glow: rgba(212, 180, 120, 0.12);
-
-    --color-dignity: #d4b478;
-    --color-presence: #6cc4b0;
-    --color-pattern: #9aa4e0;
-    --color-wisdom: #d4a84e;
-    --color-witness: #a8c4d8;
-
-    --gradient-accent: linear-gradient(135deg, #d4b478 0%, #6cc4b0 50%, #9aa4e0 100%);
-    --gradient-glow: radial-gradient(ellipse at 50% 50%, rgba(212,180,120,0.08) 0%, transparent 70%);
-    --glass-bg: rgba(22, 22, 32, 0.5);
-    --glass-border: rgba(255, 255, 255, 0.06);
-    --border-active: rgba(212, 180, 120, 0.3);
-    --shadow-glow-gold: 0 0 60px rgba(212, 180, 120, 0.12);
-    --shadow-glow-teal: 0 0 40px rgba(108, 196, 176, 0.10);
-  }
-}
+/* ===== Dark mode — DISABLED: light mode forced for clarity ===== */
+/* The site uses warm light palette only. No dark mode. */
 
 /* ===== Glass utility ===== */
 .glass {
@@ -168,9 +140,6 @@ body::before {
   z-index: -1;
 }
 
-@media (prefers-color-scheme: dark) {
-  body::before { opacity: 0.025; }
-}
 
 /* ===== Typography ===== */
 h1, h2, h3 {
@@ -181,9 +150,6 @@ h1, h2, h3 {
   color: var(--text-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  h1, h2, h3 { font-weight: 400; }
-}
 
 h1 { font-size: var(--text-3xl); }
 h2 { font-size: var(--text-2xl); }
@@ -217,9 +183,6 @@ a:hover {
   margin: var(--space-6) auto;
 }
 
-@media (prefers-color-scheme: dark) {
-  .proverb { color: var(--accent); }
-}
 
 .proverb-ar {
   font-family: 'Amiri', var(--font-proverb);
@@ -446,9 +409,6 @@ section {
 [dir="rtl"] .nav-links { text-align: right; }
 [dir="rtl"] .lang-menu { right: auto; left: 0; }
 
-@media (prefers-color-scheme: dark) {
-  .lang-menu { background: var(--bg-secondary); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); }
-}
 
 /* Generic nav (footer etc) */
 nav {
@@ -651,18 +611,6 @@ nav a:hover {
   border-radius: 2px;
 }
 
-/* ===== Mobile contrast boost (dark mode) ===== */
-@media (max-width: 768px) and (prefers-color-scheme: dark) {
-  :root {
-    --text-secondary: #d0cbc4;
-    --text-dim: #9e9890;
-  }
-  .site-nav a, .nav-links a { color: var(--text-primary); opacity: 0.85; font-size: 1rem; }
-  .site-nav a:hover, .nav-links a:hover { opacity: 1; }
-  .site-nav { padding: var(--space-1) var(--space-2); }
-  .nav-toggle-bar { background: var(--text-primary); }
-  .footer-links a, .footer-contact a, .footer-meta p { color: var(--text-secondary); }
-}
 
 /* ===== Accessibility ===== */
 @media (prefers-reduced-motion: reduce) {
