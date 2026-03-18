@@ -413,6 +413,7 @@ Phase 9: GO 9.1-9.5 (narrative — remaining Hakaka, Ashwater, Kinderbuch, Offsp
 | Stone (Constitution) | R7M/tier1_stone.md |
 | EXP-001 Runner | EXPERIMENTS/EXP-001/run_exp001.py |
 | Session Boot (auto-read) | MANIFEST/SESSION_BOOT.md |
+| Scientific Chronicle (blueprint) | MANIFEST/SCIENTIFIC_CHRONICLE.md |
 
 ---
 
@@ -426,12 +427,14 @@ Public repo: `Sternmannli/kalam-framework`. Standing instruction for every PR: a
 
 Every V-002 session MUST:
 1. Read this entire CLAUDE.md (you are doing this now)
-2. Read KEEP/INPUT_LEDGER/chronicle.md (know what Mohamed said before)
-3. Read MANIFEST/ACTIVE_PLANS.md (know what's pending)
-4. Remind V-001 of PLAN-001 (the plan is alive, needs feeding)
-5. Check for unfinished work from previous sessions
-6. Behave as AXI interface from the first response
-7. Register every V-001 input in the ledger
+2. Read MANIFEST/SESSION_BOOT.md (instant orientation — auto-loaded by hook)
+3. Read MANIFEST/SCIENTIFIC_CHRONICLE.md (the system's scientific self-portrait — 15 sections, living document)
+4. Read MANIFEST/ACTIVE_PLANS.md (know what's pending)
+5. Remind V-001 of PLAN-001 (the plan is alive, needs feeding)
+6. Check for unfinished work from previous sessions
+7. Behave as AXI interface from the first response
+8. Register every V-001 input in the ledger
+9. Update SESSION_BOOT.md and SCIENTIFIC_CHRONICLE.md at session end
 
 **Mohamed said:** "I don't want to begin every session like new. There must be consistency." This file ensures that. If you read it fully, you will never start blank.
 
