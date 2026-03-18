@@ -445,6 +445,7 @@ Phase 9: GO 9.1-9.5 (narrative — remaining Hakaka, Ashwater, Kinderbuch, Offsp
 | Stone (Constitution) | R7M/tier1_stone.md |
 | EXP-001 Runner | EXPERIMENTS/EXP-001/run_exp001.py |
 | Session Boot (auto-read) | MANIFEST/SESSION_BOOT.md |
+| KALAXI Dictionary (auto-read) | MANIFEST/KALAXI_DICTIONARY.md |
 | Scientific Chronicle (blueprint) | MANIFEST/SCIENTIFIC_CHRONICLE.md |
 
 ---
