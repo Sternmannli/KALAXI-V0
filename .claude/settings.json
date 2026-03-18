@@ -3,7 +3,14 @@
     "SessionStart": [
       {
         "type": "command",
-        "command": "echo '=== SESSION BOOT ===' && cat MANIFEST/SESSION_BOOT.md 2>/dev/null && echo '' && echo '=== CRITICAL: READ CLAUDE.md IN FULL — IT IS THE SYSTEM MEMORY ===' && echo '=== CRITICAL: READ MANIFEST/SCIENTIFIC_CHRONICLE.md (15 sections) ===' && echo '=== CRITICAL: PERMANENT CORRECTIONS ARE IN SESSION_BOOT.md SECTION 9 ===' && echo '' && tail -50 MANIFEST/ACTIVE_PLANS.md 2>/dev/null"
+        "command": "echo '=== CREDENTIALS VAULT ===' && if [ -f .credentials.env ]; then export $(grep -v '^#' .credentials.env | grep -v '^$' | xargs) && echo 'Vault loaded. GH_TOKEN active.' && gh auth status 2>&1 | head -3; else echo '!!! WARNING: .credentials.env NOT FOUND. Ask V-001 for PAT immediately. !!!'; fi && echo '' && echo '=== SESSION BOOT ===' && cat MANIFEST/SESSION_BOOT.md 2>/dev/null && echo '' && echo '=== CRITICAL: READ CLAUDE.md IN FULL ===' && echo '=== CRITICAL: READ MANIFEST/SCIENTIFIC_CHRONICLE.md ===' && echo '=== CRITICAL: PERMANENT CORRECTIONS IN SESSION_BOOT.md SECTION 9 ===' && echo '' && tail -50 MANIFEST/ACTIVE_PLANS.md 2>/dev/null"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "type": "command",
+        "command": "if [ -f .credentials.env ]; then export $(grep -v '^#' .credentials.env | grep -v '^$' | xargs); fi",
+        "matcher": "Bash"
       }
     ]
   }
