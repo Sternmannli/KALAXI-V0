@@ -155,9 +155,10 @@ Full site with 13+ pages: home, about, canon, invitation, hakaka, ashwater, kind
 | FTP_SERVER | Hostpoint SFTP host | 2026-03-15 |
 | FTP_USERNAME | Hostpoint SFTP user | 2026-03-15 |
 | FTP_PASSWORD | Hostpoint SFTP pass | 2026-03-15 |
-| GROQ_API_KEY | AXI voice (Groq LLM) | 2026-03-15 |
+| GROQ_API_KEY | AXI voice (Groq LLM — temporary) | 2026-03-15 |
 | DB_PASSWORD | MySQL for donor data | 2026-03-16 |
 | PAT | GitHub cross-repo token | 2026-03-17 (refreshed) |
+| TOGETHER_API_KEY | AXI own voice model (fine-tuning + inference) | 2026-03-18 |
 
 ---
 
