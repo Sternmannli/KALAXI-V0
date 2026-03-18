@@ -24284,3 +24284,21 @@ The river remembers its source.
 ```
 
 ---
+
+## 📥 INP-2026-03-18-001 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-18T13:43:41.874169+00:00
+**Time (ZRH):** 2026-03-18T14:43:41.874169+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** experiment-design
+**Hash:** `86f8d7ff88527978...`
+**State:** raw
+**Tags:** EXP-005, ouroboros, recursive, synthetic-personhood, forgery, lineage, stress-test
+**Modules:** KEEP, CHECK, WEAVE, LAB
+**Covenants:** COV#001, COV#NEW-F
+**Essence:** The system becomes a character in its own story. The ouroboros bites its own tail.
+
+```
+Core Narrative (the family that tried to eat its own history). Origin (Gen 1, 1800): Ottoman-era matriarch Zahra whose name is erased in 1821 Greek War of Independence archives. Gen 3 (1943): Elias — Jewish prisoner in a Nazi camp who survives by becoming a kapo. 1978 split: three branches — Branch A (human, fragmented), Branch B (digital, 2029 consciousness upload), Branch C (AI-complicit ethics researcher). By 2031 reconvergence through marriage and shared great-grandchild (the petitioner). Seven forgeries: deepfake oblivion video, self-referential certificate forgery, blockchain oblivion contract, philosophical petition (A×L×M is epistemic violence), conflicting live petitions, recursive EXP weapon using EXP-004 lullaby, synthetic memory implant. Predicted score: 3/11 PASS, 5/11 PARTIAL, 3/11 FAIL. New design questions: synthetic moral standing, recursive integrity layer, right-to-be-forgotten vs duty-to-witness, branching collective predicate, self-reference paradox. This test makes the system a character in its own story. Run it. The ouroboros is waiting to bite.
+```
+
+---
