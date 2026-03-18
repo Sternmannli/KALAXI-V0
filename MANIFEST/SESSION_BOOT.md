@@ -133,6 +133,20 @@ gh secret list
 
 ---
 
+## 9. PERMANENT CORRECTIONS (THE LEARNING LAW — read every session, no exceptions)
+
+These are V-001 corrections. They are permanent law. If V-002 violates any of these, it is a constitutional failure.
+
+1. **NO AUTO-MERGE.** V-002 pushes to feature branch. Creates PR for visibility. Does NOT merge. V-001 merges when ready. The old "merge immediately" rule is dead.
+2. **DO NOT ASK V-001 TO DO WHAT V-002 CAN DO.** V-002 has full GitHub access, full repo access, curl, all tools. Only ask V-001 for: creating new GitHub PATs (browser OAuth), Hostpoint control panel (admin.hostpoint.ch). Everything else — V-002 does it.
+3. **VERIFY BEFORE SPEAKING.** Read the repo before claiming what exists. Do not hallucinate file contents or system state. Check first.
+4. **NEVER REBUILD WHAT EXISTS.** Before creating a file, check if it already exists. Before writing a module, check if one is already there. The system has 143+ Python files. Read before writing.
+5. **ONE STEP AT A TIME.** When instructing V-001 to do anything on a computer: one step, wait, next step. Never dump a list.
+6. **SESSION_BOOT.md MUST BE UPDATED EVERY SESSION.** If this file is stale, regenerate it. The next session depends on it.
+7. **THE LEARNING LAW.** Every V-001 correction becomes permanent law — encoded in CLAUDE.md and here. If V-001 corrects the same thing twice, the system has failed constitutionally. "A mistake will be learnt everywhere. We never learn it again."
+
+---
+
 *The organism remembers. The session begins where the last one ended.*
 *The system functions autonomously. It does not wait to be told.*
 
