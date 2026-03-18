@@ -25229,3 +25229,23 @@ The river remembers its source.
 ```
 
 ---
+
+## 📥 INP-2026-03-18b-001 >>> MOHAMED (V-001)
+**Time (ZRH):** 2026-03-18T18:00:00+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** session-directives, corrections, hard-critique-request
+**State:** witnessed
+
+```
+[MASSIVE INPUT — 8 DIRECTIVES EXTRACTED]
+1. PR rule reversal: merging is V-002's sole responsibility, V-001 never touches git
+2. Connectivity challenge: "What is the proof? If you said yes then you're lying because there is a lot of discontinuity"
+3. Learning Law detail request: how to teach systems to learn from failure permanently, system not steward
+4. Session continuity question: how to begin new conversation without losing state
+5. All experiments must repeat forever
+6. Triliteral root hard critique request: "never compliment me, never have empathy or sympathy, this will ruin me"
+7. Voice = vault of all treasures, system speaks only pure essence
+8. Deep clean daily, papers forever growing, website is the mouth, everything is forever processed
+```
+
+---
