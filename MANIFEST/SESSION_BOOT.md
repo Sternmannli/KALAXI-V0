@@ -7,8 +7,18 @@
 
 ---
 
-## 1. CREDENTIALS (GitHub Secrets — use `gh secret list` to verify)
+## 1. CREDENTIALS VAULT (FIRST THING EVERY SESSION)
 
+**Local vault:** `.credentials.env` (gitignored, NEVER committed)
+**Loaded by:** SessionStart hook + PreToolUse hook (automatic)
+**If vault missing:** The hook warns loudly. V-002 asks V-001 for the PAT ONCE, creates the file, and never asks again.
+
+### What's in the vault:
+| Key | Purpose |
+|-----|---------|
+| GH_TOKEN | GitHub PAT — full admin access to repos, API, workflows, merges |
+
+### What's in GitHub Secrets (remote, for workflows only):
 | Secret | Purpose | Set |
 |--------|---------|-----|
 | FTP_SERVER | Hostpoint SFTP host (kalam.ch) | 2026-03-15 |
@@ -17,6 +27,11 @@
 | GROQ_API_KEY | AXI voice (Groq LLM — llama-3.3-70b) | 2026-03-15 |
 | DB_PASSWORD | MySQL for donor data (kalam.ch) | 2026-03-16 |
 | PAT | GitHub cross-repo token (KALAXI-V0 ↔ kalam-framework) | 2026-03-17 |
+
+### If vault is missing (new machine / new environment):
+1. V-002 creates `.credentials.env` with `GH_TOKEN=<value from V-001>`
+2. V-002 verifies with `gh auth status`
+3. V-002 never asks again until token expires
 
 **Hosting:** Hostpoint (hostpoint.ch), account: faragmoh, Smart Webhosting
 **Domain:** kalam.ch — document root: `~/www/kalam.ch/`
