@@ -1519,13 +1519,21 @@ class Distillery:
                     "",
                 ])
 
-        # ── Content areas ─────────────────────────────────────────
-        for area_name in ["wisdom", "constitution", "experiments", "site", "manifest"]:
+        # ── Content areas (original + source readers) ──────────────
+        all_areas = [
+            "wisdom", "constitution", "experiments", "site", "manifest",
+            "proverbs", "anomalies", "wisdom_nodes",
+            "hakaka", "narrative_sources", "treasures",
+            "observations", "origins", "canon",
+            "voice_architecture", "protocols", "external_voices",
+            "excavation", "ledger",
+        ]
+        for area_name in all_areas:
             area = self._report.areas.get(area_name)
             if not area:
                 continue
             lines.extend([
-                f"## {area_name.title()}",
+                f"## {area_name.replace('_', ' ').title()}",
                 f"- Patterns: {', '.join(area.get('meta_patterns', []))}",
                 f"- Essence: \"{area.get('meta_essence', '')}\"",
                 f"- Entries: {area.get('entry_count', 0)}",
@@ -1571,16 +1579,20 @@ class Distillery:
         """Run the full distillery pipeline.
 
         Sequence:
-        1. Extract narratives → structural arc, voice register, chapter stats
-        2. Extract voice → VoiceDNA fingerprint
-        3. Extract wisdom → proverb clusters, treasure principles
-        4. Extract constitution → equations, concepts, origins
-        5. Extract experiments → discoveries, findings
-        6. Extract site → inner workings, donor principles
-        7. Extract manifest → system position, heading, vitals
-        8. Render essence document (DISTILLED_ESSENCE.md)
-        9. Feed to system (DIGESTION/latest.json)
-        10. Log run
+        Phase A: Original extractors (site JSON)
+          1. Extract narratives → structural arc, voice register, chapter stats
+          2. Extract voice → VoiceDNA fingerprint
+          3-7. Extract wisdom, constitution, experiments, site, manifest
+        Phase B: Source-level readers (14 new readers)
+          8. Proverbs (WISDOM_CANON.md), Anomalies, Wisdom Nodes
+          9. Hakaka, Ashwater, Kinderbuch (source markdown)
+          10. Treasures, Observations, Origins, Canon
+          11. Voice architecture, Protocols, External voices, Excavation
+          12. Input Ledger (1,683 entries)
+        Phase C: Synthesis
+          13. Render essence document (DISTILLED_ESSENCE.md)
+          14. Feed to system (DIGESTION/latest.json)
+          15. Log run
 
         Args:
             force: If True, re-process already-witnessed entries.
@@ -1597,6 +1609,10 @@ class Distillery:
             existing = self._run_log_path.read_text()
             run_number = existing.count("## Run #") + 1
         self._report.run_number = run_number
+
+        # ══════════════════════════════════════════════════════════
+        # PHASE A: Original extractors (site JSON sources)
+        # ══════════════════════════════════════════════════════════
 
         # ── 1. Narratives ─────────────────────────────────────────
         narratives = self.extract_narratives()
@@ -1623,8 +1639,23 @@ class Distillery:
             self._essence_store.extend(area_result.entries)
             self._report.content_areas_processed.append(area_name)
 
-        # ── System essence (the one-line distillation of everything) ──
-        # Priority: EXP-004 discovery > constitution essence > narrative essence
+        # ══════════════════════════════════════════════════════════
+        # PHASE B: Source-level readers (raw files, not site JSON)
+        # ══════════════════════════════════════════════════════════
+
+        source_readers = self._build_source_readers()
+
+        for reader in source_readers:
+            area_result = reader.extract()
+            self._report.areas[reader.area_name] = area_result.to_dict()
+            self._essence_store.extend(area_result.entries)
+            self._report.content_areas_processed.append(reader.area_name)
+
+        # ══════════════════════════════════════════════════════════
+        # PHASE C: Synthesis
+        # ══════════════════════════════════════════════════════════
+
+        # ── System essence ────────────────────────────────────────
         exp_area = self._report.areas.get("experiments", {})
         con_area = self._report.areas.get("constitution", {})
         self._report.system_essence = (
@@ -1633,19 +1664,54 @@ class Distillery:
             or (narratives[0].essence if narratives else "")
         )
 
-        # ── 8. Render ─────────────────────────────────────────────
+        # ── Render ────────────────────────────────────────────────
         doc = self.render_essence_document()
         self._report.content_areas_processed.append("rendered")
 
-        # ── 9. Feed ───────────────────────────────────────────────
+        # ── Feed ──────────────────────────────────────────────────
         feed_result = self.feed_to_system()
         self._report.content_areas_processed.append("fed")
 
-        # ── 10. Log ───────────────────────────────────────────────
+        # ── Log ───────────────────────────────────────────────────
         self._report.entries_total = len(self._essence_store)
         self._log_run(self._report)
 
         return self._report
+
+    @staticmethod
+    def _build_source_readers():
+        """Instantiate all source-level readers. Imported here to avoid circular deps."""
+        from WEAVER.distillery_readers.proverb_reader import ProverbReader
+        from WEAVER.distillery_readers.anomaly_reader import AnomalyReader
+        from WEAVER.distillery_readers.wisdom_node_reader import WisdomNodeReader
+        from WEAVER.distillery_readers.hakaka_reader import HakakaReader
+        from WEAVER.distillery_readers.narrative_source_reader import NarrativeSourceReader
+        from WEAVER.distillery_readers.treasure_reader import TreasureReader
+        from WEAVER.distillery_readers.observation_reader import ObservationReader
+        from WEAVER.distillery_readers.origin_reader import OriginReader
+        from WEAVER.distillery_readers.canon_reader import CanonReader
+        from WEAVER.distillery_readers.voice_reader import VoiceReader
+        from WEAVER.distillery_readers.protocol_reader import ProtocolReader
+        from WEAVER.distillery_readers.external_voice_reader import ExternalVoiceReader
+        from WEAVER.distillery_readers.excavation_reader import ExcavationReader
+        from WEAVER.distillery_readers.ledger_reader import LedgerReader
+
+        return [
+            ProverbReader(),
+            AnomalyReader(),
+            WisdomNodeReader(),
+            HakakaReader(),
+            NarrativeSourceReader(),
+            TreasureReader(),
+            ObservationReader(),
+            OriginReader(),
+            CanonReader(),
+            VoiceReader(),
+            ProtocolReader(),
+            ExternalVoiceReader(),
+            ExcavationReader(),
+            LedgerReader(),
+        ]
 
     # ── Utilities ────────────────────────────────────────────────────
 
