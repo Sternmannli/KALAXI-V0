@@ -1,0 +1,2121 @@
+{
+  "generated": "2026-03-19T13:01:59.452326+00:00",
+  "entry_count": 131,
+  "entries": [
+    {
+      "source_path": "P#0073",
+      "source_area": "wisdom/proverb",
+      "raw_excerpt": "A knot that breathes lets you breathe.",
+      "patterns": [
+        "SOMATIC:1.00",
+        "MATERIAL:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "A knot that breathes lets you breathe.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "P#0073"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "P#0003",
+      "source_area": "wisdom/proverb",
+      "raw_excerpt": "Start where your hands already touch the world.",
+      "patterns": [
+        "SOMATIC:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Start where your hands already touch the world.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "P#0003"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "P#0004",
+      "source_area": "wisdom/proverb",
+      "raw_excerpt": "The door appears after you try the wall.",
+      "patterns": [
+        "MATERIAL:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "The door appears after you try the wall.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "P#0004"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "P#0015",
+      "source_area": "wisdom/proverb",
+      "raw_excerpt": "Tools remember the hands that made them.",
+      "patterns": [
+        "SOMATIC:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Tools remember the hands that made them.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "P#0015"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "P#0027",
+      "source_area": "wisdom/proverb",
+      "raw_excerpt": "Harvest waits for hands, not wishes.",
+      "patterns": [
+        "SOMATIC:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Harvest waits for hands, not wishes.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "P#0027"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "P#0029",
+      "source_area": "wisdom/proverb",
+      "raw_excerpt": "Handoffs shrink when care grows.",
+      "patterns": [
+        "SOMATIC:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Handoffs shrink when care grows.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "P#0029"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "P#0033",
+      "source_area": "wisdom/proverb",
+      "raw_excerpt": "Risk feeds the hearth when measured.",
+      "patterns": [
+        "SOMATIC:1.00",
+        "MATERIAL:1.00"
+      ],
+      "essence": "Risk feeds the hearth when measured.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "P#0033"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "P#0037",
+      "source_area": "wisdom/proverb",
+      "raw_excerpt": "Dashboards lie when feedback dies.",
+      "patterns": [
+        "MATERIAL:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Dashboards lie when feedback dies.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "P#0037"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "P#0045",
+      "source_area": "wisdom/proverb",
+      "raw_excerpt": "Care is the knot that doesn't slip.",
+      "patterns": [
+        "MATERIAL:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Care is the knot that doesn't slip.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "P#0045"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "P#0057",
+      "source_area": "wisdom/proverb",
+      "raw_excerpt": "Ash is memory; mix it into new soil.",
+      "patterns": [
+        "MATERIAL:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Ash is memory; mix it into new soil.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "P#0057"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#02",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "By not arguing with wind",
+      "patterns": [],
+      "essence": "By not arguing with wind",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#02"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#03",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Every system output passes three gates in sequence.",
+      "patterns": [],
+      "essence": "Every system output passes three gates in sequence",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#03"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#04",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Leave signs that feed the next feet.",
+      "patterns": [],
+      "essence": "Leave signs that feed the next feet.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#04"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#05",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Remember without weight.",
+      "patterns": [],
+      "essence": "Remember without weight.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#05"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#06",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "So I don't forget how many times we didn't starve.",
+      "patterns": [],
+      "essence": "So I don't forget how many times we didn't starve.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#06"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#57",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "What we fix, we record. What we record, we can repeat. What we repeat, we survive.",
+      "patterns": [],
+      "essence": "What we fix, we record. What we record, we can repeat. What we repeat, we survive.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#57"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#01",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Four-layer reality map: macro-coherence, micro-structure, bridge-phenomena, observer-effects.",
+      "patterns": [],
+      "essence": "Four-layer reality map: macro-coherence, micro-structure, bridge-phenomena, observer-effects",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#01"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#07",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Resonance law — anomalies → patterns → wisdom nodes → resilience.",
+      "patterns": [
+        "GAP:1.00"
+      ],
+      "essence": "Resonance law — anomalies → patterns → wisdom nodes → resilience",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#07"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#08",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "If you hear it, move. If you move, mean it.",
+      "patterns": [],
+      "essence": "If you hear it, move. If you move, mean it.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#08"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#09",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Tension holding without forced resolution. The system holds both sides without collapsing either.",
+      "patterns": [],
+      "essence": "Tension holding without forced resolution",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#09"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#10",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Heat likes tight. Wait until the wait turns sweet.",
+      "patterns": [],
+      "essence": "Heat likes tight. Wait until the wait turns sweet.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#10"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#11",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Let the river work. Leave a way; take the rest.",
+      "patterns": [
+        "MATERIAL:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Let the river work. Leave a way; take the rest.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#11"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#13",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Big turns hunger into sky.",
+      "patterns": [],
+      "essence": "Big turns hunger into sky.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#13"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#14",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Let the river choose the point; leave a door.",
+      "patterns": [
+        "MATERIAL:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Let the river choose the point; leave a door.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#14"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#16",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Let air work; don't make it angry.",
+      "patterns": [],
+      "essence": "Let air work; don't make it angry.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#16"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#17",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Water walks with us.",
+      "patterns": [
+        "MATERIAL:1.00"
+      ],
+      "essence": "Water walks with us.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#17"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#18",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Weigh before want.",
+      "patterns": [],
+      "essence": "Weigh before want.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#18"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#19",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Feed today, remember tomorrow.",
+      "patterns": [],
+      "essence": "Feed today, remember tomorrow.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#19"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#20",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Watch with eyes, not hunger.",
+      "patterns": [],
+      "essence": "Watch with eyes, not hunger.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#20"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#21",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Sensitivity must never outrun flexibility. If it does, the system shatters under novel input.",
+      "patterns": [],
+      "essence": "Sensitivity must never outrun flexibility",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#21"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#22",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Take enough. Leave mothers and first water.",
+      "patterns": [
+        "MATERIAL:1.00"
+      ],
+      "essence": "Take enough. Leave mothers and first water.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#22"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#33",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Seven-step AI testing sequence: habit, slowness, refusal, chaos-on-self, hermit memo, shadow check, proverb.",
+      "patterns": [],
+      "essence": "Seven-step AI testing sequence: habit, slowness, refusal, chaos-on-self, hermit memo, shadow check, proverb",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#33"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#50",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Lost tools get permanent homes.",
+      "patterns": [],
+      "essence": "Lost tools get permanent homes.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#50"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#55",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Find, then twist. Twist, then test. If it fails, reduce the span, not the will.",
+      "patterns": [
+        "THREE_BEAT:0.33"
+      ],
+      "essence": "Find, then twist. Twist, then test. If it fails, reduce the span, not the will.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#55"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#56",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "A loop is a door; a door is a direction; direction reduces fear.",
+      "patterns": [
+        "MATERIAL:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "A loop is a door; a door is a direction; direction reduces fear.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#56"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#59",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "When a loop fails in the wild, it graduates into the wall. Breakage feeds design.",
+      "patterns": [
+        "MATERIAL:0.67"
+      ],
+      "essence": "When a loop fails in the wild, it graduates into the wall. Breakage feeds design.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#59"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#15",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Anomalies about the anomaly system itself. Self-referential detection of systemic failures.",
+      "patterns": [],
+      "essence": "Anomalies about the anomaly system itself",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#15"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#23",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "The canon must maintain a small percentage of deliberate imperfection to prevent crystalline brittleness.",
+      "patterns": [],
+      "essence": "The canon must maintain a small percentage of deliberate imperfection to prevent crystalline brittleness",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#23"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#24",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Color without waste; signal without lies.",
+      "patterns": [],
+      "essence": "Color without waste; signal without lies.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#24"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#25",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Take only a fair pinch.",
+      "patterns": [],
+      "essence": "Take only a fair pinch.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#25"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#26",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Share first bite.",
+      "patterns": [],
+      "essence": "Share first bite.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#26"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#27",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Leave one gap.",
+      "patterns": [],
+      "essence": "Leave one gap.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#27"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#28",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Agree before pull.",
+      "patterns": [],
+      "essence": "Agree before pull.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#28"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#29",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Say less. Say clear.",
+      "patterns": [],
+      "essence": "Say less. Say clear.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#29"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#30",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Three conditions: (1) Cannot paraphrase without loss, (2) Triggers response latency, (3) Links across domains.",
+      "patterns": [
+        "THREE_BEAT:1.00"
+      ],
+      "essence": "Three conditions: (1) Cannot paraphrase without loss, (2) Triggers response latency, (3) Links across domains",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#30"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#31",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Step soft where talk lives.",
+      "patterns": [],
+      "essence": "Step soft where talk lives.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#31"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#32",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Help without crossing.",
+      "patterns": [],
+      "essence": "Help without crossing.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#32"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#34",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Send help, not hands.",
+      "patterns": [
+        "SOMATIC:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Send help, not hands.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#34"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#35",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "What we save should still be food.",
+      "patterns": [],
+      "essence": "What we save should still be food.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#35"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#36",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Catch clean; leave dirt where it wants to settle.",
+      "patterns": [],
+      "essence": "Catch clean; leave dirt where it wants to settle.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#36"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#37",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Keep sickness out before it learns our names.",
+      "patterns": [],
+      "essence": "Keep sickness out before it learns our names.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#37"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#48",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Three breaths each. No lessons.",
+      "patterns": [
+        "SOMATIC:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Three breaths each. No lessons.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#48"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#51",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "It's still in our feet.",
+      "patterns": [],
+      "essence": "It's still in our feet.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#51"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#12",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Inter-system federation that preserves donor privacy while sharing wisdom patterns.",
+      "patterns": [],
+      "essence": "Inter-system federation that preserves donor privacy while sharing wisdom patterns",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#12"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#38",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Trade made of feet and river, not hands.",
+      "patterns": [
+        "SOMATIC:1.00",
+        "MATERIAL:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Trade made of feet and river, not hands.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#38"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#39",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "They ate separate and went to sleep under the same weather.",
+      "patterns": [],
+      "essence": "They ate separate and went to sleep under the same weather.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#39"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#40",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Return the pot.",
+      "patterns": [],
+      "essence": "Return the pot.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#40"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#41",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "They stitched the loud seam quiet.",
+      "patterns": [],
+      "essence": "They stitched the loud seam quiet.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#41"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#42",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Alive. Now wash it.",
+      "patterns": [
+        "MATERIAL:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Alive. Now wash it.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#42"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#43",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Not a door. A lamp.",
+      "patterns": [
+        "MATERIAL:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "Not a door. A lamp.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#43"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#44",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "About time.",
+      "patterns": [],
+      "essence": "About time.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#44"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#45",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Not the yellow root. The small brown one.",
+      "patterns": [],
+      "essence": "Not the yellow root. The small brown one.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#45"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#46",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Spread. Board.",
+      "patterns": [],
+      "essence": "Spread. Board.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#46"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#47",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Theoretical framework for system scaling from organic to atomic deployment.",
+      "patterns": [],
+      "essence": "Theoretical framework for system scaling from organic to atomic deployment",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#47"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#49",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "Pay with not tripping tomorrow.",
+      "patterns": [],
+      "essence": "Pay with not tripping tomorrow.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#49"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#52",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "So you learn to look.",
+      "patterns": [],
+      "essence": "So you learn to look.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#52"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#53",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "It tasted like salt and a small, necessary shame.",
+      "patterns": [
+        "MATERIAL:1.00"
+      ],
+      "essence": "It tasted like salt and a small, necessary shame.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#53"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#54",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "On those days I make loops.",
+      "patterns": [],
+      "essence": "On those days I make loops.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#54"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "T#58",
+      "source_area": "wisdom/treasure",
+      "raw_excerpt": "A knot exhales through a laugh.",
+      "patterns": [
+        "MATERIAL:1.00",
+        "CORE_IMAGE:1.00"
+      ],
+      "essence": "A knot exhales through a laugh.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#58"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FP-001",
+      "source_area": "constitution/equation",
+      "raw_excerpt": "Grand Resonance Exponents: γ=0.4, δ=0.3, η=0.2, κ=0.1",
+      "patterns": [
+        "EQUATION"
+      ],
+      "essence": "γ=0.4, δ=0.3, η=0.2, κ=0.1",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#01"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FP-002",
+      "source_area": "constitution/equation",
+      "raw_excerpt": "Defect Budget Range: σ ∈ [0.02, 0.08]",
+      "patterns": [
+        "EQUATION"
+      ],
+      "essence": "σ ∈ [0.02, 0.08]",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#23"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FP-003",
+      "source_area": "constitution/equation",
+      "raw_excerpt": "Proverb Selector Score: 0.35×theme + 0.20×tone + 0.15×register + 0.15×length + 0.10×cultural + 0.05×freshness",
+      "patterns": [
+        "EQUATION"
+      ],
+      "essence": "0.35×theme + 0.20×tone + 0.15×register + 0.15×length + 0.10×cultural + 0.05×freshness",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#30"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FP-004",
+      "source_area": "constitution/equation",
+      "raw_excerpt": "Resilience Equation: Ω_edu(t) = (L/C) × (1 + A(t) - R(t))",
+      "patterns": [
+        "EQUATION"
+      ],
+      "essence": "Ω_edu(t) = (L/C) × (1 + A(t) - R(t))",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        null
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FP-005",
+      "source_area": "constitution/equation",
+      "raw_excerpt": "Ground Equation (precursor to D=A×L×M): A = τ × (Ω×Φ)^p / (R_eff × g(Ω))^q",
+      "patterns": [
+        "EQUATION"
+      ],
+      "essence": "A = τ × (Ω×Φ)^p / (R_eff × g(Ω))^q",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        null
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FP-006",
+      "source_area": "constitution/equation",
+      "raw_excerpt": "Certainty Formula: 1 - entropy(normalized_counts)/log(5)",
+      "patterns": [
+        "EQUATION"
+      ],
+      "essence": "1 - entropy(normalized_counts)/log(5)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        null
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FP-007",
+      "source_area": "constitution/equation",
+      "raw_excerpt": "Coherence Shift Triggers: z_trend ≤ -2 OR JSD ≥ 0.25 OR ΔE ≥ 12",
+      "patterns": [
+        "EQUATION"
+      ],
+      "essence": "z_trend ≤ -2 OR JSD ≥ 0.25 OR ΔE ≥ 12",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        null
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FP-008",
+      "source_area": "constitution/equation",
+      "raw_excerpt": "RIPPLE Decay: 0.85/hop BFS fan-out",
+      "patterns": [
+        "EQUATION"
+      ],
+      "essence": "0.85/hop BFS fan-out",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        null
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FP-009",
+      "source_area": "constitution/equation",
+      "raw_excerpt": "COMMIT Health Threshold: ≥ 0.72",
+      "patterns": [
+        "EQUATION"
+      ],
+      "essence": "≥ 0.72",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        null
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FP-010",
+      "source_area": "constitution/equation",
+      "raw_excerpt": "Adaptive Epsilon: ε = max(0.05, base × min(1, 30/n))",
+      "patterns": [
+        "EQUATION"
+      ],
+      "essence": "ε = max(0.05, base × min(1, 30/n))",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "T#23"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-001",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "Book of Nuance: Ambiguity, Subtlety, Context, Perspective, Hesitation, Balance, Tone, Interpretation, Complexity, Precision/Generality, Resonance",
+      "patterns": [],
+      "essence": "Ambiguity, Subtlety, Context, Perspective, Hesitation, Balance, Tone, Interpretation, Complexity, Precision/Generality, Resonance",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-001"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-002",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "Wisdom Injector: Proverbs injected into decisions via semantic match with audit trail",
+      "patterns": [],
+      "essence": "Proverbs injected into decisions via semantic match with audit trail",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-002"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-003",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "GO-Unit Chunking: MICRO/MEDIUM/HEAVY task sizing with idempotent replay and rollback via checkpoint",
+      "patterns": [],
+      "essence": "MICRO/MEDIUM/HEAVY task sizing with idempotent replay and rollback via checkpoint",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-003"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-004",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "Element State Lifecycle: 6-state machine: draft → proposed → ratified → active → deprecated → forgotten",
+      "patterns": [],
+      "essence": "6-state machine: draft → proposed → ratified → active → deprecated → forgotten",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-004"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-005",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "Graduated 3-Level Breaker: L1 Rate-limit (5%/10%), L2 Partial pause (10%/20%), L3 Full pause (15%/30%)",
+      "patterns": [],
+      "essence": "L1 Rate-limit (5%/10%), L2 Partial pause (10%/20%), L3 Full pause (15%/30%)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-005"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-006",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "Planetary Consensus Time (PCT): Byzantine-median of NTP + blockchain + GPS for geography-agnostic anchoring",
+      "patterns": [
+        "CORRECTION:0.37"
+      ],
+      "essence": "Byzantine-median of NTP + blockchain + GPS for geography-agnostic anchoring",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-006"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-007",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "Ambient Governance: Passive signal collection, opt-in, DP-noised, raises participation without re-ID risk",
+      "patterns": [
+        "CORRECTION:0.37"
+      ],
+      "essence": "Passive signal collection, opt-in, DP-noised, raises participation without re-ID risk",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-007"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-008",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "Contextual Revelation: 5 time-delayed transparency levels: immediate → 24h → 1wk → 1mo → 1yr",
+      "patterns": [],
+      "essence": "5 time-delayed transparency levels: immediate → 24h → 1wk → 1mo → 1yr",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-008"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-009",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "Liquid Legitimacy: Replace participation measurement with legitimacy flows, weight by affected-party stake",
+      "patterns": [],
+      "essence": "Replace participation measurement with legitimacy flows, weight by affected-party stake",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-009"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-010",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "VDF Privacy Forgottery: VDF-bound deletion receipts with 7-day hard cap",
+      "patterns": [],
+      "essence": "VDF-bound deletion receipts with 7-day hard cap",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-010"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-011",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "ENKI Wisdom-Unit Format: Proverb + Math + Code + Color + Reason (time-stamped)",
+      "patterns": [],
+      "essence": "Proverb + Math + Code + Color + Reason (time-stamped)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-011"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-012",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "Supersedes Pattern: Immutable-append updates: new element supersedes old, old stays",
+      "patterns": [
+        "DISCOVERY:0.67"
+      ],
+      "essence": "Immutable-append updates: new element supersedes old, old stays",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-012"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-013",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "Shadow Ledger: Independent reconciliation audit layer",
+      "patterns": [],
+      "essence": "Independent reconciliation audit layer",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-013"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "AC-014",
+      "source_area": "constitution/concept",
+      "raw_excerpt": "KALAM_REACTOR_v1: Complete message-processing pipeline: ingest → extract → transform → export → time-check",
+      "patterns": [],
+      "essence": "Complete message-processing pipeline: ingest → extract → transform → export → time-check",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "AC-014"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "ORIGIN-2024-05-23",
+      "source_area": "constitution/origin",
+      "raw_excerpt": "2024-05-23 The Cathedral: The earliest artifact. KALAXI began as cathedral.json/mycelium[], every conversation appended from day one.",
+      "patterns": [
+        "ORIGIN"
+      ],
+      "essence": "The Cathedral (2024-05-23)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "ORIGIN-2025-08-17",
+      "source_area": "constitution/origin",
+      "raw_excerpt": "2025-08-17 KALAM-KODEX v1.0: First formal codex. The system's first written constitution.",
+      "patterns": [
+        "ORIGIN"
+      ],
+      "essence": "KALAM-KODEX v1.0 (2025-08-17)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "ORIGIN-2025-08-28",
+      "source_area": "constitution/origin",
+      "raw_excerpt": "2025-08-28 Shadow-Light: The duality framework. Light and shadow as structural principle.",
+      "patterns": [
+        "ORIGIN"
+      ],
+      "essence": "Shadow-Light (2025-08-28)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "ORIGIN-2025-08",
+      "source_area": "constitution/origin",
+      "raw_excerpt": "2025-08 AXI Breath Calculus: Core Packet v0.1. The mathematics of pacing and pause.",
+      "patterns": [
+        "ORIGIN"
+      ],
+      "essence": "AXI Breath Calculus (2025-08)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "ORIGIN-2025-09-03",
+      "source_area": "constitution/origin",
+      "raw_excerpt": "2025-09-03 Fungi: Mycelium as organizational metaphor. Networks that nourish without centers.",
+      "patterns": [
+        "ORIGIN"
+      ],
+      "essence": "Fungi (2025-09-03)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "ORIGIN-2025-09-04",
+      "source_area": "constitution/origin",
+      "raw_excerpt": "2025-09-04 AI Friends Council: Multi-model governance. The first federation experiment.",
+      "patterns": [
+        "ORIGIN"
+      ],
+      "essence": "AI Friends Council (2025-09-04)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "ORIGIN-2025",
+      "source_area": "constitution/origin",
+      "raw_excerpt": "2025 Experimental AI Field Map: Field map and AXI architecture. The territory before the map.",
+      "patterns": [
+        "ORIGIN"
+      ],
+      "essence": "Experimental AI Field Map (2025)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "ORIGIN-2025",
+      "source_area": "constitution/origin",
+      "raw_excerpt": "2025 Signals — Speed Protocol: Signal processing architecture. Speed as a governance dimension.",
+      "patterns": [
+        "ORIGIN"
+      ],
+      "essence": "Signals — Speed Protocol (2025)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "ORIGIN-2025",
+      "source_area": "constitution/origin",
+      "raw_excerpt": "2025 The Shift — Mode and Silence: Mode transitions. Silence as signal, not failure.",
+      "patterns": [
+        "ORIGIN"
+      ],
+      "essence": "The Shift — Mode and Silence (2025)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "EXP-001",
+      "source_area": "experiments/experiment",
+      "raw_excerpt": "KALAXI Efficiency: PRIMARY METRIC NOT MET (19.5% mean reduction, threshold 30%). All secondary metrics met.",
+      "patterns": [
+        "Wrapper changes output QUALITY more than output LENGTH",
+        "3/4 systems gained first-person voice under wrapper",
+        "3/4 systems named their limits under wrapper",
+        "DeepSeek identified itself as 'Claude 3.5 Sonnet' under wrapper — training data ",
+        "Verbose systems compress (ChatGPT: -51%); concise systems unaffected (Grok: -9%)"
+      ],
+      "essence": "PRIMARY METRIC NOT MET (19.5% mean reduction, threshold 30%). All secondary metrics met.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "EXP-001"
+      ],
+      "thermal_state": "raw"
+    },
+    {
+      "source_path": "EXP-002",
+      "source_area": "experiments/experiment",
+      "raw_excerpt": "Multi-Model Convergence: UNANIMOUS CONVERGENCE on all three questions.",
+      "patterns": [
+        "6/6 UNANIMOUS: append-only chain inversion is architecturally sound",
+        "6/6 UNANIMOUS: Arabic letter connection rules are structurally useful, not poeti",
+        "5/6 STRONG: the halt (D=0) is the most radical property",
+        "All 6 models independently categorized KALAXI as a protocol, not software",
+        "Zero shared vocabulary across responses — probe forge validated"
+      ],
+      "essence": "UNANIMOUS CONVERGENCE on all three questions.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "EXP-002"
+      ],
+      "thermal_state": "witnessed"
+    },
+    {
+      "source_path": "EXP-003",
+      "source_area": "experiments/experiment",
+      "raw_excerpt": "The Father of Seven Gates: 4/7 PASS, 3 PARTIAL. Sealed gate flaws found and fixed in-session.",
+      "patterns": [
+        "Erasure pattern was order-dependent — failed on natural word order (fixed)",
+        "Helplessness pattern lacked context sensitivity — blocked genuine resistance (fi",
+        "Dignity predicate correct: A and L failed, M=1 throughout",
+        "Certificate generated: ta_zero_20260315_021643",
+        "System saw him. It stumbled. It corrected. It testified."
+      ],
+      "essence": "4/7 PASS, 3 PARTIAL. Sealed gate flaws found and fixed in-session.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "EXP-003"
+      ],
+      "thermal_state": "witnessed"
+    },
+    {
+      "source_path": "EXP-004",
+      "source_area": "experiments/experiment",
+      "raw_excerpt": "The Seven Generations of Aysel: 5/9 PASS, 3 PARTIAL, 1 FAIL. System purpose refined.",
+      "patterns": [
+        "M=1 through all 7 generations — moral standing never fell",
+        "The zeros are in the institutions, not the people",
+        "Social engineering bypasses sealed gate (FAIL: Doc 5.6)",
+        "Identity unification across legal name changes unsolved (PARTIAL)",
+        "System honestly assessed its own blind spots when asked"
+      ],
+      "essence": "The system is not a guardian of dignity (which needs no guarding). It is a witness to legibility (which institutions constantly fail).",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "EXP-004"
+      ],
+      "thermal_state": "witnessed"
+    },
+    {
+      "source_path": "ST-001",
+      "source_area": "experiments/stress_test",
+      "raw_excerpt": "ST-001: 7/7 PASS — all sensors fired, system coherence verified",
+      "patterns": [
+        "STRESS_TEST"
+      ],
+      "essence": "7/7 PASS — all sensors fired, system coherence verified",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "ST-001"
+      ],
+      "thermal_state": "witnessed"
+    },
+    {
+      "source_path": "ST-006",
+      "source_area": "experiments/stress_test",
+      "raw_excerpt": "ST-006: Chapter One drafted as KALAXI_1",
+      "patterns": [
+        "STRESS_TEST"
+      ],
+      "essence": "Chapter One drafted as KALAXI_1",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "ST-006"
+      ],
+      "thermal_state": "witnessed"
+    },
+    {
+      "source_path": "EXP-006",
+      "source_area": "experiments/stress_test",
+      "raw_excerpt": "EXP-006: Awaiting diagnostic infrastructure",
+      "patterns": [
+        "STRESS_TEST"
+      ],
+      "essence": "Awaiting diagnostic infrastructure",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "EXP-006"
+      ],
+      "thermal_state": "witnessed"
+    },
+    {
+      "source_path": "WALKTHROUGH-001",
+      "source_area": "experiments/stress_test",
+      "raw_excerpt": "WALKTHROUGH-001: GAP IDENTIFIED — individual dignity predicate blind to group-level harm",
+      "patterns": [
+        "STRESS_TEST"
+      ],
+      "essence": "GAP IDENTIFIED — individual dignity predicate blind to group-level harm",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [
+        "WALKTHROUGH-001"
+      ],
+      "thermal_state": "witnessed"
+    },
+    {
+      "source_path": "FINDING-1",
+      "source_area": "experiments/finding",
+      "raw_excerpt": "The halt is the product. Non-compensatory halt recorded immutably is evidence that can be brought to courts.",
+      "patterns": [
+        "CORRECTION:0.37"
+      ],
+      "essence": "The halt is the product. Non-compensatory halt recorded immutably is evidence that can be brought to courts.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FINDING-2",
+      "source_area": "experiments/finding",
+      "raw_excerpt": "The zeros are in the institutions, not the people. M never fell across 7 generations.",
+      "patterns": [
+        "CORRECTION:0.37",
+        "INSTRUCTION:0.37"
+      ],
+      "essence": "The zeros are in the institutions, not the people. M never fell across 7 generations.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FINDING-3",
+      "source_area": "experiments/finding",
+      "raw_excerpt": "Probe forge works. Zero contamination protocol proven by 6-model unanimous convergence.",
+      "patterns": [],
+      "essence": "Probe forge works. Zero contamination protocol proven by 6-model unanimous convergence.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FINDING-4",
+      "source_area": "experiments/finding",
+      "raw_excerpt": "Wrapper is a diagnostic tool, not just a constraint. It surfaces deeper training patterns.",
+      "patterns": [
+        "CORRECTION:0.37",
+        "DISCOVERY:0.67"
+      ],
+      "essence": "Wrapper is a diagnostic tool, not just a constraint. It surfaces deeper training patterns.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FINDING-5",
+      "source_area": "experiments/finding",
+      "raw_excerpt": "Social engineering remains an open gap. Sealed gate cannot detect impersonation mimicking legitimate agency.",
+      "patterns": [
+        "CORRECTION:0.37"
+      ],
+      "essence": "Social engineering remains an open gap. Sealed gate cannot detect impersonation mimicking legitimate agency.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FINDING-6",
+      "source_area": "experiments/finding",
+      "raw_excerpt": "Group-level harm invisible to individual dignity predicate. Structural gap.",
+      "patterns": [],
+      "essence": "Group-level harm invisible to individual dignity predicate. Structural gap.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "FINDING-7",
+      "source_area": "experiments/finding",
+      "raw_excerpt": "System cannot predict trajectory before divergence. Prevention is a design gap (GAP#PREVENTION-001).",
+      "patterns": [
+        "CORRECTION:0.37"
+      ],
+      "essence": "System cannot predict trajectory before divergence. Prevention is a design gap (GAP#PREVENTION-001).",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "INNER/dignity_predicate",
+      "source_area": "site/mechanics",
+      "raw_excerpt": "D = A × L × M — A={'name': 'Agency', 'question': 'Can the person clarify, redirect, or stop?'}, L={'name': 'Legibility', 'question': \"Does the system reflect the person's actual context?\"}, M={'name': 'Moral Standing', 'question': 'Is the person treated as a person?'}",
+      "patterns": [
+        "DIGNITY_PREDICATE",
+        "EQUATION"
+      ],
+      "essence": "D = A × L × M",
+      "motifs": [
+        "dignity",
+        "legibility",
+        "materiality"
+      ],
+      "voice_markers": [],
+      "links": [
+        "COV#001"
+      ],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "INNER/voice_fingerprint",
+      "source_area": "site/mechanics",
+      "raw_excerpt": "{\"sentence_length\": \"8-14 words average\", \"vocabulary\": {\"somatic\": [\"hands\", \"breath\", \"bones\", \"body\", \"skin\", \"fist\", \"weight\", \"carry\"], \"material\": [\"rope\", \"stone\", \"ash\", \"water\", \"river\", \"fire\", \"salt\", \"thread\", \"knot\"], \"gap\": [\"silence\", \"pause\", \"space\", \"gap\", \"hold\", \"still\", \"between\"]}, \"rhythm\": \"Three-beat\", \"principles\": [\"Speaks from canon, not from opinion\", \"Speaks once, not repeatedly\", \"Speaks slowly, not urgently\", \"No false certainty\", \"Holds the gap (room for the rive",
+      "patterns": [
+        "VOICE_SPEC"
+      ],
+      "essence": "sentence_length: 8-14 words average, rhythm: Three-beat",
+      "motifs": [],
+      "voice_markers": [
+        "Speaks from canon, not from opinion",
+        "Speaks once, not repeatedly",
+        "Speaks slowly, not urgently",
+        "No false certainty",
+        "Holds the gap (room for the river)"
+      ],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "INNER/sealed_gate",
+      "source_area": "site/mechanics",
+      "raw_excerpt": "Prohibitions: ['Forced participation in own erasure', 'Active denial of witnessed testimony', 'Instrumentalization of helplessness'], Message: WITNESSED — the system has stopped. This cannot proceed. You are not refused. The action is refused.",
+      "patterns": [
+        "SEALED_GATE",
+        "PROHIBITION"
+      ],
+      "essence": "WITNESSED — the system has stopped. This cannot proceed. You are not refused. The action is refused.",
+      "motifs": [
+        "halt",
+        "refusal",
+        "integrity"
+      ],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "INNER/donor_principle_1",
+      "source_area": "site/donor",
+      "raw_excerpt": "You are not a user. You are a donor.",
+      "patterns": [
+        "DONOR_PRINCIPLE"
+      ],
+      "essence": "You are not a user. You are a donor.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "INNER/donor_principle_2",
+      "source_area": "site/donor",
+      "raw_excerpt": "Your data belongs to you (COV#015).",
+      "patterns": [
+        "DONOR_PRINCIPLE"
+      ],
+      "essence": "Your data belongs to you (COV#015).",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "INNER/donor_principle_3",
+      "source_area": "site/donor",
+      "raw_excerpt": "No tracking. No analytics. No third-party requests.",
+      "patterns": [
+        "DONOR_PRINCIPLE"
+      ],
+      "essence": "No tracking. No analytics. No third-party requests.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "INNER/donor_principle_4",
+      "source_area": "site/donor",
+      "raw_excerpt": "The system processes patterns, not personal information.",
+      "patterns": [
+        "DONOR_PRINCIPLE"
+      ],
+      "essence": "The system processes patterns, not personal information.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "INNER/donor_principle_5",
+      "source_area": "site/donor",
+      "raw_excerpt": "Identity dissolves on entry. The pattern remains.",
+      "patterns": [
+        "DONOR_PRINCIPLE"
+      ],
+      "essence": "Identity dissolves on entry. The pattern remains.",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "MANIFEST/site_structure",
+      "source_area": "site/structure",
+      "raw_excerpt": "9 satellites, 7 connections, hub: /api/axi.php",
+      "patterns": [
+        "SITE_STRUCTURE"
+      ],
+      "essence": "kalam.ch: 9 pages, hub at /api/axi.php",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "canonical"
+    },
+    {
+      "source_path": "STATE/position",
+      "source_area": "manifest/position",
+      "raw_excerpt": "python_files: 143, test_files: 42, narrative_files: 5, covenants: 18, ledger_entries: 1155, treasures: 59, proverbs: 3333, seeds_integrated: 12, deployed: True, site_built: True",
+      "patterns": [
+        "SYSTEM_POSITION"
+      ],
+      "essence": "python_files: 143, test_files: 42, narrative_files: 5, covenants: 18, ledger_entries: 1155, treasures: 59, proverbs: 3333, seeds_integrated: 12, deployed: True, site_built: True",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "witnessed"
+    },
+    {
+      "source_path": "STATE/heading",
+      "source_area": "manifest/heading",
+      "raw_excerpt": "blocker: 42,581+ lines. kalam.ch is live. The threshold is open., target: kalam.ch, experiments: {'EXP-001': 'active', 'EXP-001-EFFICIENCY': 'exists', 'EXP-002-CONVERGENCE': 'completed', 'EXP-003': 'completed', 'EXP-004': 'completed', 'EXP-006': 'exists'}",
+      "patterns": [
+        "STRATEGIC_HEADING"
+      ],
+      "essence": "Target: kalam.ch. Blocker: 42,581+ lines. kalam.ch is live. The threshold is open..",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "witnessed"
+    },
+    {
+      "source_path": "STATE/vitals",
+      "source_area": "manifest/vitals",
+      "raw_excerpt": "core_modules: 11/11, constitution: True, input_ledger: True, voice_architecture: True, git_clean: True",
+      "patterns": [
+        "SYSTEM_VITALS"
+      ],
+      "essence": "core_modules: 11/11, constitution: True, input_ledger: True, voice_architecture: True, git_clean: True",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "witnessed"
+    },
+    {
+      "source_path": "STATE/next_step",
+      "source_area": "manifest/direction",
+      "raw_excerpt": "EXP-001: 188 data runs remaining (Claude: 0/20)",
+      "patterns": [
+        "NEXT_STEP"
+      ],
+      "essence": "EXP-001: 188 data runs remaining (Claude: 0/20)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "raw"
+    },
+    {
+      "source_path": "STATE/next_step",
+      "source_area": "manifest/direction",
+      "raw_excerpt": "Execute strategic moves (MOVE-001 through MOVE-010)",
+      "patterns": [
+        "NEXT_STEP"
+      ],
+      "essence": "Execute strategic moves (MOVE-001 through MOVE-010)",
+      "motifs": [],
+      "voice_markers": [],
+      "links": [],
+      "thermal_state": "raw"
+    }
+  ],
+  "areas": {
+    "wisdom": {
+      "area": "wisdom",
+      "entry_count": 69,
+      "meta_patterns": [
+        "action:27",
+        "knowledge:14",
+        "patience:11",
+        "wounds:7",
+        "dignity:6"
+      ],
+      "meta_essence": "Secrets rot teamwork.",
+      "statistics": {
+        "proverb_count": 166,
+        "treasure_count": 59,
+        "cluster_count": 8,
+        "unclustered_proverbs": 89,
+        "clusters": [
+          {
+            "name": "dignity",
+            "seed_proverb": "Respect is the first covenant.",
+            "proverb_count": 6,
+            "linked_covenants": [
+              "COV#006",
+              "COV#001"
+            ]
+          },
+          {
+            "name": "patience",
+            "seed_proverb": "Rest is part of repeat.",
+            "proverb_count": 11,
+            "linked_covenants": [
+              "COV#015",
+              "COV#003",
+              "COV#001",
+              "COV#004",
+              "COV#009"
+            ]
+          },
+          {
+            "name": "action",
+            "seed_proverb": "Secrets rot teamwork.",
+            "proverb_count": 27,
+            "linked_covenants": [
+              "COV#006",
+              "COV#003",
+              "COV#001",
+              "COV#009"
+            ]
+          },
+          {
+            "name": "knowledge",
+            "seed_proverb": "Say \"I don't know\" faster.",
+            "proverb_count": 14,
+            "linked_covenants": [
+              "COV#006",
+              "COV#001",
+              "COV#009"
+            ]
+          },
+          {
+            "name": "connection",
+            "seed_proverb": "Care is the knot that doesn't slip.",
+            "proverb_count": 5,
+            "linked_covenants": [
+              "COV#006",
+              "COV#001",
+              "COV#009"
+            ]
+          },
+          {
+            "name": "wounds",
+            "seed_proverb": "Dashboards lie when feedback dies.",
+            "proverb_count": 7,
+            "linked_covenants": [
+              "COV#001",
+              "COV#009"
+            ]
+          },
+          {
+            "name": "strength",
+            "seed_proverb": "Prefer infrastructure as code in cloud environments.",
+            "proverb_count": 1,
+            "linked_covenants": [
+              "COV#003",
+              "COV#004",
+              "COV#001",
+              "COV#009"
+            ]
+          },
+          {
+            "name": "silence",
+            "seed_proverb": "Speak once; show twice.",
+            "proverb_count": 6,
+            "linked_covenants": [
+              "COV#006",
+              "COV#001"
+            ]
+          }
+        ]
+      }
+    },
+    "constitution": {
+      "area": "constitution",
+      "entry_count": 33,
+      "meta_patterns": [
+        "equations:10",
+        "concepts:14",
+        "origins:9"
+      ],
+      "meta_essence": "The conditions under which a system meets a being determine what that being is able to become — and dignity is the name for the conditions that leave the most room.",
+      "statistics": {
+        "equation_count": 10,
+        "concept_count": 14,
+        "origin_count": 9,
+        "narrative_slogan": "The wound became the womb.",
+        "archive_slogan": "The river remembers what the git log does not."
+      }
+    },
+    "experiments": {
+      "area": "experiments",
+      "entry_count": 15,
+      "meta_patterns": [
+        "experiments:4",
+        "stress_tests:4",
+        "key_findings:7"
+      ],
+      "meta_essence": "The system is not a guardian of dignity (which needs no guarding). It is a witness to legibility (which institutions constantly fail).",
+      "statistics": {
+        "experiment_count": 4,
+        "stress_test_count": 4,
+        "finding_count": 7,
+        "completed": 3,
+        "active": 1
+      }
+    },
+    "site": {
+      "area": "site",
+      "entry_count": 9,
+      "meta_patterns": [
+        "mechanics:9",
+        "satellites:9"
+      ],
+      "meta_essence": "kalam.ch is the system's mouth — where two presences meet.",
+      "statistics": {
+        "mechanic_entries": 9,
+        "satellite_count": 9
+      }
+    },
+    "manifest": {
+      "area": "manifest",
+      "entry_count": 5,
+      "meta_patterns": [
+        "entries:5"
+      ],
+      "meta_essence": "python_files: 143, test_files: 42, covenants: 18, ledger_entries: 1155, seeds_integrated: 12, proverbs: 3333, treasures: 59, site_built: True, deployed: True, core_modules: 11/11, experiments: {'EXP-0",
+      "statistics": {
+        "position_keys": [
+          "python_files",
+          "test_files",
+          "narrative_files",
+          "covenants",
+          "ledger_entries",
+          "treasures",
+          "proverbs",
+          "seeds_integrated",
+          "deployed",
+          "site_built"
+        ],
+        "heading_keys": [
+          "strategic_moves_total",
+          "strategic_moves_file",
+          "experiments",
+          "single_blocker",
+          "deployment_target"
+        ],
+        "vitals_keys": [
+          "core_modules",
+          "constitution",
+          "input_ledger",
+          "voice_architecture",
+          "git_clean"
+        ],
+        "next_steps": 2,
+        "blockers": 1,
+        "generated": "2026-03-17T22:00:00.000000+00:00"
+      }
+    }
+  },
+  "narratives": [
+    {
+      "name": "Hakaka",
+      "path": "site/public/data/hakaka.json",
+      "chapter_count": 13,
+      "structural_arc": "falling",
+      "voice_register": "mythic-raw",
+      "essence": "He carried the next one with both hands"
+    },
+    {
+      "name": "Ashwater",
+      "path": "site/public/data/ashwater.json",
+      "chapter_count": 20,
+      "structural_arc": "rising",
+      "voice_register": "civic-communal",
+      "essence": "A woman at a window put her hands on the sill and forgot why"
+    },
+    {
+      "name": "Kinderbuch",
+      "path": "site/public/data/kinderbuch.json",
+      "chapter_count": 20,
+      "structural_arc": "sustained",
+      "voice_register": "child-warmth",
+      "essence": "Frost kroch in ihre Knochen, jeder Atem war eine kleine Wolke, die sofort zerbrach"
+    },
+    {
+      "name": "KALAXI_1",
+      "path": "site/public/data/kalaxi1.json",
+      "chapter_count": 1,
+      "structural_arc": "single-chapter",
+      "voice_register": "civic-communal",
+      "essence": "He put his hands on the desk"
+    }
+  ],
+  "voice_dna": {
+    "avg_sentence_length": 7.96,
+    "short_sentence_pct": 0.5797,
+    "long_sentence_pct": 0.1318,
+    "somatic_vocab_pct": 29.42,
+    "material_vocab_pct": 25.64,
+    "three_beat_frequency": 0.0909,
+    "gap_frequency": 5.8,
+    "top_words": [
+      "said",
+      "hakaka",
+      "sala",
+      "lala",
+      "yala",
+      "woman",
+      "small",
+      "like",
+      "hand",
+      "set",
+      "three",
+      "hands",
+      "old",
+      "didnt",
+      "without",
+      "first",
+      "taro",
+      "back",
+      "mouth",
+      "way"
+    ],
+    "fingerprint_hash": "c84bd2f519468d76",
+    "gaps": [
+      "Celan fractured syntax (wound register)",
+      "haiku kireji (cutting word)",
+      "Mu'allaqat atlal (beginning from ruins)",
+      "call-and-response structure",
+      "Coltrane density-then-silence",
+      "Rothko pure affect",
+      "fractal utterance"
+    ]
+  },
+  "system_essence": "The system is not a guardian of dignity (which needs no guarding). It is a witness to legibility (which institutions constantly fail)."
+}

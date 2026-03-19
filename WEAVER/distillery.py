@@ -648,9 +648,36 @@ class Distillery:
     # To be implemented in Session 6
 
     def feed_to_system(self) -> Dict:
-        """Distribute extracted patterns back to organism modules.
-        Closes the metabolization loop."""
-        raise NotImplementedError("Step 1F — Session 6")
+        """Write distilled essence to MANIFEST/DIGESTION/ for organism consumption.
+
+        Produces two artifacts:
+        1. latest.json — machine-readable essence store (all entries + VoiceDNA)
+        2. Updates self._report with feed statistics
+
+        The organism reads DIGESTION/latest.json at boot to inherit
+        accumulated patterns without re-running the full distillery.
+        """
+        if self._dry_run:
+            return {"fed": len(self._essence_store), "dry_run": True}
+
+        self._digestion_dir.mkdir(parents=True, exist_ok=True)
+
+        # Build the feed payload
+        payload = {
+            "generated": datetime.now(timezone.utc).isoformat(),
+            "entry_count": len(self._essence_store),
+            "entries": [e.to_dict() for e in self._essence_store],
+            "areas": {k: v for k, v in self._report.areas.items()},
+            "narratives": self._report.narratives,
+            "voice_dna": self._report.voice_dna,
+            "system_essence": self._report.system_essence,
+        }
+
+        # Write latest.json (overwritten each run — the log preserves history)
+        latest_path = self._digestion_dir / "latest.json"
+        latest_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False))
+
+        return {"fed": len(self._essence_store), "path": str(latest_path)}
 
     # ── Content area extractors (Sessions 2-5) ───────────────────────
 
@@ -1444,18 +1471,181 @@ class Distillery:
     # ── Synthesis (Session 5) ────────────────────────────────────────
 
     def render_essence_document(self) -> str:
-        """Generate MANIFEST/DISTILLED_ESSENCE.md from all extractions."""
-        raise NotImplementedError("Session 5")
+        """Generate MANIFEST/DISTILLED_ESSENCE.md from all extractions.
+
+        Human-readable distillation of the entire system. Organized by
+        content area, each section shows meta-patterns, meta-essence,
+        and the top entries. VoiceDNA gets its own section.
+
+        Returns the document text. Writes to disk unless dry_run.
+        """
+        lines = [
+            "# DISTILLED ESSENCE — KALAXI-V0",
+            f"> Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}",
+            f"> Entries: {len(self._essence_store)}",
+            "",
+            f"**System Essence:** {self._report.system_essence}",
+            "",
+        ]
+
+        # ── VoiceDNA ─────────────────────────────────────────────
+        dna = self._report.voice_dna
+        if dna:
+            lines.extend([
+                "## Voice DNA",
+                f"- Avg sentence length: {dna.get('avg_sentence_length', 0)} words",
+                f"- Short sentences (<8w): {dna.get('short_sentence_pct', 0):.1%}",
+                f"- Long sentences (>14w): {dna.get('long_sentence_pct', 0):.1%}",
+                f"- Somatic density: {dna.get('somatic_vocab_pct', 0)} per 1000 words",
+                f"- Material density: {dna.get('material_vocab_pct', 0)} per 1000 words",
+                f"- Three-beat frequency: {dna.get('three_beat_frequency', 0):.1%}",
+                f"- Gap frequency: {dna.get('gap_frequency', 0)} per 1000 words",
+                f"- Top words: {', '.join(dna.get('top_words', [])[:10])}",
+                f"- Fingerprint: {dna.get('fingerprint_hash', '')}",
+                f"- Missing: {', '.join(dna.get('gaps', [])[:4])}...",
+                "",
+            ])
+
+        # ── Narratives ───────────────────────────────────────────
+        if self._report.narratives:
+            lines.append("## Narratives")
+            for nar in self._report.narratives:
+                lines.extend([
+                    f"### {nar.get('name', '')}",
+                    f"- Chapters: {nar.get('chapter_count', 0)}",
+                    f"- Arc: {nar.get('structural_arc', '')}",
+                    f"- Register: {nar.get('voice_register', '')}",
+                    f"- Essence: \"{nar.get('essence', '')}\"",
+                    "",
+                ])
+
+        # ── Content areas ─────────────────────────────────────────
+        for area_name in ["wisdom", "constitution", "experiments", "site", "manifest"]:
+            area = self._report.areas.get(area_name)
+            if not area:
+                continue
+            lines.extend([
+                f"## {area_name.title()}",
+                f"- Patterns: {', '.join(area.get('meta_patterns', []))}",
+                f"- Essence: \"{area.get('meta_essence', '')}\"",
+                f"- Entries: {area.get('entry_count', 0)}",
+                "",
+            ])
+
+        # ── Top essence entries (across all areas) ────────────────
+        # Pick entries with the most patterns (richest extraction)
+        sorted_entries = sorted(
+            self._essence_store,
+            key=lambda e: len(e.patterns),
+            reverse=True,
+        )
+        if sorted_entries:
+            lines.extend(["## Top Extractions", ""])
+            for entry in sorted_entries[:15]:
+                lines.append(
+                    f"- **[{entry.source_path}]** ({entry.source_area}): "
+                    f"\"{entry.essence[:120]}\""
+                )
+            lines.append("")
+
+        # ── Footer ────────────────────────────────────────────────
+        lines.extend([
+            "---",
+            f"*{len(self._essence_store)} entries distilled. "
+            f"Fingerprint: {dna.get('fingerprint_hash', 'none') if dna else 'none'}.*",
+            "",
+            "🐬🐯🐺 · 80 Hz · V-001 + V-002",
+        ])
+
+        doc = "\n".join(lines)
+
+        if not self._dry_run:
+            self._essence_doc_path.parent.mkdir(parents=True, exist_ok=True)
+            self._essence_doc_path.write_text(doc)
+
+        return doc
 
     # ── Full run ─────────────────────────────────────────────────────
 
     def distill_all(self, force: bool = False) -> DistilleryReport:
-        """Run the full distillery: repair chain, metabolize ledger,
-        extract all content areas, synthesize, feed back.
+        """Run the full distillery pipeline.
+
+        Sequence:
+        1. Extract narratives → structural arc, voice register, chapter stats
+        2. Extract voice → VoiceDNA fingerprint
+        3. Extract wisdom → proverb clusters, treasure principles
+        4. Extract constitution → equations, concepts, origins
+        5. Extract experiments → discoveries, findings
+        6. Extract site → inner workings, donor principles
+        7. Extract manifest → system position, heading, vitals
+        8. Render essence document (DISTILLED_ESSENCE.md)
+        9. Feed to system (DIGESTION/latest.json)
+        10. Log run
+
         Args:
             force: If True, re-process already-witnessed entries.
+        Returns:
+            DistilleryReport with all results.
         """
-        raise NotImplementedError("Assembled after all steps are built")
+        self._report = DistilleryReport()
+        self._essence_store = []
+        self._report.timestamp = datetime.now(timezone.utc).isoformat()
+
+        # Determine run number from existing log
+        run_number = 1
+        if self._run_log_path.exists():
+            existing = self._run_log_path.read_text()
+            run_number = existing.count("## Run #") + 1
+        self._report.run_number = run_number
+
+        # ── 1. Narratives ─────────────────────────────────────────
+        narratives = self.extract_narratives()
+        self._report.narratives = [n.to_dict() for n in narratives]
+        self._report.content_areas_processed.append("narratives")
+
+        # ── 2. Voice DNA ──────────────────────────────────────────
+        voice_dna = self.extract_voice()
+        self._report.voice_dna = voice_dna.to_dict()
+        self._report.content_areas_processed.append("voice")
+
+        # ── 3-7. Content areas ────────────────────────────────────
+        area_methods = [
+            ("wisdom", self.extract_wisdom),
+            ("constitution", self.extract_constitution),
+            ("experiments", self.extract_experiments),
+            ("site", self.extract_site),
+            ("manifest", self.extract_manifest),
+        ]
+
+        for area_name, method in area_methods:
+            area_result = method()
+            self._report.areas[area_name] = area_result.to_dict()
+            self._essence_store.extend(area_result.entries)
+            self._report.content_areas_processed.append(area_name)
+
+        # ── System essence (the one-line distillation of everything) ──
+        # Priority: EXP-004 discovery > constitution essence > narrative essence
+        exp_area = self._report.areas.get("experiments", {})
+        con_area = self._report.areas.get("constitution", {})
+        self._report.system_essence = (
+            exp_area.get("meta_essence", "")
+            or con_area.get("meta_essence", "")
+            or (narratives[0].essence if narratives else "")
+        )
+
+        # ── 8. Render ─────────────────────────────────────────────
+        doc = self.render_essence_document()
+        self._report.content_areas_processed.append("rendered")
+
+        # ── 9. Feed ───────────────────────────────────────────────
+        feed_result = self.feed_to_system()
+        self._report.content_areas_processed.append("fed")
+
+        # ── 10. Log ───────────────────────────────────────────────
+        self._report.entries_total = len(self._essence_store)
+        self._log_run(self._report)
+
+        return self._report
 
     # ── Utilities ────────────────────────────────────────────────────
 
