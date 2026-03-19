@@ -486,6 +486,90 @@ class InputLedger:
                 entry_file.write_text(content)
         return True
 
+    def metabolize_batch(self, batch: List[Dict]) -> int:
+        """Metabolize multiple entries with a single save.
+        Each item in batch: {"entry_id": str, "patterns": List[str], "essence": str}
+        Returns count of successfully metabolized entries."""
+        count = 0
+        for item in batch:
+            entry = self.get(item["entry_id"])
+            if entry is None:
+                continue
+            entry.patterns = item.get("patterns", [])
+            essence = item.get("essence", "")
+            if essence:
+                entry.essence = essence
+            if entry.thermal_state == "raw":
+                entry.thermal_state = "witnessed"
+            count += 1
+        if count > 0:
+            self._save()
+            # Skip chronicle rewrite during batch — too expensive for 1600+ entries
+        return count
+
+    def advance_thermal(self, entry_id: str, target_state: str,
+                        reason: str = "") -> bool:
+        """Advance an entry's thermal state along the chain:
+        raw -> witnessed -> integrated -> canonical.
+        No skipping allowed. Returns True if advanced."""
+        THERMAL_ORDER = ["raw", "witnessed", "integrated", "canonical"]
+        entry = self.get(entry_id)
+        if entry is None:
+            return False
+        current_idx = THERMAL_ORDER.index(entry.thermal_state) if entry.thermal_state in THERMAL_ORDER else -1
+        target_idx = THERMAL_ORDER.index(target_state) if target_state in THERMAL_ORDER else -1
+        if target_idx <= current_idx or target_idx < 0:
+            return False  # Cannot go backward or skip
+        if target_idx != current_idx + 1:
+            return False  # Must advance one step at a time
+        entry.thermal_state = target_state
+        return True
+
+    def repair_chain(self) -> Dict:
+        """Repair the hash chain. Content hashes are immutable (they hash raw_text).
+        Only chain links (prev_hash, chain_hash) are recalculated from the break point.
+        Returns a report of what was repaired."""
+        if not self._entries:
+            return {"repaired": 0, "status": "empty"}
+        repairs = []
+        for i, entry in enumerate(self._entries):
+            expected_prev = "GENESIS" if i == 0 else self._entries[i - 1].chain_hash
+            expected_chain = self._compute_hash(entry.content_hash + expected_prev)
+            needs_repair = (entry.prev_hash != expected_prev or
+                            entry.chain_hash != expected_chain)
+            if needs_repair:
+                old_prev = entry.prev_hash
+                old_chain = entry.chain_hash
+                entry.prev_hash = expected_prev
+                entry.chain_hash = expected_chain
+                repairs.append({
+                    "index": i,
+                    "entry_id": entry.entry_id,
+                    "old_prev": old_prev[:16],
+                    "new_prev": expected_prev[:16],
+                    "old_chain": old_chain[:16],
+                    "new_chain": expected_chain[:16],
+                })
+        if repairs:
+            self._save()
+        return {
+            "repaired": len(repairs),
+            "first_break": repairs[0]["index"] if repairs else None,
+            "last_break": repairs[-1]["index"] if repairs else None,
+            "chain_valid": self.verify_chain(),
+            "status": "repaired" if repairs else "clean",
+        }
+
+    def thermal_summary(self) -> Dict:
+        """Count entries by thermal state."""
+        counts = {"raw": 0, "witnessed": 0, "integrated": 0, "canonical": 0}
+        for e in self._entries:
+            if e.thermal_state in counts:
+                counts[e.thermal_state] += 1
+            else:
+                counts[e.thermal_state] = counts.get(e.thermal_state, 0) + 1
+        return counts
+
     def summary(self) -> dict:
         return {
             "total_entries": len(self._entries),
