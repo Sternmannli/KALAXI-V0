@@ -304,14 +304,13 @@ def _assess_severity(individual: TensionSide, collective: TensionSide, direct: b
     col_only = collective.signals and not individual.signals
     if both and total >= 4:
         return "HIGH"
-    elif col_only and len(collective.signals) >= 2:
+    elif col_only:
         # WALKTHROUGH-001 fix: collective signals with ZERO individual signals
-        # means the harm is hidden — individuals are invisible precisely because
-        # the bias operates at the group level. This is MORE dangerous, not less.
+        # means the harm is hidden — individuals pass dignity gates while the
+        # group is erased from opportunity. This is MORE dangerous, not less.
+        # Every individual D=1.0 + cohort rejection = constitutional dead zone.
         return "HIGH"
     elif both and total >= 2:
-        return "MEDIUM"
-    elif col_only:
         return "MEDIUM"
     elif total >= 1:
         return "LOW"

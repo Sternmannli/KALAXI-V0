@@ -114,6 +114,8 @@ from FIELD.STUDY.divergence_study import DivergenceShadowInstrument
 from FIELD.amendments import PrivacyEnvelope, BaselineDriftDetector, RefusalMap
 # ── Input Ledger: every V-001 input is a unit, registered as-is ──
 from WEAVER.input_ledger import InputLedger, V001, V002
+# ── Boot Ritual: credentials + connectivity + ledger integrity ──
+from WEAVER.boot_ritual import boot_ritual, BootResult
 # ── Compass: system orientation engine ──
 from WEAVER.compass import Compass
 # ── Letter Ontology + Chain Validator + Witness Certificate (EXP-002) ──
@@ -251,6 +253,10 @@ class OrganismState:
     # ── Layer 3 Reframe (RATIFIED 2026-03-15) ──
     layer3_active: bool = True  # Dignity is not fragile. The system refuses denial, not protects.
     layer3_dignity_frame: str = "refusal"  # "protection" (old) → "refusal" (Layer 3)
+    # ── Boot Ritual (2026-03-18): credentials + connectivity + ledger ──
+    boot_ritual_passed: bool = False
+    boot_ritual_checks: int = 0
+    boot_ritual_failures: int = 0
     timestamp: str = ""
 
 
@@ -358,8 +364,14 @@ class Organism:
         self._refusal_map = RefusalMap()
         # ── Input Ledger: every V-001 input is a unit ──
         self._input_ledger = InputLedger()
+        # ── Boot Ritual: verify credentials + connectivity + ledger ──
+        # strict=False so we don't crash the organism in test environments
+        # but the result is stored and checked before processing
+        self._boot_result = boot_ritual(strict=False)
         # ── Compass: orientation engine (MOVE-001) ──
         self._compass = Compass()
+        # ── Distillery: extract essence from all content sources ──
+        self._distillery = None  # lazy-loaded to avoid circular imports
         # ── Letter Chain (EXP-002): ontology + witness certificates ──
         self._witness_certs_generated = 0
         self._last_sense = None
@@ -406,6 +418,19 @@ class Organism:
         # Signal to the system that a probe needs forge sterilization
         pass
 
+    def distill(self, dry_run=False):
+        """Run the Distillery to extract essence from all content sources.
+
+        Returns the DistilleryReport. When dry_run=False, writes
+        DISTILLED_ESSENCE.md and DIGESTION/latest.json.
+        """
+        if self._distillery is None:
+            from WEAVER.distillery import Distillery
+            self._distillery = Distillery(dry_run=dry_run)
+        else:
+            self._distillery._dry_run = dry_run
+        return self._distillery.distill_all()
+
     def process(self, donor_input, medium=None, felt_domain="donor-exchange"):
         """
         Process donor input through the full organism pipeline v2.0.
@@ -448,6 +473,13 @@ class Organism:
             medium = TERMINAL
 
         warnings = []
+
+        # ── Phase -2: BOOT RITUAL — credentials + connectivity + ledger integrity ──
+        # "Never process anything without making sure of both. When not, you stop." — V-001
+        if not self._boot_result.passed:
+            critical = [c for c in self._boot_result.checks if not c.passed and c.critical]
+            if critical:
+                warnings.append(f"BOOT ALARM: {critical[0].message}")
 
         # ── Phase -1: EXCHANGE LEDGER — register raw input before anything else ──
         # "Every input is a unit. An element. A cell." — V-001
@@ -643,7 +675,15 @@ class Organism:
             warnings.append(f"Agency collapsed: weakest dimension is {agency_score.weakest}")
 
         # 2d-v. GAP#004 — conflict detection (individual vs collective)
-        conflict_ticket = self._conflict_engine.process(donor_input)
+        # Fix 4: Pass individual dignity scores into the conflict engine so
+        # collective measurement can compute D_collective = mean(D_i) × (1 - variance_penalty)
+        individual_scores = [c.score for c in dignity.components] if dignity.components else None
+        failed_components = [[c.name for c in dignity.components if not c.passed]] if dignity.components else None
+        conflict_ticket = self._conflict_engine.process(
+            donor_input,
+            individual_scores=individual_scores,
+            failed_components=failed_components,
+        )
         if conflict_ticket:
             self._wire.broadcast(
                 f"GAP#004 conflict: {conflict_ticket.severity} — {conflict_ticket.input_summary}",
@@ -651,6 +691,45 @@ class Organism:
                 source="mediator",
             )
             warnings.append(f"GAP#004 {conflict_ticket.severity}: {conflict_ticket.resolution_mode}")
+
+            # Fix 2: Wire collective remedies to shelter path (COV#008 for groups)
+            if conflict_ticket.collective_remedies:
+                cohort_shelter_needed = any(
+                    r.remedy_type in ("sealed_gate", "policy_review")
+                    for r in conflict_ticket.collective_remedies
+                )
+                remedy_descriptions = [r.description for r in conflict_ticket.collective_remedies]
+                self._wire.broadcast(
+                    f"Collective remedies ({len(remedy_descriptions)}): "
+                    + "; ".join(r.remedy_type for r in conflict_ticket.collective_remedies),
+                    "gap004-collective-remedy",
+                    source="mediator",
+                )
+                if cohort_shelter_needed:
+                    # COV#008 applies to groups — trigger shelter for the cohort
+                    shelter_record = self._shelter.receive(
+                        ex_id, donor_input,
+                        failed_components=["collective_D"],
+                    )
+                    warnings.append(
+                        f"COV#008 collective shelter: {shelter_record.donor_message}"
+                    )
+
+            # Fix 3: W-Scale checkpoint — escalate unwitnessed collective sealed gate
+            if (conflict_ticket.collective_measurement
+                    and conflict_ticket.collective_measurement.sealed_gate
+                    and conflict_ticket.witness_level < 3):
+                conflict_ticket = self._conflict_engine.steward_sees(conflict_ticket)
+                self._wire.broadcast(
+                    f"W-Scale escalation: collective D="
+                    f"{conflict_ticket.collective_measurement.D_collective:.3f} "
+                    f"< 0.5 — auto-escalated to W-3 (SEEN)",
+                    "w-scale-checkpoint",
+                    source="organism",
+                )
+                warnings.append(
+                    f"W-Scale: sealed gate conflict escalated to W-3 (SEEN)"
+                )
 
         # 2e. PILLARS — unified pillar detection (humour/absurdity/obsession/love/proverb)
         pillar_profile = None
@@ -1147,6 +1226,10 @@ class Organism:
             letter_ontology_non_connectors=len(NON_CONNECTORS),
             letter_ontology_connectors=len(ALL_LETTERS) - len(NON_CONNECTORS),
             witness_certificates_generated=self._witness_certs_generated,
+            # ── Boot Ritual (2026-03-18) ──
+            boot_ritual_passed=self._boot_result.passed,
+            boot_ritual_checks=len(self._boot_result.checks),
+            boot_ritual_failures=len([c for c in self._boot_result.checks if not c.passed]),
             timestamp=self._now(),
         )
 

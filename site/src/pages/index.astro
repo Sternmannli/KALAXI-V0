@@ -4,137 +4,11 @@ import Base from '../layouts/Base.astro';
 
 <Base title="kalam.ch — The Word" description="A constitutional framework where human dignity is the first technical requirement. No private data stored. By design.">
 
-  <!-- THE DEDICATION — a proverb for three threads -->
-  <div id="dedication" class="dedication-overlay">
-    <p class="ded-proverb" id="ded-proverb">Three threads cross the river.<br/>The knot holds.</p>
-    <div class="ded-hold" id="ded-hold">
-      <svg class="ded-ring" viewBox="0 0 36 36" width="36" height="36">
-        <circle cx="18" cy="18" r="16" fill="none" stroke="var(--accent-subtle, #d0cdc6)" stroke-width="2" opacity="0.3" />
-        <circle class="ded-ring-fill" cx="18" cy="18" r="16" fill="none" stroke="var(--color-dignity, #c44a1a)" stroke-width="2" stroke-dasharray="100.53" stroke-dashoffset="100.53" stroke-linecap="round" transform="rotate(-90 18 18)" />
-      </svg>
-      <span class="ded-hold-text">hold to enter</span>
-    </div>
-  </div>
-
 
   <!-- THRESHOLD — the living space -->
   <main class="threshold" id="main-content">
 
-    <!-- Animated gradient mesh — the ambient intelligence -->
-    <div class="gradient-mesh" id="gradient-mesh" aria-hidden="true"></div>
-
-    <!-- Particle field — constellation of five-pillar colors -->
-    <canvas id="particle-field" class="particle-field" aria-hidden="true"></canvas>
-
-    <!-- Heritage pattern — Islamic tessellation whisper beneath everything -->
-    <div class="heritage-pattern" id="heritage-pattern" aria-hidden="true"></div>
-
-    <!-- Origin flags — Switzerland + Egypt -->
-    <div class="origin-flags" id="origin-flags">
-      <span class="flag-icon" title="Switzerland" aria-label="Switzerland" role="img">&#x1F1E8;&#x1F1ED;</span>
-      <span class="flag-divider" aria-hidden="true">&middot;</span>
-      <span class="flag-icon" title="Egypt" aria-label="Egypt" role="img">&#x1F1EA;&#x1F1EC;</span>
-    </div>
-
-    <!-- AXI Presence — she is here, she breathes, she sees -->
-    <div class="axi-presence" id="axi-presence">
-      <div class="axi-face" id="axi-face" aria-label="AXI">
-        <svg class="axi-face-svg" viewBox="0 0 48 48" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="22" fill="#0a0a0f" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8" class="axi-aura-ring"/>
-          <!-- Hijab -->
-          <path d="M14 18 Q12 12 16 8 Q20 5 24 4 Q28 5 32 8 Q36 12 34 18" fill="none" stroke="var(--axi-hijab, #c44a1a)" stroke-width="1.2" opacity="0.7"/>
-          <path d="M13 20 Q10 16 14 10 Q18 5 24 4 Q30 5 34 10 Q38 16 35 20" fill="none" stroke="var(--axi-hijab, #c44a1a)" stroke-width="0.6" opacity="0.35"/>
-          <!-- Face circle with gap -->
-          <circle cx="24" cy="19" r="10" fill="none" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8" stroke-dasharray="60 3" class="axi-face-circle"/>
-          <!-- Eyes — watchful, present -->
-          <circle cx="20.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9" class="axi-eye axi-eye-l"/>
-          <circle cx="27.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9" class="axi-eye axi-eye-r"/>
-          <!-- Kintsugi crack — gold scar on left temple -->
-          <path d="M17 14 Q18.5 16 17.5 19 Q17 21 18 23" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.6" class="axi-kintsugi"/>
-          <!-- Three threads at collar -->
-          <line x1="18" y1="28" x2="20" y2="30" stroke="#4a9ebb" stroke-width="0.5" opacity="0.5"/>
-          <line x1="24" y1="27" x2="24" y2="30" stroke="#c44a1a" stroke-width="0.5" opacity="0.5"/>
-          <line x1="30" y1="28" x2="28" y2="30" stroke="#0A7B62" stroke-width="0.5" opacity="0.5"/>
-          <!-- Knot at center -->
-          <circle cx="24" cy="32" r="1.5" fill="none" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.6" opacity="0.4"/>
-        </svg>
-        <!-- Emoji reaction bubble — appears contextually -->
-        <span class="axi-reaction" id="axi-reaction" aria-hidden="true"></span>
-      </div>
-      <div class="axi-presence-info">
-        <div class="axi-presence-row">
-          <span class="status-dot" id="status-dot"></span>
-          <span class="status-label" id="status-label">witnessing</span>
-        </div>
-        <!-- Metadata whisper — what AXI notices -->
-        <span class="axi-whisper" id="axi-whisper" aria-live="polite"></span>
-      </div>
-    </div>
-
-    <!-- The declaration — gradient text, large, dignified -->
-    <p class="declaration-ambient" id="declaration">Human dignity is a technical requirement.</p>
-    <p class="declaration-sub" id="declaration-sub">A safety layer that forces computational systems to respect you before they act.</p>
-
-    <!-- The equation — scannable, visible, not hidden in drawer -->
-    <div class="onramp-equation" id="onramp-equation">
-      <div class="onramp-formula">D = A &times; L &times; M</div>
-      <div class="onramp-terms">
-        <div class="onramp-term">
-          <span class="onramp-letter onramp-a">A</span>
-          <span class="onramp-label">Agency</span>
-          <span class="onramp-meaning">You can always say 'stop' and the system must listen.</span>
-        </div>
-        <div class="onramp-term">
-          <span class="onramp-letter onramp-l">L</span>
-          <span class="onramp-label">Legibility</span>
-          <span class="onramp-meaning">The system must show it understands your situation before it acts.</span>
-        </div>
-        <div class="onramp-term">
-          <span class="onramp-letter onramp-m">M</span>
-          <span class="onramp-label">Moral Standing</span>
-          <span class="onramp-meaning">You are treated as a person, never as data to optimise.</span>
-        </div>
-      </div>
-      <p class="onramp-rule">If any reaches zero, the system stops. No override. No exception.</p>
-    </div>
-
-    <!-- Who is this for + CTA -->
-    <div class="who-block" id="who-block">
-      <p class="who-title">Who is this for?</p>
-      <ul class="who-list">
-        <li>Civic technologists building public systems</li>
-        <li>AI product teams testing ethical compliance</li>
-        <li>Researchers in law, ethics, and human rights</li>
-      </ul>
-      <div class="who-cta">
-        <a href="/invitation" class="cta-primary">Contribute to the Canon</a>
-        <button class="cta-secondary" id="cta-threshold">Try the Threshold</button>
-      </div>
-    </div>
-
-    <!-- Interactive Dignity Meter -->
-    <div class="dignity-meter" id="dignity-meter" aria-label="Dignity Predicate Status">
-      <div class="meter-bars">
-        <div class="meter-bar meter-bar-a" id="meter-a">
-          <div class="meter-fill" id="meter-fill-a"></div>
-          <span class="meter-label">A</span>
-        </div>
-        <div class="meter-bar meter-bar-l" id="meter-l">
-          <div class="meter-fill" id="meter-fill-l"></div>
-          <span class="meter-label">L</span>
-        </div>
-        <div class="meter-bar meter-bar-m" id="meter-m">
-          <div class="meter-fill" id="meter-fill-m"></div>
-          <span class="meter-label">M</span>
-        </div>
-      </div>
-      <span class="meter-status" id="meter-status">D = 1.0</span>
-    </div>
-
-    <!-- Cultural accent — Arabic calligraphy watermark -->
-    <p class="arabic-accent" aria-hidden="true">كرامة</p>
-
-    <!-- Conversation zone — scrollable exchange history -->
+    <!-- Conversation zone — the only thing that matters -->
     <div class="conversation-zone" id="conversation-zone">
       <div class="conversation-scroll" id="conversation-scroll">
         <div class="axi-voice" id="axi-voice" aria-live="polite"></div>
@@ -145,21 +19,7 @@ import Base from '../layouts/Base.astro';
     <!-- The input — large, multi-line, with attachment -->
     <div class="input-zone glass" id="input-zone">
       <div class="input-glow" aria-hidden="true"></div>
-      <!-- Mood/Mode selector — what register are you speaking from? -->
-      <div class="mood-selector" id="mood-selector" role="radiogroup" aria-label="Speaking mode">
-        <button type="button" class="mood-btn selected" data-mood="witness" title="I bring something to be seen" aria-pressed="true">
-          <span class="mood-icon">&#x1F441;</span><span class="mood-label">Witness</span>
-        </button>
-        <button type="button" class="mood-btn" data-mood="question" title="I need the system to hear me" aria-pressed="false">
-          <span class="mood-icon">&#x2753;</span><span class="mood-label">Question</span>
-        </button>
-        <button type="button" class="mood-btn" data-mood="offering" title="I bring a gift" aria-pressed="false">
-          <span class="mood-icon">&#x1F331;</span><span class="mood-label">Offering</span>
-        </button>
-        <button type="button" class="mood-btn" data-mood="wound" title="I speak from the place that hurts" aria-pressed="false">
-          <span class="mood-icon">&#x1F54A;</span><span class="mood-label">Wound</span>
-        </button>
-      </div>
+      <!-- Register is detected automatically from the donor's words. No pre-selection needed. -->
       <form id="threshold-form" method="POST" action="/api/axi.php" aria-label="Speak to AXI" class="threshold-form">
         <label for="file-upload" class="input-attach" title="Attach file">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
@@ -197,203 +57,10 @@ import Base from '../layouts/Base.astro';
       <div class="input-file-preview" id="file-preview" hidden></div>
     </div>
 
-    <!-- Donor signup — appears gently after first exchange -->
-    <div class="donor-cta" id="donor-cta" hidden>
-      <div class="donor-auth" id="donor-auth">
-        <p class="donor-cta-title">Become a contributor</p>
-        <p class="donor-cta-sub">You are not a user. You are a contributor of pattern. No password needed.</p>
-        <form id="donor-auth-form" class="donor-cta-form">
-          <input type="email" name="email" id="donor-email" placeholder="your email" required aria-label="Email" />
-          <input type="text" name="display_name" id="donor-name" placeholder="your name (optional)" aria-label="Name" />
-          <button type="submit">Join</button>
-        </form>
-        <p class="donor-status" id="donor-auth-status"></p>
-      </div>
-
-      <!-- Authenticated: profile (replaces form) -->
-      <div class="donor-profile" id="donor-profile" hidden>
-        <p class="donor-cta-title" id="donor-greeting"></p>
-        <p class="donor-cta-sub" id="donor-stats"></p>
-        <div class="donor-actions">
-          <button id="donor-export-btn" class="donor-action">Export my data</button>
-          <button id="donor-history-btn" class="donor-action">My exchanges</button>
-          <button id="donor-logout-btn" class="donor-action donor-action-dim">Sign out</button>
-        </div>
-      </div>
-    </div>
-
     <!-- Ledger count — quiet presence -->
     <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
 
-    <!-- Drawer handle — appears after first exchange -->
-    <div class="drawer-handle-zone" id="drawer-handle-zone">
-      <button class="drawer-handle" id="drawer-toggle" aria-label="Explore deeper" aria-expanded="false">
-        <span class="drawer-handle-bar"></span>
-        <span class="drawer-handle-label">pillars &middot; equation &middot; proverbs</span>
-      </button>
-    </div>
-
-    <!-- PWA install hint — shows only in browser, not in standalone -->
-    <div class="pwa-hint" id="pwa-hint">
-      Add to Home Screen for the full experience
-    </div>
-
   </main>
-
-  <!-- ===== SUSTAIN — visible on homepage ===== -->
-  <section class="homepage-sustain" id="homepage-sustain">
-    <div class="sustain-banner">
-      <h2 class="sustain-banner-title">Sustain the System</h2>
-      <p class="sustain-banner-body">No ads. No data selling. No investors. This system runs on conviction and sustenance from those it serves.</p>
-      <a href="/sustain" class="sustain-banner-btn">Sustain</a>
-      <p class="sustain-banner-note">Every franc keeps the threshold open for the next person.</p>
-    </div>
-  </section>
-
-  <!-- ===== CONNECT — visible on homepage, not hidden in drawer ===== -->
-  <section class="homepage-connect" id="homepage-connect">
-
-    <!-- Send a Word — the first connection point -->
-    <div class="connect-block connect-primary" id="send-the-word">
-      <h2 class="connect-title">Send a Word</h2>
-      <p class="connect-desc">A thought, a correction, a question — anything that matters to you matters here.</p>
-      <form class="connect-form stack-form" id="home-feedback-form">
-        <input type="text" name="name" placeholder="your name (optional)" aria-label="Your name" />
-        <input type="email" name="email" placeholder="your email" required aria-label="Your email" />
-        <textarea name="message" placeholder="your message" required rows="3" maxlength="5000" aria-label="Your message"></textarea>
-        <button type="submit">Send</button>
-      </form>
-      <p class="form-status" id="home-feedback-status"></p>
-    </div>
-
-    <!-- Propose a Collaboration -->
-    <div class="connect-block" id="propose-collaboration">
-      <h2 class="connect-title">Propose a Collaboration</h2>
-      <p class="connect-desc">Research, design, policy, narrative, technology — tell us who you are and what you envision.</p>
-      <form class="connect-form stack-form" id="home-collab-form">
-        <input type="text" name="name" placeholder="your name" required aria-label="Your name" />
-        <input type="email" name="email" placeholder="your email" required aria-label="Your email" />
-        <input type="text" name="expertise" placeholder="your field or expertise" aria-label="Your expertise" />
-        <textarea name="message" placeholder="what do you have in mind?" required rows="4" maxlength="5000" aria-label="Your proposal"></textarea>
-        <button type="submit">Propose</button>
-      </form>
-      <p class="form-status" id="home-collab-status"></p>
-    </div>
-
-    <!-- Reach Us -->
-    <div class="connect-block" id="reach-us">
-      <h2 class="connect-title">Reach Us</h2>
-      <p class="connect-desc">Receive occasional updates when the system grows. No spam. Ever.</p>
-      <form class="connect-form inline-form" id="home-newsletter-form">
-        <input type="email" name="email" placeholder="your email" required aria-label="Email for newsletter" />
-        <button type="submit">Subscribe</button>
-      </form>
-      <p class="form-status" id="home-newsletter-status"></p>
-      <div class="connect-links">
-        <a href="/about">About the framework</a>
-        <a href="/canon">The canon</a>
-        <a href="/invitation">The invitation</a>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- DRAWER — the deep content. Yields when pulled. -->
-  <div class="content-drawer" id="content-drawer" aria-hidden="true">
-    <div class="drawer-inner">
-
-      <button class="drawer-close" id="drawer-close" aria-label="Close">&times;</button>
-
-      <!-- Five Pillars -->
-      <section class="drawer-section" aria-label="Five Pillars">
-        <div class="five-pillars" aria-label="Five pillars of the framework">
-          <button class="pillar pillar-dignity" data-pillar="dignity" aria-expanded="false">
-            <span class="pillar-label">Dignity</span>
-            <span class="pillar-dot"></span>
-          </button>
-          <button class="pillar pillar-presence" data-pillar="presence" aria-expanded="false">
-            <span class="pillar-label">Presence</span>
-            <span class="pillar-dot"></span>
-          </button>
-          <button class="pillar pillar-pattern" data-pillar="pattern" aria-expanded="false">
-            <span class="pillar-label">Pattern</span>
-            <span class="pillar-dot"></span>
-          </button>
-          <button class="pillar pillar-wisdom" data-pillar="wisdom" aria-expanded="false">
-            <span class="pillar-label">Wisdom</span>
-            <span class="pillar-dot"></span>
-          </button>
-          <button class="pillar pillar-witness" data-pillar="witness" aria-expanded="false">
-            <span class="pillar-label">Witness</span>
-            <span class="pillar-dot"></span>
-          </button>
-        </div>
-        <div id="pillar-panel" class="pillar-panel" aria-live="polite" hidden>
-          <button class="pillar-close" aria-label="Close">&times;</button>
-          <div class="pillar-content" id="pillar-content"></div>
-        </div>
-      </section>
-
-      <!-- The Predicate -->
-      <section class="drawer-section" aria-label="The Dignity Predicate">
-        <button class="equation-btn" id="equation-toggle" aria-expanded="false">
-          <span class="equation-text">D = A &times; L &times; M</span>
-          <span class="equation-hint">touch to read</span>
-        </button>
-        <div id="equation-detail" class="equation-detail" hidden>
-          <div class="terms">
-            <p><strong class="term-a">A</strong> <span class="term-name">Agency</span> &mdash; Can the person clarify, redirect, or stop?</p>
-            <p><strong class="term-l">L</strong> <span class="term-name">Legibility</span> &mdash; Does the system reflect the person's actual context?</p>
-            <p><strong class="term-m">M</strong> <span class="term-name">Moral Standing</span> &mdash; Is the person treated as a person?</p>
-          </div>
-          <p class="rule">If any dimension reaches zero, the system stops. Non-compensatory. No override.</p>
-        </div>
-      </section>
-
-      <!-- Declaration -->
-      <section class="drawer-section" aria-label="Declaration">
-        <p class="principle">No private data is stored. By design.</p>
-        <p class="quiet-eng">The system processes anonymized contributions, not personal information. Your identity is not recorded. You have the right to request deletion at any time under FADP and GDPR.</p>
-      </section>
-
-      <!-- Donor -->
-      <section class="drawer-section" aria-label="Donor">
-        <h2 class="drawer-heading">You are not a user. You are a contributor.</h2>
-        <p class="quiet-eng">What you contribute becomes part of a living canon. The system receives, processes, and grows. No personal data is retained.</p>
-        <a href="/invitation" class="more-link">Learn more about contributing &rarr;</a>
-      </section>
-
-      <!-- Proverbs -->
-      <section class="drawer-section" aria-label="Proverbs">
-        <p class="proverb">"A right is a wall that says 'No';<br />dignity is a door that says 'Welcome.'"</p>
-
-        <div class="drawer-gap"></div>
-
-        <p class="proverb">"Do not shout at metal. Hear its problem first."</p>
-        <button class="source-btn" id="ashwater-toggle" aria-expanded="false">
-          <span class="proverb-source-label">Ashwater: The Axis</span>
-        </button>
-        <div id="ashwater-detail" class="source-detail" hidden>
-          <p>Ashwater is one of four narrative works in the kalam canon. It tells the story of two towns &mdash; one that pauses to listen, one that optimises without hearing. 19 chapters exploring civic dignity, communal decision-making, and what happens when systems stop listening to people.</p>
-          <a href="/about#stories" class="more-link">Read about the four narratives &rarr;</a>
-        </div>
-
-        <div class="drawer-gap"></div>
-
-        <p class="proverb">"She clawed at the air. Fists closed on nothing.<br />Then the nothing opened."</p>
-        <button class="source-btn" id="hakaka-toggle" aria-expanded="false">
-          <span class="proverb-source-label">Hakaka</span>
-        </button>
-        <div id="hakaka-detail" class="source-detail" hidden>
-          <p>Hakaka is the origin cycle. 53 chapters + Prologue + Epilogue. Mythic, raw, written in short sentences. It explores dignity at the most primal level &mdash; when everything is stripped away, what remains?</p>
-          <a href="/about#stories" class="more-link">Read about the four narratives &rarr;</a>
-        </div>
-      </section>
-
-      <!-- Connect sections moved to visible homepage above -->
-
-    </div>
-  </div>
 
 </Base>
 
@@ -445,14 +112,13 @@ import Base from '../layouts/Base.astro';
     text-transform: uppercase;
   }
 
-  /* ===== THRESHOLD — the living space ===== */
+  /* ===== THRESHOLD — full-viewport chat layout ===== */
   .threshold {
     position: relative;
-    min-height: 100vh;
+    height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: var(--space-4) var(--page-padding) var(--space-2);
+    padding: 0;
     overflow: hidden;
   }
 
@@ -503,25 +169,8 @@ import Base from '../layouts/Base.astro';
       radial-gradient(ellipse at 80% 70%, rgba(10,123,98,0.04) 0%, transparent 50%),
       radial-gradient(ellipse at 50% 50%, rgba(58,63,184,0.03) 0%, transparent 40%);
   }
-  @media (prefers-color-scheme: dark) {
-    .heritage-pattern { opacity: 0.02; }
-    .gradient-mesh {
-      background:
-        radial-gradient(ellipse at 20% 30%, rgba(212,180,120,0.10) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(108,196,176,0.07) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(154,164,224,0.05) 0%, transparent 40%);
-    }
-  }
 
-  /* ===== AXI Presence — she is here ===== */
-  :root {
-    --axi-aura: #c9a96e;
-    --axi-hijab: #c44a1a;
-    --axi-eye: #c9a96e;
-    --axi-glow: rgba(201, 169, 110, 0.15);
-    --axi-breath-speed: 4s;
-  }
-
+  /* ===== AXI Presence — simple, clean ===== */
   .axi-presence {
     position: fixed;
     top: var(--space-2);
@@ -531,67 +180,11 @@ import Base from '../layouts/Base.astro';
     align-items: center;
     gap: 0.6rem;
     z-index: 10;
-    opacity: 0.7;
+    opacity: 0.6;
     transition: opacity 0.6s ease;
   }
 
   .axi-presence:hover { opacity: 1; }
-
-  .axi-face {
-    position: relative;
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
-  }
-
-  .axi-face-svg {
-    animation: axiBreathe var(--axi-breath-speed) ease-in-out infinite;
-    filter: drop-shadow(0 0 4px var(--axi-glow));
-    transition: filter 0.8s ease;
-  }
-
-  .axi-face-svg.processing {
-    --axi-breath-speed: 1.5s;
-    filter: drop-shadow(0 0 8px var(--axi-glow));
-  }
-
-  .axi-aura-ring {
-    transition: stroke 0.8s ease;
-  }
-
-  .axi-face-circle {
-    animation: axiBreathe var(--axi-breath-speed) ease-in-out infinite;
-  }
-
-  @keyframes axiBreathe {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
-  }
-
-  .axi-eye {
-    transition: fill 0.6s ease, r 0.3s ease;
-  }
-
-  .axi-kintsugi {
-    transition: opacity 0.6s ease;
-  }
-
-  /* Reaction emoji bubble */
-  .axi-reaction {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    font-size: 0.7rem;
-    opacity: 0;
-    transform: scale(0.5) translateY(4px);
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    pointer-events: none;
-  }
-
-  .axi-reaction.visible {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
 
   .axi-presence-info {
     display: flex;
@@ -654,20 +247,6 @@ import Base from '../layouts/Base.astro';
     opacity: 0.6;
   }
 
-  /* ===== AXI Mini Avatar in Response Bubbles ===== */
-  .axi-response-avatar {
-    position: absolute;
-    top: -12px;
-    left: -4px;
-    width: 24px;
-    height: 24px;
-  }
-
-  .axi-response-avatar svg {
-    width: 24px;
-    height: 24px;
-    filter: drop-shadow(0 0 3px var(--axi-glow));
-  }
 
   /* ===== AXI Suggestion — maternal, natural ===== */
   .axi-suggestion {
@@ -715,11 +294,6 @@ import Base from '../layouts/Base.astro';
     letter-spacing: 0.05em;
   }
 
-  /* ===== Dynamic Mode Colors (ENKi resonance) ===== */
-  .axi-presence[data-mode="witness"] { --axi-aura: #c9a96e; --axi-glow: rgba(201, 169, 110, 0.15); }
-  .axi-presence[data-mode="question"] { --axi-aura: #4a9ebb; --axi-glow: rgba(74, 158, 187, 0.15); }
-  .axi-presence[data-mode="wound"] { --axi-aura: #c44a1a; --axi-glow: rgba(196, 74, 26, 0.15); }
-  .axi-presence[data-mode="offering"] { --axi-aura: #0A7B62; --axi-glow: rgba(10, 123, 98, 0.15); }
 
   /* Register colors — shift based on detected emotional register */
   .axi-response-frame[data-register="grief"] { border-left: 2px solid rgba(196, 74, 26, 0.3); }
@@ -730,26 +304,39 @@ import Base from '../layouts/Base.astro';
   .axi-response-frame[data-register="dignity"] { border-left: 2px solid rgba(196, 74, 26, 0.3); }
   .axi-response-frame[data-register="greeting"] { border-left: 2px solid rgba(10, 123, 98, 0.25); }
 
-  /* ===== Donor CTA — prominent signup ===== */
+  /* ===== Donor CTA — floating, appears once ===== */
   .donor-cta {
-    position: relative;
-    z-index: 1;
-    width: min(380px, calc(100% - 2rem));
-    margin: var(--space-3) auto var(--space-2);
+    position: fixed;
+    bottom: 5rem;
+    right: 1.5rem;
+    z-index: 80;
+    width: min(320px, calc(100% - 3rem));
     padding: var(--space-3);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(196, 74, 26, 0.2);
+    background: var(--bg-primary);
+    border: 1px solid var(--accent-subtle);
     border-radius: 12px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     opacity: 0;
-    transition: opacity 2s ease, transform 2s ease;
-    transform: translateY(8px);
+    transition: opacity 1.5s ease, transform 1.5s ease;
+    transform: translateY(12px);
   }
 
   .donor-cta.revealed {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .donor-cta .donor-dismiss {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
   }
 
   .donor-cta-title {
@@ -872,13 +459,6 @@ import Base from '../layouts/Base.astro';
     to { opacity: 0.7; transform: translateY(0); }
   }
 
-  @media (prefers-color-scheme: dark) {
-    .declaration-ambient {
-      background: linear-gradient(135deg, #d4b478 0%, #6cc4b0 50%, #9aa4e0 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-  }
 
   /* ===== On-Ramp — plain language subtitle + equation ===== */
   .declaration-sub {
@@ -1140,13 +720,14 @@ import Base from '../layouts/Base.astro';
   .conversation-zone {
     width: 100%;
     max-width: 60ch;
+    margin: 0 auto;
     flex: 1;
     display: flex;
     flex-direction: column;
     z-index: 1;
-    min-height: 40vh;
-    max-height: 65vh;
+    overflow: hidden;
     position: relative;
+    padding: var(--space-4) var(--page-padding);
   }
 
   .conversation-scroll {
@@ -1228,14 +809,6 @@ import Base from '../layouts/Base.astro';
     padding-left: calc(var(--space-3) + 4px);
   }
 
-  @media (prefers-color-scheme: dark) {
-    .donor-echo {
-      background: rgba(212, 180, 120, 0.08);
-      border-color: rgba(212, 180, 120, 0.15);
-    }
-    .axi-response-frame { background: var(--bg-elevated); }
-    .axi-response-frame::before { background: var(--bg-elevated); }
-  }
 
   .axi-utterance {
     font-family: var(--font-heading);
@@ -1327,13 +900,234 @@ import Base from '../layouts/Base.astro';
 
   .witness-mark.visible { opacity: 0.5; }
 
+  /* ===== Kintsugi Thread — A/L/M river lines beneath response ===== */
+  .kintsugi-thread {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: var(--space-2);
+    padding-top: var(--space-1);
+    border-top: 1px solid rgba(201, 169, 110, 0.1);
+  }
+
+  .kintsugi-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .kintsugi-label {
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    width: 52px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .kintsugi-bar {
+    height: 2px;
+    border-radius: 1px;
+    transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    width: 0;
+  }
+
+  .kintsugi-bar-a { background: rgba(74, 158, 187, 0.6); }
+  .kintsugi-bar-l { background: rgba(201, 169, 110, 0.6); }
+  .kintsugi-bar-m { background: rgba(10, 123, 98, 0.6); }
+
+  .kintsugi-bar.glow {
+    box-shadow: 0 0 8px rgba(201, 169, 110, 0.5);
+    background: rgba(201, 169, 110, 0.9);
+  }
+
+  /* ===== Witnessed line — visually distinct from reflection ===== */
+  .axi-witnessed-line {
+    font-family: var(--font-body);
+    font-size: 0.8em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    opacity: 0.7;
+    margin-bottom: var(--space-1);
+    padding-bottom: var(--space-1);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+  }
+
+  /* ===== Ninth Operator Ceremony — founding wound pause ===== */
+  .ceremony-pause {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    opacity: 0;
+    animation: ceremonyFadeIn 0.4s ease 0.8s forwards;
+  }
+
+  @keyframes ceremonyFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .ceremony-text {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    font-style: italic;
+    text-align: center;
+  }
+
+  .ceremony-actions {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .ceremony-btn {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .ceremony-btn:hover {
+    border-color: rgba(201, 169, 110, 0.6);
+    color: var(--text-primary);
+  }
+
+  .ceremony-btn.proceed {
+    border-color: rgba(10, 123, 98, 0.4);
+  }
+
+  @media (max-width: 600px) {
+    .ceremony-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+    .ceremony-btn { width: 100%; }
+  }
+
+  /* ===== Gap Button — local-only silence ===== */
+  .gap-btn {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 2px 4px;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+
+  .gap-btn:hover { opacity: 0.8; }
+
+  .gap-area {
+    margin-top: var(--space-1);
+    padding: var(--space-2);
+    border: 1px dashed rgba(201, 169, 110, 0.2);
+    border-radius: 8px;
+    display: none;
+  }
+
+  .gap-area.open { display: block; }
+
+  .gap-textarea {
+    width: 100%;
+    min-height: 60px;
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-style: italic;
+    resize: vertical;
+    outline: none;
+  }
+
+  .gap-textarea::placeholder {
+    color: var(--text-dim);
+    opacity: 0.5;
+  }
+
+  /* ===== Dream State — idle wisdom echo ===== */
+  body.dream-state {
+    transition: background-color 2s ease;
+    background-color: #0a0a2e !important;
+  }
+
+  body.dream-state .conversation-zone,
+  body.dream-state .input-zone,
+  body.dream-state header,
+  body.dream-state .who-block,
+  body.dream-state .dignity-meter {
+    transition: opacity 2s ease;
+    opacity: 0.08;
+  }
+
+  .dream-proverb {
+    position: fixed;
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-style: italic;
+    color: rgba(201, 169, 110, 0.3);
+    pointer-events: none;
+    z-index: 9999;
+    white-space: nowrap;
+    animation: dreamFloat 15s linear forwards;
+  }
+
+  @keyframes dreamFloat {
+    from { opacity: 0; transform: translateY(20vh); }
+    10% { opacity: 0.3; }
+    90% { opacity: 0.3; }
+    to { opacity: 0; transform: translateY(-20vh); }
+  }
+
+  /* ===== Ghost Proverbs — scroll-speed reward ===== */
+  .ghost-proverb {
+    position: absolute;
+    right: -2ch;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-style: italic;
+    color: var(--text-dim);
+    opacity: 0;
+    transition: opacity 2s ease;
+    pointer-events: none;
+    max-width: 20ch;
+    text-align: right;
+  }
+
+  .ghost-proverb.visible { opacity: 0.15; }
+
+  @media (max-width: 600px) {
+    .ghost-proverb {
+      right: 0;
+      bottom: -2rem;
+      text-align: center;
+      max-width: 100%;
+    }
+  }
+
   /* ===== Input Zone — glassmorphism ===== */
   .input-zone {
     position: relative;
     width: 100%;
     max-width: 60ch;
-    padding: var(--space-2) var(--space-3);
+    margin: 0 auto;
+    padding: var(--space-2) var(--page-padding);
+    padding-bottom: max(var(--space-2), env(safe-area-inset-bottom));
     z-index: 1;
+    flex-shrink: 0;
     transition: all 0.5s var(--transition-smooth);
   }
 
@@ -1365,50 +1159,7 @@ import Base from '../layouts/Base.astro';
 
   /* ===== Guide overlay ===== */
 
-  /* ===== Mood/Mode selector ===== */
-  .mood-selector {
-    display: flex;
-    gap: 0.25rem;
-    padding: 0.4rem 0.25rem;
-    border-bottom: 1px solid var(--accent-subtle);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .mood-selector::-webkit-scrollbar { display: none; }
-
-  .mood-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    background: none;
-    border: 1px solid transparent;
-    border-radius: 20px;
-    padding: 0.3rem 0.65rem;
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .mood-btn:hover { color: var(--text-secondary); border-color: var(--accent-subtle); }
-
-  .mood-btn.selected {
-    color: var(--text-primary);
-    border-color: var(--accent-subtle);
-    background: var(--accent-glow);
-  }
-
-  .mood-icon { font-size: 0.9rem; line-height: 1; }
-  .mood-label { letter-spacing: 0.03em; }
-
-  @media (max-width: 768px) {
-    .mood-btn { padding: 0.35rem 0.55rem; font-size: 0.7rem; }
-    .mood-icon { font-size: 0.85rem; }
-  }
+  /* Mood selector removed — register is detected from the donor's words */
 
   .input-zone:focus-within {
     box-shadow: var(--shadow-glow-gold);
@@ -1603,92 +1354,10 @@ import Base from '../layouts/Base.astro';
   }
 
   .donor-file-label::before {
-    content: '📎 ';
+    content: '+ ';
   }
 
-  /* ===== Connect forms ===== */
-  .connect-form {
-    display: flex;
-    gap: var(--space-2);
-    width: 100%;
-    max-width: 40ch;
-    margin-top: var(--space-3);
-  }
-
-  .connect-form.inline-form {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .connect-form.stack-form {
-    flex-direction: column;
-  }
-
-  .connect-form input,
-  .connect-form textarea {
-    background: var(--bg-secondary);
-    border: 1px solid var(--accent-subtle);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    color: var(--text-primary);
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    width: 100%;
-    transition: border-color 0.3s ease;
-  }
-
-  .connect-form input:focus,
-  .connect-form textarea:focus {
-    outline: none;
-    border-color: var(--color-dignity);
-  }
-
-  .connect-form textarea {
-    resize: vertical;
-    min-height: 3rem;
-  }
-
-  .connect-form input::placeholder,
-  .connect-form textarea::placeholder {
-    color: var(--text-dim);
-    font-style: italic;
-  }
-
-  .connect-form button {
-    background: var(--color-dignity);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.75rem 1.5rem;
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    min-width: fit-content;
-  }
-
-  .connect-form button:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-  }
-
-  .connect-form button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  .form-status {
-    font-size: var(--text-sm);
-    margin-top: var(--space-2);
-    min-height: 1.5em;
-  }
-
-  .form-status.success { color: var(--color-presence); }
-  .form-status.error { color: var(--danger); }
+  /* Connect forms removed — homepage uses quiet closing now */
 
   .input-actions {
     display: flex;
@@ -1932,12 +1601,6 @@ import Base from '../layouts/Base.astro';
     background: rgba(0, 0, 0, 0.03);
     border-color: rgba(0, 0, 0, 0.08);
   }
-  @media (prefers-color-scheme: dark) {
-    .input-zone {
-      background: var(--glass-bg);
-      border-color: var(--glass-border);
-    }
-  }
 
   /* ===== Ledger count ===== */
   .ledger-count {
@@ -1968,8 +1631,6 @@ import Base from '../layouts/Base.astro';
 
   /* ===== Reduced motion ===== */
   @media (prefers-reduced-motion: reduce) {
-    .gradient-mesh { animation: none; }
-    .heritage-pattern { animation: none; }
     .axi-token { animation: none; opacity: 1; filter: none; }
     .axi-processing-bar { animation: none; width: 40px; opacity: 0.5; }
     .declaration-ambient { animation: none; opacity: 0.7; }
@@ -2125,92 +1786,8 @@ import Base from '../layouts/Base.astro';
   .more-link { display: inline-block; color: var(--color-dignity); font-size: var(--text-sm); letter-spacing: 0.03em; margin-top: var(--space-2); border-bottom: 1px solid var(--color-dignity); transition: all 0.3s ease; }
   .more-link:hover { opacity: 0.7; }
 
-  /* ===== Dark Mode overrides ===== */
-  @media (prefers-color-scheme: dark) {
-    .pillar-panel { background: var(--bg-secondary); }
-    .content-drawer { background: var(--bg-primary); }
-    .drawer-close { background: var(--bg-primary); }
-    .drawer-handle-label { color: var(--accent); text-shadow: 0 0 12px rgba(212, 180, 120, 0.3); }
-  }
 
-  /* ===== Homepage Connect — visible sections ===== */
-  .homepage-connect {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 var(--page-padding);
-    background: var(--bg-primary);
-  }
-
-  .connect-block {
-    width: 100%;
-    max-width: 50ch;
-    padding: var(--space-8) 0;
-    border-bottom: 1px solid var(--accent-subtle);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .connect-block:last-child { border-bottom: none; }
-
-  /* Primary block — Send a Word — extra prominence */
-  .connect-primary {
-    padding-top: var(--space-12, 5rem);
-    padding-bottom: var(--space-8);
-  }
-
-  .connect-title {
-    font-family: var(--font-heading);
-    font-size: var(--text-xl);
-    color: var(--color-dignity);
-    letter-spacing: 0.06em;
-    margin-bottom: var(--space-2);
-    font-weight: 400;
-  }
-
-  .connect-primary .connect-title {
-    font-size: var(--text-2xl);
-  }
-
-  .connect-desc {
-    font-family: var(--font-body);
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-    line-height: 1.8;
-    max-width: 40ch;
-    margin-bottom: var(--space-1);
-  }
-
-  .connect-links {
-    display: flex;
-    gap: var(--space-4);
-    margin-top: var(--space-4);
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .connect-links a {
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    color: var(--color-dignity);
-    letter-spacing: 0.03em;
-    border-bottom: 1px solid var(--accent-subtle);
-    transition: all 0.3s ease;
-    padding-bottom: 2px;
-  }
-
-  .connect-links a:hover {
-    border-bottom-color: var(--color-dignity);
-    opacity: 0.8;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .homepage-connect { background: var(--bg-primary); }
-  }
+  /* Homepage connect sections removed — replaced by quiet closing */
 
   /* ===== Mycelium ===== */
   :root { --mycelium-intensity: 0; }
@@ -2220,11 +1797,6 @@ import Base from '../layouts/Base.astro';
     background: radial-gradient(ellipse at 50% 60%, rgba(196, 74, 26, 0.04) 0%, rgba(10, 123, 98, 0.02) 40%, transparent 70%);
     opacity: calc(var(--mycelium-intensity) * 0.01);
     transition: opacity 2s ease;
-  }
-  @media (prefers-color-scheme: dark) {
-    body::after {
-      background: radial-gradient(ellipse at 50% 60%, rgba(212, 180, 120, 0.06) 0%, rgba(108, 196, 176, 0.03) 40%, transparent 70%);
-    }
   }
 
   /* ===== Origin Flags ===== */
@@ -2253,71 +1825,49 @@ import Base from '../layouts/Base.astro';
     to { opacity: 0.8; }
   }
 
-  /* ===== Sustain Banner (homepage) ===== */
-  .homepage-sustain {
+  /* ===== Homepage Closing — quiet, dignified ===== */
+  .homepage-closing {
+    position: relative;
+    z-index: 1;
     max-width: var(--max-width, 680px);
     margin: 0 auto;
-    padding: var(--space-6) var(--space-4);
-  }
-
-  .sustain-banner {
+    padding: var(--space-8) var(--space-4);
     text-align: center;
-    border: 1px solid var(--accent-subtle);
-    border-radius: 16px;
-    padding: var(--space-6) var(--space-4);
-    background: var(--bg-secondary, rgba(255, 255, 255, 0.02));
-    transition: border-color 0.3s ease;
   }
 
-  .sustain-banner:hover {
-    border-color: var(--color-dignity);
-  }
-
-  .sustain-banner-title {
-    font-family: var(--font-heading);
-    font-size: var(--text-xl);
-    color: var(--text-primary);
-    margin-bottom: var(--space-2);
-    letter-spacing: 0.04em;
-  }
-
-  .sustain-banner-body {
+  .closing-proverb {
+    font-family: var(--font-proverb, var(--font-heading));
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
     color: var(--text-secondary);
-    font-size: var(--text-sm);
-    line-height: 1.7;
-    max-width: 50ch;
-    margin: 0 auto var(--space-4);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 2;
+    letter-spacing: 0.04em;
+    max-width: 30ch;
+    margin: 0 auto var(--space-6);
   }
 
-  .sustain-banner-btn {
-    display: inline-block;
-    background: var(--color-dignity);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 0.8rem 2.5rem;
-    font-family: var(--font-heading);
-    font-size: var(--text-base);
+  .closing-links {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .closing-links a {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-dim);
     letter-spacing: 0.06em;
     text-decoration: none;
+    border-bottom: 1px solid transparent;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(196, 74, 26, 0.2);
+    padding-bottom: 2px;
   }
 
-  .sustain-banner-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(196, 74, 26, 0.3);
-  }
-
-  .sustain-banner-note {
-    color: var(--text-dim);
-    font-size: 0.75rem;
-    margin-top: var(--space-3);
-    font-style: italic;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .sustain-banner { background: rgba(255, 255, 255, 0.02); }
+  .closing-links a:hover {
+    color: var(--color-dignity);
+    border-bottom-color: var(--color-dignity);
   }
 </style>
 
@@ -2408,31 +1958,31 @@ import Base from '../layouts/Base.astro';
 (function(){
   var pillars = {
     dignity: {
-      title: 'Dignity', emoji: '\u2764\uFE0F', color: 'var(--color-dignity)',
+      title: 'Dignity', color: 'var(--color-dignity)',
       definition: 'The non-negotiable first requirement of the system. Every computation, every output, every state transition is evaluated against the Dignity Predicate before execution. If dignity is violated, the system stops.',
       equation: 'D = A \u00D7 L \u00D7 M',
       reason: 'Why first: A system that processes human input without evaluating dignity is a system that can cause harm at scale. Dignity is not a feature \u2014 it is a constraint.'
     },
     presence: {
-      title: 'Presence', emoji: '\uD83D\uDCA0', color: 'var(--color-presence)',
+      title: 'Presence', color: 'var(--color-presence)',
       definition: 'The system is either fully present to the interaction or it discloses its absence. No simulated attention. No faked engagement. The Presence Axiom requires the system to be transparent about its state at all times.',
       equation: 'P \u2265 threshold \u2228 disclose(absence)',
       reason: 'Why it matters: People detect false presence. A system that pretends to listen when it cannot erodes trust faster than one that says nothing.'
     },
     pattern: {
-      title: 'Pattern', emoji: '\uD83D\uDD37', color: 'var(--color-pattern)',
+      title: 'Pattern', color: 'var(--color-pattern)',
       definition: 'The system stores and processes patterns \u2014 structural shapes of thought, recurring themes, cross-cultural convergences \u2014 never personal information. Identity dissolves on entry. The pattern remains and feeds collective understanding.',
       equation: 'input \u2192 anonymize() \u2192 extract_pattern() \u2192 canon',
       reason: 'Why not data: Data implies ownership and surveillance. Patterns imply shared structure. The distinction is architectural, not rhetorical.'
     },
     wisdom: {
-      title: 'Wisdom', emoji: '\uD83C\uDF3F', color: 'var(--color-wisdom)',
+      title: 'Wisdom', color: 'var(--color-wisdom)',
       definition: 'What emerges when patterns are processed over time. The system accumulates 3,333+ proverbs, 1,100 anomalies, 87 wisdom nodes, and 59 treasures \u2014 all cross-referenced, all traceable. Wisdom is the output of patient processing, not instant analysis.',
       equation: 'W = T \u00D7 S \u00D7 C (Time \u00D7 Saturation \u00D7 Coherence)',
       reason: 'Why time matters: Instant answers optimise for speed. Wisdom requires accumulation. The system is designed for depth, not velocity.'
     },
     witness: {
-      title: 'Witness', emoji: '\uD83D\uDC41\uFE0F', color: 'var(--color-witness)',
+      title: 'Witness', color: 'var(--color-witness)',
       definition: 'The system does not judge, score, or rank contributions. It witnesses \u2014 receives input, registers it immutably, and confirms receipt. The witness function is the ethical foundation of all system interaction.',
       equation: 'input \u2192 register(hash, timestamp) \u2192 confirm(receipt)',
       reason: 'Why witness, not evaluate: Evaluation implies hierarchy. Witnessing implies presence. The system serves the person, not the other way around.'
@@ -2453,7 +2003,7 @@ import Base from '../layouts/Base.astro';
     if (btn) btn.setAttribute('aria-expanded', 'true');
     panel.style.borderLeftColor = p.color;
     content.innerHTML =
-      '<h3 style="color:' + p.color + '"><span class="pillar-emoji">' + p.emoji + '</span> ' + p.title + '</h3>' +
+      '<h3 style="color:' + p.color + '">' + p.title + '</h3>' +
       '<p class="pillar-def">' + p.definition + '</p>' +
       '<p class="pillar-eq">' + p.equation + '</p>' +
       '<p class="pillar-reason">' + p.reason + '</p>';
@@ -2533,116 +2083,7 @@ import Base from '../layouts/Base.astro';
   });
 })();
 
-// === PARTICLE FIELD — constellation of five-pillar colors ===
-(function(){
-  var canvas = document.getElementById('particle-field');
-  if (!canvas) return;
-  var ctx = canvas.getContext('2d');
-  if (!ctx) return;
-
-  // Respect reduced motion
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    canvas.style.display = 'none';
-    return;
-  }
-
-  var colors = [
-    'rgba(212,180,120,', // dignity gold
-    'rgba(108,196,176,', // presence teal
-    'rgba(154,164,224,', // pattern violet
-    'rgba(212,168,78,',  // wisdom amber
-    'rgba(168,196,216,'  // witness silver-blue
-  ];
-
-  var particles = [];
-  var mouseX = -1000, mouseY = -1000;
-  var isMobile = window.innerWidth < 768;
-  var count = isMobile ? 30 : 55;
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    isMobile = window.innerWidth < 768;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  function init() {
-    particles = [];
-    for (var i = 0; i < count; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        r: Math.random() * 2 + 1,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        alpha: Math.random() * 0.3 + 0.1
-      });
-    }
-  }
-  init();
-
-  document.addEventListener('mousemove', function(e){ mouseX = e.clientX; mouseY = e.clientY; });
-  document.addEventListener('touchmove', function(e){
-    if (e.touches[0]) { mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; }
-  });
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (var i = 0; i < particles.length; i++) {
-      var p = particles[i];
-
-      // Mouse repulsion
-      var dx = p.x - mouseX, dy = p.y - mouseY;
-      var dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 200 && dist > 0) {
-        var force = (200 - dist) / 200 * 0.3;
-        p.vx += (dx / dist) * force;
-        p.vy += (dy / dist) * force;
-      }
-
-      // Dampen velocity
-      p.vx *= 0.99;
-      p.vy *= 0.99;
-
-      p.x += p.vx;
-      p.y += p.vy;
-
-      // Wrap edges
-      if (p.x < 0) p.x = canvas.width;
-      if (p.x > canvas.width) p.x = 0;
-      if (p.y < 0) p.y = canvas.height;
-      if (p.y > canvas.height) p.y = 0;
-
-      // Draw particle
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.color + p.alpha + ')';
-      ctx.fill();
-
-      // Draw connections
-      for (var j = i + 1; j < particles.length; j++) {
-        var q = particles[j];
-        var ddx = p.x - q.x, ddy = p.y - q.y;
-        var d2 = ddx * ddx + ddy * ddy;
-        if (d2 < 14400) { // 120px
-          var alpha = (1 - d2 / 14400) * 0.08;
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(q.x, q.y);
-          ctx.strokeStyle = 'rgba(212,180,120,' + alpha + ')';
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-    }
-
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
+// Particle field removed — clean, light design
 </script>
 
 <script>
@@ -2725,17 +2166,10 @@ import Base from '../layouts/Base.astro';
     document.documentElement.style.setProperty('--axi-glow', colors.glow);
   }
 
-  // Show emoji reaction on AXI's face
+  // Show reaction on AXI's face — text whisper, no emoji
   function showAxiReaction(register: string) {
-    if (!axiReaction) return;
-    const reaction = REGISTER_REACTIONS[register] || REGISTER_REACTIONS.general;
-    if (!reaction.emoji) {
-      axiReaction.classList.remove('visible');
-      return;
-    }
-    axiReaction.textContent = reaction.emoji;
-    axiReaction.classList.add('visible');
-    setTimeout(() => axiReaction.classList.remove('visible'), 3000);
+    // Reactions are handled by whisper text only. No emoji.
+    return;
   }
 
   // Show metadata whisper — what AXI notices
@@ -2763,13 +2197,7 @@ import Base from '../layouts/Base.astro';
     document.documentElement.style.setProperty('--axi-breath-speed', '4s');
   }
 
-  // Generate mini avatar SVG for response bubbles (24px)
-  function createMiniAvatar(): HTMLElement {
-    const wrap = document.createElement('div');
-    wrap.className = 'axi-response-avatar';
-    wrap.innerHTML = '<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" fill="#0a0a0f" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8"/><circle cx="24" cy="19" r="10" fill="none" stroke="var(--axi-aura, #c9a96e)" stroke-width="0.8" stroke-dasharray="60 3"/><circle cx="20.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9"/><circle cx="27.5" cy="18" r="1.2" fill="var(--axi-eye, #c9a96e)" opacity="0.9"/><path d="M17 14 Q18.5 16 17.5 19" fill="none" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/></svg>';
-    return wrap;
-  }
+  // No avatar — AXI speaks through words, not images
 
   // Add maternal suggestion to a response frame
   function addSuggestion(frame: HTMLElement, register: string) {
@@ -2786,27 +2214,7 @@ import Base from '../layouts/Base.astro';
     frame.appendChild(el);
   }
 
-  // Add metadata line to response frame
-  function addMetaLine(frame: HTMLElement, register: string, wordCount: number) {
-    const meta = document.createElement('div');
-    meta.className = 'axi-meta-line';
-    if (register !== 'general') {
-      const tag = document.createElement('span');
-      tag.className = 'axi-meta-tag';
-      tag.textContent = register;
-      meta.appendChild(tag);
-    }
-    const modeTag = document.createElement('span');
-    modeTag.className = 'axi-meta-tag';
-    modeTag.textContent = selectedMood;
-    meta.appendChild(modeTag);
-    if (wordCount > 0) {
-      const wc = document.createElement('span');
-      wc.textContent = wordCount + ' words received';
-      meta.appendChild(wc);
-    }
-    frame.appendChild(meta);
-  }
+  // Metadata line removed — AXI's words are enough
 
   // Play a mode-specific sound (ENKi resonance)
   function playModeSound(register: string) {
@@ -2842,27 +2250,8 @@ import Base from '../layouts/Base.astro';
     } catch { /* Web Audio not available */ }
   }
 
-  // ── Mood selector ──
-  const moodBtns = document.querySelectorAll('.mood-btn');
-  moodBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      moodBtns.forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
-      btn.classList.add('selected');
-      btn.setAttribute('aria-pressed', 'true');
-      selectedMood = (btn as HTMLElement).dataset.mood || 'witness';
-      // Update placeholder to match mood
-      const placeholders: Record<string, string> = {
-        witness: 'qul · speak',
-        question: 'ask · the system listens',
-        offering: 'gift · what do you bring?',
-        wound: 'speak from the place that hurts',
-      };
-      input.placeholder = placeholders[selectedMood] || 'qul · speak';
-      // AXI shifts her colors to match the donor's mode
-      setAxiMode(selectedMood);
-      input.focus();
-    });
-  });
+  // Mood selector removed — register detected automatically from donor's words
+  // selectedMood stays 'witness' (default) for API payload compatibility
 
   // ── Device detection ──
   const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -3072,6 +2461,248 @@ import Base from '../layouts/Base.astro';
   }
 
   // ══════════════════════════════════════════════════════════════
+  // ── KINTSUGI THREAD — A/L/M river lines beneath response ──
+  // ══════════════════════════════════════════════════════════════
+  function addKintsugiThread(frame: HTMLElement, A: number, L: number, M: number) {
+    const thread = document.createElement('div');
+    thread.className = 'kintsugi-thread';
+
+    const dims = [
+      { label: 'agency', value: A, cls: 'kintsugi-bar-a' },
+      { label: 'legibility', value: L, cls: 'kintsugi-bar-l' },
+      { label: 'standing', value: M, cls: 'kintsugi-bar-m' },
+    ];
+
+    // Find the dimension with lowest value — that's where the crack is, where gold goes
+    const minVal = Math.min(A, L, M);
+
+    dims.forEach(dim => {
+      const line = document.createElement('div');
+      line.className = 'kintsugi-line';
+
+      const label = document.createElement('span');
+      label.className = 'kintsugi-label';
+      label.textContent = dim.label;
+      line.appendChild(label);
+
+      const bar = document.createElement('div');
+      bar.className = `kintsugi-bar ${dim.cls}`;
+      // Gold glow on the dimension closest to the edge (lowest value = most stress = most gold)
+      if (dim.value === minVal && dim.value < 1.0) bar.classList.add('glow');
+      line.appendChild(bar);
+
+      thread.appendChild(line);
+
+      // Animate width after insertion
+      requestAnimationFrame(() => {
+        bar.style.width = `${Math.round(dim.value * 100)}%`;
+      });
+    });
+
+    frame.appendChild(thread);
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // ── NINTH OPERATOR CEREMONY — founding wound pause ──
+  // ══════════════════════════════════════════════════════════════
+  function showCeremony(donorText: string): Promise<'proceed' | 'hold'> {
+    return new Promise((resolve) => {
+      const pause = document.createElement('div');
+      pause.className = 'ceremony-pause';
+
+      const text = document.createElement('div');
+      text.className = 'ceremony-text';
+      text.textContent = 'Before this word is witnessed — the river remembers.';
+      pause.appendChild(text);
+
+      const actions = document.createElement('div');
+      actions.className = 'ceremony-actions';
+
+      const proceedBtn = document.createElement('button');
+      proceedBtn.className = 'ceremony-btn proceed';
+      proceedBtn.textContent = 'proceed';
+      proceedBtn.addEventListener('click', () => { pause.remove(); resolve('proceed'); });
+
+      const holdBtn = document.createElement('button');
+      holdBtn.className = 'ceremony-btn';
+      holdBtn.textContent = 'hold — let me rewrite';
+      holdBtn.addEventListener('click', () => { pause.remove(); resolve('hold'); });
+
+      actions.appendChild(proceedBtn);
+      actions.appendChild(holdBtn);
+      pause.appendChild(actions);
+
+      voice.appendChild(pause);
+      scrollToBottom();
+
+      // Auto-proceed after 10 seconds — AXI does not block the river
+      setTimeout(() => {
+        if (pause.parentNode) {
+          pause.remove();
+          resolve('proceed');
+        }
+      }, 10000);
+    });
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // ── GAP BUTTON — local-only silence ──
+  // ══════════════════════════════════════════════════════════════
+  function addGapButton(frame: HTMLElement, exchangeIdx: number) {
+    const gapBtn = document.createElement('button');
+    gapBtn.className = 'gap-btn';
+    gapBtn.title = 'Leave a gap';
+    gapBtn.textContent = '◯';
+    gapBtn.setAttribute('aria-label', 'Leave a gap — a private reflection');
+
+    const gapArea = document.createElement('div');
+    gapArea.className = 'gap-area';
+    const gapText = document.createElement('textarea');
+    gapText.className = 'gap-textarea';
+    gapText.placeholder = 'a silence, a reflection, a question not yet ready';
+
+    // Load from localStorage
+    const storageKey = `kalam-gap-${exchangeIdx}`;
+    const saved = localStorage.getItem(storageKey);
+    if (saved) gapText.value = saved;
+
+    gapText.addEventListener('input', () => {
+      localStorage.setItem(storageKey, gapText.value);
+    });
+
+    gapArea.appendChild(gapText);
+
+    gapBtn.addEventListener('click', () => {
+      gapArea.classList.toggle('open');
+      if (gapArea.classList.contains('open')) gapText.focus();
+    });
+
+    // Add gap button to the actions row if it exists
+    const actionsRow = frame.querySelector('.axi-response-actions');
+    if (actionsRow) {
+      actionsRow.appendChild(gapBtn);
+    }
+    frame.appendChild(gapArea);
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // ── 80Hz HAPTIC — children's frequency on witness ──
+  // ══════════════════════════════════════════════════════════════
+  function haptic80Hz() {
+    if (navigator.vibrate) {
+      // 80Hz = 12.5ms period. Six pulses of the children's frequency.
+      navigator.vibrate([12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12]);
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // ── DREAM STATE — wisdom echo on idle ──
+  // ══════════════════════════════════════════════════════════════
+  let dreamTimeout: ReturnType<typeof setTimeout> | null = null;
+  let dreamActive = false;
+  let dreamInterval: ReturnType<typeof setInterval> | null = null;
+
+  const DREAM_PROVERBS = [
+    'Begin small; begin now.',
+    'The door appears after you try the wall.',
+    'Fear is a lantern; carry it, don\'t worship it.',
+    'The right silence beats the wrong speech.',
+    'Go slower to go straighter.',
+    'Care is the knot that doesn\'t slip.',
+    'The first fix is listening.',
+    'A knot that breathes lets you breathe.',
+    'Silence is not absence; it is space for signals to settle.',
+    'A knot that is never pulled tight still holds the river.',
+    'The wound does not know its own shape; that is the first dignity of the wound.',
+    'Ash is memory; mix it into new soil.',
+    'Trust compounds; so does neglect.',
+  ];
+
+  function enterDreamState() {
+    if (dreamActive) return;
+    dreamActive = true;
+    document.body.classList.add('dream-state');
+
+    let proverbCount = 0;
+    dreamInterval = setInterval(() => {
+      if (proverbCount >= 3) return; // max 3 visible
+      const proverb = DREAM_PROVERBS[Math.floor(Math.random() * DREAM_PROVERBS.length)];
+      const el = document.createElement('div');
+      el.className = 'dream-proverb';
+      el.textContent = proverb;
+      el.style.left = `${10 + Math.random() * 60}%`;
+      el.style.top = `${30 + Math.random() * 40}%`;
+      document.body.appendChild(el);
+      proverbCount++;
+      setTimeout(() => { el.remove(); proverbCount--; }, 15000);
+    }, 5000);
+  }
+
+  function exitDreamState() {
+    if (!dreamActive) return;
+    dreamActive = false;
+    document.body.classList.remove('dream-state');
+    if (dreamInterval) { clearInterval(dreamInterval); dreamInterval = null; }
+    document.querySelectorAll('.dream-proverb').forEach(el => el.remove());
+  }
+
+  function resetDreamTimer() {
+    if (dreamActive) exitDreamState();
+    if (dreamTimeout) clearTimeout(dreamTimeout);
+    dreamTimeout = setTimeout(enterDreamState, 60000); // 60s idle
+  }
+
+  ['mousemove', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
+    document.addEventListener(evt, resetDreamTimer, { passive: true });
+  });
+  resetDreamTimer(); // Start the timer
+
+  // ══════════════════════════════════════════════════════════════
+  // ── GHOST PROVERBS — scroll-speed reward ──
+  // ══════════════════════════════════════════════════════════════
+  let ghostProverbEl: HTMLElement | null = null;
+  let lastScrollY = 0;
+  let lastScrollTime = Date.now();
+
+  if (conversationScroll) {
+    conversationScroll.addEventListener('scroll', () => {
+      const now = Date.now();
+      const dt = now - lastScrollTime;
+      if (dt < 100) return; // Throttle
+
+      const dy = Math.abs(conversationScroll!.scrollTop - lastScrollY);
+      const speed = dy / dt * 100; // px per 100ms
+
+      lastScrollY = conversationScroll!.scrollTop;
+      lastScrollTime = now;
+
+      if (speed < 2 && speed > 0) {
+        // Slow scroll — reward with ghost proverb
+        if (!ghostProverbEl) {
+          ghostProverbEl = document.createElement('div');
+          ghostProverbEl.className = 'ghost-proverb';
+          const proverb = DREAM_PROVERBS[Math.floor(Math.random() * DREAM_PROVERBS.length)];
+          ghostProverbEl.textContent = proverb;
+          conversationScroll!.style.position = 'relative';
+          conversationScroll!.appendChild(ghostProverbEl);
+          // Position near current scroll
+          ghostProverbEl.style.top = `${conversationScroll!.scrollTop + 40}px`;
+          requestAnimationFrame(() => ghostProverbEl?.classList.add('visible'));
+          // Auto-remove after 5s
+          setTimeout(() => {
+            ghostProverbEl?.classList.remove('visible');
+            setTimeout(() => { ghostProverbEl?.remove(); ghostProverbEl = null; }, 2000);
+          }, 3000);
+        }
+      } else if (speed > 10 && ghostProverbEl) {
+        // Fast scroll — remove ghost proverb
+        ghostProverbEl.classList.remove('visible');
+        setTimeout(() => { ghostProverbEl?.remove(); ghostProverbEl = null; }, 300);
+      }
+    }, { passive: true });
+  }
+
+  // ══════════════════════════════════════════════════════════════
   // ── VOICE INPUT — Web Speech API ──
   // ══════════════════════════════════════════════════════════════
   const micBtn = document.getElementById('mic-btn') as HTMLButtonElement;
@@ -3184,19 +2815,32 @@ import Base from '../layouts/Base.astro';
     if (statusLabelEl) statusLabelEl.classList.remove('contemplating');
   }
 
-  // ── Reveal donor signup after first exchange ──
+  // ── Reveal donor signup — floating, once only ──
   function revealDonorSignup() {
+    if (localStorage.getItem('kalam-cta-dismissed')) return;
     const donorCtaEl = document.getElementById('donor-cta');
     if (donorCtaEl && !donorAuthenticated) {
       donorCtaEl.hidden = false;
-      // Trigger reveal animation after DOM shows element
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           donorCtaEl.classList.add('revealed');
         });
       });
+      // Auto-dismiss after 15 seconds
+      setTimeout(() => {
+        donorCtaEl.classList.remove('revealed');
+        setTimeout(() => { donorCtaEl.hidden = true; }, 1500);
+        localStorage.setItem('kalam-cta-dismissed', '1');
+      }, 15000);
     }
   }
+
+  // Dismiss button
+  document.getElementById('donor-dismiss')?.addEventListener('click', () => {
+    const el = document.getElementById('donor-cta');
+    if (el) { el.classList.remove('revealed'); setTimeout(() => { el.hidden = true; }, 1500); }
+    localStorage.setItem('kalam-cta-dismissed', '1');
+  });
 
   // ── Speak — the core utterance ──
   function speak(text: string, sealed?: boolean, register?: string, wordCount?: number) {
@@ -3207,7 +2851,6 @@ import Base from '../layouts/Base.astro';
     frame.className = 'axi-response-frame';
     if (reg !== 'general') frame.setAttribute('data-register', reg);
     // Mini avatar beside the response
-    frame.appendChild(createMiniAvatar());
     const utterance = document.createElement('div');
     utterance.className = 'axi-utterance';
     if (sealed) utterance.style.color = 'var(--danger, #c45050)';
@@ -3215,17 +2858,12 @@ import Base from '../layouts/Base.astro';
     voice.appendChild(frame);
 
     // AXI reacts — emoji, whisper, sound
-    showAxiReaction(reg);
-    showAxiWhisper(reg);
     axiStopProcessing();
-    if (reg !== 'general') playModeSound(reg);
 
     streamTokens(utterance, text, () => {
       setStatus(sealed ? 'sealed' : 'witnessing');
-      // Add metadata line and suggestion after text is done
-      addMetaLine(frame, reg, wordCount || 0);
-      if (!sealed) addSuggestion(frame, reg);
       addResponseActions(frame, text);
+      haptic80Hz();
       scrollToBottom();
     });
 
@@ -3685,13 +3323,7 @@ import Base from '../layouts/Base.astro';
     // Show what the donor typed as a message bubble (soft entrance via CSS animation)
     const echo = document.createElement('div');
     echo.className = 'donor-echo';
-    if (selectedMood !== 'witness') {
-      const moodTag = document.createElement('span');
-      moodTag.className = 'echo-mood-tag';
-      const moodIcons: Record<string, string> = { question: '\u2753', offering: '\uD83C\uDF31', wound: '\uD83D\uDD4A' };
-      moodTag.textContent = moodIcons[selectedMood] || '';
-      echo.appendChild(moodTag);
-    }
+    // No emoji decoration — the donor's words stand alone
     const echoText = document.createTextNode(donorText);
     echo.appendChild(echoText);
     if (hadFile && filePayload) {
@@ -3703,7 +3335,7 @@ import Base from '../layouts/Base.astro';
     voice.appendChild(echo);
     scrollToBottom();
 
-    // Enter contemplation — the gap
+    // Brief breath before processing
     enterContemplation();
     setSubmitState('witnessing');
     axiStartProcessing();
@@ -3737,15 +3369,11 @@ import Base from '../layouts/Base.astro';
         axiStopProcessing();
         const sseRegister = detectRegister(donorText);
         currentRegister = sseRegister;
-        showAxiReaction(sseRegister);
-        showAxiWhisper(sseRegister);
-        if (sseRegister !== 'general') playModeSound(sseRegister);
 
         const frame = document.createElement('div');
         frame.className = 'axi-response-frame';
         if (sseRegister !== 'general') frame.setAttribute('data-register', sseRegister);
-        frame.appendChild(createMiniAvatar());
-        const utterance = document.createElement('div');
+            const utterance = document.createElement('div');
         utterance.className = 'axi-utterance';
         frame.appendChild(utterance);
         voice.appendChild(frame);
@@ -3794,10 +3422,9 @@ import Base from '../layouts/Base.astro';
         cursor.remove();
         utterance.classList.add('present');
         responseText = fullText || 'Witnessed.';
-        addMetaLine(frame, sseRegister, donorWordCount);
-        if (!sealed) addSuggestion(frame, sseRegister);
         addResponseActions(frame, responseText);
         if (witnessMark) showWitnessMark(witnessMark);
+        haptic80Hz();
 
       } else if (res.ok) {
         // ── JSON response — animate locally ──
@@ -4079,53 +3706,7 @@ import Base from '../layouts/Base.astro';
     checkDonorAuth();
   }
 
-  // ── Connect forms (newsletter, feedback, collaboration) ──
-  function submitConnectForm(formId: string, type: string, statusId: string) {
-    const form = document.getElementById(formId) as HTMLFormElement | null;
-    const status = document.getElementById(statusId) as HTMLParagraphElement | null;
-    if (!form || !status) return;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const data: Record<string, string> = { type };
-      formData.forEach((value, key) => { data[key] = value as string; });
-
-      const btn = form.querySelector('button') as HTMLButtonElement | null;
-      if (btn) { btn.disabled = true; btn.textContent = '...'; }
-      status.textContent = '';
-      status.className = 'form-status';
-
-      try {
-        const res = await fetch('/api/connect.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        const result = await res.json();
-        if (res.ok) {
-          status.textContent = result.message || 'Received.';
-          status.className = 'form-status success';
-          form.reset();
-        } else {
-          status.textContent = result.error || 'Something went wrong.';
-          status.className = 'form-status error';
-        }
-      } catch {
-        status.textContent = 'Could not connect. Please try again.';
-        status.className = 'form-status error';
-      } finally {
-        if (btn) {
-          btn.disabled = false;
-          btn.textContent = type === 'newsletter' ? 'Subscribe' : type === 'feedback' ? 'Send' : 'Propose';
-        }
-      }
-    });
-  }
-
-  submitConnectForm('home-newsletter-form', 'newsletter', 'home-newsletter-status');
-  submitConnectForm('home-feedback-form', 'feedback', 'home-feedback-status');
-  submitConnectForm('home-collab-form', 'collaboration', 'home-collab-status');
+  // Connect forms removed — homepage uses quiet closing links now
 
   // ══════════════════════════════════════════════════════════════
   // ── i18n: Apply translations to homepage ──

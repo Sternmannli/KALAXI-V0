@@ -137,6 +137,59 @@ class TestVoiceAuditScore(unittest.TestCase):
         self.assertGreater(len(audit.warnings), 0)
 
 
+class TestRule7SomaticAnchor(unittest.TestCase):
+    """Rule 7: Somatic anchor — at least one concrete noun."""
+
+    def test_somatic_text_passes(self):
+        audit = audit_voice("The stone holds what speech cannot carry forward.")
+        rule7_violations = [v for v in audit.violations if v.rule == 7]
+        self.assertEqual(len(rule7_violations), 0)
+
+    def test_abstract_text_fails(self):
+        audit = audit_voice("The framework provides systemic support for digital transformation.")
+        rule7_violations = [v for v in audit.violations if v.rule == 7]
+        self.assertGreater(len(rule7_violations), 0)
+
+    def test_multiple_somatic_words(self):
+        audit = audit_voice("Ash is memory. Mix it into new soil.")
+        rule7_violations = [v for v in audit.violations if v.rule == 7]
+        self.assertEqual(len(rule7_violations), 0)
+
+
+class TestRule8SentenceShape(unittest.TestCase):
+    """Rule 8: Sentence shape — 4-20 words per sentence."""
+
+    def test_good_length_passes(self):
+        audit = audit_voice("The river holds what stone cannot carry.")
+        rule8_violations = [v for v in audit.violations if v.rule == 8]
+        self.assertEqual(len(rule8_violations), 0)
+
+    def test_very_long_sentence_fails(self):
+        long = "The " + "very " * 25 + "long stone path leads somewhere far away into the distance."
+        audit = audit_voice(long)
+        rule8_violations = [v for v in audit.violations if v.rule == 8]
+        self.assertGreater(len(rule8_violations), 0)
+
+
+class TestRule9HelpfulnessLeak(unittest.TestCase):
+    """Rule 9: No helpfulness leak — no assistant persona."""
+
+    def test_witness_text_passes(self):
+        audit = audit_voice("The knot holds. This is witnessed.")
+        rule9_violations = [v for v in audit.violations if v.rule == 9]
+        self.assertEqual(len(rule9_violations), 0)
+
+    def test_helpfulness_detected(self):
+        audit = audit_voice("I can help you with that stone. Hope this helps!")
+        rule9_violations = [v for v in audit.violations if v.rule == 9]
+        self.assertGreater(len(rule9_violations), 0)
+
+    def test_assistant_greeting_detected(self):
+        audit = audit_voice("How can I help you find the right path today?")
+        rule9_violations = [v for v in audit.violations if v.rule == 9]
+        self.assertGreater(len(rule9_violations), 0)
+
+
 class TestRenderIntegration(unittest.TestCase):
     """Test that render() includes voice audit data."""
 
@@ -149,6 +202,48 @@ class TestRenderIntegration(unittest.TestCase):
         result = render("I think this is absolutely certain.", medium=TERMINAL)
         if result.dignity_passed:
             self.assertLess(result.voice_score, 1.0)
+
+
+class TestStandaloneLinter(unittest.TestCase):
+    """Test TOOLS/voice_lint.py standalone linter."""
+
+    def setUp(self):
+        sys.path.insert(0, str(ROOT / "TOOLS"))
+        from voice_lint import lint
+        self.lint = lint
+
+    def test_valid_utterance(self):
+        passed, reason, _ = self.lint("The stone holds what speech cannot carry forward.")
+        self.assertTrue(passed)
+
+    def test_silence_valid(self):
+        passed, reason, _ = self.lint("")
+        self.assertTrue(passed)
+        self.assertEqual(reason, "Valid silence")
+
+    def test_halt_valid(self):
+        passed, reason, _ = self.lint("The gate refuses. Not because dignity is fragile.")
+        self.assertTrue(passed)
+        self.assertEqual(reason, "Valid halt")
+
+    def test_no_somatic(self):
+        passed, reason, _ = self.lint("The framework provides systemic support for digital transformation.")
+        self.assertFalse(passed)
+        self.assertIn("somatic", reason.lower())
+
+    def test_helpfulness_leak(self):
+        passed, reason, _ = self.lint("I can help you with that stone right now today.")
+        self.assertFalse(passed)
+        self.assertIn("leak", reason.lower())
+
+    def test_too_many_sentences_strict(self):
+        text = "Stone holds. " * 6
+        passed, reason, _ = self.lint(text, strict=True)
+        self.assertFalse(passed)
+
+    def test_canonical_proverb_format(self):
+        passed, reason, _ = self.lint("Rest is part of repeat. Lay the hand down and breathe.")
+        self.assertTrue(passed)
 
 
 if __name__ == "__main__":

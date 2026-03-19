@@ -48,3 +48,6 @@ site/.astro/
 node_modules/
 .astro/
 *.db
+
+# Credentials vault — NEVER commit (contains PAT, tokens, passwords)
+.credentials.env

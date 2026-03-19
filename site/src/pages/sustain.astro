@@ -141,9 +141,10 @@ import QRCode from '../components/QRCode.astro';
               <div class="alt-method-info">
                 <strong>TWINT</strong>
                 <span class="twint-number">+41 78 353 17 77</span>
-                <span class="twint-instruction">Open TWINT app → Send money → Enter this number</span>
+                <span class="twint-instruction">Open TWINT app &rarr; Send money &rarr; Enter this number</span>
+                <button class="twint-copy-btn" id="twint-copy" aria-label="Copy TWINT number">Copy number</button>
               </div>
-              <button class="twint-copy-btn" id="twint-copy" aria-label="Copy TWINT number">Copy</button>
+              <QRCode url="https://pay.twint.ch/1/namedBeneficiary?alias=kalam&type=11&partyIdentification=%2B41783531777" label="Scan for TWINT" size={90} />
             </div>
           </div>
         </div>
@@ -423,13 +424,6 @@ import QRCode from '../components/QRCode.astro';
   /* Sustain action section */
   .sustain-action { text-align: center; }
 
-  /* Dark mode refinements */
-  @media (prefers-color-scheme: dark) {
-    .cost-row.cost-total { background: rgba(212, 180, 120, 0.08); }
-    .amount-btn { background: var(--bg-elevated); }
-    .freq-btn { background: var(--bg-elevated); }
-    .alt-method { background: rgba(255, 255, 255, 0.02); }
-  }
 
   /* Mobile */
   @media (max-width: 768px) {

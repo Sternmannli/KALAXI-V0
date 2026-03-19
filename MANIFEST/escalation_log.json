@@ -14,12 +14,12 @@
         "event": "escalation_initiated",
         "level": "elevated",
         "trigger": "test",
-        "timestamp": "2026-03-19T11:59:09.770715+00:00",
+        "timestamp": "2026-03-19T15:29:36.388222+00:00",
         "initiated_by": "system"
       }
     ],
     "resolution": "",
     "resolved": false,
-    "timestamp": "2026-03-19T11:59:09.770719+00:00"
+    "timestamp": "2026-03-19T15:29:36.388232+00:00"
   }
 ]
