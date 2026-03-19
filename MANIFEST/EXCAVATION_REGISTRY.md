@@ -348,11 +348,28 @@ Coverage: 11 core modules + 12 seed mechanisms + 6 measurement layers + cryptogr
 
 ---
 
-## PHASE 10: SITE (Website)
+## PHASE 10: SITE (Website — kalam.ch)
 
-**Status: PENDING.** ~731,986 lines across ~11,192 files (mostly node_modules + build artifacts).
+**ALL SOURCE FILES READ + EXTRACTED. 2026-03-19.** (node_modules/dist/.astro skipped — build artifacts only.)
 
-Strategy: Read only source files (site/src/, site/public/, site/api/), skip node_modules and dist. To be excavated in next session.
+Built with Astro 6 + PHP backend. Deployed on Hostpoint. LIVE as of 2026-03-17.
+
+| Component | Files | Lines | Essence |
+|-----------|-------|-------|---------|
+| Pages (src/pages/) | 22 .astro | ~7,472 | EXTRACTED. Threshold (input zone + Ninth Operator + Living Ledger), About (founding wound), Canon (18 covenants + 166 proverbs), Hakaka/Ashwater/Kinderbuch/KALAXI_1 (narratives), R7M (59 treasures), Science, Compass, Workings, Museum, Silence, Gallery, Sustain, Invitation, 404. |
+| Layout + Components | 2 | ~225 | EXTRACTED. Base.astro (master layout, nav, footer, PWA, SW register). QRCode.astro. |
+| API Endpoints (public/api/) | 13 PHP | ~2,950 | EXTRACTED. axi.php (1,520 lines — CANONICAL CORE: sealed gate + dignity + ledger + proverbs + voice). proxy.php (Groq API bridge). donor.php (magic link auth, profiles). connect.php (forms). sustain.php (donations). health.php. export.php (GDPR). migrate.php. |
+| PHP Libraries (api/lib/) | 4 | ~769 | EXTRACTED. dignity.php (D=A×L×M), narratives.php, proverbs.php (166 canonical), sealed_gate.php (legacy). |
+| Data JSON (public/data/) | 11 | ~165KB | EXTRACTED. hakaka.json (56KB, 54 chapters), ashwater.json (26KB), kinderbuch.json (27KB), kalaxi1.json, r7m-index.json (59 treasures), proverbs.json (166), science.json, inner-workings.json, manifest.json, system-state.json. |
+| Styles | 1 | ~800 | EXTRACTED. global.css: 5 color pillars, Cormorant/IBM Plex/Amiri typography, 8px grid. |
+| Service Worker | 1 | 88 | EXTRACTED. sw.js: precache core, network-first API, cache-first assets, offline fallback. |
+| Config | 2 | ~30 | EXTRACTED. astro.config.mjs, translations.ts (prepared, not integrated). |
+
+**Design:** Warm cream (#fafaf8), burnt orange accent (#c44a1a), teal presence (#0a7b62), indigo pattern (#3a3fb8), amber wisdom (#9b6b00). Cormorant Garamond (headings), IBM Plex Sans (body), Amiri (proverbs/Arabic).
+
+**Phase 1 features live:** Threshold input, Sealed Gate, Dignity Predicate, Hash-Chained Ledger, Witness Certificates, 166 Proverbs, Living Ledger Counter, PWA, Service Worker, Donation forms, Donor accounts (magic link), GDPR export, Dedication Ceremony, Accessibility.
+
+**Phase 2 needed:** Cloudflare Worker + KV for persistence, real LLM responses through AXI voice.
 
 ---
 
