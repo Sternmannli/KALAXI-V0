@@ -1,0 +1,3 @@
+# Protect system data from direct web access
+# Only accessible via PHP (command.php)
+Deny from all
