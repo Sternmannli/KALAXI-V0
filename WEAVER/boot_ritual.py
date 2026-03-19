@@ -5,10 +5,11 @@ boot_ritual.py — KALAXI Boot Ritual (Constitutional Law)
 The system does NOTHING until this ritual passes. No processing. No response.
 No input digestion. If the ritual fails, the system halts with alarm.
 
-Three phases, in order:
+Four phases, in order:
   Phase 0: CREDENTIALS — vault exists and is loaded
   Phase 1: CONNECTIVITY — git, website, all connections verified
   Phase 2: LEDGER INTEGRITY — hash chain intact, input sacred
+  Phase 3: DISTILLERY STATE — essence freshness (non-critical)
 
 If any phase fails: HALT. The system does not proceed broken.
 
@@ -370,6 +371,79 @@ def _check_ledger_chain() -> BootCheck:
 
 
 # ══════════════════════════════════════════════════════════════════════
+# PHASE 3: DISTILLERY STATE (essence freshness)
+# ══════════════════════════════════════════════════════════════════════
+
+def _check_distillery_essence() -> BootCheck:
+    """Check that DISTILLED_ESSENCE.md exists and is reasonably fresh."""
+    essence_path = ROOT / "MANIFEST" / "DISTILLED_ESSENCE.md"
+    if not essence_path.exists():
+        return BootCheck(
+            name="distillery_essence",
+            phase=3,
+            passed=False,
+            message="DISTILLED_ESSENCE.md not found. Run organism.distill() to generate.",
+            critical=False,  # Warning, not halt — system runs without it
+        )
+    # Check freshness: warn if older than 7 days
+    import time
+    mtime = essence_path.stat().st_mtime
+    age_days = (time.time() - mtime) / 86400
+    if age_days > 7:
+        return BootCheck(
+            name="distillery_essence",
+            phase=3,
+            passed=False,
+            message=f"DISTILLED_ESSENCE.md is {age_days:.0f} days old. Consider re-running distill().",
+            critical=False,
+        )
+    return BootCheck(
+        name="distillery_essence",
+        phase=3,
+        passed=True,
+        message=f"DISTILLED_ESSENCE.md present ({age_days:.1f} days old).",
+    )
+
+
+def _check_distillery_latest() -> BootCheck:
+    """Check that DIGESTION/latest.json exists and has entries."""
+    latest_path = ROOT / "MANIFEST" / "DIGESTION" / "latest.json"
+    if not latest_path.exists():
+        return BootCheck(
+            name="distillery_latest",
+            phase=3,
+            passed=False,
+            message="DIGESTION/latest.json not found. Run organism.distill() to generate.",
+            critical=False,
+        )
+    try:
+        data = json.loads(latest_path.read_text())
+        count = len(data) if isinstance(data, list) else 0
+        if count == 0:
+            return BootCheck(
+                name="distillery_latest",
+                phase=3,
+                passed=False,
+                message="DIGESTION/latest.json is empty.",
+                critical=False,
+            )
+        return BootCheck(
+            name="distillery_latest",
+            phase=3,
+            passed=True,
+            message=f"DIGESTION/latest.json: {count} entries.",
+        )
+    except (json.JSONDecodeError, OSError) as e:
+        return BootCheck(
+            name="distillery_latest",
+            phase=3,
+            passed=False,
+            message=f"DIGESTION/latest.json corrupted: {e}",
+            critical=False,
+        )
+
+
+# ══════════════════════════════════════════════════════════════════════
 # THE RITUAL
 # ══════════════════════════════════════════════════════════════════════
 
@@ -382,6 +456,7 @@ def boot_ritual(strict: bool = True) -> BootResult:
     Phase 0: CREDENTIALS (vault + auth)
     Phase 1: CONNECTIVITY (git + website + modules + files)
     Phase 2: LEDGER INTEGRITY (existence + hash chain)
+    Phase 3: DISTILLERY STATE (essence + latest.json freshness)
 
     Returns BootResult with pass/fail and details.
     """
@@ -401,6 +476,10 @@ def boot_ritual(strict: bool = True) -> BootResult:
     # Phase 2: LEDGER INTEGRITY
     checks.append(_check_ledger_exists())
     checks.append(_check_ledger_chain())
+
+    # Phase 3: DISTILLERY STATE (non-critical — warnings only)
+    checks.append(_check_distillery_essence())
+    checks.append(_check_distillery_latest())
 
     # Evaluate
     critical_failures = [c for c in checks if not c.passed and c.critical]
