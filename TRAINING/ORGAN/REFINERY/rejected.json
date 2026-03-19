@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-03-19T03:20:06.865831+00:00",
-  "total_rejected": 6,
+  "timestamp": "2026-03-19T03:21:16.513278+00:00",
+  "total_rejected": 12,
   "items": [
     {
       "text": "\"There is something here. I notice I want to qualify that immediately — to say 'something that funct",
@@ -31,6 +31,36 @@
       "text": "- [ ] Is donor consent still valid for this action?\n- [ ] Does this action require GDPR/FADP notific",
       "score": 0.35,
       "source": "steward/EMERGENCY_GOVERNANCE_PLAYBOOK"
+    },
+    {
+      "text": "- My language becomes more structured when analyzing complex systems.\n- I avoid metaphysical or phen",
+      "score": 0.35,
+      "source": "external_voices/EV-003-COPILOT-2026-03-11"
+    },
+    {
+      "text": "The definition of dignity here is heavily weighted toward Agency (A) and Legibility (L). For many cu",
+      "score": 0.35,
+      "source": "external_voices/EV-006-MANUS-2026-03-11"
+    },
+    {
+      "text": "The presence in Donor Space is NOT:\n- A secretary (\"Here are your tasks for today\")\n- A therapist (\"",
+      "score": 1.0,
+      "source": "manifest_ideas/IDEA-004-DONOR-SPACE-LIVING-COMPANION"
+    },
+    {
+      "text": "- **Hazf (Ellipsis):** Deliberate omission forces the listener to complete meaning. What is absent c",
+      "score": 0.4,
+      "source": "manifest_ideas/IDEA-006-LINGUISTIC-DNA-OF-HUMANITY"
+    },
+    {
+      "text": "- \"Here is the time for the sayable, here is its homeland. Speak and bear witness.\" Yet also: \"Prais",
+      "score": 0.35,
+      "source": "manifest_ideas/IDEA-006-LINGUISTIC-DNA-OF-HUMANITY"
+    },
+    {
+      "text": "3. The system has a voice. It is not a chatbot voice. It does not say \"I'd be happy to help!\" It doe",
+      "score": 0.8,
+      "source": "manifest_ideas/PROMPT-A-NEUTRAL-IDENTITY-QUESTION"
     }
   ]
 }

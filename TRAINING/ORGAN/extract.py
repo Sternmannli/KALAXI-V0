@@ -63,6 +63,16 @@ TRILITERAL = ROOT / "VOICE" / "TRILITERAL_ROOT_SYSTEM_2026-03-18.md"
 MANIFEST_META_DIR = ROOT / "MANIFEST" / "metadata"
 SCIENTIFIC_CHRONICLE_MD = ROOT / "MANIFEST" / "SCIENTIFIC_CHRONICLE.md"
 
+# ─── BATCH 3: Medium-priority sources ─────────────────────────────────────────
+FACE_DIR = ROOT / "FACE" / "KALAM_CH"
+DEVELOPMENTAL_DIR = ROOT / "DEVELOPMENTAL"
+ENKI_DIR = ROOT / "ENKI" / "ST-006"
+EXTERNAL_VOICES_DIR = ROOT / "EXTERNAL_VOICES"
+BOOK_7_DIR = ROOT / "BOOK_7_DONOR"
+FUTURE_DIR = ROOT / "FUTURE"
+ARCHIVE_DIR = ROOT / "ARCHIVE"
+MANIFEST_IDEAS_DIR = ROOT / "MANIFEST" / "IDEAS"
+
 # ─── AI Contamination Filter ────────────────────────────────────────────────
 
 FORBIDDEN_PHRASES = [
@@ -776,6 +786,95 @@ def extract_scientific_chronicle() -> list[dict]:
     return extract_markdown_passages(SCIENTIFIC_CHRONICLE_MD, "scientific_chronicle", purity_level=2)
 
 
+# ─── BATCH 3: Medium-Priority Extractors ─────────────────────────────────────
+
+def extract_face() -> list[dict]:
+    """FACE/KALAM_CH/ — first sentence, diagnostic sentences, design rationale."""
+    if not FACE_DIR.exists():
+        return []
+    entries = []
+    for f in sorted(FACE_DIR.iterdir()):
+        if f.is_file() and f.suffix == ".md":
+            entries.extend(extract_markdown_passages(f, f"face/{f.stem}", purity_level=1))
+    return entries
+
+
+def extract_developmental() -> list[dict]:
+    """DEVELOPMENTAL/ — emergence events, the sentence discovery."""
+    return extract_directory_passages(DEVELOPMENTAL_DIR, "developmental", purity_level=2)
+
+
+def extract_enki() -> list[dict]:
+    """ENKI/ST-006/ — multilingual voice instances (7 languages).
+    Each file has proverb, math, code, colour, reason."""
+    if not ENKI_DIR.exists():
+        return []
+    entries = []
+    for f in sorted(ENKI_DIR.iterdir()):
+        if f.is_file() and f.suffix == ".md":
+            text = f.read_text(encoding="utf-8")
+            # Extract individual lines of substance
+            for line in text.split('\n'):
+                line = line.strip()
+                if not line or line.startswith("#") or line.startswith("🐬"):
+                    continue
+                # Strip markdown bold
+                cleaned = re.sub(r'\*\*([^*]+)\*\*', r'\1', line).lstrip('- ').strip()
+                if len(cleaned.split()) >= 4:
+                    entries.append({
+                        "text": cleaned,
+                        "source": f"enki/{f.stem}",
+                        "contamination_score": 0.0,
+                        "hash": passage_hash(cleaned),
+                        "purity_level": 1,
+                    })
+    return entries
+
+
+def extract_external_voices() -> list[dict]:
+    """EXTERNAL_VOICES/ — two uses:
+    (a) V-002 assessment sections → Level 2 CPT
+    (b) LLM responses with AI markers → Level 3 anti-corpus for future DPO"""
+    if not EXTERNAL_VOICES_DIR.exists():
+        return []
+    entries = []
+    for f in sorted(EXTERNAL_VOICES_DIR.rglob("*.md")):
+        passages = extract_markdown_passages(f, f"external_voices/{f.stem}", purity_level=2)
+        entries.extend(passages)
+    return entries
+
+
+def extract_book7() -> list[dict]:
+    """BOOK_7_DONOR/ — donor session records, relay text."""
+    return extract_directory_passages(BOOK_7_DIR, "book7_donor", purity_level=2)
+
+
+def extract_future_seeds() -> list[dict]:
+    """FUTURE/ — 12 seed design files."""
+    if not FUTURE_DIR.exists():
+        return []
+    entries = []
+    for f in sorted(FUTURE_DIR.iterdir()):
+        if f.is_file() and f.suffix == ".md" and f.name != "README.md":
+            entries.extend(extract_markdown_passages(f, f"future/{f.stem}", purity_level=2))
+    return entries
+
+
+def extract_archive() -> list[dict]:
+    """ARCHIVE/ — first sight conversation, Jekyll legacy, orphan code comments."""
+    if not ARCHIVE_DIR.exists():
+        return []
+    entries = []
+    for f in ARCHIVE_DIR.rglob("*.md"):
+        entries.extend(extract_markdown_passages(f, f"archive/{f.stem}", purity_level=2))
+    return entries
+
+
+def extract_manifest_ideas() -> list[dict]:
+    """MANIFEST/IDEAS/ — design proposals, linguistic DNA study, prompt frameworks."""
+    return extract_directory_passages(MANIFEST_IDEAS_DIR, "manifest_ideas", purity_level=2)
+
+
 # ─── Phase Builders ──────────────────────────────────────────────────────────
 
 AXI_SYSTEM_PROMPT = (
@@ -1099,6 +1198,17 @@ def run_refinery():
     run_extractor("triliteral", extract_triliteral)
     run_extractor("manifest_tiers", extract_manifest_tiers)
     run_extractor("scientific_chronicle", extract_scientific_chronicle)
+
+    # BATCH 3: Medium-priority sources
+    print("\n--- Batch 3: Medium-Priority Sources ---")
+    run_extractor("face", extract_face)
+    run_extractor("developmental", extract_developmental)
+    run_extractor("enki", extract_enki)
+    run_extractor("external_voices", extract_external_voices)
+    run_extractor("book7", extract_book7)
+    run_extractor("future_seeds", extract_future_seeds)
+    run_extractor("archive", extract_archive)
+    run_extractor("manifest_ideas", extract_manifest_ideas)
 
     # ─── Global dedup ─────────────────────────────────────────────────────
 
