@@ -93,15 +93,27 @@ def extract_proverbs() -> list[dict]:
             except (json.JSONDecodeError, KeyError):
                 pass
 
-    # WISDOM_CANON.md — proverb section
+    # WISDOM_CANON.md — proverb section (all layers)
     wc = ROOT / "R7M" / "WISDOM_CANON.md"
     if wc.exists():
         text = _read(wc)
-        # Match P#XXXX patterns
-        for m in re.finditer(r"P#(\d+)\s*[—–:\-]\s*(.+?)(?:\n(?=P#|\n|##)|$)", text, re.DOTALL):
+        # Match P#XXXX - text (numbered proverbs)
+        for m in re.finditer(r"^P#(\d+)\s*[-–—]\s*(.+)", text, re.MULTILINE):
             pid = f"P#{m.group(1)}"
-            ptxt = m.group(2).strip().split("\n")[0].strip()
-            if len(ptxt) > 10:
+            ptxt = m.group(2).strip()
+            if len(ptxt) > 5 and not any(i.get("id") == pid for i in items):
+                items.append({"type": "proverb", "id": pid, "text": ptxt, "source": "WISDOM_CANON.md"})
+        # Match P#EMERGE-XXXX
+        for m in re.finditer(r"^(P#EMERGE-\d+)\s*\[.*?\]\s*\ntext:\s*(.+)", text, re.MULTILINE):
+            pid = m.group(1)
+            ptxt = m.group(2).strip()
+            if len(ptxt) > 5 and not any(i.get("id") == pid for i in items):
+                items.append({"type": "proverb", "id": pid, "text": ptxt, "source": "WISDOM_CANON.md"})
+        # Match P#AXIOM-XXX
+        for m in re.finditer(r"(P#AXIOM-\d+)\s*[—–]\s*\"(.+?)\"", text):
+            pid = m.group(1)
+            ptxt = m.group(2).strip()
+            if not any(i.get("id") == pid for i in items):
                 items.append({"type": "proverb", "id": pid, "text": ptxt, "source": "WISDOM_CANON.md"})
 
     return items
@@ -204,13 +216,18 @@ def extract_exemplars() -> list[dict]:
 # ---------------------------------------------------------------------------
 
 def extract_covenants() -> list[dict]:
-    """Extract covenants from stone tier."""
+    """Extract covenants from stone tier (correct path: MANIFEST/metadata/)."""
     items = []
-    sf = ROOT / "R7M" / "tier1_stone.md"
-    if sf.exists():
-        text = _read(sf)
-        for m in re.finditer(r"(COV#\d+[A-Z]*)\s*[—–\-]\s*(.+?)(?:\n\n|\n(?=COV#)|\Z)", text, re.DOTALL):
-            items.append({"type": "covenant", "id": m.group(1), "text": m.group(2).strip(), "source": "tier1_stone.md"})
+    for path in [ROOT / "MANIFEST" / "metadata" / "tier1_stone.md", ROOT / "R7M" / "tier1_stone.md"]:
+        if not path.exists():
+            continue
+        text = _read(path)
+        # Match "- **COV#XXX:** NAME — description" format
+        for m in re.finditer(r"\*\*(COV#[A-Z0-9#\-]+)\:\*\*\s*(.+?)(?=\n-\s*\*\*COV#|\n\n|\n###|\Z)", text, re.DOTALL):
+            cov_id = m.group(1)
+            cov_text = m.group(2).strip()
+            if not any(i.get("id") == cov_id for i in items):
+                items.append({"type": "covenant", "id": cov_id, "text": cov_text, "source": str(path.relative_to(ROOT))})
     return items
 
 
@@ -271,25 +288,46 @@ def extract_treasures() -> list[dict]:
 # ---------------------------------------------------------------------------
 
 def extract_anomalies() -> list[dict]:
-    """Extract anomaly entries from WISDOM_CANON."""
+    """Extract anomaly entries from WISDOM_CANON (including ANOM#NEW-*)."""
     items = []
     wc = ROOT / "R7M" / "WISDOM_CANON.md"
     if not wc.exists():
         return items
     text = _read(wc)
-    for m in re.finditer(r"##ANOM:(\d+)\s*\n(.*?)(?=\n##ANOM:|\n##SECTION:|\Z)", text, re.DOTALL):
+    # Match ##ANOM:XXXX and ##ANOM:NEW-XXX
+    for m in re.finditer(r"##ANOM:([A-Z0-9\-]+)\s*(?:\[.*?\])?\s*\n(.*?)(?=\n##ANOM:|\n##SECTION:|\n---|\Z)", text, re.DOTALL):
         anom_id = f"ANOM#{m.group(1)}"
         body = m.group(2).strip()
+        # Extract structured fields
         desc = ""
         dm = re.search(r"description:\s*(.+)", body)
         if dm:
             desc = dm.group(1).strip()
-        items.append({
+        severity = ""
+        sm = re.search(r"severity:\s*(\w+)", body)
+        if sm:
+            severity = sm.group(1)
+        module = ""
+        mm = re.search(r"module:\s*(\w+)", body)
+        if mm:
+            module = mm.group(1)
+        felt = ""
+        fm = re.search(r"felt_domain:\s*(\w+)", body)
+        if fm:
+            felt = fm.group(1)
+        entry = {
             "type": "anomaly",
             "id": anom_id,
-            "text": desc or body[:300],
+            "text": desc or body[:500],
             "source": "WISDOM_CANON.md",
-        })
+        }
+        if severity:
+            entry["severity"] = severity
+        if module:
+            entry["module"] = module
+        if felt:
+            entry["felt_domain"] = felt
+        items.append(entry)
     return items
 
 

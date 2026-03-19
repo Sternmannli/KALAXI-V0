@@ -117,6 +117,58 @@ def build():
     for err in dpo_errors[:5]:
         print(f"  ERROR: {err}")
 
+    # ─── ZAKAKA merge ───────────────────────────────────────────────────
+    print("\n--- ZAKAKA Merge (Essence³) ---")
+    zakaka_cpt = ORGAN / "ZAKAKA" / "ZAKAKA_CPT.jsonl"
+    zakaka_sft = ORGAN / "ZAKAKA" / "ZAKAKA_SFT.jsonl"
+    zakaka_cpt_count = 0
+    zakaka_sft_count = 0
+
+    # Collect existing text hashes to avoid duplicates
+    existing_hashes = set()
+    for entry in cpt_valid:
+        existing_hashes.add(hash(entry["text"][:150]))
+
+    if zakaka_cpt.exists():
+        with open(zakaka_cpt, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    entry = json.loads(line)
+                    h = hash(entry.get("text", "")[:150])
+                    if h not in existing_hashes:
+                        cpt_valid.append(entry)
+                        existing_hashes.add(h)
+                        zakaka_cpt_count += 1
+                except json.JSONDecodeError:
+                    pass
+    print(f"  ZAKAKA → CPT: {zakaka_cpt_count} new entries merged")
+
+    existing_sft_hashes = set()
+    for entry in sft_valid:
+        existing_sft_hashes.add(hash(entry["messages"][2]["content"][:150]))
+
+    if zakaka_sft.exists():
+        with open(zakaka_sft, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    entry = json.loads(line)
+                    ok, msg = validate_sft_entry(entry)
+                    if ok:
+                        h = hash(entry["messages"][2]["content"][:150])
+                        if h not in existing_sft_hashes:
+                            sft_valid.append(entry)
+                            existing_sft_hashes.add(h)
+                            zakaka_sft_count += 1
+                except json.JSONDecodeError:
+                    pass
+    print(f"  ZAKAKA → SFT: {zakaka_sft_count} new entries merged")
+
     # ─── Write final outputs ─────────────────────────────────────────────
     print("\n--- Writing Final Corpus Files ---")
 
@@ -183,6 +235,7 @@ def build():
         "total_entries": total,
         "total_pure_words": cpt_words + sft_words + dpo_chosen_words,
         "invalid_entries": total_invalid,
+        "zakaka_merged": {"cpt": zakaka_cpt_count, "sft": zakaka_sft_count},
         "contamination_threshold": 0.25,
         "files": [
             str(final_cpt.relative_to(ROOT)),
