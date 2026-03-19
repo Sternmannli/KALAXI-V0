@@ -402,12 +402,109 @@ class Distillery:
         return results
 
     # ── Step 1C: extract_essence_line() ──────────────────────────────
-    # To be implemented in Session 2
+    # Session D — implemented
 
     def extract_essence_line(self, text: str, patterns: List[str]) -> str:
-        """Distill text into one line of meaning (not summary).
-        Uses patterns to identify the load-bearing sentence."""
-        raise NotImplementedError("Step 1C — next session")
+        """Distill text into one line of meaning (not summary — the meaning).
+
+        Strategy: score each sentence against the detected patterns.
+        The load-bearing sentence is the one most aligned with what
+        the text IS (instruction, correction, narrative image, etc.).
+
+        Scoring factors:
+        1. Pattern alignment — sentence matches the dominant pattern type
+        2. Brevity bonus — shorter sentences carry more weight (V-001 voice)
+        3. Position — first and last sentences get a slight boost
+        4. Density — more canonical vocabulary per word = more load-bearing
+
+        Limitation: this picks the best existing sentence, not a creative
+        rewrite. Automated extraction without an LLM cannot rephrase.
+        """
+        if not text or not text.strip():
+            return ""
+
+        sentences = self._sentences(text)
+        if not sentences:
+            # No sentence boundaries found — return truncated text
+            return text.strip()[:200]
+
+        if len(sentences) == 1:
+            return sentences[0]
+
+        # Parse dominant pattern type from patterns list
+        # patterns look like "CORRECTION:0.72", "INSTRUCTION:0.85"
+        dominant_type = ""
+        dominant_score = 0.0
+        for p in patterns:
+            if ":" in p:
+                ptype, pscore = p.split(":", 1)
+                try:
+                    sc = float(pscore)
+                    if sc > dominant_score:
+                        dominant_score = sc
+                        dominant_type = ptype
+                except ValueError:
+                    pass
+
+        # Build marker list for the dominant pattern type
+        type_to_markers = {
+            "CORRECTION": V001_CORRECTION_MARKERS,
+            "INSTRUCTION": V001_INSTRUCTION_MARKERS,
+            "PREFERENCE": V001_PREFERENCE_MARKERS,
+            "PRINCIPLE": V001_PRINCIPLE_MARKERS,
+            "REVELATION": V001_REVELATION_MARKERS,
+            "REPORT": V002_REPORT_MARKERS,
+            "DISCOVERY": V002_DISCOVERY_MARKERS,
+            "FAILURE": V002_FAILURE_MARKERS,
+            "BUILD": V002_BUILD_MARKERS,
+            "SOMATIC": SOMATIC_VOCABULARY,
+            "MATERIAL": MATERIAL_VOCABULARY,
+            "CORE_IMAGE": CORE_IMAGES,
+        }
+        dominant_markers = type_to_markers.get(dominant_type, [])
+
+        # Score each sentence
+        best_sentence = sentences[0]
+        best_score = -1.0
+
+        for i, sent in enumerate(sentences):
+            score = 0.0
+            word_count = max(self._count_words(sent), 1)
+
+            # Factor 1: pattern alignment (0-1)
+            if dominant_markers:
+                score += self._score_markers(sent, dominant_markers) * 2.0
+
+            # Factor 2: brevity bonus — sentences 4-14 words score highest
+            # Fragments (1-2 words) are penalized hard — "No." or "Stop."
+            # are not essence, they are punctuation
+            if 4 <= word_count <= 14:
+                score += 1.0
+            elif word_count <= 2:
+                score -= 1.0  # Heavy penalty for fragments
+            elif word_count == 3:
+                score += 0.3
+            else:
+                # Diminishing score as length increases past 14
+                score += max(0.1, 1.0 - (word_count - 14) * 0.05)
+
+            # Factor 3: position — first and last sentences get a boost
+            if i == 0:
+                score += 0.5
+            elif i == len(sentences) - 1:
+                score += 0.3
+
+            # Factor 4: canonical vocabulary density
+            canon_hits = self._count_vocabulary(sent, CORE_IMAGES)
+            canon_hits += self._count_vocabulary(sent, SOMATIC_VOCABULARY)
+            if canon_hits > 0:
+                score += min(canon_hits / word_count * 5, 1.0)
+
+            if score > best_score:
+                best_score = score
+                best_sentence = sent
+
+        return best_sentence
 
     # ── Step 1D: link_to_canon() ─────────────────────────────────────
     # To be implemented in Session 3
