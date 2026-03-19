@@ -507,20 +507,142 @@ class Distillery:
         return best_sentence
 
     # ── Step 1D: link_to_canon() ─────────────────────────────────────
-    # To be implemented in Session 3
+    # Session E — implemented
+
+    # Proverb cache — loaded once, reused across calls
+    _proverb_cache: Optional[List[Dict]] = None
+
+    # Stop words — too common to be meaningful for matching
+    _STOP_WORDS = {
+        "the", "a", "an", "is", "are", "was", "were", "be", "been",
+        "being", "have", "has", "had", "do", "does", "did", "will",
+        "would", "could", "should", "may", "might", "shall", "can",
+        "to", "of", "in", "for", "on", "with", "at", "by", "from",
+        "as", "into", "through", "during", "before", "after", "it",
+        "its", "this", "that", "these", "those", "i", "you", "he",
+        "she", "we", "they", "me", "him", "her", "us", "them", "my",
+        "your", "his", "our", "their", "not", "no", "and", "but",
+        "or", "if", "then", "than", "so", "up", "out", "about",
+    }
+
+    def _load_proverbs(self) -> List[Dict]:
+        """Load proverbs from site data. Cached after first load."""
+        if Distillery._proverb_cache is not None:
+            return Distillery._proverb_cache
+        proverbs_path = ROOT / "site" / "public" / "data" / "proverbs.json"
+        if proverbs_path.exists():
+            Distillery._proverb_cache = json.loads(proverbs_path.read_text())
+        else:
+            Distillery._proverb_cache = []
+        return Distillery._proverb_cache
+
+    def _meaningful_words(self, text: str) -> set:
+        """Extract meaningful (non-stop) words from text."""
+        words = set(re.findall(r'[a-z]+', text.lower()))
+        return words - self._STOP_WORDS
 
     def link_to_canon(self, text: str, patterns: List[str]) -> List[str]:
-        """Connect extracted content to canonical elements
-        (covenants, proverbs, treasures). Returns list of canonical IDs."""
-        raise NotImplementedError("Step 1D — next session")
+        """Connect extracted content to canonical elements.
+
+        Two matching strategies:
+        1. Proverb text overlap — keyword match against 166 proverbs
+           in site/public/data/proverbs.json. Requires 2+ meaningful
+           shared words for a link.
+        2. Pattern-type inference — PRINCIPLE/INSTRUCTION patterns
+           suggest covenant links; narrative patterns suggest treasure links.
+
+        Returns list of canonical ID strings like 'P#0042', 'COV#003'.
+        Capped at 5 links to avoid noise.
+        """
+        if not text or not text.strip():
+            return []
+
+        links = []
+        text_words = self._meaningful_words(text)
+
+        # Strategy 1: proverb text overlap
+        proverbs = self._load_proverbs()
+        for proverb in proverbs:
+            proverb_text = proverb.get("text", "")
+            proverb_words = self._meaningful_words(proverb_text)
+            overlap = text_words & proverb_words
+            # Require 2+ meaningful shared words (not just "begin" or "step")
+            if len(overlap) >= 2:
+                links.append(proverb["id"])
+
+        # Strategy 2: pattern-type inference
+        pattern_types = set()
+        for p in patterns:
+            if ":" in p:
+                ptype = p.split(":")[0]
+                pattern_types.add(ptype)
+
+        if "PRINCIPLE" in pattern_types or "INSTRUCTION" in pattern_types:
+            links.append("COV:linked")  # General covenant association
+        if "SOMATIC" in pattern_types or "MATERIAL" in pattern_types:
+            links.append("T:linked")    # Treasure association (narrative voice)
+        if "FAILURE" in pattern_types:
+            links.append("CORRECTION_LOG:linked")
+
+        # Cap at 5 to avoid noise
+        return links[:5]
 
     # ── Step 1E: metabolize_entry() ──────────────────────────────────
-    # To be implemented in Session 3
+    # Session E — implemented
 
     def metabolize_entry(self, entry) -> Optional[EssenceEntry]:
         """Orchestrate full metabolization of a single ledger entry.
-        Calls extract_patterns → extract_essence_line → link_to_canon → metabolize."""
-        raise NotImplementedError("Step 1E — next session")
+
+        Pipeline: extract_patterns → extract_essence_line → link_to_canon
+        Then creates an EssenceEntry and returns it.
+
+        Does NOT call ledger.metabolize() — that is done in batch by
+        the caller (metabolize_ledger or distill_all) to avoid per-entry saves.
+
+        Args:
+            entry: An InputEntry from the ledger (has .raw_text, .voice, .entry_id)
+        Returns:
+            EssenceEntry if text is non-empty, None otherwise.
+        """
+        text = getattr(entry, "raw_text", "")
+        if not text or not text.strip():
+            return None
+
+        # Determine source type from voice
+        voice = getattr(entry, "voice", "")
+        if voice == "V-001":
+            source_type = "v001"
+        elif voice == "V-002":
+            source_type = "v002"
+        else:
+            source_type = "general"
+
+        # Pipeline
+        patterns = self.extract_patterns(text, source_type)
+        essence = self.extract_essence_line(text, patterns)
+        links = self.link_to_canon(text, patterns)
+
+        # Extract motifs and voice markers from patterns
+        motifs = []
+        voice_markers = []
+        for p in patterns:
+            ptype = p.split(":")[0] if ":" in p else p
+            if ptype in ("CORE_IMAGE", "SOMATIC", "MATERIAL"):
+                motifs.append(ptype)
+            elif ptype in ("CORRECTION", "INSTRUCTION", "PRINCIPLE", "REVELATION"):
+                voice_markers.append(ptype)
+
+        return EssenceEntry(
+            source_path=getattr(entry, "entry_id", "unknown"),
+            source_area="ledger",
+            raw_excerpt=text[:500],
+            patterns=patterns,
+            essence=essence,
+            motifs=motifs,
+            voice_markers=voice_markers,
+            links=links,
+            thermal_state="witnessed",
+        )
 
     # ── Step 1F: feed_to_system() ────────────────────────────────────
     # To be implemented in Session 6
