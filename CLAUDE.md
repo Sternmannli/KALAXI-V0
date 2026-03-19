@@ -301,13 +301,16 @@ Seeds #1-12: Distributed Stewardship, Immutable Witness Network, Deliberative De
 - EXP-002: Multi-model convergence — COMPLETED (2026-03-15). 6/6 unanimous on chain inversion. Convergence map filed.
 - EXP-003: The Father of Seven Gates — COMPLETED (2026-03-15). Score: 4/7 PASS. Sealed gate flaws found and fixed.
 - EXP-004: The Seven Generations of Aysel — COMPLETED (2026-03-15). Score: 5/9 PASS. Discovery: M never fell. System purpose refined.
+- EXP-006: The Hive Mind — systemic coherence and inter-module communication test. Designed.
 - PIME: Designed, awaiting GO
 - Thermal Delay: Designed, awaiting GO
 
-### kalam.ch Status
+### kalam.ch Status (updated 2026-03-19)
+- **LIVE** at kalam.ch since 2026-03-17. 13+ pages deployed. SSL valid. 78 witness marks recorded.
 - Threshold built (Phase 1): text input with "qul" placeholder, Ninth Operator ceremony (client-side JS), dignity-latency delay, three witness marks, Living Ledger with localStorage, Mycelium visual shift
 - Phase 2 needed: Cloudflare Worker + KV for persistence (IDEA-019)
-- Deployment: authorized but NOT live — still localhost only
+- Deep site audit completed 2026-03-17: 61 issues found (4 critical, 11 high, 21 medium, 25 low). Critical: donor input counter bug breaks signup reveal; API endpoints lack CORS protection.
+- Recent fixes: dead textarea keydown handler, guide tour overlay blocking site access
 
 ### Known Discrepancy
 - ACTIVE_PLANS session 2026-03-15b says "60 runs" needed. PROJECT_TRACKER says "188 remaining." The 188 is correct (10 systems × 10 questions × 2 conditions = 200, minus 12 collected = 188). The "60" was a different framing (10q × 2c × 3 systems) from a reduced scope proposal. Canonical number: **188 remaining.**
@@ -445,6 +448,10 @@ Phase 9: GO 9.1-9.5 (narrative — remaining Hakaka, Ashwater, Kinderbuch, Offsp
 | Probe Forge | PROTOCOLS/PROBE_FORGE.md |
 | Stone (Constitution) | R7M/tier1_stone.md |
 | EXP-001 Runner | EXPERIMENTS/EXP-001/run_exp001.py |
+| System Biography | MANIFEST/SYSTEM_BIOGRAPHY.md |
+| Site Audit (2026-03-17) | MANIFEST/SITE_AUDIT_2026-03-17.md |
+| Strategic Moves | MANIFEST/STRATEGIC_MOVES_2026-03-16.md |
+| Deployment Chronicle | MANIFEST/DEPLOYMENT_CHRONICLE.md |
 | Session Boot (auto-read) | MANIFEST/SESSION_BOOT.md |
 | KALAXI Dictionary (auto-read) | MANIFEST/KALAXI_DICTIONARY.md |
 | Scientific Chronicle (blueprint) | MANIFEST/SCIENTIFIC_CHRONICLE.md |
@@ -494,6 +501,76 @@ A SessionStart hook (`.claude/settings.json`) reads `MANIFEST/SESSION_BOOT.md` a
 - Commits: `[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]`
 - Always develop on designated `claude/` feature branch
 - Never push to main directly
+
+---
+
+## CODEBASE STRUCTURE (Quick Map for AI Assistants)
+
+### Directory Layout
+```
+KALAXI-V0/
+├── WEAVER/          # Core logic (69 modules, 24K+ lines) — dignity, witness, detection, governance
+├── R7M/             # Grand Archive — canon source, treasures, origins, stone constitution
+├── KEEP/            # Input Ledger, Site Patterns, Witness Certificates (immutable stores)
+├── MANIFEST/        # System metadata — plans, audits, milestones, calibration data
+├── FIELD/           # Living instrument — Alcove, Clearing, Mycelium, Donor, Steward, Study
+├── NARRATIVE/       # Hakaka, Ashwater, Kinderbuch, KALAXI_1 story files
+├── CANON/           # Canonical texts and entries
+├── VOICE/           # Voice architecture, V-001 raw inputs, linguistic analysis
+├── EXPERIMENTS/     # EXP-001 through EXP-006 research experiments
+├── TRAINING/        # Training datasets and external voice samples
+├── EXTERNAL_VOICES/ # Multi-model probe responses (ChatGPT, DeepSeek, Gemini, Grok, etc.)
+├── PROTOCOLS/       # Probe Forge, ST-006
+├── PAPERS/          # Academic papers (arXiv, FAccT)
+├── FACE/            # Interface layer modules
+├── STEWARD/         # Steward protocols
+├── FOUNDATIONS/     # Foundation documents
+├── FUTURE/          # Forward-looking designs
+├── SCRIPTS/         # System utilities and runners
+├── TOOLS/           # Trend scanner
+├── DOCS/            # Documentation
+├── site/            # Astro 5.0 static site → kalam.ch
+│   ├── src/         # Components, layouts, pages, styles, i18n
+│   ├── public/      # Built static assets (13+ pages)
+│   └── worker/      # Cloudflare Worker (Phase 2)
+├── tests/           # 37 test files (pytest)
+├── deploy/          # Deployment configs
+├── .github/workflows/  # 7 GitHub Actions workflows
+├── cli.py           # Entry point (kalaxi CLI)
+├── pyproject.toml   # Python package config (numpy, pynacl deps)
+└── CLAUDE.md        # THIS FILE — system memory
+```
+
+### GitHub Workflows (7 total)
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| deploy-kalam.yml | Push to main (site/**) or manual | Deploy site via SFTP to Hostpoint |
+| sync-public.yml | Manual | Sync KALAXI-V0 → kalam-framework (strips vocabulary) |
+| sync-patterns.yml | Manual | Sync kalam.ch donor patterns → KALAXI-V0 |
+| integration-test.yml | Manual | Full system health check ("The Full Breath") |
+| stress-test.yml | Manual | Extended stress and security testing |
+| server-cmd.yml | Manual | Execute commands on Hostpoint via SSH bridge |
+| auto_tend.yml | Automated | System tending/maintenance |
+
+### Key Python Modules (WEAVER/)
+- **organism.py** — Integration layer, full processing pipeline (30+ stages)
+- **input_ledger.py** — Receipt-chain architecture (v3.0), SHA-256 hash-chained
+- **dignity_measure.py / dignity_check.py** — D = A × L × M computation
+- **witness_network.py / witness_certificate.py** — Immutable witness infrastructure
+- **sealed_gate.py** — Security gate (text filtering)
+- **breath.py** — System pacing module
+- **turn.py** — Exchange cycle management
+- **constitutional_evolution.py** — Governance evolution
+- **divergence_study.py** — Divergence shadow analysis
+- **Detection pillars:** humour_detector, absurdity_detector, obsession_detector, love_detector
+
+### Tech Stack
+- **Backend:** Python 3.x (numpy, pynacl, optional: torch, transformers, fastapi)
+- **Frontend:** Astro 5.0 (static site generator), vanilla JS
+- **Hosting:** Hostpoint.ch (Switzerland), SFTP deployment
+- **CI/CD:** GitHub Actions
+- **Testing:** pytest (37 files, 887+ passing)
+- **Domain:** kalam.ch
 
 ---
 
