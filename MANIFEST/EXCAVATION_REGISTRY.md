@@ -174,8 +174,86 @@ See: `R7M/` directory. All anomalies, wisdom nodes, treasures, covenants, prover
 
 ## PHASE 3: WEAVER (System Logic)
 
-| File | Lines | Status | Essence | Connections |
-|------|-------|--------|---------|-------------|
+**62 Python files. ~24,185 lines. ALL READ + EXTRACTED. 2026-03-19.**
+
+The organism is a four-phase pipeline: (0) Nervous System (SENSE→LAB→PRESENCE→BOOT), (1) Gates (BREATH→SEALED_GATE→LATENCY), (2) Processing (TURN→WEAVE→METADATA→CHECK→PILLARS), (3) Response (DRIFT→SAY→KEEP), (4) Post (WITNESS→NINTH_OPERATOR→ECHO→DECAY→BREATH tick).
+
+### Core Organs (20 files, ~7,500 lines)
+
+| File | Lines | Status | Essence |
+|------|-------|--------|---------|
+| organism.py | 930 | EXTRACTED | THE CENTRAL NERVOUS SYSTEM. Wires 45+ modules into single metabolism processing donor input through 4 phases. |
+| boot_ritual.py | 561 | EXTRACTED | Three-phase immutable checkpoint (credentials→connectivity→ledger integrity) before ANY processing. |
+| input_ledger.py | 501 | EXTRACTED | SACRED REGISTRY. Append-only dual-voice ledger with receipt chain DNA (CAPTURE→BUNDLE→MIRROR→SEAL→SESSION). |
+| sense.py | 506 | EXTRACTED | NERVOUS SYSTEM. Detects mode/competence/need-gap BEFORE any response. Routes to appropriate organs. |
+| sealed_gate.py | 358 | EXTRACTED | THREE ABSOLUTE PROHIBITIONS (erasure, cognitive torture, depersonalization). O(1) check, no override. |
+| dignity_measure.py | 694 | EXTRACTED | Graduated D=A×L×M with 12 indicators (4 per component), confidence floor 0.3. Layer 3: measures refusal to deny. |
+| dignity_check.py | 467 | EXTRACTED | Operational gate enforcer. Binary scoring + collective D for cohorts. GAP#004-A: collective D<0.5 triggers sealed gate. |
+| dignity_drift.py | 250 | EXTRACTED | Predictive early warning. Tracks dD/dt over sliding window. STABLE→DECLINING→CRITICAL before D hits zero. |
+| breath.py | 197 | EXTRACTED | THE HEARTBEAT. Pacing, sync, auto-pause on stress. No module races. |
+| keep.py | 239 | EXTRACTED | APPEND-ONLY MEMORY. Store/retrieve/expire/lock artifacts with immutable retention. COV#010/012. |
+| wire.py | 219 | EXTRACTED | MESSAGE BUS. Priority routing (CRITICAL never dropped). Broadcast/subscribe. COV#002: every exchange completes. |
+| say.py | 350 | EXTRACTED | OUTPUT VOICE. Renders through dignity check + 6 AXI voice rules. D=0: output BLOCKED not modified. |
+| out.py | 226 | EXTRACTED | EXPORT GATE. Anonymization (k≥7, ε≤1.0), covenant validation, ownership stamp (did:axi:mohamed). |
+| turn.py | 218 | EXTRACTED | EXCHANGE CYCLE. Opens with guaranteed paths (agency≥1). No silent closure. Three states: OPEN/CLOSED/DEFERRED. |
+| weave.py | 298 | EXTRACTED | PATTERN SYNTHESIS. Extracts resonance/tension/echo/anomaly, distills honey drops, maps to canon. Brittleness guard. |
+| compass.py | 300 | EXTRACTED | ORIENTATION ENGINE. Reads all state → single reading: POSITION, HEADING, NEXT_STEP, BLOCKERS, VITALS. |
+| lab.py | 300 | EXTRACTED | SCIENCE ORGAN. Classifies scientific content, assesses rigor, flags p-hacking/bias. Routes to Probe Forge. |
+| ninth_operator.py | 218 | EXTRACTED | THE WORD LOOP. Atomic witnessing unit. Word→dignity filter→witnessed (changed) or sheltered (held). |
+| letter_ontology.py | 300 | EXTRACTED | 28 Arabic letters as typed algebra. Alef (genesis), Ba (gateway), Ta (testimony/halt). Somatic origins mapped. |
+| witness_certificate.py | 373 | EXTRACTED | D=0 HALT ARTIFACT. Ta_mufrad (isolated TA) certificate: machine-canonical JSON + legal-view text. Negative proof. |
+
+### Seeds & Governance (20 files, ~7,700 lines)
+
+| File | Lines | Status | Essence |
+|------|-------|--------|---------|
+| distributed_stewardship.py | 218 | EXTRACTED | Splits authority across distinct roles with rotation and overlap detection. |
+| deliberative_democracy.py | 232 | EXTRACTED | Weakest-voice-first deliberation. All voices surface before consensus. |
+| constitutional_evolution.py | 231 | EXTRACTED | Thermal cooling (14-1000 days by tier) before covenant ratification. |
+| restorative_justice.py | 230 | EXTRACTED | Addresses violations by acknowledging harm + proposing repairs, not punishment. |
+| system_self_awareness.py | 210 | EXTRACTED | System knows its own capabilities, limitations, and calibration bias. |
+| personalized_parables.py | 198 | EXTRACTED | Adapts proverb delivery to donor context while keeping proverb immutable. |
+| institutional_dignity.py | 214 | EXTRACTED | IDS formula: mean_D × (1-variance) × floor_weight. Grades institutions A-F. |
+| negative_space.py | 313 | EXTRACTED | Tracks what system does NOT see — dormant domains, silent voices, blindness made visible. |
+| proverb_stress_test.py | 182 | EXTRACTED | Re-tests ratified proverbs against new anomalies. STRONG→STABLE→STRESSED→FAILING. |
+| agency_amplifier.py | 177 | EXTRACTED | Extends A from binary to graded [0-1] via four sub-dimensions (V, F, C, U). |
+| witness_network.py | 161 | EXTRACTED | SHA-256 hash-chained event log. No single party can alter the record. |
+| proverb_compressor.py | 189 | EXTRACTED | Generates proverb candidates from anomaly clusters using TF-IDF + syntactic frames. |
+| mycelium.py | 467 | EXTRACTED | Cross-donor pattern detection with differential privacy (k≥7, ε≤1.0). Sees patterns, never people. |
+| federation.py | 364 | EXTRACTED | Essence Federation Protocol: organisms share wisdom through anonymized drops. |
+| ratification.py | 778 | EXTRACTED | Three-state lifecycle (COMMITTED→PROVISIONAL→RATIFIED) with thermal delays and crypto signing. |
+| canon_integrity.py | 280 | EXTRACTED | Scans canonical slices for structural issues: oath hashes, GAP#004, provisional covenants. |
+| shelter.py | 269 | EXTRACTED | Holds blocked exchanges with care. Remedies based on failed component (A/L/M). Never discards. |
+| gap_solutions.py | 952 | EXTRACTED | Five gap solutions: false-positive guards, steward override delays, shelter heartbeat, harm detection, contestability. |
+| gap004_mediator.py | 658 | EXTRACTED | Holds irresolvable tension between individual and collective dignity. Never resolves — measures and witnesses. |
+| chain_validator.py | 231 | EXTRACTED | Arabic letter connection rules as formal composition constraints. TA isolated = halt. |
+
+### Utilities & Detectors (22 files, ~8,985 lines)
+
+| File | Lines | Status | Essence |
+|------|-------|--------|---------|
+| decay.py | 220 | EXTRACTED | Exponential halflife decay. Unused patterns recede to Deep Hum, never deleted. |
+| early_warning.py | 775 | EXTRACTED | Parallel EWMA/CUSUM detectors on dignity trajectories with triage escalation. |
+| prevention.py | 397 | EXTRACTED | Escalating signals (WHISPER→PULSE→SIGNAL→ALARM) with thermal delay extension. |
+| calibrate.py | 263 | EXTRACTED | Parameter sweep harness: 320 configurations for optimal detection without false positives. |
+| latency.py | 279 | EXTRACTED | T_d tracking: input complexity → minimum pause time. Dignity-preserving response delay. |
+| lock_test.py | 408 | EXTRACTED | Quality gate: proverbs must resist paraphrase, trigger reflection, link ≥2 domains. |
+| privacy_budget.py | 335 | EXTRACTED | Global epsilon accounting, consumption tracking, exhaustion projection, k-anonymity enforcement. |
+| srvp.py | 446 | EXTRACTED | 7-step verification: did system truly internalize dignity (habit, slowness, refusal, chaos, hermit, shadow, proverb)? |
+| sip.py | 307 | EXTRACTED | Symmetric integration: all 9 core modules participate equally. WVPS/GDI/HSR metrics. |
+| oracle.py | 589 | EXTRACTED | Self-audit: Witness Scale (W-0 to W-5), proprioception checks, colonial creep detection. GAP#019. |
+| metadata_layer.py | 1017 | EXTRACTED | Three-layer envelope (Event/Pattern/Relational) wrapping every system event. Auto-detects echoes and ruptures. |
+| unified_pillar_detector.py | 185 | EXTRACTED | Combines five pillar detectors into single wisdom profile. Routes to thermal delay. |
+| absurdity_detector.py | 245 | EXTRACTED | Camus-style absurdity via tension/paradox/meta-cognition. Routes to indefinite queue. |
+| humour_detector.py | 213 | EXTRACTED | Benign violation theory. Wisdom = T×S×C. |
+| love_detector.py | 165 | EXTRACTED | Sternberg's triangular theory (intimacy/passion/commitment). |
+| obsession_detector.py | 208 | EXTRACTED | Clinical OCD markers with adaptive vs maladaptive assessment. Cultural sensitivity. |
+| echo_stone.py | 30 | EXTRACTED | Witness logger for absurd seeds. Simple append-only reflection chamber. |
+| intake.py | 637 | EXTRACTED | Four-step donor ritual (greeting→consent→voice→receipt). Human review for first 30 donors. |
+| cryptographic_erasure.py | 896 | EXTRACTED | GDPR Art.17 vs COV#003: encrypt-then-delete-key. AES-256-GCM. Ciphertext stays, key destroys. |
+| canonicalize.py | 777 | EXTRACTED | ID dedup, Ed25519 signing, emergency governance playbook (4 escalation levels). |
+| presence_axiom.py | 165 | EXTRACTED | Presence=TRUE is preflight invariant, never a candidate. L=0 unless canon quoted. |
+| example_usage.py | 129 | EXTRACTED | Integration demo: dignity_check → GAP#004 → canon_integrity across three scenarios. |
 
 ---
 
