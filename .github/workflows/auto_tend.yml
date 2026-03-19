@@ -1,10 +1,9 @@
 name: Auto-Tend Threshold
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'THRESHOLD.md'
+  schedule:
+    - cron: '0 6 * * *'   # Daily at 06:00 UTC
+  workflow_dispatch:
 
 permissions:
   contents: write

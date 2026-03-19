@@ -1,15 +1,8 @@
 name: Sync to Public Repo
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'WEAVER/**'
-      - 'R7M/tier1_stone.md'
-      - 'R7M/ESSENCE.md'
-      - 'PROTOCOLS/**'
-      - 'scripts/clean_for_public.py'
-
+  schedule:
+    - cron: '0 5 * * *'   # Daily at 05:00 UTC
   workflow_dispatch:
 
 jobs:

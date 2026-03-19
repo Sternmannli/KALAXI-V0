@@ -1,12 +1,8 @@
 name: Deploy kalam.ch
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'site/**'
-      - '.github/workflows/deploy-kalam.yml'
-
+  schedule:
+    - cron: '0 4 * * *'   # Daily at 04:00 UTC
   workflow_dispatch:
 
 jobs:
