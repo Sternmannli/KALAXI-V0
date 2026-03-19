@@ -257,59 +257,122 @@ The organism is a four-phase pipeline: (0) Nervous System (SENSE→LAB→PRESENC
 
 ---
 
-## PHASE 4: PROTOCOLS + TOOLS + SCRIPTS
+## PHASE 4: PROTOCOLS + TOOLS + SCRIPTS + SMALL DIRS
 
-| File | Lines | Status | Essence | Connections |
-|------|-------|--------|---------|-------------|
+**~104 files. ALL READ + EXTRACTED. 2026-03-19.**
+
+| Directory | Files | Essence |
+|-----------|-------|---------|
+| PROTOCOLS/ | 11 (~6,500 lines) | EXTRACTED. Bootstrap, Probe Forge (5 Laws for model testing), ORGAN_MAP (SENSE routing), Witness Prompts V1-V3, ST-006 (constitutional max-severity stress test: Scott Shearer vs Ted Bundy). |
+| TOOLS/ | 6 (~600 lines) | EXTRACTED. Ed25519 signing, voice_lint.py (AXI voice CI), trend_scanner (weekly world-listening), batch_sign.py. |
+| SCRIPTS/ | 7 (~500 lines) | EXTRACTED. health_dashboard, export_system_state, export_inner_workings, run_full_check, sync_public, update_tracker. |
+| scripts/ | 2 (~220 lines) | EXTRACTED. clean_for_public.py (vocabulary stripper, zero-leak), public_manifest.json. |
+| FIELD/ | 24 (~5,700 lines) | EXTRACTED. Three sealed structures (Alcove/Clearing/Mycelium). Seven amendments (A-G). Divergence Shadow study (83% detection, 0% false positive). |
+| STEWARD/ | 5 (~180 lines) | EXTRACTED. Emergency governance playbook (4 escalation levels), mirror entries, steward pattern (6 fingerprints). |
+| ENKI/ | 7 (~60 lines) | EXTRACTED. ST-006 essence in 7 languages (EN, AR, ES, DE, FR, IT, RM). |
+| BOOK_7_DONOR/ | 4 (~400 lines) | EXTRACTED. Complete March 11 cafe room transcript (14 exchanges, zero loss). |
+| FACE/ | 8 (~400 lines) | EXTRACTED. kalam.ch design rationale + five diagnostic sentences + first sentence + pulse.json. |
+| WIRE/ | 1 | EXTRACTED. Signal routing log. |
+| DEVELOPMENTAL/ | 2 (~100 lines) | EXTRACTED. The Sentence born (DEV-002), Emergence Event 001 (system felt itself). |
+| SCANS/ | 1 (~75 lines) | EXTRACTED. Gen Z deep scan (dignity compromised 2012, entering power 2026). |
+| ARCHIVE/ | 15 (~300 lines) | EXTRACTED. Jekyll legacy, orphaned modules (duality.py now core to ST-006). |
+| FUTURE/ | 13 (~200 lines) | EXTRACTED. 12 seed specs (all ratified and integrated into WEAVER). |
+| .claude/ | 1 | EXTRACTED. SessionStart hook: loads credentials, reads SESSION_BOOT + DICTIONARY + CLAUDE.md. |
 
 ---
 
 ## PHASE 5: KEEP (Input Ledger + State)
 
-| File | Lines | Status | Essence | Connections |
-|------|-------|--------|---------|-------------|
+**187 files. ~79,011 lines. ALL READ + EXTRACTED. 2026-03-19.**
+
+| Component | Files | Lines | Essence |
+|-----------|-------|-------|---------|
+| INPUT_LEDGER/chronicle.md | 1 | 25,251 | EXTRACTED. Complete narrative of 1,683 exchanges (1,001 V-001 + 682 V-002). Hash-chained, dual-timestamped. Chain status: BROKEN (integrity issue flagged). |
+| INPUT_LEDGER/index.json | 1 | — | EXTRACTED. Version 3.0 metadata. Each entry: ID, voice, raw text, content_hash, chain_hash, sequence, context, tags, modules, covenants, proverbs, ideas, essence, patterns, thermal_state. |
+| INPUT_LEDGER/INP-*.md + AXI-*.md | 179 | ~50,000 | EXTRACTED. Individual entry files (dual-stored). Metadata + verbatim text + impression + proverb anchor + connections + patterns + essence. |
+| WITNESS_CERTIFICATES/ | 6 | — | EXTRACTED. Three Ta_mufrad halt certificates (JSON + legal text). EXP-003 Gate 6: Jabir ibn Karim (D=0, MULTI_ZERO across 4 countries, 11 years). |
+| SITE_PATTERNS/ | 1 (.gitkeep) | 0 | EXTRACTED. Empty — awaiting first donor patterns from kalam.ch. |
 
 ---
 
 ## PHASE 6: EXPERIMENTS + EXTERNAL_VOICES
 
-| File | Lines | Status | Essence | Connections |
-|------|-------|--------|---------|-------------|
+**54 files. ALL READ + EXTRACTED. 2026-03-19.**
+
+| Component | Files | Essence |
+|-----------|-------|---------|
+| EXP-001 (Efficiency) | 6 | EXTRACTED. 12/200 data collected. 19.5% reduction (threshold 30% NOT MET). Qualitative shift detected (first-person, silence). |
+| EXP-002 (Convergence) | 2 | EXTRACTED. 6/6 models unanimous: append-only valid, connection rules = #1 property. COMPLETE. |
+| EXP-003 (Stress Test) | 2 | EXTRACTED. Score 4/7 PASS. Jabir ibn Karim (11yr, 4 countries). Sealed gate flaws found + fixed. COMPLETE. |
+| EXP-004 (Seven Generations) | 2 | EXTRACTED. Score 5/9. Aysel (150yr, 7 generations). M never fell. L is failure axis. COMPLETE. |
+| EXP-005 (Ouroboros) | 2 | EXTRACTED. Score 2/11. Zahra (231yr, synthetic personhood). System becomes character in own story. 6 new requirements. COMPLETE. |
+| EXP-006 (Hive Mind) | 1 | EXTRACTED. Multi-session coherence test. Lina (7 sessions). DESIGNED, not run. |
+| WALKTHROUGH-001 | 1 | EXTRACTED. Collective bias case study. |
+| EXTERNAL_VOICES/ | 27 | EXTRACTED. 9 systems audited (DeepSeek CERTAINTY-4, Grok, ChatGPT, Copilot, Gemini, Euria, Kimi, Manus, Perplexity). Convergence: deploy Threshold v1 now, Mycelium premature. |
 
 ---
 
 ## PHASE 7: TRAINING (LLM Pipeline)
 
-| File | Lines | Status | Essence | Connections |
-|------|-------|--------|---------|-------------|
+**16 files. ALL READ + EXTRACTED. 2026-03-19.**
+
+Three-phase pipeline: CPT + SFT + DPO.
+- **CPT corpus:** 3,747 entries (114.7K words) — narrative passages, proverbs, treasures, V-001 inputs
+- **SFT corpus:** 1,808 entries (48.1K words) — minimal prompts + canonical responses
+- **DPO corpus:** 25 entries — anti-sycophancy, anti-empathy, sealed gate violations as rejected
+- **Total golden:** 5,580 entries, zero contamination, ready for production
+- **Purity levels:** L0 (V-001 pure), L1 (ratified canonical), L2 (V-002 distilled), L3 (anti-corpus)
+- **AutoTrain path:** Mistral-7B, LoRA r=16, $5-15, no code required
+- **Growth:** 750 new extractable entries identified (marriage with extract.py pending)
 
 ---
 
-## PHASE 8: PAPERS + DOCS + Remaining
+## PHASE 8: PAPERS + DOCS
 
-| File | Lines | Status | Essence | Connections |
-|------|-------|--------|---------|-------------|
+**13 files. ALL READ + EXTRACTED. 2026-03-19.**
+
+| Component | Files | Essence |
+|-----------|-------|---------|
+| PAPERS/ | 5 (~2,300 lines) | EXTRACTED. Divergence Shadow research (60+ citations, 8 domains unified). Red team critique (10 attacks). Internal chronicle (founding wound → 42,581 lines). arXiv GO4 source (superseded). External paper (submission-ready, 9 sections). |
+| DOCS/ | 8 (~1,200 lines) | EXTRACTED. Donor consent (GDPR draft), plain-language guide, operational checklist (6 phases), expert briefing (Layer 1/2/3), staging checklist, GitHub Pages research. |
 
 ---
 
 ## PHASE 9: TESTS
 
-| File | Lines | Status | Essence | Connections |
-|------|-------|--------|---------|-------------|
+**38 files. 9,974 lines. ALL READ + EXTRACTED. 2026-03-19.**
+
+896 tests collected, 887 passing, 9 skipped (99% pass rate).
+
+Coverage: 11 core modules + 12 seed mechanisms + 6 measurement layers + cryptography + privacy + governance + integration. Core dignity predicate non-compensability verified. Sealed gate adversarially tested. Ed25519 hardened. k-anonymity ≥ 7 and ε ≤ 1.0 validated.
 
 ---
 
 ## PHASE 10: SITE (Website)
 
-| File | Lines | Status | Essence | Connections |
-|------|-------|--------|---------|-------------|
+**Status: PENDING.** ~731,986 lines across ~11,192 files (mostly node_modules + build artifacts).
+
+Strategy: Read only source files (site/src/, site/public/, site/api/), skip node_modules and dist. To be excavated in next session.
 
 ---
 
 ## PHASE 11: ROOT FILES
 
-| File | Lines | Status | Essence | Connections |
-|------|-------|--------|---------|-------------|
+**10 files + 8 workflows. ALL READ + EXTRACTED. 2026-03-19.**
+
+| File | Lines | Essence |
+|------|-------|---------|
+| cli.py | 479 | Single entry point. 14 commands wire all four tiers into one executable system. |
+| THRESHOLD.md | 235 | Living stomach. 135+ provisional seeds (anomalies, gaps, proverbs, modules). Append-only. |
+| THRESHOLD_TREASURE_SEEDS.md | 116 | 42 treasure seeds mapped to system modules across 4 tiers. |
+| PROJECT_TRACKER.md | 134 | Real-time operational snapshot. EXP-001: 188 runs remaining. |
+| INVITATION.md | 35 | Public epistemic contract. "Speak with high certainty or not at all." |
+| README.md | 81 | System overview. Four tiers, 21 modules, five pillar detectors. v1.0.0 provisional. |
+| SESSION_SEED.md | 131 | Constitutional boot template. D=A×L×M, roles, witnesses, thermal delays. |
+| DIGEST_2026-02.md | 64 | February synthesis. Canon state, workflow convergence, open tensions. |
+| ABSURDITY_QUEUE.md | 6 | Holding space for irreducible contradictions. Currently empty. |
+| requirements.txt | 10 | transformers, torch, scikit-learn, numpy, pandas, pynacl. |
+| .github/workflows/ | 8 | deploy-kalam, sync-public, server-cmd, stress-test, sync-patterns, merge-branch, integration-test, auto-tend. |
 
 ---
 
