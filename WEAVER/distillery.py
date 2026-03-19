@@ -1116,24 +1116,330 @@ class Distillery:
         )
 
     def extract_experiments(self) -> AreaEssence:
-        """Extract discoveries from all experiments."""
-        raise NotImplementedError("Session 4")
+        """Extract discoveries from experiments, stress tests, key findings.
 
-    def extract_external_voices(self) -> AreaEssence:
-        """Extract from external LLM responses."""
-        raise NotImplementedError("Session 4")
+        Source: site/public/data/science.json
+        - experiments: 4 (EXP-001 through EXP-004)
+        - stress_tests: 4 (ST-001, ST-006, EXP-006, WALKTHROUGH-001)
+        - key_findings: 7 distilled discoveries
+        - probe_forge: 5 laws governing experimental probes
+        """
+        entries: List[EssenceEntry] = []
+        science_path = ROOT / "site/public/data/science.json"
 
-    def extract_studies(self) -> AreaEssence:
-        """Extract from studies and foundation documents."""
-        raise NotImplementedError("Session 4")
+        if not science_path.exists():
+            return AreaEssence(area="experiments")
+
+        science = json.loads(science_path.read_text())
+
+        # ── Experiments ───────────────────────────────────────────
+        experiments = science.get("experiments", [])
+        for exp in experiments:
+            result = exp.get("result", "")
+            discovery = exp.get("discovery", "")
+            findings = exp.get("findings", [])
+            title = exp.get("title", exp.get("name", ""))
+            exp_id = exp.get("id", "")
+
+            # The discovery (if any) is the essence; otherwise the result
+            essence = discovery if discovery else result
+
+            # Each finding becomes a pattern
+            patterns = []
+            for f in findings:
+                if isinstance(f, str):
+                    patterns.append(f[:80])
+                elif isinstance(f, dict):
+                    patterns.append(f.get("text", str(f))[:80])
+
+            entries.append(EssenceEntry(
+                source_path=exp_id,
+                source_area="experiments/experiment",
+                raw_excerpt=f"{title}: {result}"[:500],
+                patterns=patterns[:5],
+                essence=essence[:200] if essence else title,
+                motifs=[],
+                voice_markers=[],
+                links=[exp_id],
+                thermal_state="witnessed" if exp.get("status") == "complete" else "raw",
+            ))
+
+        # ── Stress tests ──────────────────────────────────────────
+        stress_tests = science.get("stress_tests", [])
+        for st in stress_tests:
+            result = st.get("result", "")
+            st_id = st.get("id", "")
+            entries.append(EssenceEntry(
+                source_path=st_id,
+                source_area="experiments/stress_test",
+                raw_excerpt=f"{st.get('name', st_id)}: {result}"[:500],
+                patterns=["STRESS_TEST"],
+                essence=result[:200] if result else st_id,
+                motifs=[],
+                voice_markers=[],
+                links=[st_id],
+                thermal_state="witnessed",
+            ))
+
+        # ── Key findings ──────────────────────────────────────────
+        key_findings = science.get("key_findings", [])
+        for i, finding in enumerate(key_findings):
+            text = finding if isinstance(finding, str) else str(finding)
+            entries.append(EssenceEntry(
+                source_path=f"FINDING-{i+1}",
+                source_area="experiments/finding",
+                raw_excerpt=text[:500],
+                patterns=self.extract_patterns(text, "general"),
+                essence=text[:200],
+                motifs=[],
+                voice_markers=[],
+                links=[],
+                thermal_state="canonical",
+            ))
+
+        meta_patterns = [
+            f"experiments:{len(experiments)}",
+            f"stress_tests:{len(stress_tests)}",
+            f"key_findings:{len(key_findings)}",
+        ]
+
+        # Meta-essence: the most important discovery
+        meta_essence = ""
+        for exp in experiments:
+            d = exp.get("discovery", "")
+            if d:
+                meta_essence = d[:200]
+                break
+        if not meta_essence and key_findings:
+            meta_essence = key_findings[0] if isinstance(key_findings[0], str) else str(key_findings[0])
+
+        return AreaEssence(
+            area="experiments",
+            entries=entries,
+            meta_patterns=meta_patterns,
+            meta_essence=meta_essence[:200],
+            statistics={
+                "experiment_count": len(experiments),
+                "stress_test_count": len(stress_tests),
+                "finding_count": len(key_findings),
+                "completed": sum(1 for e in experiments if e.get("status") == "complete"),
+                "active": sum(1 for e in experiments if e.get("status") == "active"),
+            },
+        )
 
     def extract_site(self) -> AreaEssence:
-        """Extract canonical content from kalam.ch."""
-        raise NotImplementedError("Session 5")
+        """Extract canonical content from kalam.ch site data.
+
+        Sources: manifest.json (site structure), inner-workings.json
+        (dignity predicate, voice fingerprint, sealed gate, witness protocol),
+        system-state.json (position, heading, vitals).
+        """
+        entries: List[EssenceEntry] = []
+
+        # ── Inner workings (the canonical mechanics) ──────────────
+        iw_path = ROOT / "site/public/data/inner-workings.json"
+        if iw_path.exists():
+            iw = json.loads(iw_path.read_text())
+
+            # Dignity predicate
+            dp = iw.get("dignity_predicate", {})
+            if dp:
+                eq = dp.get("equation", "")
+                components = dp.get("components", {})
+                props = dp.get("properties", {})
+                comp_text = ", ".join(f"{k}={v}" for k, v in components.items()) if isinstance(components, dict) else str(components)
+                entries.append(EssenceEntry(
+                    source_path="INNER/dignity_predicate",
+                    source_area="site/mechanics",
+                    raw_excerpt=f"{eq} — {comp_text}"[:500],
+                    patterns=["DIGNITY_PREDICATE", "EQUATION"],
+                    essence=eq if eq else "D = A × L × M",
+                    motifs=["dignity", "legibility", "materiality"],
+                    voice_markers=[],
+                    links=["COV#001"],
+                    thermal_state="canonical",
+                ))
+
+            # Voice fingerprint
+            vf = iw.get("voice_fingerprint", {})
+            if vf:
+                entries.append(EssenceEntry(
+                    source_path="INNER/voice_fingerprint",
+                    source_area="site/mechanics",
+                    raw_excerpt=json.dumps(vf)[:500],
+                    patterns=["VOICE_SPEC"],
+                    essence=f"sentence_length: {vf.get('sentence_length', '')}, rhythm: {vf.get('rhythm', '')}",
+                    motifs=[],
+                    voice_markers=vf.get("principles", [])[:5] if isinstance(vf.get("principles"), list) else [],
+                    links=[],
+                    thermal_state="canonical",
+                ))
+
+            # Sealed gate
+            sg = iw.get("sealed_gate", {})
+            if sg:
+                prohibitions = sg.get("prohibitions", [])
+                message = sg.get("message", "")
+                entries.append(EssenceEntry(
+                    source_path="INNER/sealed_gate",
+                    source_area="site/mechanics",
+                    raw_excerpt=f"Prohibitions: {prohibitions}, Message: {message}"[:500],
+                    patterns=["SEALED_GATE", "PROHIBITION"],
+                    essence=message if message else "The system halts rather than pretend.",
+                    motifs=["halt", "refusal", "integrity"],
+                    voice_markers=[],
+                    links=[],
+                    thermal_state="canonical",
+                ))
+
+            # Donor principles
+            donor_principles = iw.get("donor_principles", [])
+            for i, dp_item in enumerate(donor_principles):
+                text = dp_item if isinstance(dp_item, str) else str(dp_item)
+                entries.append(EssenceEntry(
+                    source_path=f"INNER/donor_principle_{i+1}",
+                    source_area="site/donor",
+                    raw_excerpt=text[:500],
+                    patterns=["DONOR_PRINCIPLE"],
+                    essence=text[:200],
+                    motifs=[],
+                    voice_markers=[],
+                    links=[],
+                    thermal_state="canonical",
+                ))
+
+        # ── Site manifest (structure) ─────────────────────────────
+        manifest_path = ROOT / "site/public/data/manifest.json"
+        satellite_count = 0
+        if manifest_path.exists():
+            manifest = json.loads(manifest_path.read_text())
+            satellites = manifest.get("satellites", [])
+            satellite_count = len(satellites)
+            connections = manifest.get("connections", [])
+            entries.append(EssenceEntry(
+                source_path="MANIFEST/site_structure",
+                source_area="site/structure",
+                raw_excerpt=f"{satellite_count} satellites, {len(connections)} connections, hub: {manifest.get('hub', '')}",
+                patterns=["SITE_STRUCTURE"],
+                essence=f"kalam.ch: {satellite_count} pages, hub at {manifest.get('hub', '/api/axi.php')}",
+                motifs=[],
+                voice_markers=[],
+                links=[],
+                thermal_state="canonical",
+            ))
+
+        meta_patterns = [f"mechanics:{len(entries)}", f"satellites:{satellite_count}"]
+
+        return AreaEssence(
+            area="site",
+            entries=entries,
+            meta_patterns=meta_patterns,
+            meta_essence="kalam.ch is the system's mouth — where two presences meet.",
+            statistics={
+                "mechanic_entries": len(entries),
+                "satellite_count": satellite_count,
+            },
+        )
 
     def extract_manifest(self) -> AreaEssence:
-        """Extract from manifest layer: plans, chronicles, registries."""
-        raise NotImplementedError("Session 5")
+        """Extract from system state: position, heading, vitals.
+
+        Source: site/public/data/system-state.json
+        The compass reading of where the system stands.
+        """
+        entries: List[EssenceEntry] = []
+        state_path = ROOT / "site/public/data/system-state.json"
+
+        if not state_path.exists():
+            return AreaEssence(area="manifest")
+
+        state = json.loads(state_path.read_text())
+
+        # Position
+        position = state.get("position", {})
+        if position:
+            pos_text = ", ".join(f"{k}: {v}" for k, v in position.items())
+            entries.append(EssenceEntry(
+                source_path="STATE/position",
+                source_area="manifest/position",
+                raw_excerpt=pos_text[:500],
+                patterns=["SYSTEM_POSITION"],
+                essence=pos_text[:200],
+                motifs=[],
+                voice_markers=[],
+                links=[],
+                thermal_state="witnessed",
+            ))
+
+        # Heading (strategic direction)
+        heading = state.get("heading", {})
+        if heading:
+            experiments_heading = heading.get("experiments", {})
+            blocker = heading.get("single_blocker", "")
+            target = heading.get("deployment_target", "")
+            entries.append(EssenceEntry(
+                source_path="STATE/heading",
+                source_area="manifest/heading",
+                raw_excerpt=f"blocker: {blocker}, target: {target}, experiments: {experiments_heading}"[:500],
+                patterns=["STRATEGIC_HEADING"],
+                essence=f"Target: {target}. Blocker: {blocker}." if target or blocker else "No heading recorded.",
+                motifs=[],
+                voice_markers=[],
+                links=[],
+                thermal_state="witnessed",
+            ))
+
+        # Vitals
+        vitals = state.get("vitals", {})
+        if vitals:
+            vitals_text = ", ".join(f"{k}: {v}" for k, v in vitals.items())
+            entries.append(EssenceEntry(
+                source_path="STATE/vitals",
+                source_area="manifest/vitals",
+                raw_excerpt=vitals_text[:500],
+                patterns=["SYSTEM_VITALS"],
+                essence=vitals_text[:200],
+                motifs=[],
+                voice_markers=[],
+                links=[],
+                thermal_state="witnessed",
+            ))
+
+        # Next steps + blockers
+        next_steps = state.get("next_steps", [])
+        blockers = state.get("blockers", [])
+        for ns in next_steps:
+            text = ns if isinstance(ns, str) else str(ns)
+            entries.append(EssenceEntry(
+                source_path="STATE/next_step",
+                source_area="manifest/direction",
+                raw_excerpt=text[:500],
+                patterns=["NEXT_STEP"],
+                essence=text[:200],
+                motifs=[],
+                voice_markers=[],
+                links=[],
+                thermal_state="raw",
+            ))
+
+        # Summary
+        summary = state.get("summary", {})
+        summary_text = ", ".join(f"{k}: {v}" for k, v in summary.items()) if isinstance(summary, dict) else str(summary)
+
+        return AreaEssence(
+            area="manifest",
+            entries=entries,
+            meta_patterns=[f"entries:{len(entries)}"],
+            meta_essence=summary_text[:200] if summary_text else "System state not yet summarized.",
+            statistics={
+                "position_keys": list(position.keys()) if isinstance(position, dict) else [],
+                "heading_keys": list(heading.keys()) if isinstance(heading, dict) else [],
+                "vitals_keys": list(vitals.keys()) if isinstance(vitals, dict) else [],
+                "next_steps": len(next_steps),
+                "blockers": len(blockers),
+                "generated": state.get("generated", ""),
+            },
+        )
 
     # ── Synthesis (Session 5) ────────────────────────────────────────
 
