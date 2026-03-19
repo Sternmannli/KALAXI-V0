@@ -654,9 +654,111 @@ class Distillery:
 
     # ── Content area extractors (Sessions 2-5) ───────────────────────
 
+    # Narrative JSON paths — all use same structure
+    _NARRATIVE_JSONS = [
+        ("Hakaka", "site/public/data/hakaka.json"),
+        ("Ashwater", "site/public/data/ashwater.json"),
+        ("Kinderbuch", "site/public/data/kinderbuch.json"),
+        ("KALAXI_1", "site/public/data/kalaxi1.json"),
+    ]
+
+    def _extract_chapter(self, chapter: Dict) -> NarrativeChapterEssence:
+        """Extract per-chapter statistics from a narrative chapter dict.
+
+        Measures: sentence count, avg sentence length, somatic/material/
+        core image vocabulary counts, three-beat rhythm, gap frequency.
+        Also picks the chapter's essence line using extract_essence_line().
+        """
+        text = chapter.get("text", "")
+        title = chapter.get("title", "")
+        number = chapter.get("number", 0)
+
+        if not text.strip():
+            return NarrativeChapterEssence(chapter=number, title=title)
+
+        sentences = self._sentences(text)
+        sentence_count = len(sentences)
+        word_counts = [self._count_words(s) for s in sentences]
+        avg_length = sum(word_counts) / max(sentence_count, 1)
+
+        somatic = self._count_vocabulary(text, SOMATIC_VOCABULARY)
+        material = self._count_vocabulary(text, MATERIAL_VOCABULARY)
+
+        # Core images found in this chapter
+        found_images = [
+            img for img in CORE_IMAGES
+            if img in text.lower()
+        ]
+
+        # Three-beat: sentences with exactly 2 commas (3 clauses)
+        three_beat = sum(1 for s in sentences if s.count(",") == 2)
+
+        # Gaps: em-dash, ellipsis as pause/silence
+        gap_count = text.count("—") + text.count("...") + text.count("…")
+
+        # Essence: the load-bearing sentence of this chapter
+        patterns = self.extract_patterns(text, "narrative")
+        essence = self.extract_essence_line(text, patterns)
+
+        return NarrativeChapterEssence(
+            chapter=number,
+            title=title,
+            sentence_count=sentence_count,
+            avg_sentence_length=round(avg_length, 1),
+            core_images=list(set(found_images)),
+            somatic_count=somatic,
+            material_count=material,
+            three_beat_count=three_beat,
+            gap_count=gap_count,
+            essence=essence,
+        )
+
     def extract_narratives(self) -> List[NarrativeEssence]:
-        """Extract essence from all 4 narratives."""
-        raise NotImplementedError("Session 2")
+        """Extract per-chapter stats from all 4 narrative JSONs.
+
+        Part 1 (Session F): chapter parsing + per-chapter statistics.
+        Part 2 (Session G): structural arc + voice register + VoiceDNA.
+
+        Each narrative JSON has: id, title, voice, core_images, chapters[].
+        Each chapter has: number, title, type, text, treasures, proverbs.
+        """
+        results = []
+
+        for name, rel_path in self._NARRATIVE_JSONS:
+            path = ROOT / rel_path
+            if not path.exists():
+                continue
+
+            data = json.loads(path.read_text())
+            chapters_data = data.get("chapters", [])
+
+            chapter_essences = []
+            for ch in chapters_data:
+                ch_essence = self._extract_chapter(ch)
+                chapter_essences.append(ch_essence)
+
+            # Narrative-level essence: pick the chapter with the most
+            # canonical density (somatic + material + core images)
+            best_ch = None
+            best_density = -1
+            for ch in chapter_essences:
+                density = ch.somatic_count + ch.material_count + len(ch.core_images)
+                if density > best_density:
+                    best_density = density
+                    best_ch = ch
+
+            narrative_essence = best_ch.essence if best_ch else ""
+
+            results.append(NarrativeEssence(
+                name=name,
+                path=rel_path,
+                chapters=chapter_essences,
+                structural_arc="",      # Session G
+                voice_register="",      # Session G
+                essence=narrative_essence,
+            ))
+
+        return results
 
     def extract_voice(self) -> VoiceDNA:
         """Extract and formalize the AXI voice fingerprint."""
