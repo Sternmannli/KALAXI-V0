@@ -11,16 +11,17 @@ REPO_ROOT = Path(__file__).parent.parent
 
 
 def test_slice_files_exist():
-    """All four canonical slice files must exist."""
+    """All four canonical slice files must exist (in MANIFEST/SLICES/)."""
     slices = [
         "KALAXI_A_FOUNDATION.txt",
         "KALAXI_B_MODULES_AND_VOICE.txt",
         "KALAXI_D_INTERFACE_AND_LEDGER.txt",
         "KALAXI_E_SYNTHESIS.txt",
     ]
+    slices_dir = REPO_ROOT / "MANIFEST" / "SLICES"
     for s in slices:
-        path = REPO_ROOT / s
-        assert path.exists(), f"Missing canonical slice: {s}"
+        path = slices_dir / s
+        assert path.exists(), f"Missing canonical slice: MANIFEST/SLICES/{s}"
 
 
 def test_slice_files_not_empty():
@@ -31,8 +32,9 @@ def test_slice_files_not_empty():
         "KALAXI_D_INTERFACE_AND_LEDGER.txt",
         "KALAXI_E_SYNTHESIS.txt",
     ]
+    slices_dir = REPO_ROOT / "MANIFEST" / "SLICES"
     for s in slices:
-        path = REPO_ROOT / s
+        path = slices_dir / s
         if path.exists():
             content = path.read_text(encoding="utf-8")
             assert len(content) > 100, f"Slice {s} appears empty or stub"
