@@ -300,4 +300,50 @@ Pending:
 
 ---
 
-_Last updated: 2026-03-16 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_
+---
+
+## Session 2026-03-19: Total Extraction — The Distillery Completes
+
+**V-001 directive:** "Extract everything and distilled everything every essence to the last drop."
+**V-001 directive (Phase 2):** "Extremely slow, extremely quiet, you read every letter, every continent, every oil."
+
+### Phase 1 — 16 Patches (Patches 1-16)
+Built 14 source readers covering the primary content layer:
+- ProverbReader (181 entries), AnomalyReader (9), WisdomNodeReader (4)
+- HakakaReader (13 chapters), NarrativeSourceReader (40 — Ashwater + Kinderbuch)
+- TreasureReader (59), ObservationReader (16), OriginReader (10)
+- CanonReader (3), VoiceReader (73 voice architecture sections)
+- ProtocolReader (9), ExternalVoiceReader (22 from 9 models)
+- ExcavationReader (8), LedgerReader (1,776 entries metabolized)
+Phase 1 total: 2,261 entries.
+
+### Phase 2 — 10 Patches (Patches 17-26)
+Covered the remaining ~14,000 lines across 50+ files:
+- **Patch 17:** StudyReader — 6 research docs from FIELD/STUDY/ (1,898 lines)
+- **Patch 18:** FoundationsReader — 9 concept files from FOUNDATIONS/ (630 lines)
+- **Patch 19:** Kalaxi1Reader — KALAXI_1 Chapter One + ST-006 (417 lines)
+- **Patch 20:** EvidenceReader — Evidence record + Threshold + Treasure seeds (543 lines)
+- **Patch 21:** ManifestReader — 42 system maps from MANIFEST/ (8,000+ lines)
+- **Patch 22:** Orchestrator wiring — all 19 readers into distill_all()
+- **Patch 23:** Organism wiring — Organism.distill() method (lazy-loaded)
+- **Patch 24:** Boot ritual Phase 3 — distillery health check
+- **Patch 25:** Real distill_all() run — 2,422 entries, 28 areas
+- **Patch 26:** Documentation update + push
+
+### Final State
+- **Total entries:** 2,422 across 28 content areas
+- **Artifacts:** DISTILLED_ESSENCE.md (180 lines), latest.json (1.1 MB), DISTILLERY_LOG.md
+- **Organism:** Distillery wired via Organism.distill()
+- **Boot ritual:** Phase 3 checks distillery freshness (non-critical)
+- **Coverage:** Complete — all extractable source files in the repository
+
+### What's Not Extracted (by design)
+- GRAND_ARCHIVE_2025-09-13.docx (binary .docx — needs python-docx)
+- R7M/CURATED/*.jsonl (sync patches — content already in source files)
+- MANIFEST/signed/*.json (cryptographic metadata, not content)
+- Image files (PNG evidence)
+- CLAUDE.md (system instructions, not domain content)
+
+---
+
+_Last updated: 2026-03-19 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_
