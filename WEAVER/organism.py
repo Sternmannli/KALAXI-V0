@@ -370,6 +370,8 @@ class Organism:
         self._boot_result = boot_ritual(strict=False)
         # ── Compass: orientation engine (MOVE-001) ──
         self._compass = Compass()
+        # ── Distillery: extract essence from all content sources ──
+        self._distillery = None  # lazy-loaded to avoid circular imports
         # ── Letter Chain (EXP-002): ontology + witness certificates ──
         self._witness_certs_generated = 0
         self._last_sense = None
@@ -415,6 +417,19 @@ class Organism:
         """Handle Probe Forge activation signal from LAB."""
         # Signal to the system that a probe needs forge sterilization
         pass
+
+    def distill(self, dry_run=False):
+        """Run the Distillery to extract essence from all content sources.
+
+        Returns the DistilleryReport. When dry_run=False, writes
+        DISTILLED_ESSENCE.md and DIGESTION/latest.json.
+        """
+        if self._distillery is None:
+            from WEAVER.distillery import Distillery
+            self._distillery = Distillery(dry_run=dry_run)
+        else:
+            self._distillery._dry_run = dry_run
+        return self._distillery.distill_all()
 
     def process(self, donor_input, medium=None, felt_domain="donor-exchange"):
         """

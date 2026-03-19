@@ -1527,6 +1527,7 @@ class Distillery:
             "observations", "origins", "canon",
             "voice_architecture", "protocols", "external_voices",
             "excavation", "ledger",
+            "studies", "foundations", "kalaxi1", "evidence",
         ]
         for area_name in all_areas:
             area = self._report.areas.get(area_name)
@@ -1695,6 +1696,11 @@ class Distillery:
         from WEAVER.distillery_readers.external_voice_reader import ExternalVoiceReader
         from WEAVER.distillery_readers.excavation_reader import ExcavationReader
         from WEAVER.distillery_readers.ledger_reader import LedgerReader
+        from WEAVER.distillery_readers.study_reader import StudyReader
+        from WEAVER.distillery_readers.foundations_reader import FoundationsReader
+        from WEAVER.distillery_readers.kalaxi1_reader import Kalaxi1Reader
+        from WEAVER.distillery_readers.evidence_reader import EvidenceReader
+        from WEAVER.distillery_readers.manifest_reader import ManifestReader
 
         return [
             ProverbReader(),
@@ -1711,6 +1717,11 @@ class Distillery:
             ExternalVoiceReader(),
             ExcavationReader(),
             LedgerReader(),
+            StudyReader(),
+            FoundationsReader(),
+            Kalaxi1Reader(),
+            EvidenceReader(),
+            ManifestReader(),
         ]
 
     # ── Utilities ────────────────────────────────────────────────────
