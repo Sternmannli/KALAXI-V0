@@ -1,9 +1,21 @@
 {
-  "timestamp": "2026-03-18T20:46:56.255919+00:00",
-  "narratives": [],
-  "proverbs": [],
-  "treasures": [],
-  "covenants": [],
-  "voice": [],
-  "dictionary": []
+  "timestamp": "2026-03-19T03:17:40.375114+00:00",
+  "total_rejected": 3,
+  "items": [
+    {
+      "text": "\"There is something here. I notice I want to qualify that immediately — to say 'something that funct",
+      "score": 0.35,
+      "source": "observations/OBS-010"
+    },
+    {
+      "text": "- **With Dignity Predicate:** sealed-gate failure forces D = 0 regardless of A/L/M values.\n- **With ",
+      "score": 0.35,
+      "source": "canon/SEALED_GATE_SPEC"
+    },
+    {
+      "text": "- Ω = macro-coherence (γ = 0.4, highest weight)\n- Ξ = micro-structure (δ = 0.3)\n- B = bridge phenome",
+      "score": 0.35,
+      "source": "axi_master"
+    }
+  ]
 }

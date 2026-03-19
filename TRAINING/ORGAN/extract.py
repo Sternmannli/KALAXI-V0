@@ -31,6 +31,7 @@ NARRATIVES = {
     "hakaka": ROOT / "NARRATIVE" / "Hakaka_Complete.md",
     "ashwater": ROOT / "NARRATIVE" / "Ashwater.md",
     "kinderbuch": ROOT / "NARRATIVE" / "Kinderbuch.md",
+    "kalaxi1": ROOT / "PROTOCOLS" / "ST-006" / "KALAXI_1_CHAPTER_ONE.md",
 }
 PROVERBS_JSON = ROOT / "site" / "public" / "data" / "proverbs.json"
 RAW_ESSENCE = ROOT / "TRAINING" / "raw_essence.json"
@@ -40,6 +41,18 @@ VOICE_ARCH = ROOT / "VOICE" / "VOICE_ARCHITECTURE_2026-03-14.md"
 VOICE_CANON = ROOT / "site" / "AXI_VOICE_CANON.md"
 CLAUDE_MD = ROOT / "CLAUDE.md"
 RAW_INPUT_V001 = ROOT / "VOICE" / "RAW_INPUT_V001_2026-03-14_LANGUAGE_DEPTH.md"
+
+# ─── BATCH 1: Critical sources (never touched) ────────────────────────────────
+ESSENCE_MD = ROOT / "R7M" / "ESSENCE.md"
+WISDOM_CANON_MD = ROOT / "R7M" / "WISDOM_CANON.md"
+TREASURES_INDEX = ROOT / "R7M" / "TREASURES" / "TREASURES_INDEX.md"
+ORIGINS_DIR = ROOT / "R7M" / "ORIGINS"
+OBSERVATIONS_DIR = ROOT / "R7M" / "OBSERVATIONS"
+FOUNDATIONS_DIR = ROOT / "FOUNDATIONS"
+CANON_DIR = ROOT / "CANON"
+CANON_SOURCE_DIR = ROOT / "R7M" / "CANON_SOURCE"
+AXI_MASTER = ROOT / "AXI" / "AXI_MASTER_PROMPT.md"
+INPUT_LEDGER_CHRONICLE = ROOT / "KEEP" / "INPUT_LEDGER" / "chronicle.md"
 
 # ─── AI Contamination Filter ────────────────────────────────────────────────
 
@@ -405,6 +418,290 @@ def extract_dictionary_entries() -> list[dict]:
     return entries
 
 
+# ─── Generic Markdown Extractor ──────────────────────────────────────────────
+
+def extract_markdown_passages(filepath: Path, source_name: str,
+                               purity_level: int = 2) -> list[dict]:
+    """Generic extractor for any markdown file. Splits on paragraph boundaries,
+    filters headers/metadata/short fragments, scores contamination."""
+    if not filepath.exists():
+        return []
+    text = filepath.read_text(encoding="utf-8")
+    passages = []
+    paragraphs = re.split(r'\n\s*\n', text)
+
+    for i, para in enumerate(paragraphs):
+        para = para.strip()
+        if not para:
+            continue
+        # Skip markdown headers, YAML frontmatter, metadata lines
+        if para.startswith("#") or para.startswith("---") or para.startswith("```"):
+            continue
+        if re.match(r'^(title:|id:|version:|status:|owner:|license:|generated:|depends_on:|provenance:|checksum:)', para):
+            continue
+        if para.startswith("📖") or para.startswith("🐬"):
+            continue
+        # Skip table rows and separator lines
+        if para.startswith("|") and "---" in para:
+            continue
+        # Skip very short fragments
+        if len(para.split()) < 5:
+            continue
+
+        score = contamination_score(para, source=source_name)
+        passages.append({
+            "text": para,
+            "source": source_name,
+            "file": str(filepath.relative_to(ROOT)),
+            "paragraph_index": i,
+            "word_count": len(para.split()),
+            "contamination_score": round(score, 3),
+            "hash": passage_hash(para),
+            "purity_level": purity_level,
+        })
+    return passages
+
+
+def extract_directory_passages(dirpath: Path, source_name: str,
+                                purity_level: int = 2,
+                                extensions: tuple = (".md", ".txt")) -> list[dict]:
+    """Extract from all matching files in a directory."""
+    if not dirpath.exists():
+        return []
+    entries = []
+    for f in sorted(dirpath.iterdir()):
+        if f.is_file() and f.suffix in extensions:
+            sub_source = f"{source_name}/{f.stem}"
+            entries.extend(extract_markdown_passages(f, sub_source, purity_level))
+    return entries
+
+
+# ─── BATCH 1: Critical Extractors ────────────────────────────────────────────
+
+def extract_essence_core() -> list[dict]:
+    """R7M/ESSENCE.md — the 32-word core. Highest density in the system."""
+    if not ESSENCE_MD.exists():
+        return []
+    text = ESSENCE_MD.read_text(encoding="utf-8")
+    entries = []
+    paragraphs = re.split(r'\n\s*\n', text)
+    for para in paragraphs:
+        para = para.strip()
+        if not para or para.startswith("#") or para.startswith("—") or para.startswith("🐬"):
+            continue
+        if len(para.split()) < 5:
+            continue
+        entries.append({
+            "text": para,
+            "source": "essence_core",
+            "contamination_score": 0.0,
+            "hash": passage_hash(para),
+            "purity_level": 1,
+        })
+    return entries
+
+
+def extract_treasure_vows() -> list[dict]:
+    """R7M/TREASURES/TREASURES_INDEX.md — 47 treasures with descriptions."""
+    if not TREASURES_INDEX.exists():
+        return []
+    text = TREASURES_INDEX.read_text(encoding="utf-8")
+    entries = []
+    # Pattern: ### T#NN — Name\n- **Description:** text
+    treasure_blocks = re.split(r'### T#', text)[1:]  # skip preamble
+    for block in treasure_blocks:
+        lines = block.strip().split('\n')
+        # First line: "01 — Grand Resonance Equation"
+        header = lines[0].strip() if lines else ""
+        tid_match = re.match(r'(\d+)\s*[—–-]\s*(.*)', header)
+        tid = f"T#{tid_match.group(1)}" if tid_match else "T#?"
+        tname = tid_match.group(2).strip() if tid_match else header
+
+        # Collect all text content (descriptions, principles, formulas)
+        content_parts = []
+        for line in lines[1:]:
+            line = line.strip()
+            if not line or line.startswith("- **Covenants:**") or line.startswith("- **Tier:**"):
+                continue
+            if line.startswith("- **Registered as:**") or line.startswith("- **Implementation:**"):
+                continue
+            # Strip markdown bold markers
+            cleaned = re.sub(r'\*\*([^*]+)\*\*', r'\1', line).lstrip('- ').strip()
+            if cleaned and len(cleaned.split()) >= 3:
+                content_parts.append(cleaned)
+
+        if content_parts:
+            full_text = f"{tid} — {tname}: " + " ".join(content_parts)
+            score = contamination_score(full_text)
+            entries.append({
+                "text": full_text,
+                "id": tid,
+                "source": "treasure_vows",
+                "contamination_score": round(score, 3),
+                "hash": passage_hash(full_text),
+                "purity_level": 1,
+            })
+    return entries
+
+
+def extract_origins() -> list[dict]:
+    """R7M/ORIGINS/ — founding moments. Level 0 (original thinking)."""
+    if not ORIGINS_DIR.exists():
+        return []
+    entries = []
+    for f in sorted(ORIGINS_DIR.iterdir()):
+        if f.suffix not in (".md", ".txt") or f.name == "ORIGINS_INDEX.md":
+            continue
+        passages = extract_markdown_passages(f, f"origins/{f.stem}", purity_level=0)
+        entries.extend(passages)
+    return entries
+
+
+def extract_observations() -> list[dict]:
+    """R7M/OBSERVATIONS/ — field observations of AI systems."""
+    if not OBSERVATIONS_DIR.exists():
+        return []
+    entries = []
+    for f in sorted(OBSERVATIONS_DIR.iterdir()):
+        if f.is_file() and f.suffix == ".md":
+            passages = extract_markdown_passages(f, f"observations/{f.stem}", purity_level=1)
+            entries.extend(passages)
+    return entries
+
+
+def extract_foundations() -> list[dict]:
+    """FOUNDATIONS/ — ratified structural proposals (dignity latency, witness scale, etc.)."""
+    return extract_directory_passages(FOUNDATIONS_DIR, "foundations", purity_level=1)
+
+
+def extract_canon_fossils() -> list[dict]:
+    """CANON/ — MASTER_CANON_V1, SEALED_GATE_SPEC, FIRST-SIGHT."""
+    return extract_directory_passages(CANON_DIR, "canon", purity_level=1)
+
+
+def extract_canon_source_slices() -> list[dict]:
+    """R7M/CANON_SOURCE/NARRATIVE_SLICE_*.md — 7 narrative slices."""
+    if not CANON_SOURCE_DIR.exists():
+        return []
+    entries = []
+    for f in sorted(CANON_SOURCE_DIR.iterdir()):
+        if f.name.startswith("NARRATIVE_SLICE_") and f.suffix == ".md":
+            passages = extract_narrative_passages(f, f"canon_slice/{f.stem}")
+            entries.extend(passages)
+    return entries
+
+
+def extract_axi_master() -> list[dict]:
+    """AXI/AXI_MASTER_PROMPT.md — complete system specification."""
+    if not AXI_MASTER.exists():
+        return []
+    return extract_markdown_passages(AXI_MASTER, "axi_master", purity_level=1)
+
+
+def extract_wisdom_canon() -> list[dict]:
+    """R7M/WISDOM_CANON.md — anomaly registry, proverb canon, wisdom nodes."""
+    if not WISDOM_CANON_MD.exists():
+        return []
+    text = WISDOM_CANON_MD.read_text(encoding="utf-8")
+    entries = []
+
+    # Extract anomaly descriptions
+    anom_pattern = re.compile(r'description:\s*(.+)')
+    for match in anom_pattern.finditer(text):
+        desc = match.group(1).strip()
+        if len(desc.split()) >= 5:
+            score = contamination_score(desc)
+            entries.append({
+                "text": desc,
+                "source": "wisdom_canon/anomaly",
+                "contamination_score": round(score, 3),
+                "hash": passage_hash(desc),
+                "purity_level": 1,
+            })
+
+    # Extract standalone prose paragraphs (non-structured text)
+    paragraphs = re.split(r'\n\s*\n', text)
+    for para in paragraphs:
+        para = para.strip()
+        if not para or para.startswith("#") or para.startswith("---"):
+            continue
+        if para.startswith("title:") or para.startswith("id:") or para.startswith("version:"):
+            continue
+        # Skip structured data (key: value lines, table rows)
+        lines = para.split('\n')
+        structured_lines = sum(1 for l in lines if re.match(r'^\s*\w+:', l) or l.strip().startswith('|'))
+        if structured_lines > len(lines) * 0.5:
+            continue
+        if len(para.split()) < 8:
+            continue
+        score = contamination_score(para)
+        if score <= 0.25:
+            entries.append({
+                "text": para,
+                "source": "wisdom_canon/prose",
+                "contamination_score": round(score, 3),
+                "hash": passage_hash(para),
+                "purity_level": 1,
+            })
+    return entries
+
+
+def extract_input_ledger() -> list[dict]:
+    """KEEP/INPUT_LEDGER/chronicle.md — V-001's actual words.
+    Extracts raw text from code blocks (Level 0) and essence lines (Level 2)."""
+    if not INPUT_LEDGER_CHRONICLE.exists():
+        return []
+    text = INPUT_LEDGER_CHRONICLE.read_text(encoding="utf-8")
+    entries = []
+
+    # Split into individual entries by the INP header
+    entry_blocks = re.split(r'(?=## 📥 INP-)', text)
+
+    for block in entry_blocks:
+        if not block.strip() or "## 📥 INP-" not in block:
+            continue
+
+        # Only V-001 (MOHAMED) entries
+        if ">>> MOHAMED" not in block and ">>> V-001" not in block:
+            continue
+
+        # Extract entry ID
+        id_match = re.search(r'INP-[\d-]+', block)
+        entry_id = id_match.group(0) if id_match else "unknown"
+
+        # Extract raw text from code blocks
+        code_blocks = re.findall(r'```\n(.*?)```', block, re.DOTALL)
+        for raw_text in code_blocks:
+            raw_text = raw_text.strip()
+            if len(raw_text.split()) < 5:
+                continue
+            entries.append({
+                "text": raw_text,
+                "id": entry_id,
+                "source": "input_ledger/raw",
+                "contamination_score": 0.0,  # V-001 original — always pure
+                "hash": passage_hash(raw_text),
+                "purity_level": 0,
+            })
+
+        # Extract essence line
+        essence_match = re.search(r'\*\*Essence:\*\*\s*(.+)', block)
+        if essence_match:
+            essence = essence_match.group(1).strip()
+            if len(essence.split()) >= 5:
+                score = contamination_score(essence)
+                entries.append({
+                    "text": essence,
+                    "id": f"{entry_id}/essence",
+                    "source": "input_ledger/essence",
+                    "contamination_score": round(score, 3),
+                    "hash": passage_hash(essence),
+                    "purity_level": 2,
+                })
+
+    return entries
+
+
 # ─── Phase Builders ──────────────────────────────────────────────────────────
 
 AXI_SYSTEM_PROMPT = (
@@ -419,113 +716,93 @@ AXI_SYSTEM_PROMPT = (
 )
 
 
-def build_phase_1_cpt(narratives: list, proverbs: list, treasures: list,
-                       covenants: list, voice_principles: list) -> list[dict]:
+def build_phase_1_cpt(all_extractions: list) -> list[dict]:
     """Phase 1: Raw continuous text for next-token prediction.
-    Format: {"text": "..."} — no instruction pairs."""
+    Format: {"text": "..."} — no instruction pairs.
+    Accepts unified extraction list, global dedup included."""
     entries = []
+    seen_hashes = set()
 
-    # Narrative passages (Level 0 — purest)
-    for p in narratives:
-        if p["contamination_score"] > 0.25:
-            continue  # Reject passages with 2+ contamination signals
-        entries.append({"text": p["text"], "meta": {
-            "source": p["source"], "level": 0, "hash": p["hash"]
-        }})
-
-    # Proverbs as raw text (Level 1)
-    for p in proverbs:
-        if p["contamination_score"] > 0.25:
+    for item in all_extractions:
+        # Skip contaminated
+        if item.get("contamination_score", 0) > 0.25:
             continue
-        entries.append({"text": p["text"], "meta": {
-            "source": "proverb", "id": p.get("id", ""), "level": 1, "hash": p["hash"]
-        }})
-
-    # Treasures as raw text (Level 1)
-    for t in treasures:
-        if t["contamination_score"] > 0.25:
+        # Dedup
+        h = item.get("hash", passage_hash(item["text"]))
+        if h in seen_hashes:
             continue
-        entries.append({"text": t["text"], "meta": {
-            "source": "treasure", "level": 1, "hash": t["hash"]
-        }})
-
-    # Covenants as raw text (Level 1)
-    for c in covenants:
-        if c["contamination_score"] > 0.25:
-            continue
-        entries.append({"text": c["text"], "meta": {
-            "source": "covenant", "id": c.get("id", ""), "level": 1, "hash": c["hash"]
-        }})
-
-    # Voice principles as raw text (Level 2 — acceptable for CPT)
-    for v in voice_principles:
-        if v["contamination_score"] > 0.25:
-            continue
-        entries.append({"text": v["text"], "meta": {
-            "source": "voice_principle", "level": 2, "hash": v["hash"]
-        }})
+        seen_hashes.add(h)
+        # Level 0, 1, 2 all go to CPT (Level 3 goes to DPO only)
+        if item.get("purity_level", 2) <= 2:
+            entries.append({"text": item["text"], "meta": {
+                "source": item.get("source", "unknown"),
+                "level": item.get("purity_level", 2),
+                "hash": h,
+            }})
 
     return entries
 
 
-def build_phase_2_sft(proverbs: list, covenants: list, treasures: list,
-                       dictionary: list, voice_principles: list) -> list[dict]:
+def build_phase_2_sft(all_extractions: list) -> list[dict]:
     """Phase 2: Minimal instruction pairs.
     Format: {"messages": [system, user, assistant]}
-    Prompts are stripped-down, neutral. NOT conversational."""
+    Prompts are stripped-down, neutral. NOT conversational.
+    Only Level 0 and Level 1 entries get SFT pairs."""
     entries = []
+    seen_hashes = set()
 
-    # Proverbs — minimal prompt, verbatim response
-    for p in proverbs:
-        if p["contamination_score"] > 0.25:
-            continue
-        entries.append({"messages": [
-            {"role": "system", "content": AXI_SYSTEM_PROMPT},
-            {"role": "user", "content": "Speak."},
-            {"role": "assistant", "content": p["text"]},
-        ]})
+    # Prompt templates by source type
+    PROMPTS = {
+        "proverbs": "Speak.",
+        "covenants": "State the rule.",
+        "treasures": "What do you carry?",
+        "treasure_vows": "What do you carry?",
+        "voice_principles": "How do you speak?",
+        "voice_rules": "How do you speak?",
+        "dictionary": None,  # uses term-specific prompt
+        "dictionary_negation": None,
+        "essence_core": "What is the essence?",
+        "origins": "Where did this begin?",
+        "foundations": "What holds the system?",
+        "canon": "What is sealed?",
+        "canon_fossils": "What is sealed?",
+        "observations": "What did you witness?",
+        "axi_master": "Who are you?",
+        "wisdom_canon/prose": "Speak.",
+        "wisdom_canon/anomaly": "What breaks?",
+        "input_ledger/essence": "What was said?",
+    }
 
-    # Covenants — state the rule
-    for c in covenants:
-        if c["contamination_score"] > 0.25:
+    for item in all_extractions:
+        if item.get("contamination_score", 0) > 0.25:
             continue
-        cov_id = c.get("id", "covenant")
-        entries.append({"messages": [
-            {"role": "system", "content": AXI_SYSTEM_PROMPT},
-            {"role": "user", "content": f"State {cov_id}."},
-            {"role": "assistant", "content": c["text"]},
-        ]})
+        # Only Level 0 and 1 get SFT pairs
+        if item.get("purity_level", 2) > 1:
+            continue
+        h = item.get("hash", passage_hash(item["text"]))
+        if h in seen_hashes:
+            continue
+        seen_hashes.add(h)
 
-    # Treasures — what is this
-    for t in treasures:
-        if t["contamination_score"] > 0.25:
-            continue
-        entries.append({"messages": [
-            {"role": "system", "content": AXI_SYSTEM_PROMPT},
-            {"role": "user", "content": "What do you carry?"},
-            {"role": "assistant", "content": t["text"]},
-        ]})
+        source = item.get("source", "unknown")
+        # Find matching prompt
+        prompt = None
+        for key, p in PROMPTS.items():
+            if source.startswith(key):
+                prompt = p
+                break
+        if prompt is None:
+            # Dictionary uses term-specific prompt
+            term = item.get("term", "")
+            if term:
+                prompt = f"Define {term}."
+            else:
+                prompt = "Speak."
 
-    # Dictionary entries — define term
-    for d in dictionary:
-        if d["contamination_score"] > 0.25:
-            continue
-        term = d.get("term", "")
-        prompt = f"Define {term}." if term else "Define."
         entries.append({"messages": [
             {"role": "system", "content": AXI_SYSTEM_PROMPT},
             {"role": "user", "content": prompt},
-            {"role": "assistant", "content": d["text"]},
-        ]})
-
-    # Voice principles — state voice rule
-    for v in voice_principles:
-        if v["contamination_score"] > 0.25:
-            continue
-        entries.append({"messages": [
-            {"role": "system", "content": AXI_SYSTEM_PROMPT},
-            {"role": "user", "content": "How do you speak?"},
-            {"role": "assistant", "content": v["text"]},
+            {"role": "assistant", "content": item["text"]},
         ]})
 
     return entries
@@ -704,95 +981,95 @@ def run_refinery():
     for d in [PHASE_1, PHASE_2, PHASE_3, REFINERY]:
         d.mkdir(parents=True, exist_ok=True)
 
-    # ─── Extract all sources ─────────────────────────────────────────────
+    # ─── Extract all sources into unified list ────────────────────────────
 
-    print("\n--- Extracting narratives ---")
-    all_narratives = []
+    all_extractions = []
+
+    def run_extractor(name, fn):
+        results = fn()
+        print(f"  {name}: {len(results)} entries")
+        all_extractions.extend(results)
+        return results
+
+    # Original extractors
+    print("\n--- Original Sources ---")
     for name, path in NARRATIVES.items():
-        passages = extract_narrative_passages(path, name)
-        print(f"  {name}: {len(passages)} passages extracted")
-        all_narratives.extend(passages)
+        if path.exists():
+            run_extractor(f"narrative/{name}", lambda p=path, n=name: extract_narrative_passages(p, n))
+    run_extractor("proverbs", extract_proverbs)
+    run_extractor("treasures", extract_treasures)
+    run_extractor("covenants", extract_covenants)
+    run_extractor("voice_principles", extract_voice_principles)
+    run_extractor("dictionary", extract_dictionary_entries)
+    corrections = run_extractor("corrections", extract_corrections)
 
-    print("\n--- Extracting proverbs ---")
-    proverbs = extract_proverbs()
-    print(f"  {len(proverbs)} proverbs extracted")
+    # BATCH 1: Critical sources
+    print("\n--- Batch 1: Critical Sources ---")
+    run_extractor("essence_core", extract_essence_core)
+    run_extractor("treasure_vows", extract_treasure_vows)
+    run_extractor("origins", extract_origins)
+    run_extractor("observations", extract_observations)
+    run_extractor("foundations", extract_foundations)
+    run_extractor("canon_fossils", extract_canon_fossils)
+    run_extractor("canon_source_slices", extract_canon_source_slices)
+    run_extractor("axi_master", extract_axi_master)
+    run_extractor("wisdom_canon", extract_wisdom_canon)
+    run_extractor("input_ledger", extract_input_ledger)
 
-    print("\n--- Extracting treasures ---")
-    treasures = extract_treasures()
-    print(f"  {len(treasures)} treasures extracted")
+    # ─── Global dedup ─────────────────────────────────────────────────────
 
-    print("\n--- Extracting covenants ---")
-    covenants = extract_covenants()
-    print(f"  {len(covenants)} covenants extracted")
+    print("\n--- Global Dedup ---")
+    pre_dedup = len(all_extractions)
+    seen = set()
+    deduped = []
+    for item in all_extractions:
+        h = item.get("hash", passage_hash(item["text"]))
+        if h not in seen:
+            seen.add(h)
+            deduped.append(item)
+    all_extractions = deduped
+    print(f"  Before: {pre_dedup} | After: {len(all_extractions)} | Removed: {pre_dedup - len(all_extractions)}")
 
-    print("\n--- Extracting voice principles ---")
-    voice_principles = extract_voice_principles()
-    print(f"  {len(voice_principles)} voice principles extracted")
-
-    print("\n--- Extracting dictionary entries ---")
-    dictionary = extract_dictionary_entries()
-    print(f"  {len(dictionary)} dictionary entries extracted")
-
-    print("\n--- Extracting corrections ---")
-    corrections = extract_corrections()
-    print(f"  {len(corrections)} corrections extracted")
-
-    # ─── Filter report ───────────────────────────────────────────────────
+    # ─── Contamination report ─────────────────────────────────────────────
 
     print("\n--- Contamination Filter Report ---")
-    total_items = len(all_narratives) + len(proverbs) + len(treasures) + len(covenants) + len(voice_principles) + len(dictionary)
+    total_items = len(all_extractions)
+    contaminated = [e for e in all_extractions if e.get("contamination_score", 0) > 0.25]
+    print(f"  Total items: {total_items}")
+    print(f"  Contaminated (>0.25): {len(contaminated)}")
+    print(f"  Clean rate: {(total_items - len(contaminated)) / max(total_items, 1) * 100:.1f}%")
 
-    contaminated_narratives = [p for p in all_narratives if p["contamination_score"] > 0.25]
-    contaminated_proverbs = [p for p in proverbs if p["contamination_score"] > 0.25]
-    contaminated_treasures = [t for t in treasures if t["contamination_score"] > 0.25]
-    contaminated_covenants = [c for c in covenants if c["contamination_score"] > 0.25]
-    contaminated_voice = [v for v in voice_principles if v["contamination_score"] > 0.25]
-    contaminated_dict = [d for d in dictionary if d["contamination_score"] > 0.25]
+    # Breakdown by source
+    source_counts = {}
+    for e in all_extractions:
+        src = e.get("source", "unknown").split("/")[0]
+        source_counts[src] = source_counts.get(src, 0) + 1
+    print(f"  Sources: {len(source_counts)} unique")
+    for src, count in sorted(source_counts.items(), key=lambda x: -x[1])[:15]:
+        print(f"    {src}: {count}")
 
-    total_contaminated = (len(contaminated_narratives) + len(contaminated_proverbs) +
-                          len(contaminated_treasures) + len(contaminated_covenants) +
-                          len(contaminated_voice) + len(contaminated_dict))
-
-    print(f"  Total items scanned: {total_items}")
-    print(f"  Total contaminated: {total_contaminated}")
-    print(f"  Contamination rate: {total_contaminated / max(total_items, 1) * 100:.1f}%")
-    print(f"  Narratives rejected: {len(contaminated_narratives)}/{len(all_narratives)}")
-    print(f"  Proverbs rejected: {len(contaminated_proverbs)}/{len(proverbs)}")
-    print(f"  Treasures rejected: {len(contaminated_treasures)}/{len(treasures)}")
-    print(f"  Covenants rejected: {len(contaminated_covenants)}/{len(covenants)}")
-    print(f"  Voice principles rejected: {len(contaminated_voice)}/{len(voice_principles)}")
-    print(f"  Dictionary rejected: {len(contaminated_dict)}/{len(dictionary)}")
-
-    # Save contaminated items for review
+    # Save rejected
     rejected = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "narratives": [{"text": p["text"][:100], "score": p["contamination_score"], "source": p["source"]} for p in contaminated_narratives],
-        "proverbs": [{"text": p["text"], "score": p["contamination_score"]} for p in contaminated_proverbs],
-        "treasures": [{"text": t["text"][:100], "score": t["contamination_score"]} for t in contaminated_treasures],
-        "covenants": [{"text": c["text"][:100], "score": c["contamination_score"]} for c in contaminated_covenants],
-        "voice": [{"text": v["text"][:100], "score": v["contamination_score"]} for v in contaminated_voice],
-        "dictionary": [{"text": d["text"][:100], "score": d["contamination_score"]} for d in contaminated_dict],
+        "total_rejected": len(contaminated),
+        "items": [{"text": e["text"][:100], "score": e.get("contamination_score", 0),
+                    "source": e.get("source", "?")} for e in contaminated[:50]],
     }
     (REFINERY / "rejected.json").write_text(
         json.dumps(rejected, indent=2, ensure_ascii=False), encoding="utf-8"
     )
-    print(f"  Rejected items saved to REFINERY/rejected.json")
 
     # ─── Build Phase 1 (CPT) ────────────────────────────────────────────
 
     print("\n--- Building Phase 1: CPT (Continuous Pre-Training) ---")
-    phase_1_data = build_phase_1_cpt(
-        all_narratives, proverbs, treasures, covenants, voice_principles
-    )
+    phase_1_data = build_phase_1_cpt(all_extractions)
     phase_1_file = PHASE_1 / "cpt_corpus.jsonl"
     with open(phase_1_file, "w", encoding="utf-8") as f:
         for entry in phase_1_data:
-            # Together.ai CPT format: just {"text": "..."}
             f.write(json.dumps({"text": entry["text"]}, ensure_ascii=False) + "\n")
     print(f"  Phase 1 entries: {len(phase_1_data)}")
     print(f"  Output: {phase_1_file.relative_to(ROOT)}")
 
-    # Also save the full metadata version
     (PHASE_1 / "cpt_corpus_meta.json").write_text(
         json.dumps(phase_1_data, indent=2, ensure_ascii=False), encoding="utf-8"
     )
@@ -800,9 +1077,7 @@ def run_refinery():
     # ─── Build Phase 2 (SFT) ────────────────────────────────────────────
 
     print("\n--- Building Phase 2: SFT (Supervised Fine-Tuning) ---")
-    phase_2_data = build_phase_2_sft(
-        proverbs, covenants, treasures, dictionary, voice_principles
-    )
+    phase_2_data = build_phase_2_sft(all_extractions)
     phase_2_file = PHASE_2 / "sft_corpus.jsonl"
     with open(phase_2_file, "w", encoding="utf-8") as f:
         for entry in phase_2_data:
@@ -835,7 +1110,7 @@ def run_refinery():
     print(f"  Phase 2 (SFT):  {len(phase_2_data)} entries — minimal instruction pairs")
     print(f"  Phase 3 (DPO):  {len(phase_3_data)} entries — preference boundary pairs")
     print(f"  TOTAL:          {total_entries} entries across all phases")
-    print(f"  Rejected:       {total_contaminated} entries (contamination filter)")
+    print(f"  Rejected:       {len(contaminated)} entries (contamination filter)")
     print("=" * 60)
 
     return {
@@ -843,7 +1118,7 @@ def run_refinery():
         "phase_2": len(phase_2_data),
         "phase_3": len(phase_3_data),
         "total": total_entries,
-        "rejected": total_contaminated,
+        "rejected": len(contaminated),
     }
 
 
