@@ -749,20 +749,126 @@ class Distillery:
 
             narrative_essence = best_ch.essence if best_ch else ""
 
+            arc = self._structural_arc(chapter_essences)
+            register = self._voice_register(name, chapter_essences)
+
             results.append(NarrativeEssence(
                 name=name,
                 path=rel_path,
                 chapters=chapter_essences,
-                structural_arc="",      # Session G
-                voice_register="",      # Session G
+                structural_arc=arc,
+                voice_register=register,
                 essence=narrative_essence,
             ))
 
         return results
 
     def extract_voice(self) -> VoiceDNA:
-        """Extract and formalize the AXI voice fingerprint."""
-        raise NotImplementedError("Session 2")
+        """Aggregate narrative statistics into the AXI voice fingerprint.
+
+        Reads all 4 narrative JSONs, collects every sentence, and computes:
+        - avg sentence length across the entire canon
+        - percentage of short (<8 words) and long (>14 words) sentences
+        - somatic and material vocabulary density (hits per 1000 words)
+        - three-beat rhythm frequency (% of sentences)
+        - gap frequency (gaps per 1000 words)
+        - top 20 most frequent content words (excluding stop words)
+        - fingerprint hash (SHA-256 of the DNA vector for drift detection)
+        - gaps: what the VOICE_ARCHITECTURE says is still missing
+        """
+        all_sentences: List[str] = []
+        total_words = 0
+        total_somatic = 0
+        total_material = 0
+        total_three_beat = 0
+        total_gaps = 0
+        word_freq: Dict[str, int] = {}
+
+        stop_words = {
+            "the", "a", "an", "and", "or", "but", "in", "on", "at", "to",
+            "for", "of", "with", "by", "from", "is", "it", "was", "were",
+            "be", "been", "are", "am", "has", "had", "have", "do", "did",
+            "not", "no", "this", "that", "its", "his", "her", "he", "she",
+            "they", "them", "their", "we", "our", "you", "your", "as", "if",
+            "so", "up", "out", "then", "than", "into", "all", "would",
+            "could", "who", "what", "which", "when", "where", "how",
+            "one", "two", "more", "some", "any", "each", "every",
+            # German stop words for Kinderbuch
+            "die", "der", "das", "ein", "eine", "und", "oder", "aber",
+            "in", "auf", "an", "zu", "für", "von", "mit", "aus", "ist",
+            "es", "war", "sie", "er", "ihr", "sein", "sich", "den",
+            "dem", "des", "wie", "wenn", "so", "auch", "noch", "nur",
+            "nicht", "ich", "wir", "uns",
+        }
+
+        for _name, rel_path in self._NARRATIVE_JSONS:
+            path = ROOT / rel_path
+            if not path.exists():
+                continue
+            data = json.loads(path.read_text())
+            for ch in data.get("chapters", []):
+                text = ch.get("text", "")
+                if not text.strip():
+                    continue
+
+                sentences = self._sentences(text)
+                all_sentences.extend(sentences)
+                wc = self._count_words(text)
+                total_words += wc
+                total_somatic += self._count_vocabulary(text, SOMATIC_VOCABULARY)
+                total_material += self._count_vocabulary(text, MATERIAL_VOCABULARY)
+                total_three_beat += sum(1 for s in sentences if s.count(",") == 2)
+                total_gaps += text.count("—") + text.count("...") + text.count("…")
+
+                for word in text.lower().split():
+                    clean = re.sub(r'[^a-zäöüß]', '', word)
+                    if clean and len(clean) > 2 and clean not in stop_words:
+                        word_freq[clean] = word_freq.get(clean, 0) + 1
+
+        n_sentences = len(all_sentences)
+        if n_sentences == 0:
+            return VoiceDNA()
+
+        word_counts = [self._count_words(s) for s in all_sentences]
+        avg_len = sum(word_counts) / n_sentences
+        short_pct = sum(1 for w in word_counts if w < 8) / n_sentences
+        long_pct = sum(1 for w in word_counts if w > 14) / n_sentences
+
+        per_k = 1000.0 / max(total_words, 1)
+        somatic_pct = round(total_somatic * per_k, 2)
+        material_pct = round(total_material * per_k, 2)
+        three_beat_freq = round(total_three_beat / n_sentences, 4)
+        gap_freq = round(total_gaps * per_k, 2)
+
+        top_words = sorted(word_freq, key=word_freq.get, reverse=True)[:20]
+
+        # Fingerprint: deterministic hash of the DNA vector
+        dna_vector = f"{avg_len:.2f}|{short_pct:.4f}|{long_pct:.4f}|{somatic_pct}|{material_pct}|{three_beat_freq}|{gap_freq}"
+        fp_hash = hashlib.sha256(dna_vector.encode()).hexdigest()[:16]
+
+        # What's still missing (from VOICE_ARCHITECTURE)
+        voice_gaps = [
+            "Celan fractured syntax (wound register)",
+            "haiku kireji (cutting word)",
+            "Mu'allaqat atlal (beginning from ruins)",
+            "call-and-response structure",
+            "Coltrane density-then-silence",
+            "Rothko pure affect",
+            "fractal utterance",
+        ]
+
+        return VoiceDNA(
+            avg_sentence_length=round(avg_len, 2),
+            short_sentence_pct=round(short_pct, 4),
+            long_sentence_pct=round(long_pct, 4),
+            somatic_vocab_pct=somatic_pct,
+            material_vocab_pct=material_pct,
+            three_beat_frequency=three_beat_freq,
+            gap_frequency=gap_freq,
+            top_words=top_words,
+            fingerprint_hash=fp_hash,
+            gaps=voice_gaps,
+        )
 
     def extract_wisdom(self) -> AreaEssence:
         """Extract from wisdom canon: proverbs, anomalies, treasures."""
@@ -852,3 +958,84 @@ class Distillery:
         """Count occurrences of vocabulary words in text."""
         lower = text.lower()
         return sum(lower.count(w) for w in vocab)
+
+    @staticmethod
+    def _structural_arc(chapters: List[NarrativeChapterEssence]) -> str:
+        """Detect how canonical density evolves across chapters.
+
+        Computes per-chapter density (somatic + material + core images),
+        then classifies the shape: rising, falling, peak, valley, flat.
+        Returns a short human-readable arc description.
+        """
+        if len(chapters) < 2:
+            return "single-chapter"
+
+        densities = [
+            ch.somatic_count + ch.material_count + len(ch.core_images)
+            for ch in chapters
+        ]
+        n = len(densities)
+        mid = n // 2
+
+        first_half_avg = sum(densities[:mid]) / max(mid, 1)
+        second_half_avg = sum(densities[mid:]) / max(n - mid, 1)
+        peak_idx = densities.index(max(densities))
+        valley_idx = densities.index(min(densities))
+
+        # Threshold for "significant" difference
+        total_avg = sum(densities) / n
+        threshold = total_avg * 0.25
+
+        if abs(first_half_avg - second_half_avg) < threshold:
+            if mid - 1 <= peak_idx <= mid + 1 and densities[peak_idx] > total_avg * 1.5:
+                return f"peak at ch.{chapters[peak_idx].chapter}"
+            if mid - 1 <= valley_idx <= mid + 1 and densities[valley_idx] < total_avg * 0.5:
+                return f"valley at ch.{chapters[valley_idx].chapter}"
+            return "sustained"
+        elif second_half_avg > first_half_avg + threshold:
+            return "rising"
+        elif first_half_avg > second_half_avg + threshold:
+            return "falling"
+        return "sustained"
+
+    @staticmethod
+    def _voice_register(name: str, chapters: List[NarrativeChapterEssence]) -> str:
+        """Classify a narrative's voice register based on its statistics.
+
+        Uses avg sentence length, somatic/material ratio, gap density,
+        and narrative name as signals.
+
+        Registers (from VOICE_ARCHITECTURE):
+        - mythic-raw: short sentences, high somatic, Hakaka territory
+        - civic-communal: medium sentences, balanced vocab, Ashwater territory
+        - child-warmth: very short sentences, material > somatic, Kinderbuch
+        - forming: low density overall, voice still emerging
+        """
+        if not chapters:
+            return "forming"
+
+        total_sent = sum(ch.sentence_count for ch in chapters)
+        total_somatic = sum(ch.somatic_count for ch in chapters)
+        total_material = sum(ch.material_count for ch in chapters)
+        total_gaps = sum(ch.gap_count for ch in chapters)
+        avg_len = sum(ch.avg_sentence_length for ch in chapters) / len(chapters)
+
+        density = total_somatic + total_material
+        if total_sent < 50 and density < 30:
+            return "forming"
+
+        somatic_ratio = total_somatic / max(total_material, 1)
+        material_ratio = total_material / max(total_somatic, 1)
+        gap_heavy = total_gaps > total_sent * 0.08
+
+        if avg_len < 7.0 and material_ratio > 1.2:
+            return "child-warmth"
+        if gap_heavy:
+            return "civic-communal"
+        if avg_len < 10.0 and somatic_ratio > 1.0:
+            return "mythic-raw"
+        if somatic_ratio > 1.2:
+            return "mythic-raw"
+        if material_ratio > 1.2:
+            return "child-warmth"
+        return "civic-communal"
