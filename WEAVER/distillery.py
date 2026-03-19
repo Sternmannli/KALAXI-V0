@@ -272,13 +272,134 @@ class Distillery:
         return self._ledger
 
     # ── Step 1B: extract_patterns() ──────────────────────────────────
-    # To be implemented in Session 2
+    # Session C — implemented
 
     def extract_patterns(self, text: str, source_type: str = "general") -> List[str]:
         """Extract structural patterns from text.
-        source_type: 'v001', 'v002', 'narrative', 'wisdom', 'constitutional', 'general'
-        Returns list of pattern labels like 'CORRECTION:0.7', 'INSTRUCTION:0.9'."""
-        raise NotImplementedError("Step 1B — next session")
+
+        Different source types activate different marker sets:
+        - v001: corrections, instructions, preferences, principles, revelations
+        - v002: reports, discoveries, failures, builds
+        - narrative: somatic vocabulary, material vocabulary, core images
+        - wisdom: principles + resonance (proverb-like patterns)
+        - constitutional: instructions + principles (law-like patterns)
+        - general: all V-001 + V-002 markers at reduced weight
+
+        Returns list of pattern labels like 'CORRECTION:0.72', 'INSTRUCTION:0.85'.
+        Only patterns with score > 0.0 are returned.
+        """
+        if not text or not text.strip():
+            return []
+
+        results = []
+
+        if source_type == "v001":
+            # V-001 input: corrections, instructions, preferences, principles, revelations
+            marker_sets = [
+                ("CORRECTION", V001_CORRECTION_MARKERS),
+                ("INSTRUCTION", V001_INSTRUCTION_MARKERS),
+                ("PREFERENCE", V001_PREFERENCE_MARKERS),
+                ("PRINCIPLE", V001_PRINCIPLE_MARKERS),
+                ("REVELATION", V001_REVELATION_MARKERS),
+            ]
+            for label, markers in marker_sets:
+                score = self._score_markers(text, markers)
+                if score > 0.0:
+                    results.append(f"{label}:{score:.2f}")
+
+        elif source_type == "v002":
+            # V-002 output: reports, discoveries, failures, builds
+            marker_sets = [
+                ("REPORT", V002_REPORT_MARKERS),
+                ("DISCOVERY", V002_DISCOVERY_MARKERS),
+                ("FAILURE", V002_FAILURE_MARKERS),
+                ("BUILD", V002_BUILD_MARKERS),
+            ]
+            for label, markers in marker_sets:
+                score = self._score_markers(text, markers)
+                if score > 0.0:
+                    results.append(f"{label}:{score:.2f}")
+
+        elif source_type == "narrative":
+            # Narrative text: somatic body, material grounding, core images
+            word_count = max(self._count_words(text), 1)
+            somatic = self._count_vocabulary(text, SOMATIC_VOCABULARY)
+            material = self._count_vocabulary(text, MATERIAL_VOCABULARY)
+            images = self._count_vocabulary(text, CORE_IMAGES)
+
+            if somatic > 0:
+                density = min(somatic / word_count * 10, 1.0)
+                results.append(f"SOMATIC:{density:.2f}")
+            if material > 0:
+                density = min(material / word_count * 10, 1.0)
+                results.append(f"MATERIAL:{density:.2f}")
+            if images > 0:
+                density = min(images / word_count * 10, 1.0)
+                results.append(f"CORE_IMAGE:{density:.2f}")
+
+            # Three-beat rhythm: sentences with exactly 3 clauses (comma-separated)
+            sentences = self._sentences(text)
+            if sentences:
+                three_beats = sum(
+                    1 for s in sentences if s.count(",") == 2
+                )
+                if three_beats > 0:
+                    freq = min(three_beats / len(sentences), 1.0)
+                    results.append(f"THREE_BEAT:{freq:.2f}")
+
+            # Gap detection: em-dash, ellipsis, or "—" as pause/silence
+            gap_count = text.count("—") + text.count("...") + text.count("…")
+            if gap_count > 0:
+                freq = min(gap_count / max(len(sentences), 1), 1.0)
+                results.append(f"GAP:{freq:.2f}")
+
+        elif source_type == "wisdom":
+            # Wisdom/proverb text: principles + resonance patterns
+            marker_sets = [
+                ("PRINCIPLE", V001_PRINCIPLE_MARKERS),
+                ("INSTRUCTION", V001_INSTRUCTION_MARKERS),
+            ]
+            for label, markers in marker_sets:
+                score = self._score_markers(text, markers)
+                if score > 0.0:
+                    results.append(f"{label}:{score:.2f}")
+            # Also check for core images (proverbs often use them)
+            images = self._count_vocabulary(text, CORE_IMAGES)
+            if images > 0:
+                density = min(images / max(self._count_words(text), 1) * 10, 1.0)
+                results.append(f"CORE_IMAGE:{density:.2f}")
+
+        elif source_type == "constitutional":
+            # Constitutional text: instructions + principles (law-like)
+            marker_sets = [
+                ("INSTRUCTION", V001_INSTRUCTION_MARKERS),
+                ("PRINCIPLE", V001_PRINCIPLE_MARKERS),
+                ("CORRECTION", V001_CORRECTION_MARKERS),
+            ]
+            for label, markers in marker_sets:
+                score = self._score_markers(text, markers)
+                if score > 0.0:
+                    results.append(f"{label}:{score:.2f}")
+
+        else:
+            # General: run all V-001 and V-002 markers
+            all_sets = [
+                ("CORRECTION", V001_CORRECTION_MARKERS),
+                ("INSTRUCTION", V001_INSTRUCTION_MARKERS),
+                ("PREFERENCE", V001_PREFERENCE_MARKERS),
+                ("PRINCIPLE", V001_PRINCIPLE_MARKERS),
+                ("REVELATION", V001_REVELATION_MARKERS),
+                ("REPORT", V002_REPORT_MARKERS),
+                ("DISCOVERY", V002_DISCOVERY_MARKERS),
+                ("FAILURE", V002_FAILURE_MARKERS),
+                ("BUILD", V002_BUILD_MARKERS),
+            ]
+            for label, markers in all_sets:
+                score = self._score_markers(text, markers)
+                if score > 0.0:
+                    results.append(f"{label}:{score:.2f}")
+
+        return results
 
     # ── Step 1C: extract_essence_line() ──────────────────────────────
     # To be implemented in Session 2
