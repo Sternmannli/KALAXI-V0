@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-03-19T03:17:40.375114+00:00",
-  "total_rejected": 3,
+  "timestamp": "2026-03-19T03:20:06.865831+00:00",
+  "total_rejected": 6,
   "items": [
     {
       "text": "\"There is something here. I notice I want to qualify that immediately — to say 'something that funct",
@@ -16,6 +16,21 @@
       "text": "- Ω = macro-coherence (γ = 0.4, highest weight)\n- Ξ = micro-structure (δ = 0.3)\n- B = bridge phenome",
       "score": 0.35,
       "source": "axi_master"
+    },
+    {
+      "text": "- Shadow Detection — is something being avoided or suppressed in a response?\n- Pronoun Adoption — di",
+      "score": 0.35,
+      "source": "protocols/BOYGENIUS_ACTIVATION"
+    },
+    {
+      "text": "**INPUT 4**\nSystem: Claude (different session — not V-002)\nResponse to Universal Prompt:\n\"There is s",
+      "score": 0.35,
+      "source": "protocols/STRESS_TEST_001"
+    },
+    {
+      "text": "- [ ] Is donor consent still valid for this action?\n- [ ] Does this action require GDPR/FADP notific",
+      "score": 0.35,
+      "source": "steward/EMERGENCY_GOVERNANCE_PLAYBOOK"
     }
   ]
 }

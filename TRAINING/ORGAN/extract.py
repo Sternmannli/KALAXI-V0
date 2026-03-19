@@ -54,6 +54,15 @@ CANON_SOURCE_DIR = ROOT / "R7M" / "CANON_SOURCE"
 AXI_MASTER = ROOT / "AXI" / "AXI_MASTER_PROMPT.md"
 INPUT_LEDGER_CHRONICLE = ROOT / "KEEP" / "INPUT_LEDGER" / "chronicle.md"
 
+# ─── BATCH 2: High-priority sources ───────────────────────────────────────────
+PROTOCOLS_DIR = ROOT / "PROTOCOLS"
+PAPERS_DIR = ROOT / "PAPERS"
+STEWARD_DIR = ROOT / "STEWARD"
+FIELD_STUDY_DIR = ROOT / "FIELD" / "STUDY"
+TRILITERAL = ROOT / "VOICE" / "TRILITERAL_ROOT_SYSTEM_2026-03-18.md"
+MANIFEST_META_DIR = ROOT / "MANIFEST" / "metadata"
+SCIENTIFIC_CHRONICLE_MD = ROOT / "MANIFEST" / "SCIENTIFIC_CHRONICLE.md"
+
 # ─── AI Contamination Filter ────────────────────────────────────────────────
 
 FORBIDDEN_PHRASES = [
@@ -702,6 +711,71 @@ def extract_input_ledger() -> list[dict]:
     return entries
 
 
+# ─── BATCH 2: High-Priority Extractors ────────────────────────────────────────
+
+def extract_protocols() -> list[dict]:
+    """PROTOCOLS/ — methodology as voice. Probe Forge, Organ Map, Boygenius,
+    Witness Prompts, Bootstrap. Skip ST-006 (already in narratives)."""
+    if not PROTOCOLS_DIR.exists():
+        return []
+    entries = []
+    skip = {"ST-006"}  # already consumed as narrative
+    for f in sorted(PROTOCOLS_DIR.iterdir()):
+        if f.is_dir() and f.name in skip:
+            continue
+        if f.is_file() and f.suffix == ".md":
+            entries.extend(extract_markdown_passages(f, f"protocols/{f.stem}", purity_level=2))
+    return entries
+
+
+def extract_papers() -> list[dict]:
+    """PAPERS/ — academic and internal chronicle voice. Skip .tex files."""
+    if not PAPERS_DIR.exists():
+        return []
+    entries = []
+    for f in sorted(PAPERS_DIR.iterdir()):
+        if f.is_file() and f.suffix == ".md":
+            entries.extend(extract_markdown_passages(f, f"papers/{f.stem}", purity_level=2))
+    return entries
+
+
+def extract_steward() -> list[dict]:
+    """STEWARD/ — governance voice, mirror entries, emergency playbook."""
+    return extract_directory_passages(STEWARD_DIR, "steward", purity_level=2)
+
+
+def extract_field_studies() -> list[dict]:
+    """FIELD/STUDY/ — pattern inventory, essence compression, Layer 3, etc."""
+    return extract_directory_passages(FIELD_STUDY_DIR, "field_study", purity_level=1)
+
+
+def extract_triliteral() -> list[dict]:
+    """VOICE/TRILITERAL_ROOT_SYSTEM — Arabic morphology as system grammar."""
+    if not TRILITERAL.exists():
+        return []
+    return extract_markdown_passages(TRILITERAL, "triliteral", purity_level=1)
+
+
+def extract_manifest_tiers() -> list[dict]:
+    """MANIFEST/metadata/ — tier2 (weaver), tier3 (honey), tier4 (hand),
+    cross_tier_index. Skip tier1 (already in covenants extractor)."""
+    if not MANIFEST_META_DIR.exists():
+        return []
+    entries = []
+    skip = {"tier1_stone.md"}  # already consumed
+    for f in sorted(MANIFEST_META_DIR.iterdir()):
+        if f.is_file() and f.suffix == ".md" and f.name not in skip:
+            entries.extend(extract_markdown_passages(f, f"manifest_tier/{f.stem}", purity_level=2))
+    return entries
+
+
+def extract_scientific_chronicle() -> list[dict]:
+    """MANIFEST/SCIENTIFIC_CHRONICLE.md — the system's self-portrait."""
+    if not SCIENTIFIC_CHRONICLE_MD.exists():
+        return []
+    return extract_markdown_passages(SCIENTIFIC_CHRONICLE_MD, "scientific_chronicle", purity_level=2)
+
+
 # ─── Phase Builders ──────────────────────────────────────────────────────────
 
 AXI_SYSTEM_PROMPT = (
@@ -1015,6 +1089,16 @@ def run_refinery():
     run_extractor("axi_master", extract_axi_master)
     run_extractor("wisdom_canon", extract_wisdom_canon)
     run_extractor("input_ledger", extract_input_ledger)
+
+    # BATCH 2: High-priority sources
+    print("\n--- Batch 2: High-Priority Sources ---")
+    run_extractor("protocols", extract_protocols)
+    run_extractor("papers", extract_papers)
+    run_extractor("steward", extract_steward)
+    run_extractor("field_studies", extract_field_studies)
+    run_extractor("triliteral", extract_triliteral)
+    run_extractor("manifest_tiers", extract_manifest_tiers)
+    run_extractor("scientific_chronicle", extract_scientific_chronicle)
 
     # ─── Global dedup ─────────────────────────────────────────────────────
 
