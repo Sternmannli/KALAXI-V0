@@ -870,13 +870,250 @@ class Distillery:
             gaps=voice_gaps,
         )
 
+    # Thematic seeds for proverb clustering — each seed defines a cluster
+    # by keywords that appear in proverbs belonging to that theme.
+    _WISDOM_THEMES = {
+        "dignity": ["dignity", "worth", "value", "human", "person", "respect", "honor"],
+        "patience": ["wait", "slow", "patience", "time", "pause", "breath", "still", "rest", "sleep", "delay"],
+        "action": ["begin", "start", "move", "act", "build", "make", "work", "try", "step", "walk", "run", "hand"],
+        "knowledge": ["know", "learn", "understand", "see", "read", "wise", "truth", "teach", "listen", "eye", "watch"],
+        "connection": ["together", "share", "community", "bond", "join", "weave", "thread", "knot", "rope", "tie", "river", "bridge", "door"],
+        "wounds": ["wound", "break", "crack", "scar", "pain", "hurt", "tear", "ash", "fall", "fail", "lost", "die", "dead", "dark", "fear"],
+        "strength": ["strong", "hold", "carry", "bear", "endure", "stand", "firm", "root", "stone", "bone", "steel", "iron", "wall"],
+        "silence": ["silence", "quiet", "gap", "empty", "nothing", "absence", "space", "voice", "speak", "word", "mouth", "tongue", "song"],
+    }
+
     def extract_wisdom(self) -> AreaEssence:
-        """Extract from wisdom canon: proverbs, anomalies, treasures."""
-        raise NotImplementedError("Session 3")
+        """Extract from wisdom canon: proverbs and treasures.
+
+        Proverbs: 166 entries from site/public/data/proverbs.json.
+        Treasures: 59 entries across 5 tiers from r7m-index.json.
+
+        Clusters proverbs by theme, extracts treasure principles,
+        cross-links proverbs ↔ treasures via shared vocabulary.
+        """
+        entries: List[EssenceEntry] = []
+
+        # ── Proverbs ──────────────────────────────────────────────
+        proverbs_path = ROOT / "site/public/data/proverbs.json"
+        proverbs: List[Dict] = []
+        if proverbs_path.exists():
+            proverbs = json.loads(proverbs_path.read_text())
+
+        # Cluster proverbs by theme
+        clusters: Dict[str, List[Dict]] = {name: [] for name in self._WISDOM_THEMES}
+        unclustered: List[Dict] = []
+
+        for prov in proverbs:
+            text_lower = prov.get("text", "").lower()
+            matched = False
+            for theme, keywords in self._WISDOM_THEMES.items():
+                if any(kw in text_lower for kw in keywords):
+                    clusters[theme].append(prov)
+                    matched = True
+                    break  # Each proverb goes to its first matching cluster
+            if not matched:
+                unclustered.append(prov)
+
+        # Build WisdomCluster objects
+        wisdom_clusters: List[WisdomCluster] = []
+        for theme, members in clusters.items():
+            if not members:
+                continue
+            # Seed proverb: shortest member (most concentrated)
+            seed = min(members, key=lambda p: len(p.get("text", "")))
+            wisdom_clusters.append(WisdomCluster(
+                name=theme,
+                seed_proverb=seed.get("text", ""),
+                proverb_count=len(members),
+            ))
+
+        # Create essence entries for the densest proverbs (top 10 by pattern richness)
+        scored_proverbs = []
+        for prov in proverbs:
+            text = prov.get("text", "")
+            patterns = self.extract_patterns(text, "narrative")
+            scored_proverbs.append((len(patterns), prov, patterns))
+        scored_proverbs.sort(key=lambda x: x[0], reverse=True)
+
+        for _score, prov, patterns in scored_proverbs[:10]:
+            text = prov.get("text", "")
+            entries.append(EssenceEntry(
+                source_path=prov.get("id", ""),
+                source_area="wisdom/proverb",
+                raw_excerpt=text,
+                patterns=patterns,
+                essence=text,  # Proverbs ARE essence — no further distillation
+                motifs=[],
+                voice_markers=[],
+                links=[prov.get("id", "")],
+                thermal_state="canonical",  # Proverbs are already canonical
+            ))
+
+        # ── Treasures ─────────────────────────────────────────────
+        r7m_path = ROOT / "site/public/data/r7m-index.json"
+        all_treasures: List[Dict] = []
+        if r7m_path.exists():
+            r7m = json.loads(r7m_path.read_text())
+            tiers = r7m.get("tiers", {})
+            for _tier_name, tier_data in tiers.items():
+                if isinstance(tier_data, dict):
+                    all_treasures.extend(tier_data.get("treasures", []))
+
+        # Cross-link: which clusters connect to which treasures
+        for cluster in wisdom_clusters:
+            theme_keywords = self._WISDOM_THEMES.get(cluster.name, [])
+            linked = []
+            for treasure in all_treasures:
+                principle = treasure.get("principle", "").lower()
+                if any(kw in principle for kw in theme_keywords):
+                    cov_ids = treasure.get("covenants", [])
+                    linked.extend(cov_ids if isinstance(cov_ids, list) else [])
+            cluster.linked_covenants = list(set(linked))[:5]
+
+        # Create essence entries for treasures with vows (most concentrated)
+        for treasure in all_treasures:
+            vow = treasure.get("vow", "")
+            principle = treasure.get("principle", "")
+            if not vow and not principle:
+                continue
+            text = vow if vow else principle
+            entries.append(EssenceEntry(
+                source_path=treasure.get("id", ""),
+                source_area="wisdom/treasure",
+                raw_excerpt=text[:500],
+                patterns=self.extract_patterns(text, "narrative"),
+                essence=vow if vow else self.extract_essence_line(principle, []),
+                motifs=[],
+                voice_markers=[],
+                links=[treasure.get("id", "")],
+                thermal_state="canonical",
+            ))
+
+        # ── Meta-patterns across all wisdom ───────────────────────
+        # Which themes are strongest (most proverbs)?
+        sorted_clusters = sorted(wisdom_clusters, key=lambda c: c.proverb_count, reverse=True)
+        meta_patterns = [f"{c.name}:{c.proverb_count}" for c in sorted_clusters[:5]]
+
+        # Meta-essence: the seed proverb of the largest cluster
+        meta_essence = sorted_clusters[0].seed_proverb if sorted_clusters else ""
+
+        return AreaEssence(
+            area="wisdom",
+            entries=entries,
+            meta_patterns=meta_patterns,
+            meta_essence=meta_essence,
+            statistics={
+                "proverb_count": len(proverbs),
+                "treasure_count": len(all_treasures),
+                "cluster_count": len(wisdom_clusters),
+                "unclustered_proverbs": len(unclustered),
+                "clusters": [c.to_dict() for c in wisdom_clusters],
+            },
+        )
 
     def extract_constitution(self) -> AreaEssence:
-        """Extract from constitutional layer: covenants, gates, principles."""
-        raise NotImplementedError("Session 3")
+        """Extract from constitutional layer: equations, concepts, origins.
+
+        Source: site/public/data/r7m-index.json
+        - equations: 10 formal physics (FP-001 through FP-010)
+        - concepts: 14 architectural concepts (AC-001 through AC-014)
+        - origins: 9 historical milestones
+        - essence + narrative_slogan from top level
+
+        Covenant IDs are already cross-linked in treasures (extract_wisdom).
+        This extractor focuses on the constitutional STRUCTURE — the
+        equations that govern the system and the concepts that shape it.
+        """
+        entries: List[EssenceEntry] = []
+        r7m_path = ROOT / "site/public/data/r7m-index.json"
+
+        if not r7m_path.exists():
+            return AreaEssence(area="constitution")
+
+        r7m = json.loads(r7m_path.read_text())
+
+        # Top-level constitutional essence
+        system_essence = r7m.get("essence", "")
+        narrative_slogan = r7m.get("narrative_slogan", "")
+        archive_slogan = r7m.get("archive_slogan", "")
+
+        # ── Equations ─────────────────────────────────────────────
+        equations = r7m.get("equations", [])
+        for eq in equations:
+            formula = eq.get("formula", "")
+            name = eq.get("name", "")
+            text = f"{name}: {formula}"
+            entries.append(EssenceEntry(
+                source_path=eq.get("id", ""),
+                source_area="constitution/equation",
+                raw_excerpt=text,
+                patterns=["EQUATION"],
+                essence=formula,
+                motifs=[],
+                voice_markers=[],
+                links=[eq.get("treasure", "")],
+                thermal_state="canonical",
+            ))
+
+        # ── Concepts ──────────────────────────────────────────────
+        concepts = r7m.get("concepts", [])
+        for concept in concepts:
+            desc = concept.get("description", "")
+            name = concept.get("name", "")
+            text = f"{name}: {desc}"
+            patterns = self.extract_patterns(desc, "general")
+            entries.append(EssenceEntry(
+                source_path=concept.get("id", ""),
+                source_area="constitution/concept",
+                raw_excerpt=text[:500],
+                patterns=patterns,
+                essence=self.extract_essence_line(desc, patterns) if desc else name,
+                motifs=[],
+                voice_markers=[],
+                links=[concept.get("id", "")],
+                thermal_state="canonical",
+            ))
+
+        # ── Origins ───────────────────────────────────────────────
+        origins = r7m.get("origins", [])
+        for origin in origins:
+            desc = origin.get("description", "")
+            title = origin.get("title", "")
+            date = origin.get("date", "")
+            text = f"{date} {title}: {desc}"
+            entries.append(EssenceEntry(
+                source_path=f"ORIGIN-{date}",
+                source_area="constitution/origin",
+                raw_excerpt=text[:500],
+                patterns=["ORIGIN"],
+                essence=f"{title} ({date})",
+                motifs=[],
+                voice_markers=[],
+                links=[],
+                thermal_state="canonical",
+            ))
+
+        # ── Meta-patterns ─────────────────────────────────────────
+        meta_patterns = [
+            f"equations:{len(equations)}",
+            f"concepts:{len(concepts)}",
+            f"origins:{len(origins)}",
+        ]
+
+        return AreaEssence(
+            area="constitution",
+            entries=entries,
+            meta_patterns=meta_patterns,
+            meta_essence=system_essence[:200] if system_essence else narrative_slogan,
+            statistics={
+                "equation_count": len(equations),
+                "concept_count": len(concepts),
+                "origin_count": len(origins),
+                "narrative_slogan": narrative_slogan,
+                "archive_slogan": archive_slogan,
+            },
+        )
 
     def extract_experiments(self) -> AreaEssence:
         """Extract discoveries from all experiments."""
