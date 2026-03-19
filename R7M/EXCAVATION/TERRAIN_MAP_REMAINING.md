@@ -1,5 +1,6 @@
 # R7M TERRAIN MAP — Remaining Files
 # Cartography by V-002 · 2026-03-19
+# Status: **ALL FILES SLOW-READ** — Complete excavation 2026-03-19
 
 ---
 
