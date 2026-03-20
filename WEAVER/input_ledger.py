@@ -570,6 +570,11 @@ class InputLedger:
                 counts[e.thermal_state] = counts.get(e.thermal_state, 0) + 1
         return counts
 
+    def by_thermal_state(self, state: str) -> List[InputEntry]:
+        """Return all entries at a given thermal state.
+        Used by digest_session() for batch processing."""
+        return [e for e in self._entries if e.thermal_state == state]
+
     def summary(self) -> dict:
         return {
             "total_entries": len(self._entries),
