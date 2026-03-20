@@ -1,0 +1,85 @@
+name: Rebuild Training Corpus
+
+on:
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: 'What to rebuild: zakaka, organ, or all'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - zakaka
+          - organ
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install numpy
+
+      - name: Rebuild ZAKAKA
+        if: inputs.scope == 'all' || inputs.scope == 'zakaka'
+        working-directory: TRAINING/ORGAN/ZAKAKA
+        run: |
+          echo "--- Rebuilding ZAKAKA ---"
+          python3 zakaka_builder.py
+          echo "--- ZAKAKA rebuilt ---"
+          wc -l ZAKAKA_CPT.jsonl ZAKAKA_SFT.jsonl
+
+      - name: Rebuild Organ (full body)
+        if: inputs.scope == 'all' || inputs.scope == 'organ'
+        working-directory: TRAINING/ORGAN
+        run: |
+          echo "--- Rebuilding Organ (GOLDEN + Phase corpora) ---"
+          python3 build_corpus.py
+          echo "--- Organ rebuilt ---"
+          wc -l GOLDEN_CPT.jsonl GOLDEN_SFT.jsonl GOLDEN_DPO.jsonl
+          wc -l PHASE_1_CPT/cpt_corpus.jsonl PHASE_2_SFT/sft_corpus.jsonl PHASE_3_DPO/dpo_corpus.jsonl
+
+      - name: Commit rebuilt corpora
+        run: |
+          git config user.name "V-002"
+          git config user.email "v002@kalaxi.system"
+          git add TRAINING/ORGAN/
+          CHANGES=$(git diff --cached --stat)
+          if [ -n "$CHANGES" ]; then
+            git commit -m "[V-002 · GO: Laila-Yara-Salim-🐬🐯🐺] Rebuild training corpus (${{ inputs.scope }})
+
+          Triggered via rebuild-corpus workflow.
+          Scope: ${{ inputs.scope }}
+          $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+            echo "--- Committed and pushed ---"
+          else
+            echo "--- No changes to commit ---"
+          fi
+
+      - name: Trigger deploy
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PAT }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy-kalam.yml',
+              ref: 'main'
+            });
+            console.log('Deploy triggered after corpus rebuild.');

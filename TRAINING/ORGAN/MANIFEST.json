@@ -1,16 +1,16 @@
 {
-  "built_at": "2026-03-19T03:21:23.479031+00:00",
+  "built_at": "2026-03-20T00:16:32.745997+00:00",
   "pipeline": "CPT → SFT → DPO (three-phase)",
   "phases": {
     "cpt": {
-      "entries": 3747,
-      "words": 114687,
-      "bytes": 797999
+      "entries": 4538,
+      "words": 132905,
+      "bytes": 920462
     },
     "sft": {
-      "entries": 1808,
-      "words": 48139,
-      "bytes": 1408967
+      "entries": 2496,
+      "words": 61094,
+      "bytes": 1838056
     },
     "dpo": {
       "entries": 25,
@@ -19,9 +19,13 @@
       "bytes": 6951
     }
   },
-  "total_entries": 5580,
-  "total_pure_words": 163066,
+  "total_entries": 7059,
+  "total_pure_words": 194239,
   "invalid_entries": 0,
+  "zakaka_merged": {
+    "cpt": 690,
+    "sft": 690
+  },
   "contamination_threshold": 0.25,
   "files": [
     "TRAINING/ORGAN/GOLDEN_CPT.jsonl",

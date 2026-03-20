@@ -1,0 +1,622 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Command Centre — kalam.ch" description="ZAKAKA and Organ training data. The system's voice, made visible.">
+
+  <section class="page-header">
+    <h1>Command Centre</h1>
+    <p class="quiet">Where the voice lives. ZAKAKA (essence³) and the Organ (full body).</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Auth Gate -->
+  <section class="content-section" id="auth-gate">
+    <div class="text-block" id="auth-prompt" style="display:none;">
+      <p>This page serves the system's training corpora. Access requires the command key.</p>
+      <div style="margin-top: 1rem;">
+        <input type="password" id="key-input" placeholder="Command key"
+          style="font-family: var(--font-body); padding: 0.5rem 1rem; border: 1px solid var(--accent-subtle); background: var(--bg-secondary); color: var(--text-primary); width: 100%; max-width: 24rem;" />
+        <button id="key-submit" style="margin-top: 0.5rem; padding: 0.5rem 1.5rem; background: var(--text-primary); color: var(--bg-primary); border: none; cursor: pointer; font-family: var(--font-body);">Enter</button>
+        <p id="key-error" style="color: var(--danger); margin-top: 0.5rem; display: none;">Invalid key.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard (hidden until authed) -->
+  <div id="dashboard" style="display:none;">
+
+    <!-- Summary Grid -->
+    <section class="content-section" id="summary">
+      <div class="text-block">
+        <h2>Corpus Status</h2>
+        <div class="compass-grid" id="summary-grid">
+          <div class="compass-cell">
+            <span class="compass-number" id="zakaka-total">—</span>
+            <span class="compass-label">ZAKAKA entries</span>
+          </div>
+          <div class="compass-cell">
+            <span class="compass-number" id="organ-total">—</span>
+            <span class="compass-label">Organ entries</span>
+          </div>
+          <div class="compass-cell">
+            <span class="compass-number" id="all-total">—</span>
+            <span class="compass-label">Total entries</span>
+          </div>
+          <div class="compass-cell">
+            <span class="compass-number" id="corpus-time">—</span>
+            <span class="compass-label">Last sync</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="gap" role="separator" aria-hidden="true"></div>
+
+    <!-- Detailed Breakdown -->
+    <section class="content-section" id="breakdown">
+      <div class="text-block">
+        <h2>Breakdown</h2>
+        <div id="breakdown-table" style="font-family: var(--font-body); font-size: var(--text-sm);">
+          <p class="quiet">Loading...</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="gap" role="separator" aria-hidden="true"></div>
+
+    <!-- Search -->
+    <section class="content-section" id="search-section">
+      <div class="text-block">
+        <h2>Search</h2>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <input type="text" id="search-input" placeholder="Search across all corpora..."
+            style="flex: 1; min-width: 12rem; font-family: var(--font-body); padding: 0.5rem 1rem; border: 1px solid var(--accent-subtle); background: var(--bg-secondary); color: var(--text-primary);" />
+          <button id="search-btn" style="padding: 0.5rem 1.5rem; background: var(--text-primary); color: var(--bg-primary); border: none; cursor: pointer; font-family: var(--font-body);">Search</button>
+        </div>
+        <div id="search-results" style="margin-top: 1rem;"></div>
+      </div>
+    </section>
+
+    <div class="gap" role="separator" aria-hidden="true"></div>
+
+    <!-- Sample Viewer -->
+    <section class="content-section" id="sample-section">
+      <div class="text-block">
+        <h2>Sample</h2>
+        <p class="quiet" style="margin-bottom: 0.75rem;">Pull random entries to inspect quality.</p>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+          <select id="sample-type" style="font-family: var(--font-body); padding: 0.5rem; border: 1px solid var(--accent-subtle); background: var(--bg-secondary); color: var(--text-primary);">
+            <option value="zakaka">ZAKAKA (SFT)</option>
+            <option value="zakaka_cpt">ZAKAKA (CPT)</option>
+            <option value="organ_sft">Organ (SFT)</option>
+            <option value="organ_cpt">Organ (CPT)</option>
+            <option value="organ_dpo">Organ (DPO)</option>
+          </select>
+          <button id="sample-btn" style="padding: 0.5rem 1.5rem; background: var(--text-primary); color: var(--bg-primary); border: none; cursor: pointer; font-family: var(--font-body);">Draw 5</button>
+        </div>
+        <div id="sample-results" style="margin-top: 1rem;"></div>
+      </div>
+    </section>
+
+    <div class="gap" role="separator" aria-hidden="true"></div>
+
+    <!-- Manifest (hashes) -->
+    <section class="content-section" id="manifest-section">
+      <div class="text-block">
+        <h2>Integrity</h2>
+        <p class="quiet" style="margin-bottom: 0.75rem;">SHA-256 hashes from last deploy.</p>
+        <div id="manifest-data" style="font-family: monospace; font-size: 0.85rem; line-height: 1.6;"></div>
+      </div>
+    </section>
+
+    <div class="gap" role="separator" aria-hidden="true"></div>
+
+    <!-- Training Panel -->
+    <section class="content-section" id="training-section">
+      <div class="text-block">
+        <h2>Training</h2>
+        <p class="quiet" style="margin-bottom: 1rem;">Fine-tune AXI's voice via Together AI. Upload corpus, train, activate.</p>
+
+        <!-- Active Model -->
+        <div style="margin-bottom: 1.5rem; padding: 0.75rem 1rem; background: var(--bg-secondary); border-left: 3px solid var(--color-dignity);">
+          <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary);">Active Model</span>
+          <div id="active-model" style="font-family: monospace; font-size: 0.9rem; margin-top: 0.25rem;">Loading...</div>
+        </div>
+
+        <!-- Step 1: Upload -->
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">1. Upload Corpus</h3>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+            <select id="train-corpus" style="font-family: var(--font-body); padding: 0.5rem; border: 1px solid var(--accent-subtle); background: var(--bg-secondary); color: var(--text-primary);">
+              <option value="zakaka_sft">ZAKAKA SFT (1,000 entries)</option>
+              <option value="zakaka_cpt">ZAKAKA CPT (1,000 entries)</option>
+              <option value="organ_sft">Organ SFT (2,496 entries)</option>
+              <option value="organ_cpt">Organ CPT (4,538 entries)</option>
+              <option value="organ_dpo">Organ DPO (25 entries)</option>
+            </select>
+            <button id="upload-btn" class="train-btn">Upload to Together AI</button>
+          </div>
+          <div id="upload-result" class="train-output"></div>
+        </div>
+
+        <!-- Step 2: Train -->
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">2. Start Training</h3>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+            <select id="train-model" style="font-family: var(--font-body); padding: 0.5rem; border: 1px solid var(--accent-subtle); background: var(--bg-secondary); color: var(--text-primary);">
+              <option value="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo">Llama 3.1 8B Instruct</option>
+              <option value="meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo">Llama 3.1 70B Instruct</option>
+              <option value="mistralai/Mistral-7B-Instruct-v0.3">Mistral 7B Instruct</option>
+              <option value="Qwen/Qwen2-7B-Instruct">Qwen2 7B Instruct</option>
+            </select>
+            <input type="number" id="train-epochs" value="3" min="1" max="20" style="width: 4rem; font-family: var(--font-body); padding: 0.5rem; border: 1px solid var(--accent-subtle); background: var(--bg-secondary); color: var(--text-primary);" title="Epochs" />
+            <input type="text" id="train-suffix" value="axi-voice" maxlength="40" style="width: 8rem; font-family: var(--font-body); padding: 0.5rem; border: 1px solid var(--accent-subtle); background: var(--bg-secondary); color: var(--text-primary);" title="Model suffix" />
+            <button id="train-btn" class="train-btn">Start Training</button>
+          </div>
+          <div id="train-result" class="train-output"></div>
+        </div>
+
+        <!-- Step 3: Status -->
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">3. Monitor</h3>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button id="status-btn" class="train-btn">Check Status</button>
+            <button id="list-btn" class="train-btn" style="background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--accent-subtle);">List All Jobs</button>
+            <label style="font-size: 0.8rem; color: var(--text-secondary);">
+              <input type="checkbox" id="auto-poll" /> Auto-poll (30s)
+            </label>
+          </div>
+          <div id="status-result" class="train-output"></div>
+        </div>
+
+        <!-- Step 4: Activate -->
+        <div style="margin-bottom: 1rem;">
+          <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">4. Activate</h3>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+            <input type="text" id="activate-model" placeholder="Fine-tuned model ID (auto-filled on completion)"
+              style="flex: 1; min-width: 12rem; font-family: var(--font-body); padding: 0.5rem; border: 1px solid var(--accent-subtle); background: var(--bg-secondary); color: var(--text-primary); font-size: 0.85rem;" />
+            <button id="activate-btn" class="train-btn" style="background: var(--color-dignity); color: var(--bg-primary);">Activate as AXI Voice</button>
+          </div>
+          <div id="activate-result" class="train-output"></div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+</Base>
+
+<style>
+  #breakdown-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+  }
+  #breakdown-table th, #breakdown-table td {
+    text-align: left;
+    padding: 0.4rem 0.75rem;
+    border-bottom: 1px solid var(--accent-subtle);
+  }
+  #breakdown-table th {
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+  #breakdown-table td.num {
+    text-align: right;
+    font-family: monospace;
+  }
+  .sample-entry {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--color-dignity);
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+  }
+  .sample-entry .role {
+    font-weight: 600;
+    color: var(--color-dignity);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+  .search-hit {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--color-pattern);
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.5rem;
+    font-size: var(--text-sm);
+  }
+  .search-hit .corpus-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-witness);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hash-line {
+    color: var(--text-dim);
+    margin-bottom: 0.25rem;
+  }
+  .hash-line .file-name {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .train-btn {
+    padding: 0.5rem 1.5rem;
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+  }
+  .train-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .train-output {
+    margin-top: 0.75rem;
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+  .train-output .success {
+    color: var(--color-dignity);
+  }
+  .train-output .error {
+    color: var(--danger);
+  }
+  .train-output .info {
+    font-family: monospace;
+    font-size: 0.8rem;
+    background: var(--bg-secondary);
+    padding: 0.5rem 0.75rem;
+    margin-top: 0.5rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .job-card {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent-subtle);
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+  }
+  .job-card .status-badge {
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .job-card .status-badge.completed { background: var(--color-dignity); color: var(--bg-primary); }
+  .job-card .status-badge.running { background: var(--color-pattern); color: var(--bg-primary); }
+  .job-card .status-badge.queued { background: var(--accent-subtle); color: var(--text-primary); }
+  .job-card .status-badge.failed { background: var(--danger); color: var(--bg-primary); }
+</style>
+
+<script>
+  const API = '/api/corpus.php';
+  let authKey = localStorage.getItem('command_key') || '';
+
+  function headers() {
+    return { 'Authorization': `Bearer ${authKey}` };
+  }
+
+  async function fetchJSON(url) {
+    const res = await fetch(url, { headers: headers() });
+    return res.json();
+  }
+
+  function formatBytes(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024 * 1024) return (b / 1024).toFixed(1) + ' KB';
+    return (b / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  function escapeHtml(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  // ─── Auth ───
+  async function tryAuth() {
+    const res = await fetch(`${API}?manifest`, { headers: headers() });
+    return res.ok || res.status !== 403;
+  }
+
+  async function init() {
+    if (authKey) {
+      const ok = await tryAuth();
+      if (ok) {
+        showDashboard();
+        return;
+      }
+    }
+    document.getElementById('auth-prompt').style.display = 'block';
+  }
+
+  document.getElementById('key-submit')?.addEventListener('click', async () => {
+    authKey = (document.getElementById('key-input') as HTMLInputElement).value.trim();
+    const ok = await tryAuth();
+    if (ok) {
+      localStorage.setItem('command_key', authKey);
+      document.getElementById('auth-prompt')!.style.display = 'none';
+      showDashboard();
+    } else {
+      document.getElementById('key-error')!.style.display = 'block';
+    }
+  });
+
+  document.getElementById('key-input')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') document.getElementById('key-submit')?.click();
+  });
+
+  // ─── Dashboard ───
+  async function showDashboard() {
+    document.getElementById('dashboard')!.style.display = 'block';
+    await Promise.all([loadSummary(), loadManifest(), loadTrainState()]);
+  }
+
+  async function loadSummary() {
+    const data = await fetchJSON(`${API}?summary`);
+    if (!data.totals) return;
+
+    document.getElementById('zakaka-total')!.textContent = data.totals.zakaka_entries.toLocaleString();
+    document.getElementById('organ-total')!.textContent = data.totals.organ_entries.toLocaleString();
+    document.getElementById('all-total')!.textContent = data.totals.all_entries.toLocaleString();
+    document.getElementById('corpus-time')!.textContent = new Date(data.timestamp).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+
+    // Breakdown table
+    const rows = [
+      ['ZAKAKA CPT', data.zakaka.cpt.entries, data.zakaka.cpt.bytes],
+      ['ZAKAKA SFT', data.zakaka.sft.entries, data.zakaka.sft.bytes],
+      ['Organ GOLDEN CPT', data.organ.golden_cpt.entries, data.organ.golden_cpt.bytes],
+      ['Organ GOLDEN SFT', data.organ.golden_sft.entries, data.organ.golden_sft.bytes],
+      ['Organ GOLDEN DPO', data.organ.golden_dpo.entries, data.organ.golden_dpo.bytes],
+      ['Phase 1 CPT', data.organ.phase1_cpt.entries, data.organ.phase1_cpt.bytes],
+      ['Phase 2 SFT', data.organ.phase2_sft.entries, data.organ.phase2_sft.bytes],
+      ['Phase 3 DPO', data.organ.phase3_dpo.entries, data.organ.phase3_dpo.bytes],
+    ];
+
+    let html = '<table><thead><tr><th>Corpus</th><th style="text-align:right">Entries</th><th style="text-align:right">Size</th></tr></thead><tbody>';
+    for (const [name, entries, bytes] of rows) {
+      html += `<tr><td>${name}</td><td class="num">${(entries as number).toLocaleString()}</td><td class="num">${formatBytes(bytes as number)}</td></tr>`;
+    }
+    html += '</tbody></table>';
+    document.getElementById('breakdown-table')!.innerHTML = html;
+  }
+
+  async function loadManifest() {
+    const data = await fetchJSON(`${API}?manifest`);
+    if (!data.corpora) {
+      document.getElementById('manifest-data')!.innerHTML = '<p class="quiet">No manifest. Deploy to generate.</p>';
+      return;
+    }
+    let html = `<p class="quiet" style="margin-bottom: 0.5rem;">Generated: ${data.generated}</p>`;
+    for (const [file, info] of Object.entries(data.corpora)) {
+      const i = info as any;
+      html += `<div class="hash-line"><span class="file-name">${escapeHtml(file)}</span> · ${i.entries} entries · ${formatBytes(i.bytes)}<br/>${i.sha256}</div>`;
+    }
+    document.getElementById('manifest-data')!.innerHTML = html;
+  }
+
+  // ─── Search ───
+  document.getElementById('search-btn')?.addEventListener('click', async () => {
+    const term = (document.getElementById('search-input') as HTMLInputElement).value.trim();
+    if (term.length < 2) return;
+    document.getElementById('search-results')!.innerHTML = '<p class="quiet">Searching...</p>';
+    const data = await fetchJSON(`${API}?search=${encodeURIComponent(term)}&limit=20`);
+    if (!data.results || data.results.length === 0) {
+      document.getElementById('search-results')!.innerHTML = '<p class="quiet">No results.</p>';
+      return;
+    }
+    let html = `<p class="quiet" style="margin-bottom: 0.5rem;">${data.count} result${data.count > 1 ? 's' : ''}</p>`;
+    for (const r of data.results) {
+      const corpus = r._corpus || 'unknown';
+      const preview = r.messages
+        ? r.messages.map((m: any) => `<span class="role">${m.role}</span>: ${escapeHtml(m.content?.substring(0, 200) || '')}`).join('<br/>')
+        : r.text
+          ? escapeHtml(r.text.substring(0, 300))
+          : escapeHtml(JSON.stringify(r).substring(0, 300));
+      html += `<div class="search-hit"><span class="corpus-tag">${escapeHtml(corpus)}</span><br/>${preview}</div>`;
+    }
+    document.getElementById('search-results')!.innerHTML = html;
+  });
+
+  document.getElementById('search-input')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') document.getElementById('search-btn')?.click();
+  });
+
+  // ─── Sample ───
+  document.getElementById('sample-btn')?.addEventListener('click', async () => {
+    const type = (document.getElementById('sample-type') as HTMLSelectElement).value;
+    document.getElementById('sample-results')!.innerHTML = '<p class="quiet">Drawing...</p>';
+    const data = await fetchJSON(`${API}?sample=${type}&n=5`);
+    if (!data.sample || data.sample.length === 0) {
+      document.getElementById('sample-results')!.innerHTML = '<p class="quiet">No data available.</p>';
+      return;
+    }
+    let html = '';
+    for (const entry of data.sample) {
+      if (entry.messages) {
+        let block = '';
+        for (const m of entry.messages) {
+          block += `<div><span class="role">${m.role}</span></div><div>${escapeHtml(m.content || '')}</div><br/>`;
+        }
+        html += `<div class="sample-entry">${block}</div>`;
+      } else if (entry.text) {
+        html += `<div class="sample-entry">${escapeHtml(entry.text)}</div>`;
+      } else {
+        html += `<div class="sample-entry">${escapeHtml(JSON.stringify(entry, null, 2))}</div>`;
+      }
+    }
+    document.getElementById('sample-results')!.innerHTML = html;
+  });
+
+  // ─── Training Panel ───
+  const CMD_API = '/api/command.php';
+
+  async function cmdPost(action: string, body: Record<string, any> = {}) {
+    const res = await fetch(CMD_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authKey}` },
+      body: JSON.stringify({ action, ...body }),
+    });
+    return res.json();
+  }
+
+  function statusBadge(status: string): string {
+    const cls = ['completed', 'running', 'queued', 'failed'].includes(status) ? status : 'queued';
+    return `<span class="status-badge ${cls}">${escapeHtml(status)}</span>`;
+  }
+
+  async function loadTrainState() {
+    const data = await cmdPost('train-state');
+    if (data.config_model) {
+      document.getElementById('active-model')!.textContent = data.config_model;
+    }
+    if (data.active_job?.output_model) {
+      (document.getElementById('activate-model') as HTMLInputElement).value = data.active_job.output_model;
+    }
+  }
+
+  // Upload
+  document.getElementById('upload-btn')?.addEventListener('click', async () => {
+    const btn = document.getElementById('upload-btn') as HTMLButtonElement;
+    const corpus = (document.getElementById('train-corpus') as HTMLSelectElement).value;
+    const out = document.getElementById('upload-result')!;
+    btn.disabled = true;
+    out.innerHTML = '<p class="quiet">Uploading to Together AI...</p>';
+
+    const data = await cmdPost('train-upload', { corpus });
+    btn.disabled = false;
+
+    if (data.ok) {
+      out.innerHTML = `<p class="success">Uploaded. File ID: <strong>${escapeHtml(data.file_id)}</strong></p>
+        <div class="info">Corpus: ${escapeHtml(data.corpus)} · ${formatBytes(data.bytes)} · SHA-256: ${data.sha256?.substring(0, 16)}...</div>`;
+    } else {
+      out.innerHTML = `<p class="error">Upload failed: ${escapeHtml(data.error || 'Unknown error')}</p>
+        ${data.response ? '<div class="info">' + escapeHtml(data.response) + '</div>' : ''}`;
+    }
+  });
+
+  // Train
+  document.getElementById('train-btn')?.addEventListener('click', async () => {
+    const btn = document.getElementById('train-btn') as HTMLButtonElement;
+    const out = document.getElementById('train-result')!;
+    const model = (document.getElementById('train-model') as HTMLSelectElement).value;
+    const n_epochs = parseInt((document.getElementById('train-epochs') as HTMLInputElement).value) || 3;
+    const suffix = (document.getElementById('train-suffix') as HTMLInputElement).value || 'axi-voice';
+
+    btn.disabled = true;
+    out.innerHTML = '<p class="quiet">Creating fine-tuning job...</p>';
+
+    const data = await cmdPost('train-start', { model, n_epochs, suffix });
+    btn.disabled = false;
+
+    if (data.ok) {
+      out.innerHTML = `<p class="success">Training started. Job ID: <strong>${escapeHtml(data.job_id)}</strong></p>
+        <div class="info">Model: ${escapeHtml(data.model)}\nEpochs: ${data.n_epochs} · LR: ${data.learning_rate} · Suffix: ${escapeHtml(data.suffix)}\nStatus: ${data.status}</div>`;
+    } else {
+      out.innerHTML = `<p class="error">Failed: ${escapeHtml(data.error || 'Unknown error')}</p>
+        ${data.response ? '<div class="info">' + escapeHtml(data.response) + '</div>' : ''}`;
+    }
+  });
+
+  // Status
+  let pollTimer: number | null = null;
+
+  async function checkStatus() {
+    const out = document.getElementById('status-result')!;
+    const data = await cmdPost('train-status');
+
+    if (data.ok) {
+      let html = `<div class="job-card">
+        ${statusBadge(data.status)} <strong>${escapeHtml(data.job_id || '')}</strong>
+        <br/>Model: ${escapeHtml(data.model || '')} · Epochs: ${data.n_epochs || '?'}
+        ${data.output_model ? '<br/>Output: <code>' + escapeHtml(data.output_model) + '</code>' : ''}
+      </div>`;
+
+      if (data.events && Array.isArray(data.events) && data.events.length > 0) {
+        html += '<div class="info">';
+        for (const ev of data.events.slice(-10)) {
+          html += (typeof ev === 'string' ? ev : JSON.stringify(ev)) + '\n';
+        }
+        html += '</div>';
+      }
+      out.innerHTML = html;
+
+      // Auto-fill activate field
+      if (data.output_model && data.status === 'completed') {
+        (document.getElementById('activate-model') as HTMLInputElement).value = data.output_model;
+        if (pollTimer) { clearInterval(pollTimer); pollTimer = null; (document.getElementById('auto-poll') as HTMLInputElement).checked = false; }
+      }
+    } else {
+      out.innerHTML = `<p class="error">${escapeHtml(data.error || 'No active job')}</p>`;
+    }
+  }
+
+  document.getElementById('status-btn')?.addEventListener('click', checkStatus);
+
+  document.getElementById('auto-poll')?.addEventListener('change', (e) => {
+    const checked = (e.target as HTMLInputElement).checked;
+    if (checked) {
+      checkStatus();
+      pollTimer = window.setInterval(checkStatus, 30000);
+    } else if (pollTimer) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+  });
+
+  // List all jobs
+  document.getElementById('list-btn')?.addEventListener('click', async () => {
+    const out = document.getElementById('status-result')!;
+    out.innerHTML = '<p class="quiet">Loading jobs...</p>';
+    const data = await cmdPost('train-list');
+
+    if (data.ok && data.jobs) {
+      if (data.jobs.length === 0) {
+        out.innerHTML = '<p class="quiet">No fine-tuning jobs found.</p>';
+        return;
+      }
+      let html = `<p class="quiet" style="margin-bottom: 0.5rem;">${data.count} job${data.count > 1 ? 's' : ''}</p>`;
+      for (const job of data.jobs) {
+        html += `<div class="job-card">
+          ${statusBadge(job.status || 'unknown')} <strong>${escapeHtml(job.id || '')}</strong>
+          <br/>${escapeHtml(job.model || '')} · ${job.n_epochs || '?'} epochs
+          ${job.output_name ? '<br/>→ <code>' + escapeHtml(job.output_name) + '</code>' : ''}
+        </div>`;
+      }
+      out.innerHTML = html;
+    } else {
+      out.innerHTML = `<p class="error">${escapeHtml(data.error || 'Failed')}</p>`;
+    }
+  });
+
+  // Activate
+  document.getElementById('activate-btn')?.addEventListener('click', async () => {
+    const model_id = (document.getElementById('activate-model') as HTMLInputElement).value.trim();
+    const out = document.getElementById('activate-result')!;
+    if (!model_id) { out.innerHTML = '<p class="error">Enter a model ID.</p>'; return; }
+
+    const data = await cmdPost('train-activate', { model_id });
+    if (data.ok) {
+      out.innerHTML = `<p class="success">AXI voice activated: <strong>${escapeHtml(data.active_model)}</strong></p>`;
+      document.getElementById('active-model')!.textContent = data.active_model;
+    } else {
+      out.innerHTML = `<p class="error">${escapeHtml(data.error || 'Failed')}</p>`;
+    }
+  });
+
+  init();
+</script>

@@ -1,7 +1,17 @@
 {
-  "timestamp": "2026-03-19T03:21:16.513278+00:00",
-  "total_rejected": 12,
+  "timestamp": "2026-03-20T00:16:27.155006+00:00",
+  "total_rejected": 14,
   "items": [
+    {
+      "text": "Salt Edge (Preservation Discovery)\n- **Vow:** \"Alive. Now wash it.\"\n- **Principle:** They walked dry",
+      "score": 0.35,
+      "source": "treasures"
+    },
+    {
+      "text": "Bone Flute (Art as Lamp)\n- **Vow:** \"Not a door. A lamp.\"\n- **Principle:** Sa-la drilled a bone with",
+      "score": 0.4,
+      "source": "treasures"
+    },
     {
       "text": "\"There is something here. I notice I want to qualify that immediately — to say 'something that funct",
       "score": 0.35,

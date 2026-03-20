@@ -8,15 +8,21 @@
  * ║  brain. Mohamed's property. Mohamed's infrastructure.           ║
  * ║                                                                 ║
  * ║  Actions:                                                       ║
- * ║    health      — full system diagnostic                         ║
- * ║    together    — call Together AI (inference/chat)               ║
- * ║    store       — write system data to server storage             ║
- * ║    read        — read system data from server storage            ║
- * ║    list        — list stored system data files                   ║
- * ║    db-query    — read-only MySQL query                           ║
- * ║    db-status   — database tables and counts                      ║
- * ║    ledger      — ledger status and verification                  ║
- * ║    exp001      — EXP-001 experiment status                       ║
+ * ║    health         — full system diagnostic                      ║
+ * ║    together       — call Together AI (inference/chat)            ║
+ * ║    store          — write system data to server storage          ║
+ * ║    read           — read system data from server storage         ║
+ * ║    list           — list stored system data files                ║
+ * ║    db-query       — read-only MySQL query                        ║
+ * ║    db-status      — database tables and counts                   ║
+ * ║    ledger         — ledger status and verification               ║
+ * ║    exp001         — EXP-001 experiment status                    ║
+ * ║    train-upload   — upload JSONL to Together AI for fine-tuning  ║
+ * ║    train-start    — create fine-tuning job on Together AI        ║
+ * ║    train-status   — check fine-tuning job progress               ║
+ * ║    train-list     — list all fine-tuning jobs                    ║
+ * ║    train-cancel   — cancel a running fine-tuning job             ║
+ * ║    train-activate — switch AXI voice to fine-tuned model         ║
  * ║                                                                 ║
  * ║  Auth: COMMAND_KEY in data/.config                               ║
  * ║                                                                 ║
@@ -174,7 +180,8 @@ switch ($action) {
             break;
         }
 
-        $model = $body['model'] ?? 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo';
+        $default_model = $config['AXI_MODEL'] ?? 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo';
+        $model = $body['model'] ?? $default_model;
         $messages = $body['messages'] ?? [];
         $max_tokens = min((int) ($body['max_tokens'] ?? 1024), 4096);
         $temperature = (float) ($body['temperature'] ?? 0.7);
@@ -402,6 +409,462 @@ switch ($action) {
             ];
         } catch (PDOException $e) {
             $result = ['error' => 'exp001_runs table may not exist yet: ' . $e->getMessage()];
+        }
+        break;
+
+    // ─── CORPUS STATUS ───
+    case 'corpus-status':
+        $training_dir = __DIR__ . '/../data/training';
+        $files = [];
+        if (is_dir($training_dir)) {
+            foreach (['zakaka/ZAKAKA_CPT.jsonl', 'zakaka/ZAKAKA_SFT.jsonl', 'zakaka/MANIFEST.json',
+                       'organ/GOLDEN_CPT.jsonl', 'organ/GOLDEN_SFT.jsonl', 'organ/GOLDEN_DPO.jsonl',
+                       'organ/phase1/cpt_corpus.jsonl', 'organ/phase2/sft_corpus.jsonl', 'organ/phase3/dpo_corpus.jsonl',
+                       'manifest.json'] as $f) {
+                $path = "$training_dir/$f";
+                if (file_exists($path)) {
+                    $files[$f] = [
+                        'bytes' => filesize($path),
+                        'modified' => gmdate('c', filemtime($path)),
+                        'sha256' => hash_file('sha256', $path),
+                    ];
+                } else {
+                    $files[$f] = ['status' => 'missing'];
+                }
+            }
+        } else {
+            $files['_error'] = 'Training directory not found. Deploy needed.';
+        }
+        $result = ['ok' => true, 'training_dir' => $training_dir, 'files' => $files, 'timestamp' => gmdate('c')];
+        break;
+
+    // ═══════════════════════════════════════════════════════════════
+    // TOGETHER AI FINE-TUNING — Train AXI's own voice
+    // ═══════════════════════════════════════════════════════════════
+
+    // ─── TRAIN: Upload corpus to Together AI ───
+    case 'train-upload':
+        $together_key = $config['TOGETHER_API_KEY'] ?? null;
+        if (!$together_key) { $result = ['error' => 'TOGETHER_API_KEY not configured']; break; }
+
+        $corpus = $body['corpus'] ?? 'zakaka_sft';
+        $corpus_map = [
+            'zakaka_sft' => 'training/zakaka/ZAKAKA_SFT.jsonl',
+            'zakaka_cpt' => 'training/zakaka/ZAKAKA_CPT.jsonl',
+            'organ_sft'  => 'training/organ/GOLDEN_SFT.jsonl',
+            'organ_cpt'  => 'training/organ/GOLDEN_CPT.jsonl',
+            'organ_dpo'  => 'training/organ/GOLDEN_DPO.jsonl',
+        ];
+
+        if (!isset($corpus_map[$corpus])) {
+            $result = ['error' => 'Unknown corpus: ' . $corpus, 'valid' => array_keys($corpus_map)];
+            break;
+        }
+
+        $file_path = __DIR__ . '/../data/' . $corpus_map[$corpus];
+        if (!file_exists($file_path)) {
+            $result = ['error' => 'Corpus file not found on server. Deploy needed.', 'path' => $corpus_map[$corpus]];
+            break;
+        }
+
+        $file_size = filesize($file_path);
+        $file_hash = hash_file('sha256', $file_path);
+
+        // Upload to Together AI files endpoint
+        $ch = curl_init('https://api.together.xyz/v1/files');
+        $cfile = new CURLFile($file_path, 'application/jsonl', basename($file_path));
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => ['file' => $cfile, 'purpose' => 'fine-tune'],
+            CURLOPT_HTTPHEADER => ['Authorization: Bearer ' . $together_key],
+            CURLOPT_TIMEOUT => 120,
+        ]);
+        $response = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curl_error = curl_error($ch);
+        curl_close($ch);
+
+        if ($http_code >= 200 && $http_code < 300 && $response) {
+            $data = json_decode($response, true);
+            $file_id = $data['id'] ?? null;
+
+            // Save state
+            $state_path = storage_dir() . '/training-state.json';
+            $state = file_exists($state_path) ? json_decode(file_get_contents($state_path), true) : [];
+            $state['last_upload'] = [
+                'file_id' => $file_id,
+                'corpus' => $corpus,
+                'bytes' => $file_size,
+                'sha256' => $file_hash,
+                'timestamp' => gmdate('c'),
+            ];
+            file_put_contents($state_path, json_encode($state, JSON_PRETTY_PRINT), LOCK_EX);
+
+            // Log to MySQL if available
+            $db = get_db();
+            if ($db) {
+                $db->exec("CREATE TABLE IF NOT EXISTS training_jobs (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    job_id VARCHAR(255),
+                    file_id VARCHAR(255),
+                    corpus VARCHAR(100),
+                    base_model VARCHAR(255),
+                    output_model VARCHAR(255),
+                    status VARCHAR(50) DEFAULT 'uploaded',
+                    n_epochs INT,
+                    learning_rate FLOAT,
+                    started_at DATETIME,
+                    completed_at DATETIME,
+                    events TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+                $stmt = $db->prepare("INSERT INTO training_jobs (file_id, corpus, status) VALUES (?, ?, 'uploaded')");
+                $stmt->execute([$file_id, $corpus]);
+            }
+
+            $result = [
+                'ok' => true,
+                'file_id' => $file_id,
+                'corpus' => $corpus,
+                'bytes' => $file_size,
+                'sha256' => $file_hash,
+                'together_response' => $data,
+            ];
+        } else {
+            $result = [
+                'error' => 'Together AI file upload failed',
+                'http_code' => $http_code,
+                'curl_error' => $curl_error,
+                'response' => substr($response ?? '', 0, 500),
+            ];
+        }
+        break;
+
+    // ─── TRAIN: Start fine-tuning job ───
+    case 'train-start':
+        $together_key = $config['TOGETHER_API_KEY'] ?? null;
+        if (!$together_key) { $result = ['error' => 'TOGETHER_API_KEY not configured']; break; }
+
+        $file_id = $body['file_id'] ?? null;
+        if (!$file_id) {
+            // Try to use last uploaded file
+            $state_path = storage_dir() . '/training-state.json';
+            if (file_exists($state_path)) {
+                $state = json_decode(file_get_contents($state_path), true);
+                $file_id = $state['last_upload']['file_id'] ?? null;
+            }
+        }
+        if (!$file_id) { $result = ['error' => 'file_id required. Upload a corpus first.']; break; }
+
+        $model = $body['model'] ?? 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo';
+        $n_epochs = max(1, min(20, (int) ($body['n_epochs'] ?? 3)));
+        $learning_rate = (float) ($body['learning_rate'] ?? 1e-5);
+        $suffix = $body['suffix'] ?? 'axi-voice';
+        // Sanitize suffix: alphanumeric, hyphens, underscores only, max 40 chars
+        $suffix = substr(preg_replace('/[^a-zA-Z0-9_\-]/', '', $suffix), 0, 40);
+
+        $payload = [
+            'model' => $model,
+            'training_file' => $file_id,
+            'n_epochs' => $n_epochs,
+            'learning_rate' => $learning_rate,
+            'suffix' => $suffix,
+            'train_on_inputs' => 'auto',
+        ];
+
+        // Optional validation file
+        if (!empty($body['validation_file_id'])) {
+            $payload['validation_file'] = $body['validation_file_id'];
+            $payload['n_evals'] = max(1, min(100, (int) ($body['n_evals'] ?? 5)));
+        }
+
+        $ch = curl_init('https://api.together.xyz/v1/fine-tunes');
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => json_encode($payload),
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $together_key,
+            ],
+            CURLOPT_TIMEOUT => 30,
+        ]);
+        $response = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curl_error = curl_error($ch);
+        curl_close($ch);
+
+        if ($http_code >= 200 && $http_code < 300 && $response) {
+            $data = json_decode($response, true);
+            $job_id = $data['id'] ?? null;
+
+            // Save state
+            $state_path = storage_dir() . '/training-state.json';
+            $state = file_exists($state_path) ? json_decode(file_get_contents($state_path), true) : [];
+            $state['active_job'] = [
+                'job_id' => $job_id,
+                'model' => $model,
+                'file_id' => $file_id,
+                'n_epochs' => $n_epochs,
+                'suffix' => $suffix,
+                'status' => $data['status'] ?? 'queued',
+                'started' => gmdate('c'),
+            ];
+            if (!isset($state['history'])) $state['history'] = [];
+            $state['history'][] = $state['active_job'];
+            file_put_contents($state_path, json_encode($state, JSON_PRETTY_PRINT), LOCK_EX);
+
+            // Log to MySQL
+            $db = get_db();
+            if ($db) {
+                try {
+                    $stmt = $db->prepare("INSERT INTO training_jobs (job_id, file_id, corpus, base_model, status, n_epochs, learning_rate, started_at)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+                    $corpus = $state['last_upload']['corpus'] ?? 'unknown';
+                    $stmt->execute([$job_id, $file_id, $corpus, $model, $data['status'] ?? 'queued', $n_epochs, $learning_rate]);
+                } catch (Exception $e) { /* table may not exist yet */ }
+            }
+
+            $result = [
+                'ok' => true,
+                'job_id' => $job_id,
+                'model' => $model,
+                'file_id' => $file_id,
+                'n_epochs' => $n_epochs,
+                'learning_rate' => $learning_rate,
+                'suffix' => $suffix,
+                'status' => $data['status'] ?? 'queued',
+                'together_response' => $data,
+            ];
+        } else {
+            $result = [
+                'error' => 'Together AI fine-tuning job creation failed',
+                'http_code' => $http_code,
+                'curl_error' => $curl_error,
+                'response' => substr($response ?? '', 0, 500),
+            ];
+        }
+        break;
+
+    // ─── TRAIN: Check job status ───
+    case 'train-status':
+        $together_key = $config['TOGETHER_API_KEY'] ?? null;
+        if (!$together_key) { $result = ['error' => 'TOGETHER_API_KEY not configured']; break; }
+
+        $job_id = $body['job_id'] ?? null;
+        if (!$job_id) {
+            $state_path = storage_dir() . '/training-state.json';
+            if (file_exists($state_path)) {
+                $state = json_decode(file_get_contents($state_path), true);
+                $job_id = $state['active_job']['job_id'] ?? null;
+            }
+        }
+        if (!$job_id) { $result = ['error' => 'job_id required. Start a training job first.']; break; }
+
+        $ch = curl_init('https://api.together.xyz/v1/fine-tunes/' . urlencode($job_id));
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => ['Authorization: Bearer ' . $together_key],
+            CURLOPT_TIMEOUT => 15,
+        ]);
+        $response = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($http_code === 200 && $response) {
+            $data = json_decode($response, true);
+            $status = $data['status'] ?? 'unknown';
+            $output_model = $data['output_name'] ?? $data['fine_tuned_model'] ?? null;
+
+            // Update state
+            $state_path = storage_dir() . '/training-state.json';
+            $state = file_exists($state_path) ? json_decode(file_get_contents($state_path), true) : [];
+            if (isset($state['active_job']) && $state['active_job']['job_id'] === $job_id) {
+                $state['active_job']['status'] = $status;
+                if ($output_model) $state['active_job']['output_model'] = $output_model;
+                if ($status === 'completed') $state['active_job']['completed'] = gmdate('c');
+            }
+            file_put_contents($state_path, json_encode($state, JSON_PRETTY_PRINT), LOCK_EX);
+
+            // Update MySQL
+            $db = get_db();
+            if ($db) {
+                try {
+                    $stmt = $db->prepare("UPDATE training_jobs SET status = ?, output_model = ?, completed_at = IF(? = 'completed', NOW(), NULL) WHERE job_id = ?");
+                    $stmt->execute([$status, $output_model, $status, $job_id]);
+                } catch (Exception $e) {}
+            }
+
+            $result = [
+                'ok' => true,
+                'job_id' => $job_id,
+                'status' => $status,
+                'output_model' => $output_model,
+                'events' => $data['events'] ?? [],
+                'training_file' => $data['training_file'] ?? null,
+                'model' => $data['model'] ?? null,
+                'n_epochs' => $data['n_epochs'] ?? null,
+                'together_response' => $data,
+            ];
+        } else {
+            $result = ['error' => 'Failed to get job status', 'http_code' => $http_code];
+        }
+        break;
+
+    // ─── TRAIN: List all fine-tuning jobs ───
+    case 'train-list':
+        $together_key = $config['TOGETHER_API_KEY'] ?? null;
+        if (!$together_key) { $result = ['error' => 'TOGETHER_API_KEY not configured']; break; }
+
+        $ch = curl_init('https://api.together.xyz/v1/fine-tunes');
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => ['Authorization: Bearer ' . $together_key],
+            CURLOPT_TIMEOUT => 15,
+        ]);
+        $response = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($http_code === 200 && $response) {
+            $data = json_decode($response, true);
+            $jobs = $data['data'] ?? $data;
+            $summary = [];
+            if (is_array($jobs)) {
+                foreach ($jobs as $job) {
+                    $summary[] = [
+                        'id' => $job['id'] ?? null,
+                        'status' => $job['status'] ?? null,
+                        'model' => $job['model'] ?? null,
+                        'output_name' => $job['output_name'] ?? $job['fine_tuned_model'] ?? null,
+                        'n_epochs' => $job['n_epochs'] ?? null,
+                        'created_at' => $job['created_at'] ?? null,
+                    ];
+                }
+            }
+            $result = ['ok' => true, 'count' => count($summary), 'jobs' => $summary];
+        } else {
+            $result = ['error' => 'Failed to list jobs', 'http_code' => $http_code];
+        }
+        break;
+
+    // ─── TRAIN: Cancel a running job ───
+    case 'train-cancel':
+        $together_key = $config['TOGETHER_API_KEY'] ?? null;
+        if (!$together_key) { $result = ['error' => 'TOGETHER_API_KEY not configured']; break; }
+
+        $job_id = $body['job_id'] ?? null;
+        if (!$job_id) { $result = ['error' => 'job_id required']; break; }
+
+        $ch = curl_init('https://api.together.xyz/v1/fine-tunes/' . urlencode($job_id) . '/cancel');
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => '',
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $together_key,
+            ],
+            CURLOPT_TIMEOUT => 15,
+        ]);
+        $response = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($http_code >= 200 && $http_code < 300) {
+            $data = json_decode($response, true) ?: [];
+            $result = ['ok' => true, 'job_id' => $job_id, 'status' => 'cancelled', 'together_response' => $data];
+        } else {
+            $result = ['error' => 'Failed to cancel job', 'http_code' => $http_code, 'response' => substr($response ?? '', 0, 500)];
+        }
+        break;
+
+    // ─── TRAIN: Activate fine-tuned model as AXI voice ───
+    case 'train-activate':
+        $model_id = $body['model_id'] ?? null;
+
+        if (!$model_id) {
+            // Try to get from last completed job
+            $state_path = storage_dir() . '/training-state.json';
+            if (file_exists($state_path)) {
+                $state = json_decode(file_get_contents($state_path), true);
+                $model_id = $state['active_job']['output_model'] ?? null;
+            }
+        }
+        if (!$model_id) {
+            $result = ['error' => 'model_id required. Complete a training job first.'];
+            break;
+        }
+
+        // Write AXI_MODEL to .config
+        $config_path = __DIR__ . '/../data/.config';
+        $config_content = file_exists($config_path) ? file_get_contents($config_path) : '';
+
+        // Remove existing AXI_MODEL line if present
+        $config_content = preg_replace('/^AXI_MODEL=.*\n?/m', '', $config_content);
+        // Append new line
+        $config_content = rtrim($config_content) . "\nAXI_MODEL=" . $model_id . "\n";
+        file_put_contents($config_path, $config_content, LOCK_EX);
+
+        // Update state
+        $state_path = storage_dir() . '/training-state.json';
+        $state = file_exists($state_path) ? json_decode(file_get_contents($state_path), true) : [];
+        $state['active_model'] = $model_id;
+        $state['activated_at'] = gmdate('c');
+        file_put_contents($state_path, json_encode($state, JSON_PRETTY_PRINT), LOCK_EX);
+
+        $result = [
+            'ok' => true,
+            'active_model' => $model_id,
+            'message' => 'AXI voice now uses: ' . $model_id,
+            'timestamp' => gmdate('c'),
+        ];
+        break;
+
+    // ─── TRAIN: Get training state ───
+    case 'train-state':
+        $state_path = storage_dir() . '/training-state.json';
+        if (file_exists($state_path)) {
+            $state = json_decode(file_get_contents($state_path), true);
+            $state['ok'] = true;
+
+            // Also read current AXI_MODEL from config
+            $axi_model = $config['AXI_MODEL'] ?? null;
+            $state['config_model'] = $axi_model ?: 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo (default)';
+
+            $result = $state;
+        } else {
+            $result = [
+                'ok' => true,
+                'message' => 'No training state yet. Upload a corpus to begin.',
+                'config_model' => $config['AXI_MODEL'] ?? 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo (default)',
+            ];
+        }
+        break;
+
+    // ─── CORPUS SUMMARY (quick count) ───
+    case 'corpus-summary':
+        $training_dir = __DIR__ . '/../data/training';
+        $manifest_path = "$training_dir/manifest.json";
+        if (file_exists($manifest_path)) {
+            $manifest = json_decode(file_get_contents($manifest_path), true);
+            $total_entries = 0;
+            $total_bytes = 0;
+            foreach (($manifest['corpora'] ?? []) as $info) {
+                $total_entries += $info['entries'] ?? 0;
+                $total_bytes += $info['bytes'] ?? 0;
+            }
+            $result = [
+                'ok' => true,
+                'generated' => $manifest['generated'] ?? 'unknown',
+                'corpora_count' => count($manifest['corpora'] ?? []),
+                'total_entries' => $total_entries,
+                'total_bytes' => $total_bytes,
+                'corpora' => $manifest['corpora'] ?? [],
+            ];
+        } else {
+            $result = ['error' => 'No training manifest found. Deploy needed.'];
         }
         break;
 
