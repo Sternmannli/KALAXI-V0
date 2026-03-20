@@ -1,11 +1,11 @@
 {
-  "built_at": "2026-03-20T02:23:51.332927+00:00",
+  "built_at": "2026-03-20T02:49:52.361606+00:00",
   "pipeline": "CPT → SFT → DPO (three-phase)",
   "phases": {
     "cpt": {
-      "entries": 4686,
-      "words": 137990,
-      "bytes": 956164
+      "entries": 4837,
+      "words": 142165,
+      "bytes": 986088
     },
     "sft": {
       "entries": 2496,
@@ -19,8 +19,8 @@
       "bytes": 6951
     }
   },
-  "total_entries": 7207,
-  "total_pure_words": 199324,
+  "total_entries": 7358,
+  "total_pure_words": 203499,
   "invalid_entries": 0,
   "zakaka_merged": {
     "cpt": 690,
