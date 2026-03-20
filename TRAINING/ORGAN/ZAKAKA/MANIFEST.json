@@ -2,28 +2,33 @@
   "name": "ZAKAKA",
   "meaning": "The treasure found in the river. The knot untied by a 17-year-old. The essence of the essence of the essence.",
   "named_by": "V-001 (Mohamed Farag), 2026-03-19",
-  "built_at": "2026-03-19T23:23:23.047680+00:00",
+  "built_at": "2026-03-20T00:03:07.757354+00:00",
   "purity": "Level 0 + Level 1 only — no AI-generated content",
   "counts": {
     "by_type": {
+      "proverb": 381,
       "sovereign_canon": 309,
-      "proverb": 181,
       "narrative_line": 119,
       "treasure": 59,
       "v001_voice": 24,
       "chapter_summary": 20,
       "covenant": 17,
       "law": 13,
+      "t_treasure": 11,
+      "official_pattern": 11,
       "badge_vow": 10,
       "anomaly": 9,
+      "catalog_anomaly": 9,
+      "equation": 7,
       "udhr_pattern": 5,
       "tension": 5,
       "axiom": 3,
-      "essence": 1
+      "essence": 1,
+      "door": 1
     },
-    "total_raw": 775,
+    "total_raw": 1014,
     "duplicates_removed": 14,
-    "total_unique": 761
+    "total_unique": 1000
   },
   "files": {
     "cpt": "TRAINING/ORGAN/ZAKAKA/ZAKAKA_CPT.jsonl",

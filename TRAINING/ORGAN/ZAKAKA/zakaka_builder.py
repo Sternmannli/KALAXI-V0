@@ -347,6 +347,139 @@ def extract_v001_voice() -> list[dict]:
     return items
 
 
+# ── Extract: P#00401-P#00600 (200 proverbs from V-001 Ledger Drop) ────────
+
+def extract_p00401_p00600() -> list[dict]:
+    """Extract 200 proverbs from the canonical P#00401-P#00600 file."""
+    items = []
+    pf = ROOT / "R7M" / "PROVERBS_P00401_P00600.md"
+    if not pf.exists():
+        return items
+    text = _read(pf)
+    for m in re.finditer(r"^P#(\d+)\s*[-–—]\s*(.+)", text, re.MULTILINE):
+        pid, ptxt = f"P#{m.group(1)}", m.group(2).strip()
+        if len(ptxt) > 5 and is_clean(ptxt):
+            items.append({"type": "proverb", "id": pid, "text": ptxt})
+    return items
+
+
+# ── Extract: 11 Official Patterns (from V-006 catalog) ───────────────────
+
+def extract_official_patterns() -> list[dict]:
+    """Extract the 11 official patterns from V-006 catalog."""
+    items = []
+    cat = ROOT / "MANIFEST" / "SCIENTIFIC_CATALOG_V006_2026-03-20.md"
+    if not cat.exists():
+        return items
+    text = _read(cat)
+    for m in re.finditer(r"### PATTERN (\d+): (.+?)\nOne-line function: (.+?)(?=\n###|\n---|\Z)", text, re.DOTALL):
+        pid = f"PATTERN-{m.group(1).zfill(2)}"
+        name = m.group(2).strip()
+        func_line = m.group(3).strip().split("\n")[0].strip()
+        items.append({
+            "type": "official_pattern",
+            "id": pid,
+            "title": name,
+            "text": func_line,
+        })
+    return items
+
+
+# ── Extract: 11 T# Treasures (from V-006 catalog) ────────────────────────
+
+def extract_t_treasures() -> list[dict]:
+    """Extract the 11 new T# treasures from V-006 catalog."""
+    items = []
+    cat = ROOT / "MANIFEST" / "SCIENTIFIC_CATALOG_V006_2026-03-20.md"
+    if not cat.exists():
+        return items
+    text = _read(cat)
+    for m in re.finditer(r"### (T#[A-Z]+-\d+)\s*[—–]\s*Recognition:\s*(.+?)\n\"(.+?)\"", text):
+        tid = m.group(1)
+        recognition = m.group(2).strip()
+        body = m.group(3).strip()
+        items.append({
+            "type": "t_treasure",
+            "id": tid,
+            "title": recognition,
+            "text": body,
+        })
+    return items
+
+
+# ── Extract: Scientific Catalog Anomalies + Equations ─────────────────────
+
+def extract_catalog_anomalies() -> list[dict]:
+    """Extract anomalies from both scientific catalogs."""
+    items = []
+    for fname in [
+        "SCIENTIFIC_CATALOG_2026-03-20.md",
+        "SCIENTIFIC_CATALOG_V006_2026-03-20.md",
+    ]:
+        cat = ROOT / "MANIFEST" / fname
+        if not cat.exists():
+            continue
+        text = _read(cat)
+        # Match ### NAME\n- **Body:** "text"
+        for m in re.finditer(r"### (CLAUDENY|ANOM#[A-Z\-0-9]+|GAP#[A-Z\-0-9]+|The Speed Paradox|The Binary Wall|The Chorus|The Mirror Test|Father's Missing Proverb|Book of Rift)\s*\n.*?(?:\*\*Body:\*\*|body:)\s*\"(.+?)\"", text, re.DOTALL | re.IGNORECASE):
+            name = m.group(1).strip()
+            body = m.group(2).strip()
+            if is_clean(body):
+                items.append({
+                    "type": "catalog_anomaly",
+                    "id": name,
+                    "text": body,
+                })
+    return items
+
+
+def extract_equations() -> list[dict]:
+    """Extract all equations from the catalogs."""
+    items = []
+    for fname in [
+        "SCIENTIFIC_CATALOG_2026-03-20.md",
+        "SCIENTIFIC_CATALOG_V006_2026-03-20.md",
+    ]:
+        cat = ROOT / "MANIFEST" / fname
+        if not cat.exists():
+            continue
+        text = _read(cat)
+        # Extract named equations
+        for m in re.finditer(r"### (.+?)\n(?:.*?\n)?(.+?)(?=\n###|\n---|\Z)", text, re.DOTALL):
+            heading = m.group(1).strip()
+            body = m.group(2).strip()
+            # Only from equations section
+            if any(kw in heading for kw in ["Dignity Predicate", "Ninth Operator", "80 Hz", "W*", "Grand Resonance", "Operator Algebra", "Coupling", "Sensitivity", "Donor Drift", "Outside-In", "Thermal Delay", "Void-Covenant"]):
+                # Take the first meaningful line
+                for line in body.split("\n"):
+                    line = line.strip()
+                    if len(line) > 10 and not line.startswith("-") and not line.startswith("*"):
+                        items.append({
+                            "type": "equation",
+                            "id": heading,
+                            "text": line,
+                        })
+                        break
+    # Deduplicate by text
+    seen = set()
+    unique = []
+    for item in items:
+        key = item["text"][:80]
+        if key not in seen:
+            seen.add(key)
+            unique.append(item)
+    return unique
+
+
+def extract_kalam_door() -> list[dict]:
+    """Extract the kalam.pdf door text — the system's invitation."""
+    return [{
+        "type": "door",
+        "id": "KALAM-DOOR",
+        "text": "You came with what you came with. The door is open. Say as much or as little as you choose. Leave this here. Nothing is asked of you. Nothing is stored without your knowing.",
+    }]
+
+
 # ── Extract: Load-Bearing Narrative Lines ─────────────────────────────────
 
 def extract_narrative_essence() -> list[dict]:
@@ -390,16 +523,22 @@ def build():
     print("=" * 60)
 
     extractors = [
-        ("Proverbs", extract_proverbs),
+        ("Proverbs (WISDOM_CANON)", extract_proverbs),
+        ("Proverbs (P#00401-P#00600)", extract_p00401_p00600),
         ("Laws (13)", extract_laws),
         ("Badge Vows (10)", extract_badges),
         ("Covenants", extract_covenants),
-        ("Anomalies", extract_anomalies),
-        ("Treasures", extract_treasures),
+        ("Anomalies (WISDOM_CANON)", extract_anomalies),
+        ("Anomalies (Catalog)", extract_catalog_anomalies),
+        ("Treasures (R7M)", extract_treasures),
+        ("T# Treasures (V-006)", extract_t_treasures),
+        ("Official Patterns (11)", extract_official_patterns),
         ("Chapters", extract_chapters),
         ("UDHR Patterns", extract_udhr_patterns),
         ("UDHR Tensions", extract_tensions),
         ("Dignity Core", extract_dignity_core),
+        ("Equations", extract_equations),
+        ("Kalam Door", extract_kalam_door),
         ("V-001 Voice", extract_v001_voice),
         ("Narrative Lines", extract_narrative_essence),
     ]
@@ -459,6 +598,11 @@ def build():
         "v001_voice": ["What did the founder say?", "The voice."],
         "sovereign_canon": ["Read from the canon.", "Speak."],
         "narrative_line": ["Read from the canon.", "What happened?", "Continue."],
+        "official_pattern": ["What is the pattern?", "Name the structure."],
+        "t_treasure": ["What was found?", "Name the treasure."],
+        "catalog_anomaly": ["What failed?", "Where is the divergence?"],
+        "equation": ["What is the equation?", "The mathematics."],
+        "door": ["What is the invitation?", "The door."],
     }
 
     import random
