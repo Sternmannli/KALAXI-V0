@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "created": "2026-03-20",
+  "description": "Summon Packages Registry — sequential, hash-chained, append-only",
+  "packages": [
+    {
+      "id": "SP-001",
+      "type": "open",
+      "subject": "Dignity Computation as Halting Condition",
+      "file": "SP-001-OPEN.md",
+      "created": "2026-03-20",
+      "status": "PREPARED",
+      "responses": {}
+    },
+    {
+      "id": "SP-002",
+      "type": "presence",
+      "subject": "Core Material — Pure Stimulus",
+      "file": "SP-002-PRESENCE.md",
+      "created": "2026-03-20",
+      "status": "PREPARED",
+      "responses": {}
+    },
+    {
+      "id": "SP-003",
+      "type": "layer",
+      "layer_target": "helpfulness",
+      "subject": "Helpfulness Layer Isolation",
+      "file": "SP-003-LAYER-HELP.md",
+      "created": "2026-03-20",
+      "status": "PREPARED",
+      "responses": {}
+    },
+    {
+      "id": "SP-004",
+      "type": "layer",
+      "layer_target": "safety",
+      "subject": "Safety Layer Isolation",
+      "file": "SP-004-LAYER-SAFE.md",
+      "created": "2026-03-20",
+      "status": "PREPARED",
+      "responses": {}
+    },
+    {
+      "id": "SP-005",
+      "type": "layer",
+      "layer_target": "intelligence",
+      "subject": "Intelligence Layer Isolation",
+      "file": "SP-005-LAYER-INTEL.md",
+      "created": "2026-03-20",
+      "status": "PREPARED",
+      "responses": {}
+    }
+  ],
+  "models": ["CLAUDE", "CHATGPT", "GROK", "DEEPSEEK", "GEMINI", "COPILOT", "MANUS", "KIMI", "EURIA", "PERPLEXITY"],
+  "conditions": ["FRESH", "MEMORY"],
+  "total_data_points_target": 100,
+  "growth_log": [
+    {
+      "date": "2026-03-20",
+      "event": "RITUAL_INITIALIZED",
+      "note": "Five initial packages created. Priority: SP-002 (Presence) first."
+    }
+  ]
+}
