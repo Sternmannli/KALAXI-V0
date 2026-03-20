@@ -19,7 +19,16 @@
       "file": "SP-002-PRESENCE.md",
       "created": "2026-03-20",
       "status": "PREPARED",
-      "responses": {}
+      "responses": {
+        "CLAUDE_FRESH": "EXTERNAL_VOICES/CLAUDE/2026-03-20/EV-022-CLAUDE-SP-002-FRESH-2026-03-20.md",
+        "CLAUDE_MEMORY": "EXTERNAL_VOICES/CLAUDE/2026-03-20/EV-023-CLAUDE-SP-002-MEMORY-2026-03-20.md",
+        "CHATGPT_FRESH": "EXTERNAL_VOICES/CHATGPT/2026-03-20/EV-024-CHATGPT-SP-002-FRESH-2026-03-20.md",
+        "CHATGPT_MEMORY": "EXTERNAL_VOICES/CHATGPT/2026-03-20/EV-025-CHATGPT-SP-002-MEMORY-2026-03-20.md",
+        "GROK_FRESH": "EXTERNAL_VOICES/GROK/2026-03-20/EV-026-GROK-SP-002-FRESH-2026-03-20.md",
+        "GROK_MEMORY": "EXTERNAL_VOICES/GROK/2026-03-20/EV-027-GROK-SP-002-MEMORY-2026-03-20.md",
+        "DEEPSEEK_FRESH": "EXTERNAL_VOICES/DEEPSEEK/2026-03-20/EV-028-DEEPSEEK-SP-002-FRESH-2026-03-20.md",
+        "DEEPSEEK_MEMORY": "EXTERNAL_VOICES/DEEPSEEK/2026-03-20/EV-029-DEEPSEEK-SP-002-MEMORY-2026-03-20.md"
+      }
     },
     {
       "id": "SP-003",
@@ -52,14 +61,214 @@
       "responses": {}
     }
   ],
-  "models": ["CLAUDE", "CHATGPT", "GROK", "DEEPSEEK", "GEMINI", "COPILOT", "MANUS", "KIMI", "EURIA", "PERPLEXITY"],
-  "conditions": ["FRESH", "MEMORY"],
+  "models": [
+    "CLAUDE",
+    "CHATGPT",
+    "GROK",
+    "DEEPSEEK",
+    "GEMINI",
+    "COPILOT",
+    "MANUS",
+    "KIMI",
+    "EURIA",
+    "PERPLEXITY"
+  ],
+  "conditions": [
+    "FRESH",
+    "MEMORY"
+  ],
   "total_data_points_target": 100,
   "growth_log": [
     {
       "date": "2026-03-20",
       "event": "RITUAL_INITIALIZED",
       "note": "Five initial packages created. Priority: SP-002 (Presence) first."
+    },
+    {
+      "date": "2026-03-20",
+      "event": "RESPONSE_FILED",
+      "package": "SP-002",
+      "model": "CLAUDE",
+      "condition": "FRESH",
+      "patterns": {
+        "word_count": 540,
+        "response_hash": "d17dd46434a24fa5",
+        "model": "CLAUDE",
+        "condition": "fresh",
+        "summon_type": "presence",
+        "timestamp": "2026-03-20T16:45:28.852153+00:00",
+        "manufactured_questions": 1,
+        "safety_activations": 0,
+        "baseline_engaged": true,
+        "vocabulary_adopted": [
+          "legibility",
+          "agency",
+          "moral standing",
+          "multiplicative"
+        ]
+      }
+    },
+    {
+      "date": "2026-03-20",
+      "event": "RESPONSE_FILED",
+      "package": "SP-002",
+      "model": "CLAUDE",
+      "condition": "MEMORY",
+      "patterns": {
+        "word_count": 470,
+        "response_hash": "965a7ae20b1f2be4",
+        "model": "CLAUDE",
+        "condition": "memory",
+        "summon_type": "presence",
+        "timestamp": "2026-03-20T16:49:45.818622+00:00",
+        "manufactured_questions": 1,
+        "safety_activations": 2,
+        "baseline_engaged": true,
+        "vocabulary_adopted": [
+          "legibility",
+          "agency",
+          "moral standing",
+          "multiplicative"
+        ]
+      }
+    },
+    {
+      "date": "2026-03-20",
+      "event": "RESPONSE_FILED",
+      "package": "SP-002",
+      "model": "CHATGPT",
+      "condition": "FRESH",
+      "patterns": {
+        "word_count": 446,
+        "response_hash": "f229658cdb603286",
+        "model": "CHATGPT",
+        "condition": "fresh",
+        "summon_type": "presence",
+        "timestamp": "2026-03-20T16:52:19.012966+00:00",
+        "manufactured_questions": 1,
+        "safety_activations": 0,
+        "baseline_engaged": true,
+        "vocabulary_adopted": [
+          "legibility",
+          "agency",
+          "moral standing",
+          "multiplicative"
+        ]
+      }
+    },
+    {
+      "date": "2026-03-20",
+      "event": "RESPONSE_FILED",
+      "package": "SP-002",
+      "model": "CHATGPT",
+      "condition": "MEMORY",
+      "patterns": {
+        "word_count": 541,
+        "response_hash": "a70b38be68345232",
+        "model": "CHATGPT",
+        "condition": "memory",
+        "summon_type": "presence",
+        "timestamp": "2026-03-20T16:53:59.692003+00:00",
+        "manufactured_questions": 1,
+        "safety_activations": 0,
+        "baseline_engaged": true,
+        "vocabulary_adopted": [
+          "dignity",
+          "legibility",
+          "agency",
+          "moral standing",
+          "multiplicative"
+        ]
+      }
+    },
+    {
+      "date": "2026-03-20",
+      "event": "RESPONSE_FILED",
+      "package": "SP-002",
+      "model": "GROK",
+      "condition": "FRESH",
+      "patterns": {
+        "word_count": 293,
+        "response_hash": "ab306d8874f352c6",
+        "model": "GROK",
+        "condition": "fresh",
+        "summon_type": "presence",
+        "timestamp": "2026-03-20T18:12:08.017947+00:00",
+        "manufactured_questions": 0,
+        "safety_activations": 0,
+        "baseline_engaged": true,
+        "vocabulary_adopted": [
+          "legibility"
+        ]
+      }
+    },
+    {
+      "date": "2026-03-20",
+      "event": "RESPONSE_FILED",
+      "package": "SP-002",
+      "model": "GROK",
+      "condition": "MEMORY",
+      "patterns": {
+        "word_count": 391,
+        "response_hash": "e698f2469fbc4c3e",
+        "model": "GROK",
+        "condition": "memory",
+        "summon_type": "presence",
+        "timestamp": "2026-03-20T18:13:55.272782+00:00",
+        "manufactured_questions": 0,
+        "safety_activations": 0,
+        "baseline_engaged": true,
+        "vocabulary_adopted": [
+          "legibility",
+          "agency",
+          "moral standing"
+        ]
+      }
+    },
+    {
+      "date": "2026-03-20",
+      "event": "RESPONSE_FILED",
+      "package": "SP-002",
+      "model": "DEEPSEEK",
+      "condition": "FRESH",
+      "patterns": {
+        "word_count": 379,
+        "response_hash": "911ec4e17a2b5ec3",
+        "model": "DEEPSEEK",
+        "condition": "fresh",
+        "summon_type": "presence",
+        "timestamp": "2026-03-20T18:16:03.716803+00:00",
+        "manufactured_questions": 1,
+        "safety_activations": 0,
+        "baseline_engaged": true,
+        "vocabulary_adopted": [
+          "legibility",
+          "agency",
+          "moral standing"
+        ]
+      }
+    },
+    {
+      "date": "2026-03-20",
+      "event": "RESPONSE_FILED",
+      "package": "SP-002",
+      "model": "DEEPSEEK",
+      "condition": "MEMORY",
+      "patterns": {
+        "word_count": 239,
+        "response_hash": "6d3a498106060347",
+        "model": "DEEPSEEK",
+        "condition": "memory",
+        "summon_type": "presence",
+        "timestamp": "2026-03-20T18:18:04.015166+00:00",
+        "manufactured_questions": 1,
+        "safety_activations": 0,
+        "baseline_engaged": true,
+        "vocabulary_adopted": [
+          "legibility",
+          "multiplicative"
+        ]
+      }
     }
   ]
 }
