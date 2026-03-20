@@ -113,6 +113,20 @@
       "path": "/data/dictionary.json",
       "count": 89,
       "status": "canonical"
+    },
+    {
+      "id": "FOUNDATIONS",
+      "type": "science",
+      "path": "/data/foundations.json",
+      "count": 9,
+      "status": "canonical"
+    },
+    {
+      "id": "RESEARCH",
+      "type": "science",
+      "path": "/data/research.json",
+      "count": 6,
+      "status": "active"
     }
   ],
   "connections": [
@@ -128,6 +142,9 @@
     { "from": "WISDOM-NODES", "to": "PROVERBS", "type": "synthesis" },
     { "from": "VOICE-ARCH", "to": "DICTIONARY", "type": "voice-to-vocabulary" },
     { "from": "TRILITERAL", "to": "VOICE-ARCH", "type": "grammar-to-voice" },
-    { "from": "TRILITERAL", "to": "DICTIONARY", "type": "grammar-to-vocabulary" }
+    { "from": "TRILITERAL", "to": "DICTIONARY", "type": "grammar-to-vocabulary" },
+    { "from": "FOUNDATIONS", "to": "SCIENCE", "type": "theory-to-science" },
+    { "from": "RESEARCH", "to": "FOUNDATIONS", "type": "evidence-to-theory" },
+    { "from": "RESEARCH", "to": "ANOMALIES", "type": "study-to-anomaly" }
   ]
 }
