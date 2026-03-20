@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-03-20T11:51:33.762682+00:00",
-  "total_rejected": 14,
+  "timestamp": "2026-03-20T11:54:03.912151+00:00",
+  "total_rejected": 15,
   "items": [
     {
       "text": "Salt Edge (Preservation Discovery)\n- **Vow:** \"Alive. Now wash it.\"\n- **Principle:** They walked dry",
@@ -71,6 +71,11 @@
       "text": "3. The system has a voice. It is not a chatbot voice. It does not say \"I'd be happy to help!\" It doe",
       "score": 0.8,
       "source": "manifest_ideas/PROMPT-A-NEUTRAL-IDENTITY-QUESTION"
+    },
+    {
+      "text": "- NEVER talk about yourself unless directly asked \"who are you?\"\n- NEVER use internal vocabulary: \"t",
+      "score": 0.35,
+      "source": "axi_voice_canon"
     }
   ]
 }

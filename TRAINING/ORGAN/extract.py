@@ -80,6 +80,9 @@ GRAND_ARCHIVE = ROOT / "R7M" / "GRAND_ARCHIVE" / "GRAND_ARCHIVE_2025-09-13.docx"
 CURATED_DIR = ROOT / "R7M" / "CURATED"
 EVIDENCE_RECORD = ROOT / "R7M" / "EVIDENCE-RECORD.md"
 SITE_DATA_DIR = ROOT / "site" / "public" / "data"
+THRESHOLD_MD = ROOT / "THRESHOLD.md"
+THRESHOLD_SEEDS_MD = ROOT / "THRESHOLD_TREASURE_SEEDS.md"
+EXCAVATION_DIR = ROOT / "R7M" / "EXCAVATION"
 
 # ─── AI Contamination Filter ────────────────────────────────────────────────
 
@@ -1027,6 +1030,34 @@ def extract_curated_patches() -> list[dict]:
     return entries
 
 
+def extract_threshold() -> list[dict]:
+    """THRESHOLD.md — emergent proverbs, treasure seeds, cross-links."""
+    if not THRESHOLD_MD.exists():
+        return []
+    return extract_markdown_passages(THRESHOLD_MD, "threshold", purity_level=1)
+
+
+def extract_threshold_seeds() -> list[dict]:
+    """THRESHOLD_TREASURE_SEEDS.md — 36 treasure seeds with canonical text."""
+    if not THRESHOLD_SEEDS_MD.exists():
+        return []
+    return extract_markdown_passages(THRESHOLD_SEEDS_MD, "threshold_seeds", purity_level=1)
+
+
+def extract_excavation() -> list[dict]:
+    """R7M/EXCAVATION/ — provenance chains, terrain maps."""
+    if not EXCAVATION_DIR.exists():
+        return []
+    return extract_directory_passages(EXCAVATION_DIR, "excavation", purity_level=2)
+
+
+def extract_voice_canon() -> list[dict]:
+    """site/AXI_VOICE_CANON.md — voice specification, canonical utterances."""
+    if not VOICE_CANON.exists():
+        return []
+    return extract_markdown_passages(VOICE_CANON, "axi_voice_canon", purity_level=1)
+
+
 def extract_site_data() -> list[dict]:
     """site/public/data/*.json — structured site data not already consumed.
     Reads: anomalies, laws, observations, enki, narrative-seeds, covenants."""
@@ -1163,6 +1194,10 @@ def build_phase_2_sft(all_extractions: list) -> list[dict]:
         "site_data/observations": "What did you witness?",
         "site_data/enki": "Where did this begin?",
         "site_data/narrative_seeds": "What grows?",
+        "threshold": "What emerges?",
+        "threshold_seeds": "What grows?",
+        "excavation": "Where is the source?",
+        "axi_voice_canon": "How do you speak?",
     }
 
     for item in all_extractions:
@@ -1606,6 +1641,10 @@ def run_refinery():
     run_extractor("sovereign_canon", extract_sovereign_canon)
     run_extractor("grand_archive", extract_grand_archive)
     run_extractor("curated_patches", extract_curated_patches)
+    run_extractor("threshold", extract_threshold)
+    run_extractor("threshold_seeds", extract_threshold_seeds)
+    run_extractor("excavation", extract_excavation)
+    run_extractor("voice_canon", extract_voice_canon)
     run_extractor("site_data", extract_site_data)
 
     # ─── Global dedup ─────────────────────────────────────────────────────
