@@ -1,30 +1,30 @@
 {
-  "built_at": "2026-03-20T11:33:24.113741+00:00",
+  "built_at": "2026-03-20T11:51:56.496627+00:00",
   "pipeline": "CPT → SFT → DPO (three-phase)",
   "phases": {
     "cpt": {
-      "entries": 4892,
-      "words": 143168,
-      "bytes": 994755
+      "entries": 7646,
+      "words": 247880,
+      "bytes": 1751435
     },
     "sft": {
-      "entries": 2496,
-      "words": 61094,
-      "bytes": 1838056
+      "entries": 2959,
+      "words": 73841,
+      "bytes": 2223604
     },
     "dpo": {
-      "entries": 25,
-      "chosen_words": 240,
-      "rejected_words": 663,
-      "bytes": 6951
+      "entries": 55,
+      "chosen_words": 626,
+      "rejected_words": 1354,
+      "bytes": 15601
     }
   },
-  "total_entries": 7413,
-  "total_pure_words": 204502,
+  "total_entries": 10660,
+  "total_pure_words": 322347,
   "invalid_entries": 0,
   "zakaka_merged": {
-    "cpt": 690,
-    "sft": 690
+    "cpt": 449,
+    "sft": 456
   },
   "contamination_threshold": 0.25,
   "files": [
