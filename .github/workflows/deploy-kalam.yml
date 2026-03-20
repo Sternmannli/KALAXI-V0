@@ -67,9 +67,46 @@ jobs:
           cp KEEP/INPUT_LEDGER/chronicle.md site/dist/data/system/ledger-chronicle.md 2>/dev/null || true
           # Constitution (CLAUDE.md IS the constitution)
           cp CLAUDE.md site/dist/data/system/ 2>/dev/null || true
+          echo "--- Tier 2: Training Corpora (ZAKAKA + Organ) ---"
+          mkdir -p site/dist/data/training/zakaka
+          mkdir -p site/dist/data/training/organ
+          # ZAKAKA — essence³ (Level 0-1 purity)
+          cp TRAINING/ORGAN/ZAKAKA/ZAKAKA_CPT.jsonl site/dist/data/training/zakaka/ 2>/dev/null || true
+          cp TRAINING/ORGAN/ZAKAKA/ZAKAKA_SFT.jsonl site/dist/data/training/zakaka/ 2>/dev/null || true
+          cp TRAINING/ORGAN/ZAKAKA/MANIFEST.json site/dist/data/training/zakaka/ 2>/dev/null || true
+          # Organ — full body (GOLDEN merged corpora)
+          cp TRAINING/ORGAN/GOLDEN_CPT.jsonl site/dist/data/training/organ/ 2>/dev/null || true
+          cp TRAINING/ORGAN/GOLDEN_SFT.jsonl site/dist/data/training/organ/ 2>/dev/null || true
+          cp TRAINING/ORGAN/GOLDEN_DPO.jsonl site/dist/data/training/organ/ 2>/dev/null || true
+          # Phase corpora
+          mkdir -p site/dist/data/training/organ/phase1
+          mkdir -p site/dist/data/training/organ/phase2
+          mkdir -p site/dist/data/training/organ/phase3
+          cp TRAINING/ORGAN/PHASE_1_CPT/cpt_corpus.jsonl site/dist/data/training/organ/phase1/ 2>/dev/null || true
+          cp TRAINING/ORGAN/PHASE_2_SFT/sft_corpus.jsonl site/dist/data/training/organ/phase2/ 2>/dev/null || true
+          cp TRAINING/ORGAN/PHASE_3_DPO/dpo_corpus.jsonl site/dist/data/training/organ/phase3/ 2>/dev/null || true
+          # Generate training manifest with hashes
+          python3 -c "
+          import json, hashlib, os, glob
+          manifest = {'generated': '$(date -u +%Y-%m-%dT%H:%M:%SZ)', 'corpora': {}}
+          for path in glob.glob('site/dist/data/training/**/*.jsonl', recursive=True):
+              with open(path, 'rb') as f: data = f.read()
+              lines = len([l for l in data.decode('utf-8', errors='replace').strip().split('\n') if l.strip()])
+              rel = os.path.relpath(path, 'site/dist/data/training')
+              manifest['corpora'][rel] = {
+                  'bytes': len(data), 'entries': lines,
+                  'sha256': hashlib.sha256(data).hexdigest()
+              }
+          with open('site/dist/data/training/manifest.json', 'w') as f:
+              json.dump(manifest, f, indent=2)
+          print(json.dumps(manifest, indent=2))
+          "
           echo "--- System data packaged ---"
           ls -la site/dist/data/system/
           du -sh site/dist/data/system/
+          echo "--- Training data packaged ---"
+          ls -laR site/dist/data/training/
+          du -sh site/dist/data/training/
 
       - name: Deploy via lftp mirror
         env:
@@ -89,7 +126,7 @@ jobs:
             cd www/kalam.ch || exit 1;
             mkdir -p data;
             rm -f data/kalam.db;
-            mirror --reverse --verbose --include-glob=*.html --include-glob=*.svg --include-glob=*.xml --include-glob=*.css --include-glob=*.js --include-glob=*.php --include-glob=*.json --include-glob=*.png --include-glob=*.md --include-glob=.htaccess --include-glob=.config --include-glob=*.txt site/dist/ .;
+            mirror --reverse --verbose --include-glob=*.html --include-glob=*.svg --include-glob=*.xml --include-glob=*.css --include-glob=*.js --include-glob=*.php --include-glob=*.json --include-glob=*.jsonl --include-glob=*.png --include-glob=*.md --include-glob=.htaccess --include-glob=.config --include-glob=*.txt site/dist/ .;
             bye;
           "
           echo "--- Deploy complete ---"
