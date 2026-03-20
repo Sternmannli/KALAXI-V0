@@ -1,0 +1,48 @@
+[
+  {
+    "id": "W#0001",
+    "source_anomaly": "ANOM#0004",
+    "source_proverb": "P#EMERGE-0001",
+    "metrics": [
+      "GapUsedRate",
+      "DignityScore"
+    ],
+    "validation_plan": "Sample 200 exchanges. Measure fraction where donor used the gap affordance and reported feeling heard.",
+    "validation_status": "pending",
+    "provisional": true
+  },
+  {
+    "id": "W#0002",
+    "source_anomaly": "ANOM#0025",
+    "source_proverb": "P#0003",
+    "metrics": [
+      "MessageLossRate"
+    ],
+    "validation_plan": "Run Wire module under high load for 30 days. Measure message loss rate before and after priority queue implementation.",
+    "validation_status": "pending",
+    "provisional": true
+  },
+  {
+    "id": "W#0003",
+    "source_anomaly": "ANOM#0004",
+    "source_proverb": "P#EMERGE-0003",
+    "metrics": [
+      "TimeToRemedy"
+    ],
+    "validation_plan": "Pilot with Check module. Measure median time from anomaly report to remediation. Threshold: < 72 hours for HIGH severity.",
+    "validation_status": "pending",
+    "provisional": true
+  },
+  {
+    "id": "W#0004",
+    "source_anomaly": "ANOM#NEW-001",
+    "source_proverb": "P#EMERGE-0005",
+    "metrics": [
+      "DignityScore",
+      "felt_domain_legibility_rate"
+    ],
+    "validation_plan": "Sample 200 exchanges. Measure fraction where person's context was reflected in response (RECEIVED condition).",
+    "validation_status": "pending",
+    "provisional": true
+  }
+]
