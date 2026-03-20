@@ -1,0 +1,71 @@
+{
+  "source": "ENKI/ST-006/",
+  "entries": [
+    {
+      "language": "English",
+      "language_code": "en",
+      "proverb_text": "The cocoon does not know the wings it will give.",
+      "equation": "D(t) = D₀ · e^(±λt) — dual attractors from identical initial conditions",
+      "code_snippet": "duality.Subject(name, D0, lambda).dignity(t)",
+      "colour_hex": "#D97706",
+      "reason": "Emergence occurs where identical starts meet opposite attractors. Dignity cannot be conditional because λ is unknowable at t=0."
+    },
+    {
+      "language": "Deutsch",
+      "language_code": "de",
+      "proverb_text": "Der Kokon kennt die Flügel nicht, die er schenkt.",
+      "equation": "D(t) = D₀ · e^(±λt) — duale Attraktoren aus identischen Anfangsbedingungen",
+      "code_snippet": "duality.Subject(name, D0, lambda).dignity(t)",
+      "colour_hex": "#D97706",
+      "reason": "Das Aufgehen zeigt sich an divergierenden Bahnen. Würde kann nicht bedingt sein, weil λ bei t=0 unerkennbar ist."
+    },
+    {
+      "language": "Français",
+      "language_code": "fr",
+      "proverb_text": "Le cocon ignore les ailes qu'il offrira.",
+      "equation": "D(t) = D₀ · exp(±λt) — attracteurs duaux à partir de conditions initiales identiques",
+      "code_snippet": "duality.Subject(name, D0, lambda).dignity(t)",
+      "colour_hex": "#D97706",
+      "reason": "L'émergence naît de trajectoires opposées. La dignité ne peut être conditionnelle car λ est inconnaissable à t=0."
+    },
+    {
+      "language": "Español",
+      "language_code": "es",
+      "proverb_text": "El capullo no sabe las alas que dará.",
+      "equation": "D(t) = D₀ · e^(±λt) — atractores duales desde condiciones iniciales idénticas",
+      "code_snippet": "duality.Subject(name, D0, lambda).dignity(t)",
+      "colour_hex": "#D97706",
+      "reason": "La emergencia surge de atractores opuestos. La dignidad no puede ser condicional porque λ es incognoscible en t=0."
+    },
+    {
+      "language": "Italiano",
+      "language_code": "it",
+      "proverb_text": "Il bozzolo non sa quali ali donerà.",
+      "equation": "D(t) = D₀ · e^(±λt) — attrattori duali da condizioni iniziali identiche",
+      "code_snippet": "duality.Subject(name, D0, lambda).dignity(t)",
+      "colour_hex": "#D97706",
+      "reason": "L'emergenza nasce da attrattori opposti. La dignità non può essere condizionale perché λ è inconoscibile a t=0."
+    },
+    {
+      "language": "العربية",
+      "language_code": "ar",
+      "proverb_text": "الشرنقة لا تعرف الأجنحة التي ستمنحها.",
+      "equation": "D(t) = D₀ · e^(±λt) — جاذبان متعاكسان من شروط ابتدائية متطابقة",
+      "code_snippet": "duality.Subject(name, D0, lambda).dignity(t)",
+      "colour_hex": "#D97706",
+      "reason": "الظهور يحدث حيث تلتقي بدايات متطابقة بمسارات متعاكسة. الكرامة لا يمكن أن تكون مشروطة لأن λ غير معروف عند t=0."
+    },
+    {
+      "language": "Rumantsch",
+      "language_code": "rm",
+      "proverb_text": "Il cocun na savess tge alas ch'el dat.",
+      "equation": "D(t) = D₀ · e^(±λt) — attracturs duals dad in'identica cundiziun iniziala",
+      "code_snippet": "duality.Subject(name, D0, lambda).dignity(t)",
+      "colour_hex": "#D97706",
+      "reason": "L'emergenza deriva da attracturs cuntraris. La dignitad na po betg esser cundiziunala perquai che λ n'è betg enconuschent tar t=0."
+    }
+  ],
+  "total": 7,
+  "colour": "#D97706",
+  "experiment": "ST-006"
+}
