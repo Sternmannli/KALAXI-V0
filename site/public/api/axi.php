@@ -1129,14 +1129,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['test'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['ask'])) {
     $content = trim($_GET['ask']);
     if (empty($content)) { echo json_encode(['error' => 'Empty ask']); exit; }
-    $voice = canonical_voice($content);
-    echo json_encode([
-        'input' => $content,
-        'witness' => $voice['mark'],
-        'reflection' => $voice['reflection'],
-        'register' => $voice['register'],
-        'source' => 'canon',
-    ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    $source = 'canon';
+    $groq_key = get_groq_key();
+    $groq_result = null;
+    if ($groq_key && function_exists('curl_init')) {
+        $groq_result = call_groq($groq_key, $content);
+    }
+    if ($groq_result) {
+        echo json_encode([
+            'input' => $content,
+            'witness' => $groq_result['witness'],
+            'reflection' => $groq_result['reflection'],
+            'register' => detect_register($content),
+            'source' => 'groq',
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    } else {
+        $voice = canonical_voice($content);
+        echo json_encode([
+            'input' => $content,
+            'witness' => $voice['mark'],
+            'reflection' => $voice['reflection'],
+            'register' => $voice['register'],
+            'source' => 'canon',
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }
     exit;
 }
 
@@ -1323,13 +1339,28 @@ HTML;
         }
     }
 
-    // === PHASE 4: CANONICAL VOICE ===
-    // AXI speaks from its own canon — proverbs, preambles, witness marks.
-    // No external AI. The voice is owned, not borrowed.
-    $voice = canonical_voice($content, $donor_mood ?? 'witness');
-    $ai_response = $voice['mark'];
-    $ai_reflection = $voice['reflection'];
+    // === PHASE 4: AXI VOICE (Groq first, canonical fallback) ===
+    $ai_response = null;
+    $ai_reflection = null;
     $ai_debug = 'canonical';
+
+    $groq_key = get_groq_key();
+    if ($groq_key && function_exists('curl_init')) {
+        $groq_result = call_groq($groq_key, $content, $image_url ?? null);
+        if ($groq_result) {
+            $ai_response = $groq_result['witness'];
+            $ai_reflection = $groq_result['reflection'];
+            $ai_debug = 'groq';
+        }
+    }
+
+    // Fallback to canonical voice if Groq unavailable
+    if (!$ai_response && !$ai_reflection) {
+        $voice = canonical_voice($content, $donor_mood ?? 'witness');
+        $ai_response = $voice['mark'];
+        $ai_reflection = $voice['reflection'];
+        $ai_debug = 'canonical';
+    }
 
     // === PHASE 5: PROVERB ===
     $proverb = select_proverb($content);
