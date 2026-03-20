@@ -358,6 +358,24 @@ def cmd_sign_artifact(args):
         print(f"  Saved to: {out}")
 
 
+def cmd_summon(args):
+    """Summon Voices — cross-model witnessing ritual."""
+    from FIELD.summon_runner import cmd_status, cmd_next, cmd_save, cmd_packages
+
+    if args.action == "status":
+        cmd_status()
+    elif args.action == "next":
+        cmd_next()
+    elif args.action == "save":
+        if not args.package or not args.model or not args.condition:
+            print("ERROR: save requires PACKAGE MODEL CONDITION")
+            print("  Example: python cli.py summon save SP-002 CHATGPT FRESH")
+            sys.exit(1)
+        cmd_save(args.package, args.model, args.condition)
+    elif args.action == "packages":
+        cmd_packages()
+
+
 def cmd_test(args):
     """Run the test suite."""
     import subprocess
@@ -444,6 +462,15 @@ def main():
     p.add_argument("--json", action="store_true", help="Output as JSON")
     p.set_defaults(func=cmd_sign_artifact)
 
+    # summon
+    p = sub.add_parser("summon", help="Summon Voices — cross-model witnessing ritual")
+    p.add_argument("action", choices=["status", "next", "save", "packages"],
+                   help="Summon action")
+    p.add_argument("package", nargs="?", help="Package ID for save (e.g. SP-002)")
+    p.add_argument("model", nargs="?", help="Model name for save (e.g. CHATGPT)")
+    p.add_argument("condition", nargs="?", help="Condition for save (FRESH or MEMORY)")
+    p.set_defaults(func=cmd_summon)
+
     # test
     p = sub.add_parser("test", help="Run the test suite")
     p.add_argument("--quick", "-q", action="store_true", help="Quick mode")
@@ -467,6 +494,8 @@ def main():
         print("    python cli.py ratify status      Ratification status")
         print("    python cli.py ratify list       List all elements")
         print("    python cli.py sign FILE         Sign an artifact")
+        print("    python cli.py summon status     Summon ritual status")
+        print("    python cli.py summon next       Next summon step")
         print("    python cli.py serve             Start API server")
         print("    python cli.py test              Run test suite")
         print()
