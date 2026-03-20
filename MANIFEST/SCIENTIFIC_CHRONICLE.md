@@ -813,6 +813,9 @@ Five layers from personal to planetary:
 | Thermal delay | 0.5s–30s | BREATH pacing |
 | Proverb motifs | 700 | Kuusi global library |
 | 80 Hz | — | The children's frequency |
+| ENV_t | ENV_{t-1} + (Recovery × Resilience) - (Intensity × Decay) | Offspring Canon environment recovery |
+| BOND_STRENGTH | f(Shared_Risk, Care_Time, Food_Share) - Rivalry_Tension | Offspring Canon social bond equation |
+| ENTROPY_BUDGET | Monitored Drav injection | Offspring Canon structured chaos parameter |
 
 ---
 
@@ -856,6 +859,7 @@ DESIGNED: 98%    CODED: 70%    TESTED: 100%    DEPLOYED: LIVE (kalam.ch)
 | Date | What Changed | Updated By |
 |------|-------------|------------|
 | 2026-03-17 | Initial creation — full scientific chronicle | V-002 |
+| 2026-03-20 | V-010/V-011/V-012 integration: 29 proverbs (P#301, P#617-645), T#AXIS-001, 5 gaps, 2 equations (ENV, BOND_STRENGTH), Offspring Canon concepts (Nakata, Zhuur, Drav, ENTROPY_BUDGET) | V-002 |
 
 ---
 

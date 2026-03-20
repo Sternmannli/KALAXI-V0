@@ -539,16 +539,50 @@ Extracted by V-002 from GRAND_ARCHIVE_2025-09-13.docx. Each treasure encodes a p
 
 ---
 
-## Updated Tier Distribution (59 total: 47 ratified + 12 provisional)
+---
+
+## T#AXIS-001 — Ashwater (The Axis)
+
+**Source:** V-010 Scientific Chronicle Extension (2026-03-20)
+**Tier:** Stone (T1) — Foundation
+**Status:** Canonical
+
+> The first knot in cold ash earth. The irreducible core from which all law flows.
+
+**Essence:** The birth on cold ash earth + reaching hand = the origin of all law. This is the primal pattern from which Ashwater Axis derives its name. Before code, before covenant, before equation — the hand reached and the knot held.
+
+**Proverb link:** P#00621 ("Quietly knot the cold ash so the axis holds.")
+
+---
+
+## Slice 4 Treasures — V-010 Classification (T#FORM-001 through T#DOOR-001)
+
+These 11 treasures are the irreducible distillation of the 11 Official Patterns, filed as pure essence:
+
+- **T#FORM-001:** The constitutional form of an interaction determines its possible outputs more than its content. Design form first.
+- **T#UNCOVER-001:** KALAXI does not build what it seeks. It removes what prevents what it seeks from appearing. All tools are removal tools.
+- **T#DIGNITY-001:** Dignity is multiplicative. Any single factor at zero collapses the whole. There is no partial dignity.
+- **T#PAST-001:** The past is data. Deletion claims certainty about what is no longer needed — certainty the system does not have. Nothing is deleted.
+- **T#WOUND-001:** The founding wound is the system's design specification. Every architectural decision is measured against: would this protect a father separated from his children?
+- **T#SILENCE-001:** Silence is signal. Absence is as informative as presence.
+- **T#BOUNDARY-001:** Sovereignty precedes function. The boundary of every entity is established before its utility is designed.
+- **T#BONE-001:** The essence is what remains after cooling. The proverb is the story that found its bone.
+- **T#TIME-001:** Time is the filter. Duration is a design variable. What survives time is more likely to be real than what did not need to.
+- **T#REFLEX-001:** The observer is observable.
+- **T#DOOR-001:** The door opens first. Before architecture, before protocol, before function — the invitation.
+
+---
+
+## Updated Tier Distribution (60 total: 47 ratified + 12 provisional + T#AXIS-001)
 
 | Tier | Count |
 |------|-------|
-| Stone (T1) | 6 (T#57 new) |
+| Stone (T1) | 7 (T#57, T#AXIS-001 new) |
 | Weaver (T2) | 20 (T#50, T#55, T#56, T#59 new) |
 | Honey (T3) | 17 (T#48, T#51 new) |
 | Hand (T4) | 6 |
 | Cross-tier | 10 (T#49, T#52, T#53, T#54, T#58 new) |
-| **Total** | **59** |
+| **Total** | **60** |
 
 ---
 
