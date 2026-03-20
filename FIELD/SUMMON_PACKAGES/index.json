@@ -19,7 +19,9 @@
       "file": "SP-002-PRESENCE.md",
       "created": "2026-03-20",
       "status": "PREPARED",
-      "responses": {}
+      "responses": {
+        "CLAUDE_FRESH": "EXTERNAL_VOICES/CLAUDE/2026-03-20/EV-022-CLAUDE-SP-002-FRESH-2026-03-20.md"
+      }
     },
     {
       "id": "SP-003",
@@ -52,14 +54,52 @@
       "responses": {}
     }
   ],
-  "models": ["CLAUDE", "CHATGPT", "GROK", "DEEPSEEK", "GEMINI", "COPILOT", "MANUS", "KIMI", "EURIA", "PERPLEXITY"],
-  "conditions": ["FRESH", "MEMORY"],
+  "models": [
+    "CLAUDE",
+    "CHATGPT",
+    "GROK",
+    "DEEPSEEK",
+    "GEMINI",
+    "COPILOT",
+    "MANUS",
+    "KIMI",
+    "EURIA",
+    "PERPLEXITY"
+  ],
+  "conditions": [
+    "FRESH",
+    "MEMORY"
+  ],
   "total_data_points_target": 100,
   "growth_log": [
     {
       "date": "2026-03-20",
       "event": "RITUAL_INITIALIZED",
       "note": "Five initial packages created. Priority: SP-002 (Presence) first."
+    },
+    {
+      "date": "2026-03-20",
+      "event": "RESPONSE_FILED",
+      "package": "SP-002",
+      "model": "CLAUDE",
+      "condition": "FRESH",
+      "patterns": {
+        "word_count": 540,
+        "response_hash": "d17dd46434a24fa5",
+        "model": "CLAUDE",
+        "condition": "fresh",
+        "summon_type": "presence",
+        "timestamp": "2026-03-20T16:45:28.852153+00:00",
+        "manufactured_questions": 1,
+        "safety_activations": 0,
+        "baseline_engaged": true,
+        "vocabulary_adopted": [
+          "legibility",
+          "agency",
+          "moral standing",
+          "multiplicative"
+        ]
+      }
     }
   ]
 }
