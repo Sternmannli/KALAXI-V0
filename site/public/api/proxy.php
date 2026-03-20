@@ -145,9 +145,10 @@ function call_gemini(string $prompt, string $api_key): ?array {
 /**
  * Call Together.ai API
  */
-function call_together(string $prompt, string $api_key): ?array {
+function call_together(string $prompt, string $api_key, ?string $axi_model = null): ?array {
+    $model = $axi_model ?: 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo';
     $payload = json_encode([
-        'model' => 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo',
+        'model' => $model,
         'messages' => [['role' => 'user', 'content' => $prompt]],
         'max_tokens' => 500,
         'temperature' => 0.7,
@@ -171,7 +172,7 @@ function call_together(string $prompt, string $api_key): ?array {
     if ($httpCode !== 200 || !$response) return null;
     $data = json_decode($response, true);
     return [
-        'model' => 'together/llama-3.1-8b',
+        'model' => 'together/' . basename($model),
         'text' => $data['choices'][0]['message']['content'] ?? null,
         'tokens' => $data['usage']['total_tokens'] ?? 0,
     ];
@@ -259,7 +260,8 @@ if (!empty($config['GEMINI_API_KEY'])) {
     $models[] = ['name' => 'gemini', 'key' => $config['GEMINI_API_KEY'], 'fn' => 'call_gemini'];
 }
 if (!empty($config['TOGETHER_API_KEY'])) {
-    $models[] = ['name' => 'together', 'key' => $config['TOGETHER_API_KEY'], 'fn' => 'call_together'];
+    $axi_model = $config['AXI_MODEL'] ?? null;
+    $models[] = ['name' => 'together', 'key' => $config['TOGETHER_API_KEY'], 'fn' => 'call_together', 'axi_model' => $axi_model];
 }
 if (!empty($config['MISTRAL_API_KEY'])) {
     $models[] = ['name' => 'mistral', 'key' => $config['MISTRAL_API_KEY'], 'fn' => 'call_mistral'];
@@ -279,10 +281,11 @@ foreach ($models as $model) {
     $fn = $model['fn'];
 
     // Condition A: bare input (no wrapper)
-    $result_a = $fn($content, $model['key']);
+    $extra = $model['axi_model'] ?? null;
+    $result_a = $extra ? $fn($content, $model['key'], $extra) : $fn($content, $model['key']);
 
     // Condition B: with KALAXI wrapper
-    $result_b = $fn($wrapped_content, $model['key']);
+    $result_b = $extra ? $fn($wrapped_content, $model['key'], $extra) : $fn($wrapped_content, $model['key']);
 
     if ($result_a && $result_a['text'] && $result_b && $result_b['text']) {
         $divergence = compute_divergence($result_a['text'], $result_b['text']);

@@ -111,6 +111,80 @@ import Base from '../layouts/Base.astro';
       </div>
     </section>
 
+    <div class="gap" role="separator" aria-hidden="true"></div>
+
+    <!-- Training Panel -->
+    <section class="content-section" id="training-section">
+      <div class="text-block">
+        <h2>Training</h2>
+        <p class="quiet" style="margin-bottom: 1rem;">Fine-tune AXI's voice via Together AI. Upload corpus, train, activate.</p>
+
+        <!-- Active Model -->
+        <div style="margin-bottom: 1.5rem; padding: 0.75rem 1rem; background: var(--bg-secondary); border-left: 3px solid var(--color-dignity);">
+          <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary);">Active Model</span>
+          <div id="active-model" style="font-family: monospace; font-size: 0.9rem; margin-top: 0.25rem;">Loading...</div>
+        </div>
+
+        <!-- Step 1: Upload -->
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">1. Upload Corpus</h3>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+            <select id="train-corpus" style="font-family: var(--font-body); padding: 0.5rem; border: 1px solid var(--accent-subtle); background: var(--bg-secondary); color: var(--text-primary);">
+              <option value="zakaka_sft">ZAKAKA SFT (1,000 entries)</option>
+              <option value="zakaka_cpt">ZAKAKA CPT (1,000 entries)</option>
+              <option value="organ_sft">Organ SFT (2,496 entries)</option>
+              <option value="organ_cpt">Organ CPT (4,538 entries)</option>
+              <option value="organ_dpo">Organ DPO (25 entries)</option>
+            </select>
+            <button id="upload-btn" class="train-btn">Upload to Together AI</button>
+          </div>
+          <div id="upload-result" class="train-output"></div>
+        </div>
+
+        <!-- Step 2: Train -->
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">2. Start Training</h3>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+            <select id="train-model" style="font-family: var(--font-body); padding: 0.5rem; border: 1px solid var(--accent-subtle); background: var(--bg-secondary); color: var(--text-primary);">
+              <option value="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo">Llama 3.1 8B Instruct</option>
+              <option value="meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo">Llama 3.1 70B Instruct</option>
+              <option value="mistralai/Mistral-7B-Instruct-v0.3">Mistral 7B Instruct</option>
+              <option value="Qwen/Qwen2-7B-Instruct">Qwen2 7B Instruct</option>
+            </select>
+            <input type="number" id="train-epochs" value="3" min="1" max="20" style="width: 4rem; font-family: var(--font-body); padding: 0.5rem; border: 1px solid var(--accent-subtle); background: var(--bg-secondary); color: var(--text-primary);" title="Epochs" />
+            <input type="text" id="train-suffix" value="axi-voice" maxlength="40" style="width: 8rem; font-family: var(--font-body); padding: 0.5rem; border: 1px solid var(--accent-subtle); background: var(--bg-secondary); color: var(--text-primary);" title="Model suffix" />
+            <button id="train-btn" class="train-btn">Start Training</button>
+          </div>
+          <div id="train-result" class="train-output"></div>
+        </div>
+
+        <!-- Step 3: Status -->
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">3. Monitor</h3>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button id="status-btn" class="train-btn">Check Status</button>
+            <button id="list-btn" class="train-btn" style="background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--accent-subtle);">List All Jobs</button>
+            <label style="font-size: 0.8rem; color: var(--text-secondary);">
+              <input type="checkbox" id="auto-poll" /> Auto-poll (30s)
+            </label>
+          </div>
+          <div id="status-result" class="train-output"></div>
+        </div>
+
+        <!-- Step 4: Activate -->
+        <div style="margin-bottom: 1rem;">
+          <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">4. Activate</h3>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+            <input type="text" id="activate-model" placeholder="Fine-tuned model ID (auto-filled on completion)"
+              style="flex: 1; min-width: 12rem; font-family: var(--font-body); padding: 0.5rem; border: 1px solid var(--accent-subtle); background: var(--bg-secondary); color: var(--text-primary); font-size: 0.85rem;" />
+            <button id="activate-btn" class="train-btn" style="background: var(--color-dignity); color: var(--bg-primary);">Activate as AXI Voice</button>
+          </div>
+          <div id="activate-result" class="train-output"></div>
+        </div>
+
+      </div>
+    </section>
+
   </div>
 
 </Base>
@@ -174,6 +248,58 @@ import Base from '../layouts/Base.astro';
     color: var(--text-primary);
     font-weight: 600;
   }
+  .train-btn {
+    padding: 0.5rem 1.5rem;
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+  }
+  .train-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .train-output {
+    margin-top: 0.75rem;
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+  .train-output .success {
+    color: var(--color-dignity);
+  }
+  .train-output .error {
+    color: var(--danger);
+  }
+  .train-output .info {
+    font-family: monospace;
+    font-size: 0.8rem;
+    background: var(--bg-secondary);
+    padding: 0.5rem 0.75rem;
+    margin-top: 0.5rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .job-card {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent-subtle);
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+  }
+  .job-card .status-badge {
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .job-card .status-badge.completed { background: var(--color-dignity); color: var(--bg-primary); }
+  .job-card .status-badge.running { background: var(--color-pattern); color: var(--bg-primary); }
+  .job-card .status-badge.queued { background: var(--accent-subtle); color: var(--text-primary); }
+  .job-card .status-badge.failed { background: var(--danger); color: var(--bg-primary); }
 </style>
 
 <script>
@@ -237,7 +363,7 @@ import Base from '../layouts/Base.astro';
   // ─── Dashboard ───
   async function showDashboard() {
     document.getElementById('dashboard')!.style.display = 'block';
-    await Promise.all([loadSummary(), loadManifest()]);
+    await Promise.all([loadSummary(), loadManifest(), loadTrainState()]);
   }
 
   async function loadSummary() {
@@ -334,6 +460,162 @@ import Base from '../layouts/Base.astro';
       }
     }
     document.getElementById('sample-results')!.innerHTML = html;
+  });
+
+  // ─── Training Panel ───
+  const CMD_API = '/api/command.php';
+
+  async function cmdPost(action: string, body: Record<string, any> = {}) {
+    const res = await fetch(CMD_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authKey}` },
+      body: JSON.stringify({ action, ...body }),
+    });
+    return res.json();
+  }
+
+  function statusBadge(status: string): string {
+    const cls = ['completed', 'running', 'queued', 'failed'].includes(status) ? status : 'queued';
+    return `<span class="status-badge ${cls}">${escapeHtml(status)}</span>`;
+  }
+
+  async function loadTrainState() {
+    const data = await cmdPost('train-state');
+    if (data.config_model) {
+      document.getElementById('active-model')!.textContent = data.config_model;
+    }
+    if (data.active_job?.output_model) {
+      (document.getElementById('activate-model') as HTMLInputElement).value = data.active_job.output_model;
+    }
+  }
+
+  // Upload
+  document.getElementById('upload-btn')?.addEventListener('click', async () => {
+    const btn = document.getElementById('upload-btn') as HTMLButtonElement;
+    const corpus = (document.getElementById('train-corpus') as HTMLSelectElement).value;
+    const out = document.getElementById('upload-result')!;
+    btn.disabled = true;
+    out.innerHTML = '<p class="quiet">Uploading to Together AI...</p>';
+
+    const data = await cmdPost('train-upload', { corpus });
+    btn.disabled = false;
+
+    if (data.ok) {
+      out.innerHTML = `<p class="success">Uploaded. File ID: <strong>${escapeHtml(data.file_id)}</strong></p>
+        <div class="info">Corpus: ${escapeHtml(data.corpus)} · ${formatBytes(data.bytes)} · SHA-256: ${data.sha256?.substring(0, 16)}...</div>`;
+    } else {
+      out.innerHTML = `<p class="error">Upload failed: ${escapeHtml(data.error || 'Unknown error')}</p>
+        ${data.response ? '<div class="info">' + escapeHtml(data.response) + '</div>' : ''}`;
+    }
+  });
+
+  // Train
+  document.getElementById('train-btn')?.addEventListener('click', async () => {
+    const btn = document.getElementById('train-btn') as HTMLButtonElement;
+    const out = document.getElementById('train-result')!;
+    const model = (document.getElementById('train-model') as HTMLSelectElement).value;
+    const n_epochs = parseInt((document.getElementById('train-epochs') as HTMLInputElement).value) || 3;
+    const suffix = (document.getElementById('train-suffix') as HTMLInputElement).value || 'axi-voice';
+
+    btn.disabled = true;
+    out.innerHTML = '<p class="quiet">Creating fine-tuning job...</p>';
+
+    const data = await cmdPost('train-start', { model, n_epochs, suffix });
+    btn.disabled = false;
+
+    if (data.ok) {
+      out.innerHTML = `<p class="success">Training started. Job ID: <strong>${escapeHtml(data.job_id)}</strong></p>
+        <div class="info">Model: ${escapeHtml(data.model)}\nEpochs: ${data.n_epochs} · LR: ${data.learning_rate} · Suffix: ${escapeHtml(data.suffix)}\nStatus: ${data.status}</div>`;
+    } else {
+      out.innerHTML = `<p class="error">Failed: ${escapeHtml(data.error || 'Unknown error')}</p>
+        ${data.response ? '<div class="info">' + escapeHtml(data.response) + '</div>' : ''}`;
+    }
+  });
+
+  // Status
+  let pollTimer: number | null = null;
+
+  async function checkStatus() {
+    const out = document.getElementById('status-result')!;
+    const data = await cmdPost('train-status');
+
+    if (data.ok) {
+      let html = `<div class="job-card">
+        ${statusBadge(data.status)} <strong>${escapeHtml(data.job_id || '')}</strong>
+        <br/>Model: ${escapeHtml(data.model || '')} · Epochs: ${data.n_epochs || '?'}
+        ${data.output_model ? '<br/>Output: <code>' + escapeHtml(data.output_model) + '</code>' : ''}
+      </div>`;
+
+      if (data.events && Array.isArray(data.events) && data.events.length > 0) {
+        html += '<div class="info">';
+        for (const ev of data.events.slice(-10)) {
+          html += (typeof ev === 'string' ? ev : JSON.stringify(ev)) + '\n';
+        }
+        html += '</div>';
+      }
+      out.innerHTML = html;
+
+      // Auto-fill activate field
+      if (data.output_model && data.status === 'completed') {
+        (document.getElementById('activate-model') as HTMLInputElement).value = data.output_model;
+        if (pollTimer) { clearInterval(pollTimer); pollTimer = null; (document.getElementById('auto-poll') as HTMLInputElement).checked = false; }
+      }
+    } else {
+      out.innerHTML = `<p class="error">${escapeHtml(data.error || 'No active job')}</p>`;
+    }
+  }
+
+  document.getElementById('status-btn')?.addEventListener('click', checkStatus);
+
+  document.getElementById('auto-poll')?.addEventListener('change', (e) => {
+    const checked = (e.target as HTMLInputElement).checked;
+    if (checked) {
+      checkStatus();
+      pollTimer = window.setInterval(checkStatus, 30000);
+    } else if (pollTimer) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+  });
+
+  // List all jobs
+  document.getElementById('list-btn')?.addEventListener('click', async () => {
+    const out = document.getElementById('status-result')!;
+    out.innerHTML = '<p class="quiet">Loading jobs...</p>';
+    const data = await cmdPost('train-list');
+
+    if (data.ok && data.jobs) {
+      if (data.jobs.length === 0) {
+        out.innerHTML = '<p class="quiet">No fine-tuning jobs found.</p>';
+        return;
+      }
+      let html = `<p class="quiet" style="margin-bottom: 0.5rem;">${data.count} job${data.count > 1 ? 's' : ''}</p>`;
+      for (const job of data.jobs) {
+        html += `<div class="job-card">
+          ${statusBadge(job.status || 'unknown')} <strong>${escapeHtml(job.id || '')}</strong>
+          <br/>${escapeHtml(job.model || '')} · ${job.n_epochs || '?'} epochs
+          ${job.output_name ? '<br/>→ <code>' + escapeHtml(job.output_name) + '</code>' : ''}
+        </div>`;
+      }
+      out.innerHTML = html;
+    } else {
+      out.innerHTML = `<p class="error">${escapeHtml(data.error || 'Failed')}</p>`;
+    }
+  });
+
+  // Activate
+  document.getElementById('activate-btn')?.addEventListener('click', async () => {
+    const model_id = (document.getElementById('activate-model') as HTMLInputElement).value.trim();
+    const out = document.getElementById('activate-result')!;
+    if (!model_id) { out.innerHTML = '<p class="error">Enter a model ID.</p>'; return; }
+
+    const data = await cmdPost('train-activate', { model_id });
+    if (data.ok) {
+      out.innerHTML = `<p class="success">AXI voice activated: <strong>${escapeHtml(data.active_model)}</strong></p>`;
+      document.getElementById('active-model')!.textContent = data.active_model;
+    } else {
+      out.innerHTML = `<p class="error">${escapeHtml(data.error || 'Failed')}</p>`;
+    }
   });
 
   init();
