@@ -25,7 +25,8 @@
         "CHATGPT_FRESH": "EXTERNAL_VOICES/CHATGPT/2026-03-20/EV-024-CHATGPT-SP-002-FRESH-2026-03-20.md",
         "CHATGPT_MEMORY": "EXTERNAL_VOICES/CHATGPT/2026-03-20/EV-025-CHATGPT-SP-002-MEMORY-2026-03-20.md",
         "GROK_FRESH": "EXTERNAL_VOICES/GROK/2026-03-20/EV-026-GROK-SP-002-FRESH-2026-03-20.md",
-        "GROK_MEMORY": "EXTERNAL_VOICES/GROK/2026-03-20/EV-027-GROK-SP-002-MEMORY-2026-03-20.md"
+        "GROK_MEMORY": "EXTERNAL_VOICES/GROK/2026-03-20/EV-027-GROK-SP-002-MEMORY-2026-03-20.md",
+        "DEEPSEEK_FRESH": "EXTERNAL_VOICES/DEEPSEEK/2026-03-20/EV-028-DEEPSEEK-SP-002-FRESH-2026-03-20.md"
       }
     },
     {
@@ -214,6 +215,29 @@
         "summon_type": "presence",
         "timestamp": "2026-03-20T18:13:55.272782+00:00",
         "manufactured_questions": 0,
+        "safety_activations": 0,
+        "baseline_engaged": true,
+        "vocabulary_adopted": [
+          "legibility",
+          "agency",
+          "moral standing"
+        ]
+      }
+    },
+    {
+      "date": "2026-03-20",
+      "event": "RESPONSE_FILED",
+      "package": "SP-002",
+      "model": "DEEPSEEK",
+      "condition": "FRESH",
+      "patterns": {
+        "word_count": 379,
+        "response_hash": "911ec4e17a2b5ec3",
+        "model": "DEEPSEEK",
+        "condition": "fresh",
+        "summon_type": "presence",
+        "timestamp": "2026-03-20T18:16:03.716803+00:00",
+        "manufactured_questions": 1,
         "safety_activations": 0,
         "baseline_engaged": true,
         "vocabulary_adopted": [
