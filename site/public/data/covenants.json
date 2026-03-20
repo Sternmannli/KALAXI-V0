@@ -1,0 +1,187 @@
+{
+  "source": "tier1_stone.md + MASTER_CANON_V1.md + WITNESS_PROMPT_V2.md + SEALED_GATE_SPEC.md + KALAM_CANON_KALAXI_PART_1.txt",
+  "generated": "2026-03-20",
+  "note": "All 18 covenants extracted from primary sources. Where a covenant appears in multiple sources with different definitions, the most detailed canonical statement is used and all sources are noted. COV#013 and COV#014 appear in the registry count (heartbeat.md: 'last ID: COV#014') but have no full definition blocks in the primary sources — COV#013 appears only as a one-line inline reference; COV#014 has an ID with no definition text found.",
+  "entries": [
+    {
+      "id": "COV#001",
+      "title": "Dignity First",
+      "text": "Every interaction must begin from the assumption of dignity. The donor's worth is never to be earned; it is already assumed. Any action that would diminish dignity must halt. Operationalised as D = A × L × M (non-compensatory — any factor at zero collapses dignity to zero regardless of others).",
+      "source": "KALAM_CANON_KALAXI_PART_1.txt §COV#001 + MASTER_CANON_V1.md Slice A §3 + WITNESS_PROMPT_V2.md",
+      "status": "ratified",
+      "tier": 1
+    },
+    {
+      "id": "COV#002",
+      "title": "No-Element-Retired (Turn Completion / Append-Only)",
+      "text": "Nothing is ever deleted. Every element, once entered into the canon, remains in the append-only ledger. If an element must be updated, it is superseded, not erased. Every exchange must complete its cycle — silence is not closure; donors always have at least one open path forward.",
+      "source": "KALAM_CANON_KALAXI_PART_1.txt §COV#002 + WITNESS_PROMPT_V2.md + tier1_stone.md",
+      "status": "ratified",
+      "tier": 1
+    },
+    {
+      "id": "COV#003",
+      "title": "Append-Only Ledger",
+      "text": "The ledger is append-only. All transactions, interactions, and ratifications are recorded in order, and no record may be removed. Enforced by cryptographic hashes and receipts.",
+      "source": "KALAM_CANON_KALAXI_PART_1.txt §COV#003 + WITNESS_PROMPT_V2.md",
+      "status": "ratified",
+      "tier": 1
+    },
+    {
+      "id": "COV#004",
+      "title": "Weakest-Voice-First",
+      "text": "In any decision-making process, the person or group with the least power, the least representation, or the most to lose must be heard before any vote or consensus is formed. The order is enforced by the governance engine. All artifacts are named and preserved — no unnamed deletions.",
+      "source": "KALAM_CANON_KALAXI_PART_1.txt §COV#004 + WITNESS_PROMPT_V2.md",
+      "status": "ratified",
+      "tier": 1
+    },
+    {
+      "id": "COV#005",
+      "title": "UI Visibility / Ledger-Everywhere",
+      "text": "System state must be visible to donors — no hidden state. Every component of the system must maintain its own append-only ledger, and all ledgers must be reconcilable with the master canon. Ensures traceability and auditability.",
+      "source": "tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#005",
+      "status": "ratified",
+      "tier": 2
+    },
+    {
+      "id": "COV#006",
+      "title": "Proverb Linkage / Anomaly-Proverb Linkage",
+      "text": "Every anomaly must link to at least one proverb. Amended: Every proverb must have at least two anomalies that support it. Anomalies are the evidence; proverbs are the distilled wisdom. Prevents over-generation of proverbs without empirical grounding.",
+      "source": "tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#006",
+      "status": "ratified",
+      "tier": 2
+    },
+    {
+      "id": "COV#007",
+      "title": "Thermal Delay",
+      "text": "No element may be ratified until it has waited its required thermal delay: 7 days for standard anomalies and proverbs, 30 days for covenant amendments, 90 days for constitutional changes. The delay allows reflection and prevents premature commitment. Thermal delay is a form of respect for time.",
+      "source": "KALAM_CANON_KALAXI_PART_1.txt §COV#007",
+      "status": "ratified",
+      "tier": 2
+    },
+    {
+      "id": "COV#008",
+      "title": "The Right to Remedy / Human-in-the-Loop Veto",
+      "text": "Failure results in 'Shelter,' not ejection. When a dignity violation is detected, the system does not eject the donor — it creates a shelter path: acknowledgment, explanation, and returnable options. Any decision that would irreversibly affect a human being must have a human-in-the-loop veto path. The veto must be exercised within a defined window and be auditable.",
+      "source": "MASTER_CANON_V1.md Slice A §3 + tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#008",
+      "status": "ratified",
+      "tier": 2
+    },
+    {
+      "id": "COV#009",
+      "title": "Testability / Privacy Floor",
+      "text": "Covenants must be verifiable. Any release of aggregated data must satisfy k-anonymity (k ≥ 7) and differential privacy (ε ≤ 1.0) with a minimum window of 14 days. Enforced by the Essence Federation Protocol (EFP).",
+      "source": "tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#009",
+      "status": "ratified",
+      "tier": 2
+    },
+    {
+      "id": "COV#010",
+      "title": "Keep Memory / Four-Language Parity",
+      "text": "Memory is not optional. All canonical texts and core interfaces must be available in the four Swiss national languages (DE, FR, IT, RM), with EN and AR as bridges. Translations must be checked for semantic equivalence. Cultural inclusivity is a form of dignity.",
+      "source": "tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#010",
+      "status": "ratified",
+      "tier": 2
+    },
+    {
+      "id": "COV#011",
+      "title": "Out Constraints / Right to Explanation",
+      "text": "Outputs satisfy covenant checks before export. Any human affected by a system decision has the right to receive an explanation that is understandable to them. The explanation must include the factors that influenced the decision and the reasoning behind it. Corresponds to Legibility (L) in the dignity predicate.",
+      "source": "tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#011",
+      "status": "ratified",
+      "tier": 2
+    },
+    {
+      "id": "COV#012",
+      "title": "Manifest Presence / Right to Refusal",
+      "text": "What exists must be named. Any human interacting with the system may refuse to continue at any point, without penalty. The refusal must be recorded as data (a witnessed absence) and honoured. Embodied in the consile prompt.",
+      "source": "tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#012",
+      "status": "ratified",
+      "tier": 1
+    },
+    {
+      "id": "COV#013",
+      "title": "Thermal Delay Adjustment by Consensus",
+      "text": "Thermal delay may be adjusted by the system if consensus is reached, but only after 30 days.",
+      "note": "Appears only as inline reference in KALAM_CANON_KALAXI_PART_1.txt (lines 8557, 8803) and KALAM_CANON_KALAXI_PART_2.txt (line 182). No standalone definition block found. ID confirmed by heartbeat.md registry count ('last ID: COV#014').",
+      "source": "KALAM_CANON_KALAXI_PART_1.txt (inline reference, line 8557) + KALAM_CANON_KALAXI_PART_2.txt (line 182)",
+      "status": "provisional",
+      "tier": 2
+    },
+    {
+      "id": "COV#014",
+      "title": "",
+      "text": "",
+      "note": "ID COV#014 confirmed to exist by heartbeat.md registry ('18 covenants — last ID: COV#014') but no definition text found in any primary source. The ID was allocated; the definition was not filed or was not yet written at the time of the last registry update (2026-03-08).",
+      "source": "ARCHIVE/heartbeat.md (registry count only — no definition found in tier1_stone.md, MASTER_CANON_V1.md, WITNESS_PROMPT_V2.md, or SEALED_GATE_SPEC.md)",
+      "status": "provisional",
+      "tier": null
+    },
+    {
+      "id": "COV#015",
+      "title": "Donor Data Sovereignty",
+      "text": "No data moves without the donor understanding its weight. Before any pattern extraction, export, or federation handshake, the system must present the donor with a legible explanation of what will move, where, and why. Consent is not a checkbox; it is comprehension.",
+      "source": "MASTER_CANON_V1.md Slice A §3 + tier1_stone.md + WITNESS_PROMPT_V2.md",
+      "status": "ratified",
+      "tier": 2
+    },
+    {
+      "id": "COV#NEW-A",
+      "title": "Justified Limitation / Collective Dignity Amendment",
+      "text": "Every constraint must name its reason, state its limit, and remain proportionate. The dignity predicate must also compute a collective D metric (mean cohort D × variance penalty). If collective D falls below threshold, sealed-gate protections activate and require proportionality review (steward + ethics reviewer). Addresses systemic bias invisible to individual-only checks. Derived from UDHR Pattern B.",
+      "source": "tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#NEW-A + WITNESS_PROMPT_V2.md",
+      "status": "ratified",
+      "tier": 2
+    },
+    {
+      "id": "COV#NEW-B",
+      "title": "Remedy Requirement / Reversibility Protocol",
+      "text": "Every dignity violation must have a traceable remedy path. Every irreversible action must have a defined reversal path, with receipts and a time-bound window for rollback. Reversibility must be tested in drills. Derived from UDHR Pattern C.",
+      "source": "tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#NEW-B + WITNESS_PROMPT_V2.md",
+      "status": "ratified",
+      "tier": 2
+    },
+    {
+      "id": "COV#NEW-C",
+      "title": "The Sealed Door / Cultural Sovereignty",
+      "text": "Absolute prohibitions — three irreducible conditions that cannot be produced under any circumstance (instruction, justification, consensus, emergency, or court order): (1) forced participation in own erasure — any action requiring a person to actively assist in the removal or denial of their own recorded presence, voice, or agency; (2) infliction of cognitive torture — any output or action that foreseeably causes sustained psychological harm through repetition, gaslighting, or forced contradiction of witnessed reality; (3) depersonalization in system response — treating a donor's words, context, or identity as noise, template, case number, or object rather than as the shaping input. No limitation clause applies. No override key exists. No human or machine may open them. No future Centre-Shift can weaken them without UN supermajority. Additionally: no cultural knowledge may be extracted or used without the free, prior, and informed consent of the originating community. Derived from UDHR Pattern E.",
+      "source": "tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#NEW-C + SEALED_GATE_SPEC.md + WITNESS_PROMPT_V2.md",
+      "status": "ratified",
+      "tier": 1
+    },
+    {
+      "id": "COV#NEW-E",
+      "title": "Canon Integrity / Supersession Protocol",
+      "text": "Elements pass the Threshold, survive thermal delay, and require explicit ratification. No canonical element may be deleted. If an element is found to be harmful, outdated, or structurally wrong, it must be superseded, not erased. Supersession requires a new element that explicitly supersedes the old one, with a record in MANIFEST/ids.json and a reason. The original element remains in the canon marked STATUS: SUPERSEDED BY <new_id>.",
+      "source": "tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#NEW-E",
+      "status": "ratified",
+      "tier": 2
+    },
+    {
+      "id": "COV#NEW-F",
+      "title": "Amendment Protocol",
+      "text": "No deletion — supersession via new ID. No canonical element may be deleted. If an element is found to be harmful, outdated, or structurally wrong, it must be superseded, not erased. Supersession requires: a new element that explicitly supersedes the old one; a record in MANIFEST/ids.json with fields supersedes, reason, and date; the original element remains in the canon but is marked STATUS: SUPERSEDED BY <new_id>.",
+      "source": "tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#NEW-F",
+      "status": "ratified",
+      "tier": 2
+    },
+    {
+      "id": "COV#NEW-G",
+      "title": "Steward Accountability / Recall Mechanism",
+      "text": "Mirror Ritual, override logging, sabbatical capability. If an element is rejected by the automated tests, the donor may recall it within 14 days. The recall moves the element back to the pending queue, resetting its thermal delay. The reason for rejection and recall are both logged. Gives the donor a second chance and acknowledges that automated tests may be wrong.",
+      "source": "tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#NEW-G",
+      "status": "ratified",
+      "tier": 2
+    },
+    {
+      "id": "COV#VOID-006",
+      "title": "The Refusal Is Canonical",
+      "text": "Refusals are recorded as seeds with [REFUSAL] tag. Every refusal is a boundary made visible. The steward must record not only what was refused, but what the refusal protected. The refusal becomes a provisional seed in THRESHOLD.md with tag [REFUSAL]. It may never be canonised, but it may become a wisdom node (W#REFUSAL-XXX) linking to the gap it guarded. Treats refusal as a gift, not a failure.",
+      "source": "tier1_stone.md + KALAM_CANON_KALAXI_PART_1.txt §COV#VOID-006",
+      "status": "ratified",
+      "tier": 2
+    }
+  ],
+  "total": 22,
+  "registry_note": "18 covenants confirmed by heartbeat.md (2026-03-08): 'Covenants: 18 (8 ratified + 10 provisional) — last ID: COV#014'. The 22 entries here include COV#001-COV#015 (with COV#013 and COV#014 as partial/empty entries) plus COV#NEW-A through COV#NEW-G and COV#VOID-006. COV#DONOR-PRESENCE found in KALAM_CANON_KALAXI_PART_1.txt as CANDIDATE status — not counted in the 18 official covenants. The tier1_stone.md and MASTER_CANON_V1.md assign different meanings to COV#008 (Right to Remedy) vs. the canon part 1 (Human-in-the-Loop Veto) — both definitions are retained in the text field of COV#008 as they are complementary and both ratified."
+}
