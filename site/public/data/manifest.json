@@ -92,6 +92,27 @@
       "path": "/data/wisdom-nodes.json",
       "count": 4,
       "status": "canonical"
+    },
+    {
+      "id": "VOICE-ARCH",
+      "type": "voice",
+      "path": "/data/voice-architecture.json",
+      "count": 31,
+      "status": "canonical"
+    },
+    {
+      "id": "TRILITERAL",
+      "type": "voice",
+      "path": "/data/triliteral-roots.json",
+      "count": 4,
+      "status": "canonical"
+    },
+    {
+      "id": "DICTIONARY",
+      "type": "voice",
+      "path": "/data/dictionary.json",
+      "count": 89,
+      "status": "canonical"
     }
   ],
   "connections": [
@@ -104,6 +125,9 @@
     { "from": "SCIENCE", "to": "NAR-KALAXI1", "type": "stress-test-to-narrative" },
     { "from": "ANOMALIES", "to": "PROVERBS", "type": "anomaly-to-wisdom" },
     { "from": "WISDOM-NODES", "to": "ANOMALIES", "type": "synthesis" },
-    { "from": "WISDOM-NODES", "to": "PROVERBS", "type": "synthesis" }
+    { "from": "WISDOM-NODES", "to": "PROVERBS", "type": "synthesis" },
+    { "from": "VOICE-ARCH", "to": "DICTIONARY", "type": "voice-to-vocabulary" },
+    { "from": "TRILITERAL", "to": "VOICE-ARCH", "type": "grammar-to-voice" },
+    { "from": "TRILITERAL", "to": "DICTIONARY", "type": "grammar-to-vocabulary" }
   ]
 }

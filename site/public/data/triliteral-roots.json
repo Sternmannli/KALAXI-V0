@@ -1,0 +1,245 @@
+{
+  "source": "VOICE/TRILITERAL_ROOT_SYSTEM_2026-03-18.md",
+  "abt_system": [
+    {
+      "letter": "Alef (ا)",
+      "abjad": 1,
+      "connection": "Non-connector",
+      "somatic_origin": "Throat (glottal)",
+      "axi_role": "Genesis / write-once"
+    },
+    {
+      "letter": "Ba (ب)",
+      "abjad": 2,
+      "connection": "Connector",
+      "somatic_origin": "Lips (bilabial)",
+      "axi_role": "Bridge / flow / processing"
+    },
+    {
+      "letter": "Ta (ت)",
+      "abjad": 400,
+      "connection": "Connector (or isolated on halt)",
+      "somatic_origin": "Teeth (dental stop)",
+      "axi_role": "Witness / attestation / halt"
+    }
+  ],
+  "somatic_zones": [
+    {
+      "zone": "Throat (حلقي)",
+      "letters": "ء ه ع ح غ خ",
+      "body_part": "Deep throat, glottis",
+      "axi_mapping": "Genesis, origin, wound"
+    },
+    {
+      "zone": "Back tongue (لهوي)",
+      "letters": "ق ك",
+      "body_part": "Tongue root → soft palate",
+      "axi_mapping": "Deep processing, hidden patterns"
+    },
+    {
+      "zone": "Mid tongue (شجري)",
+      "letters": "ج ش ي",
+      "body_part": "Tongue blade → hard palate",
+      "axi_mapping": "Branching, narrative registers"
+    },
+    {
+      "zone": "Tip tongue (ذلقي)",
+      "letters": "ل ن ر",
+      "body_part": "Tongue tip → alveolar ridge",
+      "axi_mapping": "Flow, connection, witness marks"
+    },
+    {
+      "zone": "Dental (أسناني)",
+      "letters": "ت ث د ذ ص ض ط ظ",
+      "body_part": "Tongue tip → teeth",
+      "axi_mapping": "Hard stops, gates, boundaries"
+    },
+    {
+      "zone": "Lip (شفوي)",
+      "letters": "ب م و ف",
+      "body_part": "Lips",
+      "axi_mapping": "Gateway, release, breath visible"
+    }
+  ],
+  "roots": [
+    {
+      "root_arabic": "ش-ه-د",
+      "root_latin": "sh-h-d",
+      "core_meaning": "witnessing",
+      "forms": [
+        {
+          "arabic": "shahida",
+          "transliteration": "شَهِدَ",
+          "meaning": "he witnessed",
+          "axi_module": "WITNESS NETWORK"
+        },
+        {
+          "arabic": "shahāda",
+          "transliteration": "شَهَادَة",
+          "meaning": "testimony/certificate",
+          "axi_module": "WITNESS CERTIFICATE"
+        },
+        {
+          "arabic": "shāhid",
+          "transliteration": "شَاهِد",
+          "meaning": "witness (person)",
+          "axi_module": "STEWARD"
+        },
+        {
+          "arabic": "mashhad",
+          "transliteration": "مَشْهَد",
+          "meaning": "scene, what is witnessed",
+          "axi_module": "FACE (UI visibility)"
+        },
+        {
+          "arabic": "istashhada",
+          "transliteration": "اسْتَشْهَد",
+          "meaning": "to seek testimony",
+          "axi_module": "CHECK (dignity gate)"
+        }
+      ]
+    },
+    {
+      "root_arabic": "ك-ر-م",
+      "root_latin": "k-r-m",
+      "core_meaning": "dignity/generosity",
+      "forms": [
+        {
+          "arabic": "karuma",
+          "transliteration": "كَرُمَ",
+          "meaning": "to be noble/dignified",
+          "axi_module": "DIGNITY PREDICATE"
+        },
+        {
+          "arabic": "karāma",
+          "transliteration": "كَرَامَة",
+          "meaning": "dignity (the state)",
+          "axi_module": "D = A × L × M"
+        },
+        {
+          "arabic": "mukarram",
+          "transliteration": "مُكَرَّم",
+          "meaning": "honored/dignified",
+          "axi_module": "D > 0 (passes)"
+        },
+        {
+          "arabic": "ikrām",
+          "transliteration": "إكْرَام",
+          "meaning": "honoring (the act)",
+          "axi_module": "REMEDY (COV#008)"
+        },
+        {
+          "arabic": "karīm",
+          "transliteration": "كَرِيم",
+          "meaning": "generous/noble",
+          "axi_module": "STEWARD (who remedies)"
+        }
+      ]
+    },
+    {
+      "root_arabic": "ح-ف-ظ",
+      "root_latin": "h-f-z",
+      "core_meaning": "guarding/preserving",
+      "forms": [
+        {
+          "arabic": "hafiza",
+          "transliteration": "حَفِظَ",
+          "meaning": "to preserve/memorize",
+          "axi_module": "KEEP (append-only)"
+        },
+        {
+          "arabic": "hāfiz",
+          "transliteration": "حَافِظ",
+          "meaning": "guardian/one who preserves",
+          "axi_module": "LEDGER"
+        },
+        {
+          "arabic": "mahfūz",
+          "transliteration": "مَحْفُوظ",
+          "meaning": "preserved/protected",
+          "axi_module": "HASH CHAIN"
+        },
+        {
+          "arabic": "hifz",
+          "transliteration": "حِفْظ",
+          "meaning": "preservation (the act)",
+          "axi_module": "COV#010 (memory)"
+        }
+      ]
+    },
+    {
+      "root_arabic": "ع-ق-د",
+      "root_latin": "a-q-d",
+      "core_meaning": "knotting/contracting",
+      "forms": [
+        {
+          "arabic": "'aqada",
+          "transliteration": "عَقَدَ",
+          "meaning": "to tie/knot/contract",
+          "axi_module": "COVENANT RATIFICATION"
+        },
+        {
+          "arabic": "'uqda",
+          "transliteration": "عُقْدَة",
+          "meaning": "knot (physical + metaphorical)",
+          "axi_module": "THE KNOT (voice image)"
+        },
+        {
+          "arabic": "'aqd",
+          "transliteration": "عَقْد",
+          "meaning": "contract/covenant",
+          "axi_module": "COV#001-018"
+        },
+        {
+          "arabic": "mu'aqqad",
+          "transliteration": "مُعَقَّد",
+          "meaning": "complex/knotted",
+          "axi_module": "BREATH (stress threshold)"
+        },
+        {
+          "arabic": "in'iqād",
+          "transliteration": "اِنْعِقَاد",
+          "meaning": "convening/forming",
+          "axi_module": "TURN (exchange cycle)"
+        },
+        {
+          "arabic": "AXI Concept",
+          "transliteration": "Arabic Concept",
+          "meaning": "Explanation",
+          "axi_module": "|---------------"
+        },
+        {
+          "arabic": "Covenant (Layer 1)",
+          "transliteration": "Pattern (وزن)",
+          "meaning": "The rule that shapes the root into law.",
+          "axi_module": "| Word (كلمة)"
+        },
+        {
+          "arabic": "| Sentence (جملة)",
+          "transliteration": "The unit that carries meaning through the system.",
+          "meaning": "Exchange/Turn",
+          "axi_module": "The complete cycle of meaning."
+        },
+        {
+          "arabic": "Arabic Morphology",
+          "transliteration": "Property",
+          "meaning": "AXI Ledger",
+          "axi_module": "|----------"
+        },
+        {
+          "arabic": "New forms don't destroy old roots",
+          "transliteration": "Non-destruction",
+          "meaning": "Append-only: nothing deleted",
+          "axi_module": "| Visible structure"
+        },
+        {
+          "arabic": "| Generative",
+          "transliteration": "Hash always verifiable from any entry",
+          "meaning": "One root → hundreds of words",
+          "axi_module": "One genesis → thousands of witness marks"
+        }
+      ]
+    }
+  ],
+  "total_roots": 4
+}
