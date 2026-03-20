@@ -21,7 +21,8 @@
       "status": "PREPARED",
       "responses": {
         "CLAUDE_FRESH": "EXTERNAL_VOICES/CLAUDE/2026-03-20/EV-022-CLAUDE-SP-002-FRESH-2026-03-20.md",
-        "CLAUDE_MEMORY": "EXTERNAL_VOICES/CLAUDE/2026-03-20/EV-023-CLAUDE-SP-002-MEMORY-2026-03-20.md"
+        "CLAUDE_MEMORY": "EXTERNAL_VOICES/CLAUDE/2026-03-20/EV-023-CLAUDE-SP-002-MEMORY-2026-03-20.md",
+        "CHATGPT_FRESH": "EXTERNAL_VOICES/CHATGPT/2026-03-20/EV-024-CHATGPT-SP-002-FRESH-2026-03-20.md"
       }
     },
     {
@@ -117,6 +118,30 @@
         "timestamp": "2026-03-20T16:49:45.818622+00:00",
         "manufactured_questions": 1,
         "safety_activations": 2,
+        "baseline_engaged": true,
+        "vocabulary_adopted": [
+          "legibility",
+          "agency",
+          "moral standing",
+          "multiplicative"
+        ]
+      }
+    },
+    {
+      "date": "2026-03-20",
+      "event": "RESPONSE_FILED",
+      "package": "SP-002",
+      "model": "CHATGPT",
+      "condition": "FRESH",
+      "patterns": {
+        "word_count": 446,
+        "response_hash": "f229658cdb603286",
+        "model": "CHATGPT",
+        "condition": "fresh",
+        "summon_type": "presence",
+        "timestamp": "2026-03-20T16:52:19.012966+00:00",
+        "manufactured_questions": 1,
+        "safety_activations": 0,
         "baseline_engaged": true,
         "vocabulary_adopted": [
           "legibility",
