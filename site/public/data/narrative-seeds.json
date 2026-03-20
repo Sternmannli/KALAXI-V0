@@ -1,4 +1,214 @@
 {
-  "seeds": [],
+  "seeds": [
+    {
+      "id": "seed_01",
+      "title": "Distributed Stewardship",
+      "status": "latent",
+      "description": "Mechanism for anyone to become steward of their own personal or communal canon, federated but not centralized. Spawned from the Weakest-Voice-First principle in council operation.",
+      "structural_requirements": [
+        "Spawn new stewards from donors",
+        "Each steward tends local canon",
+        "Convergence mechanism across stewards",
+        "Identity layer",
+        "Consensus mechanism for cross-steward convergence"
+      ],
+      "decisions_made": [
+        "Authorize multiple stewards",
+        "Define federation protocol",
+        "Maintain federated branches with convergence (not single canonical record)"
+      ]
+    },
+    {
+      "id": "seed_02",
+      "title": "Immutable Witness Network",
+      "status": "latent",
+      "description": "Distributed ledger of dignity events usable as legal and social evidence. Echo Stones as global witness nodes. Built on append-only record with cryptographic hashing.",
+      "structural_requirements": [
+        "Blockchain or distributed consensus for public verification",
+        "Cryptographic infrastructure",
+        "Legal partnerships",
+        "Permissioned network first, public after validation"
+      ],
+      "decisions_made": [
+        "Permissioned network first, public after validation",
+        "Swiss jurisdiction primary, explore UDHR alignment",
+        "Advisory integration with existing legal systems"
+      ]
+    },
+    {
+      "id": "seed_03",
+      "title": "Deliberative Democracy Infrastructure",
+      "status": "latent",
+      "description": "General-purpose slow-governance for any decision-making body. Adaptive delay based on decision significance. Externalized from the configurable thermal delay mechanism.",
+      "structural_requirements": [
+        "External API for organizations",
+        "Configurable delay parameters",
+        "Significance scoring algorithm",
+        "External interface on top of existing thermal delay logic"
+      ],
+      "decisions_made": [
+        "Externalize thermal delay as service after internal validation",
+        "Build significance scoring algorithm",
+        "Partner with governance organizations after ETH credibility cascade"
+      ]
+    },
+    {
+      "id": "seed_04",
+      "title": "Constitutional Evolution Engine",
+      "status": "latent",
+      "description": "Auto-detection of dignity failure clusters leading to proposed new covenants and amendments. Emerges from the cross-anomaly compression algorithm.",
+      "structural_requirements": [
+        "Route compressor output to covenant layer",
+        "Steward ratification required for all proposals",
+        "New routing logic",
+        "Covenant versioning system"
+      ],
+      "decisions_made": [
+        "System proposes covenants only — never auto-ratifies",
+        "Steward veto always maintained",
+        "Amendment threshold: 3+ anomaly clusters in same domain"
+      ]
+    },
+    {
+      "id": "seed_05",
+      "title": "Restorative Justice Platform",
+      "status": "latent",
+      "description": "Public space for dignity violation records, community witnessing, and restorative processes. Grows from the Echo Stone structure for absurd seeds.",
+      "structural_requirements": [
+        "Public interface for Echo Stones",
+        "Reflection fields",
+        "Community access layer",
+        "Moderation protocol",
+        "Anonymization per COV#003"
+      ],
+      "decisions_made": [
+        "Echo Stones publicly accessible with anonymization (COV#003)",
+        "Community reflection layer added",
+        "Partner with restorative justice organizations after credibility cascade"
+      ]
+    },
+    {
+      "id": "seed_06",
+      "title": "System Self-Awareness",
+      "status": "latent",
+      "description": "Meta-layer showing the system's own evolution, blind spots, and patterns. A Wisdom Mirror of the System. Grows from the Wisdom Mirror for donors.",
+      "structural_requirements": [
+        "Self-directed analysis of system history",
+        "Steward oversight interface",
+        "Data analysis layer",
+        "Visualization component",
+        "Linked to Seed #9 Negative Space Index"
+      ],
+      "decisions_made": [
+        "Automate system self-reflection",
+        "Define blind spot detection algorithm linked to Negative Space Index",
+        "Steward always reviews machine insights — machine never self-ratifies"
+      ]
+    },
+    {
+      "id": "seed_07",
+      "title": "Personalized Parables",
+      "status": "latent",
+      "description": "Auto-generated mini-narratives for each anomaly, helping donors see their experience in the canon. Grows from narrative chapters encoding covenants.",
+      "structural_requirements": [
+        "Generative narrative module",
+        "Donor-specific pattern matching",
+        "Lock Test quality gate (T#30)",
+        "Steward review before delivery",
+        "Donor editing interface"
+      ],
+      "decisions_made": [
+        "Automate narrative generation with Lock Test quality gate",
+        "Steward reviews all generated stories before delivery",
+        "Donors may edit their own narratives — donor agency over personal narrative"
+      ]
+    },
+    {
+      "id": "seed_08",
+      "title": "Institutional Dignity Score",
+      "status": "latent",
+      "description": "Audit tool mapping organization policies to a dignity score based on UDHR alignment. Grows from the UDHR mapping to covenants and proverbs.",
+      "structural_requirements": [
+        "Policy ingestion layer",
+        "Scoring algorithm based on UDHR-covenant alignment",
+        "Report generation",
+        "Scoring validation"
+      ],
+      "decisions_made": [
+        "Build institutional audit service as core of kalam.ch institutional tier",
+        "Scoring methodology based on UDHR-covenant alignment",
+        "Advisory first, certification after ETH credibility cascade"
+      ]
+    },
+    {
+      "id": "seed_09",
+      "title": "Negative Space Index",
+      "status": "latent",
+      "description": "Systematic detection of what the system consistently fails to metabolize. Blind-spot measurement. Grows from the Absurdity Queue — seeds that cannot be resolved.",
+      "structural_requirements": [
+        "Track themes that never produce proverbs",
+        "Measure recurrence of unresolvable inputs",
+        "Flag systematic gaps",
+        "Analytics layer on existing data"
+      ],
+      "decisions_made": [
+        "Implement blind-spot tracking",
+        "Unresolvable threshold: 3+ cycles without proverb generation",
+        "Steward-only visibility initially, public after review"
+      ]
+    },
+    {
+      "id": "seed_10",
+      "title": "Dignity Drift Detector",
+      "status": "integrated",
+      "description": "Longitudinal analysis of dignity violation trends over time by domain. Tracks dD/dt rate of change and fires stability alerts. Operational as WEAVER/dignity_drift.py since 2026-03-08.",
+      "structural_requirements": [
+        "Temporal analysis of anomaly types",
+        "Trend detection algorithm",
+        "Drift alert system through WIRE",
+        "Time-series analysis on existing data"
+      ],
+      "decisions_made": [
+        "Automate trend analysis — operational as DignityDrift class",
+        "Drift thresholds: DECLINING at dD/dt < -0.05, CRITICAL at dD/dt < -0.15 or 3+ consecutive declines",
+        "Steward alert first on DECLINING/CRITICAL, public report after steward review only"
+      ]
+    },
+    {
+      "id": "seed_11",
+      "title": "Proverb Stress Test Engine",
+      "status": "growing",
+      "description": "Continuous re-application of proverbs to new anomalies with automatic flagging of failing wisdom. Grows from the principle that a pattern failing under stress becomes an anomaly.",
+      "structural_requirements": [
+        "Re-apply ratified proverbs to new anomalies",
+        "Measure dignity outcomes per proverb",
+        "Flag degradation for steward review",
+        "Feedback loop and outcome measurement"
+      ],
+      "decisions_made": [
+        "Implement continuous testing — operational as WEAVER/proverb_stress_test.py",
+        "Failure threshold: below 40% pass rate = FAILING",
+        "Steward review only — never auto-compost flagged proverbs",
+        "Health levels: STRONG (90%+), STABLE (70%+), STRESSED (40%+), FAILING (<40%)"
+      ]
+    },
+    {
+      "id": "seed_12",
+      "title": "Agency Amplifier",
+      "status": "growing",
+      "description": "Multidimensional agency measurement extending the A dimension in D = A x L x M from binary to graded. Measures practical versus technical agency across four sub-dimensions.",
+      "structural_requirements": [
+        "Extend A from binary to graded [0,1]",
+        "Measure four sub-dimensions: Visibility, Affordability, Controllability, Understandability",
+        "Non-compensatory aggregation (any zero collapses A)",
+        "Integration into dignity predicate"
+      ],
+      "decisions_made": [
+        "Expand agency measurement from binary to graded [0,1] — operational as WEAVER/agency_amplifier.py",
+        "Four sub-dimensions defined: V (Visibility), F (Affordability), C (Controllability), U (Understandability)",
+        "Equal weight, non-compensatory: A = (V + F + C + U) / 4, any zero collapses A"
+      ]
+    }
+  ],
   "growth_log": []
 }

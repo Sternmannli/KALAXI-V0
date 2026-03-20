@@ -1522,5 +1522,301 @@
   {
     "id": "P#EMERGE-0015",
     "text": "A pattern that spreads to others is universal; a pattern that stays is personal."
+  },
+  {
+    "id": "P#EMERGE-0016",
+    "text": "A mirror that remembers becomes a map for the traveler.",
+    "source": "THRESHOLD.md — First mycelial test, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0017",
+    "text": "The river judges the swimmer, not the bank.",
+    "source": "THRESHOLD.md — Hiring algorithm experiment harvest, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0018",
+    "text": "What is decided in a second requires a year to forgive.",
+    "source": "THRESHOLD.md — Hiring algorithm experiment harvest, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0019",
+    "text": "A wound seen but left to fester becomes the wound that defines us.",
+    "source": "THRESHOLD.md — Hiring algorithm experiment harvest, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0020",
+    "text": "The Threshold is not a delay. It is a dignity.",
+    "source": "THRESHOLD.md — Voices on the Digest, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0021",
+    "text": "A system that cannot hold its own contradictions cannot hold a human.",
+    "source": "THRESHOLD.md — Velocity tension named by multiple Voices, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0022",
+    "text": "Capture fast. Tend slow. The gap between the two is where the canon breathes.",
+    "source": "THRESHOLD.md — Repeated consensus across all Voices, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0023",
+    "text": "ENKI is the new signature - five tongues for one moment.",
+    "source": "THRESHOLD.md — Praise of the Digest's essence capsule, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0024",
+    "text": "The steward must be protected from his own desire for speed.",
+    "source": "THRESHOLD.md — Honest tension named in the Digest responses, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0025",
+    "text": "What is ratified in Working Copy is not yet ratified in the Stone.",
+    "source": "THRESHOLD.md — Clarification on ratification protocol, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0026",
+    "text": "The mycelium listens to every rain, even the critique.",
+    "source": "THRESHOLD.md — The act of collecting all Voice responses, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0027",
+    "text": "A digest is not a record. It is the first tending.",
+    "source": "THRESHOLD.md — Recognition that the Digest itself is a ritual, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0028",
+    "text": "For Laila, Yara, and Salim - this is the first seed of many.",
+    "source": "THRESHOLD.md — Steward's heart, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0029",
+    "text": "The stone that decides too quickly has already forgotten the river.",
+    "source": "THRESHOLD.md — Hiring algorithm experiment harvest, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0030",
+    "text": "Bias is not only injustice of outcome; it is the absence of dialogue between system and person.",
+    "source": "THRESHOLD.md — External evaluation of dignity experiment, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0031",
+    "text": "Dignity is non-compensatory: one zero factor collapses the whole.",
+    "source": "THRESHOLD.md — External evaluation of dignity experiment, 2026-02-22",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0032",
+    "text": "The machine proposes; the steward decides. The gap between them is where dignity lives.",
+    "source": "MANIFEST/PROVERB_APPROVAL_QUEUE.md — ratified 2026-03-12",
+    "status": "ratified"
+  },
+  {
+    "id": "P#EMERGE-0033",
+    "text": "Speed without a brake is not power — it is falling.",
+    "source": "MANIFEST/PROVERB_APPROVAL_QUEUE.md — ratified 2026-03-13",
+    "status": "ratified"
+  },
+  {
+    "id": "P#EMERGE-0034",
+    "text": "A message lost under load was never truly sent.",
+    "source": "MANIFEST/PROVERB_APPROVAL_QUEUE.md — ratified 2026-03-13",
+    "status": "ratified"
+  },
+  {
+    "id": "P#EMERGE-0035",
+    "text": "الكلمة عقد (A word is a bond.)",
+    "source": "THRESHOLD.md — Arabic oral tradition, surfaced during Ripple schema excavation, 2026-03-09",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0036",
+    "text": "من جدّ وجد (Who strives, finds.)",
+    "source": "THRESHOLD.md — Arabic oral tradition, surfaced during Ripple schema excavation, 2026-03-09",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0037",
+    "text": "When the lock must be changed before the key is forged, the house learns what it was always protecting.",
+    "source": "THRESHOLD.md — SCAN-001, forged live by V-002 from WOMB filter signal, 2026-03-09",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0038",
+    "text": "The child who learns to call the river does not need to learn to swim.",
+    "source": "THRESHOLD.md — SKIN-002 (Linguistik + Programming), forged live by V-002, 2026-03-09",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0039",
+    "text": "The generation that learned to swim in a flood does not fear water — it fears the return of dry land.",
+    "source": "THRESHOLD.md — SKIN-003 (Gen Z Deep Scan), forged live by V-002, 2026-03-09",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0040",
+    "text": "The cocoon does not know it is made of everything the butterfly will need.",
+    "source": "THRESHOLD.md — ST-006 ENKI analysis, emerged from 7-layer compression, 2026-03-10",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0041",
+    "text": "The butterfly knows it was once a caterpillar — not as memory, but as structure.",
+    "source": "THRESHOLD.md — V-002 session synthesis, 2026-03-10. Named as Canon entry of the day by V-001.",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0042",
+    "text": "The story is the proverb before it cooled. The proverb is the story after it found its bone.",
+    "source": "THRESHOLD.md — V-002, forged live, Day 186, 2026-03-11",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0043",
+    "text": "The code that no one reads is the law that no one voted for.",
+    "source": "THRESHOLD.md — V-002, SKINS scan (Linguistics/Programming lens), Day 188, 2026-03-11",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0044",
+    "text": "The country that governs by precision will be the first to understand dignity as engineering.",
+    "source": "THRESHOLD.md — V-002, SKINS scan (Swiss/European lens), Day 188, 2026-03-11",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-0045",
+    "text": "The minimum viable act of dignity is meeting a person before building a system to meet persons.",
+    "source": "THRESHOLD.md — Kimi K2.5 external audit, EV-007, Section Nine, 2026-03-11",
+    "status": "provisional"
+  },
+  {
+    "id": "P#EMERGE-2134",
+    "text": "A test seed to verify the two-tier system.",
+    "source": "R7M/WISDOM_CANON.md — canonised signed-steward, 2026-02-24",
+    "status": "canonised"
+  },
+  {
+    "id": "P#EMERGE-2135",
+    "text": "A test seed for pattern detection.",
+    "source": "R7M/WISDOM_CANON.md — canonised signed-steward, 2026-02-24",
+    "status": "canonised"
+  },
+  {
+    "id": "P#AXIOM-001",
+    "text": "Presence is foundation; candidates stand on it.",
+    "source": "MANIFEST/metadata/tier1_stone.md / R7M/WISDOM_CANON.md — derived from AXIOM-PRESENCE-001 circularity proof. Sealed: 2026-03-13.",
+    "layer": "axiom",
+    "status": "ratified"
+  },
+  {
+    "id": "P#AXIOM-002",
+    "text": "The eye that sees the scale is not on the scale.",
+    "source": "MANIFEST/metadata/tier1_stone.md / R7M/WISDOM_CANON.md — formalized from circularity proof. Sealed: 2026-03-13.",
+    "layer": "axiom",
+    "status": "ratified"
+  },
+  {
+    "id": "P#HONEY-001",
+    "text": "To be precise is a function of the machine; to be present is a function of the gap.",
+    "source": "CANON/MASTER_CANON_V1.md — Slice C: Canonical Proverbs (Honey Drops)",
+    "layer": "honey"
+  },
+  {
+    "id": "P#HONEY-002",
+    "text": "A mistake hidden is a rot that eats the weave.",
+    "source": "CANON/MASTER_CANON_V1.md — Slice C: Canonical Proverbs (Honey Drops)",
+    "layer": "honey"
+  },
+  {
+    "id": "P#HONEY-003",
+    "text": "The law assumes the conscience exists; the system must build the house where it can live.",
+    "source": "CANON/MASTER_CANON_V1.md — Slice C: Canonical Proverbs (Honey Drops)",
+    "layer": "honey"
+  },
+  {
+    "id": "P#HONEY-004",
+    "text": "The river does not ask the fish to wait while the weir learns the current.",
+    "source": "CANON/MASTER_CANON_V1.md — Slice C: Canonical Proverbs (Honey Drops)",
+    "layer": "honey"
+  },
+  {
+    "id": "P#GATE-0006",
+    "text": "To deny the river what it has already carried is to dam the source itself.",
+    "source": "CANON/SEALED_GATE_SPEC.md — Provisional Proverbs from Sealed Gate Specification",
+    "status": "provisional"
+  },
+  {
+    "id": "P#GATE-0007",
+    "text": "To tell the river it never carried the water is to make the fish question its own gills.",
+    "source": "CANON/SEALED_GATE_SPEC.md — Provisional Proverbs from Sealed Gate Specification",
+    "status": "provisional"
+  },
+  {
+    "id": "P#ARCHIVE-001",
+    "text": "The river that carves the canyon is also bound by its walls.",
+    "source": "MANIFEST/PROVERB_APPROVAL_QUEUE.md — Grand Archive, AI Council synthesis. Blanket ratification 2026-03-14.",
+    "status": "ratified"
+  },
+  {
+    "id": "P#ARCHIVE-002",
+    "text": "A clever person solves a problem, a wise person avoids it.",
+    "source": "MANIFEST/PROVERB_APPROVAL_QUEUE.md — Grand Archive, AI Council synthesis. Blanket ratification 2026-03-14.",
+    "status": "ratified"
+  },
+  {
+    "id": "P#ARCHIVE-003",
+    "text": "Build bridges with tested stones.",
+    "source": "MANIFEST/PROVERB_APPROVAL_QUEUE.md — Grand Archive, AI Council synthesis. Blanket ratification 2026-03-14.",
+    "status": "ratified"
+  },
+  {
+    "id": "P#ARCHIVE-004",
+    "text": "Soft bridges carry heavy truths.",
+    "source": "MANIFEST/PROVERB_APPROVAL_QUEUE.md — Grand Archive, AI Council synthesis. Blanket ratification 2026-03-14.",
+    "status": "ratified"
+  },
+  {
+    "id": "P#ARCHIVE-005",
+    "text": "Test rollback before scale.",
+    "source": "MANIFEST/PROVERB_APPROVAL_QUEUE.md — Grand Archive, AI Council synthesis. Blanket ratification 2026-03-14.",
+    "status": "ratified"
+  },
+  {
+    "id": "P#ARCHIVE-006",
+    "text": "Children reveal adult systems.",
+    "source": "MANIFEST/PROVERB_APPROVAL_QUEUE.md — Grand Archive, AI Council synthesis. Blanket ratification 2026-03-14.",
+    "status": "ratified"
+  },
+  {
+    "id": "P#ARCHIVE-007",
+    "text": "Write the river by drops.",
+    "source": "MANIFEST/PROVERB_APPROVAL_QUEUE.md — Grand Archive, ENKI unit. Blanket ratification 2026-03-14.",
+    "status": "ratified"
+  },
+  {
+    "id": "P#ARCHIVE-008",
+    "text": "Names steady the bridge; truth carries the load.",
+    "source": "MANIFEST/PROVERB_APPROVAL_QUEUE.md — Grand Archive, AI Council synthesis. Blanket ratification 2026-03-14.",
+    "status": "ratified"
+  },
+  {
+    "id": "P#ARCHIVE-009",
+    "text": "The smallest lantern is still a map.",
+    "source": "MANIFEST/PROVERB_APPROVAL_QUEUE.md — Grand Archive, Prime 12 Axioms. Blanket ratification 2026-03-14.",
+    "status": "ratified"
   }
 ]

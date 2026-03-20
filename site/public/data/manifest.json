@@ -49,13 +49,14 @@
       "id": "PROVERBS",
       "type": "wisdom",
       "path": "/data/proverbs.json",
-      "count": 381,
+      "count": 430,
       "status": "canonical"
     },
     {
       "id": "SEEDS",
       "type": "growth",
       "path": "/data/narrative-seeds.json",
+      "count": 12,
       "status": "active"
     },
     {
@@ -127,6 +128,34 @@
       "path": "/data/research.json",
       "count": 6,
       "status": "active"
+    },
+    {
+      "id": "COVENANTS",
+      "type": "constitution",
+      "path": "/data/covenants.json",
+      "count": 22,
+      "status": "canonical"
+    },
+    {
+      "id": "LAWS",
+      "type": "constitution",
+      "path": "/data/laws.json",
+      "count": 44,
+      "status": "canonical"
+    },
+    {
+      "id": "OBSERVATIONS",
+      "type": "science",
+      "path": "/data/observations.json",
+      "count": 16,
+      "status": "active"
+    },
+    {
+      "id": "ENKI",
+      "type": "multilingual",
+      "path": "/data/enki.json",
+      "count": 7,
+      "status": "canonical"
     }
   ],
   "connections": [
@@ -145,6 +174,12 @@
     { "from": "TRILITERAL", "to": "DICTIONARY", "type": "grammar-to-vocabulary" },
     { "from": "FOUNDATIONS", "to": "SCIENCE", "type": "theory-to-science" },
     { "from": "RESEARCH", "to": "FOUNDATIONS", "type": "evidence-to-theory" },
-    { "from": "RESEARCH", "to": "ANOMALIES", "type": "study-to-anomaly" }
+    { "from": "RESEARCH", "to": "ANOMALIES", "type": "study-to-anomaly" },
+    { "from": "COVENANTS", "to": "ANOMALIES", "type": "law-to-failure" },
+    { "from": "COVENANTS", "to": "PROVERBS", "type": "law-to-wisdom" },
+    { "from": "LAWS", "to": "COVENANTS", "type": "law-to-covenant" },
+    { "from": "OBSERVATIONS", "to": "RESEARCH", "type": "evidence-to-study" },
+    { "from": "OBSERVATIONS", "to": "ANOMALIES", "type": "observation-to-anomaly" },
+    { "from": "ENKI", "to": "SCIENCE", "type": "experiment-to-science" }
   ]
 }

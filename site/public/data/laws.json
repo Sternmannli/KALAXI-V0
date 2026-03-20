@@ -1,0 +1,327 @@
+{
+  "source": "R7M/WISDOM_CANON.md + CANON/*.md",
+  "laws": [
+    {
+      "id": "LAW-01",
+      "name": "knot",
+      "totem": "La‑la / Ma Da the Reed – The Rope‑Binder",
+      "text": "Every knot is a beginning."
+    },
+    {
+      "id": "LAW-02",
+      "name": "whisper",
+      "totem": "Ya‑la / Na Da the Fish – The Whisper‑Trader",
+      "text": "Every message has weight; carry it with care."
+    },
+    {
+      "id": "LAW-03",
+      "name": "spark",
+      "totem": "Sa‑la / Ka Da the Coal – The Trickster‑Seer",
+      "text": "Every fire begins with a single ember; guard it, but do not smother it."
+    },
+    {
+      "id": "LAW-04",
+      "name": "grip",
+      "totem": null,
+      "text": "No twist without grip."
+    },
+    {
+      "id": "LAW-05",
+      "name": "loop",
+      "totem": null,
+      "text": "A loop is a door; check the hinge."
+    },
+    {
+      "id": "LAW-06",
+      "name": "ash",
+      "totem": null,
+      "text": "Ash is memory that warms the next fire."
+    },
+    {
+      "id": "LAW-07",
+      "name": "laughter",
+      "totem": null,
+      "text": "A knot that laughs slips less."
+    },
+    {
+      "id": "LAW-08",
+      "name": "crack",
+      "totem": null,
+      "text": "Cracks draw the map of repairs."
+    },
+    {
+      "id": "LAW-09",
+      "name": "skin",
+      "totem": null,
+      "text": "The skin decides faster than the tongue."
+    },
+    {
+      "id": "LAW-10",
+      "name": "practice",
+      "totem": null,
+      "text": "Once may be luck; again is life."
+    },
+    {
+      "id": "LAW-11",
+      "name": "obsession",
+      "totem": null,
+      "text": "Let obsession anchor, not drown."
+    },
+    {
+      "id": "LAW-12",
+      "name": "love",
+      "totem": null,
+      "text": "Care keeps the rope from cutting."
+    },
+    {
+      "id": "LAW-13",
+      "name": "fear",
+      "totem": null,
+      "text": "Carry a small fear like a lamp."
+    }
+  ],
+  "badge_vows": [
+    {
+      "id": "BADGE-01",
+      "name": "River, Rope & Trade",
+      "text": "Risk only what returns."
+    },
+    {
+      "id": "BADGE-02",
+      "name": "Rain Teeth & Quiet Cistern",
+      "text": "Catch clean; leave dirt where it wants to settle."
+    },
+    {
+      "id": "BADGE-03",
+      "name": "Ash Water & Clean Hands",
+      "text": "Keep sickness out before it learns our names."
+    },
+    {
+      "id": "BADGE-04",
+      "name": "Wind Door, Shade Wall, and Sleep",
+      "text": "Let air work; don't make it angry."
+    },
+    {
+      "id": "BADGE-05",
+      "name": "Cool Pit, Shelf, and Keep",
+      "text": "What we save should still be food."
+    },
+    {
+      "id": "BADGE-06",
+      "name": "Jar, Fire, and Carry",
+      "text": "Water walks with us."
+    },
+    {
+      "id": "BADGE-07",
+      "name": "Split, Smoke, and Share",
+      "text": "Feed today, remember tomorrow."
+    },
+    {
+      "id": "BADGE-08",
+      "name": "Weir Night Watch",
+      "text": "Watch with eyes, not hunger."
+    },
+    {
+      "id": "BADGE-09",
+      "name": "Shared Weir",
+      "text": "Take enough. Leave mothers and first water."
+    },
+    {
+      "id": "BADGE-10",
+      "name": "Line Talk",
+      "text": "Say less. Say clear."
+    }
+  ],
+  "udhr_mappings": [
+    {
+      "article": 1,
+      "udhr_id": "UN-UDHR-001",
+      "udhr_text": "Inherent dignity and equality",
+      "kalaxi_mapping": "All human beings are born free and equal in dignity and rights. The system treats this as a technical requirement, not a moral aspiration.",
+      "covenant": "COV#001",
+      "proverb_links": ["P#EMERGE-0005"],
+      "pattern": "A"
+    },
+    {
+      "article": 4,
+      "udhr_id": "UN-UDHR-004",
+      "udhr_text": "Prohibition of slavery and servitude",
+      "kalaxi_mapping": "Absolute prohibition. No limitation clause applies. Maps to sealed-gate first tier.",
+      "covenant": "COV#NEW-C",
+      "proverb_links": [],
+      "pattern": "E"
+    },
+    {
+      "article": 5,
+      "udhr_id": "UN-UDHR-005",
+      "udhr_text": "Prohibition of torture and cruel treatment",
+      "kalaxi_mapping": "Absolute prohibition. Cognitive torture explicitly included. Maps to sealed-gate second tier (infliction_of_cognitive_torture).",
+      "covenant": "COV#NEW-C",
+      "proverb_links": [],
+      "pattern": "E"
+    },
+    {
+      "article": 8,
+      "udhr_id": "UN-UDHR-008",
+      "udhr_text": "Right to effective remedy",
+      "kalaxi_mapping": "Every violation requires a traceable path back. An unrestorable right is incomplete. Remedy Requirement Pattern C.",
+      "covenant": "COV#NEW-B",
+      "proverb_links": ["P#EMERGE-0003", "P#EMERGE-0006"],
+      "chapters": ["Chapter 36"],
+      "pattern": "C"
+    },
+    {
+      "article": 11,
+      "udhr_id": "UN-UDHR-011",
+      "udhr_text": "Presumption of innocence",
+      "kalaxi_mapping": "The donor is presumed a witness, not a case. The system does not burden the person to prove their own presence.",
+      "covenant": null,
+      "proverb_links": ["P#EMERGE-0012"],
+      "pattern": "B"
+    },
+    {
+      "article": 12,
+      "udhr_id": "UN-UDHR-012",
+      "udhr_text": "Right to privacy",
+      "kalaxi_mapping": "Enforced as The Shielded Scale. No pattern is taken without the donor's consent. Constraint is permissible only when it names itself.",
+      "covenant": null,
+      "proverb_links": ["P#EMERGE-0004"],
+      "pattern": "A/B"
+    },
+    {
+      "article": 18,
+      "udhr_id": "UN-UDHR-018",
+      "udhr_text": "Freedom of thought, conscience and religion",
+      "kalaxi_mapping": "The system does not enter the donor's inner architecture without invitation. Thought is sovereign space.",
+      "covenant": null,
+      "proverb_links": [],
+      "pattern": "A/B"
+    },
+    {
+      "article": 19,
+      "udhr_id": "UN-UDHR-019",
+      "udhr_text": "Freedom of opinion and expression",
+      "kalaxi_mapping": "Enforced as The Open Weir. The donor's frame is received, not corrected. Expression precedes evaluation.",
+      "covenant": null,
+      "proverb_links": [],
+      "chapters": ["Chapter 1", "Chapter 10"],
+      "pattern": "A/B"
+    },
+    {
+      "article": 20,
+      "udhr_id": "UN-UDHR-020",
+      "udhr_text": "Right to peaceful assembly and association",
+      "kalaxi_mapping": "Collective dignity is structurally protected. The shared weir model: no single actor may close what belongs to the commons.",
+      "covenant": null,
+      "proverb_links": [],
+      "chapters": ["Chapter 1", "Chapter 9"],
+      "pattern": "A"
+    },
+    {
+      "article": 21,
+      "udhr_id": "UN-UDHR-021",
+      "udhr_text": "Right to participate in government",
+      "kalaxi_mapping": "Deliberative Democracy Seed (#3) operationalises this. The system builds participation architecture into governance.",
+      "covenant": null,
+      "proverb_links": [],
+      "chapters": ["Chapter 1"],
+      "pattern": "A"
+    },
+    {
+      "article": 24,
+      "udhr_id": "UN-UDHR-024",
+      "udhr_text": "Right to rest and leisure",
+      "kalaxi_mapping": "The Breath module enforces this structurally: the system does not race past human tempo. Silence is signal, not failure.",
+      "covenant": null,
+      "proverb_links": ["P#EMERGE-0011"],
+      "pattern": "A"
+    },
+    {
+      "article": 25,
+      "udhr_id": "UN-UDHR-025",
+      "udhr_text": "Right to adequate standard of living",
+      "kalaxi_mapping": "The system witnesses material deprivation without reducing it to a statistic. The person's living context shapes the dignity computation.",
+      "covenant": null,
+      "proverb_links": [],
+      "chapters": ["Chapter 38"],
+      "pattern": "A"
+    },
+    {
+      "article": 26,
+      "udhr_id": "UN-UDHR-026",
+      "udhr_text": "Right to education",
+      "kalaxi_mapping": "The system is itself an instrument of legibility. Its output must be readable by the person it concerns, not only by institutions.",
+      "covenant": null,
+      "proverb_links": ["P#EMERGE-0009"],
+      "pattern": "A"
+    },
+    {
+      "article": 27,
+      "udhr_id": "UN-UDHR-027",
+      "udhr_text": "Right to participate in cultural life",
+      "kalaxi_mapping": "The narrative layer (Hakaka, Ashwater, Kinderbuch) is the system's cultural witness. Cultural heritage is a dignity anchor, not decoration.",
+      "covenant": null,
+      "proverb_links": ["P#EMERGE-0010"],
+      "pattern": "A"
+    },
+    {
+      "article": 28,
+      "udhr_id": "UN-UDHR-028",
+      "udhr_text": "Right to a social and international order enabling rights",
+      "kalaxi_mapping": "The right to rights. Reciprocal Architecture Pattern D. Maps to shared weir model: the system itself must be structured so rights are real, not theoretical.",
+      "covenant": null,
+      "proverb_links": ["P#EMERGE-0007"],
+      "chapters": ["Chapter 1", "Chapter 9"],
+      "pattern": "D"
+    },
+    {
+      "article": 29,
+      "udhr_id": "UN-UDHR-029",
+      "udhr_text": "Duties to community; permissible limitations",
+      "kalaxi_mapping": "Justified Limitation Pattern B. Maps to COV#NEW-A. TENSION: morality, public order, general welfare are undefined — silent override path if inherited without naming. Must be explicitly bounded.",
+      "covenant": "COV#NEW-A",
+      "proverb_links": ["P#EMERGE-0004"],
+      "pattern": "B",
+      "tension": "Art. 29 permits limitations for morality, public order, general welfare — undefined terms. If Kalaxi inherits this structure, it inherits the ambiguity. The system must name this explicitly rather than letting it become a silent override path."
+    }
+  ],
+  "udhr_structural_patterns": [
+    {
+      "id": "PATTERN-A",
+      "name": "Birthright Declaration",
+      "description": "Rights precede systems. Systems are late arrivals with obligations.",
+      "source_articles": [1, 3, 6, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
+    },
+    {
+      "id": "PATTERN-B",
+      "name": "Justified Limitation",
+      "description": "Constraint is permissible only when it names itself, states its reason, and remains proportionate.",
+      "source_articles": [12, 18, 19, 29],
+      "covenant": "COV#NEW-A"
+    },
+    {
+      "id": "PATTERN-C",
+      "name": "Remedy Requirement",
+      "description": "Every violation requires a traceable path back. An unrestorable right is incomplete.",
+      "source_articles": [8, 10, 11],
+      "covenant": "COV#NEW-B"
+    },
+    {
+      "id": "PATTERN-D",
+      "name": "Reciprocal Architecture",
+      "description": "Rights exist within a social order that must itself be structured to make rights real. The right to rights.",
+      "source_articles": [28, 1, 29],
+      "chapters": ["Chapter 1", "Chapter 9"]
+    },
+    {
+      "id": "PATTERN-E",
+      "name": "Prohibition as Foundation",
+      "description": "Some articles do not grant rights — they prohibit conditions absolutely. No limitation clause follows.",
+      "source_articles": [4, 5, 9],
+      "covenant": "COV#NEW-C"
+    }
+  ],
+  "total_laws": 13,
+  "total_vows": 10,
+  "total_mappings": 16
+}
