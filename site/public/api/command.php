@@ -405,6 +405,57 @@ switch ($action) {
         }
         break;
 
+    // ─── CORPUS STATUS ───
+    case 'corpus-status':
+        $training_dir = __DIR__ . '/../data/training';
+        $files = [];
+        if (is_dir($training_dir)) {
+            foreach (['zakaka/ZAKAKA_CPT.jsonl', 'zakaka/ZAKAKA_SFT.jsonl', 'zakaka/MANIFEST.json',
+                       'organ/GOLDEN_CPT.jsonl', 'organ/GOLDEN_SFT.jsonl', 'organ/GOLDEN_DPO.jsonl',
+                       'organ/phase1/cpt_corpus.jsonl', 'organ/phase2/sft_corpus.jsonl', 'organ/phase3/dpo_corpus.jsonl',
+                       'manifest.json'] as $f) {
+                $path = "$training_dir/$f";
+                if (file_exists($path)) {
+                    $files[$f] = [
+                        'bytes' => filesize($path),
+                        'modified' => gmdate('c', filemtime($path)),
+                        'sha256' => hash_file('sha256', $path),
+                    ];
+                } else {
+                    $files[$f] = ['status' => 'missing'];
+                }
+            }
+        } else {
+            $files['_error'] = 'Training directory not found. Deploy needed.';
+        }
+        $result = ['ok' => true, 'training_dir' => $training_dir, 'files' => $files, 'timestamp' => gmdate('c')];
+        break;
+
+    // ─── CORPUS SUMMARY (quick count) ───
+    case 'corpus-summary':
+        $training_dir = __DIR__ . '/../data/training';
+        $manifest_path = "$training_dir/manifest.json";
+        if (file_exists($manifest_path)) {
+            $manifest = json_decode(file_get_contents($manifest_path), true);
+            $total_entries = 0;
+            $total_bytes = 0;
+            foreach (($manifest['corpora'] ?? []) as $info) {
+                $total_entries += $info['entries'] ?? 0;
+                $total_bytes += $info['bytes'] ?? 0;
+            }
+            $result = [
+                'ok' => true,
+                'generated' => $manifest['generated'] ?? 'unknown',
+                'corpora_count' => count($manifest['corpora'] ?? []),
+                'total_entries' => $total_entries,
+                'total_bytes' => $total_bytes,
+                'corpora' => $manifest['corpora'] ?? [],
+            ];
+        } else {
+            $result = ['error' => 'No training manifest found. Deploy needed.'];
+        }
+        break;
+
     default:
         $result = ['error' => "Unknown action: {$action}"];
         break;
