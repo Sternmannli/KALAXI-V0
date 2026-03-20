@@ -762,7 +762,189 @@ def extract_papers() -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# MAIN — Run all 25 extractors
+# 26. MANIFEST METADATA — plans, chronicle, dictionary, essence
+# ---------------------------------------------------------------------------
+
+def extract_manifest_metadata() -> list[dict]:
+    """Extract from key MANIFEST/ files not covered by other extractors."""
+    items = []
+    key_files = [
+        "ACTIVE_PLANS.md", "SCIENTIFIC_CHRONICLE.md", "SESSION_BOOT.md",
+        "LAYER_3_INTEGRATION_EVIDENCE_2026-03-15.md", "PLAN-001.md",
+        "KALAXI_DICTIONARY.md", "DISTILLED_ESSENCE.md", "COMPASS.md",
+        "STRATEGIC_MOVES_2026-03-16.md", "DEPLOYMENT_CHRONICLE.md",
+        "SYSTEM_BIOGRAPHY.md", "PUBLIC_STRATEGY.md",
+        "SCIENTIFIC_CATALOG_2026-03-20.md", "SCIENTIFIC_CATALOG_V006_2026-03-20.md",
+    ]
+    md = ROOT / "MANIFEST"
+    for fname in key_files:
+        f = md / fname
+        if not f.exists():
+            continue
+        text = _read(f)
+        for heading, body in _md_sections(text):
+            if len(body) > 40:
+                items.append({
+                    "type": "manifest",
+                    "text": body[:2000],
+                    "heading": heading,
+                    "source": f"MANIFEST/{fname}",
+                })
+    # Also MANIFEST/REPORTS/
+    reports = md / "REPORTS"
+    if reports.exists():
+        for f in reports.glob("*.md"):
+            text = _read(f)
+            for heading, body in _md_sections(text):
+                if len(body) > 40:
+                    items.append({
+                        "type": "manifest",
+                        "text": body[:2000],
+                        "heading": heading,
+                        "source": f"MANIFEST/REPORTS/{f.name}",
+                    })
+    # MANIFEST/SLICES/ foundation texts
+    slices = md / "SLICES"
+    if slices.exists():
+        for f in slices.glob("*.txt"):
+            text = _read(f)
+            for para in _paragraphs(text, 40):
+                items.append({
+                    "type": "foundation_slice",
+                    "text": para[:2000],
+                    "source": f"MANIFEST/SLICES/{f.name}",
+                })
+    return items
+
+
+# ---------------------------------------------------------------------------
+# 27. DONOR SESSIONS — BOOK_7_DONOR/
+# ---------------------------------------------------------------------------
+
+def extract_donor_sessions() -> list[dict]:
+    """Extract from BOOK_7_DONOR/ V-001 session records."""
+    items = []
+    bd = ROOT / "BOOK_7_DONOR"
+    if not bd.exists():
+        return items
+    for f in bd.glob("*.md"):
+        text = _read(f)
+        for heading, body in _md_sections(text):
+            if len(body) > 30:
+                items.append({
+                    "type": "donor_session",
+                    "text": body[:2000],
+                    "heading": heading,
+                    "source": f"BOOK_7_DONOR/{f.name}",
+                })
+    return items
+
+
+# ---------------------------------------------------------------------------
+# 28. R7M EXCAVATION — provenance, terrain maps
+# ---------------------------------------------------------------------------
+
+def extract_excavation() -> list[dict]:
+    """Extract from R7M/EXCAVATION/ archaeological methodology."""
+    items = []
+    ed = ROOT / "R7M" / "EXCAVATION"
+    if not ed.exists():
+        return items
+    for f in ed.glob("*.md"):
+        text = _read(f)
+        for heading, body in _md_sections(text):
+            if len(body) > 40:
+                items.append({
+                    "type": "excavation",
+                    "text": body[:2000],
+                    "heading": heading,
+                    "source": f"R7M/EXCAVATION/{f.name}",
+                })
+    return items
+
+
+# ---------------------------------------------------------------------------
+# 29. SITE DATA JSON — non-narrative site content
+# ---------------------------------------------------------------------------
+
+def extract_site_data_json() -> list[dict]:
+    """Extract from site/public/data/ JSON files not covered by narratives."""
+    items = []
+    dd = ROOT / "site" / "public" / "data"
+    if not dd.exists():
+        return items
+    skip = {"hakaka.json", "ashwater.json", "kinderbuch.json", "kalaxi1.json", "proverbs.json", "r7m-index.json"}
+    for f in dd.glob("*.json"):
+        if f.name in skip:
+            continue
+        try:
+            data = json.loads(_read(f))
+        except json.JSONDecodeError:
+            continue
+        if isinstance(data, dict):
+            for key, val in data.items():
+                if isinstance(val, str) and len(val) > 30:
+                    items.append({"type": "site_data", "text": val[:2000], "source": f"site/data/{f.name}/{key}"})
+                elif isinstance(val, list):
+                    for item in val:
+                        if isinstance(item, dict):
+                            text = item.get("text", item.get("content", item.get("description", "")))
+                            if text and len(str(text)) > 30:
+                                items.append({"type": "site_data", "text": str(text)[:2000], "source": f"site/data/{f.name}/{key}"})
+                        elif isinstance(item, str) and len(item) > 30:
+                            items.append({"type": "site_data", "text": item[:2000], "source": f"site/data/{f.name}/{key}"})
+    return items
+
+
+# ---------------------------------------------------------------------------
+# 30. ROOT ESSENTIALS — threshold, session seed, digest, invitation
+# ---------------------------------------------------------------------------
+
+def extract_root_essentials() -> list[dict]:
+    """Extract from root-level essential files."""
+    items = []
+    for fname in ["THRESHOLD.md", "THRESHOLD_TREASURE_SEEDS.md", "SESSION_SEED.md",
+                   "INVITATION.md", "DIGEST_2026-02.md"]:
+        f = ROOT / fname
+        if not f.exists():
+            continue
+        text = _read(f)
+        for heading, body in _md_sections(text):
+            if len(body) > 40:
+                items.append({
+                    "type": "root_essential",
+                    "text": body[:2000],
+                    "heading": heading,
+                    "source": fname,
+                })
+    return items
+
+
+# ---------------------------------------------------------------------------
+# 31. ENKI MULTILINGUAL — ST-006 narrative in 7 languages
+# ---------------------------------------------------------------------------
+
+def extract_enki() -> list[dict]:
+    """Extract from ENKI/ST-006/ multilingual narrative."""
+    items = []
+    ed = ROOT / "ENKI" / "ST-006"
+    if not ed.exists():
+        return items
+    for f in ed.glob("*.md"):
+        text = _read(f)
+        lang = f.stem.split("_")[-1] if "_" in f.stem else "unknown"
+        for para in _paragraphs(text, 40):
+            items.append({
+                "type": "enki_narrative",
+                "text": para[:2000],
+                "source": f"ENKI/ST-006/{f.name}",
+                "language": lang,
+            })
+    return items
+
+
+# ---------------------------------------------------------------------------
+# MAIN — Run all 31 extractors
 # ---------------------------------------------------------------------------
 
 def main():
@@ -796,6 +978,12 @@ def main():
         ("Convergence", extract_convergence),
         ("Steward", extract_steward),
         ("Papers", extract_papers),
+        ("Manifest Metadata", extract_manifest_metadata),
+        ("Donor Sessions", extract_donor_sessions),
+        ("Excavation (R7M)", extract_excavation),
+        ("Site Data JSON", extract_site_data_json),
+        ("Root Essentials", extract_root_essentials),
+        ("ENKI Multilingual", extract_enki),
     ]
 
     all_items = []

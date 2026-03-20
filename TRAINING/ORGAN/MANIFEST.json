@@ -1,16 +1,16 @@
 {
-  "built_at": "2026-03-20T00:04:07.847290+00:00",
+  "built_at": "2026-03-20T00:16:32.745997+00:00",
   "pipeline": "CPT → SFT → DPO (three-phase)",
   "phases": {
     "cpt": {
-      "entries": 4441,
-      "words": 124293,
-      "bytes": 863706
+      "entries": 4538,
+      "words": 132905,
+      "bytes": 920462
     },
     "sft": {
-      "entries": 2502,
-      "words": 57745,
-      "bytes": 1818608
+      "entries": 2496,
+      "words": 61094,
+      "bytes": 1838056
     },
     "dpo": {
       "entries": 25,
@@ -19,12 +19,12 @@
       "bytes": 6951
     }
   },
-  "total_entries": 6968,
-  "total_pure_words": 182278,
+  "total_entries": 7059,
+  "total_pure_words": 194239,
   "invalid_entries": 0,
   "zakaka_merged": {
-    "cpt": 694,
-    "sft": 694
+    "cpt": 690,
+    "sft": 690
   },
   "contamination_threshold": 0.25,
   "files": [
