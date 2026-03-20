@@ -49,7 +49,7 @@
       "id": "PROVERBS",
       "type": "wisdom",
       "path": "/data/proverbs.json",
-      "count": 166,
+      "count": 381,
       "status": "canonical"
     },
     {
@@ -71,6 +71,62 @@
       "path": "/data/system-state.json",
       "page": "/compass",
       "status": "active"
+    },
+    {
+      "id": "WORKINGS",
+      "type": "system",
+      "path": "/data/inner-workings.json",
+      "page": "/workings",
+      "status": "active"
+    },
+    {
+      "id": "ANOMALIES",
+      "type": "canon",
+      "path": "/data/anomalies.json",
+      "count": 17,
+      "status": "canonical"
+    },
+    {
+      "id": "WISDOM-NODES",
+      "type": "canon",
+      "path": "/data/wisdom-nodes.json",
+      "count": 4,
+      "status": "canonical"
+    },
+    {
+      "id": "VOICE-ARCH",
+      "type": "voice",
+      "path": "/data/voice-architecture.json",
+      "count": 31,
+      "status": "canonical"
+    },
+    {
+      "id": "TRILITERAL",
+      "type": "voice",
+      "path": "/data/triliteral-roots.json",
+      "count": 4,
+      "status": "canonical"
+    },
+    {
+      "id": "DICTIONARY",
+      "type": "voice",
+      "path": "/data/dictionary.json",
+      "count": 89,
+      "status": "canonical"
+    },
+    {
+      "id": "FOUNDATIONS",
+      "type": "science",
+      "path": "/data/foundations.json",
+      "count": 9,
+      "status": "canonical"
+    },
+    {
+      "id": "RESEARCH",
+      "type": "science",
+      "path": "/data/research.json",
+      "count": 6,
+      "status": "active"
     }
   ],
   "connections": [
@@ -80,6 +136,15 @@
     { "from": "SEEDS", "to": "NAR-HAKAKA", "type": "growth-feed" },
     { "from": "SEEDS", "to": "NAR-ASHWATER", "type": "growth-feed" },
     { "from": "SEEDS", "to": "NAR-KINDERBUCH", "type": "growth-feed" },
-    { "from": "SCIENCE", "to": "NAR-KALAXI1", "type": "stress-test-to-narrative" }
+    { "from": "SCIENCE", "to": "NAR-KALAXI1", "type": "stress-test-to-narrative" },
+    { "from": "ANOMALIES", "to": "PROVERBS", "type": "anomaly-to-wisdom" },
+    { "from": "WISDOM-NODES", "to": "ANOMALIES", "type": "synthesis" },
+    { "from": "WISDOM-NODES", "to": "PROVERBS", "type": "synthesis" },
+    { "from": "VOICE-ARCH", "to": "DICTIONARY", "type": "voice-to-vocabulary" },
+    { "from": "TRILITERAL", "to": "VOICE-ARCH", "type": "grammar-to-voice" },
+    { "from": "TRILITERAL", "to": "DICTIONARY", "type": "grammar-to-vocabulary" },
+    { "from": "FOUNDATIONS", "to": "SCIENCE", "type": "theory-to-science" },
+    { "from": "RESEARCH", "to": "FOUNDATIONS", "type": "evidence-to-theory" },
+    { "from": "RESEARCH", "to": "ANOMALIES", "type": "study-to-anomaly" }
   ]
 }

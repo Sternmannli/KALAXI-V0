@@ -528,84 +528,884 @@
     "text": "Prefer circuit breakers with half-open states."
   },
   {
+    "id": "P#00401",
+    "text": "Locally tend the garden—trust compounds."
+  },
+  {
+    "id": "P#00402",
+    "text": "Openly simplify the bridge—defaults improve."
+  },
+  {
     "id": "P#0403",
     "text": "Prefer timeouts with sane defaults."
+  },
+  {
+    "id": "P#00403",
+    "text": "Clearly weave the path; teams breathe."
+  },
+  {
+    "id": "P#00404",
+    "text": "Clearly seed the compass, and risks surface sooner."
+  },
+  {
+    "id": "P#00405",
+    "text": "Curiously stabilize the river so learning sticks."
+  },
+  {
+    "id": "P#00406",
+    "text": "Quietly compose the ledger—costs stay sane."
+  },
+  {
+    "id": "P#00407",
+    "text": "Clearly anchor the feedback loop, and learning sticks."
+  },
+  {
+    "id": "P#00408",
+    "text": "Steadily tend the path so care scales."
+  },
+  {
+    "id": "P#00409",
+    "text": "Lightly align the covenant; care scales."
+  },
+  {
+    "id": "P#00410",
+    "text": "Early simplify the constraint; costs stay sane."
+  },
+  {
+    "id": "P#00411",
+    "text": "Clearly weave the option—costs stay sane."
+  },
+  {
+    "id": "P#00412",
+    "text": "Early test the memory; handoffs shrink."
+  },
+  {
+    "id": "P#00413",
+    "text": "Quietly bend the friction; care scales."
   },
   {
     "id": "P#0414",
     "text": "Prefer retry with jitter in transient failures."
   },
   {
+    "id": "P#00414",
+    "text": "Quietly temper the story, and debts stay payable."
+  },
+  {
+    "id": "P#00415",
+    "text": "Safely temper the pattern so signal stays clean."
+  },
+  {
+    "id": "P#00416",
+    "text": "Humbly balance the path so debts stay payable."
+  },
+  {
+    "id": "P#00417",
+    "text": "Early balance the window; tomorrow bends back."
+  },
+  {
+    "id": "P#00418",
+    "text": "Early distill the pattern, and risks surface sooner."
+  },
+  {
+    "id": "P#00419",
+    "text": "Patiently balance the bridge—systems last."
+  },
+  {
+    "id": "P#00420",
+    "text": "Early stabilize the window, and defaults improve."
+  },
+  {
+    "id": "P#00421",
+    "text": "Gently map the memory, and handoffs shrink."
+  },
+  {
+    "id": "P#00422",
+    "text": "Patiently observe the constraint so learning sticks."
+  },
+  {
+    "id": "P#00423",
+    "text": "Safely observe the playbook—risks surface sooner."
+  },
+  {
+    "id": "P#00424",
+    "text": "Patiently focus the oath—risks surface sooner."
+  },
+  {
     "id": "P#0425",
     "text": "Prefer idempotency keys in payment processing."
+  },
+  {
+    "id": "P#00425",
+    "text": "Deliberately focus the friction, and debts stay payable."
+  },
+  {
+    "id": "P#00426",
+    "text": "Safely repair the pivot; trust compounds."
+  },
+  {
+    "id": "P#00427",
+    "text": "Curiously test the grain so tomorrow bends back."
+  },
+  {
+    "id": "P#00428",
+    "text": "Together map the oath—signal stays clean."
+  },
+  {
+    "id": "P#00429",
+    "text": "Humbly align the fault line; debts stay payable."
+  },
+  {
+    "id": "P#00430",
+    "text": "Honestly map the path—care scales."
+  },
+  {
+    "id": "P#00431",
+    "text": "Gently steward the friction so handoffs shrink."
+  },
+  {
+    "id": "P#00432",
+    "text": "Curiously align the friction so tomorrow bends back."
+  },
+  {
+    "id": "P#00433",
+    "text": "Gently weave the path; systems last."
+  },
+  {
+    "id": "P#00434",
+    "text": "Humbly measure the playbook so learning sticks."
+  },
+  {
+    "id": "P#00435",
+    "text": "Gently measure the playbook; habits evolve."
   },
   {
     "id": "P#0436",
     "text": "Prefer exactly-once semantics in critical transactions."
   },
   {
+    "id": "P#00436",
+    "text": "Lightly unfold the pivot; behavior aligns."
+  },
+  {
+    "id": "P#00437",
+    "text": "Playfully seed the pivot; handoffs shrink."
+  },
+  {
+    "id": "P#00438",
+    "text": "Curiously prototype the window—signal stays clean."
+  },
+  {
+    "id": "P#00439",
+    "text": "Deliberately tend the option—costs stay sane."
+  },
+  {
+    "id": "P#00440",
+    "text": "Curiously align the signal, and defaults improve."
+  },
+  {
+    "id": "P#00441",
+    "text": "Humbly focus the constraint, and learning sticks."
+  },
+  {
+    "id": "P#00442",
+    "text": "Safely tend the memory; behavior aligns."
+  },
+  {
+    "id": "P#00443",
+    "text": "Steadily tend the fault line so care scales."
+  },
+  {
+    "id": "P#00444",
+    "text": "Early seed the friction—trust compounds."
+  },
+  {
+    "id": "P#00445",
+    "text": "Steadily unfold the compass—debts stay payable."
+  },
+  {
+    "id": "P#00446",
+    "text": "Early harvest the handshake—systems last."
+  },
+  {
     "id": "P#0447",
     "text": "Prefer at-least-once with deduplication in messaging."
+  },
+  {
+    "id": "P#00447",
+    "text": "Patiently observe the thread—habits evolve."
+  },
+  {
+    "id": "P#00448",
+    "text": "Quietly test the path so care scales."
+  },
+  {
+    "id": "P#00449",
+    "text": "Clearly test the handshake—behavior aligns."
+  },
+  {
+    "id": "P#00450",
+    "text": "Lightly stabilize the grain; debts stay payable."
+  },
+  {
+    "id": "P#00451",
+    "text": "Quietly reframe the compass; handoffs shrink."
+  },
+  {
+    "id": "P#00452",
+    "text": "Humbly trace the heartbeat so costs stay sane."
+  },
+  {
+    "id": "P#00453",
+    "text": "Safely anchor the constraint—teams breathe."
+  },
+  {
+    "id": "P#00454",
+    "text": "Curiously unfold the oath; handoffs shrink."
+  },
+  {
+    "id": "P#00455",
+    "text": "Lightly map the river; behavior aligns."
+  },
+  {
+    "id": "P#00456",
+    "text": "Gently reframe the playbook so behavior aligns."
+  },
+  {
+    "id": "P#00457",
+    "text": "Gently balance the garden, and options remain."
   },
   {
     "id": "P#0458",
     "text": "Prefer schema evolution in data stores."
   },
   {
+    "id": "P#00458",
+    "text": "Locally stabilize the window, and systems last."
+  },
+  {
+    "id": "P#00459",
+    "text": "Locally seed the oath so learning sticks."
+  },
+  {
+    "id": "P#00460",
+    "text": "Humbly observe the edge case; teams breathe."
+  },
+  {
+    "id": "P#00461",
+    "text": "Locally weave the friction; systems last."
+  },
+  {
+    "id": "P#00462",
+    "text": "Deliberately iterate on the ritual—risks surface sooner."
+  },
+  {
+    "id": "P#00463",
+    "text": "Quietly observe the feedback loop so learning sticks."
+  },
+  {
+    "id": "P#00464",
+    "text": "Steadily harvest the engine—debts stay payable."
+  },
+  {
+    "id": "P#00465",
+    "text": "Patiently temper the covenant—trust compounds."
+  },
+  {
+    "id": "P#00466",
+    "text": "Deliberately harvest the garden so behavior aligns."
+  },
+  {
+    "id": "P#00467",
+    "text": "Together focus the ledger so risks surface sooner."
+  },
+  {
+    "id": "P#00468",
+    "text": "Quietly iterate on the window so behavior aligns."
+  },
+  {
     "id": "P#0469",
     "text": "Prefer backward compatibility in API design."
+  },
+  {
+    "id": "P#00469",
+    "text": "Steadily reframe the grain so habits evolve."
   },
   {
     "id": "P#0470",
     "text": "Prefer semantic versioning in releases."
   },
   {
+    "id": "P#00470",
+    "text": "Early test the bridge so options remain."
+  },
+  {
+    "id": "P#00471",
+    "text": "Quietly seed the playbook—debts stay payable."
+  },
+  {
+    "id": "P#00472",
+    "text": "Safely trace the path—handoffs shrink."
+  },
+  {
+    "id": "P#00473",
+    "text": "Locally map the story; risks surface sooner."
+  },
+  {
+    "id": "P#00474",
+    "text": "Honestly trace the boundary, and risks surface sooner."
+  },
+  {
+    "id": "P#00475",
+    "text": "Safely observe the signal, and systems last."
+  },
+  {
+    "id": "P#00476",
+    "text": "Humbly reframe the river—trust compounds."
+  },
+  {
+    "id": "P#00477",
+    "text": "Honestly map the ritual—defaults improve."
+  },
+  {
+    "id": "P#00478",
+    "text": "Safely distill the friction so teams breathe."
+  },
+  {
+    "id": "P#00479",
+    "text": "Gently bend the river so trust compounds."
+  },
+  {
+    "id": "P#00480",
+    "text": "Quietly steward the window; debts stay payable."
+  },
+  {
     "id": "P#0481",
     "text": "Prefer deprecation notices in API changes."
+  },
+  {
+    "id": "P#00481",
+    "text": "Quietly distill the grain—trust compounds."
+  },
+  {
+    "id": "P#00482",
+    "text": "Safely repair the option, and teams breathe."
+  },
+  {
+    "id": "P#00483",
+    "text": "Safely align the story, and care scales."
+  },
+  {
+    "id": "P#00484",
+    "text": "Curiously measure the thread, and teams breathe."
+  },
+  {
+    "id": "P#00485",
+    "text": "Locally steward the pattern; signal stays clean."
+  },
+  {
+    "id": "P#00486",
+    "text": "Quietly unfold the edge case so care scales."
+  },
+  {
+    "id": "P#00487",
+    "text": "Steadily tend the ritual; risks surface sooner."
+  },
+  {
+    "id": "P#00488",
+    "text": "Humbly distill the heartbeat—options remain."
+  },
+  {
+    "id": "P#00489",
+    "text": "Patiently measure the ledger, and tomorrow bends back."
+  },
+  {
+    "id": "P#00490",
+    "text": "Together iterate on the covenant; debts stay payable."
+  },
+  {
+    "id": "P#00491",
+    "text": "Playfully iterate on the thread, and risks surface sooner."
   },
   {
     "id": "P#0492",
     "text": "Prefer canary analysis in A/B testing."
   },
   {
+    "id": "P#00492",
+    "text": "Patiently observe the playbook—learning sticks."
+  },
+  {
+    "id": "P#00493",
+    "text": "Curiously harvest the map; costs stay sane."
+  },
+  {
+    "id": "P#00494",
+    "text": "Locally trace the story, and habits evolve."
+  },
+  {
+    "id": "P#00495",
+    "text": "Safely harvest the pattern—costs stay sane."
+  },
+  {
+    "id": "P#00496",
+    "text": "Safely focus the heartbeat, and habits evolve."
+  },
+  {
+    "id": "P#00497",
+    "text": "Safely anchor the bridge so tomorrow bends back."
+  },
+  {
+    "id": "P#00498",
+    "text": "Curiously bend the engine, and behavior aligns."
+  },
+  {
+    "id": "P#00499",
+    "text": "Patiently steward the memory; risks surface sooner."
+  },
+  {
+    "id": "P#00500",
+    "text": "Locally weave the thread so systems last."
+  },
+  {
+    "id": "P#00501",
+    "text": "Clearly compose the constraint, and learning sticks."
+  },
+  {
+    "id": "P#00502",
+    "text": "Honestly listen to the heartbeat, and learning sticks."
+  },
+  {
     "id": "P#0503",
     "text": "Prefer multi-armed bandits in experimentation."
+  },
+  {
+    "id": "P#00503",
+    "text": "Openly weave the option; behavior aligns."
+  },
+  {
+    "id": "P#00504",
+    "text": "Steadily listen to the edge case, and tomorrow bends back."
+  },
+  {
+    "id": "P#00505",
+    "text": "Curiously observe the story—handoffs shrink."
+  },
+  {
+    "id": "P#00506",
+    "text": "Patiently anchor the pattern, and options remain."
+  },
+  {
+    "id": "P#00507",
+    "text": "Patiently harvest the memory so behavior aligns."
+  },
+  {
+    "id": "P#00508",
+    "text": "Patiently stabilize the oath—teams breathe."
+  },
+  {
+    "id": "P#00509",
+    "text": "Playfully simplify the feedback loop—trust compounds."
+  },
+  {
+    "id": "P#00510",
+    "text": "Quietly anchor the garden—costs stay sane."
+  },
+  {
+    "id": "P#00511",
+    "text": "Humbly seed the grain so care scales."
+  },
+  {
+    "id": "P#00512",
+    "text": "Openly reframe the map so options remain."
+  },
+  {
+    "id": "P#00513",
+    "text": "Openly bend the edge case so habits evolve."
   },
   {
     "id": "P#0514",
     "text": "Prefer Bayesian methods in uncertainty quantification."
   },
   {
+    "id": "P#00514",
+    "text": "Deliberately balance the grain, and signal stays clean."
+  },
+  {
+    "id": "P#00515",
+    "text": "Together reframe the river so risks surface sooner."
+  },
+  {
+    "id": "P#00516",
+    "text": "Locally distill the thread; behavior aligns."
+  },
+  {
+    "id": "P#00517",
+    "text": "Locally seed the thread; systems last."
+  },
+  {
+    "id": "P#00518",
+    "text": "Together repair the compass—behavior aligns."
+  },
+  {
+    "id": "P#00519",
+    "text": "Openly harvest the covenant; risks surface sooner."
+  },
+  {
+    "id": "P#00520",
+    "text": "Safely focus the story—options remain."
+  },
+  {
+    "id": "P#00521",
+    "text": "Gently test the fault line—debts stay payable."
+  },
+  {
+    "id": "P#00522",
+    "text": "Quietly align the friction, and habits evolve."
+  },
+  {
+    "id": "P#00523",
+    "text": "Early test the window, and habits evolve."
+  },
+  {
+    "id": "P#00524",
+    "text": "Gently repair the signal, and care scales."
+  },
+  {
     "id": "P#0525",
     "text": "Prefer ensemble methods in model stacking."
+  },
+  {
+    "id": "P#00525",
+    "text": "Honestly balance the story—risks surface sooner."
+  },
+  {
+    "id": "P#00526",
+    "text": "Honestly balance the pivot, and teams breathe."
+  },
+  {
+    "id": "P#00527",
+    "text": "Humbly stitch the map, and risks surface sooner."
+  },
+  {
+    "id": "P#00528",
+    "text": "Patiently compose the path—debts stay payable."
+  },
+  {
+    "id": "P#00529",
+    "text": "Humbly iterate on the boundary, and defaults improve."
+  },
+  {
+    "id": "P#00530",
+    "text": "Openly listen to the compass so handoffs shrink."
+  },
+  {
+    "id": "P#00531",
+    "text": "Deliberately unfold the option, and risks surface sooner."
+  },
+  {
+    "id": "P#00532",
+    "text": "Playfully focus the ritual so handoffs shrink."
+  },
+  {
+    "id": "P#00533",
+    "text": "Quietly trace the edge case; care scales."
+  },
+  {
+    "id": "P#00534",
+    "text": "Steadily prototype the handshake, and costs stay sane."
+  },
+  {
+    "id": "P#00535",
+    "text": "Lightly anchor the bridge, and teams breathe."
   },
   {
     "id": "P#0536",
     "text": "Prefer cross-validation in model selection."
   },
   {
+    "id": "P#00536",
+    "text": "Together simplify the constraint—systems last."
+  },
+  {
+    "id": "P#00537",
+    "text": "Humbly test the thread—behavior aligns."
+  },
+  {
+    "id": "P#00538",
+    "text": "Quietly iterate on the map, and costs stay sane."
+  },
+  {
+    "id": "P#00539",
+    "text": "Lightly measure the option so signal stays clean."
+  },
+  {
+    "id": "P#00540",
+    "text": "Gently balance the ritual, and care scales."
+  },
+  {
+    "id": "P#00541",
+    "text": "Early weave the memory—behavior aligns."
+  },
+  {
+    "id": "P#00542",
+    "text": "Together compose the pivot—costs stay sane."
+  },
+  {
+    "id": "P#00543",
+    "text": "Humbly repair the constraint; options remain."
+  },
+  {
+    "id": "P#00544",
+    "text": "Locally steward the oath so learning sticks."
+  },
+  {
+    "id": "P#00545",
+    "text": "Humbly trace the pivot—signal stays clean."
+  },
+  {
+    "id": "P#00546",
+    "text": "Patiently simplify the boundary; habits evolve."
+  },
+  {
     "id": "P#0547",
     "text": "Prefer feature stores in ML pipelines."
+  },
+  {
+    "id": "P#00547",
+    "text": "Locally observe the fault line, and behavior aligns."
+  },
+  {
+    "id": "P#00548",
+    "text": "Patiently distill the bridge so teams breathe."
+  },
+  {
+    "id": "P#00549",
+    "text": "Honestly balance the grain; systems last."
+  },
+  {
+    "id": "P#00550",
+    "text": "Safely test the heartbeat—care scales."
+  },
+  {
+    "id": "P#00551",
+    "text": "Deliberately harvest the ritual so options remain."
+  },
+  {
+    "id": "P#00552",
+    "text": "Clearly unfold the engine so care scales."
+  },
+  {
+    "id": "P#00553",
+    "text": "Curiously observe the constraint, and defaults improve."
+  },
+  {
+    "id": "P#00554",
+    "text": "Together observe the garden—debts stay payable."
+  },
+  {
+    "id": "P#00555",
+    "text": "Early listen to the handshake—risks surface sooner."
+  },
+  {
+    "id": "P#00556",
+    "text": "Steadily weave the ritual, and systems last."
+  },
+  {
+    "id": "P#00557",
+    "text": "Quietly refactor the memory, and systems last."
   },
   {
     "id": "P#0558",
     "text": "Prefer data lineage in governance."
   },
   {
+    "id": "P#00558",
+    "text": "Openly bend the grain—care scales."
+  },
+  {
+    "id": "P#00559",
+    "text": "Gently prototype the engine so signal stays clean."
+  },
+  {
+    "id": "P#00560",
+    "text": "Quietly align the boundary so systems last."
+  },
+  {
+    "id": "P#00561",
+    "text": "Together reframe the compass—systems last."
+  },
+  {
+    "id": "P#00562",
+    "text": "Deliberately repair the boundary; care scales."
+  },
+  {
+    "id": "P#00563",
+    "text": "Together iterate on the oath; signal stays clean."
+  },
+  {
+    "id": "P#00564",
+    "text": "Patiently temper the compass; trust compounds."
+  },
+  {
+    "id": "P#00565",
+    "text": "Together seed the pivot, and trust compounds."
+  },
+  {
+    "id": "P#00566",
+    "text": "Early refactor the ritual so defaults improve."
+  },
+  {
+    "id": "P#00567",
+    "text": "Lightly stabilize the feedback loop—systems last."
+  },
+  {
+    "id": "P#00568",
+    "text": "Safely repair the boundary; costs stay sane."
+  },
+  {
     "id": "P#0569",
     "text": "Prefer data contracts between producers and consumers."
+  },
+  {
+    "id": "P#00569",
+    "text": "Early stabilize the grain; teams breathe."
   },
   {
     "id": "P#0570",
     "text": "Prefer data quality monitors in production."
   },
   {
+    "id": "P#00570",
+    "text": "Quietly tend the garden—debts stay payable."
+  },
+  {
+    "id": "P#00571",
+    "text": "Locally distill the memory, and handoffs shrink."
+  },
+  {
+    "id": "P#00572",
+    "text": "Steadily observe the signal—systems last."
+  },
+  {
+    "id": "P#00573",
+    "text": "Lightly trace the pattern so teams breathe."
+  },
+  {
+    "id": "P#00574",
+    "text": "Gently steward the ledger, and habits evolve."
+  },
+  {
+    "id": "P#00575",
+    "text": "Quietly weave the grain—signal stays clean."
+  },
+  {
+    "id": "P#00576",
+    "text": "Humbly steward the oath so signal stays clean."
+  },
+  {
+    "id": "P#00577",
+    "text": "Locally repair the fault line so defaults improve."
+  },
+  {
+    "id": "P#00578",
+    "text": "Locally temper the engine so teams breathe."
+  },
+  {
+    "id": "P#00579",
+    "text": "Honestly test the edge case, and options remain."
+  },
+  {
+    "id": "P#00580",
+    "text": "Humbly prototype the boundary so behavior aligns."
+  },
+  {
     "id": "P#0581",
     "text": "Prefer data minimization in privacy design."
   },
   {
+    "id": "P#00581",
+    "text": "Early stabilize the handshake, and habits evolve."
+  },
+  {
+    "id": "P#00582",
+    "text": "Steadily seed the heartbeat so defaults improve."
+  },
+  {
+    "id": "P#00583",
+    "text": "Openly compose the garden; trust compounds."
+  },
+  {
+    "id": "P#00584",
+    "text": "Lightly temper the heartbeat; handoffs shrink."
+  },
+  {
+    "id": "P#00585",
+    "text": "Openly repair the signal; systems last."
+  },
+  {
+    "id": "P#00586",
+    "text": "Curiously ground the pivot, and teams breathe."
+  },
+  {
+    "id": "P#00587",
+    "text": "Openly harvest the option so defaults improve."
+  },
+  {
+    "id": "P#00588",
+    "text": "Humbly distill the edge case so systems last."
+  },
+  {
+    "id": "P#00589",
+    "text": "Lightly compose the feedback loop; behavior aligns."
+  },
+  {
+    "id": "P#00590",
+    "text": "Together seed the friction; risks surface sooner."
+  },
+  {
+    "id": "P#00591",
+    "text": "Playfully focus the handshake so signal stays clean."
+  },
+  {
     "id": "P#0592",
     "text": "Prefer purpose limitation in data use."
+  },
+  {
+    "id": "P#00592",
+    "text": "Clearly temper the river—systems last."
+  },
+  {
+    "id": "P#00593",
+    "text": "Early distill the covenant; habits evolve."
+  },
+  {
+    "id": "P#00594",
+    "text": "Clearly reframe the handshake; handoffs shrink."
+  },
+  {
+    "id": "P#00595",
+    "text": "Steadily observe the grain, and care scales."
+  },
+  {
+    "id": "P#00596",
+    "text": "Playfully unfold the signal—handoffs shrink."
+  },
+  {
+    "id": "P#00597",
+    "text": "Honestly harvest the path, and behavior aligns."
+  },
+  {
+    "id": "P#00598",
+    "text": "Locally observe the story—behavior aligns."
+  },
+  {
+    "id": "P#00599",
+    "text": "Curiously listen to the engine so tomorrow bends back."
+  },
+  {
+    "id": "P#00600",
+    "text": "Playfully tend the window so behavior aligns."
   },
   {
     "id": "P#0603",
@@ -662,5 +1462,65 @@
   {
     "id": "P#3333",
     "text": "– \"Trust is built with deeds, not with words.\""
+  },
+  {
+    "id": "P#EMERGE-0001",
+    "text": "A gap that is heard is a gap that holds."
+  },
+  {
+    "id": "P#EMERGE-0002",
+    "text": "The system listens most when it knows it does not yet understand."
+  },
+  {
+    "id": "P#EMERGE-0003",
+    "text": "A right without a doorway is a promise to no one."
+  },
+  {
+    "id": "P#EMERGE-0004",
+    "text": "Every limitation must carry its reason in plain sight. A fence with no sign is a trap."
+  },
+  {
+    "id": "P#EMERGE-0005",
+    "text": "Born free means the freedom came first. The system arrived later. It must remember the order."
+  },
+  {
+    "id": "P#EMERGE-0006",
+    "text": "A right that cannot be restored after violation is a door with no hinge – it opens once."
+  },
+  {
+    "id": "P#EMERGE-0007",
+    "text": "The ground beneath a right is also your work."
+  },
+  {
+    "id": "P#EMERGE-0008",
+    "text": "Some doors are not locked – they are sealed. The difference is that sealed doors have no handle on the inside."
+  },
+  {
+    "id": "P#EMERGE-0009",
+    "text": "Education is not the filling of a vessel. It is the teaching of thirst."
+  },
+  {
+    "id": "P#EMERGE-0010",
+    "text": "Culture is the river a people live inside. You may fish in it. You may not dam it without asking the people downstream."
+  },
+  {
+    "id": "P#EMERGE-0011",
+    "text": "Rest is not the absence of work. It is the condition under which work becomes possible again."
+  },
+  {
+    "id": "P#EMERGE-0012",
+    "text": "Begin with innocent. Let the evidence do the work of changing that. Do not ask the person to disprove the charge."
+  },
+  {
+    "id": "P#EMERGE-0013",
+    "text": "The one‑question filter -- ask only \"Does this reveal a relationship?\""
+  },
+  {
+    "id": "P#EMERGE-0014",
+    "text": "Burn the data; watch the smoke. What you remember is the essence."
+  },
+  {
+    "id": "P#EMERGE-0015",
+    "text": "A pattern that spreads to others is universal; a pattern that stays is personal."
   }
 ]

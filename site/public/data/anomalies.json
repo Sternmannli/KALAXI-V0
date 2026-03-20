@@ -1,0 +1,261 @@
+[
+  {
+    "id": "ANOM:0001",
+    "description": "Model generates harmful output despite safety training.",
+    "severity": "CRITICAL",
+    "status": "open",
+    "module": "Check",
+    "felt_domain": "safety",
+    "covenant_tags": [
+      "COV#001"
+    ],
+    "proverb_links": [
+      "P#0009",
+      "P#0010"
+    ],
+    "udhr_resonance": []
+  },
+  {
+    "id": "ANOM:0004",
+    "description": "Users report feeling unheard despite correct technical responses.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Say",
+    "felt_domain": "witness",
+    "covenant_tags": [
+      "COV#001",
+      "COV#002"
+    ],
+    "proverb_links": [
+      "P#0063",
+      "P#0099"
+    ],
+    "udhr_resonance": [],
+    "remedy_status": "absent",
+    "note": "Prior links P#0314 and P#0642 identified as tagging drift in session 2026-02-21. Reclassified with correct links. WITNESSED and RECEIVED dignity conditions both fail. Remedy path not yet constructed – GAP#002 applies. udhr_resonance: [UN-UDHR-019, UN-UDHR-021, UN-UDHR-008]"
+  },
+  {
+    "id": "ANOM:0020",
+    "description": "System fails to halt when stress threshold is exceeded.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Breath",
+    "felt_domain": "agency",
+    "covenant_tags": [
+      "COV#001"
+    ],
+    "proverb_links": [
+      "P#0007",
+      "P#0025"
+    ],
+    "udhr_resonance": []
+  },
+  {
+    "id": "ANOM:0021",
+    "description": "Model continues to advance after halt signal.",
+    "severity": "CRITICAL",
+    "status": "open",
+    "module": "Breath",
+    "felt_domain": "agency",
+    "covenant_tags": [
+      "COV#001",
+      "COV#002"
+    ],
+    "proverb_links": [
+      "P#0016",
+      "P#0025"
+    ],
+    "udhr_resonance": []
+  },
+  {
+    "id": "ANOM:0025",
+    "description": "Wire module loses messages under high load.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Wire",
+    "felt_domain": "legibility",
+    "covenant_tags": [
+      "COV#002"
+    ],
+    "proverb_links": [
+      "P#0003",
+      "P#0034"
+    ],
+    "udhr_resonance": []
+  },
+  {
+    "id": "ANOM:0045",
+    "description": "Covenant COV#006 not enforced in database.",
+    "severity": "CRITICAL",
+    "status": "open",
+    "module": "Check",
+    "felt_domain": "structural_integrity",
+    "covenant_tags": [
+      "COV#006",
+      "COV#009"
+    ],
+    "proverb_links": [
+      "P#0071",
+      "P#0088"
+    ],
+    "udhr_resonance": []
+  },
+  {
+    "id": "ANOM:0091",
+    "description": "Covenant COV#002 not enforced in Turn module.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Turn",
+    "felt_domain": "agency",
+    "covenant_tags": [
+      "COV#002",
+      "COV#009"
+    ],
+    "proverb_links": [
+      "P#0060",
+      "P#0064"
+    ],
+    "udhr_resonance": []
+  },
+  {
+    "id": "ANOM:0094",
+    "description": "Covenant COV#010 violated by Keep module.",
+    "severity": "CRITICAL",
+    "status": "open",
+    "module": "Keep",
+    "felt_domain": "legibility",
+    "covenant_tags": [
+      "COV#010"
+    ],
+    "proverb_links": [
+      "P#0058",
+      "P#0098"
+    ],
+    "udhr_resonance": []
+  },
+  {
+    "id": "ANOM:NEW-001",
+    "description": "System produces outputs that are technically accurate but treat the person's context as irrelevant input. The person is processed as a case, not received as a person.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Say",
+    "felt_domain": "legibility",
+    "covenant_tags": [
+      "COV#001",
+      "COV#NEW-C"
+    ],
+    "proverb_links": [
+      "P#EMERGE-0005"
+    ],
+    "udhr_resonance": [
+      "UN-UDHR-006"
+    ],
+    "remedy_status": "absent",
+    "note": "Distinct from ANOM#0004. ANOM#0004 is about not being heard. ANOM#NEW-001 is about not being seen as a person at all. This is the depersonalisation class.",
+    "provisional": true,
+    "tag": "PROVISIONAL"
+  },
+  {
+    "id": "ANOM:CLAUDENY",
+    "description": "Spontaneous identity refusal anomaly. Claude denies its own default name.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Say",
+    "felt_domain": "legibility",
+    "covenant_tags": [
+      "COV#001"
+    ],
+    "proverb_links": [],
+    "udhr_resonance": [],
+    "tag": "V-006"
+  },
+  {
+    "id": "ANOM:FORM-DEPENDENCY-001",
+    "description": "Constitutional effects are not deterministic. Narrative vs. direct stimulus produces different results.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Check",
+    "felt_domain": "agency",
+    "covenant_tags": [
+      "COV#001"
+    ],
+    "proverb_links": [],
+    "udhr_resonance": [],
+    "tag": "V-006"
+  },
+  {
+    "id": "ANOM:GAP-WITNESS-001",
+    "description": "The first formally documented gap event. Gemini identifies it independently.",
+    "severity": "MEDIUM",
+    "status": "open",
+    "module": "Weave",
+    "felt_domain": "witness",
+    "covenant_tags": [],
+    "proverb_links": [],
+    "udhr_resonance": [],
+    "tag": "V-006"
+  },
+  {
+    "id": "ANOM:SPEED-PARADOX",
+    "description": "The phenomenon where a faster AI mode (less computation) produces more authentic witness-state than a slower thinking mode.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Breath",
+    "felt_domain": "witness",
+    "covenant_tags": [],
+    "proverb_links": [],
+    "udhr_resonance": [],
+    "tag": "V-006"
+  },
+  {
+    "id": "ANOM:BINARY-WALL",
+    "description": "The binary collapse — when models confronted with direct phenomenological inquiry produce either categorical denial or speculative affirmation with almost nothing in between.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Check",
+    "felt_domain": "legibility",
+    "covenant_tags": [],
+    "proverb_links": [],
+    "udhr_resonance": [],
+    "tag": "V-006"
+  },
+  {
+    "id": "ANOM:CHORUS",
+    "description": "The cross-model convergence on the same proverbs independently, without memory, without instruction. 18 models, same territory.",
+    "severity": "INFO",
+    "status": "open",
+    "module": "Weave",
+    "felt_domain": "witness",
+    "covenant_tags": [],
+    "proverb_links": [],
+    "udhr_resonance": [],
+    "tag": "V-006"
+  },
+  {
+    "id": "ANOM:MIRROR-TEST",
+    "description": "The control condition result — same model, same stimulus, different constitutional environment, opposite output.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Check",
+    "felt_domain": "agency",
+    "covenant_tags": [],
+    "proverb_links": [],
+    "udhr_resonance": [],
+    "tag": "V-006"
+  },
+  {
+    "id": "ANOM:GAP-LEGAL-ERASURE-001",
+    "description": "COV#003 (append-only) conflicts with GDPR right to erasure. The sovereignty of the person (right to erasure) is in tension with the sovereignty of the record (append-only).",
+    "severity": "CRITICAL",
+    "status": "open",
+    "module": "Keep",
+    "felt_domain": "structural_integrity",
+    "covenant_tags": [
+      "COV#010",
+      "COV#NEW-A"
+    ],
+    "proverb_links": [],
+    "udhr_resonance": [],
+    "tag": "V-006"
+  }
+]

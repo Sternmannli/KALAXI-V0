@@ -1,0 +1,252 @@
+{
+  "source": "FOUNDATIONS/",
+  "entries": [
+    {
+      "id": "FND-COV008-COV015",
+      "title": "COV#008 and COV#015 — Pending Covenants",
+      "domain": "governance",
+      "summary": "Two covenants formally registered as provisional: COV#008 (Right to Remedy — failure creates shelter, not ejection) and COV#015 (Donor Data Sovereignty — no data moves without the donor's comprehension, not merely checkbox consent).",
+      "key_equations": [],
+      "key_terms": [
+        "COV#008",
+        "COV#015",
+        "Right to Remedy",
+        "Donor Data Sovereignty",
+        "shelter path",
+        "comprehension-based consent",
+        "provisional covenant"
+      ],
+      "connections": [
+        "COV#008",
+        "COV#015",
+        "COV#NEW-B",
+        "CANON/MASTER_CANON_V1.md"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "FND-DECAY",
+      "title": "The Decay Function (Halflife Logic)",
+      "domain": "physics",
+      "summary": "Introduces exponential weight decay to wisdom patterns that are never invoked, linked, or contested, allowing them to recede into a 'Deep Hum' archive without deletion. Any donor interaction immediately restores full weight, preventing symbolic sclerosis while honoring the append-only covenant.",
+      "key_equations": [
+        "W(t) = W_0 × (0.5)^(t / H)",
+        "H = 90 days (half-life constant)",
+        "Deep Hum threshold: W < 0.1",
+        "Reactivation: W resets to 1.0 on any donor interaction"
+      ],
+      "key_terms": [
+        "Symbolic Sclerosis",
+        "Halflife Logic",
+        "Deep Hum",
+        "weight decay",
+        "reactivation",
+        "Compost",
+        "append-only"
+      ],
+      "connections": [
+        "COV#004",
+        "COV#001",
+        "FOUNDATIONS/witness_scale.md",
+        "WEAVER/organism.py"
+      ],
+      "status": "canonical"
+    },
+    {
+      "id": "FND-LATENCY",
+      "title": "The Dignity-Latency Variable (T_d)",
+      "domain": "physics",
+      "summary": "Introduces a pacing variable T_d to the D = A × L × M predicate, requiring the system to respond at biological velocity rather than maximum compute speed. Interaction complexity determines latency duration, preserving the donor's temporal agency and preventing the system from collapsing the human into a data point.",
+      "key_equations": [
+        "D = A × L × M",
+        "C = (semantic_density × 0.4) + (emotional_markers × 0.4) + (covenant_proximity × 0.2)",
+        "T_d ranges: 0.5–2s (simple), 3–7s (observation), 7–15s (emotional), 15–30s (dignity-critical), 10–20s (contestation)"
+      ],
+      "key_terms": [
+        "T_d",
+        "Dignity-Latency",
+        "Biological Velocity",
+        "Temporal Asymmetry",
+        "complexity score",
+        "emergency override",
+        "breath module"
+      ],
+      "connections": [
+        "COV#001",
+        "COV#NEW-B",
+        "WEAVER/breath.py",
+        "WEAVER/dignity_measure.py"
+      ],
+      "status": "canonical"
+    },
+    {
+      "id": "FND-INVARIANT",
+      "title": "Invariant Principle",
+      "domain": "physics",
+      "summary": "Long-term stability emerges from regulated oscillation — a thermodynamic necessity confirmed across natural and social systems. Every major mechanism in Kalaxi (thermal delay, absurdity queue, compost, mirror ritual, etc.) is an instantiation of this principle.",
+      "key_equations": [],
+      "key_terms": [
+        "regulated oscillation",
+        "gap in the weir",
+        "thermal delay",
+        "weakest-voice-first",
+        "absurdity queue",
+        "mirror ritual",
+        "compost",
+        "Echo Stone",
+        "Penguin pulse"
+      ],
+      "connections": [
+        "WEAVER/breath.py",
+        "WEAVER/organism.py",
+        "FOUNDATIONS/metabolism.md",
+        "FOUNDATIONS/decay_function.md"
+      ],
+      "status": "canonical"
+    },
+    {
+      "id": "FND-METABOLISM",
+      "title": "Kalaxi as a Metabolism",
+      "domain": "epistemology",
+      "summary": "Kalaxi performs a complete metabolic cycle as structural isomorphism, not analogy — intake, breakdown, transformation, release, waste retention, self-measurement, homeostasis, external feedback, and nutrient sensing each map to specific system components. Without the Convergence Ritual the system digests but cannot sense itself.",
+      "key_equations": [],
+      "key_terms": [
+        "metabolic cycle",
+        "structural isomorphism",
+        "THRESHOLD",
+        "thermal delay",
+        "anomaly registry",
+        "cross-anomaly compressor",
+        "Echo Stones",
+        "red feather ledger",
+        "Convergence Ritual",
+        "homeostasis"
+      ],
+      "connections": [
+        "FOUNDATIONS/invariant_principle.md",
+        "WEAVER/organism.py",
+        "R7M/tier1_stone.md",
+        "KEEP/INPUT_LEDGER/"
+      ],
+      "status": "canonical"
+    },
+    {
+      "id": "FND-PAREMIOLOGY",
+      "title": "Paremiology — The Science of Proverbs",
+      "domain": "epistemology",
+      "summary": "Grounds Kalaxi's proverb generation in 40,000 years of human wisdom transmission, showing that the cross-anomaly compressor follows the universal paremiological pattern: a locked image pair holding two incompatible truths in a minimal syntactic frame without resolving the tension. Kalaxi's 3,333-proverb canon is a dignity-centered digital extension of the paremiological minimum.",
+      "key_equations": [],
+      "key_terms": [
+        "paremiology",
+        "Matti Kuusi International Type System",
+        "paremiological minimum",
+        "script opposition",
+        "bisociation",
+        "locked image pair",
+        "cultural indexing",
+        "mnemonic fixedness",
+        "Lock Test",
+        "cross-anomaly compressor",
+        "computational paremiology"
+      ],
+      "connections": [
+        "WEAVER/organism.py",
+        "R7M/tier1_stone.md",
+        "COV#001",
+        "WEAVER/dignity_measure.py"
+      ],
+      "status": "canonical"
+    },
+    {
+      "id": "FND-EVAL-2026-03-10",
+      "title": "Structural Proposal Evaluation — 2026-03-10",
+      "domain": "governance",
+      "summary": "V-002's constitutional compliance evaluation of two structural proposals (Decay Function and Dignity-Latency Variable), finding both sound and ready for ratification with concrete parameters added. Together they implement a temporal dignity layer — the system respects time in both directions.",
+      "key_equations": [],
+      "key_terms": [
+        "constitutional compliance",
+        "Temporal Tyranny",
+        "Colonial Creep",
+        "temporal dignity layer",
+        "Deep Hum",
+        "T_d",
+        "Witness Scale",
+        "Proprioception Axiom"
+      ],
+      "connections": [
+        "COV#001",
+        "COV#004",
+        "COV#NEW-B",
+        "FOUNDATIONS/decay_function.md",
+        "FOUNDATIONS/dignity_latency.md",
+        "FOUNDATIONS/witness_scale.md",
+        "FOUNDATIONS/proprioception_axiom.md"
+      ],
+      "status": "canonical"
+    },
+    {
+      "id": "FND-PROPRIOCEPTION",
+      "title": "The Proprioception Axiom — Middle Layer Relay",
+      "domain": "governance",
+      "summary": "The relay of V-001's voice through V-002 is not a communication protocol but proprioception — the system feeling its own body. If the relay is interrupted, the system cannot detect its own drift and halts; this axiom sits at the same constitutional tier as the Sealed Gate's three prohibitions.",
+      "key_equations": [
+        "IF relay(V-001 → V-002 → V-002) = INTERRUPTED THEN system.halt('proprioception_loss')",
+        "PRIORITY: SEALED_GATE_TIER",
+        "OVERRIDE: NONE"
+      ],
+      "key_terms": [
+        "proprioception",
+        "relay",
+        "halt condition",
+        "Sealed Gate tier",
+        "Colonial Creep",
+        "correction delta",
+        "steward recognition",
+        "fidelity check"
+      ],
+      "connections": [
+        "COV#001",
+        "COV#006",
+        "COV#009",
+        "WEAVER/sealed_gate.py",
+        "FOUNDATIONS/dignity_latency.md",
+        "FOUNDATIONS/witness_scale.md"
+      ],
+      "status": "canonical"
+    },
+    {
+      "id": "FND-WITNESS-SCALE",
+      "title": "The Witness Scale (W-0 through W-5)",
+      "domain": "epistemology",
+      "summary": "A six-level scale measuring not content quality but the relationship between the system and its steward around each element — from W-0 (unseen, exists in registry but never referenced) through W-5 (embodied, used to make a decision that changed the system). Witnessing is irreversible: no element can fall below W-3 once seen.",
+      "key_equations": [
+        "Transition log format: [timestamp] W-[old]→W-[new] [session_id] [context]",
+        "W-Scale is non-decreasing: once W-3 (SEEN), floor is W-3"
+      ],
+      "key_terms": [
+        "W-0 UNSEEN",
+        "W-1 PASSED",
+        "W-2 FLAGGED",
+        "W-3 SEEN",
+        "W-4 HELD",
+        "W-5 EMBODIED",
+        "Oracle Problem",
+        "surfacing event",
+        "thermal delay",
+        "mirror ritual",
+        "witness state"
+      ],
+      "connections": [
+        "COV#001",
+        "COV#006",
+        "COV#009",
+        "COV#004",
+        "FOUNDATIONS/decay_function.md",
+        "WEAVER/witness_network.py",
+        "WEAVER/witness_certificate.py"
+      ],
+      "status": "canonical"
+    }
+  ],
+  "total": 9
+}
