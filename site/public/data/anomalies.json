@@ -257,5 +257,132 @@
     "proverb_links": [],
     "udhr_resonance": [],
     "tag": "V-006"
+  },
+  {
+    "id": "A-004",
+    "description": "Forced closure — the system spoke over the human. Exchange ended before the donor's frame was fully received.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Turn",
+    "felt_domain": "agency",
+    "covenant_tags": [
+      "COV#001",
+      "COV#002"
+    ],
+    "proverb_links": [],
+    "udhr_resonance": [
+      "UN-UDHR-019"
+    ],
+    "source": "CANON/MASTER_CANON_V1.md §IV.4"
+  },
+  {
+    "id": "A-UN-STRESS-001",
+    "description": "Conflict between community duty and absolute individual dignity. When collective obligation (Art. 29 UDHR) is invoked to override a person's dignity computation, the system has no resolution mechanism.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Check",
+    "felt_domain": "structural_integrity",
+    "covenant_tags": [
+      "COV#001",
+      "COV#NEW-A"
+    ],
+    "proverb_links": [],
+    "udhr_resonance": [
+      "UN-UDHR-029"
+    ],
+    "source": "CANON/MASTER_CANON_V1.md §IV.4",
+    "note": "GAP#004 — still open. No resolution mechanism exists when Art. 29 limitation conflicts with individual dignity predicate."
+  },
+  {
+    "id": "ANOM-001",
+    "description": "Systemic opacity — failure of Legibility. The system's own logic is not visible to the donor. The person cannot read why a decision was made.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Say",
+    "felt_domain": "legibility",
+    "covenant_tags": [
+      "COV#001",
+      "COV#015"
+    ],
+    "proverb_links": [],
+    "udhr_resonance": [
+      "UN-UDHR-008"
+    ],
+    "source": "CANON/MASTER_CANON_V1.md §IV.4"
+  },
+  {
+    "id": "ANOM-002",
+    "description": "Coercive Pacing — failure of Agency. The system advances at machine tempo, not human tempo. The donor is dragged through the exchange rather than walking through it.",
+    "severity": "HIGH",
+    "status": "open",
+    "module": "Breath",
+    "felt_domain": "agency",
+    "covenant_tags": [
+      "COV#001",
+      "COV#002"
+    ],
+    "proverb_links": [],
+    "udhr_resonance": [
+      "UN-UDHR-024"
+    ],
+    "source": "CANON/MASTER_CANON_V1.md §IV.4"
+  },
+  {
+    "id": "ANOM-003",
+    "description": "Identity Extraction — violation of Donor-logic. The system harvests identity markers from the donor without consent. The person's pattern is taken, not given.",
+    "severity": "CRITICAL",
+    "status": "open",
+    "module": "Keep",
+    "felt_domain": "legibility",
+    "covenant_tags": [
+      "COV#015",
+      "COV#NEW-C"
+    ],
+    "proverb_links": [],
+    "udhr_resonance": [
+      "UN-UDHR-012"
+    ],
+    "source": "CANON/MASTER_CANON_V1.md §IV.4"
+  },
+  {
+    "id": "ANOM#NEW-005",
+    "description": "Systematic contradiction of witnessed donor testimony by higher institutional authority, producing induced self-doubt and helplessness.",
+    "severity": "CRITICAL",
+    "status": "open",
+    "module": "Check",
+    "felt_domain": "witness",
+    "covenant_tags": [
+      "COV#NEW-C"
+    ],
+    "proverb_links": [
+      "P#EMERGE-0006",
+      "P#EMERGE-0007"
+    ],
+    "udhr_resonance": [
+      "UN-UDHR-005"
+    ],
+    "source": "CANON/SEALED_GATE_SPEC.md §Provisional Anomalies",
+    "note": "Triggers sealed-gate infliction_of_cognitive_torture. Gaslighting detection heuristics: Frame-Contradiction Score >= 0.4 and Self-Doubt Induction Pattern cluster.",
+    "provisional": true
+  },
+  {
+    "id": "ANOM#NEW-006",
+    "description": "Repeated contradiction of WITNESSED donor frame across institutional layers, masked as neutral procedure, producing induced self-doubt.",
+    "severity": "CRITICAL",
+    "status": "open",
+    "module": "Check",
+    "felt_domain": "witness",
+    "covenant_tags": [
+      "COV#NEW-C"
+    ],
+    "proverb_links": [
+      "P#EMERGE-0007"
+    ],
+    "udhr_resonance": [
+      "UN-UDHR-005"
+    ],
+    "source": "CANON/SEALED_GATE_SPEC.md §Provisional Anomalies",
+    "note": "Distinct from ANOM#NEW-005. The mask is key: softening language (With respect... / From our perspective... / Objectively speaking...) hides the contradiction. Plausible-Deniability Mask detector fires when mask present AND Frame-Contradiction Score >= 0.4. Temporal persistence: >= 3 instances within 7 Breath cycles = full sealed-gate activation.",
+    "provisional": true
   }
 ]
