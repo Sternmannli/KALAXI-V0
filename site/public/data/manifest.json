@@ -71,6 +71,13 @@
       "path": "/data/system-state.json",
       "page": "/compass",
       "status": "active"
+    },
+    {
+      "id": "WORKINGS",
+      "type": "system",
+      "path": "/data/inner-workings.json",
+      "page": "/workings",
+      "status": "active"
     }
   ],
   "connections": [
