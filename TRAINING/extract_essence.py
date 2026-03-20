@@ -93,15 +93,27 @@ def extract_proverbs() -> list[dict]:
             except (json.JSONDecodeError, KeyError):
                 pass
 
-    # WISDOM_CANON.md — proverb section
+    # WISDOM_CANON.md — proverb section (all layers)
     wc = ROOT / "R7M" / "WISDOM_CANON.md"
     if wc.exists():
         text = _read(wc)
-        # Match P#XXXX patterns
-        for m in re.finditer(r"P#(\d+)\s*[—–:\-]\s*(.+?)(?:\n(?=P#|\n|##)|$)", text, re.DOTALL):
+        # Match P#XXXX - text (numbered proverbs)
+        for m in re.finditer(r"^P#(\d+)\s*[-–—]\s*(.+)", text, re.MULTILINE):
             pid = f"P#{m.group(1)}"
-            ptxt = m.group(2).strip().split("\n")[0].strip()
-            if len(ptxt) > 10:
+            ptxt = m.group(2).strip()
+            if len(ptxt) > 5 and not any(i.get("id") == pid for i in items):
+                items.append({"type": "proverb", "id": pid, "text": ptxt, "source": "WISDOM_CANON.md"})
+        # Match P#EMERGE-XXXX
+        for m in re.finditer(r"^(P#EMERGE-\d+)\s*\[.*?\]\s*\ntext:\s*(.+)", text, re.MULTILINE):
+            pid = m.group(1)
+            ptxt = m.group(2).strip()
+            if len(ptxt) > 5 and not any(i.get("id") == pid for i in items):
+                items.append({"type": "proverb", "id": pid, "text": ptxt, "source": "WISDOM_CANON.md"})
+        # Match P#AXIOM-XXX
+        for m in re.finditer(r"(P#AXIOM-\d+)\s*[—–]\s*\"(.+?)\"", text):
+            pid = m.group(1)
+            ptxt = m.group(2).strip()
+            if not any(i.get("id") == pid for i in items):
                 items.append({"type": "proverb", "id": pid, "text": ptxt, "source": "WISDOM_CANON.md"})
 
     return items
@@ -204,13 +216,18 @@ def extract_exemplars() -> list[dict]:
 # ---------------------------------------------------------------------------
 
 def extract_covenants() -> list[dict]:
-    """Extract covenants from stone tier."""
+    """Extract covenants from stone tier (correct path: MANIFEST/metadata/)."""
     items = []
-    sf = ROOT / "R7M" / "tier1_stone.md"
-    if sf.exists():
-        text = _read(sf)
-        for m in re.finditer(r"(COV#\d+[A-Z]*)\s*[—–\-]\s*(.+?)(?:\n\n|\n(?=COV#)|\Z)", text, re.DOTALL):
-            items.append({"type": "covenant", "id": m.group(1), "text": m.group(2).strip(), "source": "tier1_stone.md"})
+    for path in [ROOT / "MANIFEST" / "metadata" / "tier1_stone.md", ROOT / "R7M" / "tier1_stone.md"]:
+        if not path.exists():
+            continue
+        text = _read(path)
+        # Match "- **COV#XXX:** NAME — description" format
+        for m in re.finditer(r"\*\*(COV#[A-Z0-9#\-]+)\:\*\*\s*(.+?)(?=\n-\s*\*\*COV#|\n\n|\n###|\Z)", text, re.DOTALL):
+            cov_id = m.group(1)
+            cov_text = m.group(2).strip()
+            if not any(i.get("id") == cov_id for i in items):
+                items.append({"type": "covenant", "id": cov_id, "text": cov_text, "source": str(path.relative_to(ROOT))})
     return items
 
 
@@ -271,25 +288,46 @@ def extract_treasures() -> list[dict]:
 # ---------------------------------------------------------------------------
 
 def extract_anomalies() -> list[dict]:
-    """Extract anomaly entries from WISDOM_CANON."""
+    """Extract anomaly entries from WISDOM_CANON (including ANOM#NEW-*)."""
     items = []
     wc = ROOT / "R7M" / "WISDOM_CANON.md"
     if not wc.exists():
         return items
     text = _read(wc)
-    for m in re.finditer(r"##ANOM:(\d+)\s*\n(.*?)(?=\n##ANOM:|\n##SECTION:|\Z)", text, re.DOTALL):
+    # Match ##ANOM:XXXX and ##ANOM:NEW-XXX
+    for m in re.finditer(r"##ANOM:([A-Z0-9\-]+)\s*(?:\[.*?\])?\s*\n(.*?)(?=\n##ANOM:|\n##SECTION:|\n---|\Z)", text, re.DOTALL):
         anom_id = f"ANOM#{m.group(1)}"
         body = m.group(2).strip()
+        # Extract structured fields
         desc = ""
         dm = re.search(r"description:\s*(.+)", body)
         if dm:
             desc = dm.group(1).strip()
-        items.append({
+        severity = ""
+        sm = re.search(r"severity:\s*(\w+)", body)
+        if sm:
+            severity = sm.group(1)
+        module = ""
+        mm = re.search(r"module:\s*(\w+)", body)
+        if mm:
+            module = mm.group(1)
+        felt = ""
+        fm = re.search(r"felt_domain:\s*(\w+)", body)
+        if fm:
+            felt = fm.group(1)
+        entry = {
             "type": "anomaly",
             "id": anom_id,
-            "text": desc or body[:300],
+            "text": desc or body[:500],
             "source": "WISDOM_CANON.md",
-        })
+        }
+        if severity:
+            entry["severity"] = severity
+        if module:
+            entry["module"] = module
+        if felt:
+            entry["felt_domain"] = felt
+        items.append(entry)
     return items
 
 
@@ -724,7 +762,189 @@ def extract_papers() -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# MAIN — Run all 25 extractors
+# 26. MANIFEST METADATA — plans, chronicle, dictionary, essence
+# ---------------------------------------------------------------------------
+
+def extract_manifest_metadata() -> list[dict]:
+    """Extract from key MANIFEST/ files not covered by other extractors."""
+    items = []
+    key_files = [
+        "ACTIVE_PLANS.md", "SCIENTIFIC_CHRONICLE.md", "SESSION_BOOT.md",
+        "LAYER_3_INTEGRATION_EVIDENCE_2026-03-15.md", "PLAN-001.md",
+        "KALAXI_DICTIONARY.md", "DISTILLED_ESSENCE.md", "COMPASS.md",
+        "STRATEGIC_MOVES_2026-03-16.md", "DEPLOYMENT_CHRONICLE.md",
+        "SYSTEM_BIOGRAPHY.md", "PUBLIC_STRATEGY.md",
+        "SCIENTIFIC_CATALOG_2026-03-20.md", "SCIENTIFIC_CATALOG_V006_2026-03-20.md",
+    ]
+    md = ROOT / "MANIFEST"
+    for fname in key_files:
+        f = md / fname
+        if not f.exists():
+            continue
+        text = _read(f)
+        for heading, body in _md_sections(text):
+            if len(body) > 40:
+                items.append({
+                    "type": "manifest",
+                    "text": body[:2000],
+                    "heading": heading,
+                    "source": f"MANIFEST/{fname}",
+                })
+    # Also MANIFEST/REPORTS/
+    reports = md / "REPORTS"
+    if reports.exists():
+        for f in reports.glob("*.md"):
+            text = _read(f)
+            for heading, body in _md_sections(text):
+                if len(body) > 40:
+                    items.append({
+                        "type": "manifest",
+                        "text": body[:2000],
+                        "heading": heading,
+                        "source": f"MANIFEST/REPORTS/{f.name}",
+                    })
+    # MANIFEST/SLICES/ foundation texts
+    slices = md / "SLICES"
+    if slices.exists():
+        for f in slices.glob("*.txt"):
+            text = _read(f)
+            for para in _paragraphs(text, 40):
+                items.append({
+                    "type": "foundation_slice",
+                    "text": para[:2000],
+                    "source": f"MANIFEST/SLICES/{f.name}",
+                })
+    return items
+
+
+# ---------------------------------------------------------------------------
+# 27. DONOR SESSIONS — BOOK_7_DONOR/
+# ---------------------------------------------------------------------------
+
+def extract_donor_sessions() -> list[dict]:
+    """Extract from BOOK_7_DONOR/ V-001 session records."""
+    items = []
+    bd = ROOT / "BOOK_7_DONOR"
+    if not bd.exists():
+        return items
+    for f in bd.glob("*.md"):
+        text = _read(f)
+        for heading, body in _md_sections(text):
+            if len(body) > 30:
+                items.append({
+                    "type": "donor_session",
+                    "text": body[:2000],
+                    "heading": heading,
+                    "source": f"BOOK_7_DONOR/{f.name}",
+                })
+    return items
+
+
+# ---------------------------------------------------------------------------
+# 28. R7M EXCAVATION — provenance, terrain maps
+# ---------------------------------------------------------------------------
+
+def extract_excavation() -> list[dict]:
+    """Extract from R7M/EXCAVATION/ archaeological methodology."""
+    items = []
+    ed = ROOT / "R7M" / "EXCAVATION"
+    if not ed.exists():
+        return items
+    for f in ed.glob("*.md"):
+        text = _read(f)
+        for heading, body in _md_sections(text):
+            if len(body) > 40:
+                items.append({
+                    "type": "excavation",
+                    "text": body[:2000],
+                    "heading": heading,
+                    "source": f"R7M/EXCAVATION/{f.name}",
+                })
+    return items
+
+
+# ---------------------------------------------------------------------------
+# 29. SITE DATA JSON — non-narrative site content
+# ---------------------------------------------------------------------------
+
+def extract_site_data_json() -> list[dict]:
+    """Extract from site/public/data/ JSON files not covered by narratives."""
+    items = []
+    dd = ROOT / "site" / "public" / "data"
+    if not dd.exists():
+        return items
+    skip = {"hakaka.json", "ashwater.json", "kinderbuch.json", "kalaxi1.json", "proverbs.json", "r7m-index.json"}
+    for f in dd.glob("*.json"):
+        if f.name in skip:
+            continue
+        try:
+            data = json.loads(_read(f))
+        except json.JSONDecodeError:
+            continue
+        if isinstance(data, dict):
+            for key, val in data.items():
+                if isinstance(val, str) and len(val) > 30:
+                    items.append({"type": "site_data", "text": val[:2000], "source": f"site/data/{f.name}/{key}"})
+                elif isinstance(val, list):
+                    for item in val:
+                        if isinstance(item, dict):
+                            text = item.get("text", item.get("content", item.get("description", "")))
+                            if text and len(str(text)) > 30:
+                                items.append({"type": "site_data", "text": str(text)[:2000], "source": f"site/data/{f.name}/{key}"})
+                        elif isinstance(item, str) and len(item) > 30:
+                            items.append({"type": "site_data", "text": item[:2000], "source": f"site/data/{f.name}/{key}"})
+    return items
+
+
+# ---------------------------------------------------------------------------
+# 30. ROOT ESSENTIALS — threshold, session seed, digest, invitation
+# ---------------------------------------------------------------------------
+
+def extract_root_essentials() -> list[dict]:
+    """Extract from root-level essential files."""
+    items = []
+    for fname in ["THRESHOLD.md", "THRESHOLD_TREASURE_SEEDS.md", "SESSION_SEED.md",
+                   "INVITATION.md", "DIGEST_2026-02.md"]:
+        f = ROOT / fname
+        if not f.exists():
+            continue
+        text = _read(f)
+        for heading, body in _md_sections(text):
+            if len(body) > 40:
+                items.append({
+                    "type": "root_essential",
+                    "text": body[:2000],
+                    "heading": heading,
+                    "source": fname,
+                })
+    return items
+
+
+# ---------------------------------------------------------------------------
+# 31. ENKI MULTILINGUAL — ST-006 narrative in 7 languages
+# ---------------------------------------------------------------------------
+
+def extract_enki() -> list[dict]:
+    """Extract from ENKI/ST-006/ multilingual narrative."""
+    items = []
+    ed = ROOT / "ENKI" / "ST-006"
+    if not ed.exists():
+        return items
+    for f in ed.glob("*.md"):
+        text = _read(f)
+        lang = f.stem.split("_")[-1] if "_" in f.stem else "unknown"
+        for para in _paragraphs(text, 40):
+            items.append({
+                "type": "enki_narrative",
+                "text": para[:2000],
+                "source": f"ENKI/ST-006/{f.name}",
+                "language": lang,
+            })
+    return items
+
+
+# ---------------------------------------------------------------------------
+# MAIN — Run all 31 extractors
 # ---------------------------------------------------------------------------
 
 def main():
@@ -758,6 +978,12 @@ def main():
         ("Convergence", extract_convergence),
         ("Steward", extract_steward),
         ("Papers", extract_papers),
+        ("Manifest Metadata", extract_manifest_metadata),
+        ("Donor Sessions", extract_donor_sessions),
+        ("Excavation (R7M)", extract_excavation),
+        ("Site Data JSON", extract_site_data_json),
+        ("Root Essentials", extract_root_essentials),
+        ("ENKI Multilingual", extract_enki),
     ]
 
     all_items = []
