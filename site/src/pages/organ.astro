@@ -1,0 +1,360 @@
+---
+import Base from '../layouts/Base.astro';
+import organ from '../../public/data/organ.json';
+
+const phases = organ.phases;
+---
+
+<Base title="ORGAN — kalam.ch" description="The full body. 16,830 entries. 563,874 words. Three-phase training pipeline.">
+
+  <section class="page-header">
+    <h1>ORGAN</h1>
+    <p class="quiet organ-desc">{organ.description}</p>
+    <p class="organ-pipeline">{organ.pipeline}</p>
+    <div class="organ-stats">
+      <span class="stat">{organ.totals.entries.toLocaleString()} entries</span>
+      <span class="stat-sep">&middot;</span>
+      <span class="stat">{organ.totals.words.toLocaleString()} words</span>
+      <span class="stat-sep">&middot;</span>
+      <span class="stat">{organ.totals.invalid} invalid</span>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Relationship to ZAKAKA -->
+  <section class="content-section">
+    <div class="text-block">
+      <h2>ZAKAKA is inside ORGAN</h2>
+      <p>ZAKAKA is the bone — {organ.zakaka_merged.cpt} pure entries merged into the full corpus. Everything in ZAKAKA is Level 0 or Level 1. The Organ adds Levels 2–4: what the system derived, what external models contributed, what operations produced.</p>
+      <p class="separation-rule">ZAKAKA feeds into Organ. Organ never feeds into ZAKAKA.</p>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Purity Levels -->
+  <section class="content-section">
+    <div class="text-block">
+      <h2>Purity Levels</h2>
+      <div class="purity-grid">
+        {organ.purity_levels.map((level: any) => (
+          <div class={`purity-card purity-${level.level}`}>
+            <span class="purity-level">Level {level.level}</span>
+            <h3>{level.name}</h3>
+            <p>{level.description}</p>
+            <span class="purity-source">{level.source}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Three Phases -->
+  <section class="content-section">
+    <div class="text-block">
+      <h2>Three Phases</h2>
+
+      <!-- CPT -->
+      <div class="phase-block" id="cpt">
+        <h3>Phase 1: {phases.cpt.name}</h3>
+        <p class="phase-desc">{phases.cpt.description}</p>
+        <div class="phase-stats">
+          <span>{phases.cpt.entries.toLocaleString()} entries</span>
+          <span>&middot;</span>
+          <span>{phases.cpt.words.toLocaleString()} words</span>
+        </div>
+        <div class="samples">
+          <h4>Samples</h4>
+          {phases.cpt.samples.map((s: string) => (
+            <blockquote class="sample-text">{s}</blockquote>
+          ))}
+        </div>
+      </div>
+
+      <!-- SFT -->
+      <div class="phase-block" id="sft">
+        <h3>Phase 2: {phases.sft.name}</h3>
+        <p class="phase-desc">{phases.sft.description}</p>
+        <div class="phase-stats">
+          <span>{phases.sft.entries.toLocaleString()} entries</span>
+          <span>&middot;</span>
+          <span>{phases.sft.words.toLocaleString()} words</span>
+        </div>
+        <div class="samples">
+          <h4>Samples</h4>
+          {phases.sft.samples.map((s: any) => (
+            <div class="sft-sample">
+              <p class="sft-prompt">{s.prompt}</p>
+              <p class="sft-response">{s.response}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- DPO -->
+      <div class="phase-block" id="dpo">
+        <h3>Phase 3: {phases.dpo.name}</h3>
+        <p class="phase-desc">{phases.dpo.description}</p>
+        <div class="phase-stats">
+          <span>{phases.dpo.entries} entries</span>
+        </div>
+        <div class="samples">
+          <h4>Samples</h4>
+          {phases.dpo.samples.map((s: any) => (
+            <div class="dpo-sample">
+              <p class="dpo-prompt">{s.prompt}</p>
+              <div class="dpo-pair">
+                <div class="dpo-chosen">
+                  <span class="dpo-label">Chosen</span>
+                  <p>{s.chosen}</p>
+                </div>
+                <div class="dpo-rejected">
+                  <span class="dpo-label">Rejected</span>
+                  <p>{s.rejected}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Links -->
+  <section class="content-section">
+    <div class="text-block">
+      <h2>Related</h2>
+      <ul class="organ-links">
+        <li><a href="/zakaka">ZAKAKA — the bone (Level 0 + 1)</a></li>
+        <li><a href="/r7m">R7M — the womb (source treasures)</a></li>
+        <li><a href="/hakaka">Hakaka — the origin narrative</a></li>
+        <li><a href="/science">Science — experiments and probes</a></li>
+      </ul>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  .organ-desc {
+    font-family: var(--font-proverb);
+    font-size: var(--text-lg);
+    max-width: 50ch;
+  }
+
+  .organ-pipeline {
+    font-family: monospace;
+    font-size: var(--text-sm);
+    color: var(--color-presence);
+    margin-top: var(--space-1);
+  }
+
+  .organ-stats {
+    display: flex;
+    gap: 0.5rem;
+    font-size: var(--text-sm);
+    color: var(--text-dim);
+    margin-top: var(--space-1);
+  }
+
+  .separation-rule {
+    font-weight: 600;
+    color: var(--color-dignity);
+    margin-top: var(--space-2);
+  }
+
+  /* Purity */
+  .purity-grid {
+    display: grid;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .purity-card {
+    padding: var(--space-2) var(--space-3);
+    border-radius: 6px;
+    background: var(--bg-inset);
+    border-left: 4px solid var(--accent-subtle);
+  }
+
+  .purity-0 { border-left-color: var(--color-dignity); }
+  .purity-1 { border-left-color: var(--color-wisdom); }
+  .purity-2 { border-left-color: var(--color-presence); }
+  .purity-3 { border-left-color: var(--color-pattern); }
+  .purity-4 { border-left-color: var(--color-witness); }
+
+  .purity-level {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+
+  .purity-card h3 {
+    font-family: var(--font-heading);
+    font-size: var(--text-base);
+    margin: 0.2rem 0;
+  }
+
+  .purity-card p {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+
+  .purity-source {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* Phases */
+  .phase-block {
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--bg-elevated);
+  }
+
+  .phase-block:last-child {
+    border-bottom: none;
+  }
+
+  .phase-block h3 {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+  }
+
+  .phase-desc {
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: var(--space-1);
+  }
+
+  .phase-stats {
+    display: flex;
+    gap: 0.5rem;
+    font-size: var(--text-sm);
+    color: var(--text-dim);
+    margin-bottom: var(--space-3);
+  }
+
+  .samples h4 {
+    font-size: var(--text-sm);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-1);
+  }
+
+  .sample-text {
+    font-family: var(--font-proverb);
+    font-size: var(--text-sm);
+    border-left: 3px solid var(--accent-subtle);
+    padding-left: var(--space-2);
+    margin: var(--space-1) 0;
+    color: var(--text-secondary);
+  }
+
+  /* SFT samples */
+  .sft-sample {
+    margin-bottom: var(--space-2);
+    padding: var(--space-2);
+    background: var(--bg-inset);
+    border-radius: 6px;
+  }
+
+  .sft-prompt {
+    font-size: var(--text-sm);
+    color: var(--text-dim);
+    margin-bottom: 0.3rem;
+  }
+
+  .sft-prompt::before {
+    content: 'Q: ';
+    font-weight: 600;
+  }
+
+  .sft-response {
+    font-family: var(--font-proverb);
+    font-size: var(--text-sm);
+  }
+
+  .sft-response::before {
+    content: 'AXI: ';
+    font-weight: 600;
+    color: var(--color-dignity);
+  }
+
+  /* DPO samples */
+  .dpo-sample {
+    margin-bottom: var(--space-3);
+  }
+
+  .dpo-prompt {
+    font-size: var(--text-sm);
+    color: var(--text-dim);
+    margin-bottom: var(--space-1);
+  }
+
+  .dpo-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+  }
+
+  @media (max-width: 600px) {
+    .dpo-pair {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .dpo-chosen, .dpo-rejected {
+    padding: var(--space-2);
+    border-radius: 6px;
+    font-size: var(--text-sm);
+  }
+
+  .dpo-chosen {
+    background: rgba(10, 123, 98, 0.08);
+    border: 1px solid var(--color-presence);
+  }
+
+  .dpo-rejected {
+    background: rgba(196, 80, 80, 0.08);
+    border: 1px solid var(--danger);
+  }
+
+  .dpo-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  .dpo-chosen .dpo-label { color: var(--color-presence); }
+  .dpo-rejected .dpo-label { color: var(--danger); }
+
+  /* Links */
+  .organ-links {
+    list-style: none;
+    padding: 0;
+  }
+
+  .organ-links li {
+    margin-bottom: var(--space-1);
+  }
+
+  .organ-links a {
+    color: var(--color-dignity);
+    text-decoration: none;
+    font-size: var(--text-sm);
+  }
+
+  .organ-links a:hover {
+    text-decoration: underline;
+  }
+</style>
