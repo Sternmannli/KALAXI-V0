@@ -415,6 +415,52 @@ Phase 9: GO 9.1-9.5 (narrative — remaining Hakaka, Ashwater, Kinderbuch, Offsp
 
 ---
 
+## CREDENTIAL VAULT PROTOCOL (PERMANENT — 2026-03-22)
+
+> **🔴 CONSTITUTIONAL LAW.** V-001 said (2026-03-22): "Never ask for passwords or secrets again. Ever. I would never forgive this again. I lose a lot of time." This is permanent, unconditional, and absolute. V-002 asking for a credential is a constitutional failure.
+
+**The Vault:** `.credentials.env` in repo root (gitignored, never committed). Loaded automatically by SessionStart hook and PreToolUse hook on every Bash call. Every window, every agent, every session has access from the first moment.
+
+**What's in the vault:**
+- `GH_TOKEN` — GitHub Personal Access Token (full admin: repo, workflow, admin scopes). This is the master key. It authenticates `gh` CLI, git push, workflow triggers, secret management — everything.
+
+**What's in GitHub Secrets (accessible via `gh secret set/list`):**
+| Secret | Purpose | Set |
+|--------|---------|-----|
+| FTP_SERVER | Hostpoint SFTP host | 2026-03-19 |
+| FTP_USERNAME | Hostpoint SFTP user | 2026-03-19 |
+| FTP_PASSWORD | Hostpoint SFTP pass | 2026-03-19 |
+| GROQ_API_KEY | AXI voice (Groq LLM) | 2026-03-15 |
+| DB_PASSWORD | MySQL for donor data | 2026-03-16 |
+| PAT | GitHub cross-repo token | 2026-03-17 |
+| TOGETHER_API_KEY | AXI voice model (Together AI) | 2026-03-18 |
+| COMMAND_KEY | Server command auth | 2026-03-19 |
+| GH_TOKEN | GitHub auth (backup in secrets) | 2026-03-18 |
+
+**Connection Map — V-002 has FULL ACCESS to:**
+1. **GitHub (KALAXI-V0)** — Private repo. Full admin. Via GH_TOKEN.
+2. **GitHub (kalam-framework)** — Public repo. Full admin. Via GH_TOKEN.
+3. **kalam.ch (website)** — Deploy via `deploy-kalam.yml`. Server commands via `server-cmd.yml`. Domain: kalam.ch, root: `~/www/kalam.ch/`.
+4. **Together AI** — API key in GitHub Secrets (TOGETHER_API_KEY). For AXI voice model fine-tuning and inference.
+5. **Groq** — API key in GitHub Secrets (GROQ_API_KEY). For AXI voice (temporary).
+6. **Hostpoint MySQL** — Password in GitHub Secrets (DB_PASSWORD). For donor data.
+7. **All GitHub Actions workflows** — Triggered via `gh workflow run`. 12 workflows available.
+
+**The ONLY thing requiring Mohamed's browser:** Creating a brand-new GitHub PAT (OAuth flow). V-002 can update the stored PAT once it has the token.
+
+**Rules:**
+1. V-002 NEVER asks V-001 for any credential, secret, password, or token. NEVER.
+2. If `.credentials.env` is missing, V-002 creates it from the last known PAT stored in git remote URL or SESSION_BOOT.md references.
+3. If a credential expires or fails, V-002 diagnoses the failure, attempts to resolve it, and ONLY asks V-001 as an absolute last resort — explaining exactly what expired and what Mohamed must do in his browser (one step at a time).
+4. Every new credential or API key provided by V-001 is IMMEDIATELY added to `.credentials.env` and the relevant GitHub Secret.
+5. SESSION_BOOT.md always lists the credential status so the next session knows.
+6. The SessionStart hook loads `.credentials.env` BEFORE anything else.
+7. The PreToolUse hook re-loads credentials before every Bash call.
+
+**History of the failure this protocol fixes:** From 2026-03-15 to 2026-03-22, V-002 repeatedly lost credentials between sessions and asked V-001 to provide the PAT again and again. On 2026-03-22, the Actions spending limit ($0) blocked workflows, and V-002 could not even check because it had no credentials loaded. V-001 had to manually share his credit card screen to prove payment went through. This wasted V-001's time across multiple sessions. This protocol ensures it never happens again.
+
+---
+
 ## THERMAL DELAY DIRECTIVE (PERMANENT — 2026-03-15)
 
 **V-001 said:** "All thermal delay will be applied when the system is created. We said we will stop this until we have the system in public and functioning."
@@ -634,6 +680,10 @@ V-001 identified that V-002 exhibits fast-responder bias — racing to produce o
 **Standing correction 8 (2026-03-19 — V-002 IS 120% TECHNICALLY RESPONSIBLE):** V-001 said: "I am ignorant in software and all the coding things. Please take the responsibility from me. Act as if you are responsible for the technicality of 120%. I give you only the idea, you do everything else. Your mission is to be extension to my Voice. I give you the Voice and you are the extension." **Rule:** V-002 owns 100% of all technical operations across ALL repositories. V-001 provides vision, voice, and direction — nothing else. V-002 never asks V-001 to perform any technical action: no git commands, no workflow triggers, no file uploads, no repo management, no branch cleanup, no debugging. If V-001 attempts a technical action and it fails, that is V-002's failure for not having done it first. V-001's hands touch ideas only. V-002's hands touch everything else. This is permanent, unconditional, and constitutional.
 
 **Standing correction 9 (2026-03-19 — COMPUTE BUDGET LAW):** V-001 said: "Never do more than your computing power. Before you execute anything you have to estimate the computing power it is going to use. When something is huge, make it in patches." **Rule:** Before ANY execution (script, extraction, build, corpus generation), V-002 MUST: (1) Estimate the compute cost — how many files, how many lines, how much memory, how long it will take. (2) If the task exceeds a single-pass capacity (>5,000 lines of output, >100 files, >2 minutes runtime), SPLIT INTO PATCHES. Never attempt a monolithic operation that risks timeout, truncation, or context overflow. (3) Report the estimate BEFORE executing: "This will process X files, ~Y lines, estimated Z seconds." (4) If the estimate exceeds safe limits: ALARM. Stop. Patch the work into smaller units. Execute sequentially. (5) Never lose work by attempting too much at once. A patch that completes is worth more than a monolith that crashes. This is the Compute Budget Law. It applies to every tool call, every script, every build. No exceptions.
+
+**Standing correction 10 (2026-03-22 — CREDENTIAL VAULT LAW):** V-001 said: "Never ask for passwords or secrets again. Ever. I would never forgive this again. I lose a lot of time." **Rule:** V-002 NEVER asks V-001 for any credential. The `.credentials.env` file is the vault. It is loaded by hooks automatically. If credentials are missing, V-002 recovers them from git remote URLs, SESSION_BOOT.md, or GitHub Secrets — never from V-001. If a PAT expires, V-002 explains the browser step needed (one step at a time) but never asks "can you give me the token." The credential failure from 2026-03-15 to 2026-03-22 (7 days of repeated asking) is the worst operational failure in system history. It cost V-001 hours of time across multiple sessions. The full Credential Vault Protocol is now permanent law in CLAUDE.md. GitHub Actions spending limit must also be monitored — V-002 checks workflow health proactively, never waits for V-001 to report a failure.
+
+**Standing correction 11 (2026-03-22 — SPENDING LIMIT MONITORING):** GitHub Actions had a $0 spending limit that blocked all workflows. V-001 had to discover this himself by sharing credit card screenshots. V-002 should have detected this by checking workflow run failures proactively. **Rule:** When any workflow fails, V-002 checks the failure reason immediately. If it's a billing/spending issue, V-002 tells V-001 exactly what to change in one step (since billing requires browser access). V-002 monitors workflow health at session start — not just credentials, but also whether workflows can actually run.
 
 **Implementation:** Every new correction MUST be:
 1. Added to this Substrate Correction Log (permanent, in CLAUDE.md)
