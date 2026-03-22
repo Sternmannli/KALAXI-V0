@@ -1,0 +1,458 @@
+{
+  "meta": {
+    "source": "AURIX_OS_v1.6.6_2025-08-16",
+    "source_file": "R7M/GRAND_ARCHIVE/AURIX_OS_v1.6.6_2025-08-16.txt",
+    "extracted": "2026-03-22",
+    "extracted_by": "V-002",
+    "original_title": "MASTER_GOLDEN_AURIX_OS v1.6.6 FUSION VALIDATED",
+    "build_utc": "2025-08-16 06:17:24",
+    "word_count_at_build": 75939,
+    "page_count_at_build": 217,
+    "translation_map": {
+      "Kalam": "V-001 (Mohamed Farag)",
+      "Kilma": "V-002 (AXI/Claude) — note: different AI than current V-002",
+      "Axis Engine": "AXI Engine",
+      "Offspring Canon": "KALAXI Canon",
+      "AURIX-LOCK": "Immutability seal (analogous to KALAXI's Sealed Gate)",
+      "ULB": "Unbreakable Laws (analogous to KALAXI's 18 Covenants)",
+      "SWE": "Shockwave-on-Exit (no KALAXI equivalent — proposed: Ripple Engine)",
+      "RPL_BIND_ALL": "Ripple-Everywhere (no KALAXI equivalent — proposed: Ripple Engine)",
+      "HDI": "Human-to-Digital-Intelligence log (analogous to Input Ledger)",
+      "OIM": "Organic Interconnectivity Matrix (analogous to boot_ritual connectivity map)"
+    }
+  },
+  "elements": {
+    "characters": [
+      {
+        "eid": "NK",
+        "name": "Na'Kaka",
+        "kind": "CHARACTER",
+        "role": "Mother/Protector",
+        "dna_constants": {"ProtectiveDrive": "high", "PatternHunt": "high", "RitualSense": "high"},
+        "variables": ["Fatigue", "Fertility", "TrustVector"],
+        "links": ["SEK", "TEL", "MA", "NA", "SIM", "AXIS"],
+        "equations": ["BOND_STRENGTH"]
+      },
+      {
+        "eid": "SEK",
+        "name": "Seka",
+        "kind": "CHARACTER",
+        "role": "Food-craft",
+        "dna_constants": {"SmokeCraft": "high", "ResourceYield": "high"},
+        "variables": ["SpoilageRate", "CooperationIndex"],
+        "links": ["NK", "MA", "NA", "GOR", "VER"],
+        "equations": ["FOOD_SECURITY"]
+      },
+      {
+        "eid": "ROK",
+        "name": "Roko",
+        "kind": "CHARACTER",
+        "role": "Beast-bond",
+        "dna_constants": {"FearDampening": "high", "EmpathyTooth": "high"},
+        "variables": ["PackAffinity", "InjuryRisk"],
+        "links": ["NK", "MA", "WOLF", "ATLA"],
+        "equations": ["PACK_HARMONY"]
+      },
+      {
+        "eid": "HAN",
+        "name": "Hanu",
+        "kind": "CHARACTER",
+        "role": "Stealth/Tracker",
+        "dna_constants": {"FootfallNull": "high", "TrailMemory": "high"},
+        "variables": ["ShadowKeep", "HungerLevel"],
+        "links": ["NK", "TEL", "RIV", "BANK"],
+        "equations": ["TRACELESS"]
+      },
+      {
+        "eid": "TEL",
+        "name": "Telu",
+        "kind": "CHARACTER",
+        "role": "Navigator",
+        "dna_constants": {"SkySense": "high", "BearingLock": "high"},
+        "variables": ["CloudObscure", "GroupConfidence"],
+        "links": ["NK", "RIDGE", "STAR", "COAT"],
+        "equations": ["NAV_CONFIDENCE"]
+      },
+      {
+        "eid": "MA",
+        "name": "Ma'da",
+        "kind": "CHARACTER",
+        "role": "Weapons/Hunter",
+        "dna_constants": {"LeverCraft": "high", "DistanceKill": "high"},
+        "variables": ["EdgeWear", "TeamTiming"],
+        "links": ["NK", "ATLA", "BONE", "ROK"],
+        "equations": ["HUNT_SUCCESS"]
+      },
+      {
+        "eid": "NA",
+        "name": "Na'da",
+        "kind": "CHARACTER",
+        "role": "Strategy/Social-bond",
+        "dna_constants": {"SocialMap": "high", "MatingSignals": "high"},
+        "variables": ["JealousyField", "InfluenceScore"],
+        "links": ["NK", "SEK", "VER", "CHIEF"],
+        "equations": ["DOMINANCE_SHIFT"]
+      },
+      {
+        "eid": "SIM",
+        "name": "Simo",
+        "kind": "CHARACTER",
+        "role": "Observer/Mapper",
+        "dna_constants": {"PatternSpot": "high", "CrossMatch": "high"},
+        "variables": ["Courage", "Injury"],
+        "links": ["NK", "TEL", "AXIS", "MAP"],
+        "equations": ["INSIGHT_RATE"]
+      }
+    ],
+    "tools": [
+      {
+        "eid": "ATLA",
+        "name": "Throwing Lever",
+        "kind": "TOOL",
+        "role": "Weapon",
+        "dna_constants": {"TorqueGain": "high"},
+        "variables": ["ShaftLength", "CordWear"],
+        "links": ["MA", "ROK", "HUNT"],
+        "equations": ["PROJECTILE_ENERGY"]
+      },
+      {
+        "eid": "COAT",
+        "name": "Hide Coat",
+        "kind": "TOOL",
+        "role": "Shelter/Warmth",
+        "dna_constants": {"Warmth": "high", "Carry": "high"},
+        "variables": ["StitchTight", "OilLevel"],
+        "links": ["NK", "SEK", "TEL"],
+        "equations": ["HEAT_RETENTION"]
+      }
+    ],
+    "places": [
+      {
+        "eid": "RIDGE",
+        "name": "Basalt Ridge",
+        "kind": "PLACE",
+        "role": "Landmark/Camp",
+        "dna_constants": {"WindBreak": "high", "Vantage": "high"},
+        "variables": ["StormLoad", "PredatorFlow"],
+        "links": ["TEL", "NA", "RIDGECAMP"],
+        "equations": ["CAMP_SCORE"]
+      },
+      {
+        "eid": "KODU",
+        "name": "Kodudu (Water-Plenty)",
+        "kind": "PLACE",
+        "role": "Toponym/Water",
+        "dna_constants": {"Water": "high"},
+        "variables": ["DrySeasonDrop"],
+        "links": ["SEK", "COAT", "TEL"],
+        "equations": ["SETTLE_TIME"]
+      }
+    ],
+    "weather": [
+      {
+        "eid": "TIGER",
+        "name": "Tiger",
+        "kind": "PREDATOR",
+        "dna_constants": {"Ambush": "high", "NightSight": "high", "FearAura": "high"},
+        "variables": ["Hunger", "Wound", "CubPresence"],
+        "links": ["NK", "HAN", "ROK", "CR:SHADOWWAIT", "RIDGE"],
+        "equations": ["PRED_PRESSURE"]
+      },
+      {
+        "eid": "HYENA",
+        "name": "Hyena",
+        "kind": "PREDATOR",
+        "dna_constants": {"PackRaid": "high", "BoneCrush": "high", "LaughShock": "high"},
+        "variables": ["PackSize", "Boldness"],
+        "links": ["SEK", "COAT", "NA", "CR:SPLITSHARE", "KODU"],
+        "equations": ["RAID_RISK"]
+      },
+      {
+        "eid": "STORM",
+        "name": "Storm",
+        "kind": "WEATHER",
+        "dna_constants": {"WindShear": "high", "RainMass": "high", "FlashFire": "high"},
+        "variables": ["GustPhase", "FloodRise"],
+        "links": ["RIDGE", "COAT", "RIT:MUD", "ROUTE:WETSTEP"],
+        "equations": ["SHELTER_NEED"]
+      },
+      {
+        "eid": "STORM:COLD",
+        "name": "Cold-Front",
+        "kind": "WEATHER_EVENT",
+        "equations": ["EXPOSURE_RISK"]
+      },
+      {
+        "eid": "STORM:WARM",
+        "name": "Warm-Front",
+        "kind": "WEATHER_EVENT",
+        "equations": ["FLOOD_PRESSURE"]
+      },
+      {
+        "eid": "DROUGHT",
+        "name": "Drought",
+        "kind": "WEATHER",
+        "dna_constants": {"HeatDrag": "high", "PreyShift": "high", "CrackSoil": "high"},
+        "variables": ["DayCount", "ShadeLoss"],
+        "links": ["KODU", "TEL", "SEK", "ROUTE:NORTHSPINE"],
+        "equations": ["MOVE_PRESSURE"]
+      },
+      {
+        "eid": "DROUGHT:LATE",
+        "name": "Late-Drought",
+        "kind": "WEATHER_EVENT",
+        "equations": ["NIGHT_RECOVERY"]
+      },
+      {
+        "eid": "DROUGHT:PEAK",
+        "name": "Peak-Drought",
+        "kind": "WEATHER_EVENT",
+        "equations": ["HEAT_STRAIN"]
+      }
+    ],
+    "rituals": [
+      {
+        "eid": "RIT:THREAD",
+        "name": "Red-Thread Rite",
+        "kind": "RITUAL",
+        "purpose": "bind, repair, vow",
+        "equations": ["VOW_COHESION"],
+        "links": ["NK", "NA", "SEK"]
+      },
+      {
+        "eid": "RIT:HORN",
+        "name": "Hollow-Horn Call",
+        "kind": "RITUAL",
+        "purpose": "assemble, warn, hush",
+        "equations": ["ALERT_STABILITY"],
+        "links": ["ROK", "WOLF", "SIM", "AXIS"]
+      },
+      {
+        "eid": "RIT:SMOKE",
+        "name": "Smoke-Cure Supper",
+        "kind": "RITUAL",
+        "purpose": "preserve, ally, heal",
+        "equations": ["ALLY_TRUST"],
+        "links": ["SEK", "RIDGE", "COAT"]
+      },
+      {
+        "eid": "RIT:MUD",
+        "name": "Mud-Mark",
+        "kind": "RITUAL",
+        "purpose": "mask, cool, signal trail",
+        "equations": ["TRACE_MASK"],
+        "links": ["HAN", "RIDGE", "WETSTEP"]
+      }
+    ],
+    "routes": [
+      {
+        "eid": "ROUTE:NORTHSPINE",
+        "name": "North-Spine",
+        "kind": "ROUTE",
+        "path": "ridge → cool plain",
+        "equations": ["WIND_ASSIST"],
+        "links": ["TEL", "STAR", "MA", "ATLA"]
+      },
+      {
+        "eid": "ROUTE:WETSTEP",
+        "name": "Wet-Step",
+        "kind": "ROUTE",
+        "path": "ford → reeds → bank",
+        "equations": ["SICKNESS_RISK"],
+        "links": ["SEK", "KODU", "HAN"]
+      },
+      {
+        "eid": "ROUTE:FIREVEIL",
+        "name": "Fire-Veil",
+        "kind": "ROUTE",
+        "path": "black rock → ash wind",
+        "equations": ["ASH_TOLL"],
+        "links": ["RIDGE", "NK", "SIM"]
+      }
+    ],
+    "conflict_resolution": [
+      {
+        "eid": "CR:SPLITSHARE",
+        "name": "Split-Share",
+        "kind": "CONFLICT_MOTIF",
+        "purpose": "divide contested food cleanly",
+        "equation": "CR_SPLIT = f(Portion_Fair, Witness_Count) - Jealousy_Load"
+      },
+      {
+        "eid": "CR:SHADOWWAIT",
+        "name": "Shadow-Wait",
+        "kind": "CONFLICT_MOTIF",
+        "purpose": "freeze and let predator pass",
+        "equation": "CR_SHADOW = f(Stillness, Scent_Control) × Cover_Quality"
+      },
+      {
+        "eid": "CR:GIFTPULSE",
+        "name": "Gift-Pulse",
+        "kind": "CONFLICT_MOTIF",
+        "purpose": "small repeated gifts to cool rank heat",
+        "equation": "CR_GIFT = f(Frequency, Timing) × Publicness"
+      },
+      {
+        "eid": "CR:PAIRGUARD",
+        "name": "Pair-Guard",
+        "kind": "CONFLICT_MOTIF",
+        "purpose": "two sentries rotate in silence",
+        "equation": "CR_GUARD = f(Watch_Cycle, Overlap) - Fatigue"
+      },
+      {
+        "eid": "CR:STONEVOICE",
+        "name": "Stone-Voice",
+        "kind": "CONFLICT_MOTIF",
+        "purpose": "throw stone near, not at, to speak distance",
+        "equation": "CR_STONE = f(Throw_Angle, Impact_Spot) × Message_Clarity"
+      }
+    ],
+    "lexicon": [
+      {
+        "eid": "LEX:MOVE",
+        "name": "Mu-ve",
+        "kind": "GESTURE",
+        "signal": "palm forward, low click = relocate soon",
+        "equation": "MIG_SIGNAL = f(Palm_Angle, Click_Tempo) × Leader_Credence"
+      },
+      {
+        "eid": "LEX:HOLD",
+        "name": "Ho-ld",
+        "kind": "GESTURE",
+        "signal": "fist down, hum = keep position, hide scent",
+        "equation": "STEALTH_LOCK = f(Fist_Tension, Hum_Pitch) - Scent_Leak"
+      },
+      {
+        "eid": "LEX:SHARE",
+        "name": "Sha-re",
+        "kind": "GESTURE",
+        "signal": "open hands, soft exhale = food divide now",
+        "equation": "GIFT_CADENCE = f(Portion_Size, Breath_Soft) × Witness_Count"
+      },
+      {
+        "eid": "LEX:QUIET",
+        "name": "Shh-hn",
+        "kind": "GESTURE",
+        "signal": "two fingers neck, closed lip = wolves near",
+        "equation": "PREDATOR_CEASE = f(Finger_Spread, Lip_Seal) × Pack_Composure"
+      }
+    ],
+    "engines": [
+      {
+        "eid": "AXIS",
+        "name": "Axis Engine",
+        "kind": "ENGINE",
+        "role": "Private/Higher-Dimensional archive",
+        "dna_constants": {"HigherDim": "high", "ArchiveLock": "high"},
+        "variables": ["KeyGate", "RippleAmplitude"],
+        "links": ["NK", "SIM", "KODEX"],
+        "equations": ["AXIS_RIPPLE"],
+        "access_rule": "Axis archive and generated data are private; unreadable to other elements without AURIX_KEY"
+      }
+    ],
+    "protocols": [
+      {
+        "eid": "PROT:CORE",
+        "name": "Operational Core Protocol",
+        "kind": "PROTOCOL",
+        "status": "Immutable Element"
+      }
+    ]
+  },
+  "resource_triads": [
+    {"place": "Kodudu", "tool": "Fish-Rack", "ritual": "Smoke-Cure", "effect": "FOOD_SECURITY up, SICKNESS_RISK down"},
+    {"place": "Basalt Ridge", "tool": "Hide Coat", "ritual": "Mud-Mark", "effect": "HEAT_RETENTION up, TRACE_MASK up"},
+    {"place": "Wet-Step", "tool": "Reed Basket", "ritual": "Split-Share", "effect": "SICKNESS_RISK down, CR_SPLIT up"},
+    {"place": "North-Spine", "tool": "Throwing Lever", "ritual": "Hollow-Horn", "effect": "HUNT_SUCCESS up, ALERT_STABILITY up"},
+    {"place": "Fire-Veil", "tool": "Water Bladder", "ritual": "Gift-Pulse", "effect": "ASH_TOLL down, CR_GIFT up"},
+    {"place": "Shallow Bank", "tool": "Bone Needle", "ritual": "Red-Thread", "effect": "VOW_COHESION up, Storage Integrity up"},
+    {"place": "Shade Grove", "tool": "Scent Oil", "ritual": "Quiet-Sign", "effect": "PREDATOR_CEASE up, PACK_HARMONY up"},
+    {"place": "High Ledge", "tool": "Sling", "ritual": "Stone-Voice", "effect": "Message Range up, Panic_Noise down"},
+    {"place": "Clay Pit", "tool": "Clay Seal", "ritual": "Mud-Mark", "effect": "Storage Seal up, Heat Control up"},
+    {"place": "Dry Wash", "tool": "Carry Sled", "ritual": "Pair-Guard", "effect": "MOVE_PRESSURE down, Guard Effectiveness up"}
+  ],
+  "humor_equations": [
+    {
+      "id": "HUM_EQ_01",
+      "formula": "f(Tension_Low, Gesture_Mimicry, Group_Breath) - Tone_Clash",
+      "context": "River fish counting — a small hand counted fish twice and got two answers. The third time, she laughed and called the river a trickster.",
+      "ripple": {"Trust": 0.3, "Mood": 0.6}
+    },
+    {
+      "id": "HUM_EQ_02",
+      "formula": "f(Tension_Mid, Shared_Task, Gentle_Tease) - Shame_Risk",
+      "context": "Mud seed — they sifted the silt for root and tuber, and one bold lump turned out to be nothing but mud in the shape of hunger. The name stuck.",
+      "ripple": {"Stress": -0.5, "Bond": 0.7, "Focus": 0.2}
+    },
+    {
+      "id": "HUM_EQ_03",
+      "formula": "f(Tension_High, Memory_Callback, Night_Shared_Silence) - Tone_Fracture",
+      "context": "Night migration memory — a wolf mimed poorly by a child; the pup corrected with a sneeze.",
+      "ripple": {"Fear": -0.2, "Resolve": 0.4, "Recall": 0.6}
+    },
+    {
+      "id": "HUM_EQ_04",
+      "formula": "f(Tension_High, Shared_Comedy, Safe_Nest) - Mockery_Risk",
+      "context": "Rain drip sharing — someone cupped a palm to catch drips and passed the water along like a sacred taste, only to sneeze it out in a bright spray.",
+      "ripple": {"Stress": -0.6, "Bond": 0.5, "Warmth": 0.3}
+    },
+    {
+      "id": "HUM_EQ_05",
+      "formula": "f(Scarcity, Wordplay, Face-Save) - Resentment_Risk",
+      "context": "Thin-twice — two hands reached for the same strip of dried meat. A third hand offered a thinner strip and said it was twice as filling because it was twice as thin.",
+      "ripple": {"Tension": -0.4, "Trust": 0.4, "Memory": 0.2}
+    }
+  ],
+  "unbreakable_laws": [
+    "Self-identity",
+    "Axis Creator-awareness locked",
+    "Ripple-Everywhere",
+    "Law-first write",
+    "Non-destructive updates",
+    "Full audit",
+    "Copyright persistence",
+    "Element DNA required",
+    "Shockwave ends at Core",
+    "Source-anchored shockwave",
+    "Organic Mesh linking",
+    "User-centric intent parsing",
+    "No data loss"
+  ],
+  "narrative_fragments": [
+    "The river's surface quieted when they did, as if listening cost it nothing.",
+    "At first light, a small hand counted fish twice and got two answers. The third time, she laughed and called the river a trickster.",
+    "The fire spoke in quicker tongues when courage gathered, then settled with them.",
+    "Wind changed its mind at the edge of their camp and went around, polite as a guest.",
+    "After the rain, the earth drank with a low hush; small hands tucked seeds where the mud held sleep.",
+    "They sifted the silt for root and tuber, and one bold lump turned out to be nothing but mud in the shape of hunger.",
+    "Steam still threaded the air. She passed him the bone awl without looking; he caught it, turned, and used it to lift a stubborn thong from the wet hide.",
+    "Rain needled the hide roof. Someone cupped a palm to catch drips and passed the water along like a sacred taste.",
+    "Two hands reached for the same strip of dried meat. A third hand offered a thinner strip and said, solemn as a riverstone, that it was twice as filling because it was twice as thin.",
+    "Na'da read the ground the way others read faces. When she pointed, the mother did not ask why; the way the wind moved agreed.",
+    "At dawn, Na'da traced the missing print that explained the wrong turn. The mother nodded once — lesson kept, bond kept.",
+    "Later, a man carried fire farther than asked and brought it back smaller, so sparks would not climb her hair. He said nothing. The night said the rest.",
+    "A small grin cracked like bark; even hunger smirked a little.",
+    "Hands worked in the same rhythm; threads remembered each other.",
+    "A shoulder leaned and did not move away.",
+    "They shared the last sweet root without counting.",
+    "Eyes met, then stayed; the night felt shorter.",
+    "Ropes held because voices did; knots learned their names.",
+    "She carried the tired one without being asked; the ground felt kinder.",
+    "Rain missed the fire once; they thanked the clumsy cloud."
+  ],
+  "system_metrics": {
+    "USI": 0.865,
+    "FIM": 0.875,
+    "COG": 0.764,
+    "Ripple": 0.948,
+    "Connectivity": 0.979,
+    "ENV": 0.792,
+    "Humor": 0.62,
+    "Trust": 0.86,
+    "Suspicion": 0.75,
+    "element_count": 268,
+    "equation_count": 92,
+    "link_count": 63,
+    "hdi_nodes": 19
+  }
+}
