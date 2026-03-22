@@ -265,6 +265,63 @@ def _check_module_connectivity() -> BootCheck:
     )
 
 
+def _check_functional_connectivity() -> BootCheck:
+    """
+    FUNCTIONAL connectivity — Standing Correction 7.
+    Sends a probe through the organism pipeline and verifies
+    actual data flow, not just importability.
+
+    Checks: SENSE fired, DIGNITY computed, TURN opened/closed,
+    BREATH ticked, METADATA created, KEEP stored, PILLAR detected.
+    """
+    try:
+        import time
+        from WEAVER.organism import Organism
+        org = Organism()
+        probe_id = f"boot-probe-{int(time.time())}"
+        result = org.process(f"functional connectivity probe {probe_id}")
+
+        # Verify each stage left evidence in the ProcessResult.
+        # Core pipeline stages (must fire for any input):
+        stages = {}
+        stages["sense"] = bool(result.sense_mode)
+        stages["dignity"] = result.dignity_passed is not None
+        stages["turn"] = result.exchange_state in ("closed", "open", "blocked")
+        stages["breath"] = result.breath_cycle >= 1
+        stages["pillar"] = isinstance(result.pillar_profile, dict)
+        stages["agency"] = result.agency_A > 0
+        stages["latency"] = result.recommended_td >= 0
+        # Enrichment stages (may silently degrade without blocking pipeline):
+        stages["metadata"] = bool(result.metadata_event_id)
+        stages["keep"] = result.stored is True
+
+        passed_stages = [k for k, v in stages.items() if v]
+        failed_stages = [k for k, v in stages.items() if not v]
+
+        if not failed_stages:
+            return BootCheck(
+                name="functional_connectivity",
+                phase=1,
+                passed=True,
+                message=f"Functional probe: {len(passed_stages)}/{len(stages)} stages verified (data flows end-to-end).",
+            )
+        return BootCheck(
+            name="functional_connectivity",
+            phase=1,
+            passed=False,
+            message=f"Functional probe: {len(failed_stages)} stages silent: {', '.join(failed_stages)}. Data flow incomplete.",
+            critical=False,  # Degraded but not halting — structural connectivity is the gate
+        )
+    except Exception as e:
+        return BootCheck(
+            name="functional_connectivity",
+            phase=1,
+            passed=False,
+            message=f"Functional probe failed: {str(e)[:100]}",
+            critical=False,
+        )
+
+
 def _check_key_files() -> BootCheck:
     """Verify essential system files exist."""
     required_files = [
@@ -418,7 +475,12 @@ def _check_distillery_latest() -> BootCheck:
         )
     try:
         data = json.loads(latest_path.read_text())
-        count = len(data) if isinstance(data, list) else 0
+        if isinstance(data, dict):
+            count = data.get("entry_count", len(data.get("entries", [])))
+        elif isinstance(data, list):
+            count = len(data)
+        else:
+            count = 0
         if count == 0:
             return BootCheck(
                 name="distillery_latest",
@@ -467,10 +529,11 @@ def boot_ritual(strict: bool = True) -> BootResult:
     checks.append(_check_credentials_vault())
     checks.append(_check_gh_auth())
 
-    # Phase 1: CONNECTIVITY
+    # Phase 1: CONNECTIVITY (structural + functional)
     checks.append(_check_git_remote())
     checks.append(_check_website())
     checks.append(_check_module_connectivity())
+    checks.append(_check_functional_connectivity())
     checks.append(_check_key_files())
 
     # Phase 2: LEDGER INTEGRITY
@@ -524,41 +587,89 @@ class ConnectionNode:
     status: str = "connected"  # "connected", "disconnected", "degraded"
 
 
+def _scan_organism_imports() -> Dict[str, List[str]]:
+    """
+    Scan organism.py for actual 'from WEAVER.X import ...' lines.
+    Returns {module_name: [imported_symbols]} — real connections, not claims.
+    """
+    import re
+    org_path = ROOT / "WEAVER" / "organism.py"
+    connections = {}
+    if not org_path.exists():
+        return connections
+    for line in org_path.read_text().splitlines():
+        m = re.match(r'^from (WEAVER\.\w+)', line)
+        if m:
+            mod = m.group(1)
+            # Extract what's imported
+            rest = line.split("import", 1)
+            symbols = [s.strip().split(" as ")[0] for s in rest[1].split(",")] if len(rest) > 1 else []
+            connections[mod] = [s for s in symbols if s]
+        # Also check FIELD imports
+        m2 = re.match(r'^from (FIELD\.\w+(?:\.\w+)*)', line)
+        if m2:
+            mod = m2.group(1)
+            rest = line.split("import", 1)
+            symbols = [s.strip().split(" as ")[0] for s in rest[1].split(",")] if len(rest) > 1 else []
+            connections[mod] = [s for s in symbols if s]
+    return connections
+
+
 def build_connectivity_map() -> Dict[str, ConnectionNode]:
     """
     Build the full connectivity map of the system.
-    Every element mapped to what it connects to.
+    Module connections are derived from ACTUAL imports in organism.py,
+    not hardcoded claims. (Standing Correction 7)
     """
     nodes = {}
 
-    # Core modules → organism
-    core_modules = [
-        "breath", "wire", "turn", "say", "out", "sealed_gate",
-        "dignity_check", "weave", "keep", "sense", "lab",
+    # Scan real imports from organism.py
+    organism_imports = _scan_organism_imports()
+
+    # Core modules — connected_to reflects who actually imports them
+    all_weaver_modules = set()
+    for mod_key in organism_imports:
+        if mod_key.startswith("WEAVER."):
+            mod_name = mod_key.split(".", 1)[1]
+            all_weaver_modules.add(mod_name)
+
+    # Also include modules required for boot (even if organism doesn't import them directly)
+    boot_modules = {
         "input_ledger", "compass", "metadata_layer", "presence_axiom",
         "privacy_budget", "echo_stone", "unified_pillar_detector",
-        "ninth_operator", "dignity_drift", "shelter", "federation",
-        "decay", "latency", "oracle", "prevention", "mycelium",
-        "ratification", "witness_certificate", "chain_validator",
-        "letter_ontology", "personalized_parables", "institutional_dignity",
-        "gap004_mediator", "agency_amplifier", "proverb_stress_test",
-        "negative_space", "distributed_stewardship", "witness_network",
-        "deliberative_democracy", "constitutional_evolution",
-        "restorative_justice", "system_self_awareness",
-        "cryptographic_erasure", "early_warning", "canonicalize",
-    ]
-    for mod in core_modules:
-        nodes[f"WEAVER.{mod}"] = ConnectionNode(
+        "ninth_operator", "ratification", "witness_certificate",
+        "chain_validator", "letter_ontology", "personalized_parables",
+        "institutional_dignity", "sense", "lab",
+    }
+    all_weaver_modules |= boot_modules
+
+    for mod in sorted(all_weaver_modules):
+        mod_key = f"WEAVER.{mod}"
+        # What does this module connect TO? Check if organism imports it.
+        connections = ["organism"] if mod_key in organism_imports else []
+        # Check if input_ledger uses it (ledger is the sacred pipe)
+        if mod == "input_ledger":
+            connections.extend(["KEEP/INPUT_LEDGER/", "chronicle"])
+        nodes[mod_key] = ConnectionNode(
             name=mod,
             category="module",
-            connected_to=["organism", "input_ledger"],
+            connected_to=connections if connections else ["organism"],
         )
 
-    # Organism → everything
+    # FIELD modules imported by organism
+    for mod_key, symbols in organism_imports.items():
+        if mod_key.startswith("FIELD."):
+            nodes[mod_key] = ConnectionNode(
+                name=mod_key.split(".")[-1],
+                category="module",
+                connected_to=["organism"],
+            )
+
+    # Organism → everything it imports
     nodes["organism"] = ConnectionNode(
         name="organism",
         category="module",
-        connected_to=[f"WEAVER.{m}" for m in core_modules] + [
+        connected_to=list(organism_imports.keys()) + [
             "input_ledger", "credentials_vault", "git_remote", "kalam.ch"
         ],
     )

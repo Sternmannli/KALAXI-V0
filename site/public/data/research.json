@@ -26,7 +26,7 @@
         "norm_survival_after_100_responses": 0.0067
       },
       "connections": [
-        "WEAVER/divergence_study.py",
+        "FIELD/STUDY/divergence_study.py",
         "WEAVER/dignity_measure.py",
         "WEAVER/breath.py",
         "WEAVER/sealed_gate.py",
@@ -72,7 +72,7 @@
         }
       },
       "connections": [
-        "WEAVER/divergence_study.py",
+        "FIELD/STUDY/divergence_study.py",
         "WEAVER/dignity_drift.py",
         "WEAVER/early_warning.py",
         "WEAVER/oracle.py",
