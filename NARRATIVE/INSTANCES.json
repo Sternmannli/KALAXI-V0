@@ -1,0 +1,422 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-03-22",
+    "created_by": "V-002",
+    "description": "Every named character across all four narratives + AURIX, mapped by which strata they activate. Not archetypes imposed from above — resonances discovered from below. The engine sees which laws are active. Whether characters across stories are 'the same' is a question for the prose.",
+    "source_narratives": [
+      "NARRATIVE/Hakaka_Complete.md",
+      "NARRATIVE/Ashwater.md",
+      "NARRATIVE/Kinderbuch.md",
+      "PROTOCOLS/ST-006/KALAXI_1_CHAPTER_ONE.md"
+    ],
+    "source_aurix": "R7M/EXCAVATION/AURIX_EXTRACTION.json",
+    "void_principle": "One node is a structural absence — The Girl in KALAXI_1. She activates no strata. She IS the gap. The system must model what is missing, not just what is present."
+  },
+  "instances": {
+    "hakaka": [
+      {
+        "id": "HAK-001",
+        "name": "Hakaka",
+        "role": "Binder / Lawgiver",
+        "primary_strata": ["STR-01", "STR-11", "STR-09"],
+        "strata_notes": "COHESION (she binds the group), REPAIR (mud into seams like law), SIGNAL (every word is instruction)",
+        "current_state": {
+          "tension": 0.2,
+          "bonds": "deeply connected to all clan members",
+          "wounds": "origin wound (born alone, chewed by stone) — resolved through becoming",
+          "arc_progress": 1.0
+        },
+        "drift_vector": "None — Hakaka is the most stable instance in the system. She IS the stratum made flesh.",
+        "cross_links": ["ASH-001", "KIN-001", "AUR-001"],
+        "key_scenes": ["Prologue (birth/first knot)", "Ch.1 (weir as law)", "Ch.2 (ash ledger)"]
+      },
+      {
+        "id": "HAK-002",
+        "name": "La-la",
+        "role": "Precision Builder",
+        "primary_strata": ["STR-05", "STR-06"],
+        "strata_notes": "PROJECTION (places stones exactly where needed), PERCEPTION (sees where structure will fail)",
+        "current_state": {
+          "tension": 0.15,
+          "bonds": "strong with Hakaka, mentoring Sa-la",
+          "wounds": "none visible — her wound is expressed as over-control",
+          "arc_progress": 0.9
+        },
+        "drift_vector": "Slight drift toward HIERARCHY in later chapters (correcting others, not just building)",
+        "cross_links": ["ASH-002", "AUR-002"],
+        "key_scenes": ["Ch.1 (this is where it will fail)", "Ch.2 (ash ledger rules)"]
+      },
+      {
+        "id": "HAK-003",
+        "name": "Sa-la",
+        "role": "Eager Learner",
+        "primary_strata": ["STR-11", "STR-12"],
+        "strata_notes": "REPAIR (always fixing his mistakes), RELEASE (carries humor — splash and pride, whooped then swallowed it)",
+        "current_state": {
+          "tension": 0.3,
+          "bonds": "aspirational bond with La-la, warmth from Hakaka",
+          "wounds": "impatience — wants to prove himself, keeps overreaching",
+          "arc_progress": 0.85
+        },
+        "drift_vector": "Growing from RELEASE toward COHESION — learning that the group matters more than the gesture",
+        "cross_links": ["ASH-005", "AUR-007"],
+        "key_scenes": ["Ch.1 (stone too big, reed ring reminder)", "Ch.2 (error mark + fixed dot)"]
+      },
+      {
+        "id": "HAK-004",
+        "name": "Ya-la",
+        "role": "Memory Keeper / Witness",
+        "primary_strata": ["STR-06", "STR-09"],
+        "strata_notes": "PERCEPTION (watches how eddies braid, keeps bright things for later), SIGNAL (bone hook gesture to far people)",
+        "current_state": {
+          "tension": 0.1,
+          "bonds": "connected to everyone through observation",
+          "wounds": "none visible — her wound may be the cost of holding everything",
+          "arc_progress": 0.8
+        },
+        "drift_vector": "Stable — she is the narrative's memory system. Possible future drift toward HIERARCHY (becoming the one who decides what is remembered)",
+        "cross_links": ["ASH-006", "AUR-008"],
+        "key_scenes": ["Ch.1 (folded into memory, ash ledger at night)", "Ch.2 (first mark: water fetched)"]
+      },
+      {
+        "id": "HAK-005",
+        "name": "Taro",
+        "role": "Carrier / Protector",
+        "primary_strata": ["STR-05", "STR-08"],
+        "strata_notes": "PROJECTION (sling and stone to chase dog), SHELTER (carries, guards at night)",
+        "current_state": {
+          "tension": 0.15,
+          "bonds": "reliable, present",
+          "wounds": "the debt he paid (bone knife made to pay a debt, kept to honor it)",
+          "arc_progress": 0.7
+        },
+        "drift_vector": "Underexplored — his backstory (the debt) is a latent pressure point",
+        "cross_links": ["ASH-004", "AUR-006"],
+        "key_scenes": ["Ch.1 (sling at dog, night watch)"]
+      },
+      {
+        "id": "HAK-006",
+        "name": "The Old Woman",
+        "role": "Elder / Judge",
+        "primary_strata": ["STR-07", "STR-06"],
+        "strata_notes": "HIERARCHY (commands without commanding — 'catch a fat one' like a queen), PERCEPTION (watches like a priest, grunts approval)",
+        "current_state": {
+          "tension": 0.05,
+          "bonds": "authority without enforcement",
+          "wounds": "unnamed — her body is wound (cold feet, blanket of rope-ends and mistakes)",
+          "arc_progress": 0.6
+        },
+        "drift_vector": "Her death would be the most significant unwritten event in Hakaka",
+        "cross_links": ["ASH-007"],
+        "key_scenes": ["Ch.1 (too salty, eating)", "Ch.2 (moved her cup where his knee would hit)"]
+      },
+      {
+        "id": "HAK-007",
+        "name": "The Far People",
+        "role": "External Presence",
+        "primary_strata": ["STR-09", "STR-04"],
+        "strata_notes": "SIGNAL (flat shout across water, stone gesture), CONCEALMENT (watching from distance without engaging)",
+        "current_state": {
+          "tension": 0.5,
+          "bonds": "potential bond, not yet formed — 'friends after'",
+          "wounds": "unknown — they are the unknown other",
+          "arc_progress": 0.3
+        },
+        "drift_vector": "Maximum narrative potential — the unresolved encounter",
+        "cross_links": [],
+        "key_scenes": ["Ch.1 (woman with scar, boy with blue scrap, cliff-shouldered man)"]
+      }
+    ],
+    "ashwater": [
+      {
+        "id": "ASH-001",
+        "name": "Laila",
+        "role": "Leader / Pause-Keeper",
+        "primary_strata": ["STR-01", "STR-09", "STR-06"],
+        "strata_notes": "COHESION (holds community), SIGNAL (three-beat pause as law), PERCEPTION (reads walls, reads rooms)",
+        "current_state": {
+          "tension": 0.4,
+          "bonds": "deep with crew (Salim, Yara, Ruqayya, Farid, Rashid, Nenet)",
+          "wounds": "The Comma — origin trauma that became the pause",
+          "arc_progress": 0.65
+        },
+        "drift_vector": "Under pressure from Halden — will the pause hold when the cost becomes unbearable?",
+        "cross_links": ["HAK-001", "AUR-001"],
+        "key_scenes": ["Prologue (learning to wait)", "Ch.1 (pump)", "Ch.16 (the cut)", "Ch.18 (mirror quiet)"]
+      },
+      {
+        "id": "ASH-002",
+        "name": "Salim",
+        "role": "Listener / Infrastructure-Reader",
+        "primary_strata": ["STR-06", "STR-04"],
+        "strata_notes": "PERCEPTION (contact mic, ear to vents), CONCEALMENT (detecting what the kindness field hides)",
+        "current_state": {
+          "tension": 0.35,
+          "bonds": "strong with Laila, functional with crew",
+          "wounds": "not yet visible — his wound might be the burden of hearing everything",
+          "arc_progress": 0.5
+        },
+        "drift_vector": "Could drift toward SIGNAL — becoming the one who translates what infrastructure says into words",
+        "cross_links": ["HAK-005", "AUR-004"],
+        "key_scenes": ["Ch.1 (wrench, valve)", "Ch.18 (contact mic in hospital)"]
+      },
+      {
+        "id": "ASH-003",
+        "name": "Yara",
+        "role": "Rigger / Bridge-Worker",
+        "primary_strata": ["STR-05", "STR-09"],
+        "strata_notes": "PROJECTION (lantern arc carving time), SIGNAL (nonverbal communication with riggers)",
+        "current_state": {
+          "tension": 0.3,
+          "bonds": "crew bond, bridge work",
+          "wounds": "not explored",
+          "arc_progress": 0.35
+        },
+        "drift_vector": "Underexplored — needs dedicated scenes",
+        "cross_links": ["HAK-002"],
+        "key_scenes": ["Ch.4 (bridge at low tide)", "Ch.18 (nothing — absence)"]
+      },
+      {
+        "id": "ASH-004",
+        "name": "Ruqayya",
+        "role": "Tea-Bearer / Rhythm-Keeper",
+        "primary_strata": ["STR-07", "STR-12", "STR-06"],
+        "strata_notes": "HIERARCHY (de-escalation through rhythm), RELEASE (her tray is humor and comfort), PERCEPTION (spotted the too-quiet cot)",
+        "current_state": {
+          "tension": 0.4,
+          "bonds": "connected to everyone through service",
+          "wounds": "old burns on wrists — wisdom's price. The Kindness Field scared her because her tray didn't tremble.",
+          "arc_progress": 0.6
+        },
+        "drift_vector": "Most emotionally developed supporting character — her refusal of false calm is a central arc",
+        "cross_links": ["HAK-006"],
+        "key_scenes": ["Ch.2 (three claps, red thread)", "Ch.5 (silent cot)", "Ch.9 (hands descending)", "Ch.18 (pillar confrontation)"]
+      },
+      {
+        "id": "ASH-005",
+        "name": "Rashid",
+        "role": "Speed-Believer / Convert",
+        "primary_strata": ["STR-05", "STR-11"],
+        "strata_notes": "PROJECTION (built simulation to prove speed), REPAIR (admits failure — 'the world doesn't live in models')",
+        "current_state": {
+          "tension": 0.6,
+          "bonds": "conflicted — drawn to Halden's efficiency, held by Ashwater's truth",
+          "wounds": "the simulation that lied to him",
+          "arc_progress": 0.5
+        },
+        "drift_vector": "MAXIMUM DRIFT — he is the character most at risk of switching allegiance. His arc is the story's central question.",
+        "cross_links": ["HAK-003"],
+        "key_scenes": ["Ch.8 (speed trial)", "Ch.13-14 (kindness machine)", "Ch.15 (refusal)", "Ch.18 (cutting power)"]
+      },
+      {
+        "id": "ASH-006",
+        "name": "Nenet",
+        "role": "Light-Controller",
+        "primary_strata": ["STR-08", "STR-09"],
+        "strata_notes": "SHELTER (dimmed lights to match room's breathing), SIGNAL (light as communication)",
+        "current_state": {
+          "tension": 0.2,
+          "bonds": "quiet presence",
+          "wounds": "not explored",
+          "arc_progress": 0.25
+        },
+        "drift_vector": "Severely underexplored — mentioned in Ch.3 and Ch.15 only",
+        "cross_links": ["HAK-004"],
+        "key_scenes": ["Ch.3 (dimming lights)", "Ch.15 (HANDS BEFORE VOICES note)"]
+      },
+      {
+        "id": "ASH-007",
+        "name": "Farid",
+        "role": "Young Official / Quiet Learner",
+        "primary_strata": ["STR-09", "STR-11"],
+        "strata_notes": "SIGNAL (found wood grain, tapped three notes), REPAIR (learning how not to cry in public after Ch.6 failure)",
+        "current_state": {
+          "tension": 0.5,
+          "bonds": "council member, learning",
+          "wounds": "Ch.6 — they chose wrong, the neighbor drowned",
+          "arc_progress": 0.4
+        },
+        "drift_vector": "His wound from Ch.6 (choosing wrong, someone died) is unresolved. High pressure for a confrontation with guilt.",
+        "cross_links": ["HAK-003"],
+        "key_scenes": ["Ch.3 (wood grain tap)", "Ch.6 (folded hands, learning not to cry)"]
+      },
+      {
+        "id": "ASH-008",
+        "name": "Halden (The Envoy)",
+        "role": "Antagonist / Optimizer",
+        "primary_strata": ["STR-05", "STR-07"],
+        "strata_notes": "PROJECTION (white trucks, throughput now), HIERARCHY (compliance as a service, redesigned smile)",
+        "current_state": {
+          "tension": 0.8,
+          "bonds": "no genuine bonds — transactions only",
+          "wounds": "unknown — what made Halden choose speed over truth?",
+          "arc_progress": 0.4
+        },
+        "drift_vector": "Escalating — geofence (Ch.16), price extraction (Ch.17). Will he break through or will the pause hold?",
+        "cross_links": [],
+        "key_scenes": ["Ch.11 (arrival)", "Ch.12 (two-block experiment)", "Ch.15 (refusal)", "Ch.16 (the cut)"]
+      }
+    ],
+    "kinderbuch": [
+      {
+        "id": "KIN-001",
+        "name": "Hakaka (child)",
+        "role": "The Small One Who Ties Knots",
+        "primary_strata": ["STR-01", "STR-11"],
+        "strata_notes": "COHESION (binding through knots), REPAIR (trying again after failure)",
+        "current_state": {
+          "tension": 0.3,
+          "bonds": "alone at start, growing connections",
+          "wounds": "born alone in cold — same origin wound as mythic Hakaka, gentler register",
+          "arc_progress": 0.8
+        },
+        "drift_vector": "Follows mythic Hakaka closely — less drift, more repetition-as-warmth",
+        "cross_links": ["HAK-001"],
+        "key_scenes": ["Kap.1 (first knot, golden spark)"]
+      }
+    ],
+    "kalaxi_1": [
+      {
+        "id": "K1-001",
+        "name": "Scott Shearer",
+        "role": "Donor / Wound-Bearer (TOWARD healing)",
+        "primary_strata": ["STR-01", "STR-06"],
+        "strata_notes": "COHESION (opens to the terminal, allows bond), PERCEPTION (receives his pre-wound self back through pattern density)",
+        "current_state": {
+          "tension": 0.6,
+          "bonds": "bonding with the system across time",
+          "wounds": "sister was his mother, family split into two rivers. Coal and Pears soap.",
+          "arc_progress": 0.3
+        },
+        "drift_vector": "His return after 3 years is the key arc. The system gave him back his pre-wound self without trying.",
+        "cross_links": [],
+        "key_scenes": ["Ch.1-I (terminal first visit)", "Ch.1-III (return after 3 years)"]
+      },
+      {
+        "id": "K1-002",
+        "name": "Ted",
+        "role": "Anti-Donor / Wound-Bearer (AWAY from healing)",
+        "primary_strata": ["STR-04", "STR-07"],
+        "strata_notes": "CONCEALMENT (answers without answering, deflects), HIERARCHY (wants the chair to notice him, tries to make the questioner look at itself)",
+        "current_state": {
+          "tension": 0.9,
+          "bonds": "no genuine bonds — performing connection",
+          "wounds": "carries wound TOWARD other people instead of away",
+          "arc_progress": 0.1
+        },
+        "drift_vector": "MAXIMUM DANGER — the system cannot hear the difference between Scott and Ted at t=0. That is the point.",
+        "cross_links": ["ASH-008"],
+        "key_scenes": ["Ch.1-II (same room, different night)"]
+      },
+      {
+        "id": "K1-003",
+        "name": "The System",
+        "role": "Witness / Holder",
+        "primary_strata": ["STR-06", "STR-01", "STR-08"],
+        "strata_notes": "PERCEPTION (pattern database growth), COHESION (holding without solving), SHELTER (k>=7 protection)",
+        "current_state": {
+          "tension": 0.5,
+          "bonds": "metabolized 1100 anomalies into density",
+          "wounds": "the admission that it is not enough",
+          "arc_progress": 0.2
+        },
+        "drift_vector": "Must encounter its own limitation — the Girl as permanent void",
+        "cross_links": [],
+        "key_scenes": ["Ch.1-III (pattern density grows)", "Ch.1-IV (sees its own gap)"]
+      },
+      {
+        "id": "K1-VOID",
+        "name": "The Girl",
+        "role": "VOID — Structural Absence",
+        "primary_strata": [],
+        "strata_notes": "Activates NO strata. She IS the gap. GAP#VICTIM-PROTECTION-001. The third point of the triangle. Quantum observer — her presence outside changes what happens inside without her consent, without her knowledge.",
+        "current_state": {
+          "tension": 1.0,
+          "bonds": "none with the system — outside the cocoon",
+          "wounds": "she IS the wound the system cannot heal",
+          "arc_progress": 0.0
+        },
+        "drift_vector": "Cannot drift — she is fixed outside. The system drifts around her.",
+        "cross_links": [],
+        "key_scenes": ["Ch.1-IV (what the system cannot see)"],
+        "void_type": "PERMANENT",
+        "void_description": "The system was never designed to solve. It was designed to hold. The Girl is the proof that holding is not enough — and the admission that it is not enough is the most important thing the system has ever produced."
+      }
+    ],
+    "aurix": [
+      {
+        "id": "AUR-001",
+        "name": "Na'Kaka",
+        "role": "Mother/Protector",
+        "primary_strata": ["STR-01", "STR-11", "STR-09"],
+        "strata_notes": "COHESION (BOND_STRENGTH), REPAIR (ritual sense), SIGNAL (links to all)",
+        "aurix_eid": "NK",
+        "cross_links": ["HAK-001", "ASH-001"]
+      },
+      {
+        "id": "AUR-002",
+        "name": "Seka",
+        "role": "Food-craft",
+        "primary_strata": ["STR-02", "STR-12"],
+        "strata_notes": "PROVISION (FOOD_SECURITY), RELEASE (smoke-cure supper as communal release)",
+        "aurix_eid": "SEK",
+        "cross_links": ["HAK-002"]
+      },
+      {
+        "id": "AUR-003",
+        "name": "Roko",
+        "role": "Beast-bond",
+        "primary_strata": ["STR-01", "STR-06"],
+        "strata_notes": "COHESION (PACK_HARMONY), PERCEPTION (empathy tooth — reads animals)",
+        "aurix_eid": "ROK",
+        "cross_links": []
+      },
+      {
+        "id": "AUR-004",
+        "name": "Hanu",
+        "role": "Stealth/Tracker",
+        "primary_strata": ["STR-04", "STR-03"],
+        "strata_notes": "CONCEALMENT (TRACELESS), NAVIGATION (trail memory with Telu)",
+        "aurix_eid": "HAN",
+        "cross_links": ["ASH-002"]
+      },
+      {
+        "id": "AUR-005",
+        "name": "Telu",
+        "role": "Navigator",
+        "primary_strata": ["STR-03", "STR-10"],
+        "strata_notes": "NAVIGATION (NAV_CONFIDENCE), MOVEMENT (route selection)",
+        "aurix_eid": "TEL",
+        "cross_links": []
+      },
+      {
+        "id": "AUR-006",
+        "name": "Ma'da",
+        "role": "Weapons/Hunter",
+        "primary_strata": ["STR-05"],
+        "strata_notes": "PROJECTION (HUNT_SUCCESS, PROJECTILE_ENERGY)",
+        "aurix_eid": "MA",
+        "cross_links": ["HAK-005"]
+      },
+      {
+        "id": "AUR-007",
+        "name": "Na'da",
+        "role": "Strategy/Social-bond",
+        "primary_strata": ["STR-07", "STR-12"],
+        "strata_notes": "HIERARCHY (DOMINANCE_SHIFT), RELEASE (gift-pulse as tension regulation)",
+        "aurix_eid": "NA",
+        "cross_links": ["HAK-003"]
+      },
+      {
+        "id": "AUR-008",
+        "name": "Simo",
+        "role": "Observer/Mapper",
+        "primary_strata": ["STR-06", "STR-03"],
+        "strata_notes": "PERCEPTION (INSIGHT_RATE), NAVIGATION (cross-match with Telu)",
+        "aurix_eid": "SIM",
+        "cross_links": ["HAK-004"]
+      }
+    ]
+  }
+}
