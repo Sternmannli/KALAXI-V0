@@ -1,22 +1,22 @@
 # COMPASS — System Orientation
 
-> Generated: 2026-03-17T09:10:33.436153+00:00
+> Generated: 2026-03-22T03:28:33.963157+00:00
 > This file is auto-generated. Do not edit manually.
 
 ---
 
 ## POSITION — Where We Are
 
-- **Python Files:** 137
-- **Test Files:** 38
+- **Python Files:** 176
+- **Test Files:** 40
 - **Narrative Files:** 5
-- **Covenants:** 13
-- **Ledger Entries:** 1155
+- **Covenants:** 47
+- **Ledger Entries:** 2457
 - **Treasures:** 200
-- **Proverbs:** 281
+- **Proverbs:** 283
 - **Seeds Integrated:** 12
 - **Deployed:** True
-- **Site Built:** True
+- **Site Built:** False
 
 ---
 
@@ -25,20 +25,21 @@
 - **Strategic Moves Total:** 10
 - **Strategic Moves File:** MANIFEST/STRATEGIC_MOVES_2026-03-16.md
 - **Experiments:**
-  - EXP-001: exists
   - EXP-001-EFFICIENCY: exists
   - EXP-002-CONVERGENCE: has_results
   - EXP-003: exists
   - EXP-004: exists
+  - EXP-005: exists
   - EXP-006: exists
-- **Single Blocker:** 40,888+ lines. Zero users. Nothing is live.
-- **Deployment Target:** kalam.ch
+- **Deployment Status:** LIVE at kalam.ch since 2026-03-17
+- **Code Lines:** 42,581+
+- **Single Blocker:** Phase 2: persistence, donor accounts, voice model
 
 ---
 
 ## NEXT STEP — What To Do Now
 
-1. EXP-001: 200 data runs remaining
+1. kalam.ch Phase 2: MySQL migration, donor persistence, Living Ledger
 2. Execute strategic moves (MOVE-001 through MOVE-010)
 
 ---
@@ -52,7 +53,7 @@
 ## VITALS — System Health
 
 - **Core Modules:** 11/11
-- **Constitution:** NO
+- **Constitution:** YES
 - **Input Ledger:** YES
 - **Voice Architecture:** YES
 - **Git Clean:** NO
