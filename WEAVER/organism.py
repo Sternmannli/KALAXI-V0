@@ -125,6 +125,8 @@ from WEAVER.witness_certificate import (
     DignitySnapshot, Subject, InstitutionalContext, CoordinatesOfFailure,
     generate_certificate, save_certificate,
 )
+# ── Voice Engine: canon-grounded response generation ──
+from WEAVER.voice_engine import VoiceEngine, detect_register
 
 
 @dataclass
@@ -372,6 +374,8 @@ class Organism:
         self._compass = Compass()
         # ── Distillery: extract essence from all content sources ──
         self._distillery = None  # lazy-loaded to avoid circular imports
+        # ── Voice Engine: canon-grounded response generation ──
+        self._voice_engine = VoiceEngine()
         # ── Letter Chain (EXP-002): ontology + witness certificates ──
         self._witness_certs_generated = 0
         self._last_sense = None
@@ -1048,9 +1052,9 @@ class Organism:
             # WITNESS CERTIFICATE — the halt is the product
             try:
                 d_snap = DignitySnapshot(
-                    A=self._last_measurement.A if self._last_measurement else 0.0,
-                    L=self._last_measurement.L if self._last_measurement else 0.0,
-                    M=self._last_measurement.M if self._last_measurement else 0.0,
+                    A=self._last_measurement.A.final_score if self._last_measurement else 0.0,
+                    L=self._last_measurement.L.final_score if self._last_measurement else 0.0,
+                    M=self._last_measurement.M.final_score if self._last_measurement else 0.0,
                 )
                 cert = generate_certificate(
                     dignity=d_snap,
@@ -1117,21 +1121,20 @@ class Organism:
                 warnings=self._last_dignity.get("warnings", []) + warnings,
             )
 
-        # 3b. SAY — render output
-        # For now, the output is an acknowledgment. In a full system,
-        # SENSE-aware response: if SENSE recommends asking, prepend the question
+        # 3b. SAY — render output through Voice Engine (canon-grounded)
+        # SENSE-aware: if SENSE recommends asking, the question takes priority
+        # Otherwise: Voice Engine speaks from canon (proverbs, narratives, golden utterances)
         if sense_reading.ask_recommended and sense_reading.ask_question:
             response_text = sense_reading.ask_question
-        elif drops:
-            best_drop = max(drops, key=lambda d: d.confidence)
-            response_text = (
-                f"Your offering has been received. "
-                f"{len(drops)} pattern{'s' if len(drops) > 1 else ''} detected "
-                f"({best_drop.drop_type}, confidence {best_drop.confidence:.1%}). "
-                f"It rests in the threshold."
-            )
         else:
-            response_text = "Your offering has been received. The mycelium listens."
+            # Voice Engine: respond from canon, register-matched
+            input_register = detect_register(donor_input)
+            voice_response = self._voice_engine.respond(
+                donor_input,
+                dignity=dignity.D,
+                register=input_register,
+            )
+            response_text = voice_response.text
 
         # LAB-aware: append rigor warnings if science detected
         if lab_reading and lab_reading.active and lab_reading.rigor_warnings:
