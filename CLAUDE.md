@@ -317,18 +317,19 @@ The system is not a guardian of dignity (which needs no guarding). It is a witne
 Seeds #1-12: Distributed Stewardship, Immutable Witness Network, Deliberative Democracy, Constitutional Evolution, Restorative Justice, System Self-Awareness, Personalized Parables, Institutional Dignity Score, Negative Space Index, Dignity Drift Detector, Proverb Stress Test, Agency Amplifier.
 
 ### Code Status
-- 143 Python files, 42,581+ lines
-- 896 tests collected (887 passing, 9 skipped — verified 2026-03-17)
-- Organism v2.0: all modules wired + Input Ledger
+- 176 Python files, 42,581+ lines
+- 1006 tests collected (1006 passing, 9 skipped — verified 2026-03-22)
+- Organism v2.0: all modules wired + Input Ledger + Compass + Distillery
 
-### Registry Status (as of 2026-03-15)
+### Registry Status (as of 2026-03-22)
 - 18 covenants (all 18 ratified — 0 provisional)
 - 1,100 anomalies indexed
 - 3,333+ proverbs + 20 emergent + 9 from Grand Archive
 - 87 wisdom nodes
 - 59 Treasures (T#01-T#59)
 - 53 narrative chapters + Prologue + Epilogue (Hakaka) + 19 (Ashwater) + 20 (Kinderbuch) + 1 (KALAXI_1)
-- 907 entries in Input Ledger (hash-chained, append-only) — last: INP-2026-03-15-472
+- 2,457+ entries in Input Ledger (hash-chained, append-only)
+- 200 Golden Regression utterances (TRAINING/GOLDEN_REGRESSION.jsonl)
 
 ### Active Experiments
 - EXP-001: 12 data files collected (Q3 only, across 9 systems). 188 runs remaining. Claude data: 0/20. Hypothesis NOT MET at 19.5% (threshold: 30%). Runner + analyzer ready.

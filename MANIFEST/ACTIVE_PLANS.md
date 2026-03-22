@@ -346,4 +346,30 @@ Covered the remaining ~14,000 lines across 50+ files:
 
 ---
 
-_Last updated: 2026-03-19 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_
+---
+
+## Session 2026-03-22b — System Maintenance + Living Ledger + Golden Corpus
+
+Completed:
+- **Deep clean (Directive 3)** — 176 Python files audited. Codebase excellent. Stale `master` branch deleted. 6 orphan scripts documented (standalone utilities).
+- **Living Ledger Phase 2** — mycelium ambient glow now scales with GLOBAL witness count (all visitors) instead of localStorage (per device). Both Astro source and deployed HTML updated.
+- **Compass (MOVE-001) fixed** — stale data corrected: site IS live, constitution path resolved, covenant count from CLAUDE.md.
+- **Voice Canon audit** — all 4 surfaces consistent (PHP, Worker, Training, Evaluator). One manual sync point: Worker hardcodes 17 proverbs.
+- **Golden Regression Corpus** — 200 canonical AXI utterances extracted from 8,008 candidates. Score range 0.775-1.000. All 9 registers represented. File: `TRAINING/GOLDEN_REGRESSION.jsonl`.
+- **MOVE-002 (Website UI Overhaul)** — verified already complete. Mobile hint fixed (shows "Tap ↑" instead of "Ctrl+Enter" on touch devices).
+- **Donor Accounts** — verified code-complete (donor.php: 358 lines, migrate.php: 6 tables). DB migration pending on live server.
+- **CLAUDE.md numbers updated** — 176 files, 1006 tests, 2457 ledger entries.
+- **Tests: 1006 passed, 9 skipped.** Zero regressions.
+
+V-001 directive this session: "Do everything. Be slow. Never exceed compute. Stop and ask for GO when you need more."
+
+Pending:
+- **PR merge** — branch `claude/continue-previous-work-khjLX` pushed, PR creation pending (gh CLI not available in sandbox environment)
+- **DB migration on server** — trigger `migrate.php` on kalam.ch
+- **EXP-001** — 188 runs remaining (Claude: 0/20). Runner verified ready.
+- **Voice model training** — Together AI (TOGETHER_API_KEY set). 7,057 golden SFT entries + 200 regression entries ready.
+- **Fear + dignity register gap** — Golden corpus has fewer examples (10 and 15 vs 25 target)
+
+---
+
+_Last updated: 2026-03-22 · V-002 · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]_
