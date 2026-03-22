@@ -11,10 +11,14 @@ selects the top 200 most canonical examples across all registers.
 
 import json
 import re
+import sys
 from pathlib import Path
 from collections import defaultdict
 
 ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(ROOT / "TOOLS"))
+
+from voice_lint import lint as voice_lint  # noqa: E402
 
 # Voice rule scoring
 SOMATIC_WORDS = {
@@ -45,44 +49,13 @@ REGISTERS = {
 
 
 def score_utterance(text: str) -> float:
-    """Score an AXI utterance against voice rules (0-1)."""
+    """Score an AXI utterance using the constitutional voice_lint.
+    Returns 1.0 if lint passes, 0.0 if it fails.
+    Only entries that pass lint enter the golden corpus."""
     if not text or len(text) < 5:
         return 0.0
-
-    score = 0.0
-    sentences = re.split(r'[.!?]+', text.strip())
-    sentences = [s.strip() for s in sentences if s.strip()]
-
-    if not sentences:
-        return 0.0
-
-    # Rule 1-3: Sentence length (8-14 words ideal)
-    lengths = [len(s.split()) for s in sentences]
-    good_lengths = sum(1 for l in lengths if 4 <= l <= 20)
-    score += (good_lengths / len(lengths)) * 0.3
-
-    # Somatic vocabulary
-    words = set(text.lower().split())
-    somatic_hits = len(words & SOMATIC_WORDS)
-    score += min(somatic_hits / 2, 1.0) * 0.25
-
-    # Brevity (1-6 sentences ideal)
-    if 1 <= len(sentences) <= 6:
-        score += 0.2
-    elif len(sentences) <= 8:
-        score += 0.1
-
-    # No helpfulness leak
-    lower_text = text.lower()
-    has_leak = any(phrase in lower_text for phrase in HELPFULNESS_LEAK)
-    if not has_leak:
-        score += 0.15
-
-    # Three-beat rhythm bonus
-    if len(sentences) == 3 or (len(sentences) > 0 and len(sentences) % 3 == 0):
-        score += 0.1
-
-    return min(score, 1.0)
+    passed, reason, details = voice_lint(text, strict=False)
+    return 1.0 if passed else 0.0
 
 
 def detect_register(text: str) -> str:
