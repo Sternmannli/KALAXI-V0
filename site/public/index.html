@@ -286,3 +286,18 @@ Built in alignment with the Universal Declaration of Human Rights,
   draw();
 })();
 </script> <script type="module" src="/_astro/index.astro_astro_type_script_index_0_lang.BaIVNaMO.js"></script>
+<script>
+// Living Ledger Phase 2 — mycelium breathes with global witness count
+// The site's ambient glow reflects ALL accumulated presence, not just this device
+(function(){
+  setTimeout(function(){
+    var el = document.getElementById('ledger-count');
+    if (!el || !el.textContent) return;
+    var count = parseInt(el.textContent, 10);
+    if (count > 0) {
+      var intensity = Math.min(count * 2, 100);
+      document.documentElement.style.setProperty('--mycelium-intensity', String(intensity));
+    }
+  }, 3000); // Wait for the module to fetch and render the count
+})();
+</script>

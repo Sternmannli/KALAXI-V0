@@ -52,7 +52,7 @@ def test_compass_heading_keys():
     c = Compass()
     reading = c.sense()
     assert "single_blocker" in reading.heading
-    assert "deployment_target" in reading.heading
+    assert "deployment_status" in reading.heading
 
 
 def test_compass_vitals():
