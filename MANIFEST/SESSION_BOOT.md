@@ -107,45 +107,46 @@ gh secret list
 
 | Measure | Count |
 |---------|-------|
-| Python files | 143+ |
+| Python files | 176 |
 | Lines of code | 42,581+ |
-| Tests | 896+ (887 passing, 9 skipped) |
+| Tests | 1006 passed, 9 skipped |
 | Covenants | 18 ratified |
-| Ledger entries | 1,155+ |
+| Ledger entries | 2,457+ |
 | Proverbs | 3,355+ |
 | Seeds | 12/12 integrated |
 | Site pages | 13+ |
 | Site status | **LIVE** at kalam.ch |
 | Standing corrections | 13 (in CLAUDE.md Substrate Correction Log) |
+| Golden regression corpus | 200 entries (TRAINING/GOLDEN_REGRESSION.jsonl) |
 
 ---
 
 ## 5. LAST SESSION
 
-**Date:** 2026-03-22
+**Date:** 2026-03-22 (session 2)
 **Summary:**
-1. **GitHub Actions spending limit fixed** — was $0, blocking all workflows. Now $10/month.
-2. **Credential Vault Protocol** — permanent constitutional law. V-002 NEVER asks for credentials again. `.credentials.env` stores GH_TOKEN + Hostpoint SSH credentials. GitHub Secrets updated.
-3. **Standing corrections 10-13 added:**
-   - #10: Credential Vault Law (never ask for passwords)
-   - #11: Spending Limit Monitoring (proactive workflow health checks)
-   - #12: V-001 is not technical (coding/math/physics = V-002's job)
-   - #13: Session Continuity Law (close window, open new one — system handles the rest)
-4. **SESSION_BOOT.md rewritten** — comprehensive orientation for every new session.
+1. **Deep clean** — codebase health excellent (176 Python files, all accounted for). Stale `master` branch deleted. 6 orphan scripts documented (standalone utilities, not dead code).
+2. **Living Ledger Phase 2** — mycelium ambient glow now scales with global witness count (all visitors) instead of localStorage (per device). Both index.astro and deployed index.html updated.
+3. **Compass (MOVE-001) fixed** — stale data corrected. Site IS live since 2026-03-17. Constitution path fixed. Covenant count sourced from CLAUDE.md. COMPASS.md auto-generated.
+4. **Voice Canon audit** — all 4 surfaces consistent (PHP, Worker, Training, Evaluator). One manual sync point: Worker hardcodes 17 proverbs.
+5. **Golden Regression Corpus** — 200 canonical AXI utterances extracted from 8,008 candidates. Score 0.775-1.000. All 9 registers. File: TRAINING/GOLDEN_REGRESSION.jsonl
+6. **Donor Accounts** — verified code-complete (donor.php: 358 lines, 6 actions). DB migration (migrate.php) pending on live server.
+7. **Tests: 1006 passed, 9 skipped** — up from 896. Zero regressions.
 
-**PRs merged:** #331 (Credential Vault Protocol), #332 (Corrections 12-13)
+**Branch:** `claude/continue-previous-work-khjLX` — pushed, PR pending (gh CLI not available in this environment)
+**Previous session PRs:** #331, #332, #333
 
 ---
 
 ## 6. WHAT IS PENDING
 
-1. **EXP-001** — 188 runs remaining (Claude: 0/20)
-2. **kalam.ch Phase 2** — Cloudflare Worker + KV (Living Ledger persistence)
-3. **Donor Accounts** — pattern persistence, PHP + MySQL schema
-4. **Voice Canon sync** — 4 surfaces need sync check (Groq, Worker, Training, Evaluator)
+1. **PR merge** — branch `claude/continue-previous-work-khjLX` needs PR created and merged to main
+2. **DB migration on server** — trigger `migrate.php` on kalam.ch (creates 6 MySQL tables)
+3. **EXP-001** — 188 runs remaining (Claude: 0/20)
+4. **Website UI Overhaul (MOVE-002)** — bigger input/output frames, donor-oriented design
 5. **EXP-005** — Fractured Ouroboros test (designed, ready)
-6. **Golden corpus** — 200 canonical AXI utterances for voice regression testing
-7. **Deep clean** — Directive 3: dead code, orphan files, stale artifacts (run at session start)
+6. **Voice model training** — use Together AI (TOGETHER_API_KEY) for AXI fine-tuning
+7. **Fear + dignity register gap** — Golden corpus has fewer examples for these registers (10 and 15 vs 25 target)
 
 ---
 
