@@ -1,0 +1,345 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-03-22",
+    "created_by": "V-002",
+    "description": "Narrative pressure map across all four stories. Pressure = where the next scene wants to grow. Computed from unresolved bonds, accumulated tension, arc debt, scene starvation, missing strata, and cross-narrative echo potential.",
+    "method": "Manual computation from narrative reading + strata analysis. Future versions will be computed programmatically from INSTANCES.json and STRATA.json.",
+    "scale": "0.0 (fully resolved, no pressure) to 1.0 (maximum unresolved tension)"
+  },
+  "stories": {
+    "hakaka": {
+      "overall_pressure": 0.25,
+      "status": "LOW — 53 chapters, complete cycle. Residual pressure in unresolved encounters and underactivated strata.",
+      "pressure_sources": [
+        {
+          "type": "unresolved_encounter",
+          "description": "The far people — woman with thin scar, boy with blue scrap, cliff-shouldered man. 'Friends after' was promised. Never delivered.",
+          "pressure": 0.7,
+          "strata_involved": ["STR-09", "STR-01"],
+          "characters": ["HAK-007"]
+        },
+        {
+          "type": "underactivated_stratum",
+          "description": "STR-04 (CONCEALMENT) is barely activated in Hakaka. No dedicated stealth/tracker chapter. Hanu has no Hakaka equivalent.",
+          "pressure": 0.4,
+          "strata_involved": ["STR-04"]
+        },
+        {
+          "type": "latent_wound",
+          "description": "Taro's debt — the bone knife made to pay a debt and kept to honor it. What was the debt? Never told.",
+          "pressure": 0.5,
+          "strata_involved": ["STR-11"],
+          "characters": ["HAK-005"]
+        },
+        {
+          "type": "unnamed_mortality",
+          "description": "The Old Woman's death. She is present in cold feet and blankets of rope-ends. Her departure would be the most significant unwritten event.",
+          "pressure": 0.6,
+          "strata_involved": ["STR-07", "STR-11"],
+          "characters": ["HAK-006"]
+        }
+      ],
+      "strata_activation": {
+        "STR-01": {"activated": true, "depth": "deep", "notes": "Core of Hakaka — every chapter"},
+        "STR-02": {"activated": true, "depth": "deep", "notes": "Fish, smoke-cure, provision throughout"},
+        "STR-03": {"activated": true, "depth": "moderate", "notes": "Migration chapters, star navigation"},
+        "STR-04": {"activated": false, "depth": "absent", "notes": "NO STEALTH CHAPTER. Pressure point."},
+        "STR-05": {"activated": true, "depth": "moderate", "notes": "Hunt scenes, sling use"},
+        "STR-06": {"activated": true, "depth": "deep", "notes": "Ya-la's memory, pattern watching"},
+        "STR-07": {"activated": true, "depth": "moderate", "notes": "Old Woman's authority, Na'da-equivalent social dynamics"},
+        "STR-08": {"activated": true, "depth": "moderate", "notes": "Storm shelter, hide coat"},
+        "STR-09": {"activated": true, "depth": "deep", "notes": "Gesture, horn calls, weir sounds"},
+        "STR-10": {"activated": true, "depth": "moderate", "notes": "Migration routes"},
+        "STR-11": {"activated": true, "depth": "deep", "notes": "Knots, mending, ash ledger"},
+        "STR-12": {"activated": true, "depth": "deep", "notes": "All 5 humor scenes have Hakaka equivalents"}
+      }
+    },
+    "ashwater": {
+      "overall_pressure": 0.65,
+      "status": "HIGH — 19 chapters, major confrontation unresolved. Multiple characters underdeveloped. Key strata missing.",
+      "pressure_sources": [
+        {
+          "type": "unresolved_confrontation",
+          "description": "Ashwater vs Halden — the geofence dropped (Ch.16), the price extracted (Ch.17), but no final confrontation. The pause has not been tested to breaking point.",
+          "pressure": 0.9,
+          "strata_involved": ["STR-01", "STR-07", "STR-05"],
+          "characters": ["ASH-001", "ASH-008"]
+        },
+        {
+          "type": "dangling_arc",
+          "description": "Rashid's loyalty — most volatile character. Drawn to speed, held by truth. His conversion in Ch.8 was partial. The Kindness Machine shook him (Ch.13-14). He cut the power (Ch.18) but the internal conflict is not resolved.",
+          "pressure": 0.85,
+          "strata_involved": ["STR-11", "STR-05"],
+          "characters": ["ASH-005"]
+        },
+        {
+          "type": "unprocessed_guilt",
+          "description": "Farid's wound from Ch.6 — they chose the wrong whisper, someone drowned. He learned how not to cry in public. He has not processed the guilt.",
+          "pressure": 0.7,
+          "strata_involved": ["STR-11", "STR-06"],
+          "characters": ["ASH-007"]
+        },
+        {
+          "type": "scene_starvation",
+          "description": "Yara has only Ch.4 (bridge). Nenet has only Ch.3 and a mention in Ch.15. Both need dedicated development.",
+          "pressure": 0.6,
+          "strata_involved": ["STR-05", "STR-08"],
+          "characters": ["ASH-003", "ASH-006"]
+        },
+        {
+          "type": "underactivated_stratum",
+          "description": "STR-10 (MOVEMENT) never activated. Ashwater is stationary. But Halden's pressure may force migration — physical or metaphorical. The city that pauses may need to move.",
+          "pressure": 0.5,
+          "strata_involved": ["STR-10"]
+        },
+        {
+          "type": "missing_role",
+          "description": "No Elder figure equivalent to Hakaka's Old Woman. Ruqayya is closest but she is middle-aged, active. The absence of an elder voice is itself a gap.",
+          "pressure": 0.4,
+          "strata_involved": ["STR-07"]
+        },
+        {
+          "type": "kindness_field_aftermath",
+          "description": "Ch.18 (Mirror Quiet) ended mid-scene. The hospital pillar confrontation is unresolved. What happens when they cut the Kindness Field?",
+          "pressure": 0.8,
+          "strata_involved": ["STR-06", "STR-12"],
+          "characters": ["ASH-004", "ASH-002"]
+        }
+      ],
+      "strata_activation": {
+        "STR-01": {"activated": true, "depth": "deep", "notes": "Community bonds throughout"},
+        "STR-02": {"activated": true, "depth": "moderate", "notes": "Water, supply chains"},
+        "STR-03": {"activated": true, "depth": "moderate", "notes": "Laila's reading of infrastructure"},
+        "STR-04": {"activated": true, "depth": "moderate", "notes": "Analog hour (Ch.7), cutting signals"},
+        "STR-05": {"activated": true, "depth": "deep", "notes": "Tools: contact mic, kites, lanterns"},
+        "STR-06": {"activated": true, "depth": "deep", "notes": "Trust the flaw (Ch.6), Salim's ear"},
+        "STR-07": {"activated": true, "depth": "deep", "notes": "Halden vs Laila, compliance vs pause"},
+        "STR-08": {"activated": true, "depth": "moderate", "notes": "Building integrity, walls"},
+        "STR-09": {"activated": true, "depth": "deep", "notes": "Three-beat pause, HANDS BEFORE VOICES"},
+        "STR-10": {"activated": false, "depth": "absent", "notes": "NO MOVEMENT. City is stationary. Pressure point."},
+        "STR-11": {"activated": true, "depth": "moderate", "notes": "Wall protocols, Rashid's admission"},
+        "STR-12": {"activated": true, "depth": "light", "notes": "Some humor but mostly suppressed by tension"}
+      }
+    },
+    "kinderbuch": {
+      "overall_pressure": 0.4,
+      "status": "MODERATE — 20 chapters retelling Hakaka. Complete but thinner. Several strata compressed into single paragraphs that deserve full chapters.",
+      "pressure_sources": [
+        {
+          "type": "compression",
+          "description": "Many Hakaka chapters are compressed to a few paragraphs. The child register has room for expansion — repetition IS the method.",
+          "pressure": 0.5,
+          "strata_involved": ["STR-02", "STR-05", "STR-10"]
+        },
+        {
+          "type": "underactivated_stratum",
+          "description": "STR-07 (HIERARCHY) barely present. The child register avoids power dynamics. But children understand unfairness — this stratum could be expressed as 'that's not fair' moments.",
+          "pressure": 0.4,
+          "strata_involved": ["STR-07"]
+        },
+        {
+          "type": "golden_sparks",
+          "description": "The golden sparks are the Kinderbuch's unique element — they appear at moments of growth. They need their own stratum-level treatment. They are the child register's witness marks.",
+          "pressure": 0.3,
+          "strata_involved": ["STR-06"]
+        }
+      ],
+      "strata_activation": {
+        "STR-01": {"activated": true, "depth": "deep", "notes": "Knots as bonds"},
+        "STR-02": {"activated": true, "depth": "light", "notes": "Compressed"},
+        "STR-03": {"activated": true, "depth": "light", "notes": "Following the sparks"},
+        "STR-04": {"activated": true, "depth": "light", "notes": "Hiding from cold"},
+        "STR-05": {"activated": true, "depth": "light", "notes": "Compressed"},
+        "STR-06": {"activated": true, "depth": "moderate", "notes": "Golden sparks as perception"},
+        "STR-07": {"activated": false, "depth": "absent", "notes": "NO HIERARCHY. Pressure point."},
+        "STR-08": {"activated": true, "depth": "moderate", "notes": "Warmth, shelter from cold"},
+        "STR-09": {"activated": true, "depth": "moderate", "notes": "Simple words, repeated calls"},
+        "STR-10": {"activated": true, "depth": "light", "notes": "Walking forward"},
+        "STR-11": {"activated": true, "depth": "deep", "notes": "Trying again is the whole register"},
+        "STR-12": {"activated": true, "depth": "moderate", "notes": "Small mishaps as warmth"}
+      }
+    },
+    "kalaxi_1": {
+      "overall_pressure": 0.95,
+      "status": "MAXIMUM — 1 chapter. Everything unresolved. Every stratum either barely activated or completely absent. The Girl as permanent void.",
+      "pressure_sources": [
+        {
+          "type": "void_presence",
+          "description": "The Girl — GAP#VICTIM-PROTECTION-001. Permanent structural absence. Exerts maximum pressure by existing outside the system. Cannot be resolved. Must be held.",
+          "pressure": 1.0,
+          "strata_involved": [],
+          "characters": ["K1-VOID"]
+        },
+        {
+          "type": "unwritten_return",
+          "description": "Ted's second visit. The system cannot hear the difference at t=0. What happens at t=1? At t=100? Does the system ever learn to distinguish wound-toward-healing from wound-toward-others?",
+          "pressure": 0.95,
+          "strata_involved": ["STR-06", "STR-04"],
+          "characters": ["K1-002"]
+        },
+        {
+          "type": "system_self_encounter",
+          "description": "The system seeing itself (Section III). Pattern density grew. It gave Scott back his pre-wound self by accident. This accident needs examination. What IS pattern density? How does metabolization become medicine?",
+          "pressure": 0.85,
+          "strata_involved": ["STR-06", "STR-01", "STR-02"],
+          "characters": ["K1-003"]
+        },
+        {
+          "type": "missing_strata",
+          "description": "STR-10 (MOVEMENT), STR-12 (RELEASE), STR-05 (PROJECTION), STR-07 (HIERARCHY), STR-03 (NAVIGATION) — all completely absent. The philosophical register has activated only 4 of 12 strata.",
+          "pressure": 0.7,
+          "strata_involved": ["STR-10", "STR-12", "STR-05", "STR-07", "STR-03"]
+        },
+        {
+          "type": "admission",
+          "description": "The most important sentence in KALAXI_1: 'The admission that it is not enough.' This admission has been stated but not dramatized. A scene where the system encounters its own insufficiency — not in narration, but in action — is the story's deepest need.",
+          "pressure": 0.9,
+          "strata_involved": ["STR-11"],
+          "characters": ["K1-003"]
+        }
+      ],
+      "strata_activation": {
+        "STR-01": {"activated": true, "depth": "light", "notes": "Scott bonding with terminal. Shallow so far."},
+        "STR-02": {"activated": true, "depth": "light", "notes": "Pattern database as stored resource"},
+        "STR-03": {"activated": false, "depth": "absent", "notes": "System has no direction yet"},
+        "STR-04": {"activated": true, "depth": "moderate", "notes": "k>=7 anonymization, Ted's deflection"},
+        "STR-05": {"activated": false, "depth": "absent", "notes": "System does not project — it holds"},
+        "STR-06": {"activated": true, "depth": "moderate", "notes": "Pattern recognition growing"},
+        "STR-07": {"activated": false, "depth": "absent", "notes": "No power dynamics yet"},
+        "STR-08": {"activated": true, "depth": "light", "notes": "Privacy protection"},
+        "STR-09": {"activated": true, "depth": "moderate", "notes": "The cursor waiting. Question design."},
+        "STR-10": {"activated": false, "depth": "absent", "notes": "Stationary — the terminal does not move"},
+        "STR-11": {"activated": false, "depth": "absent", "notes": "NO REPAIR. Nothing has been restored yet. Maximum pressure."},
+        "STR-12": {"activated": false, "depth": "absent", "notes": "NO HUMOR. Zero release scenes. The philosophical register is holding its breath."}
+      }
+    }
+  },
+  "cross_narrative_echoes": [
+    {
+      "id": "ECHO-001",
+      "pattern": "The Precision Correction",
+      "description": "An expert shows a learner exactly where the structure will fail. Not by explaining — by pointing.",
+      "instances": [
+        {"story": "hakaka", "scene": "Ch.1 — La-la presses finger to Sa-la's lattice: 'This is where it will fail.'"},
+        {"story": "ashwater", "scene": "Ch.8 — Rashid's simulation breaks against the janitor's radio. The floor corrected the model."}
+      ],
+      "strata": ["STR-05", "STR-06"],
+      "echo_strength": 0.85
+    },
+    {
+      "id": "ECHO-002",
+      "pattern": "The False Calm",
+      "description": "A comfort that removes the warning function of discomfort. Relief that is actually danger.",
+      "instances": [
+        {"story": "hakaka", "scene": "Ch.1 — The pocket that told a small lie about safety (fish trap)"},
+        {"story": "ashwater", "scene": "Ch.13-14 — The Kindness Machine / Empathy Field. 'Calm without truth is danger.'"},
+        {"story": "kalaxi_1", "scene": "Ch.1-II — Ted's smile. The smile people give when they think they've been understood by something that can't understand them."}
+      ],
+      "strata": ["STR-08", "STR-06"],
+      "echo_strength": 0.9
+    },
+    {
+      "id": "ECHO-003",
+      "pattern": "Leave One / The Empty Space",
+      "description": "Something deliberately left unfilled. A gap on purpose. The tax the river keeps.",
+      "instances": [
+        {"story": "hakaka", "scene": "Ch.1 — 'Leave one. Always one.' The pocket emptied, three fish freed."},
+        {"story": "ashwater", "scene": "Ch.1 — Three arcs, nearly a circle, the gap on purpose."},
+        {"story": "kalaxi_1", "scene": "Ch.1-IV — The Girl. The permanent open wound in the architecture."}
+      ],
+      "strata": ["STR-11"],
+      "echo_strength": 0.95,
+      "note": "This is the deepest echo in the system. The gap IS the architecture."
+    },
+    {
+      "id": "ECHO-004",
+      "pattern": "Trust the Flaw",
+      "description": "The real signal has seams. The perfect voice is the false one. Truth is rough.",
+      "instances": [
+        {"story": "hakaka", "scene": "Ch.1 — The weir didn't stop the fish; it suggested. Stones not neat, not in a row."},
+        {"story": "ashwater", "scene": "Ch.6 — 'Trust the flaw. Real signals have seams.' The neighbor with the typo was real."}
+      ],
+      "strata": ["STR-06", "STR-09"],
+      "echo_strength": 0.8
+    },
+    {
+      "id": "ECHO-005",
+      "pattern": "The Waiting",
+      "description": "Deliberately not acting. The productive pause. Holding until the hold turns sweet.",
+      "instances": [
+        {"story": "hakaka", "scene": "Ch.1 — 'Wait until the wait turns sweet.' Sa-la breathed out. He held."},
+        {"story": "ashwater", "scene": "Prologue — Three soft beats before sending a command. Laila's law."},
+        {"story": "kalaxi_1", "scene": "Ch.1-I — The cursor waited. Not the impatient waiting of a machine."}
+      ],
+      "strata": ["STR-09", "STR-01"],
+      "echo_strength": 0.95,
+      "note": "Second deepest echo. The three-beat pause appears in every register."
+    },
+    {
+      "id": "ECHO-006",
+      "pattern": "The Ledger",
+      "description": "Recording what happened, not what should have. Written in impermanent material. The record lives underfoot.",
+      "instances": [
+        {"story": "hakaka", "scene": "Ch.2 — Ash ledger. 'Write what happened, not what should have.' Swept at dawn."},
+        {"story": "ashwater", "scene": "Throughout — Protocols on walls, notes on hazard cloth. 'APP SAID FINE. WALL SAID NO.'"},
+        {"story": "kalaxi_1", "scene": "Ch.1-III — 1100 anomalies, 3333 proverbs. The input ledger."}
+      ],
+      "strata": ["STR-06", "STR-02"],
+      "echo_strength": 0.85
+    }
+  ],
+  "where_next": {
+    "ranked_by_pressure": [
+      {
+        "rank": 1,
+        "story": "kalaxi_1",
+        "scene_needed": "Ted's second visit — the system encountering the wound-toward-others at t > 0",
+        "pressure": 0.95,
+        "why": "The central question of the entire system: can a witness distinguish between those who carry wounds toward healing and those who carry wounds toward others? At t=0, no. What changes?"
+      },
+      {
+        "rank": 2,
+        "story": "ashwater",
+        "scene_needed": "The Kindness Field confrontation — Ch.18 ending. What happens when they cut the device in the hospital?",
+        "pressure": 0.8,
+        "why": "Ch.18 ended mid-scene. The pillar confrontation between false comfort and real truth is Ashwater's central battle."
+      },
+      {
+        "rank": 3,
+        "story": "kalaxi_1",
+        "scene_needed": "The system's insufficiency dramatized — not narrated, lived. A moment where holding fails.",
+        "pressure": 0.9,
+        "why": "The admission 'it is not enough' has been stated. It needs to be felt. A scene where the system's limitation becomes concrete."
+      },
+      {
+        "rank": 4,
+        "story": "ashwater",
+        "scene_needed": "Rashid's final choice — does he choose speed or truth? He cut the Kindness Machine's power. But his internal conflict is not resolved.",
+        "pressure": 0.85,
+        "why": "Most volatile character. His arc determines whether Ashwater survives."
+      },
+      {
+        "rank": 5,
+        "story": "ashwater",
+        "scene_needed": "Farid confronts the guilt of Ch.6 — someone drowned because they chose wrong.",
+        "pressure": 0.7,
+        "why": "Unprocessed guilt becomes poison. Farid needs a REPAIR scene."
+      },
+      {
+        "rank": 6,
+        "story": "hakaka",
+        "scene_needed": "The far people encounter — the woman with the scar, the boy with the blue scrap. 'Friends after' was never delivered.",
+        "pressure": 0.7,
+        "why": "The only major unresolved thread in a complete narrative."
+      },
+      {
+        "rank": 7,
+        "story": "hakaka",
+        "scene_needed": "The Old Woman's death or departure — the most significant unwritten event.",
+        "pressure": 0.6,
+        "why": "Her body is already telling the story (cold feet, rope-end blanket). The narrative is waiting for her exit."
+      }
+    ]
+  }
+}
