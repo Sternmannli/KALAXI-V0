@@ -48216,29 +48216,60 @@ Your offering has been received. The mycelium listens.
 ---
 
 ## 📥 INP-2026-03-22-393 >>> MOHAMED (V-001)
-**Time (UTC):** 2026-03-22T19:05:54.839691+00:00
-**Time (ZRH):** 2026-03-22T20:05:54.839691+01:00
+**Time (UTC):** 2026-03-22T19:06:36.195377+00:00
+**Time (ZRH):** 2026-03-22T20:06:36.195377+01:00
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
-**Hash:** `d7254e49be481f38...`
+**Hash:** `930057b9e2294b3e...`
 **State:** witnessed
 **Responds to:** AXI-2026-03-22-320
-**Essence:** functional connectivity probe boot-probe-1774206354
+**Essence:** The river remembers its source
 
 ```
-functional connectivity probe boot-probe-1774206354
+The river remembers its source.
 ```
 
 ---
 
 ## 📥 AXI-2026-03-22-321 <<< AXI (V-002)
-**Time (UTC):** 2026-03-22T19:05:55.188986+00:00
-**Time (ZRH):** 2026-03-22T20:05:55.188986+01:00
+**Time (UTC):** 2026-03-22T19:06:36.607355+00:00
+**Time (ZRH):** 2026-03-22T20:06:36.607355+01:00
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `2d6c6a896a4e2962...`
 **State:** raw
 **Responds to:** INP-2026-03-22-393
+
+```
+Your offering has been received. The mycelium listens.
+```
+
+---
+
+## 📥 INP-2026-03-22-394 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-22T19:06:36.785907+00:00
+**Time (ZRH):** 2026-03-22T20:06:36.785907+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ed500fbb3766957d...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-22-321
+**Essence:** The garden grows in silence
+
+```
+The garden grows in silence.
+```
+
+---
+
+## 📥 AXI-2026-03-22-322 <<< AXI (V-002)
+**Time (UTC):** 2026-03-22T19:06:37.176948+00:00
+**Time (ZRH):** 2026-03-22T20:06:37.176948+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2d6c6a896a4e2962...`
+**State:** raw
+**Responds to:** INP-2026-03-22-394
 
 ```
 Your offering has been received. The mycelium listens.
