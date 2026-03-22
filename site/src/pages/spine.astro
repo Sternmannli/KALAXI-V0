@@ -1,0 +1,494 @@
+---
+import Base from '../layouts/Base.astro';
+import spine from '../../public/data/spine.json';
+---
+
+<Base title="Spine — kalam.ch" description="Twelve behavioral laws beneath four stories. The physics of a narrative world.">
+
+  <section class="page-header">
+    <h1>{spine.title}</h1>
+    <p class="quiet">{spine.subtitle}</p>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Introduction -->
+  <section class="content-section" id="about">
+    <div class="text-block">
+      <p>{spine.description}</p>
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- The 12 Strata -->
+  <section class="content-section" id="strata">
+    <div class="text-block">
+      <h2>The Twelve Strata</h2>
+      <p class="quiet">Not archetypes. Not templates. Laws.</p>
+    </div>
+
+    <div class="strata-grid">
+      {spine.strata.map((s: any) => (
+        <div class="stratum-card" id={s.id.toLowerCase()}>
+          <div class="stratum-header">
+            <span class="stratum-marker" style={`background: ${s.color}`}></span>
+            <h3>{s.name}</h3>
+            <span class="stratum-id">{s.id}</span>
+          </div>
+          <p class="stratum-law">{s.law}</p>
+          <p class="stratum-eq"><code>{s.equation}</code></p>
+
+          <div class="register-grid">
+            <div class="register-cell">
+              <span class="register-label">Mythic</span>
+              <span class="register-text">{s.mappings.hakaka}</span>
+            </div>
+            <div class="register-cell">
+              <span class="register-label">Civic</span>
+              <span class="register-text">{s.mappings.ashwater}</span>
+            </div>
+            <div class="register-cell">
+              <span class="register-label">Child</span>
+              <span class="register-text">{s.mappings.kinderbuch}</span>
+            </div>
+            <div class="register-cell">
+              <span class="register-label">Philosophical</span>
+              <span class="register-text">{s.mappings.kalaxi_1}</span>
+            </div>
+          </div>
+
+          <p class="stratum-module quiet">Module: {s.module}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Four Stories -->
+  <section class="content-section" id="stories">
+    <div class="text-block">
+      <h2>Four Stories</h2>
+      <p class="quiet">Same physics. Different registers. Each activates its own strata.</p>
+    </div>
+
+    {spine.stories.map((story: any) => (
+      <div class="story-card" id={story.id}>
+        <div class="story-header">
+          <h3>{story.name}</h3>
+          <span class="story-register">{story.register}</span>
+          <span class="story-chapters">{story.chapters} {story.chapters === 1 ? 'chapter' : 'chapters'}</span>
+        </div>
+
+        <div class="pressure-bar-container">
+          <div class="pressure-bar" style={`width: ${story.pressure * 100}%`}>
+            <span class="pressure-label">{Math.round(story.pressure * 100)}%</span>
+          </div>
+        </div>
+        <p class="story-status">{story.status}</p>
+
+        <div class="character-list">
+          {story.characters.map((ch: any) => (
+            <div class={`character-chip ${ch.strata.length === 0 ? 'void-chip' : ''}`}>
+              <span class="character-name">{ch.name}</span>
+              <span class="character-role">{ch.role}</span>
+              <span class="character-strata">
+                {ch.strata.length === 0 ? 'VOID' : ch.strata.map((s: string) => spine.strata.find((st: any) => st.id === s)?.name || s).join(' · ')}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {story.missing_strata.length > 0 && (
+          <p class="story-missing">
+            Missing: {story.missing_strata.map((s: string) => spine.strata.find((st: any) => st.id === s)?.name || s).join(', ')}
+          </p>
+        )}
+
+        <p class="story-pressure-note">{story.top_pressure}</p>
+
+        <div class="gap" role="separator" aria-hidden="true"></div>
+      </div>
+    ))}
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Cross-Narrative Echoes -->
+  <section class="content-section" id="echoes">
+    <div class="text-block">
+      <h2>Echoes</h2>
+      <p class="quiet">The same pattern at different registers. Six found so far.</p>
+    </div>
+
+    {spine.echoes.map((echo: any) => (
+      <div class="echo-card">
+        <div class="echo-header">
+          <h3>{echo.name}</h3>
+          <span class="echo-strength">{Math.round(echo.strength * 100)}%</span>
+        </div>
+        <p class="echo-description">{echo.description}</p>
+        <ul class="echo-instances">
+          {echo.instances.map((inst: string) => (
+            <li>{inst}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </section>
+
+  <div class="gap" role="separator" aria-hidden="true"></div>
+
+  <!-- Where Next -->
+  <section class="content-section" id="where-next">
+    <div class="text-block">
+      <h2>Where the Next Scene Wants to Grow</h2>
+      <p class="quiet">Ranked by pressure. The stories are asking.</p>
+    </div>
+
+    <ol class="next-list">
+      {spine.where_next.map((item: any) => (
+        <li class="next-item">
+          <span class="next-story">{item.story}</span>
+          <span class="next-scene">{item.scene}</span>
+          <span class="next-pressure">{Math.round(item.pressure * 100)}%</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- Connection footer -->
+  <section class="connection-footer">
+    <p class="quiet">Connected to the living system. Part of the body of work.</p>
+  </section>
+
+</Base>
+
+<style>
+  /* === Strata Grid === */
+  .strata-grid {
+    max-width: 75ch;
+    margin: var(--space-4) auto;
+    padding: 0 var(--page-padding);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .stratum-card {
+    padding: var(--space-4);
+    border-left: 3px solid var(--accent-subtle);
+    background: var(--bg-inset);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .stratum-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
+  }
+
+  .stratum-marker {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .stratum-header h3 {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    margin: 0;
+    flex: 1;
+  }
+
+  .stratum-id {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-family: monospace;
+  }
+
+  .stratum-law {
+    font-style: italic;
+    color: var(--text-secondary);
+    margin: var(--space-1) 0;
+  }
+
+  .stratum-eq code {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    background: var(--bg-secondary);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+  }
+
+  .stratum-module {
+    font-size: 0.8rem;
+    margin-top: var(--space-2);
+    font-family: monospace;
+  }
+
+  /* Register mappings */
+  .register-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+
+  @media (max-width: 600px) {
+    .register-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .register-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .register-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    font-family: var(--font-body);
+  }
+
+  .register-text {
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  /* === Story Cards === */
+  .story-card {
+    max-width: 75ch;
+    margin: 0 auto var(--space-4);
+    padding: var(--space-4) var(--page-padding);
+  }
+
+  .story-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-2);
+  }
+
+  .story-header h3 {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    margin: 0;
+  }
+
+  .story-register {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    border: 1px solid var(--accent-subtle);
+    padding: 0.1rem 0.5rem;
+    border-radius: 3px;
+  }
+
+  .story-chapters {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+
+  /* Pressure bar */
+  .pressure-bar-container {
+    width: 100%;
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: var(--space-2) 0 var(--space-1);
+  }
+
+  .pressure-bar {
+    height: 100%;
+    background: var(--accent-warm);
+    border-radius: 3px;
+    position: relative;
+    min-width: 2rem;
+    transition: width 0.6s var(--transition-smooth);
+  }
+
+  .pressure-label {
+    position: absolute;
+    right: 0;
+    top: -1.4rem;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    font-family: monospace;
+  }
+
+  .story-status {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin: var(--space-1) 0;
+  }
+
+  .story-missing {
+    font-size: 0.8rem;
+    color: var(--accent-warm);
+    margin-top: var(--space-2);
+  }
+
+  .story-pressure-note {
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: var(--text-sm);
+    margin-top: var(--space-2);
+    padding-left: var(--space-2);
+    border-left: 2px solid var(--accent-subtle);
+  }
+
+  /* Character chips */
+  .character-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin-top: var(--space-3);
+  }
+
+  .character-chip {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    padding: var(--space-1) 0;
+    border-bottom: 1px solid var(--bg-secondary);
+    flex-wrap: wrap;
+  }
+
+  .character-chip:last-child {
+    border-bottom: none;
+  }
+
+  .void-chip {
+    border-left: 3px solid var(--accent-warm);
+    padding-left: var(--space-2);
+  }
+
+  .character-name {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    min-width: 8ch;
+  }
+
+  .character-role {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    flex: 1;
+  }
+
+  .character-strata {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-family: monospace;
+  }
+
+  .void-chip .character-strata {
+    color: var(--accent-warm);
+    font-weight: 600;
+  }
+
+  /* === Echo Cards === */
+  .echo-card {
+    max-width: 65ch;
+    margin: 0 auto var(--space-4);
+    padding: var(--space-3) var(--page-padding);
+    border-left: 2px solid var(--color-pattern);
+  }
+
+  .echo-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
+  }
+
+  .echo-header h3 {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    margin: 0;
+    flex: 1;
+  }
+
+  .echo-strength {
+    font-size: 0.75rem;
+    font-family: monospace;
+    color: var(--color-pattern);
+  }
+
+  .echo-description {
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+  }
+
+  .echo-instances {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .echo-instances li {
+    font-size: var(--text-sm);
+    color: var(--text-dim);
+    padding: 0.3rem 0;
+    padding-left: var(--space-2);
+    border-left: 1px solid var(--bg-secondary);
+    margin-bottom: 0.3rem;
+  }
+
+  /* === Where Next === */
+  .next-list {
+    max-width: 65ch;
+    margin: var(--space-4) auto;
+    padding: 0 var(--page-padding);
+    list-style: none;
+    counter-reset: next-counter;
+  }
+
+  .next-item {
+    counter-increment: next-counter;
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--bg-secondary);
+    flex-wrap: wrap;
+  }
+
+  .next-item::before {
+    content: counter(next-counter);
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    color: var(--accent-warm);
+    min-width: 1.5ch;
+  }
+
+  .next-story {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    min-width: 8ch;
+  }
+
+  .next-scene {
+    flex: 1;
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+
+  .next-pressure {
+    font-size: 0.75rem;
+    font-family: monospace;
+    color: var(--accent-warm);
+  }
+</style>

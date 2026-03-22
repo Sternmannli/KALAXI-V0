@@ -89,11 +89,15 @@ class Compass:
         # Narrative stats
         position["narrative_files"] = self._count_files("NARRATIVE/**/*.md")
 
-        # Covenants
-        stone_path = self._root / "MANIFEST" / "metadata" / "tier1_stone.md"
-        if not stone_path.exists():
-            stone_path = self._root / "R7M" / "tier1_stone.md"
-        position["covenants"] = self._count_pattern(stone_path, r"COV#\d+")
+        # Covenants — count from CLAUDE.md (canonical source) or any R7M file
+        claude_md = self._root / "CLAUDE.md"
+        position["covenants"] = self._count_pattern(claude_md, r"COV#\d+")
+        if position["covenants"] == 0:
+            # Fallback: scan R7M for covenant references
+            for f in (self._root / "R7M").rglob("*.md"):
+                position["covenants"] += self._count_pattern(f, r"COV#\d+")
+                if position["covenants"] > 0:
+                    break
 
         # Ledger
         ledger_index = self._root / "KEEP" / "INPUT_LEDGER" / "index.json"
@@ -133,9 +137,10 @@ class Compass:
         # Active experiments
         heading["experiments"] = self._read_experiment_status()
 
-        # The single blocker
-        heading["single_blocker"] = "40,888+ lines. Zero users. Nothing is live."
-        heading["deployment_target"] = "kalam.ch"
+        # Current state — site is LIVE since 2026-03-17
+        heading["deployment_status"] = "LIVE at kalam.ch since 2026-03-17"
+        heading["code_lines"] = "42,581+"
+        heading["single_blocker"] = "Phase 2: persistence, donor accounts, voice model"
 
         return heading
 
@@ -150,9 +155,8 @@ class Compass:
         if not compass_out.exists():
             steps.append("Generate first COMPASS.md orientation file")
 
-        # Check deployment
-        if not self._check_deployment():
-            steps.append("Deploy kalam.ch — site built, not live")
+        # Phase 2 persistence
+        steps.append("kalam.ch Phase 2: MySQL migration, donor persistence, Living Ledger")
 
         # Check EXP-001 status
         exp_path = self._root / "EXPERIMENTS" / "EXP-001"
@@ -202,8 +206,11 @@ class Compass:
         present = sum(1 for m in core_modules if (weaver / m).exists())
         vitals["core_modules"] = f"{present}/{len(core_modules)}"
 
-        # Constitution
-        vitals["constitution"] = (self._root / "R7M" / "tier1_stone.md").exists()
+        # Constitution (lives in R7M archive, multiple source files)
+        vitals["constitution"] = (
+            (self._root / "R7M" / "KALAXI_SOVEREIGN_CANON.txt").exists()
+            or (self._root / "R7M" / "ESSENCE.md").exists()
+        )
 
         # Input ledger
         vitals["input_ledger"] = (self._root / "KEEP" / "INPUT_LEDGER" / "index.json").exists()

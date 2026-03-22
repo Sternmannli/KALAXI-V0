@@ -323,21 +323,24 @@ import Base from '../layouts/Base.astro';
         if (count > 0) {
           el.textContent = count + ' witness marks';
           el.classList.add('visible');
+          // Mycelium intensity grows with global witness count
+          // The site breathes with accumulated presence — all visitors, not just this device
+          const intensity = Math.min(count * 2, 100);
+          document.documentElement.style.setProperty('--mycelium-intensity', String(intensity));
         }
       }
     } catch(e) {
       // Silent — the count is a quiet presence, not a requirement
-    }
-
-    // Mycelium intensity grows with witness count
-    try {
-      const stored = localStorage.getItem('kalam-exchanges');
-      if (stored) {
-        const n = parseInt(stored, 10);
-        if (n > 0) {
-          document.documentElement.style.setProperty('--mycelium-intensity', String(Math.min(n * 5, 100)));
+      // Fallback: use local exchanges if server unreachable
+      try {
+        const stored = localStorage.getItem('kalam-exchanges');
+        if (stored) {
+          const n = parseInt(stored, 10);
+          if (n > 0) {
+            document.documentElement.style.setProperty('--mycelium-intensity', String(Math.min(n * 5, 100)));
+          }
         }
-      }
-    } catch(e) {}
+      } catch(e2) {}
+    }
   })();
 </script>

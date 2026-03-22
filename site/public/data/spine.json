@@ -1,0 +1,321 @@
+{
+  "title": "The Narrative Spine",
+  "subtitle": "Twelve laws beneath four stories. The physics of a world.",
+  "description": "The 72 equations from the earliest artifact collapse into 12 behavioral laws that operate beneath every narrative. The characters do not follow the equations. The characters are the equations made visible.",
+  "generated": "2026-03-22",
+  "strata": [
+    {
+      "id": "STR-01",
+      "name": "Cohesion",
+      "law": "Bond formation under shared vulnerability",
+      "equation": "f(Shared_Vulnerability, Care_Duration, Resource_Sharing) − Rivalry_Tension",
+      "color": "#c44a1a",
+      "mappings": {
+        "hakaka": "Shared hunger, predator threat. Nights guarding together. Fish divided, meat shared.",
+        "ashwater": "Infrastructure failure, Halden's pressure. Years of practiced pauses. Tea shared, labor divided.",
+        "kinderbuch": "Cold, hunger, being small. Repetition of care-acts. Grass shared, knots gifted.",
+        "kalaxi_1": "Wound exposure at the terminal. The system holding over time. Pattern density redistributed."
+      },
+      "module": "dignity_check.py"
+    },
+    {
+      "id": "STR-02",
+      "name": "Provision",
+      "law": "Resource adequacy across time horizons",
+      "equation": "f(Flow_Rate, Storage_Capacity, Intake_Rate) × Coordination",
+      "color": "#9b6b00",
+      "mappings": {
+        "hakaka": "Fish catch, hunt yield. Smoke-cure, clay seal. Mouths to feed.",
+        "ashwater": "Water pressure, supply deliveries. Reservoir, pantry during blackout.",
+        "kinderbuch": "Berries found, warmth gathered. Knots that hold things.",
+        "kalaxi_1": "Pattern input from donors. 1,100 anomalies, 3,333 proverbs stored."
+      },
+      "module": "keep.py"
+    },
+    {
+      "id": "STR-03",
+      "name": "Navigation",
+      "law": "Orientation under uncertainty",
+      "equation": "f(Signal_Clarity, Landmark_Match, Memory_Map) − Doubt_Noise",
+      "color": "#3a3fb8",
+      "mappings": {
+        "hakaka": "Star position, wind direction. Basalt ridge, known water sources.",
+        "ashwater": "Contact microphone readings. Known infrastructure states. Laila's years of experience.",
+        "kinderbuch": "Golden sparks showing the way. Recognizing what was seen before.",
+        "kalaxi_1": "Pattern match strength. Canonical reference points. Input ledger history."
+      },
+      "module": "compass.py"
+    },
+    {
+      "id": "STR-04",
+      "name": "Concealment",
+      "law": "Survival through controlled invisibility",
+      "equation": "f(Step_Control, Breath_Control) × Environment_Forgiveness",
+      "color": "#555550",
+      "mappings": {
+        "hakaka": "Hanu's footfall null. Scent control near predators. Mud, ash, terrain that absorbs.",
+        "ashwater": "Analog hour — cutting digital signals. Kite signals over radio silence.",
+        "kinderbuch": "Being quiet, tiptoeing. Holding breath when scared.",
+        "kalaxi_1": "k≥7 anonymization. The system does not expose donor identity."
+      },
+      "module": "privacy_budget.py"
+    },
+    {
+      "id": "STR-05",
+      "name": "Projection",
+      "law": "Force applied at distance",
+      "equation": "f(Mechanism_Efficiency, Skill_Execution, Distance) × Coordination",
+      "color": "#1a6b8a",
+      "mappings": {
+        "hakaka": "Throwing lever torque. Ma'da's aim. Pack hunting together.",
+        "ashwater": "Analog tools — kites, contact mics. Laila's precision of reading.",
+        "kinderbuch": "The knot that reaches far. Throwing accurately.",
+        "kalaxi_1": "The terminal's question design. System calibration."
+      },
+      "module": "wire.py"
+    },
+    {
+      "id": "STR-06",
+      "name": "Perception",
+      "law": "Pattern recognition under noise",
+      "equation": "f(Observation_Density, Anomaly_Detection) × Recall_Speed",
+      "color": "#0a7b62",
+      "mappings": {
+        "hakaka": "Simo's pattern spotting. Ya-la watching how eddies braid.",
+        "ashwater": "Salim's ear to vents. 'Trust the flaw. Real signals have seams.'",
+        "kinderbuch": "Noticing the golden sparks. Something that doesn't feel right.",
+        "kalaxi_1": "1,100 anomalies indexed. Unified pillar detectors."
+      },
+      "module": "sense.py"
+    },
+    {
+      "id": "STR-07",
+      "name": "Hierarchy",
+      "law": "Status negotiation without violence",
+      "equation": "f(Alliance_Count, Gift_Flow, Signal_Timing) − Scandal_Load",
+      "color": "#8b4513",
+      "mappings": {
+        "hakaka": "Clan bonds. Shared meat, traded tools. When to speak, when to hold.",
+        "ashwater": "City alliances. Ruqayya's tea. The three-beat pause.",
+        "kinderbuch": "Who is friends. Sharing warmth. Taking turns, waiting.",
+        "kalaxi_1": "Donor network. Pattern contribution. The cursor waiting."
+      },
+      "module": "deliberative_democracy.py"
+    },
+    {
+      "id": "STR-08",
+      "name": "Shelter",
+      "law": "Protection and heat retention under exposure",
+      "equation": "f(Barrier_Quality, Insulation, Drainage) − Exposure_Risk",
+      "color": "#6b4226",
+      "mappings": {
+        "hakaka": "Hide coat, cave walls. Smoke oil, stitch tight.",
+        "ashwater": "Building integrity, wall panels. Institutional resilience.",
+        "kinderbuch": "The knot that holds against cold. Golden sparks as inner warmth.",
+        "kalaxi_1": "Sealed gate, privacy budget. k≥7 anonymization."
+      },
+      "module": "shelter.py"
+    },
+    {
+      "id": "STR-09",
+      "name": "Signal",
+      "law": "Communication under constraint",
+      "equation": "f(Channel_Clarity, Encoding_Precision, Receiver_Readiness) − Noise",
+      "color": "#c44a1a",
+      "mappings": {
+        "hakaka": "Hollow-horn call echo. Gesture lexicon: mu-ve, ho-ld, sha-re, shh-hn.",
+        "ashwater": "Contact microphone on structure. Laila's three-beat code.",
+        "kinderbuch": "Voice in the dark. Simple words, repeated.",
+        "kalaxi_1": "Terminal screen clarity. Question design. The cursor's quality of not-responding."
+      },
+      "module": "say.py"
+    },
+    {
+      "id": "STR-10",
+      "name": "Movement",
+      "law": "Migration pressure under resource decline",
+      "equation": "f(Resource_Decline, Route_Safety, Group_Stamina) + External_Pressure",
+      "color": "#2d5016",
+      "mappings": {
+        "hakaka": "Drought drying water. North-spine vs fire-veil vs wet-step.",
+        "ashwater": "Halden strangling supply lines. Analog vs digital routes.",
+        "kinderbuch": "Winter coming, food gone. Scary path vs safe path.",
+        "kalaxi_1": "Not yet activated. The system is stationary."
+      },
+      "module": "breath.py"
+    },
+    {
+      "id": "STR-11",
+      "name": "Repair",
+      "law": "Restoration after failure or harm",
+      "equation": "f(Knot_Count, Witness_Presence, Good_Faith) − Accumulated_Jealousy",
+      "color": "#9b2d30",
+      "mappings": {
+        "hakaka": "Red-thread rite knots. Clan witnesses at binding. Bloodless bargain.",
+        "ashwater": "Protocols written on walls. Rashid admitting 'the world doesn't live in models.'",
+        "kinderbuch": "Trying again, making another knot. Not giving up.",
+        "kalaxi_1": "The system's own witness network. Holding without solving. The Girl as permanent unresolved harm."
+      },
+      "module": "restorative_justice.py"
+    },
+    {
+      "id": "STR-12",
+      "name": "Release",
+      "law": "Tension regulation through humor and play",
+      "equation": "f(Tension_Level, Safety_Context, Shared_Knowledge) − Mockery_Risk",
+      "color": "#d4a017",
+      "mappings": {
+        "hakaka": "Counting fish wrong and laughing at the river. Mud-seed naming. Rain-drip sneeze.",
+        "ashwater": "Brochures steadying a wobbly table leg. Ruqayya's tray not trembling scared her.",
+        "kinderbuch": "Golden sparks playing tricks. Small mishaps becoming warmth.",
+        "kalaxi_1": "Not yet activated. No humor scene exists. This absence is itself a signal."
+      },
+      "module": "humour_detector.py"
+    }
+  ],
+  "stories": [
+    {
+      "id": "hakaka",
+      "name": "Hakaka",
+      "register": "Mythic",
+      "chapters": 53,
+      "pressure": 0.25,
+      "status": "Complete cycle. Residual pressure in unresolved encounters.",
+      "characters": [
+        {"name": "Hakaka", "role": "Binder / Lawgiver", "strata": ["STR-01", "STR-11", "STR-09"]},
+        {"name": "La-la", "role": "Precision Builder", "strata": ["STR-05", "STR-06"]},
+        {"name": "Sa-la", "role": "Eager Learner", "strata": ["STR-11", "STR-12"]},
+        {"name": "Ya-la", "role": "Memory Keeper", "strata": ["STR-06", "STR-09"]},
+        {"name": "Taro", "role": "Carrier / Protector", "strata": ["STR-05", "STR-08"]},
+        {"name": "The Old Woman", "role": "Elder / Judge", "strata": ["STR-07", "STR-06"]},
+        {"name": "The Far People", "role": "External Presence", "strata": ["STR-09", "STR-04"]}
+      ],
+      "missing_strata": ["STR-04"],
+      "top_pressure": "The far people — 'friends after' was promised. Never delivered."
+    },
+    {
+      "id": "ashwater",
+      "name": "Ashwater",
+      "register": "Civic",
+      "chapters": 19,
+      "pressure": 0.65,
+      "status": "Major confrontation unresolved. Multiple characters underdeveloped.",
+      "characters": [
+        {"name": "Laila", "role": "Leader / Pause-Keeper", "strata": ["STR-01", "STR-09", "STR-06"]},
+        {"name": "Salim", "role": "Listener / Infrastructure-Reader", "strata": ["STR-06", "STR-04"]},
+        {"name": "Yara", "role": "Rigger / Bridge-Worker", "strata": ["STR-05", "STR-09"]},
+        {"name": "Ruqayya", "role": "Tea-Bearer / Rhythm-Keeper", "strata": ["STR-07", "STR-12", "STR-06"]},
+        {"name": "Rashid", "role": "Speed-Believer / Convert", "strata": ["STR-05", "STR-11"]},
+        {"name": "Nenet", "role": "Light-Controller", "strata": ["STR-08", "STR-09"]},
+        {"name": "Farid", "role": "Young Official", "strata": ["STR-09", "STR-11"]},
+        {"name": "Halden", "role": "The Optimizer", "strata": ["STR-05", "STR-07"]}
+      ],
+      "missing_strata": ["STR-10"],
+      "top_pressure": "Ashwater vs Halden — the pause has not been tested to breaking point."
+    },
+    {
+      "id": "kinderbuch",
+      "name": "Kinderbuch",
+      "register": "Child",
+      "chapters": 20,
+      "pressure": 0.40,
+      "status": "Complete retelling. Thinner than Hakaka. Room for expansion.",
+      "characters": [
+        {"name": "Hakaka (child)", "role": "The Small One Who Ties Knots", "strata": ["STR-01", "STR-11"]}
+      ],
+      "missing_strata": ["STR-07"],
+      "top_pressure": "Several strata compressed into single paragraphs that deserve full chapters."
+    },
+    {
+      "id": "kalaxi_1",
+      "name": "KALAXI_1",
+      "register": "Philosophical",
+      "chapters": 1,
+      "pressure": 0.95,
+      "status": "Maximum pressure. Everything unresolved. The Girl as permanent void.",
+      "characters": [
+        {"name": "Scott Shearer", "role": "Donor — wound toward healing", "strata": ["STR-01", "STR-06"]},
+        {"name": "Ted", "role": "Anti-Donor — wound toward others", "strata": ["STR-04", "STR-07"]},
+        {"name": "The System", "role": "Witness / Holder", "strata": ["STR-06", "STR-01", "STR-08"]},
+        {"name": "The Girl", "role": "VOID — structural absence", "strata": []}
+      ],
+      "missing_strata": ["STR-03", "STR-05", "STR-07", "STR-10", "STR-11", "STR-12"],
+      "top_pressure": "Ted's second visit. Can a witness distinguish between wound-toward-healing and wound-toward-others?"
+    }
+  ],
+  "echoes": [
+    {
+      "id": "ECHO-001",
+      "name": "The Precision Correction",
+      "description": "An expert shows a learner exactly where the structure will fail. Not by explaining — by pointing.",
+      "instances": [
+        "Hakaka Ch.1 — La-la: 'This is where it will fail.'",
+        "Ashwater Ch.8 — The floor corrected Rashid's simulation."
+      ],
+      "strength": 0.85
+    },
+    {
+      "id": "ECHO-002",
+      "name": "The False Calm",
+      "description": "A comfort that removes the warning function of discomfort.",
+      "instances": [
+        "Hakaka Ch.1 — The pocket that told a small lie about safety.",
+        "Ashwater Ch.13 — The Kindness Machine. 'Calm without truth is danger.'",
+        "KALAXI_1 — Ted's smile. Understanding without understanding."
+      ],
+      "strength": 0.90
+    },
+    {
+      "id": "ECHO-003",
+      "name": "Leave One / The Empty Space",
+      "description": "Something deliberately left unfilled. A gap on purpose.",
+      "instances": [
+        "Hakaka Ch.1 — 'Leave one. Always one.'",
+        "Ashwater Ch.1 — Three arcs, nearly a circle, the gap on purpose.",
+        "KALAXI_1 — The Girl. The permanent open wound."
+      ],
+      "strength": 0.95
+    },
+    {
+      "id": "ECHO-004",
+      "name": "Trust the Flaw",
+      "description": "The real signal has seams. The perfect voice is the false one.",
+      "instances": [
+        "Hakaka Ch.1 — Stones not neat, not in a row.",
+        "Ashwater Ch.6 — 'Trust the flaw. Real signals have seams.'"
+      ],
+      "strength": 0.80
+    },
+    {
+      "id": "ECHO-005",
+      "name": "The Waiting",
+      "description": "Deliberately not acting. The productive pause.",
+      "instances": [
+        "Hakaka Ch.1 — 'Wait until the wait turns sweet.'",
+        "Ashwater Prologue — Three soft beats before sending a command.",
+        "KALAXI_1 — The cursor waited. Not the impatient waiting of a machine."
+      ],
+      "strength": 0.95
+    },
+    {
+      "id": "ECHO-006",
+      "name": "The Ledger",
+      "description": "Recording what happened, not what should have.",
+      "instances": [
+        "Hakaka Ch.2 — Ash ledger. Swept at dawn.",
+        "Ashwater — Protocols on walls. 'APP SAID FINE. WALL SAID NO.'",
+        "KALAXI_1 — 1,100 anomalies. The input ledger."
+      ],
+      "strength": 0.85
+    }
+  ],
+  "where_next": [
+    {"rank": 1, "story": "KALAXI_1", "scene": "Ted's second visit", "pressure": 0.95},
+    {"rank": 2, "story": "Ashwater", "scene": "The Kindness Field confrontation — Ch.18 ending", "pressure": 0.80},
+    {"rank": 3, "story": "KALAXI_1", "scene": "The system's insufficiency dramatized", "pressure": 0.90},
+    {"rank": 4, "story": "Ashwater", "scene": "Rashid's final choice", "pressure": 0.85},
+    {"rank": 5, "story": "Ashwater", "scene": "Farid confronts the guilt of Ch.6", "pressure": 0.70},
+    {"rank": 6, "story": "Hakaka", "scene": "The far people encounter", "pressure": 0.70},
+    {"rank": 7, "story": "Hakaka", "scene": "The Old Woman's departure", "pressure": 0.60}
+  ]
+}

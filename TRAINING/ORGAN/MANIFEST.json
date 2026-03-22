@@ -8,9 +8,9 @@
       "bytes": 2291824
     },
     "sft": {
-      "entries": 7057,
-      "words": 233933,
-      "bytes": 5816321
+      "entries": 7077,
+      "words": 234233,
+      "bytes": 5820321
     },
     "dpo": {
       "entries": 85,
@@ -19,7 +19,7 @@
       "bytes": 24753
     }
   },
-  "total_entries": 16830,
+  "total_entries": 16850,
   "total_pure_words": 563874,
   "invalid_entries": 0,
   "zakaka_merged": {

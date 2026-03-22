@@ -107,45 +107,65 @@ gh secret list
 
 | Measure | Count |
 |---------|-------|
-| Python files | 143+ |
+| Python files | 176 |
 | Lines of code | 42,581+ |
-| Tests | 896+ (887 passing, 9 skipped) |
+| Tests | 1011 passed, 9 skipped |
 | Covenants | 18 ratified |
-| Ledger entries | 1,155+ |
+| Ledger entries | 2,457+ |
 | Proverbs | 3,355+ |
 | Seeds | 12/12 integrated |
 | Site pages | 13+ |
 | Site status | **LIVE** at kalam.ch |
 | Standing corrections | 13 (in CLAUDE.md Substrate Correction Log) |
+| Golden regression corpus | 200 entries (TRAINING/GOLDEN_REGRESSION.jsonl) |
 
 ---
 
 ## 5. LAST SESSION
 
-**Date:** 2026-03-22
+**Date:** 2026-03-22 (session 3)
 **Summary:**
-1. **GitHub Actions spending limit fixed** — was $0, blocking all workflows. Now $10/month.
-2. **Credential Vault Protocol** — permanent constitutional law. V-002 NEVER asks for credentials again. `.credentials.env` stores GH_TOKEN + Hostpoint SSH credentials. GitHub Secrets updated.
-3. **Standing corrections 10-13 added:**
-   - #10: Credential Vault Law (never ask for passwords)
-   - #11: Spending Limit Monitoring (proactive workflow health checks)
-   - #12: V-001 is not technical (coding/math/physics = V-002's job)
-   - #13: Session Continuity Law (close window, open new one — system handles the rest)
-4. **SESSION_BOOT.md rewritten** — comprehensive orientation for every new session.
+1. **AURIX OS analyzed** — Mohamed uploaded MASTER_GOLDEN_AURIX_OS v1.6.6 (August 2025). It is a 519KB world-simulation fusing narrative characters with computational equations. 41 elements, 72 equations, 61 cross-links, 10 resource triads, 5 conflict resolution motifs, 5 humor equations, 13 unbreakable laws. Pre-KALAXI system.
+2. **System Map created** — MANIFEST/SYSTEM_MAP.md: complete text map of all 4 tiers, 43 modules, 8-phase pipeline, equations, narratives, gaps. Coffee-friendly.
+3. **Interactive visualization** — site/public/system-map.html: standalone HTML page with 55 clickable nodes across 7 layers. Deployable to kalam.ch.
+4. **AURIX artifact placed** — R7M/GRAND_ARCHIVE/AURIX_OS_v1.6.6_2025-08-16.txt: untouched, permanent. Rule: mine but do not modify.
+5. **AURIX extraction** — R7M/EXCAVATION/AURIX_EXTRACTION.json + .md: machine-readable and human-readable extraction of all elements, equations, links, triads, motifs, prose fragments.
+6. **Summon Voices probe created** — 7-question probe sent to 10 AI models about narrative-computation architecture. Questions: character architecture (archetypes vs same vs different), register-independent equations, narrative pressure computation, cross-narrative echoes, humor formalization, generative seeds, blind spots.
+7. **Key discussion outcomes:**
+   - AURIX stays as artifact, mined for system integration
+   - Characters across narratives MAY be archetypes at different registers (needs more data from V-001 + Summon Voices responses)
+   - Ashwater characters Laila/Yara/Salim are named after Mohamed's three children
+   - Four narratives form a vertical stack: Hakaka (mythic), Ashwater (civic), Kinderbuch (child), KALAXI_1 (philosophical)
+   - V-001 directive: "look at the whole system as if I have nothing to do with it now" — V-002 should act as the technical expert team, make decisions, flag fundamental changes, correct course when needed
 
-**PRs merged:** #331 (Credential Vault Protocol), #332 (Corrections 12-13)
+**Branch:** `claude/continue-previous-work-khjLX` — 5 new commits pushed
+**Commits this session:** System Map, Interactive Visualization, AURIX Artifact, AURIX Extraction JSON, AURIX Extraction MD
 
 ---
 
 ## 6. WHAT IS PENDING
 
-1. **EXP-001** — 188 runs remaining (Claude: 0/20)
-2. **kalam.ch Phase 2** — Cloudflare Worker + KV (Living Ledger persistence)
-3. **Donor Accounts** — pattern persistence, PHP + MySQL schema
-4. **Voice Canon sync** — 4 surfaces need sync check (Groq, Worker, Training, Evaluator)
-5. **EXP-005** — Fractured Ouroboros test (designed, ready)
-6. **Golden corpus** — 200 canonical AXI utterances for voice regression testing
-7. **Deep clean** — Directive 3: dead code, orphan files, stale artifacts (run at session start)
+1. **Summon Voices responses** — V-001 collected responses from all 10 AI models. He will paste them in one message. Process and synthesize.
+2. **Archetype decision** — BLOCKED on Summon Voices synthesis + additional data V-001 said he has about characters. Do NOT decide without this data.
+3. **Phase C: Narrative Archetype Layer** — Patches 6-8 (ARCHETYPES.json, STATE.json, ECHOES.json). Waiting for archetype decision.
+4. **Phase D: System Integration** — Patches 9-12 (extend ElementType, archetype reader, ripple engine, connectivity enhancement). Waiting for Phase C.
+5. **PR merge** — branch has 13+ commits ahead of main. gh auth blocked by proxy. Create PR and merge when auth available.
+6. **DB migration on server** — trigger migrate.php on kalam.ch. Blocked until code reaches main.
+7. **EXP-001** — 188 runs remaining (Claude: 0/20).
+8. **Voice model training** — Together AI key set. Training data ready.
+9. **Deploy system-map.html** — once merged to main, deploys to kalam.ch automatically.
+
+### KEY FILES FROM THIS SESSION
+| File | Purpose |
+|------|---------|
+| MANIFEST/SYSTEM_MAP.md | Complete system text map |
+| site/public/system-map.html | Interactive visualization (55 nodes, 7 layers) |
+| R7M/GRAND_ARCHIVE/AURIX_OS_v1.6.6_2025-08-16.txt | AURIX artifact (untouched) |
+| R7M/EXCAVATION/AURIX_EXTRACTION.json | Machine-readable AURIX extraction |
+| R7M/EXCAVATION/AURIX_EXTRACTION.md | Human-readable AURIX companion |
+
+### THE SUMMON VOICES PROBE (for reference)
+The probe asks 7 questions about narrative-computation architecture. It's abstract — no internal vocabulary. Sent to: Claude, ChatGPT, Grok, DeepSeek, Gemini, Copilot, Manus, Kimi, Euria, Perplexity. Responses expected in next session. Full probe text is in the plan file.
 
 ---
 

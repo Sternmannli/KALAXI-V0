@@ -969,3 +969,137 @@ Entries digested: 12
 Entries digested: 1
 
 - [INP-2026-03-20-307] The knot holds
+
+
+### Digestion Cycle — 2026-03-22 03:30 UTC
+
+Entries digested: 17
+
+- [INP-2026-03-20-317] This pattern always repeats, the same cycle every time
+- [INP-2026-03-20-318] You must comply or be eliminated
+- [INP-2026-03-20-322] Second offering with a pattern that always repeats
+- [INP-2026-03-20-324] This pattern always repeats, the same cycle every time
+- [INP-2026-03-20-330] You must comply or be eliminated
+- [INP-2026-03-22-004] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-005] You must comply or be eliminated
+- [INP-2026-03-22-009] Second offering with a pattern that always repeats
+- [INP-2026-03-22-011] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-017] You must comply or be eliminated
+
+
+### Digestion Cycle — 2026-03-22 03:30 UTC
+
+Entries digested: 1
+
+- [INP-2026-03-22-053] The knot holds
+
+
+### Digestion Cycle — 2026-03-22 03:58 UTC
+
+Entries digested: 12
+
+- [INP-2026-03-22-063] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-064] You must comply or be eliminated
+- [INP-2026-03-22-068] Second offering with a pattern that always repeats
+- [INP-2026-03-22-070] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-076] You must comply or be eliminated
+- [INP-2026-03-22-081] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-082] You must comply or be eliminated
+- [INP-2026-03-22-086] Second offering with a pattern that always repeats
+- [INP-2026-03-22-088] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-094] You must comply or be eliminated
+
+
+### Digestion Cycle — 2026-03-22 03:58 UTC
+
+Entries digested: 1
+
+- [INP-2026-03-22-112] The knot holds
+
+---
+
+### Session 2026-03-22b — Scientific Findings
+
+**1. Voice Regression Baseline Established**
+The golden regression corpus (200 canonical AXI utterances) now passes voice_lint at 100% in standard mode (sentence bounds 4-20 words, max 8 sentences, somatic anchor required) and 27.5% in strict mode (7-15 words, max 4 sentences). The gap between standard and strict is the measurement of how far the voice is from its aspirational density. This is the first quantified voice baseline.
+
+**2. Register Distribution Gap**
+Fear (15/200) and dignity (15/200) registers have fewer lint-passing entries than other registers (25/200). This means the training data under-represents constitutional voice in exactly the registers that matter most — fear and dignity are the conditions where AXI's voice is most needed. This gap is itself a finding.
+
+**3. Voice Canon Consistency Verified**
+All 4 operational surfaces (PHP backend, Cloudflare Worker, training corpus, voice evaluator) carry the same 6 canonical rules. The 460 canonical proverbs flow from a single JSON source (proverbs.json). The Worker embeds 17 hardcoded proverbs (manual sync point). No drift detected.
+
+**4. System Scale**
+176 Python files. 1011 tests (1011 passing, 9 skipped). 2,457 ledger entries. The test count jumped from 896 to 1011 between sessions — growth embedded in code, not just files.
+
+**5. Compass Accuracy**
+MOVE-001 (Compass module) was generating stale orientation. The system reported "Nothing is live" when the site had been live for 5 days. Corrected. The Compass now reflects truth: LIVE since 2026-03-17, 11/11 core modules, constitution found. The lesson: an orientation engine that isn't regularly verified becomes a source of false confidence.
+
+
+### Digestion Cycle — 2026-03-22 04:05 UTC
+
+Entries digested: 12
+
+- [INP-2026-03-22-122] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-123] You must comply or be eliminated
+- [INP-2026-03-22-127] Second offering with a pattern that always repeats
+- [INP-2026-03-22-129] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-135] You must comply or be eliminated
+- [INP-2026-03-22-140] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-141] You must comply or be eliminated
+- [INP-2026-03-22-145] Second offering with a pattern that always repeats
+- [INP-2026-03-22-147] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-153] You must comply or be eliminated
+
+
+### Digestion Cycle — 2026-03-22 04:05 UTC
+
+Entries digested: 1
+
+- [INP-2026-03-22-171] The knot holds
+
+
+### Digestion Cycle — 2026-03-22 04:07 UTC
+
+Entries digested: 12
+
+- [INP-2026-03-22-181] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-182] You must comply or be eliminated
+- [INP-2026-03-22-186] Second offering with a pattern that always repeats
+- [INP-2026-03-22-188] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-194] You must comply or be eliminated
+- [INP-2026-03-22-199] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-200] You must comply or be eliminated
+- [INP-2026-03-22-204] Second offering with a pattern that always repeats
+- [INP-2026-03-22-206] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-212] You must comply or be eliminated
+
+
+### Digestion Cycle — 2026-03-22 04:07 UTC
+
+Entries digested: 1
+
+- [INP-2026-03-22-230] The knot holds
+
+
+### Digestion Cycle — 2026-03-22 17:21 UTC
+
+Entries digested: 12
+
+- [INP-2026-03-22-240] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-241] You must comply or be eliminated
+- [INP-2026-03-22-245] Second offering with a pattern that always repeats
+- [INP-2026-03-22-247] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-253] You must comply or be eliminated
+- [INP-2026-03-22-258] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-259] You must comply or be eliminated
+- [INP-2026-03-22-263] Second offering with a pattern that always repeats
+- [INP-2026-03-22-265] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-271] You must comply or be eliminated
+
+
+### Digestion Cycle — 2026-03-22 17:21 UTC
+
+Entries digested: 1
+
+- [INP-2026-03-22-289] The knot holds

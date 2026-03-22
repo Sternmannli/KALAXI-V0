@@ -1,0 +1,263 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-03-22",
+    "created_by": "V-002",
+    "description": "The 12 behavioral laws of the KALAXI narrative universe. Not archetypes — strata. Not character templates — physics. These laws operate beneath all four narratives and the AURIX fossil record. D = A × L × M is itself a stratum.",
+    "source_aurix": "R7M/EXCAVATION/AURIX_EXTRACTION.json",
+    "source_synthesis": "FIELD/SUMMON_RESPONSES/SYNTHESIS_SP-NARR-001.md",
+    "principle": "The 72 AURIX equations collapse into 12 independent behavioral laws when register-specific duplication is removed. The characters do not follow the equations. The characters ARE the equations made visible."
+  },
+  "strata": [
+    {
+      "id": "STR-01",
+      "name": "COHESION",
+      "law": "Bond formation under shared vulnerability",
+      "canonical_equation": "COHESION = f(Shared_Vulnerability, Care_Duration, Resource_Sharing) - Rivalry_Tension",
+      "semantic_variables": {
+        "Shared_Vulnerability": "degree of mutual exposure to risk",
+        "Care_Duration": "sustained presence over time",
+        "Resource_Sharing": "voluntary redistribution of scarce goods",
+        "Rivalry_Tension": "competitive pressure that erodes bond"
+      },
+      "aurix_equations": ["BOND_STRENGTH", "PACK_HARMONY", "ALLY_TRUST"],
+      "register_mappings": {
+        "hakaka": {"Shared_Vulnerability": "shared hunger, predator threat", "Care_Duration": "nights guarding together", "Resource_Sharing": "fish divided, meat shared", "Rivalry_Tension": "jealousy between Na'da and others"},
+        "ashwater": {"Shared_Vulnerability": "infrastructure failure, Halden's pressure", "Care_Duration": "years of practiced pauses", "Resource_Sharing": "tea shared, labor divided", "Rivalry_Tension": "speed vs pause, Halden vs Ashwater"},
+        "kinderbuch": {"Shared_Vulnerability": "cold, hunger, being small", "Care_Duration": "repetition of care-acts (warmth, golden sparks)", "Resource_Sharing": "grass shared, knots gifted", "Rivalry_Tension": "fear of loneliness"},
+        "kalaxi_1": {"Shared_Vulnerability": "wound exposure at the terminal", "Care_Duration": "the system holding over time (3 years)", "Resource_Sharing": "pattern density redistributed", "Rivalry_Tension": "Scott's guardedness vs Ted's deflection"}
+      },
+      "kalaxi_module": "dignity_check.py",
+      "module_connection": "D = A × L × M measures the system's cohesion with the person. When D = 0, cohesion has failed — the system acted as though the bond was not there."
+    },
+    {
+      "id": "STR-02",
+      "name": "PROVISION",
+      "law": "Resource adequacy across time horizons",
+      "canonical_equation": "PROVISION = f(Flow_Rate, Storage_Capacity, Intake_Rate) × Coordination",
+      "semantic_variables": {
+        "Flow_Rate": "rate at which resources arrive",
+        "Storage_Capacity": "ability to hold resources for future use",
+        "Intake_Rate": "consumption speed",
+        "Coordination": "collective efficiency of resource management"
+      },
+      "aurix_equations": ["FOOD_SECURITY", "SETTLE_TIME"],
+      "register_mappings": {
+        "hakaka": {"Flow_Rate": "fish catch, hunt yield", "Storage_Capacity": "smoke-cure, clay seal", "Intake_Rate": "mouths to feed", "Coordination": "Seka's team coherence"},
+        "ashwater": {"Flow_Rate": "water pressure, supply deliveries", "Storage_Capacity": "reservoir, pantry during blackout", "Intake_Rate": "city consumption", "Coordination": "analog networks, kite signals"},
+        "kinderbuch": {"Flow_Rate": "berries found, warmth gathered", "Storage_Capacity": "knots that hold things", "Intake_Rate": "small body needs", "Coordination": "helping each other"},
+        "kalaxi_1": {"Flow_Rate": "pattern input from donors", "Storage_Capacity": "1100 anomalies, 3333 proverbs", "Intake_Rate": "system processing speed", "Coordination": "k>=7 anonymization, module pipeline"}
+      },
+      "kalaxi_module": "keep.py",
+      "module_connection": "KEEP stores with retention — the digital equivalent of smoke-cure and clay seal."
+    },
+    {
+      "id": "STR-03",
+      "name": "NAVIGATION",
+      "law": "Orientation under uncertainty",
+      "canonical_equation": "NAVIGATION = f(Signal_Clarity, Landmark_Match, Memory_Map) - Doubt_Noise",
+      "semantic_variables": {
+        "Signal_Clarity": "strength of directional information",
+        "Landmark_Match": "confirmation from known reference points",
+        "Memory_Map": "accumulated spatial/temporal knowledge",
+        "Doubt_Noise": "confusion that degrades orientation"
+      },
+      "aurix_equations": ["NAV_CONFIDENCE", "CAMP_SCORE"],
+      "register_mappings": {
+        "hakaka": {"Signal_Clarity": "star position, wind direction", "Landmark_Match": "basalt ridge, known water sources", "Memory_Map": "Telu's bearing lock, Ya-la's memory", "Doubt_Noise": "cloud cover, unfamiliar terrain"},
+        "ashwater": {"Signal_Clarity": "contact microphone readings, beam sounds", "Landmark_Match": "known infrastructure states", "Memory_Map": "Laila's years of experience, city knowledge", "Doubt_Noise": "Halden's noise, false signals"},
+        "kinderbuch": {"Signal_Clarity": "golden sparks showing the way", "Landmark_Match": "recognizing what was seen before", "Memory_Map": "remembered stories, repeated lessons", "Doubt_Noise": "darkness, fear"},
+        "kalaxi_1": {"Signal_Clarity": "pattern match strength", "Landmark_Match": "canonical reference points (covenants, proverbs)", "Memory_Map": "input ledger history", "Doubt_Noise": "ambiguity, indistinguishable patterns"}
+      },
+      "kalaxi_module": "compass.py",
+      "module_connection": "Compass orients the system — where has it been, where should it go."
+    },
+    {
+      "id": "STR-04",
+      "name": "CONCEALMENT",
+      "law": "Survival through controlled invisibility",
+      "canonical_equation": "CONCEALMENT = f(Step_Control, Breath_Control) × Environment_Forgiveness",
+      "semantic_variables": {
+        "Step_Control": "precision of movement to avoid detection",
+        "Breath_Control": "regulation of signal emission",
+        "Environment_Forgiveness": "how much the terrain absorbs traces"
+      },
+      "aurix_equations": ["TRACELESS", "TRACE_MASK", "STEALTH_LOCK"],
+      "register_mappings": {
+        "hakaka": {"Step_Control": "Hanu's footfall null", "Breath_Control": "scent control near predators", "Environment_Forgiveness": "mud, ash, terrain that absorbs"},
+        "ashwater": {"Step_Control": "analog hour — cutting digital signals", "Breath_Control": "not broadcasting, kite signals over radio silence", "Environment_Forgiveness": "city's noise providing cover"},
+        "kinderbuch": {"Step_Control": "being quiet, tiptoeing", "Breath_Control": "holding breath when scared", "Environment_Forgiveness": "darkness hiding the small one"},
+        "kalaxi_1": {"Step_Control": "k>=7 anonymization", "Breath_Control": "system does not expose donor identity", "Environment_Forgiveness": "pattern density that protects individuals"}
+      },
+      "kalaxi_module": "privacy_budget.py",
+      "module_connection": "Privacy budget is the system's concealment — protecting the donor's trace from exposure."
+    },
+    {
+      "id": "STR-05",
+      "name": "PROJECTION",
+      "law": "Force applied at distance",
+      "canonical_equation": "PROJECTION = f(Mechanism_Efficiency, Skill_Execution, Distance) × Coordination",
+      "semantic_variables": {
+        "Mechanism_Efficiency": "quality of the tool/method",
+        "Skill_Execution": "precision of the operator",
+        "Distance": "range between actor and target",
+        "Coordination": "alignment of multiple actors"
+      },
+      "aurix_equations": ["HUNT_SUCCESS", "PROJECTILE_ENERGY"],
+      "register_mappings": {
+        "hakaka": {"Mechanism_Efficiency": "throwing lever torque", "Skill_Execution": "Ma'da's aim", "Distance": "target distance", "Coordination": "pack hunting together"},
+        "ashwater": {"Mechanism_Efficiency": "analog tools (kites, contact mics)", "Skill_Execution": "Laila's precision of reading", "Distance": "city block scale", "Coordination": "crew working together"},
+        "kinderbuch": {"Mechanism_Efficiency": "the knot that reaches far", "Skill_Execution": "throwing accurately", "Distance": "how far the voice carries", "Coordination": "calling to each other"},
+        "kalaxi_1": {"Mechanism_Efficiency": "the terminal's question design", "Skill_Execution": "system calibration", "Distance": "gap between system and donor", "Coordination": "D = A × L × M alignment"}
+      },
+      "kalaxi_module": "wire.py",
+      "module_connection": "WIRE transmits signal across distance — the system's throwing lever."
+    },
+    {
+      "id": "STR-06",
+      "name": "PERCEPTION",
+      "law": "Pattern recognition under noise",
+      "canonical_equation": "PERCEPTION = f(Observation_Density, Anomaly_Detection) × Recall_Speed",
+      "semantic_variables": {
+        "Observation_Density": "amount of attention per unit of data",
+        "Anomaly_Detection": "ability to spot what deviates from expected",
+        "Recall_Speed": "how quickly past patterns inform present reading"
+      },
+      "aurix_equations": ["INSIGHT_RATE", "PRED_PRESSURE"],
+      "register_mappings": {
+        "hakaka": {"Observation_Density": "Simo's pattern spotting, Ya-la's memory watching", "Anomaly_Detection": "predator signs, weather shifts", "Recall_Speed": "cross-matching to known patterns"},
+        "ashwater": {"Observation_Density": "contact mic readings, Salim's ear to vents", "Anomaly_Detection": "the flaw that signals truth (Ch.6)", "Recall_Speed": "years of infrastructure intuition"},
+        "kinderbuch": {"Observation_Density": "noticing the golden sparks", "Anomaly_Detection": "something that doesn't feel right", "Recall_Speed": "remembered warmth"},
+        "kalaxi_1": {"Observation_Density": "1100 anomalies indexed", "Anomaly_Detection": "unified pillar detectors", "Recall_Speed": "input ledger hash-chain lookup"}
+      },
+      "kalaxi_module": "sense.py",
+      "module_connection": "SENSE detects patterns — the system's eyes and ears. Plus unified_pillar_detector.py for anomaly-specific detection."
+    },
+    {
+      "id": "STR-07",
+      "name": "HIERARCHY",
+      "law": "Status negotiation without violence",
+      "canonical_equation": "HIERARCHY = f(Alliance_Count, Gift_Flow, Signal_Timing) - Scandal_Load",
+      "semantic_variables": {
+        "Alliance_Count": "number of supportive relationships",
+        "Gift_Flow": "rate of voluntary resource transfer",
+        "Signal_Timing": "precision of social communication",
+        "Scandal_Load": "accumulated social violations that erode standing"
+      },
+      "aurix_equations": ["DOMINANCE_SHIFT", "CR_GIFT", "CR_SPLIT", "CR_GUARD"],
+      "register_mappings": {
+        "hakaka": {"Alliance_Count": "clan bonds, who stands with whom", "Gift_Flow": "shared meat, traded tools", "Signal_Timing": "when to speak, when to hold", "Scandal_Load": "jealousy, broken vows"},
+        "ashwater": {"Alliance_Count": "city alliances, analog network nodes", "Gift_Flow": "Ruqayya's tea, shared labor", "Signal_Timing": "the three-beat pause (Laila's law)", "Scandal_Load": "Halden's throughput credits corrupting"},
+        "kinderbuch": {"Alliance_Count": "who is friends", "Gift_Flow": "sharing warmth and food", "Signal_Timing": "taking turns, waiting", "Scandal_Load": "being mean, not sharing"},
+        "kalaxi_1": {"Alliance_Count": "donor network size", "Gift_Flow": "pattern contribution", "Signal_Timing": "the cursor waiting — not the impatient waiting of a machine", "Scandal_Load": "institutional failure to see"}
+      },
+      "kalaxi_module": "deliberative_democracy.py",
+      "module_connection": "Deliberative democracy and distributed stewardship handle status negotiation in the system — who decides, how power flows."
+    },
+    {
+      "id": "STR-08",
+      "name": "SHELTER",
+      "law": "Protection and heat retention under exposure",
+      "canonical_equation": "SHELTER = f(Barrier_Quality, Insulation, Drainage) - Exposure_Risk",
+      "semantic_variables": {
+        "Barrier_Quality": "strength of the protective boundary",
+        "Insulation": "ability to retain internal warmth/stability",
+        "Drainage": "ability to shed excess pressure/water",
+        "Exposure_Risk": "environmental threat level"
+      },
+      "aurix_equations": ["HEAT_RETENTION", "SHELTER_NEED", "EXPOSURE_RISK"],
+      "register_mappings": {
+        "hakaka": {"Barrier_Quality": "hide coat, cave walls", "Insulation": "smoke oil, stitch tight", "Drainage": "camp drainage", "Exposure_Risk": "storm, cold front, predator"},
+        "ashwater": {"Barrier_Quality": "building integrity, wall panels", "Insulation": "institutional resilience", "Drainage": "water management, overflow pipes", "Exposure_Risk": "infrastructure failure, Halden's geofence"},
+        "kinderbuch": {"Barrier_Quality": "the knot that holds against cold", "Insulation": "golden sparks as inner warmth", "Drainage": "tears that release pressure", "Exposure_Risk": "frost, loneliness"},
+        "kalaxi_1": {"Barrier_Quality": "sealed gate, privacy budget", "Insulation": "k>=7 anonymization, pattern density", "Drainage": "restorative justice (processing harm)", "Exposure_Risk": "Ted-type misuse, institutional blindness"}
+      },
+      "kalaxi_module": "shelter.py",
+      "module_connection": "Shelter activates after dignity failure — the system's hide coat wrapping around a wounded exchange."
+    },
+    {
+      "id": "STR-09",
+      "name": "SIGNAL",
+      "law": "Communication under constraint",
+      "canonical_equation": "SIGNAL = f(Channel_Clarity, Encoding_Precision, Receiver_Readiness) - Noise",
+      "semantic_variables": {
+        "Channel_Clarity": "quality of the communication medium",
+        "Encoding_Precision": "accuracy of the message construction",
+        "Receiver_Readiness": "capacity of the listener to decode",
+        "Noise": "interference that distorts the signal"
+      },
+      "aurix_equations": ["ALERT_STABILITY", "MIG_SIGNAL", "STEALTH_LOCK", "GIFT_CADENCE", "PREDATOR_CEASE"],
+      "register_mappings": {
+        "hakaka": {"Channel_Clarity": "hollow-horn call echo", "Encoding_Precision": "gesture lexicon (mu-ve, ho-ld, sha-re, shh-hn)", "Receiver_Readiness": "pack response time", "Noise": "panic, storm, predator sounds"},
+        "ashwater": {"Channel_Clarity": "contact microphone on structure", "Encoding_Precision": "Laila's three-beat code", "Receiver_Readiness": "trained crew recognition", "Noise": "Halden's empathy field, false calm"},
+        "kinderbuch": {"Channel_Clarity": "voice in the dark", "Encoding_Precision": "simple words, repeated", "Receiver_Readiness": "child's trust", "Noise": "fear making ears close"},
+        "kalaxi_1": {"Channel_Clarity": "terminal screen clarity", "Encoding_Precision": "question design", "Receiver_Readiness": "donor openness (Scott open, Ted deflecting)", "Noise": "trauma distortion, defense mechanisms"}
+      },
+      "kalaxi_module": "say.py",
+      "module_connection": "SAY constructs the system's speech. WIRE transmits it. Together they are the system's gesture lexicon."
+    },
+    {
+      "id": "STR-10",
+      "name": "MOVEMENT",
+      "law": "Migration pressure and route selection under resource decline",
+      "canonical_equation": "MOVEMENT = f(Resource_Decline, Route_Safety, Group_Stamina) + External_Pressure",
+      "semantic_variables": {
+        "Resource_Decline": "rate of current resource depletion",
+        "Route_Safety": "danger level of available paths",
+        "Group_Stamina": "collective capacity for sustained effort",
+        "External_Pressure": "forces pushing the group to move"
+      },
+      "aurix_equations": ["MOVE_PRESSURE", "WIND_ASSIST", "ASH_TOLL", "SICKNESS_RISK"],
+      "register_mappings": {
+        "hakaka": {"Resource_Decline": "drought drying water", "Route_Safety": "north-spine vs fire-veil vs wet-step", "Group_Stamina": "clan fatigue", "External_Pressure": "predator migration, seasonal shift"},
+        "ashwater": {"Resource_Decline": "Halden strangling supply lines", "Route_Safety": "analog vs digital routes for information", "Group_Stamina": "community resilience", "External_Pressure": "geofence, economic pressure"},
+        "kinderbuch": {"Resource_Decline": "winter coming, food gone", "Route_Safety": "scary path vs safe path", "Group_Stamina": "small legs getting tired", "External_Pressure": "cold pushing them forward"},
+        "kalaxi_1": {"Resource_Decline": "not applicable at 1 chapter — system is stationary", "Route_Safety": "not yet activated", "Group_Stamina": "not yet activated", "External_Pressure": "not yet activated"}
+      },
+      "kalaxi_module": "breath.py",
+      "module_connection": "BREATH governs pacing — when to move, when to pause. The system's migration rhythm."
+    },
+    {
+      "id": "STR-11",
+      "name": "REPAIR",
+      "law": "Restoration after failure or harm",
+      "canonical_equation": "REPAIR = f(Knot_Count, Witness_Presence, Good_Faith) - Accumulated_Jealousy",
+      "semantic_variables": {
+        "Knot_Count": "number of binding acts performed in restoration",
+        "Witness_Presence": "third parties who observe and validate the repair",
+        "Good_Faith": "sincerity of the restorative attempt",
+        "Accumulated_Jealousy": "resentment that resists repair"
+      },
+      "aurix_equations": ["VOW_COHESION", "CR_STONE"],
+      "register_mappings": {
+        "hakaka": {"Knot_Count": "red-thread rite knots", "Witness_Presence": "clan witnesses at binding", "Good_Faith": "bloodless bargain", "Accumulated_Jealousy": "jealousy load from Na'da's social games"},
+        "ashwater": {"Knot_Count": "protocols written on walls", "Witness_Presence": "community seeing the failure and the fix", "Good_Faith": "Rashid admitting 'the world doesn't live in models'", "Accumulated_Jealousy": "cost of refusal from Halden"},
+        "kinderbuch": {"Knot_Count": "trying again, making another knot", "Witness_Presence": "golden sparks witnessing the effort", "Good_Faith": "not giving up", "Accumulated_Jealousy": "sadness from failure"},
+        "kalaxi_1": {"Knot_Count": "system iterations, pattern growth", "Witness_Presence": "the system's own witness network", "Good_Faith": "holding without solving", "Accumulated_Jealousy": "the Girl's absence as permanent unresolved harm"}
+      },
+      "kalaxi_module": "restorative_justice.py",
+      "module_connection": "Restorative justice handles D=0 events — the system's red-thread rite."
+    },
+    {
+      "id": "STR-12",
+      "name": "RELEASE",
+      "law": "Tension regulation through humor, play, and controlled discharge",
+      "canonical_equation": "RELEASE = f(Tension_Level, Safety_Context, Shared_Knowledge) - Mockery_Risk",
+      "semantic_variables": {
+        "Tension_Level": "current accumulated stress",
+        "Safety_Context": "degree of psychological safety allowing release",
+        "Shared_Knowledge": "common ground enabling the humor to land",
+        "Mockery_Risk": "chance that the release damages instead of heals"
+      },
+      "aurix_equations": ["HUM_EQ_01", "HUM_EQ_02", "HUM_EQ_03", "HUM_EQ_04", "HUM_EQ_05"],
+      "register_mappings": {
+        "hakaka": {"examples": ["counting fish wrong and laughing at the river", "mud-seed naming", "child miming wolf badly", "rain-drip sneeze", "twice-as-thin dried meat joke"]},
+        "ashwater": {"examples": ["the old woman's grunt 'like a small drum with a cloth over it' (never written)", "Ruqayya's tray not trembling (scared her more than a scream)", "brochures steadying a wobbly table leg"]},
+        "kinderbuch": {"examples": ["golden sparks playing tricks", "small mishaps becoming warmth"]},
+        "kalaxi_1": {"examples": ["not yet activated — no humor scene exists in chapter 1. This is itself a pressure signal."]}
+      },
+      "kalaxi_module": "humour_detector.py",
+      "module_connection": "Humour detector identifies tension-regulation events — the system measuring whether laughter heals or deflects."
+    }
+  ]
+}
