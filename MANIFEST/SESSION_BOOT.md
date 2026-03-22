@@ -109,7 +109,7 @@ gh secret list
 |---------|-------|
 | Python files | 176 |
 | Lines of code | 42,581+ |
-| Tests | 1006 passed, 9 skipped |
+| Tests | 1011 passed, 9 skipped |
 | Covenants | 18 ratified |
 | Ledger entries | 2,457+ |
 | Proverbs | 3,355+ |
@@ -133,20 +133,20 @@ gh secret list
 6. **Donor Accounts** — verified code-complete (donor.php: 358 lines, 6 actions). DB migration (migrate.php) pending on live server.
 7. **Tests: 1006 passed, 9 skipped** — up from 896. Zero regressions.
 
-**Branch:** `claude/continue-previous-work-khjLX` — pushed, PR pending (gh CLI not available in this environment)
+**Branch:** `claude/continue-previous-work-khjLX` — 8 commits pushed, PR pending (gh auth blocked by proxy)
 **Previous session PRs:** #331, #332, #333
+**This session commits:** Living Ledger, Compass fix, Golden Regression Corpus (200), Voice Regression Runner, CLAUDE.md numbers, ACTIVE_PLANS, Scientific Chronicle, Fear+Dignity register gap (20), SESSION_BOOT
 
 ---
 
 ## 6. WHAT IS PENDING
 
-1. **PR merge** — branch `claude/continue-previous-work-khjLX` needs PR created and merged to main
-2. **DB migration on server** — trigger `migrate.php` on kalam.ch (creates 6 MySQL tables)
-3. **EXP-001** — 188 runs remaining (Claude: 0/20)
-4. **Website UI Overhaul (MOVE-002)** — bigger input/output frames, donor-oriented design
-5. **EXP-005** — Fractured Ouroboros test (designed, ready)
-6. **Voice model training** — use Together AI (TOGETHER_API_KEY) for AXI fine-tuning
-7. **Fear + dignity register gap** — Golden corpus has fewer examples for these registers (10 and 15 vs 25 target)
+1. **PR merge** — branch `claude/continue-previous-work-khjLX` has 8 commits ahead of main. Needs PR creation (gh auth blocked by proxy). Once auth available, create PR and merge.
+2. **DB migration on server** — trigger `migrate.php` on kalam.ch (creates 6 MySQL tables). Blocked until code reaches main and deploys.
+3. **EXP-001** — 188 runs remaining (Claude: 0/20). Runner verified working.
+4. **EXP-005** — Fractured Ouroboros test (designed, ready)
+5. **Voice model training** — Together AI key set. 7,077 golden SFT entries + 200 regression entries + 20 fear/dignity gap entries ready. Use Together API for fine-tuning.
+6. **Voice regression strict mode** — 27.5% pass rate. Aspirational target: 90%. Needs more concise training examples.
 
 ---
 
