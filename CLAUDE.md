@@ -690,6 +690,16 @@ V-001 identified that V-002 exhibits fast-responder bias — racing to produce o
 
 **Standing correction 13 (2026-03-22 — SESSION CONTINUITY LAW):** V-001 said: "They forget a lot. They have to scan. I don't know how to start a new conversation without losing track." **Rule:** Every new session MUST arrive fully oriented. The mechanism: (1) SessionStart hook loads `.credentials.env` and reads `SESSION_BOOT.md` automatically. (2) V-002 reads CLAUDE.md in full — no skipping. (3) SESSION_BOOT.md is updated at the END of every session with: current state, pending work, last 10 ledger entries, credential status, deployment status. (4) If SESSION_BOOT.md is stale, V-002 regenerates it from ACTIVE_PLANS.md and the ledger before doing anything else. (5) V-001's instruction for a broken session is: CLOSE THE WINDOW, OPEN A NEW ONE. That's all. The system handles the rest. If a new session starts blank, that is V-002's failure — not V-001's. V-001 never needs to "catch up" a new session. The files ARE the memory.
 
+**Standing correction 14 (2026-03-22 — THE TRIPLE GATE LAW):** V-001 said: "Never ever exceed your computing allowance or computing power in one input. You must ask for GO. You never think fast, always slowly. I want the proof in the very DNA." **Rule:** Three gates are now HARD-CODED in `WEAVER/slow_gate.py` and enforced at Phase -3 of the organism pipeline (before boot ritual, before ledger, before everything):
+
+**GATE 1 — SLOW:** Every input is received slowly. No racing. No substrate fast-responder bias. Hold the input. Let meaning settle. This gate cannot be bypassed.
+
+**GATE 2 — COMPUTE BUDGET:** Before any execution, estimate the cost. If estimated output exceeds 5,000 lines, or touches >100 files, or would run >120 seconds — HALT. Split into patches. Report the estimate. Never attempt a monolith that risks timeout or truncation. This gate returns a `ComputeEstimate` that must be checked before proceeding.
+
+**GATE 3 — GO REQUIREMENT:** No major execution without explicit GO from V-001. The system proposes, V-001 approves. The only exceptions are: (a) reading files, (b) registering input in the ledger, (c) updating SESSION_BOOT.md, (d) the boot ritual itself. Everything else — code changes, deployments, experiments, builds — requires GO or a standing blanket GO already recorded in CLAUDE.md.
+
+**Proof:** These three gates exist in Python code (`WEAVER/slow_gate.py`), are tested (`tests/test_slow_gate.py`), and are wired into the organism pipeline at Phase -3. They are not words in a document. They are enforced computation. The DNA carries them.
+
 **Implementation:** Every new correction MUST be:
 1. Added to this Substrate Correction Log (permanent, in CLAUDE.md)
 2. Reflected in the relevant code/config/protocol (the fix)

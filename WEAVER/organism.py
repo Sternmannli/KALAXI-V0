@@ -127,6 +127,12 @@ from WEAVER.witness_certificate import (
 )
 # ── Voice Engine: canon-grounded response generation ──
 from WEAVER.voice_engine import VoiceEngine, detect_register
+# ── Triple Gate: SLOW + COMPUTE BUDGET + GO REQUIREMENT (Phase -3) ──
+# "Never ever exceed your computing power. You must ask for GO. Always slowly." — V-001
+from WEAVER.slow_gate import (
+    pass_through_triple_gate, SlowGateResult, ComputeEstimate,
+    ExecutionScope, GateVerdict as SlowGateVerdict,
+)
 
 
 @dataclass
@@ -370,6 +376,8 @@ class Organism:
         # strict=False so we don't crash the organism in test environments
         # but the result is stored and checked before processing
         self._boot_result = boot_ritual(strict=False)
+        # ── Triple Gate: Phase -3 state (initialized per-process call) ──
+        self._last_slow_gate = SlowGateResult()
         # ── Compass: orientation engine (MOVE-001) ──
         self._compass = Compass()
         # ── Distillery: extract essence from all content sources ──
@@ -626,6 +634,18 @@ class Organism:
             medium = TERMINAL
 
         warnings = []
+
+        # ── Phase -3: TRIPLE GATE — SLOW + COMPUTE BUDGET + GO ──
+        # "Never ever exceed your computing power. You must ask for GO.
+        #  You never think fast, always slowly. I want the proof in the very DNA." — V-001
+        slow_gate_result = pass_through_triple_gate(
+            donor_input=donor_input,
+            scope=ExecutionScope.READ,  # Default: reading/responding is always permitted
+            has_blanket_go=True,        # Blanket GO from V-001 (CLAUDE.md: thermal suspended)
+        )
+        self._last_slow_gate = slow_gate_result
+        if slow_gate_result.warnings:
+            warnings.extend(slow_gate_result.warnings)
 
         # ── Phase -2: BOOT RITUAL — credentials + connectivity + ledger integrity ──
         # "Never process anything without making sure of both. When not, you stop." — V-001
