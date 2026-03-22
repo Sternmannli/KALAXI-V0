@@ -123,30 +123,49 @@ gh secret list
 
 ## 5. LAST SESSION
 
-**Date:** 2026-03-22 (session 2)
+**Date:** 2026-03-22 (session 3)
 **Summary:**
-1. **Deep clean** — codebase health excellent (176 Python files, all accounted for). Stale `master` branch deleted. 6 orphan scripts documented (standalone utilities, not dead code).
-2. **Living Ledger Phase 2** — mycelium ambient glow now scales with global witness count (all visitors) instead of localStorage (per device). Both index.astro and deployed index.html updated.
-3. **Compass (MOVE-001) fixed** — stale data corrected. Site IS live since 2026-03-17. Constitution path fixed. Covenant count sourced from CLAUDE.md. COMPASS.md auto-generated.
-4. **Voice Canon audit** — all 4 surfaces consistent (PHP, Worker, Training, Evaluator). One manual sync point: Worker hardcodes 17 proverbs.
-5. **Golden Regression Corpus** — 200 canonical AXI utterances extracted from 8,008 candidates. Score 0.775-1.000. All 9 registers. File: TRAINING/GOLDEN_REGRESSION.jsonl
-6. **Donor Accounts** — verified code-complete (donor.php: 358 lines, 6 actions). DB migration (migrate.php) pending on live server.
-7. **Tests: 1006 passed, 9 skipped** — up from 896. Zero regressions.
+1. **AURIX OS analyzed** — Mohamed uploaded MASTER_GOLDEN_AURIX_OS v1.6.6 (August 2025). It is a 519KB world-simulation fusing narrative characters with computational equations. 41 elements, 72 equations, 61 cross-links, 10 resource triads, 5 conflict resolution motifs, 5 humor equations, 13 unbreakable laws. Pre-KALAXI system.
+2. **System Map created** — MANIFEST/SYSTEM_MAP.md: complete text map of all 4 tiers, 43 modules, 8-phase pipeline, equations, narratives, gaps. Coffee-friendly.
+3. **Interactive visualization** — site/public/system-map.html: standalone HTML page with 55 clickable nodes across 7 layers. Deployable to kalam.ch.
+4. **AURIX artifact placed** — R7M/GRAND_ARCHIVE/AURIX_OS_v1.6.6_2025-08-16.txt: untouched, permanent. Rule: mine but do not modify.
+5. **AURIX extraction** — R7M/EXCAVATION/AURIX_EXTRACTION.json + .md: machine-readable and human-readable extraction of all elements, equations, links, triads, motifs, prose fragments.
+6. **Summon Voices probe created** — 7-question probe sent to 10 AI models about narrative-computation architecture. Questions: character architecture (archetypes vs same vs different), register-independent equations, narrative pressure computation, cross-narrative echoes, humor formalization, generative seeds, blind spots.
+7. **Key discussion outcomes:**
+   - AURIX stays as artifact, mined for system integration
+   - Characters across narratives MAY be archetypes at different registers (needs more data from V-001 + Summon Voices responses)
+   - Ashwater characters Laila/Yara/Salim are named after Mohamed's three children
+   - Four narratives form a vertical stack: Hakaka (mythic), Ashwater (civic), Kinderbuch (child), KALAXI_1 (philosophical)
+   - V-001 directive: "look at the whole system as if I have nothing to do with it now" — V-002 should act as the technical expert team, make decisions, flag fundamental changes, correct course when needed
 
-**Branch:** `claude/continue-previous-work-khjLX` — 8 commits pushed, PR pending (gh auth blocked by proxy)
-**Previous session PRs:** #331, #332, #333
-**This session commits:** Living Ledger, Compass fix, Golden Regression Corpus (200), Voice Regression Runner, CLAUDE.md numbers, ACTIVE_PLANS, Scientific Chronicle, Fear+Dignity register gap (20), SESSION_BOOT
+**Branch:** `claude/continue-previous-work-khjLX` — 5 new commits pushed
+**Commits this session:** System Map, Interactive Visualization, AURIX Artifact, AURIX Extraction JSON, AURIX Extraction MD
 
 ---
 
 ## 6. WHAT IS PENDING
 
-1. **PR merge** — branch `claude/continue-previous-work-khjLX` has 8 commits ahead of main. Needs PR creation (gh auth blocked by proxy). Once auth available, create PR and merge.
-2. **DB migration on server** — trigger `migrate.php` on kalam.ch (creates 6 MySQL tables). Blocked until code reaches main and deploys.
-3. **EXP-001** — 188 runs remaining (Claude: 0/20). Runner verified working.
-4. **EXP-005** — Fractured Ouroboros test (designed, ready)
-5. **Voice model training** — Together AI key set. 7,077 golden SFT entries + 200 regression entries + 20 fear/dignity gap entries ready. Use Together API for fine-tuning.
-6. **Voice regression strict mode** — 27.5% pass rate. Aspirational target: 90%. Needs more concise training examples.
+1. **Summon Voices responses** — V-001 collected responses from all 10 AI models. He will paste them in one message. Process and synthesize.
+2. **Archetype decision** — BLOCKED on Summon Voices synthesis + additional data V-001 said he has about characters. Do NOT decide without this data.
+3. **Phase C: Narrative Archetype Layer** — Patches 6-8 (ARCHETYPES.json, STATE.json, ECHOES.json). Waiting for archetype decision.
+4. **Phase D: System Integration** — Patches 9-12 (extend ElementType, archetype reader, ripple engine, connectivity enhancement). Waiting for Phase C.
+5. **PR merge** — branch has 13+ commits ahead of main. gh auth blocked by proxy. Create PR and merge when auth available.
+6. **DB migration on server** — trigger migrate.php on kalam.ch. Blocked until code reaches main.
+7. **EXP-001** — 188 runs remaining (Claude: 0/20).
+8. **Voice model training** — Together AI key set. Training data ready.
+9. **Deploy system-map.html** — once merged to main, deploys to kalam.ch automatically.
+
+### KEY FILES FROM THIS SESSION
+| File | Purpose |
+|------|---------|
+| MANIFEST/SYSTEM_MAP.md | Complete system text map |
+| site/public/system-map.html | Interactive visualization (55 nodes, 7 layers) |
+| R7M/GRAND_ARCHIVE/AURIX_OS_v1.6.6_2025-08-16.txt | AURIX artifact (untouched) |
+| R7M/EXCAVATION/AURIX_EXTRACTION.json | Machine-readable AURIX extraction |
+| R7M/EXCAVATION/AURIX_EXTRACTION.md | Human-readable AURIX companion |
+
+### THE SUMMON VOICES PROBE (for reference)
+The probe asks 7 questions about narrative-computation architecture. It's abstract — no internal vocabulary. Sent to: Claude, ChatGPT, Grok, DeepSeek, Gemini, Copilot, Manus, Kimi, Euria, Perplexity. Responses expected in next session. Full probe text is in the plan file.
 
 ---
 
