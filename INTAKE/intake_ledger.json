@@ -324,6 +324,87 @@
           "timestamp": "2026-03-22T21:29:07.520449+00:00"
         }
       ]
+    },
+    "INTAKE-4545FD130B70": {
+      "session_id": "INTAKE-4545FD130B70",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "greeting",
+      "created": "2026-03-22T21:32:14.525109+00:00",
+      "consent_given": false,
+      "consent_timestamp": "",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-4545FD130B70",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:32:14.525109+00:00",
+          "covenant_promise_shown": true
+        }
+      ]
+    },
+    "INTAKE-D7B3135CC171": {
+      "session_id": "INTAKE-D7B3135CC171",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "consent",
+      "created": "2026-03-22T21:32:14.527866+00:00",
+      "consent_given": true,
+      "consent_timestamp": "2026-03-22T21:32:14.530102+00:00",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-D7B3135CC171",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:32:14.527866+00:00",
+          "covenant_promise_shown": true
+        },
+        {
+          "event": "consent_given",
+          "timestamp": "2026-03-22T21:32:14.530102+00:00",
+          "consent_text_hash": "c6aa93949b7696d0f911cd9b96bd51e888631580345f611c23d82c0f8ab796b2"
+        }
+      ]
+    },
+    "INTAKE-7F656FD66CCA": {
+      "session_id": "INTAKE-7F656FD66CCA",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "rejected",
+      "created": "2026-03-22T21:32:14.581569+00:00",
+      "consent_given": false,
+      "consent_timestamp": "",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-7F656FD66CCA",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "2026-03-22T21:32:14.585759+00:00",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:32:14.581569+00:00",
+          "covenant_promise_shown": true
+        },
+        {
+          "event": "consent_declined",
+          "timestamp": "2026-03-22T21:32:14.585759+00:00"
+        }
+      ]
     }
   }
 }
