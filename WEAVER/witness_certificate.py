@@ -370,3 +370,49 @@ def save_certificate(cert: WitnessCertificate) -> Path:
         f.write(cert.to_legal_view())
 
     return json_path
+
+
+def load_certificate(certificate_id: str):
+    """Load a witness certificate by ID from KEEP/WITNESS_CERTIFICATES/."""
+    json_path = CERTIFICATE_DIR / f"{certificate_id}.json"
+    if not json_path.exists():
+        return None
+
+    with open(json_path) as f:
+        data = json.load(f)
+
+    # Reconstruct the certificate from stored data
+    dignity = DignitySnapshot(
+        A=data.get("dignity", {}).get("A", 0.0),
+        L=data.get("dignity", {}).get("L", 0.0),
+        M=data.get("dignity", {}).get("M", 0.0),
+    )
+    subject = Subject(
+        subject_id=data.get("subject", {}).get("subject_id", ""),
+        role=data.get("subject", {}).get("role", ""),
+    )
+    context = InstitutionalContext(
+        institution_id=data.get("context", {}).get("institution_id", ""),
+        procedure=data.get("context", {}).get("procedure", ""),
+        case_id=data.get("context", {}).get("case_id", ""),
+        process_step=data.get("context", {}).get("process_step", ""),
+    )
+    coordinates = CoordinatesOfFailure(
+        axis=data.get("coordinates", {}).get("axis", ""),
+        node_id=data.get("coordinates", {}).get("node_id", ""),
+        rule_id=data.get("coordinates", {}).get("rule_id", ""),
+        inputs_present=data.get("coordinates", {}).get("inputs_present", []),
+        missing_or_unreadable=data.get("coordinates", {}).get("missing_or_unreadable", []),
+        machine_explanation=data.get("coordinates", {}).get("machine_explanation", ""),
+    )
+
+    cert = WitnessCertificate(
+        certificate_id=data.get("certificate_id", certificate_id),
+        issued=data.get("issued", ""),
+        dignity=dignity,
+        subject=subject,
+        context=context,
+        coordinates=coordinates,
+        prev_hash=data.get("chain", {}).get("prev_hash", ""),
+    )
+    return cert
