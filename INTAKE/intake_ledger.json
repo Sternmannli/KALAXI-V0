@@ -1,0 +1,410 @@
+{
+  "total_donors": 0,
+  "sessions": {
+    "INTAKE-67F7618C874A": {
+      "session_id": "INTAKE-67F7618C874A",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "greeting",
+      "created": "2026-03-22T21:16:33.202139+00:00",
+      "consent_given": false,
+      "consent_timestamp": "",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-67F7618C874A",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:16:33.202139+00:00",
+          "covenant_promise_shown": true
+        }
+      ]
+    },
+    "INTAKE-7862644A626C": {
+      "session_id": "INTAKE-7862644A626C",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "consent",
+      "created": "2026-03-22T21:16:33.225156+00:00",
+      "consent_given": true,
+      "consent_timestamp": "2026-03-22T21:16:33.227949+00:00",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-7862644A626C",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:16:33.225156+00:00",
+          "covenant_promise_shown": true
+        },
+        {
+          "event": "consent_given",
+          "timestamp": "2026-03-22T21:16:33.227949+00:00",
+          "consent_text_hash": "c6aa93949b7696d0f911cd9b96bd51e888631580345f611c23d82c0f8ab796b2"
+        }
+      ]
+    },
+    "INTAKE-01260719C963": {
+      "session_id": "INTAKE-01260719C963",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "rejected",
+      "created": "2026-03-22T21:16:33.230289+00:00",
+      "consent_given": false,
+      "consent_timestamp": "",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-01260719C963",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "2026-03-22T21:16:33.232147+00:00",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:16:33.230289+00:00",
+          "covenant_promise_shown": true
+        },
+        {
+          "event": "consent_declined",
+          "timestamp": "2026-03-22T21:16:33.232147+00:00"
+        }
+      ]
+    },
+    "INTAKE-196E1B3D2B14": {
+      "session_id": "INTAKE-196E1B3D2B14",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "greeting",
+      "created": "2026-03-22T21:16:47.147385+00:00",
+      "consent_given": false,
+      "consent_timestamp": "",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-196E1B3D2B14",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:16:47.147385+00:00",
+          "covenant_promise_shown": true
+        }
+      ]
+    },
+    "INTAKE-95FFA5D9F3B6": {
+      "session_id": "INTAKE-95FFA5D9F3B6",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "consent",
+      "created": "2026-03-22T21:16:47.150950+00:00",
+      "consent_given": true,
+      "consent_timestamp": "2026-03-22T21:16:47.153153+00:00",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-95FFA5D9F3B6",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:16:47.150950+00:00",
+          "covenant_promise_shown": true
+        },
+        {
+          "event": "consent_given",
+          "timestamp": "2026-03-22T21:16:47.153153+00:00",
+          "consent_text_hash": "c6aa93949b7696d0f911cd9b96bd51e888631580345f611c23d82c0f8ab796b2"
+        }
+      ]
+    },
+    "INTAKE-414691CDFCD7": {
+      "session_id": "INTAKE-414691CDFCD7",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "rejected",
+      "created": "2026-03-22T21:16:47.155337+00:00",
+      "consent_given": false,
+      "consent_timestamp": "",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-414691CDFCD7",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "2026-03-22T21:16:47.157037+00:00",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:16:47.155337+00:00",
+          "covenant_promise_shown": true
+        },
+        {
+          "event": "consent_declined",
+          "timestamp": "2026-03-22T21:16:47.157037+00:00"
+        }
+      ]
+    },
+    "INTAKE-036E83C64921": {
+      "session_id": "INTAKE-036E83C64921",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "greeting",
+      "created": "2026-03-22T21:22:22.117410+00:00",
+      "consent_given": false,
+      "consent_timestamp": "",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-036E83C64921",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:22:22.117410+00:00",
+          "covenant_promise_shown": true
+        }
+      ]
+    },
+    "INTAKE-0E1D794AAB13": {
+      "session_id": "INTAKE-0E1D794AAB13",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "consent",
+      "created": "2026-03-22T21:22:22.120316+00:00",
+      "consent_given": true,
+      "consent_timestamp": "2026-03-22T21:22:22.122656+00:00",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-0E1D794AAB13",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:22:22.120316+00:00",
+          "covenant_promise_shown": true
+        },
+        {
+          "event": "consent_given",
+          "timestamp": "2026-03-22T21:22:22.122656+00:00",
+          "consent_text_hash": "c6aa93949b7696d0f911cd9b96bd51e888631580345f611c23d82c0f8ab796b2"
+        }
+      ]
+    },
+    "INTAKE-6AC9553DD17A": {
+      "session_id": "INTAKE-6AC9553DD17A",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "rejected",
+      "created": "2026-03-22T21:22:22.127604+00:00",
+      "consent_given": false,
+      "consent_timestamp": "",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-6AC9553DD17A",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "2026-03-22T21:22:22.481097+00:00",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:22:22.127604+00:00",
+          "covenant_promise_shown": true
+        },
+        {
+          "event": "consent_declined",
+          "timestamp": "2026-03-22T21:22:22.481097+00:00"
+        }
+      ]
+    },
+    "INTAKE-B4DF7C39B8C9": {
+      "session_id": "INTAKE-B4DF7C39B8C9",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "greeting",
+      "created": "2026-03-22T21:29:07.463533+00:00",
+      "consent_given": false,
+      "consent_timestamp": "",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-B4DF7C39B8C9",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:29:07.463533+00:00",
+          "covenant_promise_shown": true
+        }
+      ]
+    },
+    "INTAKE-34037AC5DB23": {
+      "session_id": "INTAKE-34037AC5DB23",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "consent",
+      "created": "2026-03-22T21:29:07.513208+00:00",
+      "consent_given": true,
+      "consent_timestamp": "2026-03-22T21:29:07.516038+00:00",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-34037AC5DB23",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:29:07.513208+00:00",
+          "covenant_promise_shown": true
+        },
+        {
+          "event": "consent_given",
+          "timestamp": "2026-03-22T21:29:07.516038+00:00",
+          "consent_text_hash": "c6aa93949b7696d0f911cd9b96bd51e888631580345f611c23d82c0f8ab796b2"
+        }
+      ]
+    },
+    "INTAKE-E3460724DBA8": {
+      "session_id": "INTAKE-E3460724DBA8",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "rejected",
+      "created": "2026-03-22T21:29:07.518622+00:00",
+      "consent_given": false,
+      "consent_timestamp": "",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-E3460724DBA8",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "2026-03-22T21:29:07.520449+00:00",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:29:07.518622+00:00",
+          "covenant_promise_shown": true
+        },
+        {
+          "event": "consent_declined",
+          "timestamp": "2026-03-22T21:29:07.520449+00:00"
+        }
+      ]
+    },
+    "INTAKE-4545FD130B70": {
+      "session_id": "INTAKE-4545FD130B70",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "greeting",
+      "created": "2026-03-22T21:32:14.525109+00:00",
+      "consent_given": false,
+      "consent_timestamp": "",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-4545FD130B70",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:32:14.525109+00:00",
+          "covenant_promise_shown": true
+        }
+      ]
+    },
+    "INTAKE-D7B3135CC171": {
+      "session_id": "INTAKE-D7B3135CC171",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "consent",
+      "created": "2026-03-22T21:32:14.527866+00:00",
+      "consent_given": true,
+      "consent_timestamp": "2026-03-22T21:32:14.530102+00:00",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-D7B3135CC171",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:32:14.527866+00:00",
+          "covenant_promise_shown": true
+        },
+        {
+          "event": "consent_given",
+          "timestamp": "2026-03-22T21:32:14.530102+00:00",
+          "consent_text_hash": "c6aa93949b7696d0f911cd9b96bd51e888631580345f611c23d82c0f8ab796b2"
+        }
+      ]
+    },
+    "INTAKE-7F656FD66CCA": {
+      "session_id": "INTAKE-7F656FD66CCA",
+      "donor_pseudonym": "wanderer-1",
+      "stage": "rejected",
+      "created": "2026-03-22T21:32:14.581569+00:00",
+      "consent_given": false,
+      "consent_timestamp": "",
+      "first_voice": "",
+      "dignity_score": 0.0,
+      "dignity_audit": {},
+      "keep_receipt_id": "",
+      "exchange_id": "INTAKE-7F656FD66CCA",
+      "review_required": true,
+      "review_status": "pending",
+      "sealed_gate_passed": true,
+      "completed": "2026-03-22T21:32:14.585759+00:00",
+      "history": [
+        {
+          "event": "greeting",
+          "timestamp": "2026-03-22T21:32:14.581569+00:00",
+          "covenant_promise_shown": true
+        },
+        {
+          "event": "consent_declined",
+          "timestamp": "2026-03-22T21:32:14.585759+00:00"
+        }
+      ]
+    }
+  }
+}

@@ -7,34 +7,126 @@ from datetime import datetime
 
 # Import the individual detectors (WEAVER package)
 # These detectors require heavy ML dependencies (torch, transformers, sentence-transformers).
-# When those deps are unavailable, we use lightweight stubs that return neutral results.
+# When those deps are unavailable, we use lightweight regex-based fallbacks that provide
+# basic detection rather than returning silent neutrals.
+import re
+
+# ── Lightweight regex-based pillar detection (no ML dependencies) ──
+
+def _lightweight_humour(text):
+    """Regex-based humour detection: irony markers, laughter, self-deprecation."""
+    text_lower = text.lower()
+    signals = 0
+    # Laughter and amusement
+    if re.search(r'\b(haha|lol|lmao|rofl|😂|😄|🤣)\b', text_lower):
+        signals += 2
+    # Irony markers
+    if re.search(r'\b(ironi[c]|sarcas[mt]|kidding|joking|tongue.in.cheek)\b', text_lower):
+        signals += 2
+    # Self-deprecation
+    if re.search(r'\b(i.m (such|so|really) (bad|stupid|terrible|hopeless))\b', text_lower):
+        signals += 1
+    # Absurd juxtaposition (very short + very long sentence in same text)
+    if re.search(r'[!?]{2,}', text):
+        signals += 1
+    is_humour = signals >= 2
+    return {
+        "is_humour": is_humour,
+        "humour_type": "regex-detected" if is_humour else "none",
+        "wisdom_potential": min(signals * 0.2, 0.8) if is_humour else 0,
+        "bv_score": min(signals * 0.15, 0.6),
+        "detection_method": "lightweight_regex",
+    }
+
+def _lightweight_absurdity(text):
+    """Regex-based absurdity detection: contradictions, impossible claims."""
+    text_lower = text.lower()
+    signals = 0
+    # Contradictions
+    if re.search(r'\b(but also|yet somehow|impossible.{0,20}(but|yet|still))\b', text_lower):
+        signals += 2
+    # Paradox markers
+    if re.search(r'\b(paradox|absurd|nonsense|kafka|catch.22|ouroboros)\b', text_lower):
+        signals += 2
+    # Impossible claims
+    if re.search(r'\b(always never|never always|everything nothing|infinite.{0,10}zero)\b', text_lower):
+        signals += 2
+    is_absurd = signals >= 2
+    return {
+        "is_absurd": is_absurd,
+        "absurdity_type": "regex-detected" if is_absurd else "none",
+        "wisdom_potential": min(signals * 0.25, 0.9) if is_absurd else 0,
+        "metadata": {"detection_method": "lightweight_regex", "signals": signals},
+    }
+
+def _lightweight_obsession(text):
+    """Regex-based obsession detection: repetition, fixation markers."""
+    text_lower = text.lower()
+    # Word repetition (same word 3+ times)
+    words = re.findall(r'\b\w{4,}\b', text_lower)
+    word_counts = {}
+    for w in words:
+        word_counts[w] = word_counts.get(w, 0) + 1
+    repeated = {w: c for w, c in word_counts.items() if c >= 3}
+    signals = len(repeated)
+    # Fixation markers
+    if re.search(r'\b(always|every time|can.t stop|obsess|fixat|haunt|recurring|again and again)\b', text_lower):
+        signals += 1
+    is_obsessive = signals >= 2
+    return {
+        "is_obsessive": is_obsessive,
+        "obsession_type": "regex-detected" if is_obsessive else "none",
+        "wisdom_potential": min(signals * 0.2, 0.8) if is_obsessive else 0,
+        "metadata": {"detection_method": "lightweight_regex", "repeated_words": list(repeated.keys())[:5]},
+    }
+
+def _lightweight_love(text):
+    """Regex-based love detection: intimacy, passion, commitment markers."""
+    text_lower = text.lower()
+    intimacy = len(re.findall(r'\b(love|dear|close|hold|embrace|tender|gentle|warm|care|cherish)\b', text_lower))
+    passion = len(re.findall(r'\b(desire|yearn|miss|ache|burn|fire|heart|soul|dream)\b', text_lower))
+    commitment = len(re.findall(r'\b(forever|always|promise|vow|covenant|faithful|loyal|together)\b', text_lower))
+    total = intimacy + passion + commitment
+    if total >= 2:
+        love_type = "intimacy" if intimacy >= passion and intimacy >= commitment else \
+                    "passion" if passion >= commitment else "commitment"
+    else:
+        love_type = "non-love"
+    return {
+        "love_type": love_type,
+        "wisdom_potential": min(total * 0.15, 0.9) if total >= 2 else 0,
+        "intimacy": min(intimacy * 0.2, 1.0),
+        "passion": min(passion * 0.2, 1.0),
+        "commitment": min(commitment * 0.2, 1.0),
+        "detection_method": "lightweight_regex",
+    }
+
+
+# ── Import ML detectors with lightweight fallback ──
+
 try:
     from WEAVER.humour_detector import detect_humour_in_text
-except ImportError:
-    def detect_humour_in_text(text):
-        return {"is_humour": False, "humour_type": "none", "wisdom_potential": 0, "bv_score": 0}
+except (ImportError, Exception):
+    detect_humour_in_text = _lightweight_humour
 
 try:
     from WEAVER.absurdity_detector import detect_absurdity_in_text
-except ImportError:
-    def detect_absurdity_in_text(text):
-        return {"is_absurd": False, "absurdity_type": "none", "wisdom_potential": 0, "metadata": {}}
+except (ImportError, Exception):
+    detect_absurdity_in_text = _lightweight_absurdity
 
 try:
     from WEAVER.obsession_detector import detect_obsession_in_text
-except ImportError:
-    def detect_obsession_in_text(text):
-        return {"is_obsessive": False, "obsession_type": "none", "wisdom_potential": 0, "metadata": {}}
+except (ImportError, Exception):
+    detect_obsession_in_text = _lightweight_obsession
 
 try:
     from WEAVER.love_detector import detect_love_in_text
-except ImportError:
-    def detect_love_in_text(text):
-        return {"love_type": "non-love", "wisdom_potential": 0, "intimacy": 0, "passion": 0, "commitment": 0}
+except (ImportError, Exception):
+    detect_love_in_text = _lightweight_love
 
 try:
     from WEAVER.proverb_compressor import generate_proverb_from_cluster
-except ImportError:
+except (ImportError, Exception):
     def generate_proverb_from_cluster(cluster):
         return None
 
