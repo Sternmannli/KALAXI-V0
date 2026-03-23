@@ -185,15 +185,33 @@ class CanonIndex:
         words = re.findall(r'[a-zA-ZäöüÄÖÜß]+', text.lower())
         return [w for w in words if w not in STOP_WORDS and len(w) > 2]
 
+    @staticmethod
+    def _clean_text(text: str) -> str:
+        """Strip structural noise from canon text before indexing."""
+        # Remove markdown headers
+        text = re.sub(r'^#{1,4}\s+', '', text)
+        # Remove metadata lines
+        text = re.sub(r'^(Source article|Maps to|source:|severity:|status:|module:|Pattern [A-Z] –).*$', '', text, flags=re.MULTILINE)
+        # Remove markdown bold/italic
+        text = re.sub(r'\*{1,2}([^*]+)\*{1,2}', r'\1', text)
+        # Remove ID prefixes (T#48, COV#001, etc.) at start
+        text = re.sub(r'^[A-Z#]+\d+\s*[-–—:]\s*', '', text)
+        # Collapse whitespace
+        text = re.sub(r'\s+', ' ', text).strip()
+        return text
+
     def _add_entry(self, text: str, source: str, **kwargs):
-        tokens = self._tokenize(text)
+        cleaned = self._clean_text(text)
+        if not cleaned or len(cleaned) < 8:
+            return
+        tokens = self._tokenize(cleaned)
         if not tokens:
             return
         freq = Counter(tokens)
         total = sum(freq.values())
         word_freq = {w: c / total for w, c in freq.items()}
         entry = CanonEntry(
-            text=text,
+            text=cleaned,
             source=source,
             word_set=set(tokens),
             word_freq=word_freq,
@@ -584,7 +602,48 @@ def _compose_local_response(
             response_text = best_entry.text.rstrip(".") + ". " + second.text
             sources.append(f"{second.source}:{second.id}" if second.id else second.source)
 
+    # Final clean: ensure no structural noise in output
+    response_text = _clean_response(response_text)
+
     return response_text, sources, confidence
+
+
+def _clean_response(text: str) -> str:
+    """
+    Final pass to ensure the response is clean human-readable text.
+    Strips any remaining markdown, metadata, or structural artifacts.
+    """
+    # Remove markdown headers
+    text = re.sub(r'^#{1,4}\s+', '', text, flags=re.MULTILINE)
+    # Remove label prefixes (NARRATIVE SLOGAN:, ARCHIVE SLOGAN:, etc.)
+    text = re.sub(r'^(NARRATIVE|ARCHIVE)\s+SLOGAN:\s*', '', text, flags=re.MULTILINE)
+    # Remove metadata lines (Source article, Maps to, severity, etc.)
+    lines = text.split("\n")
+    clean_lines = []
+    for line in lines:
+        stripped = line.strip()
+        # Skip metadata-looking lines
+        if re.match(r'^(Source article|Maps to|source:|severity:|status:|module:|covenant_tags:|proverb_links:|felt_domain:|Pattern [A-Z] –)', stripped, re.IGNORECASE):
+            continue
+        # Skip empty lines
+        if not stripped:
+            continue
+        # Skip lines that are just IDs or labels
+        if re.match(r'^(T#\d+|COV#\d+|P#\d+|ANOM#\d+)\s*$', stripped):
+            continue
+        # Skip lines that are just a short title (protocol names, etc.)
+        if len(stripped.split()) <= 4 and not any(c in stripped for c in '.!?,:;'):
+            continue
+        clean_lines.append(stripped)
+    text = " ".join(clean_lines)
+    # Remove markdown bold/italic
+    text = re.sub(r'\*{1,2}([^*]+)\*{1,2}', r'\1', text)
+    # Collapse whitespace
+    text = re.sub(r'\s+', ' ', text).strip()
+    # If cleaning removed everything, return a dignified fallback
+    if not text or len(text) < 5:
+        text = "The knot holds. The river does not explain."
+    return text
 
 
 def _call_api(

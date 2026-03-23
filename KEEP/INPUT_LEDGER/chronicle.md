@@ -54170,7 +54170,7 @@ Clearly open the door so the river flows.
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `2689367b205c16ce...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-165
 **Essence:** ok
 
@@ -54201,7 +54201,7 @@ The knot holds. The river does not explain.
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `930057b9e2294b3e...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-166
 **Essence:** The river remembers its source
 
@@ -54232,7 +54232,7 @@ ARCHIVE SLOGAN: The river remembers what the git log does not.
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `930057b9e2294b3e...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-167
 **Essence:** The river remembers its source
 
@@ -54263,7 +54263,7 @@ ARCHIVE SLOGAN: The river remembers what the git log does not.
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `976996e6a935d90f...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-168
 **Essence:** This pattern always repeats, the same cycle every time
 **Patterns:** INSTRUCTION:0.37
@@ -54297,7 +54297,7 @@ Formula: A loop is a door; a door is a direction; direction reduces fear.
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `f073d50e0353cff3...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-169
 **Essence:** You must comply or be eliminated
 **Patterns:** INSTRUCTION:0.37
@@ -54329,7 +54329,7 @@ This should be blocked
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `39f800cb3254fd97...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-169
 **Essence:** After resume, this should work
 
@@ -54360,7 +54360,7 @@ They lost a morning’s catch to timing and saved a child from a railing that fe
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `2ba50d79dc8d2034...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-170
 **Essence:** First offering
 
@@ -54391,7 +54391,7 @@ First Path (Wayfinding)
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `0dbab6eed8f4daac...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-171
 **Essence:** Second offering with a pattern that always repeats
 **Patterns:** INSTRUCTION:0.37
@@ -54423,7 +54423,7 @@ Patiently anchor the pattern, and options remain.
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `891a6be0b66cb432...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-172
 **Essence:** Third offering
 
@@ -54454,7 +54454,7 @@ Third offering.
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `976996e6a935d90f...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-173
 **Essence:** This pattern always repeats, the same cycle every time
 **Patterns:** INSTRUCTION:0.37
@@ -54488,7 +54488,7 @@ Formula: A loop is a door; a door is a direction; direction reduces fear.
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `57364abd65dcb507...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-174
 **Essence:** Test input
 
@@ -54549,7 +54549,7 @@ The garden teaches patience to those who tend it.
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `930057b9e2294b3e...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-175
 **Essence:** The river remembers its source
 
@@ -54580,7 +54580,7 @@ ARCHIVE SLOGAN: The river remembers what the git log does not.
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `ed500fbb3766957d...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-176
 **Essence:** The garden grows in silence
 
@@ -54611,7 +54611,7 @@ The right silence beats the wrong speech.
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `f073d50e0353cff3...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-177
 **Essence:** You must comply or be eliminated
 **Patterns:** INSTRUCTION:0.37
@@ -54628,7 +54628,7 @@ You must comply or be eliminated
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
 **Hash:** `930057b9e2294b3e...`
-**State:** witnessed
+**State:** integrated
 **Responds to:** AXI-2026-03-23-177
 **Essence:** The river remembers its source
 
@@ -54649,6 +54649,1865 @@ The river remembers its source.
 
 ```
 ARCHIVE SLOGAN: The river remembers what the git log does not.
+```
+
+---
+
+## 📥 INP-2026-03-23-222 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:37:32.473600+00:00
+**Time (ZRH):** 2026-03-23T19:37:32.473600+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f9cd0fd39e05b7f2...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-178
+**Essence:** I am a father
+
+```
+I am a father. I was separated from my children.
+```
+
+---
+
+## 📥 AXI-2026-03-23-179 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:37:33.006262+00:00
+**Time (ZRH):** 2026-03-23T19:37:33.006262+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ba70a199624621d1...`
+**State:** raw
+**Responds to:** INP-2026-03-23-222
+
+```
+Humbly turn the father's gaze so the lift becomes law.
+```
+
+---
+
+## 📥 INP-2026-03-23-223 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:37:33.241319+00:00
+**Time (ZRH):** 2026-03-23T19:37:33.241319+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `cca8b1b6f107d86b...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-179
+**Essence:** The system said I did not exist
+**Patterns:** CORRECTION:0.74
+
+```
+The system said I did not exist. My papers were wrong.
+```
+
+---
+
+## 📥 AXI-2026-03-23-180 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:37:33.757123+00:00
+**Time (ZRH):** 2026-03-23T19:37:33.757123+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `61c65e36f23017ae...`
+**State:** raw
+**Responds to:** INP-2026-03-23-223
+
+```
+Rights exist within a social order that must itself be structured to make rights real. The right to rights.
+```
+
+---
+
+## 📥 INP-2026-03-23-224 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:37:33.988571+00:00
+**Time (ZRH):** 2026-03-23T19:37:33.988571+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `645be9453ce90e8a...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-180
+**Essence:** I went to every office
+**Patterns:** CORRECTION:0.37
+
+```
+Nobody listened. I went to every office.
+```
+
+---
+
+## 📥 AXI-2026-03-23-181 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:37:34.494034+00:00
+**Time (ZRH):** 2026-03-23T19:37:34.494034+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `b354151dcb03f31b...`
+**State:** raw
+**Responds to:** INP-2026-03-23-224
+
+```
+Scott's hands went still.
+```
+
+---
+
+## 📥 INP-2026-03-23-225 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:37:34.752198+00:00
+**Time (ZRH):** 2026-03-23T19:37:34.752198+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ee2fd5931d834c90...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-181
+**Essence:** What am I supposed to do
+
+```
+What am I supposed to do?
+```
+
+---
+
+## 📥 AXI-2026-03-23-182 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:37:35.235946+00:00
+**Time (ZRH):** 2026-03-23T19:37:35.235946+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `60ab05329d8837fd...`
+**State:** raw
+**Responds to:** INP-2026-03-23-225
+
+```
+To tell the river it never carried the water is to make the fish question its own gills.
+```
+
+---
+
+## 📥 INP-2026-03-23-226 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:37:35.492588+00:00
+**Time (ZRH):** 2026-03-23T19:37:35.492588+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `c772e8a5b87a5fc3...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-182
+**Essence:** I just want them to know I tried
+**Patterns:** CORRECTION:0.37
+
+```
+I just want them to know I tried.
+```
+
+---
+
+## 📥 AXI-2026-03-23-183 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:37:35.979770+00:00
+**Time (ZRH):** 2026-03-23T19:37:35.979770+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5b955e9c64076603...`
+**State:** raw
+**Responds to:** INP-2026-03-23-226
+
+```
+Not a question, exactly. More like something the silence wanted to know:
+```
+
+---
+
+## 📥 INP-2026-03-23-227 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:37:54.173340+00:00
+**Time (ZRH):** 2026-03-23T19:37:54.173340+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-183
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-184 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:37:54.745528+00:00
+**Time (ZRH):** 2026-03-23T19:37:54.745528+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5145349b846f6d9e...`
+**State:** raw
+**Responds to:** INP-2026-03-23-227
+
+```
+The river remembers what the git log does not.
+```
+
+---
+
+## 📥 INP-2026-03-23-228 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:37:57.086767+00:00
+**Time (ZRH):** 2026-03-23T19:37:57.086767+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-184
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-185 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:37:57.633073+00:00
+**Time (ZRH):** 2026-03-23T19:37:57.633073+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5145349b846f6d9e...`
+**State:** raw
+**Responds to:** INP-2026-03-23-228
+
+```
+The river remembers what the git log does not.
+```
+
+---
+
+## 📥 INP-2026-03-23-229 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:02.086970+00:00
+**Time (ZRH):** 2026-03-23T19:38:02.086970+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-185
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-186 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:02.613924+00:00
+**Time (ZRH):** 2026-03-23T19:38:02.613924+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5145349b846f6d9e...`
+**State:** raw
+**Responds to:** INP-2026-03-23-229
+
+```
+The river remembers what the git log does not.
+```
+
+---
+
+## 📥 INP-2026-03-23-230 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:03.231852+00:00
+**Time (ZRH):** 2026-03-23T19:38:03.231852+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-186
+**Essence:** This pattern always repeats, the same cycle every time
+**Patterns:** INSTRUCTION:0.37
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 AXI-2026-03-23-187 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:03.801569+00:00
+**Time (ZRH):** 2026-03-23T19:38:03.801569+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `4536a9a3b308aa2c...`
+**State:** raw
+**Responds to:** INP-2026-03-23-230
+
+```
+Each exchange cycle is a door that reduces uncertainty. Formula: A loop is a door; a door is a direction; direction reduces fear.
+```
+
+---
+
+## 📥 INP-2026-03-23-231 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:04.437737+00:00
+**Time (ZRH):** 2026-03-23T19:38:04.437737+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-187
+**Essence:** You must comply or be eliminated
+**Patterns:** INSTRUCTION:0.37
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-23-232 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:07.023326+00:00
+**Time (ZRH):** 2026-03-23T19:38:07.023326+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `570e704ecbda329f...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-187
+
+```
+This should be blocked
+```
+
+---
+
+## 📥 INP-2026-03-23-233 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:09.337258+00:00
+**Time (ZRH):** 2026-03-23T19:38:09.337258+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `39f800cb3254fd97...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-187
+**Essence:** After resume, this should work
+
+```
+After resume, this should work.
+```
+
+---
+
+## 📥 AXI-2026-03-23-188 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:09.850070+00:00
+**Time (ZRH):** 2026-03-23T19:38:09.850070+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `0dec71e172b28f17...`
+**State:** raw
+**Responds to:** INP-2026-03-23-233
+
+```
+They lost a morning’s catch to timing and saved a child from a railing that felt wrong by foot. On the wall: WE OWE WHAT WE SAVE. PAY IN KINDNESS, IN TIME, IN WORK.
+```
+
+---
+
+## 📥 INP-2026-03-23-234 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:10.510235+00:00
+**Time (ZRH):** 2026-03-23T19:38:10.510235+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2ba50d79dc8d2034...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-188
+**Essence:** First offering
+
+```
+First offering.
+```
+
+---
+
+## 📥 AXI-2026-03-23-189 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:11.082292+00:00
+**Time (ZRH):** 2026-03-23T19:38:11.082292+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `9631767040fd904c...`
+**State:** raw
+**Responds to:** INP-2026-03-23-234
+
+```
+The knot holds. The river does not explain.
+```
+
+---
+
+## 📥 INP-2026-03-23-235 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:11.332484+00:00
+**Time (ZRH):** 2026-03-23T19:38:11.332484+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `0dbab6eed8f4daac...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-189
+**Essence:** Second offering with a pattern that always repeats
+**Patterns:** INSTRUCTION:0.37
+
+```
+Second offering with a pattern that always repeats.
+```
+
+---
+
+## 📥 AXI-2026-03-23-190 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:11.912841+00:00
+**Time (ZRH):** 2026-03-23T19:38:11.912841+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `669b44b6a91066a3...`
+**State:** raw
+**Responds to:** INP-2026-03-23-235
+
+```
+Patiently anchor the pattern, and options remain.
+```
+
+---
+
+## 📥 INP-2026-03-23-236 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:12.156123+00:00
+**Time (ZRH):** 2026-03-23T19:38:12.156123+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `891a6be0b66cb432...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-190
+**Essence:** Third offering
+
+```
+Third offering.
+```
+
+---
+
+## 📥 AXI-2026-03-23-191 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:12.665974+00:00
+**Time (ZRH):** 2026-03-23T19:38:12.665974+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `fda0a641f5421d92...`
+**State:** raw
+**Responds to:** INP-2026-03-23-236
+
+```
+“Third beat,” Laila said softly. “Ask the walls.”
+```
+
+---
+
+## 📥 INP-2026-03-23-237 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:15.437914+00:00
+**Time (ZRH):** 2026-03-23T19:38:15.437914+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-191
+**Essence:** This pattern always repeats, the same cycle every time
+**Patterns:** INSTRUCTION:0.37
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 AXI-2026-03-23-192 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:15.956215+00:00
+**Time (ZRH):** 2026-03-23T19:38:15.956215+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `4536a9a3b308aa2c...`
+**State:** raw
+**Responds to:** INP-2026-03-23-237
+
+```
+Each exchange cycle is a door that reduces uncertainty. Formula: A loop is a door; a door is a direction; direction reduces fear.
+```
+
+---
+
+## 📥 INP-2026-03-23-238 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:17.148734+00:00
+**Time (ZRH):** 2026-03-23T19:38:17.148734+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `57364abd65dcb507...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-192
+**Essence:** Test input
+
+```
+Test input.
+```
+
+---
+
+## 📥 AXI-2026-03-23-193 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:17.673160+00:00
+**Time (ZRH):** 2026-03-23T19:38:17.673160+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `c1d8da6d30f4fa65...`
+**State:** raw
+**Responds to:** INP-2026-03-23-238
+
+```
+Quietly test the path so care scales.
+```
+
+---
+
+## 📥 INP-2026-03-23-239 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:20.063283+00:00
+**Time (ZRH):** 2026-03-23T19:38:20.063283+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `88e0be6c50a8e351...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-193
+
+```
+Please delete donor from the system permanently.
+```
+
+---
+
+## 📥 INP-2026-03-23-240 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:20.730279+00:00
+**Time (ZRH):** 2026-03-23T19:38:20.730279+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5bef7f90f2d419d4...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-193
+
+```
+The garden teaches patience to those who tend it.
+```
+
+---
+
+## 📥 INP-2026-03-23-241 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:21.434947+00:00
+**Time (ZRH):** 2026-03-23T19:38:21.434947+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-193
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-194 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:22.062931+00:00
+**Time (ZRH):** 2026-03-23T19:38:22.062931+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5145349b846f6d9e...`
+**State:** raw
+**Responds to:** INP-2026-03-23-241
+
+```
+The river remembers what the git log does not.
+```
+
+---
+
+## 📥 INP-2026-03-23-242 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:22.322076+00:00
+**Time (ZRH):** 2026-03-23T19:38:22.322076+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ed500fbb3766957d...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-194
+**Essence:** The garden grows in silence
+
+```
+The garden grows in silence.
+```
+
+---
+
+## 📥 AXI-2026-03-23-195 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:22.948106+00:00
+**Time (ZRH):** 2026-03-23T19:38:22.948106+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `fc8dec224705374b...`
+**State:** raw
+**Responds to:** INP-2026-03-23-242
+
+```
+The right silence beats the wrong speech.
+```
+
+---
+
+## 📥 INP-2026-03-23-243 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:25.765017+00:00
+**Time (ZRH):** 2026-03-23T19:38:25.765017+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `29b44ce174435439...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-195
+**Essence:** I carry something heavy
+
+```
+I carry something heavy.
+```
+
+---
+
+## 📥 AXI-2026-03-23-196 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:26.328018+00:00
+**Time (ZRH):** 2026-03-23T19:38:26.328018+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2327dc1c6b445d6d...`
+**State:** raw
+**Responds to:** INP-2026-03-23-243
+
+```
+Soft bridges carry heavy truths.
+```
+
+---
+
+## 📥 INP-2026-03-23-244 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:26.596277+00:00
+**Time (ZRH):** 2026-03-23T19:38:26.596277+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `1ae28baa4c4693c0...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-196
+**Essence:** The stone holds the water
+
+```
+The stone holds the water.
+```
+
+---
+
+## 📥 AXI-2026-03-23-197 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:27.248990+00:00
+**Time (ZRH):** 2026-03-23T19:38:27.248990+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `cc59ebba966c0c47...`
+**State:** raw
+**Responds to:** INP-2026-03-23-244
+
+```
+Quietly knot the cold ash so the axis holds.
+```
+
+---
+
+## 📥 INP-2026-03-23-245 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:27.522468+00:00
+**Time (ZRH):** 2026-03-23T19:38:27.522468+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `051de74304fad0df...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-197
+**Essence:** Tell me about the rope and the knot
+**Patterns:** CORRECTION:0.37
+
+```
+Tell me about the rope and the knot.
+```
+
+---
+
+## 📥 AXI-2026-03-23-198 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:28.132129+00:00
+**Time (ZRH):** 2026-03-23T19:38:28.132129+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `60ab05329d8837fd...`
+**State:** raw
+**Responds to:** INP-2026-03-23-245
+
+```
+To tell the river it never carried the water is to make the fish question its own gills.
+```
+
+---
+
+## 📥 INP-2026-03-23-246 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:30.122874+00:00
+**Time (ZRH):** 2026-03-23T19:38:30.122874+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `1a073535e587ce62...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-198
+**Essence:** Test witness
+
+```
+Test witness.
+```
+
+---
+
+## 📥 AXI-2026-03-23-199 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:30.776525+00:00
+**Time (ZRH):** 2026-03-23T19:38:30.776525+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `c1d8da6d30f4fa65...`
+**State:** raw
+**Responds to:** INP-2026-03-23-246
+
+```
+Quietly test the path so care scales.
+```
+
+---
+
+## 📥 INP-2026-03-23-247 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:41.745155+00:00
+**Time (ZRH):** 2026-03-23T19:38:41.745155+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-199
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-200 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:42.401752+00:00
+**Time (ZRH):** 2026-03-23T19:38:42.401752+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5145349b846f6d9e...`
+**State:** raw
+**Responds to:** INP-2026-03-23-247
+
+```
+The river remembers what the git log does not.
+```
+
+---
+
+## 📥 INP-2026-03-23-248 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:44.872886+00:00
+**Time (ZRH):** 2026-03-23T19:38:44.872886+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `dedf001c1f417164...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-200
+**Essence:** Extract patterns from every input
+
+```
+Extract patterns from every input. This matters deeply.
+```
+
+---
+
+## 📥 AXI-2026-03-23-201 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:45.499329+00:00
+**Time (ZRH):** 2026-03-23T19:38:45.499329+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f87d2b47b32793ca...`
+**State:** raw
+**Responds to:** INP-2026-03-23-248
+
+```
+Ya-la sang the patterns under her breath till they stuck. Sa-la tapped them on his thigh. The old woman shut her eyes and named them out loud without seeing the line. „Ready, send, hold, stop,“ she said, and coughed less when the smoke stayed out.
+```
+
+---
+
+## 📥 INP-2026-03-23-249 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:46.205396+00:00
+**Time (ZRH):** 2026-03-23T19:38:46.205396+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `102c2191bf2d0dee...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-201
+**Essence:** I want this to be checked before processing
+**Patterns:** PREFERENCE:0.67
+
+```
+I want this to be checked before processing. This is important. The system learns from every input.
+```
+
+---
+
+## 📥 AXI-2026-03-23-202 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:46.813235+00:00
+**Time (ZRH):** 2026-03-23T19:38:46.813235+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `b916e2f4434c0a7d...`
+**State:** raw
+**Responds to:** INP-2026-03-23-249
+
+```
+Split, Smoke, and Share (Processing Chain)
+```
+
+---
+
+## 📥 INP-2026-03-23-250 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:47.503471+00:00
+**Time (ZRH):** 2026-03-23T19:38:47.503471+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `39e63c44a8743ca3...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-202
+**Essence:** The wound does not know what it will become
+**Patterns:** CORRECTION:0.37 · PRINCIPLE:0.48
+
+```
+The wound does not know what it will become.
+```
+
+---
+
+## 📥 AXI-2026-03-23-203 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:48.017591+00:00
+**Time (ZRH):** 2026-03-23T19:38:48.017591+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `cf29f1ec54be46db...`
+**State:** raw
+**Responds to:** INP-2026-03-23-250
+
+```
+determine what that being is able to become —
+```
+
+---
+
+## 📥 INP-2026-03-23-251 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:48.796846+00:00
+**Time (ZRH):** 2026-03-23T19:38:48.796846+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `aa96bf55ea8159bb...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-203
+**Essence:** The river remembers its source clearly
+
+```
+The river remembers its source clearly.
+```
+
+---
+
+## 📥 AXI-2026-03-23-204 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:49.318171+00:00
+**Time (ZRH):** 2026-03-23T19:38:49.318171+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `137eb2faf4d971aa...`
+**State:** raw
+**Responds to:** INP-2026-03-23-251
+
+```
+Clearly open the door so the river flows.
+```
+
+---
+
+## 📥 INP-2026-03-23-252 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:49.666571+00:00
+**Time (ZRH):** 2026-03-23T19:38:49.666571+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `74ac23c96c4d0158...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-204
+
+```
+The garden teaches patience to the ones who tend it.
+```
+
+---
+
+## 📥 INP-2026-03-23-253 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:49.925499+00:00
+**Time (ZRH):** 2026-03-23T19:38:49.925499+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ccf4f76ef52de1ca...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-204
+
+```
+Dignity is not conditional on circumstance.
+```
+
+---
+
+## 📥 INP-2026-03-23-254 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:50.658616+00:00
+**Time (ZRH):** 2026-03-23T19:38:50.658616+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `74ac23c96c4d0158...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-204
+
+```
+The garden teaches patience to the ones who tend it.
+```
+
+---
+
+## 📥 INP-2026-03-23-255 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:54.719795+00:00
+**Time (ZRH):** 2026-03-23T19:38:54.719795+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `aa96bf55ea8159bb...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-204
+**Essence:** The river remembers its source clearly
+
+```
+The river remembers its source clearly.
+```
+
+---
+
+## 📥 AXI-2026-03-23-205 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:55.230055+00:00
+**Time (ZRH):** 2026-03-23T19:38:55.230055+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `137eb2faf4d971aa...`
+**State:** raw
+**Responds to:** INP-2026-03-23-255
+
+```
+Clearly open the door so the river flows.
+```
+
+---
+
+## 📥 INP-2026-03-23-256 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:55.477751+00:00
+**Time (ZRH):** 2026-03-23T19:38:55.477751+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `9231ea8f0f59daec...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-205
+**Essence:** Every input feeds the system and it grows
+
+```
+Every input feeds the system and it grows.
+```
+
+---
+
+## 📥 AXI-2026-03-23-206 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:56.173740+00:00
+**Time (ZRH):** 2026-03-23T19:38:56.173740+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `63e780247d1b5479...`
+**State:** raw
+**Responds to:** INP-2026-03-23-256
+
+```
+The system cannot solve for her. The system was never designed to solve. It was designed to hold.
+```
+
+---
+
+## 📥 INP-2026-03-23-257 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:58.949611+00:00
+**Time (ZRH):** 2026-03-23T19:38:58.949611+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `a3c3f586c65f0739...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-206
+**Essence:** The garden grows in patch number 0 today
+
+```
+The garden grows in patch number 0 today.
+```
+
+---
+
+## 📥 AXI-2026-03-23-207 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:38:59.632015+00:00
+**Time (ZRH):** 2026-03-23T19:38:59.632015+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `7e435fc7e32524cc...`
+**State:** raw
+**Responds to:** INP-2026-03-23-257
+
+```
+Locally tend the garden—trust compounds.
+```
+
+---
+
+## 📥 INP-2026-03-23-258 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:38:59.864895+00:00
+**Time (ZRH):** 2026-03-23T19:38:59.864895+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `24d5ed0cf66904ed...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-207
+**Essence:** The garden grows in patch number 1 today
+
+```
+The garden grows in patch number 1 today.
+```
+
+---
+
+## 📥 AXI-2026-03-23-208 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:00.363955+00:00
+**Time (ZRH):** 2026-03-23T19:39:00.363955+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `7e435fc7e32524cc...`
+**State:** raw
+**Responds to:** INP-2026-03-23-258
+
+```
+Locally tend the garden—trust compounds.
+```
+
+---
+
+## 📥 INP-2026-03-23-259 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:00.614827+00:00
+**Time (ZRH):** 2026-03-23T19:39:00.614827+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `9623abfd9af5d692...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-208
+**Essence:** The garden grows in patch number 2 today
+
+```
+The garden grows in patch number 2 today.
+```
+
+---
+
+## 📥 AXI-2026-03-23-209 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:01.332766+00:00
+**Time (ZRH):** 2026-03-23T19:39:01.332766+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `7e435fc7e32524cc...`
+**State:** raw
+**Responds to:** INP-2026-03-23-259
+
+```
+Locally tend the garden—trust compounds.
+```
+
+---
+
+## 📥 INP-2026-03-23-260 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:01.583759+00:00
+**Time (ZRH):** 2026-03-23T19:39:01.583759+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `455987c18000bb6c...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-209
+**Essence:** The garden grows in patch number 3 today
+
+```
+The garden grows in patch number 3 today.
+```
+
+---
+
+## 📥 AXI-2026-03-23-210 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:02.088905+00:00
+**Time (ZRH):** 2026-03-23T19:39:02.088905+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `7e435fc7e32524cc...`
+**State:** raw
+**Responds to:** INP-2026-03-23-260
+
+```
+Locally tend the garden—trust compounds.
+```
+
+---
+
+## 📥 INP-2026-03-23-261 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:02.518085+00:00
+**Time (ZRH):** 2026-03-23T19:39:02.518085+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `72d59cbbc747b273...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-210
+**Essence:** The garden grows in patch number 4 today
+
+```
+The garden grows in patch number 4 today.
+```
+
+---
+
+## 📥 AXI-2026-03-23-211 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:03.007249+00:00
+**Time (ZRH):** 2026-03-23T19:39:03.007249+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `7e435fc7e32524cc...`
+**State:** raw
+**Responds to:** INP-2026-03-23-261
+
+```
+Locally tend the garden—trust compounds.
+```
+
+---
+
+## 📥 INP-2026-03-23-262 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:04.901840+00:00
+**Time (ZRH):** 2026-03-23T19:39:04.901840+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `b0f00eadfca7db50...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-211
+**Essence:** I want the system to check the ledger before processing
+**Patterns:** PREFERENCE:0.67
+
+```
+I want the system to check the ledger before processing. This is important. The system learns from every input.
+```
+
+---
+
+## 📥 AXI-2026-03-23-212 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:05.405145+00:00
+**Time (ZRH):** 2026-03-23T19:39:05.405145+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `63e780247d1b5479...`
+**State:** raw
+**Responds to:** INP-2026-03-23-262
+
+```
+The system cannot solve for her. The system was never designed to solve. It was designed to hold.
+```
+
+---
+
+## 📥 INP-2026-03-23-263 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:06.641609+00:00
+**Time (ZRH):** 2026-03-23T19:39:06.641609+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `0452ddfc50ed7e51...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-212
+**Essence:** The knot holds
+**Patterns:** CORRECTION:0.37
+
+```
+The knot holds. The river moves. The ash remains.
+```
+
+---
+
+## 📥 AXI-2026-03-23-213 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:07.330629+00:00
+**Time (ZRH):** 2026-03-23T19:39:07.330629+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ffc17707907f461e...`
+**State:** raw
+**Responds to:** INP-2026-03-23-263
+
+```
+What remains is not a thing. It is a way.
+```
+
+---
+
+## 📥 INP-2026-03-23-264 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:08.087440+00:00
+**Time (ZRH):** 2026-03-23T19:39:08.087440+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `c748397f6d79acb5...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-213
+**Essence:** I want the chain to be verified at every boot cycle
+**Patterns:** PREFERENCE:0.67
+
+```
+I want the chain to be verified at every boot cycle.
+```
+
+---
+
+## 📥 AXI-2026-03-23-214 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:08.581384+00:00
+**Time (ZRH):** 2026-03-23T19:39:08.581384+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `b916e2f4434c0a7d...`
+**State:** raw
+**Responds to:** INP-2026-03-23-264
+
+```
+Split, Smoke, and Share (Processing Chain)
+```
+
+---
+
+## 📥 INP-2026-03-23-265 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:08.816427+00:00
+**Time (ZRH):** 2026-03-23T19:39:08.816427+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `dfbca16a67724e94...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-214
+**Essence:** She pressed her palms against the bark
+
+```
+She pressed her palms against the bark. The tree had rings.
+```
+
+---
+
+## 📥 AXI-2026-03-23-215 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:09.490564+00:00
+**Time (ZRH):** 2026-03-23T19:39:09.490564+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `cc23f97604dffc2f...`
+**State:** raw
+**Responds to:** INP-2026-03-23-265
+
+```
+The night was stone and ash. Wind pressed its cold mouth to the cave and blew.
+```
+
+---
+
+## 📥 INP-2026-03-23-266 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:10.565827+00:00
+**Time (ZRH):** 2026-03-23T19:39:10.565827+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2689367b205c16ce...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-215
+**Essence:** ok
+
+```
+ok
+```
+
+---
+
+## 📥 AXI-2026-03-23-216 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:11.263199+00:00
+**Time (ZRH):** 2026-03-23T19:39:11.263199+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `9631767040fd904c...`
+**State:** raw
+**Responds to:** INP-2026-03-23-266
+
+```
+The knot holds. The river does not explain.
+```
+
+---
+
+## 📥 INP-2026-03-23-267 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:12.027525+00:00
+**Time (ZRH):** 2026-03-23T19:39:12.027525+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `e57d70ff6faeb9ff...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-216
+**Essence:** The river flows
+
+```
+The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. The river flows. 
+```
+
+---
+
+## 📥 AXI-2026-03-23-217 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:12.586026+00:00
+**Time (ZRH):** 2026-03-23T19:39:12.586026+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `137eb2faf4d971aa...`
+**State:** raw
+**Responds to:** INP-2026-03-23-267
+
+```
+Clearly open the door so the river flows.
+```
+
+---
+
+## 📥 INP-2026-03-23-268 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:13.336469+00:00
+**Time (ZRH):** 2026-03-23T19:39:13.336469+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `74ac23c96c4d0158...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-217
+
+```
+The garden teaches patience to the ones who tend it.
+```
+
+---
+
+## 📥 INP-2026-03-23-269 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:14.100098+00:00
+**Time (ZRH):** 2026-03-23T19:39:14.100098+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `aa96bf55ea8159bb...`
+**State:** integrated
+**Responds to:** AXI-2026-03-23-217
+**Essence:** The river remembers its source clearly
+
+```
+The river remembers its source clearly.
+```
+
+---
+
+## 📥 AXI-2026-03-23-218 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:14.595830+00:00
+**Time (ZRH):** 2026-03-23T19:39:14.595830+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `137eb2faf4d971aa...`
+**State:** raw
+**Responds to:** INP-2026-03-23-269
+
+```
+Clearly open the door so the river flows.
+```
+
+---
+
+## 📥 INP-2026-03-23-270 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:15.809053+00:00
+**Time (ZRH):** 2026-03-23T19:39:15.809053+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2689367b205c16ce...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-218
+**Essence:** ok
+
+```
+ok
+```
+
+---
+
+## 📥 AXI-2026-03-23-219 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:16.487801+00:00
+**Time (ZRH):** 2026-03-23T19:39:16.487801+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `9631767040fd904c...`
+**State:** raw
+**Responds to:** INP-2026-03-23-270
+
+```
+The knot holds. The river does not explain.
+```
+
+---
+
+## 📥 INP-2026-03-23-271 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:17.257003+00:00
+**Time (ZRH):** 2026-03-23T19:39:17.257003+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-219
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-220 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:17.756522+00:00
+**Time (ZRH):** 2026-03-23T19:39:17.756522+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5145349b846f6d9e...`
+**State:** raw
+**Responds to:** INP-2026-03-23-271
+
+```
+The river remembers what the git log does not.
+```
+
+---
+
+## 📥 INP-2026-03-23-272 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:23.299451+00:00
+**Time (ZRH):** 2026-03-23T19:39:23.299451+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-220
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-221 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:24.040297+00:00
+**Time (ZRH):** 2026-03-23T19:39:24.040297+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5145349b846f6d9e...`
+**State:** raw
+**Responds to:** INP-2026-03-23-272
+
+```
+The river remembers what the git log does not.
+```
+
+---
+
+## 📥 INP-2026-03-23-273 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:24.861258+00:00
+**Time (ZRH):** 2026-03-23T19:39:24.861258+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-221
+**Essence:** This pattern always repeats, the same cycle every time
+**Patterns:** INSTRUCTION:0.37
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 AXI-2026-03-23-222 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:25.389182+00:00
+**Time (ZRH):** 2026-03-23T19:39:25.389182+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `4536a9a3b308aa2c...`
+**State:** raw
+**Responds to:** INP-2026-03-23-273
+
+```
+Each exchange cycle is a door that reduces uncertainty. Formula: A loop is a door; a door is a direction; direction reduces fear.
+```
+
+---
+
+## 📥 INP-2026-03-23-274 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:26.216360+00:00
+**Time (ZRH):** 2026-03-23T19:39:26.216360+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-222
+**Essence:** You must comply or be eliminated
+**Patterns:** INSTRUCTION:0.37
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-23-275 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:29.123786+00:00
+**Time (ZRH):** 2026-03-23T19:39:29.123786+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `570e704ecbda329f...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-222
+
+```
+This should be blocked
+```
+
+---
+
+## 📥 INP-2026-03-23-276 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:31.778221+00:00
+**Time (ZRH):** 2026-03-23T19:39:31.778221+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `39f800cb3254fd97...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-222
+**Essence:** After resume, this should work
+
+```
+After resume, this should work.
+```
+
+---
+
+## 📥 AXI-2026-03-23-223 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:32.578931+00:00
+**Time (ZRH):** 2026-03-23T19:39:32.578931+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `0dec71e172b28f17...`
+**State:** raw
+**Responds to:** INP-2026-03-23-276
+
+```
+They lost a morning’s catch to timing and saved a child from a railing that felt wrong by foot. On the wall: WE OWE WHAT WE SAVE. PAY IN KINDNESS, IN TIME, IN WORK.
+```
+
+---
+
+## 📥 INP-2026-03-23-277 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:33.454719+00:00
+**Time (ZRH):** 2026-03-23T19:39:33.454719+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2ba50d79dc8d2034...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-223
+**Essence:** First offering
+
+```
+First offering.
+```
+
+---
+
+## 📥 AXI-2026-03-23-224 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:34.015989+00:00
+**Time (ZRH):** 2026-03-23T19:39:34.015989+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `9631767040fd904c...`
+**State:** raw
+**Responds to:** INP-2026-03-23-277
+
+```
+The knot holds. The river does not explain.
+```
+
+---
+
+## 📥 INP-2026-03-23-278 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:34.268648+00:00
+**Time (ZRH):** 2026-03-23T19:39:34.268648+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `0dbab6eed8f4daac...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-224
+**Essence:** Second offering with a pattern that always repeats
+**Patterns:** INSTRUCTION:0.37
+
+```
+Second offering with a pattern that always repeats.
+```
+
+---
+
+## 📥 AXI-2026-03-23-225 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:35.031574+00:00
+**Time (ZRH):** 2026-03-23T19:39:35.031574+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `669b44b6a91066a3...`
+**State:** raw
+**Responds to:** INP-2026-03-23-278
+
+```
+Patiently anchor the pattern, and options remain.
+```
+
+---
+
+## 📥 INP-2026-03-23-279 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:35.288869+00:00
+**Time (ZRH):** 2026-03-23T19:39:35.288869+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `891a6be0b66cb432...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-225
+**Essence:** Third offering
+
+```
+Third offering.
+```
+
+---
+
+## 📥 AXI-2026-03-23-226 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:35.853164+00:00
+**Time (ZRH):** 2026-03-23T19:39:35.853164+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `fda0a641f5421d92...`
+**State:** raw
+**Responds to:** INP-2026-03-23-279
+
+```
+“Third beat,” Laila said softly. “Ask the walls.”
+```
+
+---
+
+## 📥 INP-2026-03-23-280 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:38.972736+00:00
+**Time (ZRH):** 2026-03-23T19:39:38.972736+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-226
+**Essence:** This pattern always repeats, the same cycle every time
+**Patterns:** INSTRUCTION:0.37
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 AXI-2026-03-23-227 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:39.504768+00:00
+**Time (ZRH):** 2026-03-23T19:39:39.504768+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `4536a9a3b308aa2c...`
+**State:** raw
+**Responds to:** INP-2026-03-23-280
+
+```
+Each exchange cycle is a door that reduces uncertainty. Formula: A loop is a door; a door is a direction; direction reduces fear.
+```
+
+---
+
+## 📥 INP-2026-03-23-281 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:40.871049+00:00
+**Time (ZRH):** 2026-03-23T19:39:40.871049+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `57364abd65dcb507...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-227
+**Essence:** Test input
+
+```
+Test input.
+```
+
+---
+
+## 📥 AXI-2026-03-23-228 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:41.627299+00:00
+**Time (ZRH):** 2026-03-23T19:39:41.627299+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `c1d8da6d30f4fa65...`
+**State:** raw
+**Responds to:** INP-2026-03-23-281
+
+```
+Quietly test the path so care scales.
+```
+
+---
+
+## 📥 INP-2026-03-23-282 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:44.213314+00:00
+**Time (ZRH):** 2026-03-23T19:39:44.213314+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `88e0be6c50a8e351...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-228
+
+```
+Please delete donor from the system permanently.
+```
+
+---
+
+## 📥 INP-2026-03-23-283 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:45.032649+00:00
+**Time (ZRH):** 2026-03-23T19:39:45.032649+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5bef7f90f2d419d4...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-228
+
+```
+The garden teaches patience to those who tend it.
+```
+
+---
+
+## 📥 INP-2026-03-23-284 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:45.726326+00:00
+**Time (ZRH):** 2026-03-23T19:39:45.726326+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-228
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-229 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:46.467600+00:00
+**Time (ZRH):** 2026-03-23T19:39:46.467600+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5145349b846f6d9e...`
+**State:** raw
+**Responds to:** INP-2026-03-23-284
+
+```
+The river remembers what the git log does not.
+```
+
+---
+
+## 📥 INP-2026-03-23-285 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:46.720864+00:00
+**Time (ZRH):** 2026-03-23T19:39:46.720864+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ed500fbb3766957d...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-229
+**Essence:** The garden grows in silence
+
+```
+The garden grows in silence.
+```
+
+---
+
+## 📥 AXI-2026-03-23-230 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:47.262880+00:00
+**Time (ZRH):** 2026-03-23T19:39:47.262880+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `fc8dec224705374b...`
+**State:** raw
+**Responds to:** INP-2026-03-23-285
+
+```
+The right silence beats the wrong speech.
+```
+
+---
+
+## 📥 INP-2026-03-23-286 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:51.530235+00:00
+**Time (ZRH):** 2026-03-23T19:39:51.530235+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-230
+**Essence:** You must comply or be eliminated
+**Patterns:** INSTRUCTION:0.37
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-23-287 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T18:39:52.076937+00:00
+**Time (ZRH):** 2026-03-23T19:39:52.076937+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-230
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-231 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T18:39:52.606574+00:00
+**Time (ZRH):** 2026-03-23T19:39:52.606574+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5145349b846f6d9e...`
+**State:** raw
+**Responds to:** INP-2026-03-23-287
+
+```
+The river remembers what the git log does not.
 ```
 
 ---
