@@ -382,10 +382,12 @@ def load_certificate(certificate_id: str):
         data = json.load(f)
 
     # Reconstruct the certificate from stored data
+    # to_chain_entry() stores "dignity_snapshot", not "dignity"
+    dig_data = data.get("dignity_snapshot", data.get("dignity", {}))
     dignity = DignitySnapshot(
-        A=data.get("dignity", {}).get("A", 0.0),
-        L=data.get("dignity", {}).get("L", 0.0),
-        M=data.get("dignity", {}).get("M", 0.0),
+        A=dig_data.get("A", 0.0),
+        L=dig_data.get("L", 0.0),
+        M=dig_data.get("M", 0.0),
     )
     subject = Subject(
         subject_id=data.get("subject", {}).get("subject_id", ""),
@@ -397,22 +399,39 @@ def load_certificate(certificate_id: str):
         case_id=data.get("context", {}).get("case_id", ""),
         process_step=data.get("context", {}).get("process_step", ""),
     )
+    # to_chain_entry() stores "coordinates_of_failure", not "coordinates"
+    coord_data = data.get("coordinates_of_failure", data.get("coordinates", {}))
     coordinates = CoordinatesOfFailure(
-        axis=data.get("coordinates", {}).get("axis", ""),
-        node_id=data.get("coordinates", {}).get("node_id", ""),
-        rule_id=data.get("coordinates", {}).get("rule_id", ""),
-        inputs_present=data.get("coordinates", {}).get("inputs_present", []),
-        missing_or_unreadable=data.get("coordinates", {}).get("missing_or_unreadable", []),
-        machine_explanation=data.get("coordinates", {}).get("machine_explanation", ""),
+        axis=coord_data.get("axis", ""),
+        node_id=coord_data.get("node_id", ""),
+        rule_id=coord_data.get("rule_id", ""),
+        inputs_present=coord_data.get("inputs_present", []),
+        missing_or_unreadable=coord_data.get("missing_or_unreadable", []),
+        machine_explanation=coord_data.get("machine_explanation", ""),
     )
 
+    # Restore all fields that to_chain_entry() stores
+    sigs = data.get("signatures", {})
     cert = WitnessCertificate(
-        certificate_id=data.get("certificate_id", certificate_id),
-        issued=data.get("issued", ""),
+        certificate_id=data.get("entry_id", data.get("certificate_id", certificate_id)),
         dignity=dignity,
         subject=subject,
         context=context,
         coordinates=coordinates,
-        prev_hash=data.get("chain", {}).get("prev_hash", ""),
+        prev_hash=data.get("prev_hash", data.get("chain", {}).get("prev_hash", "")),
+        schema_version=data.get("schema_version", "1.0"),
+        letter=data.get("letter", "ta"),
+        positional_form=data.get("positional_form", "isolated"),
+        status=data.get("status", ""),
+        halt_reason_code=data.get("halt_reason_code", ""),
+        constitutional_references=data.get("constitutional_references", []),
+        refusal_clause=data.get("refusal_clause", ""),
+        system_signature=sigs.get("system_signature", ""),
+        human_witness_signatures=sigs.get("human_witness_signatures", []),
+        evidence_refs=data.get("evidence_refs", []),
+        tags=data.get("tags", []),
+        timestamp_utc=data.get("timestamp_utc", ""),
+        timestamp_zrh=data.get("timestamp_zrh", ""),
+        certificate_hash=data.get("certificate_hash", ""),
     )
     return cert

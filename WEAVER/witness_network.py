@@ -52,6 +52,7 @@ class WitnessRecord:
             "chain_hash": self.chain_hash,
             "sequence": self.sequence,
             "timestamp": self.timestamp,
+            "metadata": self.metadata,
         }
 
 

@@ -127,6 +127,7 @@ from WEAVER.witness_certificate import (
 )
 # ── Voice Engine: canon-grounded response generation ──
 from WEAVER.voice_engine import VoiceEngine, detect_register
+from WEAVER.conversation_memory import ConversationMemory, TurnSnapshot
 # ── Triple Gate: SLOW + COMPUTE BUDGET + GO REQUIREMENT (Phase -3) ──
 # "Never ever exceed your computing power. You must ask for GO. Always slowly." — V-001
 from WEAVER.slow_gate import (
@@ -384,6 +385,8 @@ class Organism:
         self._distillery = None  # lazy-loaded to avoid circular imports
         # ── Voice Engine: canon-grounded response generation ──
         self._voice_engine = VoiceEngine()
+        # ── Conversation Memory: pattern tracking across turns ──
+        self._conversation_memory = ConversationMemory()
         # ── Letter Chain (EXP-002): ontology + witness certificates ──
         self._witness_certs_generated = 0
         self._last_sense = None
@@ -1155,11 +1158,13 @@ class Organism:
         # 3b. SAY — render output through Voice Engine (canon-grounded)
         # SENSE-aware: if SENSE recommends asking, the question takes priority
         # Otherwise: Voice Engine speaks from canon (proverbs, narratives, golden utterances)
+        # Always detect register — needed by ConversationMemory even if sense asks
+        input_register = detect_register(donor_input)
+        voice_response = None
         if sense_reading.ask_recommended and sense_reading.ask_question:
             response_text = sense_reading.ask_question
         else:
             # Voice Engine: respond from canon, register-matched
-            input_register = detect_register(donor_input)
             voice_response = self._voice_engine.respond(
                 donor_input,
                 dignity=dignity.D,
@@ -1190,11 +1195,46 @@ class Organism:
 
         # ── Phase 4: POST-PROCESSING ────────────────────────────
 
-        # 4a. WITNESS — record exchange on immutable chain (Seed #2)
+        # 4a. CONVERSATION MEMORY — record turn awareness
+        canon_sources = voice_response.sources if voice_response else []
+        themes = [d.get("type", "") for d in drops] if drops else []
+        turn_snapshot = TurnSnapshot(
+            exchange_id=ex_id,
+            register=input_register,
+            themes=themes,
+            confidence=sense_reading.mode_confidence if hasattr(sense_reading, "mode_confidence") else 0.5,
+            dignity_score=dignity.D,
+            canon_sources=canon_sources,
+        )
+        self._conversation_memory.record_turn(turn_snapshot)
+        conv_snapshot = self._conversation_memory.snapshot()
+
+        # 4a-ii. WITNESS — record exchange on immutable chain (Seed #2)
+        # Full metadata: dignity check, intelligence result, conversation shape
+        witness_metadata = {
+            "dignity": {
+                "D": dignity.D,
+                "A": self._last_measurement.A.final_score if self._last_measurement else 0.0,
+                "L": self._last_measurement.L.final_score if self._last_measurement else 0.0,
+                "M": self._last_measurement.M.final_score if self._last_measurement else 0.0,
+            },
+            "intelligence": {
+                "register": input_register,
+                "themes": themes,
+                "confidence": turn_snapshot.confidence,
+                "mode": sense_reading.mode.value if hasattr(sense_reading, "mode") and hasattr(sense_reading.mode, "value") else str(getattr(sense_reading, "mode", "")),
+                "canon_sources": canon_sources[:10],
+                "pillar_profile": self._last_pillar_profile or {},
+            },
+            "conversation": conv_snapshot.to_dict(),
+            "patterns": len(candidates),
+            "drops": len(drops),
+        }
         self._witness_net.witness(
             "exchange",
             f"{ex_id}: D={dignity.D:.1f}, patterns={len(candidates)}, drops={len(drops)}",
             "organism",
+            metadata=witness_metadata,
         )
 
         # 4b. NINTH OPERATOR — the word loop
