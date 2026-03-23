@@ -772,6 +772,10 @@ class Organism:
 
         # ── Phase 2: PROCESSING ─────────────────────────────────
 
+        # Initialize variables that may be referenced in early-return paths
+        pillar_profile = None
+        metadata_event_id = None
+
         # 2a. TURN — open exchange
         self._exchange_counter += 1
         ex_id = f"EX-{self._exchange_counter:06d}"
