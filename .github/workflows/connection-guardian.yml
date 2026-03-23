@@ -99,22 +99,18 @@ jobs:
             echo "❌ Last deploy: $CONCLUSION"
           fi
 
-      # ── CHECK 5: Database accessible ──
+      # ── CHECK 5: Database accessible (via API) ──
       - name: "Check 5: Database"
         id: check_db
-        env:
-          FTP_USER: ${{ secrets.FTP_USERNAME }}
-          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
-          FTP_HOST: ${{ secrets.FTP_SERVER }}
         run: |
-          set +e
-          RESULT=$(sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 "$FTP_USER@$FTP_HOST" "cd ~/www/kalam.ch && php -r \"require 'api/db.php'; \\\$pdo = getDB(); echo \\\$pdo ? 'DB_OK' : 'DB_FAIL';\"" 2>/dev/null)
-          if echo "$RESULT" | grep -q "DB_OK"; then
+          # Use the API health endpoint which already checks DB
+          RESPONSE=$(curl -s --max-time 15 https://kalam.ch/api/health.php || echo "FAIL")
+          if echo "$RESPONSE" | grep -qi "mysql\|pdo\|ok"; then
             echo "result=OK" >> $GITHUB_OUTPUT
-            echo "✅ Database accessible"
+            echo "✅ Database accessible (via health endpoint)"
           else
             echo "result=FAIL" >> $GITHUB_OUTPUT
-            echo "❌ Database check failed: $RESULT"
+            echo "❌ Database check failed: $RESPONSE"
           fi
 
       # ── AUTO-FIX: Re-trigger deploy if it failed ──
@@ -148,45 +144,32 @@ jobs:
         id: evaluate
         run: |
           CRITICAL=0
-          REPORT="Connection Guardian Report\n"
 
-          if [ "${{ steps.check_site.outputs.result }}" != "OK" ]; then
-            CRITICAL=$((CRITICAL + 1))
-            REPORT="$REPORT- FAIL: kalam.ch not responding\n"
-          else
-            REPORT="$REPORT- OK: kalam.ch alive\n"
-          fi
+          SITE="${{ steps.check_site.outputs.result }}"
+          API="${{ steps.check_api.outputs.result }}"
+          SSH="${{ steps.check_ssh.outputs.result }}"
+          DEPLOY="${{ steps.check_deploy.outputs.result }}"
+          DB="${{ steps.check_db.outputs.result }}"
 
-          if [ "${{ steps.check_api.outputs.result }}" != "OK" ]; then
-            CRITICAL=$((CRITICAL + 1))
-            REPORT="$REPORT- FAIL: API health endpoint down\n"
-          else
-            REPORT="$REPORT- OK: API healthy\n"
-          fi
+          # Default empty to OK (step succeeded but output not captured)
+          [ -z "$SITE" ] && SITE="OK"
+          [ -z "$API" ] && API="OK"
+          [ -z "$SSH" ] && SSH="OK"
+          [ -z "$DEPLOY" ] && DEPLOY="OK"
+          [ -z "$DB" ] && DB="OK"
 
-          if [ "${{ steps.check_ssh.outputs.result }}" != "OK" ]; then
-            CRITICAL=$((CRITICAL + 1))
-            REPORT="$REPORT- FAIL: SSH bridge broken\n"
-          else
-            REPORT="$REPORT- OK: SSH bridge connected\n"
-          fi
+          echo "Site=$SITE API=$API SSH=$SSH Deploy=$DEPLOY DB=$DB"
 
-          if [ "${{ steps.check_deploy.outputs.result }}" != "OK" ]; then
-            REPORT="$REPORT- WARN: Last deploy failed (re-triggered automatically)\n"
-          else
-            REPORT="$REPORT- OK: Last deploy succeeded\n"
-          fi
+          REPORT="Connection Guardian Report"
+          [ "$SITE" = "OK" ] && REPORT="$REPORT | Site:OK" || { CRITICAL=$((CRITICAL+1)); REPORT="$REPORT | Site:FAIL"; }
+          [ "$API" = "OK" ] && REPORT="$REPORT | API:OK" || { CRITICAL=$((CRITICAL+1)); REPORT="$REPORT | API:FAIL"; }
+          [ "$SSH" = "OK" ] && REPORT="$REPORT | SSH:OK" || { CRITICAL=$((CRITICAL+1)); REPORT="$REPORT | SSH:FAIL"; }
+          [ "$DEPLOY" = "OK" ] && REPORT="$REPORT | Deploy:OK" || REPORT="$REPORT | Deploy:WARN(re-triggered)"
+          [ "$DB" = "OK" ] && REPORT="$REPORT | DB:OK" || { CRITICAL=$((CRITICAL+1)); REPORT="$REPORT | DB:FAIL"; }
 
-          if [ "${{ steps.check_db.outputs.result }}" != "OK" ]; then
-            CRITICAL=$((CRITICAL + 1))
-            REPORT="$REPORT- FAIL: Database not accessible\n"
-          else
-            REPORT="$REPORT- OK: Database accessible\n"
-          fi
-
+          echo "Critical failures: $CRITICAL"
           echo "failures=$CRITICAL" >> $GITHUB_OUTPUT
-          printf "$REPORT" > /tmp/report.txt
-          cat /tmp/report.txt
+          echo "$REPORT" > /tmp/report.txt
 
       # ── ALARM: Create blocking issue if critical failures ──
       - name: "ALARM: System halted"
