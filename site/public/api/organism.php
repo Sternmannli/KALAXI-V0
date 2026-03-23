@@ -246,7 +246,9 @@ function org_measure_dignity(string $text): array {
 function org_load_covenants(): array {
     $path = __DIR__ . '/../data/covenants.json';
     if (!file_exists($path)) return [];
-    return json_decode(file_get_contents($path), true) ?: [];
+    $data = json_decode(file_get_contents($path), true) ?: [];
+    // Covenants are in 'entries' array, not at root
+    return $data['entries'] ?? $data;
 }
 
 /**
