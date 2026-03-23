@@ -62,7 +62,7 @@ from WEAVER.dignity_check import check_dignity, check_collective_dignity
 from WEAVER.dignity_measure import measure_dignity
 from WEAVER.weave import ingest, extract_essence, propose_proverb, wisdom_mirror
 from WEAVER.keep import store, retrieve, lock, list_artifacts, receipt_count
-from WEAVER.dignity_drift import DignityDrift, DriftLevel
+from WEAVER.dignity_drift import DignityDrift, DriftLevel, DriftAlert
 from WEAVER.shelter import Shelter
 from WEAVER.federation import Federation
 from WEAVER.srvp import SRVPEvaluator
@@ -835,6 +835,13 @@ class Organism:
         # 2d. CHECK — dignity gate on input
         dignity = check_dignity(donor_input, felt_domain=felt_domain)
         self._last_dignity = dignity.audit_object()
+
+        # Default drift_alert for early-return paths (before Phase 3 assigns the real one)
+        drift_alert = DriftAlert(
+            level=DriftLevel.STABLE, dD_dt=0.0, current_D=dignity.D,
+            window_size=0, trend_readings=0, message="", timestamp=now_utc,
+            recommended_action="none",
+        )
 
         # 2d-ii. PRESENCE-enhanced dignity (Layer 0 axiom)
         if presence.presence_assumed:
