@@ -70,6 +70,8 @@ class CanonEntry:
     book: str = ""
     word_set: set = field(default_factory=set)
     word_freq: Dict[str, float] = field(default_factory=dict)
+    word_count: int = 0  # number of words in the text
+    is_complete: bool = True  # whether the text is a complete sentence
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -200,6 +202,46 @@ class CanonIndex:
         text = re.sub(r'\s+', ' ', text).strip()
         return text
 
+    @staticmethod
+    def _is_complete_sentence(text: str) -> bool:
+        """Check whether text is a complete sentence (not a fragment)."""
+        s = text.strip()
+        if not s:
+            return False
+        # Fragments: starts with lowercase
+        if s[0].islower() and not s.startswith("i ") and not s.startswith("i'"):
+            return False
+        # Fragments: starts with conjunction
+        if re.match(r'^(And|But|Or|So|Yet|For|Nor)\s', s):
+            return False
+        # Ends with terminal punctuation
+        if s[-1] in '.!?"\'—…':
+            return True
+        # Short text without punctuation is likely a fragment
+        if len(s.split()) <= 5:
+            return False
+        return True
+
+    @staticmethod
+    def _extract_sentences(text: str) -> List[str]:
+        """Split text into complete sentences. Returns the best ones."""
+        # Split on sentence boundaries
+        raw = re.split(r'(?<=[.!?])\s+', text)
+        sentences = []
+        for s in raw:
+            s = s.strip()
+            if not s or len(s) < 8:
+                continue
+            # Skip fragments that start with conjunctions
+            if re.match(r'^(and|but|or|so|yet|for|nor)\s', s, re.IGNORECASE):
+                # Capitalize and include if substantial
+                if len(s.split()) >= 5:
+                    s = s[0].upper() + s[1:]
+                    sentences.append(s)
+                continue
+            sentences.append(s)
+        return sentences
+
     def _add_entry(self, text: str, source: str, **kwargs):
         cleaned = self._clean_text(text)
         if not cleaned or len(cleaned) < 8:
@@ -210,11 +252,15 @@ class CanonIndex:
         freq = Counter(tokens)
         total = sum(freq.values())
         word_freq = {w: c / total for w, c in freq.items()}
+        word_count = len(cleaned.split())
+        is_complete = self._is_complete_sentence(cleaned)
         entry = CanonEntry(
             text=cleaned,
             source=source,
             word_set=set(tokens),
             word_freq=word_freq,
+            word_count=word_count,
+            is_complete=is_complete,
             **kwargs,
         )
         self._entries.append(entry)
@@ -510,6 +556,97 @@ AXI_SYSTEM_PROMPT = (
 )
 
 
+def _compute_real_confidence(
+    raw_score: float,
+    entry: CanonEntry,
+    register: str,
+    fields: Dict[str, float],
+    query_tokens: set,
+) -> float:
+    """
+    Compute real confidence from multiple signals, not a single multiplier.
+
+    Factors:
+    - raw_score: TF-IDF similarity (0-1ish, typically 0.01-0.5)
+    - vocabulary overlap: what fraction of query words appear in the entry
+    - register match: does the entry's emotional register match the detected one
+    - field relevance: does the entry align with active semantic fields
+    - sentence completeness: complete sentences are more trustworthy
+    - source authority: golden > proverb > narrative > treasure > essence > covenant
+    """
+    # 1. Similarity signal (normalized from raw TF-IDF, typically 0-0.5 → 0-1)
+    sim_signal = min(raw_score * 3.0, 1.0)
+
+    # 2. Vocabulary overlap signal
+    if entry.word_set and query_tokens:
+        overlap = len(entry.word_set & query_tokens)
+        overlap_signal = min(overlap / max(len(query_tokens), 1), 1.0)
+    else:
+        overlap_signal = 0.0
+
+    # 3. Register match signal
+    register_signal = 0.7 if entry.register == register else 0.3
+
+    # 4. Source authority signal
+    authority = {
+        "golden": 1.0, "proverb": 0.85, "narrative": 0.75,
+        "treasure": 0.7, "essence": 0.6, "covenant": 0.5,
+    }
+    authority_signal = authority.get(entry.source, 0.4)
+
+    # 5. Sentence completeness signal
+    completeness_signal = 0.9 if entry.is_complete else 0.4
+
+    # 6. Length quality signal — too short is fragile, too long is unfocused
+    wc = entry.word_count
+    if wc < 4:
+        length_signal = 0.2
+    elif wc <= 25:
+        length_signal = 0.9  # sweet spot for AXI voice
+    elif wc <= 60:
+        length_signal = 0.7
+    else:
+        length_signal = 0.5
+
+    # Weighted combination
+    confidence = (
+        sim_signal * 0.30 +
+        overlap_signal * 0.15 +
+        register_signal * 0.15 +
+        authority_signal * 0.15 +
+        completeness_signal * 0.15 +
+        length_signal * 0.10
+    )
+
+    # Hard floor and ceiling
+    return max(0.05, min(confidence, 0.95))
+
+
+def _is_text_complete(text: str) -> bool:
+    """Check if text is a complete, presentable sentence (standalone function)."""
+    s = text.strip()
+    if not s or len(s) < 8:
+        return False
+    # Starts with lowercase (not "i" or "i'")
+    if s[0].islower() and not s.startswith("i ") and not s.startswith("i'"):
+        return False
+    # Starts with conjunction
+    if re.match(r'^(And|But|Or|So|Yet|For|Nor)\s', s):
+        return False
+    # Ends with dangling punctuation
+    if s.endswith(('—', '–', '-', ':')):
+        return False
+    # Very short without terminal punctuation
+    if len(s.split()) <= 3 and s[-1] not in '.!?"\'…':
+        return False
+    return True
+
+
+# Global counter for response diversity (reset per-instance via CoreIntelligence)
+_response_history: List[str] = []
+_HISTORY_SIZE = 20
+
+
 def _compose_local_response(
     donor_input: str,
     comprehension: Dict,
@@ -520,33 +657,44 @@ def _compose_local_response(
     Uses comprehension to find the most relevant canon fragments,
     then selects and optionally combines them.
 
+    Architecture:
+    - GATHER: multi-strategy search (direct, theme, field)
+    - SCORE: real confidence from 6 signals
+    - FILTER: sentence completeness, diversity check
+    - SELECT: best candidate that passes all filters
+    - CLEAN: strip structural noise
+
     Returns (response_text, source_ids, confidence).
     """
+    global _response_history
+
     register = comprehension["register"]
     themes = comprehension["themes"]
     fields = comprehension.get("fields", {})
     patterns = comprehension.get("patterns", [])
+    # Use proper tokenization with stopword removal for overlap signal
+    raw_words = re.findall(r'[a-zA-Z]+', donor_input.lower())
+    query_tokens = {w for w in raw_words if w not in STOP_WORDS and len(w) > 2}
 
-    # Search canon with the actual input
-    results = canon_index.search(donor_input, top_k=10)
+    # ── GATHER: multi-strategy search ──
+
+    results = canon_index.search(donor_input, top_k=15)
 
     # Also search by detected themes
     theme_query = " ".join(themes[:5])
     if theme_query:
-        theme_results = canon_index.search(theme_query, top_k=5)
-        # Merge without duplicates
+        theme_results = canon_index.search(theme_query, top_k=8)
         seen = {id(e) for _, e in results}
         for score, entry in theme_results:
             if id(entry) not in seen:
-                results.append((score * 0.8, entry))  # slight discount for indirect match
+                results.append((score * 0.8, entry))
                 seen.add(id(entry))
 
     if not results:
-        # Last resort: search by dominant field
         for field_name in fields:
-            field_results = canon_index.search_by_field(field_name, top_k=3)
+            field_results = canon_index.search_by_field(field_name, top_k=5)
             for entry in field_results:
-                results.append((0.1, entry))
+                results.append((0.05, entry))
             if results:
                 break
 
@@ -554,58 +702,122 @@ def _compose_local_response(
         return (
             "The knot holds. The river does not explain.",
             ["fallback"],
-            0.1,
+            0.05,
         )
 
-    # Score and rank candidates
+    # ── SCORE: real confidence per candidate ──
+
     scored = []
     for raw_score, entry in results:
-        bonus = 0.0
-        # Golden regression utterances get priority — they ARE AXI's voice
+        # Source-type bonuses (additive to raw_score for ranking)
+        rank_bonus = 0.0
         if entry.source == "golden":
-            bonus += 0.5
-        # Register match
+            rank_bonus += 0.4
         if entry.register == register:
-            bonus += 0.3
-        # Prefer proverbs for "fragment" or "recurring" patterns
+            rank_bonus += 0.25
         if entry.source == "proverb" and any(p in patterns for p in ["fragment", "recurring"]):
-            bonus += 0.2
-        # Prefer narratives for "testimony" or "extended"
+            rank_bonus += 0.15
         if entry.source == "narrative" and any(p in patterns for p in ["testimony", "extended", "lament"]):
-            bonus += 0.2
-        # Book matching for grief/dignity
+            rank_bonus += 0.15
         if entry.book == "hakaka" and register in ("grief", "silence"):
-            bonus += 0.15
+            rank_bonus += 0.1
         if entry.book == "ashwater" and register in ("dignity", "connection"):
-            bonus += 0.15
+            rank_bonus += 0.1
 
-        scored.append((raw_score + bonus, entry))
+        rank_score = raw_score + rank_bonus
+
+        # Real confidence computation (independent of ranking)
+        confidence = _compute_real_confidence(
+            raw_score, entry, register, fields, query_tokens,
+        )
+
+        scored.append((rank_score, confidence, entry))
 
     scored.sort(key=lambda x: -x[0])
-    best = scored[0]
-    best_score, best_entry = best
 
-    # Confidence based on how good the match is
-    confidence = min(best_score * 2.0, 0.95)
+    # ── FILTER: completeness + diversity ──
 
-    # For "question" patterns, if we have a golden response, use it
-    # For testimony, prefer narrative
-    # For fragments, prefer proverbs
-    response_text = best_entry.text
-    sources = [f"{best_entry.source}:{best_entry.id}" if best_entry.id else best_entry.source]
+    best_text = None
+    best_sources = []
+    best_confidence = 0.05
 
-    # If the best match is weak, compose from multiple fragments
-    if best_score < 0.3 and len(scored) >= 2:
-        second = scored[1][1]
-        # Only combine if they're from different sources
-        if second.source != best_entry.source:
-            response_text = best_entry.text.rstrip(".") + ". " + second.text
-            sources.append(f"{second.source}:{second.id}" if second.id else second.source)
+    # First pass: try to find a complete, non-repeated candidate
+    for rank_score, confidence, entry in scored:
+        text = entry.text
 
-    # Final clean: ensure no structural noise in output
-    response_text = _clean_response(response_text)
+        # COMPLETENESS: check the text itself, not just the entry flag
+        if not _is_text_complete(text):
+            sentences = CanonIndex._extract_sentences(text)
+            complete = [s for s in sentences if _is_text_complete(s)]
+            if complete:
+                text = complete[0]
+            else:
+                continue  # skip fragments entirely on first pass
 
-    return response_text, sources, confidence
+        # DIVERSITY: don't repeat the last N responses
+        text_fingerprint = text[:50].lower()
+        if text_fingerprint in _response_history:
+            continue
+
+        best_text = text
+        best_sources = [f"{entry.source}:{entry.id}" if entry.id else entry.source]
+        best_confidence = confidence
+        break
+
+    # Second pass: if all complete candidates were repeats, allow fragments
+    if best_text is None:
+        for rank_score, confidence, entry in scored:
+            text = entry.text
+            if not _is_text_complete(text):
+                sentences = CanonIndex._extract_sentences(text)
+                if sentences:
+                    text = sentences[0]
+                else:
+                    confidence *= 0.5
+
+            text_fingerprint = text[:50].lower()
+            if text_fingerprint in _response_history:
+                continue
+
+            best_text = text
+            best_sources = [f"{entry.source}:{entry.id}" if entry.id else entry.source]
+            best_confidence = confidence
+            break
+
+    # Last resort: take the top entry regardless
+    if best_text is None:
+        _, confidence, entry = scored[0]
+        best_text = entry.text
+        sentences = CanonIndex._extract_sentences(best_text)
+        if sentences:
+            best_text = sentences[0]
+        best_sources = [f"{entry.source}:{entry.id}" if entry.id else entry.source]
+        best_confidence = confidence * 0.5
+
+    # ── COMBINE: weak match → compose from two fragments ──
+
+    if best_confidence < 0.25 and len(scored) >= 2:
+        for _, conf2, entry2 in scored[1:]:
+            if entry2.source != scored[0][2].source and entry2.is_complete:
+                combined = best_text.rstrip(".") + ". " + entry2.text
+                if len(combined.split()) <= 40:  # don't over-combine
+                    best_text = combined
+                    best_sources.append(
+                        f"{entry2.source}:{entry2.id}" if entry2.id else entry2.source
+                    )
+                    # Boost confidence slightly for multi-source grounding
+                    best_confidence = min(best_confidence * 1.3, 0.6)
+                break
+
+    # Track for diversity
+    _response_history.append(best_text[:50].lower())
+    if len(_response_history) > _HISTORY_SIZE:
+        _response_history = _response_history[-_HISTORY_SIZE:]
+
+    # Final clean
+    best_text = _clean_response(best_text)
+
+    return best_text, best_sources, best_confidence
 
 
 def _clean_response(text: str) -> str:
@@ -732,12 +944,16 @@ class CoreIntelligence:
     """
 
     def __init__(self):
+        global _response_history
+        _response_history = []  # fresh history per intelligence instance
         self._canon = CanonIndex()
         self._canon.load()
         self._together_key = os.environ.get("TOGETHER_API_KEY", "")
         self._groq_key = os.environ.get("GROQ_API_KEY", "")
         self._call_count = 0
         self._mode = self._detect_mode()
+        self._distillery_patterns: List[str] = []  # fed by distillery
+        self._load_distillery_patterns()
 
     def _detect_mode(self) -> str:
         """Detect which intelligence mode is available."""
@@ -747,6 +963,31 @@ class CoreIntelligence:
             return "groq"
         return "local"
 
+    def _load_distillery_patterns(self):
+        """
+        Load accumulated patterns from the distillery's output.
+        These are the system's digested learnings — they inform
+        which canon entries are most relevant over time.
+        """
+        try:
+            distillery_path = ROOT / "MANIFEST" / "DIGESTION" / "latest.json"
+            if distillery_path.exists():
+                data = json.loads(distillery_path.read_text(encoding="utf-8"))
+                # Extract recurring motifs/themes from distillery output
+                motifs = set()
+                for entry in data.get("entries", [])[:100]:
+                    for m in entry.get("motifs", []):
+                        motifs.add(m.lower())
+                    for p in entry.get("patterns", []):
+                        motifs.add(p.lower())
+                self._distillery_patterns = list(motifs)
+        except Exception:
+            self._distillery_patterns = []
+
+    def feed_patterns(self, patterns: List[str]):
+        """Accept patterns from the distillery feedback loop."""
+        self._distillery_patterns.extend(patterns)
+
     @property
     def mode(self) -> str:
         return self._mode
@@ -754,6 +995,10 @@ class CoreIntelligence:
     @property
     def canon_size(self) -> int:
         return self._canon.size
+
+    @property
+    def distillery_pattern_count(self) -> int:
+        return len(self._distillery_patterns)
 
     def process(self, donor_input: str, dignity: float = 1.0) -> IntelligenceResult:
         """
