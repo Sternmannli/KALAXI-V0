@@ -1,14 +1,41 @@
 name: Deploy kalam.ch
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'R7M/**'
+      - 'MANIFEST/**'
+      - 'VOICE/**'
+      - 'KEEP/**'
+      - 'NARRATIVE/**'
+      - 'TRAINING/**'
+      - 'CANON/**'
   schedule:
     - cron: '0 4 * * *'   # Daily at 04:00 UTC
   workflow_dispatch:
+
+permissions:
+  issues: read
+  contents: read
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: "Gate: Check for connection alarm"
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          ALARM=$(gh issue list --repo ${{ github.repository }} --label "blocks-everything" --state open --json number -q '.[0].number' 2>/dev/null || echo "")
+          if [ -n "$ALARM" ]; then
+            echo "🚨 Connection alarm active (issue #$ALARM). Deploy blocked."
+            echo "Fix the connection first. See the alarm issue for instructions."
+            exit 1
+          fi
+          echo "✅ No connection alarm. Proceeding."
+
       - name: Checkout
         uses: actions/checkout@v4
 

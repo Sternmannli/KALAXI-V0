@@ -138,11 +138,13 @@ Full site with 13+ pages: home, about, canon, invitation, hakaka, ashwater, kind
 
 ### Auto-Deploy
 - GitHub Actions workflow: `.github/workflows/deploy-kalam.yml`
-- Triggers on push to main when `site/**` changes
-- Also supports manual trigger (workflow_dispatch)
+- Triggers on push to main when `site/**`, `R7M/**`, `MANIFEST/**`, `VOICE/**`, `KEEP/**`, `NARRATIVE/**`, `TRAINING/**`, or `CANON/**` changes
+- Also triggers daily at 04:00 UTC (cron) and manual (workflow_dispatch)
 - Deploys via SFTP to Hostpoint using encrypted GitHub Secrets
+- Packages system data (proverbs, covenants, treasures, narratives, training corpora) to kalam.ch automatically
 - Secrets: `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_SERVER`, `GROQ_API_KEY`, `DB_PASSWORD`
 - Mohamed never uploads manually. V-002 pushes code, site goes live.
+- **Gate:** Deploy checks for `blocks-everything` label before running. If connection alarm exists, deploy is blocked.
 
 ### Three-Repo Sync (verified 2026-03-17 — ALL GREEN)
 1. **KALAXI-V0 → kalam.ch** (deploy-kalam.yml) — code becomes website. WORKING.
@@ -705,6 +707,32 @@ V-001 identified that V-002 exhibits fast-responder bias — racing to produce o
 2. Reflected in the relevant code/config/protocol (the fix)
 3. Tested (if code) or documented (if process) so the next session inherits it
 4. Never reverted unless V-001 explicitly says so
+
+---
+
+## CONNECTION GUARDIAN LAW (PERMANENT — 2026-03-23)
+
+**V-001 said:** "I cannot go again like this."
+
+The system monitors its own connections **twice daily** via `.github/workflows/connection-guardian.yml`. Five checks: website alive, API healthy, SSH bridge connected, last deploy succeeded, database accessible.
+
+**Self-healing:** If a check fails, the guardian tries to fix it automatically (re-trigger deploy, retry SSH, diagnose PHP errors). If auto-fix fails, the system HALTS — all workflows are blocked by a `blocks-everything` label until the connection is repaired.
+
+**Escalation:** The alarm issue tells Mohamed exactly what to do in ONE step, plain language. No technical jargon.
+
+**What the guardian CAN fix:** stale deploys, transient network failures, PHP errors (diagnoses and reports).
+**What needs Mohamed's browser:** Hostpoint password change (admin.hostpoint.ch → Advanced → Password Change), GitHub billing issues.
+
+**Rule:** No work proceeds on a broken connection. The system does not pretend to function when disconnected. It stops and says so.
+
+---
+
+## GITHUB SUBSCRIPTION (PERMANENT — 2026-03-23)
+
+- **Plan:** GitHub Pro (~$4/month)
+- **Actions spending limit:** $10 (set by V-001)
+- **Included minutes:** 3,000/month (Pro tier)
+- **Current usage:** Connection Guardian (~120 min/month) + deploys (~300 min/month) + server commands (~30 min/month) = well within limits
 
 ---
 
