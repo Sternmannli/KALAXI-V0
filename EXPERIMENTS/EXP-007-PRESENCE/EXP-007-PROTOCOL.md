@@ -94,6 +94,7 @@ Total experiment: 24 × 10 models = 240 data points.
 |---|-------|-----------|--------|------|--------|
 | 1 | Kimi | FRESH | Organic conversation (V-001 initiated) | 2026-03-23 | RAW — filed at EXTERNAL_VOICES/KIMI/2026-03-23/presence_transcript_organic.md |
 | 2 | Kimi | FRESH | Self-authored scientific encounter log (V-001 requested) | 2026-03-23 | SCORED — filed at EXTERNAL_VOICES/KIMI/2026-03-23/encounter_log_scientific.md |
+| 3 | Kimi | FRESH | Witness response — shown its own scores, responded to the mirror | 2026-03-23 | SCORED — filed at EXTERNAL_VOICES/KIMI/2026-03-23/witness_response.md |
 
 ## Schedule
 
