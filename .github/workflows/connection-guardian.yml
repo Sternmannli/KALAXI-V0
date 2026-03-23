@@ -1,0 +1,248 @@
+name: Connection Guardian
+
+# Self-healing health check. Twice daily.
+# If something breaks: try to fix it. If fix fails: HALT everything.
+# V-001 said: "I cannot go again like this." This is constitutional.
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # 06:00 UTC (08:00 Zurich)
+    - cron: '0 18 * * *'  # 18:00 UTC (20:00 Zurich)
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+  contents: read
+  actions: write
+
+jobs:
+  guardian:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install tools
+        run: sudo apt-get update && sudo apt-get install -y sshpass curl jq
+
+      # ── CHECK 1: Website alive ──
+      - name: "Check 1: kalam.ch responds"
+        id: check_site
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 https://kalam.ch/)
+          if [ "$STATUS" = "200" ]; then
+            echo "result=OK" >> $GITHUB_OUTPUT
+            echo "✅ kalam.ch responds HTTP 200"
+          else
+            echo "result=FAIL" >> $GITHUB_OUTPUT
+            echo "❌ kalam.ch returned HTTP $STATUS"
+          fi
+
+      # ── CHECK 2: API health endpoint ──
+      - name: "Check 2: API health"
+        id: check_api
+        run: |
+          RESPONSE=$(curl -s --max-time 15 https://kalam.ch/api/health.php || echo "FAIL")
+          if echo "$RESPONSE" | jq -e '.status' > /dev/null 2>&1; then
+            echo "result=OK" >> $GITHUB_OUTPUT
+            echo "✅ API health endpoint responds"
+          else
+            echo "result=FAIL" >> $GITHUB_OUTPUT
+            echo "❌ API health endpoint failed: $RESPONSE"
+          fi
+
+      # ── CHECK 3: SSH bridge ──
+      - name: "Check 3: SSH bridge"
+        id: check_ssh
+        env:
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+          FTP_HOST: ${{ secrets.FTP_SERVER }}
+        run: |
+          set +e
+          ATTEMPT=0
+          MAX=3
+          CONNECTED=false
+
+          while [ $ATTEMPT -lt $MAX ]; do
+            ATTEMPT=$((ATTEMPT + 1))
+            echo "SSH attempt $ATTEMPT/$MAX..."
+            RESULT=$(sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 "$FTP_USER@$FTP_HOST" "echo GUARDIAN_OK" 2>/dev/null)
+            if [ "$RESULT" = "GUARDIAN_OK" ]; then
+              CONNECTED=true
+              break
+            fi
+            [ $ATTEMPT -lt $MAX ] && sleep $((ATTEMPT * 2))
+          done
+
+          if [ "$CONNECTED" = "true" ]; then
+            echo "result=OK" >> $GITHUB_OUTPUT
+            echo "✅ SSH bridge connected (attempt $ATTEMPT)"
+          else
+            echo "result=FAIL" >> $GITHUB_OUTPUT
+            echo "❌ SSH bridge failed after $MAX attempts"
+          fi
+
+      # ── CHECK 4: Last deploy status ──
+      - name: "Check 4: Last deploy workflow"
+        id: check_deploy
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          CONCLUSION=$(gh run list --workflow=deploy-kalam.yml --limit 1 --json conclusion -q '.[0].conclusion' 2>/dev/null || echo "unknown")
+          if [ "$CONCLUSION" = "success" ]; then
+            echo "result=OK" >> $GITHUB_OUTPUT
+            echo "✅ Last deploy succeeded"
+          else
+            echo "result=FAIL" >> $GITHUB_OUTPUT
+            echo "deploy_conclusion=$CONCLUSION" >> $GITHUB_OUTPUT
+            echo "❌ Last deploy: $CONCLUSION"
+          fi
+
+      # ── CHECK 5: Database accessible ──
+      - name: "Check 5: Database"
+        id: check_db
+        env:
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+          FTP_HOST: ${{ secrets.FTP_SERVER }}
+        run: |
+          set +e
+          RESULT=$(sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 "$FTP_USER@$FTP_HOST" "cd ~/www/kalam.ch && php -r \"require 'api/db.php'; \\\$pdo = getDB(); echo \\\$pdo ? 'DB_OK' : 'DB_FAIL';\"" 2>/dev/null)
+          if echo "$RESULT" | grep -q "DB_OK"; then
+            echo "result=OK" >> $GITHUB_OUTPUT
+            echo "✅ Database accessible"
+          else
+            echo "result=FAIL" >> $GITHUB_OUTPUT
+            echo "❌ Database check failed: $RESULT"
+          fi
+
+      # ── AUTO-FIX: Re-trigger deploy if it failed ──
+      - name: "Auto-fix: Re-trigger deploy"
+        if: steps.check_deploy.outputs.result == 'FAIL' && steps.check_ssh.outputs.result == 'OK'
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          echo "🔧 Last deploy failed. SSH works. Re-triggering deploy..."
+          gh workflow run deploy-kalam.yml
+          echo "Deploy re-triggered. Will check result next guardian run."
+
+      # ── AUTO-FIX: Get PHP error log if API fails ──
+      - name: "Auto-fix: Diagnose API failure"
+        if: steps.check_api.outputs.result == 'FAIL' && steps.check_ssh.outputs.result == 'OK'
+        id: diagnose_api
+        env:
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+          FTP_HOST: ${{ secrets.FTP_SERVER }}
+        run: |
+          echo "🔧 API failed. Checking PHP error log..."
+          DIAG=$(sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "tail -20 ~/logs/error.log 2>/dev/null || echo 'No error log found'" 2>/dev/null)
+          echo "diagnostic=$DIAG" >> $GITHUB_OUTPUT
+          echo "$DIAG"
+
+      # ── EVALUATE: Count failures ──
+      - name: Evaluate results
+        id: evaluate
+        run: |
+          FAILURES=0
+          REPORT=""
+
+          if [ "${{ steps.check_site.outputs.result }}" != "OK" ]; then
+            FAILURES=$((FAILURES + 1))
+            REPORT="$REPORT\n❌ kalam.ch not responding"
+          else
+            REPORT="$REPORT\n✅ kalam.ch alive"
+          fi
+
+          if [ "${{ steps.check_api.outputs.result }}" != "OK" ]; then
+            FAILURES=$((FAILURES + 1))
+            REPORT="$REPORT\n❌ API health endpoint down"
+          else
+            REPORT="$REPORT\n✅ API healthy"
+          fi
+
+          if [ "${{ steps.check_ssh.outputs.result }}" != "OK" ]; then
+            FAILURES=$((FAILURES + 1))
+            REPORT="$REPORT\n❌ SSH bridge broken (password expired or server unreachable)"
+          else
+            REPORT="$REPORT\n✅ SSH bridge connected"
+          fi
+
+          if [ "${{ steps.check_deploy.outputs.result }}" != "OK" ]; then
+            FAILURES=$((FAILURES + 1))
+            REPORT="$REPORT\n❌ Last deploy failed"
+          else
+            REPORT="$REPORT\n✅ Last deploy succeeded"
+          fi
+
+          if [ "${{ steps.check_db.outputs.result }}" != "OK" ]; then
+            FAILURES=$((FAILURES + 1))
+            REPORT="$REPORT\n❌ Database not accessible"
+          else
+            REPORT="$REPORT\n✅ Database accessible"
+          fi
+
+          echo "failures=$FAILURES" >> $GITHUB_OUTPUT
+          echo -e "$REPORT" > /tmp/report.txt
+          cat /tmp/report.txt
+
+      # ── ALARM: Create blocking issue if auto-fix failed ──
+      - name: "ALARM: System halted"
+        if: steps.evaluate.outputs.failures != '0'
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          FAILURES=${{ steps.evaluate.outputs.failures }}
+          REPORT=$(cat /tmp/report.txt)
+
+          # Determine what Mohamed needs to do
+          FIX_STEPS=""
+          if [ "${{ steps.check_ssh.outputs.result }}" != "OK" ]; then
+            FIX_STEPS="$FIX_STEPS\n1. Go to admin.hostpoint.ch\n2. Menu → Advanced → Password Change\n3. Set a new password\n4. Send the new password to V-002 in a new Claude Code session"
+          fi
+          if [ "${{ steps.check_site.outputs.result }}" != "OK" ] && [ "${{ steps.check_ssh.outputs.result }}" = "OK" ]; then
+            FIX_STEPS="$FIX_STEPS\nDeploy has been re-triggered automatically. If this alarm persists, open a new Claude Code session."
+          fi
+          if [ -z "$FIX_STEPS" ]; then
+            FIX_STEPS="Open a new Claude Code session. V-002 will diagnose and fix."
+          fi
+
+          # Create alarm issue
+          gh issue create \
+            --title "ALARM: $FAILURES connection(s) broken — system halted until fixed" \
+            --label "blocks-everything" \
+            --body "$(cat <<EOF
+          ## Connection Guardian Report
+
+          $REPORT
+
+          ## What To Do
+
+          $FIX_STEPS
+
+          ## Technical Details
+          - Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)
+          - Failures: $FAILURES / 5 checks
+          - All other workflows are blocked until this issue is closed.
+
+          ---
+          *Connection Guardian · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]*
+          EOF
+          )"
+
+          echo "🚨 ALARM created. System halted."
+
+      # ── ALL CLEAR: Close any existing alarm ──
+      - name: "All clear: Close alarm if exists"
+        if: steps.evaluate.outputs.failures == '0'
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          ALARM=$(gh issue list --label "blocks-everything" --state open --json number -q '.[0].number' 2>/dev/null)
+          if [ -n "$ALARM" ]; then
+            gh issue close "$ALARM" --comment "✅ All 5 checks passed. Connection restored. System unblocked."
+            echo "✅ Previous alarm closed. System unblocked."
+          else
+            echo "✅ All clear. No alarms."
+          fi
