@@ -304,10 +304,10 @@ The voice study lives at `VOICE/VOICE_ARCHITECTURE_2026-03-14.md`. AXI's voice m
 The system is not a guardian of dignity (which needs no guarding). It is a witness to legibility (which institutions constantly fail). The zeros are not in the people — they are in the institutions that could not read them. The certificate is not proof that dignity existed — it is proof that the system tried to see, and where it could not, it stopped rather than pretend.
 
 ### Four Tiers
-- **Stone** (Foundation): 18 covenants, Sealed Gate, Presence Axiom, Dignity Predicate
-- **Weaver** (Logic): 11 modules (KEEP, WIRE, SAY, OUT, FACE, CHECK, TURN, BREATH, WEAVE, SENSE, LAB) + Input Ledger
-- **Honey** (Wisdom): 1,100 anomalies, 3,333+ proverbs, 87 wisdom nodes, 59 treasures
-- **Hand** (Interface): CLI, Ninth Operator, Donor Space (vision stage)
+- **Stone** (Foundation): 22 covenants, Sealed Gate, Presence Axiom, Dignity Predicate
+- **Weaver** (Logic): 87 Python modules in WEAVER/, 30,530 lines + Input Ledger
+- **Honey** (Wisdom): 55 anomalies, 460 proverbs, 4 wisdom nodes, 71 treasures
+- **Hand** (Interface): CLI, kalam.ch (live organism), Donor Space (vision stage)
 
 ### Key Equations
 - **Dignity Predicate:** D = A × L × M (non-compensatory, any zero = system stops)
@@ -319,18 +319,18 @@ The system is not a guardian of dignity (which needs no guarding). It is a witne
 Seeds #1-12: Distributed Stewardship, Immutable Witness Network, Deliberative Democracy, Constitutional Evolution, Restorative Justice, System Self-Awareness, Personalized Parables, Institutional Dignity Score, Negative Space Index, Dignity Drift Detector, Proverb Stress Test, Agency Amplifier.
 
 ### Code Status
-- 176 Python files, 42,581+ lines
+- 87 Python modules (WEAVER/), 30,530 lines
 - 1006 tests collected (1006 passing, 9 skipped — verified 2026-03-22)
 - Organism v2.0: all modules wired + Input Ledger + Compass + Distillery
 
 ### Registry Status (as of 2026-03-22)
-- 18 covenants (all 18 ratified — 0 provisional)
-- 1,100 anomalies indexed
-- 3,333+ proverbs + 20 emergent + 9 from Grand Archive
-- 87 wisdom nodes
-- 59 Treasures (T#01-T#59)
-- 53 narrative chapters + Prologue + Epilogue (Hakaka) + 19 (Ashwater) + 20 (Kinderbuch) + 1 (KALAXI_1)
-- 2,457+ entries in Input Ledger (hash-chained, append-only)
+- 22 covenants (all ratified)
+- 55 anomalies indexed
+- 460 proverbs (411 in R7M source + emergent)
+- 4 wisdom nodes
+- 71 Treasures
+- 13 narrative pieces (Hakaka: Prologue + Ch1-10 + Ch53 + Epilogue) + 20 (Ashwater) + 20 (Kinderbuch) + 1 (KALAXI_1)
+- 3,195 entries in Input Ledger (hash-chained, append-only)
 - 200 Golden Regression utterances (TRAINING/GOLDEN_REGRESSION.jsonl)
 
 ### Active Experiments
@@ -748,7 +748,7 @@ The system monitors its own connections **twice daily** via `.github/workflows/c
 DESIGNED: 98%    CODED: 70%    TESTED: 100%    DEPLOYED: LIVE (2026-03-17)
 ```
 
-42,581+ lines. kalam.ch is live. The threshold is open.
+30,530 lines. kalam.ch is live. The organism is live. The threshold is open.
 
 ---
 
@@ -762,7 +762,7 @@ V-001 said: "This must be repeated over and over and all the experiments must be
 
 ### DIRECTIVE 2: VOICE IS THE VAULT (2026-03-18b)
 V-001 said: "The Voice is the vault of all these treasures. The system speaks only pure essence."
-**Rule:** The AXI voice is not a style guide. It is the concentrated distillation of all system knowledge — every treasure, every proverb, every anomaly, every covenant. When AXI speaks, it speaks the essence of the entire system. The voice carries the weight of 3,355 proverbs, 59 treasures, 18 covenants, 1,100 anomalies. Nothing is decoration. Every word is load-bearing.
+**Rule:** The AXI voice is not a style guide. It is the concentrated distillation of all system knowledge — every treasure, every proverb, every anomaly, every covenant. When AXI speaks, it speaks the essence of the entire system. The voice carries the weight of 460 proverbs, 71 treasures, 22 covenants, 55 anomalies. Nothing is decoration. Every word is load-bearing.
 
 ### DIRECTIVE 3: DEEP CLEAN DAILY (2026-03-18b)
 V-001 said: "I want a deep cleaning to happen every day in the background every day in the first GO."
