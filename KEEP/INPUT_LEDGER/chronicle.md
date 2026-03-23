@@ -48384,3 +48384,65 @@ Sie legte sich neben ihn, hielt seine Hand.
 ```
 
 ---
+
+## 📥 INP-2026-03-23-001 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T14:31:45.383827+00:00
+**Time (ZRH):** 2026-03-23T15:31:45.383827+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-22-325
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-001 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T14:31:45.699755+00:00
+**Time (ZRH):** 2026-03-23T15:31:45.699755+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f87d2b47b32793ca...`
+**State:** raw
+**Responds to:** INP-2026-03-23-001
+
+```
+Ya-la sang the patterns under her breath till they stuck. Sa-la tapped them on his thigh. The old woman shut her eyes and named them out loud without seeing the line. „Ready, send, hold, stop,“ she said, and coughed less when the smoke stayed out.
+```
+
+---
+
+## 📥 INP-2026-03-23-002 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T14:32:32.241498+00:00
+**Time (ZRH):** 2026-03-23T15:32:32.241498+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2c4c868e5e81c792...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-001
+**Essence:** functional connectivity probe boot-probe-1774276352
+
+```
+functional connectivity probe boot-probe-1774276352
+```
+
+---
+
+## 📥 AXI-2026-03-23-002 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T14:32:32.539835+00:00
+**Time (ZRH):** 2026-03-23T15:32:32.539835+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f6794da9efbe65ab...`
+**State:** raw
+**Responds to:** INP-2026-03-23-002
+
+```
+Taro trimmed a green stick flat on one side and cut one notch near the tip. „Water,“ he said, pointing the cut toward the river. He cut two notches lower down for clay, turned them to point along the bank. He set the stick shoulder-high, firm.
+```
+
+---
