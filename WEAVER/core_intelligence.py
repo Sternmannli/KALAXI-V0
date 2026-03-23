@@ -46,6 +46,100 @@ logger = logging.getLogger("kalaxi.intelligence")
 # DATA STRUCTURES
 # ═══════════════════════════════════════════════════════════════
 
+
+class ConversationMemory:
+    """
+    Tracks patterns across turns within a conversation.
+    Not long-term storage — that's the ledger.
+    This is short-term awareness: what has the donor been saying?
+    What themes recur? What register dominates? Is confidence rising or falling?
+    """
+
+    def __init__(self):
+        self._turns: List[Dict] = []
+        self._register_counts: Dict[str, int] = {}
+        self._theme_counts: Dict[str, int] = {}
+        self._field_counts: Dict[str, int] = {}
+        self._confidences: List[float] = []
+
+    def record_turn(self, result: 'IntelligenceResult'):
+        """Record a turn's intelligence result."""
+        turn = {
+            "register": result.register,
+            "themes": result.themes[:5],
+            "confidence": result.confidence,
+            "fields": list(result.comprehension.get("fields", {}).keys()),
+            "mode": result.mode,
+        }
+        self._turns.append(turn)
+
+        # Accumulate register frequency
+        self._register_counts[result.register] = self._register_counts.get(result.register, 0) + 1
+
+        # Accumulate theme frequency
+        for theme in result.themes[:5]:
+            self._theme_counts[theme] = self._theme_counts.get(theme, 0) + 1
+
+        # Accumulate field frequency
+        for field in turn["fields"]:
+            self._field_counts[field] = self._field_counts.get(field, 0) + 1
+
+        self._confidences.append(result.confidence)
+
+    @property
+    def turn_count(self) -> int:
+        return len(self._turns)
+
+    @property
+    def dominant_register(self) -> str:
+        """The register that has appeared most across all turns."""
+        if not self._register_counts:
+            return "unknown"
+        return max(self._register_counts, key=self._register_counts.get)
+
+    @property
+    def recurring_themes(self) -> List[str]:
+        """Themes that appear more than once across turns."""
+        return [t for t, c in self._theme_counts.items() if c >= 2]
+
+    @property
+    def active_fields(self) -> List[str]:
+        """Fields that appeared in at least 2 turns."""
+        return [f for f, c in self._field_counts.items() if c >= 2]
+
+    @property
+    def confidence_trend(self) -> str:
+        """Is confidence rising, falling, or stable across turns?"""
+        if len(self._confidences) < 2:
+            return "insufficient_data"
+        recent = self._confidences[-3:]
+        if len(recent) >= 2:
+            diff = recent[-1] - recent[0]
+            if diff > 0.1:
+                return "rising"
+            elif diff < -0.1:
+                return "falling"
+        return "stable"
+
+    @property
+    def average_confidence(self) -> float:
+        if not self._confidences:
+            return 0.0
+        return sum(self._confidences) / len(self._confidences)
+
+    def snapshot(self) -> Dict:
+        """Full conversation snapshot for witness metadata."""
+        return {
+            "turn_count": self.turn_count,
+            "dominant_register": self.dominant_register,
+            "recurring_themes": self.recurring_themes[:5],
+            "active_fields": self.active_fields,
+            "confidence_trend": self.confidence_trend,
+            "average_confidence": round(self.average_confidence, 4),
+            "register_distribution": dict(self._register_counts),
+        }
+
+
 @dataclass
 class IntelligenceResult:
     """What the intelligence layer returns to the organism."""
@@ -953,6 +1047,7 @@ class CoreIntelligence:
         self._call_count = 0
         self._mode = self._detect_mode()
         self._distillery_patterns: List[str] = []  # fed by distillery
+        self._conversation = ConversationMemory()
         self._load_distillery_patterns()
 
     def _detect_mode(self) -> str:
@@ -999,6 +1094,14 @@ class CoreIntelligence:
     @property
     def distillery_pattern_count(self) -> int:
         return len(self._distillery_patterns)
+
+    @property
+    def conversation(self) -> ConversationMemory:
+        return self._conversation
+
+    @property
+    def conversation_snapshot(self) -> Dict:
+        return self._conversation.snapshot()
 
     def process(self, donor_input: str, dignity: float = 1.0) -> IntelligenceResult:
         """
@@ -1069,7 +1172,7 @@ class CoreIntelligence:
             f"{response_text}:{self._call_count}:{datetime.now(timezone.utc).isoformat()}".encode()
         ).hexdigest()[:16]
 
-        return IntelligenceResult(
+        result = IntelligenceResult(
             response_text=response_text,
             register=understanding["register"],
             themes=understanding["themes"],
@@ -1080,3 +1183,8 @@ class CoreIntelligence:
             comprehension=understanding,
             witness_hash=witness_hash,
         )
+
+        # 6. CONVERSATION MEMORY — track patterns across turns
+        self._conversation.record_turn(result)
+
+        return result

@@ -1224,10 +1224,34 @@ class Organism:
         # ── Phase 4: POST-PROCESSING ────────────────────────────
 
         # 4a. WITNESS — record exchange on immutable chain (Seed #2)
+        # Full metadata: the witness record carries the complete interaction fingerprint
+        witness_metadata = {
+            "exchange_id": ex_id,
+            "dignity": {"D": dignity.D, "passed": dignity.passed, "components": len(dignity.components)},
+            "patterns_found": len(candidates),
+            "drops_produced": len(drops),
+            "input_length": len(donor_input),
+            "response_length": len(response_text),
+        }
+        if self._last_intelligence:
+            witness_metadata["intelligence"] = {
+                "register": self._last_intelligence.register,
+                "themes": self._last_intelligence.themes[:5],
+                "confidence": round(self._last_intelligence.confidence, 4),
+                "mode": self._last_intelligence.mode,
+                "fields": {
+                    k: round(v, 3)
+                    for k, v in list(self._last_intelligence.comprehension.get("fields", {}).items())[:3]
+                },
+                "canon_sources": self._last_intelligence.canon_sources[:3],
+                "witness_hash": self._last_intelligence.witness_hash,
+            }
+            witness_metadata["conversation"] = self._intelligence.conversation_snapshot
         self._witness_net.witness(
             "exchange",
             f"{ex_id}: D={dignity.D:.1f}, patterns={len(candidates)}, drops={len(drops)}",
             "organism",
+            metadata=witness_metadata,
         )
 
         # 4b. NINTH OPERATOR — the word loop
