@@ -1288,33 +1288,60 @@ HTML;
         exit;
     }
 
-    // === PHASE 2: DIGNITY CHECK ===
-    $dignity = check_dignity($content);
-    $D = $dignity['D'];
+    // === PHASE 2: ORGANISM PIPELINE (graduated dignity + covenants + ledger) ===
+    require_once __DIR__ . '/organism.php';
+    $mysql = get_mysql();
 
-    if ($D === 0.0) {
-        // Generate witness certificate if MySQL available
-        $mysql = get_mysql();
-        $cert = null;
-        if ($mysql) {
-            $cert = witness_certificate_create($mysql, $dignity, $content);
-        }
+    // Run the full organism if database available, fallback to old check
+    if ($mysql) {
+        $organism_result = organism_process($mysql, $content);
+        $dignity = $organism_result['dignity'];
+        $D = $dignity['D'];
 
-        if ($is_form) {
-            header('Content-Type: text/html; charset=utf-8');
-            echo <<<HTML
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>kalam.ch — Held</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><style>body{font-family:"IBM Plex Sans",sans-serif;background:#0a0a0f;color:#e8e4df;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;margin:0}.voice{font-family:"Cormorant Garamond",serif;font-size:1.4rem;color:#c9a96e;font-style:italic;margin-bottom:2rem;max-width:50ch;line-height:1.8}a{color:#c9a96e;text-decoration:none;font-size:.85rem}</style></head><body><p class="voice">Your exchange has been held — not rejected, held.</p><br><a href="/">Return</a></body></html>
+        if ($organism_result['halted']) {
+            $cert = $organism_result['certificate'];
+            if ($is_form) {
+                header('Content-Type: text/html; charset=utf-8');
+                $halt_msg = htmlspecialchars($organism_result['halt_message'], ENT_QUOTES, 'UTF-8');
+                echo <<<HTML
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>kalam.ch — Held</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><style>body{font-family:"IBM Plex Sans",sans-serif;background:#0a0a0f;color:#e8e4df;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;margin:0}.voice{font-family:"Cormorant Garamond",serif;font-size:1.4rem;color:#c9a96e;font-style:italic;margin-bottom:2rem;max-width:50ch;line-height:1.8}a{color:#c9a96e;text-decoration:none;font-size:.85rem}</style></head><body><p class="voice">{$halt_msg}</p><br><a href="/">Return</a></body></html>
 HTML;
+                exit;
+            }
+            $response = [
+                'witnessed' => false, 'halted' => true, 'D' => $dignity['D'],
+                'components' => ['A' => $dignity['A']['score'], 'L' => $dignity['L']['score'], 'M' => $dignity['M']['score']],
+                'message' => $organism_result['halt_message'],
+                'covenants' => $organism_result['covenants'],
+                'chain' => $organism_result['ledger']['chain_hash'] ?? null,
+                'pipeline' => 'organism-2.0',
+            ];
+            if ($cert) $response['certificate'] = $cert;
+            echo json_encode($response);
             exit;
         }
-        $response = [
-            'witnessed' => false, 'halted' => true, 'D' => 0,
-            'components' => ['A' => $dignity['A'], 'L' => $dignity['L'], 'M' => $dignity['M']],
-            'message' => 'Your exchange has been held — not rejected, held.',
-        ];
-        if ($cert) $response['certificate_id'] = $cert['certificate_id'];
-        echo json_encode($response);
-        exit;
+    } else {
+        // Fallback: old binary dignity check (no database)
+        $dignity = check_dignity($content);
+        $D = $dignity['D'];
+        $organism_result = null;
+
+        if ($D === 0.0) {
+            if ($is_form) {
+                header('Content-Type: text/html; charset=utf-8');
+                echo <<<HTML
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>kalam.ch — Held</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><style>body{font-family:"IBM Plex Sans",sans-serif;background:#0a0a0f;color:#e8e4df;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;margin:0}.voice{font-family:"Cormorant Garamond",serif;font-size:1.4rem;color:#c9a96e;font-style:italic;margin-bottom:2rem;max-width:50ch;line-height:1.8}a{color:#c9a96e;text-decoration:none;font-size:.85rem}</style></head><body><p class="voice">Your exchange has been held — not rejected, held.</p><br><a href="/">Return</a></body></html>
+HTML;
+                exit;
+            }
+            $response = [
+                'witnessed' => false, 'halted' => true, 'D' => 0,
+                'components' => ['A' => $dignity['A'], 'L' => $dignity['L'], 'M' => $dignity['M']],
+                'message' => 'Your exchange has been held — not rejected, held.',
+            ];
+            echo json_encode($response);
+            exit;
+        }
     }
 
     // === PHASE 3: FILE EXTRACTION ===
@@ -1502,15 +1529,19 @@ HTML;
         }
 
         // Final event with metadata (includes A/L/M for Kintsugi Thread)
+        $A_sse = isset($organism_result) ? $dignity['A']['score'] : ($dignity['A'] ?? 1.0);
+        $L_sse = isset($organism_result) ? $dignity['L']['score'] : ($dignity['L'] ?? 1.0);
+        $M_sse = isset($organism_result) ? $dignity['M']['score'] : ($dignity['M'] ?? 1.0);
         $final = [
             'done' => true,
             'witness' => $ai_response,
             'count' => $new_count,
             'hash' => substr($hash, 0, 12),
             'dignity' => round($D, 3),
-            'A' => round($dignity['A'], 3),
-            'L' => round($dignity['L'], 3),
-            'M' => round($dignity['M'], 3),
+            'A' => round($A_sse, 3),
+            'L' => round($L_sse, 3),
+            'M' => round($M_sse, 3),
+            'pipeline' => isset($organism_result) ? 'organism-2.0' : 'legacy',
         ];
         if ($proverb) $final['proverb'] = $proverb;
         echo "data: " . json_encode($final) . "\n\n";
@@ -1518,21 +1549,32 @@ HTML;
         exit;
     }
 
-    // ── JSON API response (fallback) — includes A/L/M for Kintsugi Thread ──
+    // ── JSON API response — includes full organism data when available ──
+    $A_score = isset($organism_result) ? $dignity['A']['score'] : ($dignity['A'] ?? 1.0);
+    $L_score = isset($organism_result) ? $dignity['L']['score'] : ($dignity['L'] ?? 1.0);
+    $M_score = isset($organism_result) ? $dignity['M']['score'] : ($dignity['M'] ?? 1.0);
+
     $response = [
         'witnessed' => true,
         'mark' => $ai_response,
         'count' => $new_count,
         'hash' => substr($hash, 0, 12),
         'dignity' => round($D, 3),
-        'A' => round($dignity['A'], 3),
-        'L' => round($dignity['L'], 3),
-        'M' => round($dignity['M'], 3),
+        'A' => round($A_score, 3),
+        'L' => round($L_score, 3),
+        'M' => round($M_score, 3),
+        'pipeline' => isset($organism_result) ? 'organism-2.0' : 'legacy',
     ];
 
     if ($ai_reflection) $response['reflection'] = $ai_reflection;
     if ($proverb) $response['proverb'] = $proverb;
-    if ($ledger_entry) $response['chain'] = $ledger_entry['chain_snippet'];
+    if (isset($organism_result)) {
+        $response['chain'] = $organism_result['ledger']['chain_hash'] ?? null;
+        $response['confidence'] = $dignity['confidence'] ?? null;
+        $response['covenants_checked'] = $organism_result['covenants']['total_covenants'] ?? 0;
+    } elseif ($ledger_entry) {
+        $response['chain'] = $ledger_entry['chain_snippet'];
+    }
 
     // Include donor context if authenticated
     if ($donor_profile) {
