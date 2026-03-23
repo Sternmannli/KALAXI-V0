@@ -113,6 +113,40 @@ jobs:
             echo "❌ Database check failed: $RESPONSE"
           fi
 
+      # ── CHECK 6: Together AI (AXI voice model) ──
+      - name: "Check 6: Together AI"
+        id: check_together
+        env:
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 \
+            -H "Authorization: Bearer $TOGETHER_API_KEY" \
+            "https://api.together.xyz/v1/models")
+          if [ "$STATUS" = "200" ]; then
+            echo "result=OK" >> $GITHUB_OUTPUT
+            echo "✅ Together AI connected"
+          else
+            echo "result=FAIL" >> $GITHUB_OUTPUT
+            echo "❌ Together AI returned HTTP $STATUS"
+          fi
+
+      # ── CHECK 7: Groq (temporary AXI voice) ──
+      - name: "Check 7: Groq"
+        id: check_groq
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 \
+            -H "Authorization: Bearer $GROQ_API_KEY" \
+            "https://api.groq.com/openai/v1/models")
+          if [ "$STATUS" = "200" ]; then
+            echo "result=OK" >> $GITHUB_OUTPUT
+            echo "✅ Groq connected"
+          else
+            echo "result=FAIL" >> $GITHUB_OUTPUT
+            echo "❌ Groq returned HTTP $STATUS"
+          fi
+
       # ── AUTO-FIX: Re-trigger deploy if it failed ──
       - name: "Auto-fix: Re-trigger deploy"
         if: steps.check_deploy.outputs.result == 'FAIL' && steps.check_ssh.outputs.result == 'OK'
@@ -150,6 +184,8 @@ jobs:
           SSH="${{ steps.check_ssh.outputs.result }}"
           DEPLOY="${{ steps.check_deploy.outputs.result }}"
           DB="${{ steps.check_db.outputs.result }}"
+          TOGETHER="${{ steps.check_together.outputs.result }}"
+          GROQ="${{ steps.check_groq.outputs.result }}"
 
           # Default empty to OK (step succeeded but output not captured)
           [ -z "$SITE" ] && SITE="OK"
@@ -157,8 +193,10 @@ jobs:
           [ -z "$SSH" ] && SSH="OK"
           [ -z "$DEPLOY" ] && DEPLOY="OK"
           [ -z "$DB" ] && DB="OK"
+          [ -z "$TOGETHER" ] && TOGETHER="OK"
+          [ -z "$GROQ" ] && GROQ="OK"
 
-          echo "Site=$SITE API=$API SSH=$SSH Deploy=$DEPLOY DB=$DB"
+          echo "Site=$SITE API=$API SSH=$SSH Deploy=$DEPLOY DB=$DB Together=$TOGETHER Groq=$GROQ"
 
           REPORT="Connection Guardian Report"
           [ "$SITE" = "OK" ] && REPORT="$REPORT | Site:OK" || { CRITICAL=$((CRITICAL+1)); REPORT="$REPORT | Site:FAIL"; }
@@ -166,6 +204,8 @@ jobs:
           [ "$SSH" = "OK" ] && REPORT="$REPORT | SSH:OK" || { CRITICAL=$((CRITICAL+1)); REPORT="$REPORT | SSH:FAIL"; }
           [ "$DEPLOY" = "OK" ] && REPORT="$REPORT | Deploy:OK" || REPORT="$REPORT | Deploy:WARN(re-triggered)"
           [ "$DB" = "OK" ] && REPORT="$REPORT | DB:OK" || { CRITICAL=$((CRITICAL+1)); REPORT="$REPORT | DB:FAIL"; }
+          [ "$TOGETHER" = "OK" ] && REPORT="$REPORT | Together:OK" || REPORT="$REPORT | Together:WARN(voice API down)"
+          [ "$GROQ" = "OK" ] && REPORT="$REPORT | Groq:OK" || REPORT="$REPORT | Groq:WARN(temp voice down)"
 
           echo "Critical failures: $CRITICAL"
           echo "failures=$CRITICAL" >> $GITHUB_OUTPUT

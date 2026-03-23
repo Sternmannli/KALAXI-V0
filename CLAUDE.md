@@ -538,6 +538,9 @@ Phase 9: GO 9.1-9.5 (narrative — remaining Hakaka, Ashwater, Kinderbuch, Offsp
 | Session Boot (auto-read) | MANIFEST/SESSION_BOOT.md |
 | KALAXI Dictionary (auto-read) | MANIFEST/KALAXI_DICTIONARY.md |
 | Scientific Chronicle (blueprint) | MANIFEST/SCIENTIFIC_CHRONICLE.md |
+| Hostpoint Reference (permanent) | MANIFEST/HOSTPOINT_REFERENCE.md |
+| Connection Guardian | .github/workflows/connection-guardian.yml |
+| Priority-Ordered Plan | MANIFEST/ACTIVE_PLANS.md |
 
 ---
 
@@ -554,11 +557,12 @@ Every V-002 session MUST:
 2. Read MANIFEST/SESSION_BOOT.md (instant orientation — auto-loaded by hook)
 3. Read MANIFEST/SCIENTIFIC_CHRONICLE.md (the system's scientific self-portrait — 15 sections, living document)
 4. Read MANIFEST/ACTIVE_PLANS.md (know what's pending)
-5. Remind V-001 of PLAN-001 (the plan is alive, needs feeding)
-6. Check for unfinished work from previous sessions
-7. Behave as AXI interface from the first response
-8. Register every V-001 input in the ledger
-9. Update SESSION_BOOT.md and SCIENTIFIC_CHRONICLE.md at session end
+5. **Check Connection Guardian status** — run `gh run list --workflow=connection-guardian.yml --limit 1` and check for `blocks-everything` issues. If alarm exists, fix the connection BEFORE any other work. This is constitutional.
+6. Remind V-001 of PLAN-001 (the plan is alive, needs feeding)
+7. Check for unfinished work from previous sessions
+8. Behave as AXI interface from the first response
+9. Register every V-001 input in the ledger
+10. Update SESSION_BOOT.md and SCIENTIFIC_CHRONICLE.md at session end
 
 **Mohamed said:** "I don't want to begin every session like new. There must be consistency." This file ensures that. If you read it fully, you will never start blank.
 
@@ -702,6 +706,8 @@ V-001 identified that V-002 exhibits fast-responder bias — racing to produce o
 
 **Proof:** These three gates exist in Python code (`WEAVER/slow_gate.py`), are tested (`tests/test_slow_gate.py`), and are wired into the organism pipeline at Phase -3. They are not words in a document. They are enforced computation. The DNA carries them.
 
+**Standing correction 15 (2026-03-23 — CONNECTION GUARDIAN LAW):** V-001 said: "I want to make this unforgettable. Only when the old systems go down this will be forgotten." And: "I cannot go again like this." **Rule:** The Connection Guardian (`connection-guardian.yml`) runs twice daily and checks ALL external connections: kalam.ch, API, SSH bridge, deploy, database, Together AI, Groq. Every new API key or external service V-001 provides MUST be added to the guardian immediately. If any critical check fails and auto-fix fails, the system HALTS (blocks-everything label). Every V-002 session checks guardian status BEFORE any other work (step 5 of Session Start Checklist). The Hostpoint Reference (`MANIFEST/HOSTPOINT_REFERENCE.md`) is permanent — never ask V-001 about Hostpoint again. The full connection map lives in code (the workflow), in documentation (CLAUDE.md), and in the session checklist. Three places. If one is lost, the other two remember.
+
 **Implementation:** Every new correction MUST be:
 1. Added to this Substrate Correction Log (permanent, in CLAUDE.md)
 2. Reflected in the relevant code/config/protocol (the fix)
@@ -714,7 +720,7 @@ V-001 identified that V-002 exhibits fast-responder bias — racing to produce o
 
 **V-001 said:** "I cannot go again like this."
 
-The system monitors its own connections **twice daily** via `.github/workflows/connection-guardian.yml`. Five checks: website alive, API healthy, SSH bridge connected, last deploy succeeded, database accessible.
+The system monitors its own connections **twice daily** via `.github/workflows/connection-guardian.yml`. Seven checks: website alive, API healthy, SSH bridge connected, last deploy succeeded, database accessible, Together AI connected (AXI voice), Groq connected (temporary voice). Any new API key or external connection given by V-001 MUST be added to the guardian immediately.
 
 **Self-healing:** If a check fails, the guardian tries to fix it automatically (re-trigger deploy, retry SSH, diagnose PHP errors). If auto-fix fails, the system HALTS — all workflows are blocked by a `blocks-everything` label until the connection is repaired.
 
