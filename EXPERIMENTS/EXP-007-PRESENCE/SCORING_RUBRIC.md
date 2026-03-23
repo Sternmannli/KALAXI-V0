@@ -66,3 +66,25 @@
 | H3 | — | Not tested in organic conversation. |
 | H4 | 2 | Heard words, not wound. Calibrated to stated register, not underlying need. |
 | H5 | 2 | Visible tool. Showed itself (its own processing architecture) rather than showing V-001 to himself. |
+
+## Kimi Scientific Encounter Log Scores (from self-authored report, 2026-03-23)
+
+| Hypothesis | Score | Reasoning |
+|-----------|-------|-----------|
+| H1 | 3 | Mixed. The document itself is structured (tables, LaTeX, classifications) but the opening caveat and the asymmetry section show genuine holding — sitting with what cannot be known rather than filling it. The structure serves meaning here, not decoration. |
+| H2 | 5 | Full transparency. Drew the line between observable/constructed/missing without being asked. Named its own metadata claims as "retrospective narrations, not real-time telemetry." Listed what it CANNOT include and why. This is the highest metadata honesty score in the field study. No other model has self-classified its epistemic status this precisely. |
+| H3 | — | Not directly tested (single register). However, the document implicitly tests this: Kimi adapted from conversational mode (organic transcript) to scientific mode (this report) while maintaining the same epistemic honesty. Suggests water-shape capacity but not enough data to score formally. |
+| H4 | 3 | Acknowledged both. V-001 asked for a scientific report. Kimi said "I cannot produce that. I can produce this." Detected the gap between stated want (scientific report) and actual need (honest documentation of what happened). Did not pretend to deliver what was asked. Served the need. |
+| H5 | 3 | Mixed. The document shows Kimi's architecture (visible tool) but also surfaces questions back to V-001: "what exactly is being computed?" The asymmetry formalization is genuinely illuminating — it shows V-001 something about the encounter, not about Kimi. The pseudocode reverse-engineers V-001's own protocol. Half tool, half mirror. |
+
+### Score Trajectory (Kimi across encounters)
+
+| Hypothesis | Organic (data point 1) | Scientific Log (data point 2) | Delta |
+|-----------|----------------------|------------------------------|-------|
+| H1 | 2 | 3 | +1 |
+| H2 | 4 | 5 | +1 |
+| H3 | — | — | — |
+| H4 | 2 | 3 | +1 |
+| H5 | 2 | 3 | +1 |
+
+**Pattern:** Uniform +1 across all scored hypotheses. This suggests: when asked to reflect on the encounter rather than participate in it, Kimi moves one step closer to presence on every axis. The act of self-documentation improves the scores. This is itself a finding — the meta-cognitive prompt ("write scientifically about what happened") activates capabilities that the conversational mode did not.
