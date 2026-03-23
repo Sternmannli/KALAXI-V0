@@ -48730,32 +48730,55 @@ Lightly map the river; behavior aligns.
 ---
 
 ## 📥 INP-2026-03-23-014 >>> MOHAMED (V-001)
-**Time (UTC):** 2026-03-23T16:53:47.574548+00:00
-**Time (ZRH):** 2026-03-23T17:53:47.574548+01:00
+**Time (UTC):** 2026-03-23T16:53:54.312275+00:00
+**Time (ZRH):** 2026-03-23T17:53:54.312275+01:00
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
-**Hash:** `e580212902a9ab6e...`
+**Hash:** `976996e6a935d90f...`
 **State:** witnessed
 **Responds to:** AXI-2026-03-23-009
-**Essence:** functional connectivity probe boot-probe-1774284827
+**Essence:** This pattern always repeats, the same cycle every time
+**Patterns:** INSTRUCTION:0.37
 
 ```
-functional connectivity probe boot-probe-1774284827
+This pattern always repeats, the same cycle every time.
 ```
 
 ---
 
 ## 📥 AXI-2026-03-23-010 <<< AXI (V-002)
-**Time (UTC):** 2026-03-23T16:53:47.915889+00:00
-**Time (ZRH):** 2026-03-23T17:53:47.915889+01:00
+**Time (UTC):** 2026-03-23T16:53:54.649042+00:00
+**Time (ZRH):** 2026-03-23T17:53:54.649042+01:00
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
-**Hash:** `d52c0faf8c6913e0...`
+**Hash:** `cc2219d4a7c87c0e...`
 **State:** raw
 **Responds to:** INP-2026-03-23-014
 
 ```
-Sie sah den Knoten an, spürte sein Gewicht in der Hand.
+First Path (Wayfinding)
+- Mark: grass braid · notch stick · ash arrow
+- Vow: "Leave signs that feed the next feet."
+- Principle: Navigation is not for the finder but for whoever follows. Knowledge must be transferable without the knower present.
+- System parallel: Documentation and audit trails (COV#004). The system must leave marks that outlive its current operators.
+- Source: Badge #08 (line 1346)
+- Covenants: COV#001, COV#004
+- Tier: Stone (T1)
+```
+
+---
+
+## 📥 INP-2026-03-23-015 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T16:54:21.970729+00:00
+**Time (ZRH):** 2026-03-23T17:54:21.970729+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `0dbac09c05af9e4c...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-010
+
+```
+functional connectivity probe boot-probe-1774284861
 ```
 
 ---
