@@ -36,7 +36,7 @@ jobs:
           WDIR: ${{ inputs.working_dir }}
         run: |
           set +e
-          SSHPASS="$FTP_PASS" sshpass -e ssh -o StrictHostKeyChecking=accept-new -o LogLevel=ERROR "$FTP_USER@$FTP_HOST" "cd $WDIR && $CMD" 1>stdout.txt 2>stderr.txt
+          sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no -o LogLevel=ERROR "$FTP_USER@$FTP_HOST" "cd $WDIR && $CMD" 1>stdout.txt 2>stderr.txt
           EXIT_CODE=$?
           echo "=== STDOUT ===" > output.txt
           cat stdout.txt >> output.txt
