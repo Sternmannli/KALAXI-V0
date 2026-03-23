@@ -169,15 +169,20 @@ gh secret list
 4. **Archetype decision** — BLOCKED on Summon Voices synthesis + V-001 data about characters.
 5. **Phase C: Narrative Archetype Layer** — Patches 6-8. Waiting for archetype decision.
 6. **Phase D: System Integration** — Patches 9-12. Waiting for Phase C.
-7. **DB migration on server** — trigger migrate.php on kalam.ch.
+7. ~~DB migration on server~~ — DONE (2026-03-23). 6 tables created.
 8. **EXP-001** — 188 runs remaining (Claude: 0/20).
 9. **Voice model training** — Together AI key set. Training data ready.
-10. **Deploy system-map.html** — on main, will deploy on next cycle.
+10. ~~Deploy system-map.html~~ — DONE (2026-03-23). Live on kalam.ch.
 
-### VERIFIED STATE (checked 2026-03-23 session 4)
-- PR #389 is MERGED. Branch `claude/continue-previous-work-khjLX` merged to main.
-- Kimi transcript is FILED. Not pending.
-- All previous session handoffs are on main.
+### VERIFIED STATE (checked 2026-03-23 session 4, update 2)
+- PR #389 MERGED (Kimi analysis + EXP-007 design)
+- PR #390 MERGED (Standing correction 17: Continuous Handoff Law)
+- PR #392 MERGED (EXP-007 protocol + scoring rubric)
+- Kimi transcript FILED at `EXTERNAL_VOICES/KIMI/2026-03-23/presence_transcript_organic.md`
+- DB migration COMPLETE — 6 tables created on kalam.ch: ledger, witness_certificates, connections, donors, interactions, auth_tokens
+- Deploy to kalam.ch SUCCEEDED — system-map.html is live
+- EXP-007 protocol CREATED at `EXPERIMENTS/EXP-007-PRESENCE/`
+- All handoff files on main and verified
 
 ### KEY FILES FROM THIS SESSION
 | File | Purpose |
