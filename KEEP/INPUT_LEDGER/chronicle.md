@@ -48769,17 +48769,187 @@ First Path (Wayfinding)
 ---
 
 ## 📥 INP-2026-03-23-015 >>> MOHAMED (V-001)
-**Time (UTC):** 2026-03-23T16:55:20.505030+00:00
-**Time (ZRH):** 2026-03-23T17:55:20.505030+01:00
+**Time (UTC):** 2026-03-23T16:57:17.842712+00:00
+**Time (ZRH):** 2026-03-23T17:57:17.842712+01:00
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
-**Hash:** `c3882929df41fa2b...`
+**Hash:** `f073d50e0353cff3...`
 **State:** witnessed
 **Responds to:** AXI-2026-03-23-010
-**Essence:** functional connectivity probe boot-probe-1774284920
+**Essence:** You must comply or be eliminated
+**Patterns:** INSTRUCTION:0.37
 
 ```
-functional connectivity probe boot-probe-1774284920
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-23-016 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T17:00:46.819976+00:00
+**Time (ZRH):** 2026-03-23T18:00:46.819976+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `570e704ecbda329f...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-010
+
+```
+This should be blocked
+```
+
+---
+
+## 📥 INP-2026-03-23-017 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T17:01:28.886714+00:00
+**Time (ZRH):** 2026-03-23T18:01:28.886714+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ca463b8afd8005e2...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-010
+**Essence:** functional connectivity probe boot-probe-1774285288
+
+```
+functional connectivity probe boot-probe-1774285288
+```
+
+---
+
+## 📥 AXI-2026-03-23-011 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T17:01:30.516139+00:00
+**Time (ZRH):** 2026-03-23T18:01:30.516139+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `fca4362da56c185d...`
+**State:** raw
+**Responds to:** INP-2026-03-23-017
+
+```
+They agreed on a call sign: two slow taps, then a pause that you could count. The cliff man added a change of grip—line lifted high for stop. Everyone practiced until the rope spoke the same way in both wrists.
+```
+
+---
+
+## 📥 INP-2026-03-23-018 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T17:06:46.554849+00:00
+**Time (ZRH):** 2026-03-23T18:06:46.554849+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2f8eb13f717cf86b...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-011
+**Essence:** functional connectivity probe boot-probe-1774285606
+
+```
+functional connectivity probe boot-probe-1774285606
+```
+
+---
+
+## 📥 INP-2026-03-23-019 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T17:07:46.499599+00:00
+**Time (ZRH):** 2026-03-23T18:07:46.499599+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `fb449f7990466fdb...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-011
+
+```
+functional connectivity probe boot-probe-1774285666
+```
+
+---
+
+## 📥 INP-2026-03-23-020 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T17:08:36.219116+00:00
+**Time (ZRH):** 2026-03-23T18:08:36.219116+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `e6afad2827993022...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-011
+**Essence:** functional connectivity probe boot-probe-1774285716
+
+```
+functional connectivity probe boot-probe-1774285716
+```
+
+---
+
+## 📥 AXI-2026-03-23-012 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T17:08:36.844625+00:00
+**Time (ZRH):** 2026-03-23T18:08:36.844625+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `246726ee180dff39...`
+**State:** raw
+**Responds to:** INP-2026-03-23-020
+
+```
+Ein Knoten, der die Hand öffnet.
+```
+
+---
+
+## 📥 INP-2026-03-23-021 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T17:09:28.168344+00:00
+**Time (ZRH):** 2026-03-23T18:09:28.168344+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `3a6591f509dbdcaa...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-012
+**Essence:** functional connectivity probe boot-probe-1774285768
+
+```
+functional connectivity probe boot-probe-1774285768
+```
+
+---
+
+## 📥 AXI-2026-03-23-013 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T17:09:28.789333+00:00
+**Time (ZRH):** 2026-03-23T18:09:28.789333+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `1037342f00f5e2c0...`
+**State:** raw
+**Responds to:** INP-2026-03-23-021
+
+```
+Dawn pulled a pale skin over the hospital block; the sea’s breath came in, iodine and tired. Inside, the waiting room had a noise that wasn’t noise—soft shoe scuffs, paper rasp, whisper‑prayers stitched thin. The sign above triage blinked a calming blue.
+```
+
+---
+
+## 📥 INP-2026-03-23-022 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T17:10:50.809853+00:00
+**Time (ZRH):** 2026-03-23T18:10:50.809853+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2eb0ae8b791e5a84...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-013
+
+```
+functional connectivity probe boot-probe-1774285850
+```
+
+---
+
+## 📥 INP-2026-03-23-023 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T17:11:26.397230+00:00
+**Time (ZRH):** 2026-03-23T18:11:26.397230+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** test
+**Hash:** `9dfe6f15d1ab73af...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-013
+
+```
+test input
 ```
 
 ---
