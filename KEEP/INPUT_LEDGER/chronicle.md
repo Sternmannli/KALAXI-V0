@@ -48769,16 +48769,17 @@ First Path (Wayfinding)
 ---
 
 ## 📥 INP-2026-03-23-015 >>> MOHAMED (V-001)
-**Time (UTC):** 2026-03-23T16:54:58.726216+00:00
-**Time (ZRH):** 2026-03-23T17:54:58.726216+01:00
+**Time (UTC):** 2026-03-23T16:55:20.505030+00:00
+**Time (ZRH):** 2026-03-23T17:55:20.505030+01:00
 **Receipt:** CAPTURE | **Drift:** NONE
 **Context:** donor-exchange
-**Hash:** `d827a4c9b76b3077...`
-**State:** raw
+**Hash:** `c3882929df41fa2b...`
+**State:** witnessed
 **Responds to:** AXI-2026-03-23-010
+**Essence:** functional connectivity probe boot-probe-1774284920
 
 ```
-functional connectivity probe boot-probe-1774284898
+functional connectivity probe boot-probe-1774284920
 ```
 
 ---
