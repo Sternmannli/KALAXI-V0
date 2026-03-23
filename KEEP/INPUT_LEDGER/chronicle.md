@@ -48446,3 +48446,190 @@ Taro trimmed a green stick flat on one side and cut one notch near the tip. „W
 ```
 
 ---
+
+## 📥 INP-2026-03-23-003 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T21:22:40.458333+00:00
+**Time (ZRH):** 2026-03-23T22:22:40.458333+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-002
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-003 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T21:22:40.948619+00:00
+**Time (ZRH):** 2026-03-23T22:22:40.948619+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `137eb2faf4d971aa...`
+**State:** raw
+**Responds to:** INP-2026-03-23-003
+
+```
+Clearly open the door so the river flows.
+```
+
+---
+
+## 📥 INP-2026-03-23-004 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T21:26:12.450684+00:00
+**Time (ZRH):** 2026-03-23T22:26:12.450684+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `8e49527561e77744...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-003
+
+```
+functional connectivity probe boot-probe-1774301172
+```
+
+---
+
+## 📥 INP-2026-03-23-005 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T21:27:12.458300+00:00
+**Time (ZRH):** 2026-03-23T22:27:12.458300+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-003
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-004 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T21:27:12.976608+00:00
+**Time (ZRH):** 2026-03-23T22:27:12.976608+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `283159bd34cadba7...`
+**State:** raw
+**Responds to:** INP-2026-03-23-005
+
+```
+Ya-la kniete nieder, legte die Hand auf die Wunde.
+```
+
+---
+
+## 📥 INP-2026-03-23-006 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T21:27:22.441436+00:00
+**Time (ZRH):** 2026-03-23T22:27:22.441436+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-004
+**Essence:** This pattern always repeats, the same cycle every time
+**Patterns:** INSTRUCTION:0.37
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 INP-2026-03-23-007 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T21:32:01.009429+00:00
+**Time (ZRH):** 2026-03-23T22:32:01.009429+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-004
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-005 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T21:32:01.469785+00:00
+**Time (ZRH):** 2026-03-23T22:32:01.469785+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `7f9a11ab9ed731c9...`
+**State:** raw
+**Responds to:** INP-2026-03-23-007
+
+```
+Sie legte sich neben ihn, hielt seine Hand.
+```
+
+---
+
+## 📥 INP-2026-03-23-008 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T21:32:01.733848+00:00
+**Time (ZRH):** 2026-03-23T22:32:01.733848+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ed500fbb3766957d...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-005
+**Essence:** The garden grows in silence
+
+```
+The garden grows in silence.
+```
+
+---
+
+## 📥 AXI-2026-03-23-006 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T21:32:02.202357+00:00
+**Time (ZRH):** 2026-03-23T22:32:02.202357+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `6d2658b8d5e7be70...`
+**State:** raw
+**Responds to:** INP-2026-03-23-008
+
+```
+The door appears after you try the wall.
+```
+
+---
+
+## 📥 INP-2026-03-23-009 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T21:33:52.521883+00:00
+**Time (ZRH):** 2026-03-23T22:33:52.521883+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2dd984f696213975...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-006
+**Essence:** functional connectivity probe boot-probe-1774301632
+
+```
+functional connectivity probe boot-probe-1774301632
+```
+
+---
+
+## 📥 AXI-2026-03-23-007 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T21:33:52.970351+00:00
+**Time (ZRH):** 2026-03-23T22:33:52.970351+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `a8d4f949ae1706bf...`
+**State:** raw
+**Responds to:** INP-2026-03-23-009
+
+```
+WEST: The rope tugged once when pavement buckled. A hand signal moved back clean. The kite dipped when the wind hit the alley’s hot breath and rose when the breeze found room. A teenager tried a joke too loud; three palms went down—one, two, three—and the joke found a better shape. At a doorway, an old woman lifted her fingers in a tiny hum for passing shoulders to match; they did and a quarrel thinned instead of bursting.
+```
+
+---
