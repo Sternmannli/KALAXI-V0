@@ -240,7 +240,8 @@ def _check_module_connectivity() -> BootCheck:
         "WEAVER.decay", "WEAVER.latency", "WEAVER.oracle",
         "WEAVER.prevention", "WEAVER.mycelium", "WEAVER.ratification",
         "WEAVER.witness_certificate", "WEAVER.chain_validator",
-        "WEAVER.letter_ontology",
+        "WEAVER.letter_ontology", "WEAVER.core_intelligence",
+        "WEAVER.voice_engine", "WEAVER.slow_gate",
     ]
     import importlib
     missing = []

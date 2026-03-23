@@ -266,6 +266,12 @@ class OrganismState:
     boot_ritual_passed: bool = False
     boot_ritual_checks: int = 0
     boot_ritual_failures: int = 0
+    # ── Core Intelligence v1.0 (2026-03-23) ──
+    intelligence_mode: str = "local"
+    intelligence_canon_size: int = 0
+    intelligence_last_register: str = ""
+    intelligence_last_confidence: float = 0.0
+    intelligence_calls: int = 0
     timestamp: str = ""
 
 
@@ -1534,6 +1540,12 @@ class Organism:
             boot_ritual_passed=self._boot_result.passed,
             boot_ritual_checks=len(self._boot_result.checks),
             boot_ritual_failures=len([c for c in self._boot_result.checks if not c.passed]),
+            # ── Core Intelligence v1.0 ──
+            intelligence_mode=self._intelligence.mode,
+            intelligence_canon_size=self._intelligence.canon_size,
+            intelligence_last_register=self._last_intelligence.register if self._last_intelligence else "",
+            intelligence_last_confidence=self._last_intelligence.confidence if self._last_intelligence else 0.0,
+            intelligence_calls=self._intelligence._call_count,
             timestamp=self._now(),
         )
 
