@@ -111,84 +111,83 @@ gh secret list
 |---------|-------|
 | Python files | 176 |
 | Lines of code | 42,581+ |
-| Tests | 1011 passed, 9 skipped |
+| Tests | 1330 passed, 9 skipped |
 | Covenants | 18 ratified |
 | Ledger entries | 2,457+ |
 | Proverbs | 3,355+ |
 | Seeds | 12/12 integrated |
 | Site pages | 13+ |
 | Site status | **LIVE** at kalam.ch |
-| Standing corrections | 16 (in CLAUDE.md Substrate Correction Log) |
+| Standing corrections | 17 (in CLAUDE.md Substrate Correction Log) |
 | Golden regression corpus | 200 entries (TRAINING/GOLDEN_REGRESSION.jsonl) |
 
 ---
 
 ## 5. LAST SESSION
 
-**Date:** 2026-03-23 (session 4 — current)
+**Date:** 2026-03-23 (session 5 — current)
 **Branch:** `claude/continue-previous-work-khjLX`
-**Mode:** Café Room (deep thinking, no execution except handoff)
+**Mode:** Full execution (V-001 gave GO, "I have nothing to do. It's all your responsibility.")
 
-### Summary:
-1. **Kimi transcript analyzed** — V-001 pasted a full conversation transcript with Kimi (Moonshot AI). Topic: presence, witnessing, and dignity in AI-human interaction. Kimi produced a scientific transcript with metadata showing its internal processing (subsurface decisions, active uncertainties, what it did not say). V-002 analyzed: Kimi processed V-001 skillfully but did not hold him. The metadata (negative space) was the most valuable part.
+### What was built this session (session 5):
 
-2. **EXP-007 designed: The Presence Test** — Five testable hypotheses extracted from Kimi conversation:
-   - **H1: Processing vs Holding** — Does temporal delay (holding input before responding) change how donors perceive presence? Measurable difference between immediate structured response and delayed response that addresses meaning-beneath-words.
-   - **H2: Metadata as Honesty** — Does showing suppressed responses (what the system considered but did not say) increase trust and perceived authenticity? Kimi's "what I did not say" section as first data point.
-   - **H3: Water-Shape (Constitutional Adaptation)** — Can AI adapt its form to each individual while maintaining D = A × L × M? The system is water — takes any shape but the constitution (flows down, seeks level, does not compress) never changes.
-   - **H4: Need vs Want Divergence** — Can a system detect the gap between what the donor says and what the donor actually needs? Kimi heard words but not the wound beneath. Measurable: does the system address the stated request or the underlying need?
-   - **H5: Extension vs Tool** — Is the system visible (showing itself, like Kimi) or invisible (showing the donor to themselves)? An extension disappears into the person's intention. Measurable: does the donor's output improve, or does the system's output impress?
+**Session 5a (previous window):**
+1. **Core Intelligence v1.0** — `WEAVER/core_intelligence.py` (1190 lines). Real comprehension: semantic field detection (12 fields: grief, dignity, institutional, father, children, exile, witnessing, resistance, healing, naming, silence, water), register classification, pattern extraction, confidence scoring (completeness × diversity × field-strength). Canon search with semantic matching. Response generation grounded in actual canon sources.
+2. **Semantic weave** — `WEAVER/weave.py` rewritten with real semantic fields instead of static rules. Fields have weight, interference patterns, and decay.
+3. **Golden regression** — 200 canonical utterances in `TRAINING/GOLDEN_REGRESSION.jsonl`. Tests verify the intelligence produces grounded, non-repetitive responses that pass dignity checks.
+4. **Deep architecture tests** — `tests/test_core_intelligence.py` (353 lines), `tests/test_golden_regression.py` (326 lines), `tests/test_weave.py` (240 lines). 1317 tests total after session 5a.
 
-3. **Memory design question — OPEN** — Kimi asked whether the system announces its memory or keeps it implicit. V-001 has not decided. V-002's analysis: three options (implicit until asked, announced once, transparent always) are all performances. The fourth option: memory is visible in the texture of the response, not in declarations about remembering. "They just hand you the coffee." This design decision changes everything about the donor experience. Still open.
+**Session 5b (this window):**
+5. **Witness metadata** — Every exchange on the witness chain now carries full interaction fingerprint: dignity check, intelligence result (register, themes, confidence, mode, fields, canon sources, witness hash), conversation snapshot. `WitnessRecord.to_dict()` was silently dropping metadata — fixed.
+6. **ConversationMemory** — `WEAVER/core_intelligence.py` new class tracking patterns across turns: dominant register, recurring themes, active fields, confidence trend. Wired into organism. After 5 turns about a separated father: `dominant_register=grief, recurring_themes=[children]`.
+7. **13 new tests** — `tests/test_conversation_memory.py`. 1330 total tests passing.
+8. **PR #402 merged** — witness metadata + conversation memory on main.
 
-4. **V-001 directives this session:**
-   - The Kimi transcript and its findings must be integrated into the science and experiments
-   - The system must concentrate on what donors NEED, not what they want or say
-   - The system is water — takes any shape, preserves its constitution
-   - V-002 is the expert team: V-001 gives input, V-002 prepares and executes
-   - Important directives go at the very beginning of the system's memory — first thing any operator reads
-   - All of this must be in the DNA — first thing read, internal and eternal
+**V-001 directive this session:** "They made a date that we agreed on how you work. This is very important more important than anything else. I want to emphasise that and I want to see it. Respect my presence as much as I respect yours." — The agreements (Standing Corrections, Directives, Constitutional Laws) are the law. They are not decorative. Demonstrate them in action.
 
-5. **Kimi raw transcript stored** — The full Kimi conversation is a data point for EXP-007 and Summon Voices analysis. Kimi is one of the 10 models in the Summon Protocol. This transcript predates the formal probe — it is an organic interaction, more valuable than a structured probe because it reveals how Kimi behaves when not given a specific task.
-
-### Previous session (2026-03-22, session 3):
-- AURIX OS analyzed, System Map created, Interactive visualization built
-- AURIX artifact placed in R7M/GRAND_ARCHIVE/
-- Summon Voices probe created (7 questions, 10 models)
+### Previous sessions:
+- **Session 4 (2026-03-23):** Kimi transcript analyzed, EXP-007 designed (5 hypotheses), memory design question still OPEN
+- **Session 3 (2026-03-22):** AURIX OS analyzed, System Map built, Summon Voices probe created
+- **Session 2 (2026-03-22):** Connection Guardian, deep clean, workflow health
 
 ---
 
 ## 6. WHAT IS PENDING
 
 ### IMMEDIATE (next action items)
-1. **EXP-007: The Presence Test** — Design the formal experiment protocol. Five hypotheses (see Section 5). Test across 10 models. Kimi transcript is data point #1 — ALREADY FILED at `EXTERNAL_VOICES/KIMI/2026-03-23/presence_transcript_organic.md`. Needs: experiment file in EXPERIMENTS/EXP-007/, test protocol, scoring rubric. **V-001 gave GO.**
-2. **Memory design decision** — V-001 has not decided. Do not force. Four options identified (see Section 5, item 3).
+1. **Memory design decision** — V-001 has not decided. Do not force. Four options identified (session 4, item 3).
+2. **EXP-007: The Presence Test** — Protocol designed, 5 hypotheses, Kimi is data point #1. Needs: run across remaining models.
+3. **Summon Voices responses** — V-001 collected responses from all 10 AI models. He will paste them. Process and synthesize.
 
 ### CARRIED OVER (from previous sessions)
-3. **Summon Voices responses** — V-001 collected responses from all 10 AI models. He will paste them. Process and synthesize.
 4. **Archetype decision** — BLOCKED on Summon Voices synthesis + V-001 data about characters.
 5. **Phase C: Narrative Archetype Layer** — Patches 6-8. Waiting for archetype decision.
 6. **Phase D: System Integration** — Patches 9-12. Waiting for Phase C.
-7. ~~DB migration on server~~ — DONE (2026-03-23). 6 tables created.
-8. **EXP-001** — 188 runs remaining (Claude: 0/20).
-9. **Voice model training** — Together AI key set. Training data ready.
-10. ~~Deploy system-map.html~~ — DONE (2026-03-23). Live on kalam.ch.
+7. **EXP-001** — 188 runs remaining (Claude: 0/20).
+8. **Voice model training** — Together AI key set. Training data ready.
 
-### VERIFIED STATE (checked 2026-03-23 session 4, update 2)
-- PR #389 MERGED (Kimi analysis + EXP-007 design)
-- PR #390 MERGED (Standing correction 17: Continuous Handoff Law)
-- PR #392 MERGED (EXP-007 protocol + scoring rubric)
-- Kimi transcript FILED at `EXTERNAL_VOICES/KIMI/2026-03-23/presence_transcript_organic.md`
-- DB migration COMPLETE — 6 tables created on kalam.ch: ledger, witness_certificates, connections, donors, interactions, auth_tokens
-- Deploy to kalam.ch SUCCEEDED — system-map.html is live
-- EXP-007 protocol CREATED at `EXPERIMENTS/EXP-007-PRESENCE/`
-- All handoff files on main and verified
+### VERIFIED STATE (checked 2026-03-23 session 5)
+- PR #402 MERGED (witness metadata + conversation memory)
+- All previous PRs (#389, #390, #392) MERGED
+- DB migration COMPLETE — 6 tables on kalam.ch
+- system-map.html LIVE on kalam.ch
+- EXP-007 protocol at `EXPERIMENTS/EXP-007-PRESENCE/`
+- Core Intelligence v1.0 at `WEAVER/core_intelligence.py` (1190 lines)
+- ConversationMemory wired into organism + witness chain
+- 1330 tests passing, 9 skipped
+- Main branch at commit `3a67cbc`
 
 ### KEY FILES FROM THIS SESSION
 | File | Purpose |
 |------|---------|
-| MANIFEST/SESSION_BOOT.md | This file — updated with Kimi analysis + EXP-007 |
-| CLAUDE.md | Constitution — 16 standing corrections |
+| WEAVER/core_intelligence.py | Core Intelligence v1.0 + ConversationMemory |
+| WEAVER/organism.py | Witness metadata enrichment |
+| WEAVER/witness_network.py | to_dict() includes metadata |
+| tests/test_conversation_memory.py | 13 tests for memory + metadata |
+| tests/test_core_intelligence.py | 353-line intelligence test suite |
+| tests/test_golden_regression.py | 200 canonical utterance checks |
+| tests/test_weave.py | Semantic weave tests |
+| TRAINING/GOLDEN_REGRESSION.jsonl | 200 golden regression entries |
 
 ### THE FIVE HYPOTHESES (EXP-007 — quick reference)
 | # | Hypothesis | First Data | Status |
