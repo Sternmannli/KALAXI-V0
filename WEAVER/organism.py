@@ -127,6 +127,7 @@ from WEAVER.witness_certificate import (
 )
 # ── Voice Engine: canon-grounded response generation ──
 from WEAVER.voice_engine import VoiceEngine, detect_register
+from WEAVER.core_intelligence import CoreIntelligence
 # ── Triple Gate: SLOW + COMPUTE BUDGET + GO REQUIREMENT (Phase -3) ──
 # "Never ever exceed your computing power. You must ask for GO. Always slowly." — V-001
 from WEAVER.slow_gate import (
@@ -303,6 +304,13 @@ class ProcessResult:
     lab_forge_needed: bool = False
     pillar_profile: dict = field(default_factory=dict)
     metadata_event_id: str = ""
+    # ── Core Intelligence v1.0 ──
+    intelligence_mode: str = ""           # "together", "groq", "local"
+    intelligence_register: str = ""       # detected emotional register
+    intelligence_themes: list = field(default_factory=list)   # extracted themes
+    intelligence_confidence: float = 0.0  # how grounded the response is
+    intelligence_fields: dict = field(default_factory=dict)   # active semantic fields
+    canon_sources: list = field(default_factory=list)         # which canon fragments used
     warnings: list = field(default_factory=list)
 
 
@@ -384,10 +392,13 @@ class Organism:
         self._distillery = None  # lazy-loaded to avoid circular imports
         # ── Voice Engine: canon-grounded response generation ──
         self._voice_engine = VoiceEngine()
+        # ── Core Intelligence: the brain — comprehension + canon search + LLM bridge ──
+        self._intelligence = CoreIntelligence()
         # ── Letter Chain (EXP-002): ontology + witness certificates ──
         self._witness_certs_generated = 0
         self._last_sense = None
         self._last_lab = None
+        self._last_intelligence = None
         self._last_pillar_profile = None
         self._last_measurement = None
         self._last_agency = None
@@ -1152,20 +1163,26 @@ class Organism:
                 warnings=self._last_dignity.get("warnings", []) + warnings,
             )
 
-        # 3b. SAY — render output through Voice Engine (canon-grounded)
+        # 3b. SAY — respond through Core Intelligence (comprehend + canon-search + generate)
         # SENSE-aware: if SENSE recommends asking, the question takes priority
-        # Otherwise: Voice Engine speaks from canon (proverbs, narratives, golden utterances)
+        # Otherwise: CoreIntelligence processes input and responds from canon
         if sense_reading.ask_recommended and sense_reading.ask_question:
             response_text = sense_reading.ask_question
+            self._last_intelligence = None
         else:
-            # Voice Engine: respond from canon, register-matched
-            input_register = detect_register(donor_input)
-            voice_response = self._voice_engine.respond(
-                donor_input,
-                dignity=dignity.D,
-                register=input_register,
-            )
-            response_text = voice_response.text
+            # Core Intelligence: comprehend → search canon → generate response
+            intel_result = self._intelligence.process(donor_input, dignity=dignity.D)
+            response_text = intel_result.response_text
+            self._last_intelligence = intel_result
+            # Feed intelligence findings back as warnings/metadata
+            if intel_result.comprehension.get("fields"):
+                top_fields = ", ".join(
+                    f"{k}({v:.2f})" for k, v in
+                    list(intel_result.comprehension["fields"].items())[:3]
+                )
+                warnings.append(f"Intelligence: {intel_result.mode} | fields: {top_fields}")
+            if intel_result.confidence < 0.3:
+                warnings.append(f"Low intelligence confidence: {intel_result.confidence:.2f}")
 
         # LAB-aware: append rigor warnings if science detected
         if lab_reading and lab_reading.active and lab_reading.rigor_warnings:
@@ -1345,6 +1362,13 @@ class Organism:
             lab_forge_needed=lab_reading.forge_needed if lab_reading else False,
             pillar_profile=pillar_profile or {},
             metadata_event_id=metadata_event_id,
+            # ── Core Intelligence v1.0 fields ──
+            intelligence_mode=self._last_intelligence.mode if self._last_intelligence else "",
+            intelligence_register=self._last_intelligence.register if self._last_intelligence else "",
+            intelligence_themes=self._last_intelligence.themes if self._last_intelligence else [],
+            intelligence_confidence=self._last_intelligence.confidence if self._last_intelligence else 0.0,
+            intelligence_fields=self._last_intelligence.comprehension.get("fields", {}) if self._last_intelligence else {},
+            canon_sources=self._last_intelligence.canon_sources if self._last_intelligence else [],
             warnings=warnings,
         )
 
