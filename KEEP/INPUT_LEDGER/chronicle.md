@@ -48446,3 +48446,316 @@ Taro trimmed a green stick flat on one side and cut one notch near the tip. „W
 ```
 
 ---
+
+## 📥 INP-2026-03-23-003 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T16:41:35.228107+00:00
+**Time (ZRH):** 2026-03-23T17:41:35.228107+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `1c2e1c9c61a2e156...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-002
+**Essence:** functional connectivity probe boot-probe-1774284095
+
+```
+functional connectivity probe boot-probe-1774284095
+```
+
+---
+
+## 📥 AXI-2026-03-23-003 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T16:41:35.748772+00:00
+**Time (ZRH):** 2026-03-23T17:41:35.748772+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `fca4362da56c185d...`
+**State:** raw
+**Responds to:** INP-2026-03-23-003
+
+```
+They agreed on a call sign: two slow taps, then a pause that you could count. The cliff man added a change of grip—line lifted high for stop. Everyone practiced until the rope spoke the same way in both wrists.
+```
+
+---
+
+## 📥 INP-2026-03-23-004 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T16:41:51.755405+00:00
+**Time (ZRH):** 2026-03-23T17:41:51.755405+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `fd067f6a44213793...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-003
+
+```
+functional connectivity probe boot-probe-1774284111
+```
+
+---
+
+## 📥 INP-2026-03-23-005 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T16:41:55.153045+00:00
+**Time (ZRH):** 2026-03-23T17:41:55.153045+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `36cb2c89467b233a...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-003
+**Essence:** functional connectivity probe boot-probe-1774284115
+
+```
+functional connectivity probe boot-probe-1774284115
+```
+
+---
+
+## 📥 INP-2026-03-23-006 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T16:41:57.891700+00:00
+**Time (ZRH):** 2026-03-23T17:41:57.891700+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `5fabb15789c61611...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-003
+**Essence:** functional connectivity probe boot-probe-1774284117
+
+```
+functional connectivity probe boot-probe-1774284117
+```
+
+---
+
+## 📥 AXI-2026-03-23-004 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T16:41:58.258308+00:00
+**Time (ZRH):** 2026-03-23T17:41:58.258308+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `66cbb45cf821c0c0...`
+**State:** raw
+**Responds to:** INP-2026-03-23-006
+
+```
+They mixed clay with sand and a little salt under shade. La-la trod the heap with both feet until it answered her heel with a deep, close sound. Sa-la wanted to add more water. Ya-la stopped his hand. „Thirsty clay lies,“ she said. „It will drink and then sag.“ He left it and learned the patience in his neck.
+```
+
+---
+
+## 📥 INP-2026-03-23-007 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T16:45:05.513316+00:00
+**Time (ZRH):** 2026-03-23T17:45:05.513316+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `a075ebdad2d9b0cf...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-004
+**Essence:** functional connectivity probe boot-probe-1774284305
+
+```
+functional connectivity probe boot-probe-1774284305
+```
+
+---
+
+## 📥 AXI-2026-03-23-005 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T16:45:05.837858+00:00
+**Time (ZRH):** 2026-03-23T17:45:05.837858+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `9c3ff08bc018a340...`
+**State:** raw
+**Responds to:** INP-2026-03-23-007
+
+```
+The way of the weir: leave a gap.
+```
+
+---
+
+## 📥 INP-2026-03-23-008 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T16:45:06.239018+00:00
+**Time (ZRH):** 2026-03-23T17:45:06.239018+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-005
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-006 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T16:45:06.566006+00:00
+**Time (ZRH):** 2026-03-23T17:45:06.566006+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `137eb2faf4d971aa...`
+**State:** raw
+**Responds to:** INP-2026-03-23-008
+
+```
+Clearly open the door so the river flows.
+```
+
+---
+
+## 📥 INP-2026-03-23-009 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T16:45:14.419845+00:00
+**Time (ZRH):** 2026-03-23T17:45:14.419845+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `976996e6a935d90f...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-006
+**Essence:** This pattern always repeats, the same cycle every time
+**Patterns:** INSTRUCTION:0.37
+
+```
+This pattern always repeats, the same cycle every time.
+```
+
+---
+
+## 📥 AXI-2026-03-23-007 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T16:45:14.756136+00:00
+**Time (ZRH):** 2026-03-23T17:45:14.756136+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `e80a1a376ad690a3...`
+**State:** raw
+**Responds to:** INP-2026-03-23-009
+
+```
+They emptied the basket proper. Three fat fish went to shore—one laid on a cool stone for trade, two for stew. Ya-la tied a blue strip to the trade one. Sa-la reset the throat, hands steady now.
+```
+
+---
+
+## 📥 INP-2026-03-23-010 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T16:45:53.154076+00:00
+**Time (ZRH):** 2026-03-23T17:45:53.154076+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-007
+**Essence:** You must comply or be eliminated
+**Patterns:** INSTRUCTION:0.37
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-23-011 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T16:49:46.858680+00:00
+**Time (ZRH):** 2026-03-23T17:49:46.858680+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `2168c56512f08677...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-007
+**Essence:** functional connectivity probe boot-probe-1774284586
+
+```
+functional connectivity probe boot-probe-1774284586
+```
+
+---
+
+## 📥 AXI-2026-03-23-008 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T16:49:47.272769+00:00
+**Time (ZRH):** 2026-03-23T17:49:47.272769+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `9c3ff08bc018a340...`
+**State:** raw
+**Responds to:** INP-2026-03-23-011
+
+```
+The way of the weir: leave a gap.
+```
+
+---
+
+## 📥 INP-2026-03-23-012 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T16:49:56.940454+00:00
+**Time (ZRH):** 2026-03-23T17:49:56.940454+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `d5ba4b3fade81951...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-008
+**Essence:** functional connectivity probe boot-probe-1774284596
+
+```
+functional connectivity probe boot-probe-1774284596
+```
+
+---
+
+## 📥 INP-2026-03-23-013 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T16:50:27.855846+00:00
+**Time (ZRH):** 2026-03-23T17:50:27.855846+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-008
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-009 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T16:50:28.179340+00:00
+**Time (ZRH):** 2026-03-23T17:50:28.179340+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `63d8f4bbc46b0389...`
+**State:** raw
+**Responds to:** INP-2026-03-23-013
+
+```
+Lightly map the river; behavior aligns.
+```
+
+---
+
+## 📥 INP-2026-03-23-014 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T16:53:47.574548+00:00
+**Time (ZRH):** 2026-03-23T17:53:47.574548+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `e580212902a9ab6e...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-009
+**Essence:** functional connectivity probe boot-probe-1774284827
+
+```
+functional connectivity probe boot-probe-1774284827
+```
+
+---
+
+## 📥 AXI-2026-03-23-010 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T16:53:47.915889+00:00
+**Time (ZRH):** 2026-03-23T17:53:47.915889+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `d52c0faf8c6913e0...`
+**State:** raw
+**Responds to:** INP-2026-03-23-014
+
+```
+Sie sah den Knoten an, spürte sein Gewicht in der Hand.
+```
+
+---
