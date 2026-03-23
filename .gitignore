@@ -49,5 +49,5 @@ node_modules/
 .astro/
 *.db
 
-# Credentials vault — NEVER commit (contains PAT, tokens, passwords)
-.credentials.env
+# Credentials vault — committed to private repo (passkey + 2FA protection)
+# NEVER synced to public repo (excluded in clean_for_public.py NEVER_SYNC)

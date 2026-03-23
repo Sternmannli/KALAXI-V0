@@ -57,6 +57,7 @@ VOCABULARY_MAP = {
 NEVER_SYNC = {
     'CLAUDE.md',
     '.env',
+    '.credentials.env',
     '.config',
     'credentials',
     'INPUT_LEDGER',
