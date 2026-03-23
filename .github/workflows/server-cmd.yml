@@ -35,7 +35,11 @@ jobs:
           CMD: ${{ inputs.command }}
           WDIR: ${{ inputs.working_dir }}
         run: |
-          sshpass -p "$FTP_PASS" ssh -o StrictHostKeyChecking=no "$FTP_USER@$FTP_HOST" "cd $WDIR && $CMD" > output.txt 2>&1 || true
+          set +e
+          sshpass -p "$FTP_PASS" ssh -tt -o StrictHostKeyChecking=no -o LogLevel=ERROR "$FTP_USER@$FTP_HOST" "cd $WDIR && $CMD" > output.txt 2>&1
+          EXIT_CODE=$?
+          echo "" >> output.txt
+          echo "--- exit code: $EXIT_CODE ---" >> output.txt
           cat output.txt
 
       - name: Post output as issue
