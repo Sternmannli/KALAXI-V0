@@ -1,12 +1,15 @@
 {
   "meta": {
-    "version": "1.0",
+    "version": "2.0",
     "created": "2026-03-22",
+    "updated": "2026-03-22",
     "created_by": "V-002",
     "description": "The 12 behavioral laws of the KALAXI narrative universe. Not archetypes — strata. Not character templates — physics. These laws operate beneath all four narratives and the AURIX fossil record. D = A × L × M is itself a stratum.",
     "source_aurix": "R7M/EXCAVATION/AURIX_EXTRACTION.json",
     "source_synthesis": "FIELD/SUMMON_RESPONSES/SYNTHESIS_SP-NARR-001.md",
-    "principle": "The 72 AURIX equations collapse into 12 independent behavioral laws when register-specific duplication is removed. The characters do not follow the equations. The characters ARE the equations made visible."
+    "voice_feedback_date": "2026-03-22",
+    "voice_feedback_source": "FIELD/SUMMON_RESPONSES/SYNTHESIS_SPINE_FEEDBACK.md",
+    "principle": "The 72 AURIX equations collapse into 12 independent behavioral laws when register-specific duplication is removed. Characters are local solutions to the equations under story-specific constraints — not the equations themselves."
   },
   "strata": [
     {
@@ -28,7 +31,12 @@
         "kalaxi_1": {"Shared_Vulnerability": "wound exposure at the terminal", "Care_Duration": "the system holding over time (3 years)", "Resource_Sharing": "pattern density redistributed", "Rivalry_Tension": "Scott's guardedness vs Ted's deflection"}
       },
       "kalaxi_module": "dignity_check.py",
-      "module_connection": "D = A × L × M measures the system's cohesion with the person. When D = 0, cohesion has failed — the system acted as though the bond was not there."
+      "module_connection": "D = A × L × M measures the system's cohesion with the person. When D = 0, cohesion has failed — the system acted as though the bond was not there.",
+      "observable_indicators": ["characters return to each other after strain", "shared burden increases trust", "repair succeeds after rupture", "resource sharing increases under hardship"],
+      "failure_modes": ["isolation", "withheld care", "bond collapse under rivalry", "performing connection without feeling it"],
+      "confidence": 0.98,
+      "source_provenance": [{"source_file": "R7M/EXCAVATION/AURIX_EXTRACTION.json", "equation_ids": ["BOND_STRENGTH", "PACK_HARMONY", "ALLY_TRUST"]}],
+      "coupling": [{"stratum_id": "STR-02", "relationship": "co-determine survival", "strength": 0.8}, {"stratum_id": "STR-11", "relationship": "repair requires cohesion to initiate", "strength": 0.9}, {"stratum_id": "STR-12", "relationship": "humor strengthens bonds", "strength": 0.6}]
     },
     {
       "id": "STR-02",
@@ -49,7 +57,12 @@
         "kalaxi_1": {"Flow_Rate": "pattern input from donors", "Storage_Capacity": "1100 anomalies, 3333 proverbs", "Intake_Rate": "system processing speed", "Coordination": "k>=7 anonymization, module pipeline"}
       },
       "kalaxi_module": "keep.py",
-      "module_connection": "KEEP stores with retention — the digital equivalent of smoke-cure and clay seal."
+      "module_connection": "KEEP stores with retention — the digital equivalent of smoke-cure and clay seal.",
+      "observable_indicators": ["resources stored for future", "surplus shared", "collective planning visible", "waste reduction"],
+      "failure_modes": ["hoarding", "consumption exceeding intake", "no coordination", "feast-then-famine cycle"],
+      "confidence": 0.95,
+      "source_provenance": [{"source_file": "R7M/EXCAVATION/AURIX_EXTRACTION.json", "equation_ids": ["FOOD_SECURITY", "SETTLE_TIME"]}],
+      "coupling": [{"stratum_id": "STR-01", "relationship": "sharing requires bonds", "strength": 0.8}, {"stratum_id": "STR-08", "relationship": "shelter consumes resources", "strength": 0.7}, {"stratum_id": "STR-10", "relationship": "resource decline triggers migration", "strength": 0.85}]
     },
     {
       "id": "STR-03",
@@ -70,7 +83,12 @@
         "kalaxi_1": {"Signal_Clarity": "pattern match strength", "Landmark_Match": "canonical reference points (covenants, proverbs)", "Memory_Map": "input ledger history", "Doubt_Noise": "ambiguity, indistinguishable patterns"}
       },
       "kalaxi_module": "compass.py",
-      "module_connection": "Compass orients the system — where has it been, where should it go."
+      "module_connection": "Compass orients the system — where has it been, where should it go.",
+      "observable_indicators": ["confident direction despite uncertainty", "landmarks recognized", "memory of past routes applied", "group moves with shared orientation"],
+      "failure_modes": ["paralysis from confusion", "circular movement", "ignoring known landmarks", "following false signals"],
+      "confidence": 0.90,
+      "source_provenance": [{"source_file": "R7M/EXCAVATION/AURIX_EXTRACTION.json", "equation_ids": ["NAV_CONFIDENCE", "CAMP_SCORE"]}],
+      "coupling": [{"stratum_id": "STR-10", "relationship": "navigation enables movement", "strength": 0.9}, {"stratum_id": "STR-06", "relationship": "perception feeds navigation", "strength": 0.85}, {"stratum_id": "STR-09", "relationship": "signals serve as landmarks", "strength": 0.6}]
     },
     {
       "id": "STR-04",
@@ -90,7 +108,12 @@
         "kalaxi_1": {"Step_Control": "k>=7 anonymization", "Breath_Control": "system does not expose donor identity", "Environment_Forgiveness": "pattern density that protects individuals"}
       },
       "kalaxi_module": "privacy_budget.py",
-      "module_connection": "Privacy budget is the system's concealment — protecting the donor's trace from exposure."
+      "module_connection": "Privacy budget is the system's concealment — protecting the donor's trace from exposure.",
+      "observable_indicators": ["trace reduction successful", "observer fails to detect", "controlled breath and movement", "environment assists hiding"],
+      "failure_modes": ["exposure despite effort", "paranoia without threat", "isolation from over-hiding", "lost identity through excessive masking"],
+      "confidence": 0.85,
+      "source_provenance": [{"source_file": "R7M/EXCAVATION/AURIX_EXTRACTION.json", "equation_ids": ["TRACELESS", "TRACE_MASK", "STEALTH_LOCK"]}],
+      "coupling": [{"stratum_id": "STR-06", "relationship": "adversarial — concealment resists perception", "strength": 0.7}, {"stratum_id": "STR-09", "relationship": "signal and concealment inversely related", "strength": 0.8}, {"stratum_id": "STR-01", "relationship": "over-concealment erodes bonds", "strength": 0.5}]
     },
     {
       "id": "STR-05",
@@ -111,7 +134,12 @@
         "kalaxi_1": {"Mechanism_Efficiency": "the terminal's question design", "Skill_Execution": "system calibration", "Distance": "gap between system and donor", "Coordination": "D = A × L × M alignment"}
       },
       "kalaxi_module": "wire.py",
-      "module_connection": "WIRE transmits signal across distance — the system's throwing lever."
+      "module_connection": "WIRE transmits signal across distance — the system's throwing lever.",
+      "observable_indicators": ["force reaches target", "coordinated effort amplifies effect", "precision in execution", "distance bridged"],
+      "failure_modes": ["effort misses", "force without precision", "projection without coordination wastes energy", "recoil damages projector"],
+      "confidence": 0.92,
+      "source_provenance": [{"source_file": "R7M/EXCAVATION/AURIX_EXTRACTION.json", "equation_ids": ["HUNT_SUCCESS", "PROJECTILE_ENERGY"]}],
+      "coupling": [{"stratum_id": "STR-06", "relationship": "perception guides aim", "strength": 0.8}, {"stratum_id": "STR-07", "relationship": "projection is a status tool", "strength": 0.6}, {"stratum_id": "STR-09", "relationship": "projection carries signal", "strength": 0.5}]
     },
     {
       "id": "STR-06",
@@ -131,7 +159,12 @@
         "kalaxi_1": {"Observation_Density": "1100 anomalies indexed", "Anomaly_Detection": "unified pillar detectors", "Recall_Speed": "input ledger hash-chain lookup"}
       },
       "kalaxi_module": "sense.py",
-      "module_connection": "SENSE detects patterns — the system's eyes and ears. Plus unified_pillar_detector.py for anomaly-specific detection."
+      "module_connection": "SENSE detects patterns — the system's eyes and ears. Plus unified_pillar_detector.py for anomaly-specific detection.",
+      "observable_indicators": ["anomaly detected before damage", "pattern matched from memory", "subtle signal read correctly", "observer adjusts to noise"],
+      "failure_modes": ["signal missed", "false pattern matched", "information overload", "recall failure under stress"],
+      "confidence": 0.95,
+      "source_provenance": [{"source_file": "R7M/EXCAVATION/AURIX_EXTRACTION.json", "equation_ids": ["INSIGHT_RATE", "PRED_PRESSURE"]}],
+      "coupling": [{"stratum_id": "STR-04", "relationship": "adversarial — perception opposes concealment", "strength": 0.7}, {"stratum_id": "STR-03", "relationship": "perception feeds bearing", "strength": 0.85}, {"stratum_id": "STR-11", "relationship": "perceiving harm precedes repair", "strength": 0.75}]
     },
     {
       "id": "STR-07",
@@ -152,7 +185,12 @@
         "kalaxi_1": {"Alliance_Count": "donor network size", "Gift_Flow": "pattern contribution", "Signal_Timing": "the cursor waiting — not the impatient waiting of a machine", "Scandal_Load": "institutional failure to see"}
       },
       "kalaxi_module": "deliberative_democracy.py",
-      "module_connection": "Deliberative democracy and distributed stewardship handle status negotiation in the system — who decides, how power flows."
+      "module_connection": "Deliberative democracy and distributed stewardship handle status negotiation in the system — who decides, how power flows.",
+      "observable_indicators": ["status negotiated without violence", "gifts flow voluntarily", "authority accepted through competence", "challenges resolved ritually"],
+      "failure_modes": ["violence replaces negotiation", "authority without legitimacy", "status hoarding", "scandal erodes all standings"],
+      "confidence": 0.88,
+      "source_provenance": [{"source_file": "R7M/EXCAVATION/AURIX_EXTRACTION.json", "equation_ids": ["DOMINANCE_SHIFT", "CR_GIFT", "CR_SPLIT", "CR_GUARD"]}],
+      "coupling": [{"stratum_id": "STR-01", "relationship": "hierarchy serves cohesion when healthy", "strength": 0.7}, {"stratum_id": "STR-12", "relationship": "humor regulates hierarchy tension", "strength": 0.65}, {"stratum_id": "STR-05", "relationship": "projection enforces hierarchy", "strength": 0.6}]
     },
     {
       "id": "STR-08",
@@ -173,7 +211,12 @@
         "kalaxi_1": {"Barrier_Quality": "sealed gate, privacy budget", "Insulation": "k>=7 anonymization, pattern density", "Drainage": "restorative justice (processing harm)", "Exposure_Risk": "Ted-type misuse, institutional blindness"}
       },
       "kalaxi_module": "shelter.py",
-      "module_connection": "Shelter activates after dignity failure — the system's hide coat wrapping around a wounded exchange."
+      "module_connection": "Shelter activates after dignity failure — the system's hide coat wrapping around a wounded exchange.",
+      "observable_indicators": ["internal warmth maintained", "barrier holds against exposure", "drainage prevents overwhelm", "inhabitants feel safe"],
+      "failure_modes": ["barrier breach", "insulation failure", "shelter becomes prison", "exposure despite effort"],
+      "confidence": 0.90,
+      "source_provenance": [{"source_file": "R7M/EXCAVATION/AURIX_EXTRACTION.json", "equation_ids": ["HEAT_RETENTION", "SHELTER_NEED", "EXPOSURE_RISK"]}],
+      "coupling": [{"stratum_id": "STR-02", "relationship": "shelter requires resources", "strength": 0.7}, {"stratum_id": "STR-01", "relationship": "shared shelter strengthens bonds", "strength": 0.6}, {"stratum_id": "STR-04", "relationship": "shelter provides concealment", "strength": 0.5}]
     },
     {
       "id": "STR-09",
@@ -194,7 +237,12 @@
         "kalaxi_1": {"Channel_Clarity": "terminal screen clarity", "Encoding_Precision": "question design", "Receiver_Readiness": "donor openness (Scott open, Ted deflecting)", "Noise": "trauma distortion, defense mechanisms"}
       },
       "kalaxi_module": "say.py",
-      "module_connection": "SAY constructs the system's speech. WIRE transmits it. Together they are the system's gesture lexicon."
+      "module_connection": "SAY constructs the system's speech. WIRE transmits it. Together they are the system's gesture lexicon.",
+      "observable_indicators": ["message received as intended", "encoding survives noise", "receiver responds appropriately", "silence used meaningfully"],
+      "failure_modes": ["message distorted in transmission", "encoding too complex for receiver", "noise overwhelms signal", "silence misread as absence"],
+      "confidence": 0.93,
+      "source_provenance": [{"source_file": "R7M/EXCAVATION/AURIX_EXTRACTION.json", "equation_ids": ["ALERT_STABILITY", "MIG_SIGNAL", "STEALTH_LOCK", "GIFT_CADENCE", "PREDATOR_CEASE"]}],
+      "coupling": [{"stratum_id": "STR-04", "relationship": "inversely related — signal exposes", "strength": 0.8}, {"stratum_id": "STR-06", "relationship": "receiver must perceive signal", "strength": 0.85}, {"stratum_id": "STR-01", "relationship": "successful communication strengthens bonds", "strength": 0.7}]
     },
     {
       "id": "STR-10",
@@ -215,7 +263,12 @@
         "kalaxi_1": {"Resource_Decline": "not applicable at 1 chapter — system is stationary", "Route_Safety": "not yet activated", "Group_Stamina": "not yet activated", "External_Pressure": "not yet activated"}
       },
       "kalaxi_module": "breath.py",
-      "module_connection": "BREATH governs pacing — when to move, when to pause. The system's migration rhythm."
+      "module_connection": "BREATH governs pacing — when to move, when to pause. The system's migration rhythm.",
+      "observable_indicators": ["group moves in coordinated direction", "resources distributed along route", "scout information integrated", "arrival at viable destination"],
+      "failure_modes": ["stasis despite pressure", "uncoordinated flight", "route exhausts group", "migration to worse conditions"],
+      "confidence": 0.88,
+      "source_provenance": [{"source_file": "R7M/EXCAVATION/AURIX_EXTRACTION.json", "equation_ids": ["MOVE_PRESSURE", "WIND_ASSIST", "ASH_TOLL", "SICKNESS_RISK"]}],
+      "coupling": [{"stratum_id": "STR-02", "relationship": "resource decline triggers movement", "strength": 0.85}, {"stratum_id": "STR-03", "relationship": "navigation enables movement", "strength": 0.9}, {"stratum_id": "STR-01", "relationship": "movement strains bonds", "strength": 0.6}]
     },
     {
       "id": "STR-11",
@@ -236,7 +289,12 @@
         "kalaxi_1": {"Knot_Count": "system iterations, pattern growth", "Witness_Presence": "the system's own witness network", "Good_Faith": "holding without solving", "Accumulated_Jealousy": "the Girl's absence as permanent unresolved harm"}
       },
       "kalaxi_module": "restorative_justice.py",
-      "module_connection": "Restorative justice handles D=0 events — the system's red-thread rite."
+      "module_connection": "Restorative justice handles D=0 events — the system's red-thread rite.",
+      "observable_indicators": ["harm acknowledged by both parties", "binding acts performed", "witnesses validate restoration", "trust rebuilds over time"],
+      "failure_modes": ["harm denied", "repair attempted without acknowledgment", "resentment blocks restoration", "repair performed but not felt"],
+      "confidence": 0.90,
+      "source_provenance": [{"source_file": "R7M/EXCAVATION/AURIX_EXTRACTION.json", "equation_ids": ["VOW_COHESION", "CR_STONE"]}],
+      "coupling": [{"stratum_id": "STR-01", "relationship": "repair restores cohesion", "strength": 0.9}, {"stratum_id": "STR-06", "relationship": "perceiving harm precedes repair", "strength": 0.75}, {"stratum_id": "STR-07", "relationship": "repair may require hierarchical legitimacy", "strength": 0.5}]
     },
     {
       "id": "STR-12",
@@ -257,7 +315,12 @@
         "kalaxi_1": {"examples": ["not yet activated — no humor scene exists in chapter 1. This is itself a pressure signal."]}
       },
       "kalaxi_module": "humour_detector.py",
-      "module_connection": "Humour detector identifies tension-regulation events — the system measuring whether laughter heals or deflects."
+      "module_connection": "Humour detector identifies tension-regulation events — the system measuring whether laughter heals or deflects.",
+      "observable_indicators": ["tension drops after shared laughter", "trust increases after humor", "face preserved during release", "group cohesion strengthened"],
+      "failure_modes": ["humor at someone's expense", "deflection disguised as humor", "release without underlying safety", "forced levity increasing tension"],
+      "confidence": 0.85,
+      "source_provenance": [{"source_file": "R7M/EXCAVATION/AURIX_EXTRACTION.json", "equation_ids": ["HUM_EQ_01", "HUM_EQ_02", "HUM_EQ_03", "HUM_EQ_04", "HUM_EQ_05"]}],
+      "coupling": [{"stratum_id": "STR-01", "relationship": "release strengthens bonds", "strength": 0.6}, {"stratum_id": "STR-07", "relationship": "humor regulates status", "strength": 0.65}, {"stratum_id": "STR-11", "relationship": "release can initiate repair", "strength": 0.5}]
     }
   ]
 }

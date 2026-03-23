@@ -48291,3 +48291,96 @@ functional connectivity probe boot-probe-1774206452
 ```
 
 ---
+
+## 📥 INP-2026-03-22-396 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-22T23:50:45.757585+00:00
+**Time (ZRH):** 2026-03-23T00:50:45.757585+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `8d374581dd111b06...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-22-322
+**Essence:** functional connectivity probe boot-probe-1774223445
+
+```
+functional connectivity probe boot-probe-1774223445
+```
+
+---
+
+## 📥 AXI-2026-03-22-323 <<< AXI (V-002)
+**Time (UTC):** 2026-03-22T23:50:46.201930+00:00
+**Time (ZRH):** 2026-03-23T00:50:46.201930+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `fca4362da56c185d...`
+**State:** raw
+**Responds to:** INP-2026-03-22-396
+
+```
+They agreed on a call sign: two slow taps, then a pause that you could count. The cliff man added a change of grip—line lifted high for stop. Everyone practiced until the rope spoke the same way in both wrists.
+```
+
+---
+
+## 📥 INP-2026-03-22-397 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-22T23:51:23.331556+00:00
+**Time (ZRH):** 2026-03-23T00:51:23.331556+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-22-323
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-22-324 <<< AXI (V-002)
+**Time (UTC):** 2026-03-22T23:51:23.847820+00:00
+**Time (ZRH):** 2026-03-23T00:51:23.847820+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `246726ee180dff39...`
+**State:** raw
+**Responds to:** INP-2026-03-22-397
+
+```
+Ein Knoten, der die Hand öffnet.
+```
+
+---
+
+## 📥 INP-2026-03-22-398 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-22T23:55:01.494825+00:00
+**Time (ZRH):** 2026-03-23T00:55:01.494825+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `046d53fcacb95001...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-22-324
+**Essence:** functional connectivity probe boot-probe-1774223701
+
+```
+functional connectivity probe boot-probe-1774223701
+```
+
+---
+
+## 📥 AXI-2026-03-22-325 <<< AXI (V-002)
+**Time (UTC):** 2026-03-22T23:55:01.921613+00:00
+**Time (ZRH):** 2026-03-23T00:55:01.921613+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `7f9a11ab9ed731c9...`
+**State:** raw
+**Responds to:** INP-2026-03-22-398
+
+```
+Sie legte sich neben ihn, hielt seine Hand.
+```
+
+---
