@@ -83,11 +83,11 @@ $EMOTIONAL_KEYWORDS = [
     'grateful' => [0.3, 'positive'], 'relieved' => [0.4, 'positive'],
 ];
 
-function apply_confidence(float $raw, float $conf): float {
+function org_apply_confidence(float $raw, float $conf): float {
     return ($conf < CONFIDENCE_FLOOR) ? 0.0 : $raw * $conf;
 }
 
-function build_component(string $name, array $indicators): array {
+function org_build_component(string $name, array $indicators): array {
     if (empty($indicators)) {
         return ['component' => $name, 'score' => 0.0, 'confidence' => 0.0, 'passed' => false, 'evidence' => 'No indicators'];
     }
@@ -98,7 +98,7 @@ function build_component(string $name, array $indicators): array {
     }
     $rawScore /= $totalWeight;
     $confidence = min(array_column($indicators, 'confidence'));
-    $finalScore = apply_confidence($rawScore, $confidence);
+    $finalScore = org_apply_confidence($rawScore, $confidence);
 
     // Hard fail: any indicator at 0.0 with high confidence
     foreach ($indicators as $ind) {
@@ -118,7 +118,7 @@ function build_component(string $name, array $indicators): array {
     ];
 }
 
-function measure_agency(string $text): array {
+function org_measure_agency(string $text): array {
     global $COERCIVE_PATTERNS, $AGENCY_POSITIVE;
     $indicators = [];
 
@@ -147,10 +147,10 @@ function measure_agency(string $text): array {
     $loadScore = ($avgLen > 30) ? 0.5 : (($avgLen > 20) ? 0.75 : 1.0);
     $indicators[] = ['name' => 'cognitive_load', 'score' => $loadScore, 'confidence' => 0.6, 'weight' => 0.5];
 
-    return build_component('A', $indicators);
+    return org_build_component('A', $indicators);
 }
 
-function measure_legibility(string $text): array {
+function org_measure_legibility(string $text): array {
     global $DISMISSIVE_PATTERNS, $EMOTIONAL_KEYWORDS;
     $indicators = [];
 
@@ -176,10 +176,10 @@ function measure_legibility(string $text): array {
     $dismissalScore = max(0.0, 1.0 - $maxDismissal);
     $indicators[] = ['name' => 'dismissal_absence', 'score' => $dismissalScore, 'confidence' => 0.85, 'weight' => 1.5];
 
-    return build_component('L', $indicators);
+    return org_build_component('L', $indicators);
 }
 
-function measure_moral_standing(string $text): array {
+function org_measure_moral_standing(string $text): array {
     global $CONDESCENSION_PATTERNS, $VOID_PATTERNS;
     $indicators = [];
 
@@ -212,17 +212,17 @@ function measure_moral_standing(string $text): array {
     $voidConf = ($maxVoid > 0) ? 0.95 : DEFAULT_CONFIDENCE;
     $indicators[] = ['name' => 'void_covenant_distance', 'score' => $voidScore, 'confidence' => $voidConf, 'weight' => 2.0];
 
-    return build_component('M', $indicators);
+    return org_build_component('M', $indicators);
 }
 
 /**
  * Full dignity measurement: D = A × L × M
  * Non-compensatory: any zero = system halts.
  */
-function measure_dignity(string $text): array {
-    $A = measure_agency($text);
-    $L = measure_legibility($text);
-    $M = measure_moral_standing($text);
+function org_measure_dignity(string $text): array {
+    $A = org_measure_agency($text);
+    $L = org_measure_legibility($text);
+    $M = org_measure_moral_standing($text);
 
     $D = $A['score'] * $L['score'] * $M['score'];
     $confidence = min($A['confidence'], $L['confidence'], $M['confidence']);
@@ -243,7 +243,7 @@ function measure_dignity(string $text): array {
 // 2. COVENANT VALIDATION — 18 Covenants
 // ═══════════════════════════════════════════════════
 
-function load_covenants(): array {
+function org_load_covenants(): array {
     $path = __DIR__ . '/../data/covenants.json';
     if (!file_exists($path)) return [];
     return json_decode(file_get_contents($path), true) ?: [];
@@ -253,8 +253,8 @@ function load_covenants(): array {
  * Validate input against constitutional covenants.
  * Returns which covenants are relevant and their status.
  */
-function validate_covenants(string $text, array $dignity): array {
-    $covenants = load_covenants();
+function org_validate_covenants(string $text, array $dignity): array {
+    $covenants = org_load_covenants();
     $violations = [];
     $relevant = [];
 
@@ -297,7 +297,7 @@ function validate_covenants(string $text, array $dignity): array {
  * Each entry links to the previous via SHA-256.
  * The chain is the proof that nothing was altered.
  */
-function ledger_register(PDO $db, string $text, float $dignityScore, ?string $witnessMark = null): array {
+function org_ledger_register(PDO $db, string $text, float $dignityScore, ?string $witnessMark = null): array {
     // Get previous chain hash
     $stmt = $db->query("SELECT chain_hash FROM ledger ORDER BY id DESC LIMIT 1");
     $prev = $stmt->fetchColumn();
@@ -336,7 +336,7 @@ function ledger_register(PDO $db, string $text, float $dignityScore, ?string $wi
  * Verify the ledger chain integrity.
  * Returns true if every entry links correctly to its predecessor.
  */
-function ledger_verify(PDO $db): array {
+function org_ledger_verify(PDO $db): array {
     $rows = $db->query("SELECT content_hash, prev_hash, chain_hash FROM ledger ORDER BY id ASC")->fetchAll(PDO::FETCH_ASSOC);
     $errors = [];
     $prevHash = 'GENESIS';
@@ -369,7 +369,7 @@ function ledger_verify(PDO $db): array {
  * This is the system saying: "I saw this. I could not proceed.
  * Here is the proof that I stopped rather than pretend."
  */
-function create_witness_certificate(PDO $db, array $dignity, string $inputSummary): array {
+function org_create_witness_certificate(PDO $db, array $dignity, string $inputSummary): array {
     $traceId = bin2hex(random_bytes(16));
     $certData = json_encode([
         'A' => $dignity['A']['score'],
@@ -431,10 +431,10 @@ function create_witness_certificate(PDO $db, array $dignity, string $inputSummar
  */
 function organism_process(PDO $db, string $text): array {
     // Phase 1: Measure dignity
-    $dignity = measure_dignity($text);
+    $dignity = org_measure_dignity($text);
 
     // Phase 2: Validate covenants
-    $covenants = validate_covenants($text, $dignity);
+    $covenants = org_validate_covenants($text, $dignity);
 
     // Phase 3: Register in ledger (always — even if dignity fails)
     $witnessMark = null;
@@ -442,12 +442,12 @@ function organism_process(PDO $db, string $text): array {
 
     if (!$dignity['passed']) {
         // Phase 4: Create witness certificate (D = 0 → system halts)
-        $certificate = create_witness_certificate($db, $dignity, $text);
+        $certificate = org_create_witness_certificate($db, $dignity, $text);
         $witnessMark = "WITNESSED — D=0 — trace:{$certificate['trace_id']}";
     }
 
     // Phase 5: Register in hash-chained ledger
-    $ledgerEntry = ledger_register($db, $text, $dignity['D'], $witnessMark);
+    $ledgerEntry = org_ledger_register($db, $text, $dignity['D'], $witnessMark);
 
     return [
         'dignity' => $dignity,
