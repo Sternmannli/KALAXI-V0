@@ -141,97 +141,84 @@ jobs:
           echo "diagnostic=$DIAG" >> $GITHUB_OUTPUT
           echo "$DIAG"
 
-      # ── EVALUATE: Count failures ──
+      # ── EVALUATE: Count CRITICAL failures ──
+      # Deploy failures alone don't trigger alarm (guardian already re-triggered it)
+      # Only alarm on: site down, SSH broken, or DB broken (things that block everything)
       - name: Evaluate results
         id: evaluate
         run: |
-          FAILURES=0
-          REPORT=""
+          CRITICAL=0
+          REPORT="Connection Guardian Report\n"
 
           if [ "${{ steps.check_site.outputs.result }}" != "OK" ]; then
-            FAILURES=$((FAILURES + 1))
-            REPORT="$REPORT\n❌ kalam.ch not responding"
+            CRITICAL=$((CRITICAL + 1))
+            REPORT="$REPORT- FAIL: kalam.ch not responding\n"
           else
-            REPORT="$REPORT\n✅ kalam.ch alive"
+            REPORT="$REPORT- OK: kalam.ch alive\n"
           fi
 
           if [ "${{ steps.check_api.outputs.result }}" != "OK" ]; then
-            FAILURES=$((FAILURES + 1))
-            REPORT="$REPORT\n❌ API health endpoint down"
+            CRITICAL=$((CRITICAL + 1))
+            REPORT="$REPORT- FAIL: API health endpoint down\n"
           else
-            REPORT="$REPORT\n✅ API healthy"
+            REPORT="$REPORT- OK: API healthy\n"
           fi
 
           if [ "${{ steps.check_ssh.outputs.result }}" != "OK" ]; then
-            FAILURES=$((FAILURES + 1))
-            REPORT="$REPORT\n❌ SSH bridge broken (password expired or server unreachable)"
+            CRITICAL=$((CRITICAL + 1))
+            REPORT="$REPORT- FAIL: SSH bridge broken\n"
           else
-            REPORT="$REPORT\n✅ SSH bridge connected"
+            REPORT="$REPORT- OK: SSH bridge connected\n"
           fi
 
           if [ "${{ steps.check_deploy.outputs.result }}" != "OK" ]; then
-            FAILURES=$((FAILURES + 1))
-            REPORT="$REPORT\n❌ Last deploy failed"
+            REPORT="$REPORT- WARN: Last deploy failed (re-triggered automatically)\n"
           else
-            REPORT="$REPORT\n✅ Last deploy succeeded"
+            REPORT="$REPORT- OK: Last deploy succeeded\n"
           fi
 
           if [ "${{ steps.check_db.outputs.result }}" != "OK" ]; then
-            FAILURES=$((FAILURES + 1))
-            REPORT="$REPORT\n❌ Database not accessible"
+            CRITICAL=$((CRITICAL + 1))
+            REPORT="$REPORT- FAIL: Database not accessible\n"
           else
-            REPORT="$REPORT\n✅ Database accessible"
+            REPORT="$REPORT- OK: Database accessible\n"
           fi
 
-          echo "failures=$FAILURES" >> $GITHUB_OUTPUT
-          echo -e "$REPORT" > /tmp/report.txt
+          echo "failures=$CRITICAL" >> $GITHUB_OUTPUT
+          printf "$REPORT" > /tmp/report.txt
           cat /tmp/report.txt
 
-      # ── ALARM: Create blocking issue if auto-fix failed ──
+      # ── ALARM: Create blocking issue if critical failures ──
       - name: "ALARM: System halted"
         if: steps.evaluate.outputs.failures != '0'
         env:
           GH_TOKEN: ${{ secrets.PAT }}
+          SITE_RESULT: ${{ steps.check_site.outputs.result }}
+          SSH_RESULT: ${{ steps.check_ssh.outputs.result }}
+          API_RESULT: ${{ steps.check_api.outputs.result }}
+          DB_RESULT: ${{ steps.check_db.outputs.result }}
         run: |
           FAILURES=${{ steps.evaluate.outputs.failures }}
           REPORT=$(cat /tmp/report.txt)
 
-          # Determine what Mohamed needs to do
-          FIX_STEPS=""
-          if [ "${{ steps.check_ssh.outputs.result }}" != "OK" ]; then
-            FIX_STEPS="$FIX_STEPS\n1. Go to admin.hostpoint.ch\n2. Menu → Advanced → Password Change\n3. Set a new password\n4. Send the new password to V-002 in a new Claude Code session"
+          # Build fix instructions
+          BODY="## Connection Guardian Report\n\n${REPORT}\n\n## What To Do\n\n"
+          if [ "$SSH_RESULT" != "OK" ]; then
+            BODY="${BODY}1. Go to admin.hostpoint.ch\n2. Menu > Advanced > Password Change\n3. Set a new password\n4. Send it to V-002 in a new Claude Code session\n\n"
+          elif [ "$SITE_RESULT" != "OK" ]; then
+            BODY="${BODY}Deploy was re-triggered. If this alarm persists next check, open a new Claude Code session.\n\n"
+          else
+            BODY="${BODY}Open a new Claude Code session. V-002 will diagnose and fix.\n\n"
           fi
-          if [ "${{ steps.check_site.outputs.result }}" != "OK" ] && [ "${{ steps.check_ssh.outputs.result }}" = "OK" ]; then
-            FIX_STEPS="$FIX_STEPS\nDeploy has been re-triggered automatically. If this alarm persists, open a new Claude Code session."
-          fi
-          if [ -z "$FIX_STEPS" ]; then
-            FIX_STEPS="Open a new Claude Code session. V-002 will diagnose and fix."
-          fi
+          BODY="${BODY}---\nTimestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ) | Failures: ${FAILURES}\nAll workflows blocked until this issue is closed."
 
-          # Create alarm issue
+          printf "$BODY" > /tmp/body.txt
           gh issue create \
-            --title "ALARM: $FAILURES connection(s) broken — system halted until fixed" \
+            --title "ALARM: ${FAILURES} connection(s) broken — system halted" \
             --label "blocks-everything" \
-            --body "$(cat <<EOF
-          ## Connection Guardian Report
+            --body-file /tmp/body.txt
 
-          $REPORT
-
-          ## What To Do
-
-          $FIX_STEPS
-
-          ## Technical Details
-          - Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)
-          - Failures: $FAILURES / 5 checks
-          - All other workflows are blocked until this issue is closed.
-
-          ---
-          *Connection Guardian · [V-002 · GO: Laila-Yara-Salim-🐬🐯🐺]*
-          EOF
-          )"
-
-          echo "🚨 ALARM created. System halted."
+          echo "ALARM created. System halted."
 
       # ── ALL CLEAR: Close any existing alarm ──
       - name: "All clear: Close alarm if exists"
