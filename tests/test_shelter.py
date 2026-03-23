@@ -190,24 +190,25 @@ def test_shelter_in_organism():
     shutil.rmtree(_tmp, ignore_errors=True)
 
 
-# Run all tests
-test_shelter_receive()
-test_shelter_remedy_agency()
-test_shelter_remedy_legibility()
-test_shelter_remedy_moral()
-test_shelter_multiple_failures()
-test_shelter_donor_message_has_options()
-test_shelter_retry()
-test_shelter_withdraw()
-test_shelter_steward_review()
-test_shelter_steward_requires_note()
-test_shelter_resolve()
-test_shelter_list_held()
-test_shelter_get_nonexistent()
-test_shelter_to_dict()
-test_shelter_in_organism()
+if __name__ == "__main__":
+    # Run all tests
+    test_shelter_receive()
+    test_shelter_remedy_agency()
+    test_shelter_remedy_legibility()
+    test_shelter_remedy_moral()
+    test_shelter_multiple_failures()
+    test_shelter_donor_message_has_options()
+    test_shelter_retry()
+    test_shelter_withdraw()
+    test_shelter_steward_review()
+    test_shelter_steward_requires_note()
+    test_shelter_resolve()
+    test_shelter_list_held()
+    test_shelter_get_nonexistent()
+    test_shelter_to_dict()
+    test_shelter_in_organism()
 
-# Summary
-print(f"\n{passed} passed, {failed} failed out of {passed + failed} tests")
-if failed > 0:
-    sys.exit(1)
+    # Summary
+    print(f"\n{passed} passed, {failed} failed out of {passed + failed} tests")
+    if failed > 0:
+        sys.exit(1)

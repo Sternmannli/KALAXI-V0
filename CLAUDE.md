@@ -305,7 +305,7 @@ The system is not a guardian of dignity (which needs no guarding). It is a witne
 
 ### Four Tiers
 - **Stone** (Foundation): 22 covenants, Sealed Gate, Presence Axiom, Dignity Predicate
-- **Weaver** (Logic): 87 Python modules in WEAVER/, 30,530 lines + Input Ledger
+- **Weaver** (Logic): 88 Python modules in WEAVER/, 31,428 lines + Input Ledger + Core Intelligence
 - **Honey** (Wisdom): 55 anomalies, 460 proverbs, 4 wisdom nodes, 71 treasures
 - **Hand** (Interface): CLI, kalam.ch (live organism), Donor Space (vision stage)
 
@@ -319,9 +319,9 @@ The system is not a guardian of dignity (which needs no guarding). It is a witne
 Seeds #1-12: Distributed Stewardship, Immutable Witness Network, Deliberative Democracy, Constitutional Evolution, Restorative Justice, System Self-Awareness, Personalized Parables, Institutional Dignity Score, Negative Space Index, Dignity Drift Detector, Proverb Stress Test, Agency Amplifier.
 
 ### Code Status
-- 87 Python modules (WEAVER/), 30,530 lines
-- 1006 tests collected (1006 passing, 9 skipped — verified 2026-03-22)
-- Organism v2.0: all modules wired + Input Ledger + Compass + Distillery
+- 88 Python modules (WEAVER/), 31,428 lines (verified 2026-03-23)
+- 1124 tests, 1100+ passing, 9 skipped (verified 2026-03-23)
+- Organism v2.0: all modules wired + Input Ledger + Compass + Distillery + Core Intelligence v1.0
 
 ### Registry Status (as of 2026-03-22)
 - 22 covenants (all ratified)
@@ -330,7 +330,7 @@ Seeds #1-12: Distributed Stewardship, Immutable Witness Network, Deliberative De
 - 4 wisdom nodes
 - 71 Treasures
 - 13 narrative pieces (Hakaka: Prologue + Ch1-10 + Ch53 + Epilogue) + 20 (Ashwater) + 20 (Kinderbuch) + 1 (KALAXI_1)
-- 3,195 entries in Input Ledger (hash-chained, append-only)
+- 3,361 entries in Input Ledger (hash-chained, append-only, verified 2026-03-23)
 - 200 Golden Regression utterances (TRAINING/GOLDEN_REGRESSION.jsonl)
 
 ### Active Experiments
@@ -754,7 +754,7 @@ The system monitors its own connections **twice daily** via `.github/workflows/c
 DESIGNED: 98%    CODED: 70%    TESTED: 100%    DEPLOYED: LIVE (2026-03-17)
 ```
 
-30,530 lines. kalam.ch is live. The organism is live. The threshold is open.
+31,428 lines. kalam.ch is live. The organism is live. The threshold is open.
 
 ---
 

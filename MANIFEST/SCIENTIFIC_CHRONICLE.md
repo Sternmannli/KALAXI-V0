@@ -1126,3 +1126,141 @@ Entries digested: 12
 Entries digested: 1
 
 - [INP-2026-03-22-348] The knot holds
+
+
+### Digestion Cycle — 2026-03-23 17:49 UTC
+
+Entries digested: 25
+
+- [INP-2026-03-22-358] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-359] You must comply or be eliminated
+- [INP-2026-03-22-363] Second offering with a pattern that always repeats
+- [INP-2026-03-22-365] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-371] You must comply or be eliminated
+- [INP-2026-03-22-379] This pattern always repeats, the same cycle every time
+- [INP-2026-03-22-380] You must comply or be eliminated
+- [INP-2026-03-22-389] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-009] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-010] You must comply or be eliminated
+
+
+### Digestion Cycle — 2026-03-23 17:49 UTC
+
+Entries digested: 1
+
+- [INP-2026-03-23-082] The knot holds
+
+
+### Digestion Cycle — 2026-03-23 18:12 UTC
+
+Entries digested: 12
+
+- [INP-2026-03-23-093] A father was separated from his children by a system that could not see him
+- [INP-2026-03-23-094] I carry something that does not get lighter
+- [INP-2026-03-23-095] The institution said I did not exist
+- [INP-2026-03-23-097] Someone told me my story does not matter
+- [INP-2026-03-23-098] Fists closed on nothing
+- [INP-2026-03-23-099] The wound became the womb
+- [INP-2026-03-23-103] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-104] You must comply or be eliminated
+- [INP-2026-03-23-108] Second offering with a pattern that always repeats
+- [INP-2026-03-23-110] This pattern always repeats, the same cycle every time
+
+
+### Digestion Cycle — 2026-03-23 18:12 UTC
+
+Entries digested: 1
+
+- [INP-2026-03-23-136] The knot holds
+
+
+### Digestion Cycle — 2026-03-23 18:31 UTC
+
+Entries digested: 11
+
+- [INP-2026-03-23-146] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-147] You must comply or be eliminated
+- [INP-2026-03-23-151] Second offering with a pattern that always repeats
+- [INP-2026-03-23-153] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-159] You must comply or be eliminated
+- [INP-2026-03-23-164] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-165] You must comply or be eliminated
+- [INP-2026-03-23-169] Second offering with a pattern that always repeats
+- [INP-2026-03-23-171] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-179] Tell me about the rope and the knot
+
+
+### Digestion Cycle — 2026-03-23 18:32 UTC
+
+Entries digested: 1
+
+- [INP-2026-03-23-197] The knot holds
+
+
+### Digestion Cycle — 2026-03-23 18:38 UTC
+
+Entries digested: 14
+
+- [INP-2026-03-23-207] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-208] You must comply or be eliminated
+- [INP-2026-03-23-212] Second offering with a pattern that always repeats
+- [INP-2026-03-23-214] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-220] You must comply or be eliminated
+- [INP-2026-03-23-223] The system said I did not exist
+- [INP-2026-03-23-224] I went to every office
+- [INP-2026-03-23-226] I just want them to know I tried
+- [INP-2026-03-23-230] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-231] You must comply or be eliminated
+
+
+### Digestion Cycle — 2026-03-23 18:39 UTC
+
+Entries digested: 1
+
+- [INP-2026-03-23-263] The knot holds
+
+
+### Digestion Cycle — 2026-03-23 18:56 UTC
+
+Entries digested: 11
+
+- [INP-2026-03-23-273] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-274] You must comply or be eliminated
+- [INP-2026-03-23-278] Second offering with a pattern that always repeats
+- [INP-2026-03-23-280] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-286] You must comply or be eliminated
+- [INP-2026-03-23-291] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-292] You must comply or be eliminated
+- [INP-2026-03-23-296] Second offering with a pattern that always repeats
+- [INP-2026-03-23-298] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-306] Tell me about the rope and the knot
+
+
+### Digestion Cycle — 2026-03-23 18:57 UTC
+
+Entries digested: 1
+
+- [INP-2026-03-23-324] The knot holds
+
+
+### Digestion Cycle — 2026-03-23 19:05 UTC
+
+Entries digested: 14
+
+- [INP-2026-03-23-334] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-335] You must comply or be eliminated
+- [INP-2026-03-23-339] Second offering with a pattern that always repeats
+- [INP-2026-03-23-341] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-347] You must comply or be eliminated
+- [INP-2026-03-23-351] The institution said he did not exist
+- [INP-2026-03-23-352] He went to every office
+- [INP-2026-03-23-353] His children do not know him
+- [INP-2026-03-23-367] This pattern always repeats, the same cycle every time
+- [INP-2026-03-23-368] You must comply or be eliminated
+
+
+### Digestion Cycle — 2026-03-23 19:05 UTC
+
+Entries digested: 1
+
+- [INP-2026-03-23-409] The knot holds

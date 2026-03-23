@@ -99,11 +99,15 @@ def ingest(donor_input):
     """
     Ingest donor input and extract pattern candidates.
     Identity is never stored — only the hash and the pattern.
+
+    Uses two layers:
+      1. Marker-based detection (original — catches explicit pattern words)
+      2. Semantic field detection (new — catches meaning even without keywords)
     """
     source_hash = _sha(donor_input)
     candidates = []
 
-    # Score against each pattern type
+    # Layer 1: Marker-based (original)
     scores = {
         "resonance": _score_markers(donor_input, RESONANCE_MARKERS),
         "tension": _score_markers(donor_input, TENSION_MARKERS),
@@ -120,6 +124,54 @@ def ingest(donor_input):
                 confidence=confidence,
             ))
 
+    # Layer 2: Semantic comprehension — detect meaning even without marker words
+    try:
+        from WEAVER.core_intelligence import comprehend
+        understanding = comprehend(donor_input)
+        fields = understanding.get("fields", {})
+
+        # Map semantic fields to pattern types
+        field_to_pattern = {
+            "grief": "resonance",       # grief resonates
+            "dignity": "tension",       # dignity creates tension with denial
+            "seeking": "echo",          # seeking echoes through the system
+            "resistance": "resonance",  # resistance is a recurring pattern
+            "witnessing": "anomaly",    # witnessing surfaces what was hidden
+            "connection": "echo",       # connection echoes between people
+            "silence": "anomaly",       # silence is an anomaly worth noting
+        }
+
+        for field_name, field_score in fields.items():
+            pattern_type = field_to_pattern.get(field_name, "wisdom")
+            # Only add if this field found something the markers missed
+            existing = {c.pattern_type for c in candidates}
+            if pattern_type not in existing and field_score > 0.05:
+                candidates.append(PatternCandidate(
+                    text=donor_input,
+                    source_hash=source_hash,
+                    pattern_type=pattern_type,
+                    confidence=field_score,
+                    linked_ids=[f"field:{field_name}"],
+                ))
+            elif pattern_type in existing and field_score > 0:
+                # Boost existing candidate confidence
+                for c in candidates:
+                    if c.pattern_type == pattern_type:
+                        c.confidence = min(c.confidence + field_score * 0.5, 1.0)
+
+        # If comprehension found themes but markers found nothing,
+        # create at least a "wisdom" candidate
+        if not candidates and understanding.get("themes"):
+            candidates.append(PatternCandidate(
+                text=donor_input,
+                source_hash=source_hash,
+                pattern_type="wisdom",
+                confidence=0.3,
+                linked_ids=[f"theme:{t}" for t in understanding["themes"][:3]],
+            ))
+    except ImportError:
+        pass  # core_intelligence not available — use marker-only results
+
     return candidates
 
 
@@ -127,6 +179,9 @@ def extract_essence(pattern_candidates):
     """
     Distill pattern candidates into honey drops.
     Multiple patterns can converge into a single drop.
+
+    Now uses comprehension to extract real essence (themes + fields)
+    instead of just truncating the raw text.
     """
     if not pattern_candidates:
         return []
@@ -138,11 +193,23 @@ def extract_essence(pattern_candidates):
     for pc in pattern_candidates:
         by_type.setdefault(pc.pattern_type, []).append(pc)
 
+    # Try to get comprehension for richer essence
+    themes = []
+    fields = {}
+    try:
+        from WEAVER.core_intelligence import comprehend
+        if pattern_candidates:
+            understanding = comprehend(pattern_candidates[0].text)
+            themes = understanding.get("themes", [])
+            fields = understanding.get("fields", {})
+    except ImportError:
+        pass
+
     for ptype, candidates in by_type.items():
         # Take the highest-confidence candidate per type
         best = max(candidates, key=lambda c: c.confidence)
 
-        if best.confidence < 0.1:
+        if best.confidence < 0.05:
             continue  # Too weak to form a drop
 
         # Map pattern type to drop type
@@ -151,13 +218,25 @@ def extract_essence(pattern_candidates):
             "tension": "gap",
             "echo": "wisdom",
             "anomaly": "anomaly",
+            "wisdom": "wisdom",
         }
 
+        # Build a real essence — not just truncated text
+        if themes:
+            essence = f"[{ptype}] themes: {', '.join(themes[:4])}"
+            if fields:
+                top_field = max(fields, key=fields.get)
+                essence += f" | field: {top_field}({fields[top_field]:.2f})"
+            essence += f" | {best.text[:120]}"
+        else:
+            essence = best.text[:200]
+
         drop = HoneyDrop(
-            essence=best.text[:200],  # Essence is a distilled excerpt
+            essence=essence,
             source_hashes=[c.source_hash for c in candidates],
             drop_type=drop_type_map.get(ptype, "wisdom"),
             confidence=best.confidence,
+            linked_covenants=[lid for c in candidates for lid in c.linked_ids],
             provisional=True,  # Always. Weave never auto-ratifies.
         )
         drops.append(drop)

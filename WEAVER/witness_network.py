@@ -42,7 +42,7 @@ class WitnessRecord:
     metadata: Dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
-        return {
+        d = {
             "record_id": self.record_id,
             "event_type": self.event_type,
             "event_summary": self.event_summary,
@@ -53,6 +53,9 @@ class WitnessRecord:
             "sequence": self.sequence,
             "timestamp": self.timestamp,
         }
+        if self.metadata:
+            d["metadata"] = self.metadata
+        return d
 
 
 class WitnessNetwork:

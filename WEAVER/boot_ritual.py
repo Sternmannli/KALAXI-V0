@@ -240,7 +240,8 @@ def _check_module_connectivity() -> BootCheck:
         "WEAVER.decay", "WEAVER.latency", "WEAVER.oracle",
         "WEAVER.prevention", "WEAVER.mycelium", "WEAVER.ratification",
         "WEAVER.witness_certificate", "WEAVER.chain_validator",
-        "WEAVER.letter_ontology",
+        "WEAVER.letter_ontology", "WEAVER.core_intelligence",
+        "WEAVER.voice_engine", "WEAVER.slow_gate",
     ]
     import importlib
     missing = []
@@ -268,32 +269,35 @@ def _check_module_connectivity() -> BootCheck:
 def _check_functional_connectivity() -> BootCheck:
     """
     FUNCTIONAL connectivity — Standing Correction 7.
-    Sends a probe through the organism pipeline and verifies
-    actual data flow, not just importability.
+    Verifies individual module functions work without creating a full Organism
+    (which would cause infinite recursion since Organism.__init__ calls boot_ritual).
 
-    Checks: SENSE fired, DIGNITY computed, TURN opened/closed,
-    BREATH ticked, METADATA created, KEEP stored, PILLAR detected.
+    Tests: SENSE reads input, DIGNITY computes D, BREATH ticks, SEALED GATE runs.
     """
     try:
-        import time
-        from WEAVER.organism import Organism
-        org = Organism()
-        probe_id = f"boot-probe-{int(time.time())}"
-        result = org.process(f"functional connectivity probe {probe_id}")
+        from WEAVER.sense import sense_read
+        from WEAVER.dignity_check import check_dignity
+        from WEAVER.breath import Breath
+        from WEAVER.sealed_gate import sealed_gate
 
-        # Verify each stage left evidence in the ProcessResult.
-        # Core pipeline stages (must fire for any input):
         stages = {}
-        stages["sense"] = bool(result.sense_mode)
-        stages["dignity"] = result.dignity_passed is not None
-        stages["turn"] = result.exchange_state in ("closed", "open", "blocked")
-        stages["breath"] = result.breath_cycle >= 1
-        stages["pillar"] = isinstance(result.pillar_profile, dict)
-        stages["agency"] = result.agency_A > 0
-        stages["latency"] = result.recommended_td >= 0
-        # Enrichment stages (may silently degrade without blocking pipeline):
-        stages["metadata"] = bool(result.metadata_event_id)
-        stages["keep"] = result.stored is True
+
+        # SENSE — can it read input?
+        sr = sense_read("functional connectivity probe")
+        stages["sense"] = bool(sr.mode)
+
+        # DIGNITY — can it compute D?
+        dc = check_dignity("functional connectivity probe")
+        stages["dignity"] = dc.D is not None and dc.D >= 0
+
+        # BREATH — can it tick?
+        b = Breath()
+        b.tick()
+        stages["breath"] = b.cycle >= 1
+
+        # SEALED GATE — can it evaluate?
+        sg = sealed_gate("functional connectivity probe")
+        stages["sealed_gate"] = sg.refused is not None
 
         passed_stages = [k for k, v in stages.items() if v]
         failed_stages = [k for k, v in stages.items() if not v]
@@ -303,14 +307,14 @@ def _check_functional_connectivity() -> BootCheck:
                 name="functional_connectivity",
                 phase=1,
                 passed=True,
-                message=f"Functional probe: {len(passed_stages)}/{len(stages)} stages verified (data flows end-to-end).",
+                message=f"Functional probe: {len(passed_stages)}/{len(stages)} core functions verified.",
             )
         return BootCheck(
             name="functional_connectivity",
             phase=1,
             passed=False,
-            message=f"Functional probe: {len(failed_stages)} stages silent: {', '.join(failed_stages)}. Data flow incomplete.",
-            critical=False,  # Degraded but not halting — structural connectivity is the gate
+            message=f"Functional probe: {len(failed_stages)} functions failed: {', '.join(failed_stages)}.",
+            critical=False,
         )
     except Exception as e:
         return BootCheck(

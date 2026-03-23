@@ -54,13 +54,13 @@ sys.path.insert(0, str(ROOT))
 
 from WEAVER.breath import Breath, StressLevel
 from WEAVER.wire import Wire
-from WEAVER.turn import Turn, ExchangeState
-from WEAVER.say import render as say_render, SINGLELINE, TERMINAL
+from WEAVER.turn import Turn
+from WEAVER.say import render as say_render, TERMINAL
 from WEAVER.out import export as out_export
-from WEAVER.sealed_gate import sealed_gate, GateVerdict
+from WEAVER.sealed_gate import sealed_gate
 from WEAVER.dignity_check import check_dignity, check_collective_dignity
 from WEAVER.dignity_measure import measure_dignity
-from WEAVER.weave import ingest, extract_essence, propose_proverb, wisdom_mirror
+from WEAVER.weave import ingest, extract_essence, wisdom_mirror
 from WEAVER.keep import store, retrieve, lock, list_artifacts, receipt_count
 from WEAVER.dignity_drift import DignityDrift, DriftLevel, DriftAlert
 from WEAVER.shelter import Shelter
@@ -69,64 +69,65 @@ from WEAVER.srvp import SRVPEvaluator
 from WEAVER.sip import SIPEvaluator
 from WEAVER.decay import DecayEngine
 from WEAVER.latency import DignityLatency
-from WEAVER.lock_test import LockTest, LockVerdict
+from WEAVER.lock_test import LockTest
 from WEAVER.say import audit_voice
-from WEAVER.oracle import Oracle, WitnessLevel
-from WEAVER.prevention import Prevention, SignalLevel, Intervention
-from WEAVER.mycelium import Mycelium, MyceliumAlert, K_ANONYMITY_FLOOR
-from WEAVER.gap004_mediator import ConflictEngine, surface_conflict
-from WEAVER.agency_amplifier import AgencyAmplifier, AgencyScore
-from WEAVER.proverb_stress_test import ProverbStressTest, ProverbHealth
-from WEAVER.negative_space import NegativeSpaceIndex, SilenceType
-from WEAVER.distributed_stewardship import DistributedStewardship, StewardRole
+from WEAVER.oracle import Oracle
+from WEAVER.prevention import Prevention, SignalLevel
+from WEAVER.mycelium import Mycelium, K_ANONYMITY_FLOOR
+from WEAVER.gap004_mediator import ConflictEngine
+from WEAVER.agency_amplifier import AgencyAmplifier
+from WEAVER.proverb_stress_test import ProverbStressTest
+from WEAVER.negative_space import NegativeSpaceIndex
+from WEAVER.distributed_stewardship import DistributedStewardship
 from WEAVER.witness_network import WitnessNetwork
-from WEAVER.deliberative_democracy import DeliberativeDemocracy, VoteType
-from WEAVER.constitutional_evolution import ConstitutionalEvolution, AmendmentTier
+from WEAVER.deliberative_democracy import DeliberativeDemocracy
+from WEAVER.constitutional_evolution import ConstitutionalEvolution
 from WEAVER.restorative_justice import RestorativeJustice, HarmSeverity
-from WEAVER.system_self_awareness import SystemSelfAwareness, CapabilityLevel
+from WEAVER.system_self_awareness import SystemSelfAwareness
 # Disconnected modules now wired in:
-from WEAVER.ninth_operator import NinthOperator, WordState
+from WEAVER.ninth_operator import NinthOperator
 from WEAVER.gap_solutions import (
     OverprotectionGuard, StewardShadow, ShelterHeartbeat,
     HarmDetector, HarmType, ContestabilityEngine,
 )
 from WEAVER.cryptographic_erasure import CryptographicErasure
-from WEAVER.early_warning import EarlyWarningPipeline, EWMADetector, CUSUMDetector
+from WEAVER.early_warning import EWMADetector, CUSUMDetector
 from WEAVER.canonicalize import Canonicalizer, ArtifactSigner, EmergencyGovernance
-from WEAVER.ratification import RatificationEngine, ElementType, ElementState
+from WEAVER.ratification import RatificationEngine
 from FIELD.ALCOVE.shadow_genome import Alcove as FieldAlcove
 from FIELD.CLEARING.temporal_shadow import Clearing as FieldClearing
-from FIELD.AUDITS.self_audit import SelfAuditScheduler, SelfAuditRecord
-from FIELD.STEWARD.steward_observation import StewardObserver, RatificationRecord
+from FIELD.AUDITS.self_audit import SelfAuditScheduler
+from FIELD.STEWARD.steward_observation import StewardObserver
 from FIELD.DONOR.donor_layer import DonorRegistry
 from WEAVER.personalized_parables import PersonalizedParables
 from WEAVER.institutional_dignity import InstitutionalDignity
 # ── Full Integration (v2.0): previously orphaned modules now wired ──
-from WEAVER.sense import sense as sense_read, calibrate_for_expert, Mode, Competence, NeedGap
-from WEAVER.lab import lab_sense, ScienceType, RigorLevel
+from WEAVER.sense import sense as sense_read, calibrate_for_expert, Mode, Competence
+from WEAVER.lab import lab_sense
 from WEAVER.metadata_layer import MetadataGathering, EventKind, Speaker, CertaintyLevel
 from WEAVER.presence_axiom import preflight_require_presence, compute_dignity_with_presence
 from WEAVER.privacy_budget import PrivacyBudget
-from WEAVER.echo_stone import log_absurd_seed, reflect as echo_reflect
-from WEAVER.unified_pillar_detector import detect_pillars, generate_seed_from_pillars
+from WEAVER.echo_stone import log_absurd_seed
+from WEAVER.unified_pillar_detector import detect_pillars
 # Divergence study — zero heavy deps, full substrate measurement
 from FIELD.STUDY.divergence_study import DivergenceShadowInstrument
-from FIELD.amendments import PrivacyEnvelope, BaselineDriftDetector, RefusalMap
+from FIELD.amendments import BaselineDriftDetector, RefusalMap
 # ── Input Ledger: every V-001 input is a unit, registered as-is ──
-from WEAVER.input_ledger import InputLedger, V001, V002
+from WEAVER.input_ledger import InputLedger, V001
 # ── Boot Ritual: credentials + connectivity + ledger integrity ──
-from WEAVER.boot_ritual import boot_ritual, BootResult
+from WEAVER.boot_ritual import boot_ritual
 # ── Compass: system orientation engine ──
 from WEAVER.compass import Compass
 # ── Letter Ontology + Chain Validator + Witness Certificate (EXP-002) ──
-from WEAVER.letter_ontology import ALL_LETTERS, NON_CONNECTORS, ontology_summary
-from WEAVER.chain_validator import ChainEntry, validate_entry, PositionalForm, EntryType
+from WEAVER.letter_ontology import ALL_LETTERS, NON_CONNECTORS
+
 from WEAVER.witness_certificate import (
     DignitySnapshot, Subject, InstitutionalContext, CoordinatesOfFailure,
     generate_certificate, save_certificate,
 )
 # ── Voice Engine: canon-grounded response generation ──
-from WEAVER.voice_engine import VoiceEngine, detect_register
+from WEAVER.voice_engine import VoiceEngine
+from WEAVER.core_intelligence import CoreIntelligence
 # ── Triple Gate: SLOW + COMPUTE BUDGET + GO REQUIREMENT (Phase -3) ──
 # "Never ever exceed your computing power. You must ask for GO. Always slowly." — V-001
 from WEAVER.slow_gate import (
@@ -265,6 +266,12 @@ class OrganismState:
     boot_ritual_passed: bool = False
     boot_ritual_checks: int = 0
     boot_ritual_failures: int = 0
+    # ── Core Intelligence v1.0 (2026-03-23) ──
+    intelligence_mode: str = "local"
+    intelligence_canon_size: int = 0
+    intelligence_last_register: str = ""
+    intelligence_last_confidence: float = 0.0
+    intelligence_calls: int = 0
     timestamp: str = ""
 
 
@@ -303,6 +310,13 @@ class ProcessResult:
     lab_forge_needed: bool = False
     pillar_profile: dict = field(default_factory=dict)
     metadata_event_id: str = ""
+    # ── Core Intelligence v1.0 ──
+    intelligence_mode: str = ""           # "together", "groq", "local"
+    intelligence_register: str = ""       # detected emotional register
+    intelligence_themes: list = field(default_factory=list)   # extracted themes
+    intelligence_confidence: float = 0.0  # how grounded the response is
+    intelligence_fields: dict = field(default_factory=dict)   # active semantic fields
+    canon_sources: list = field(default_factory=list)         # which canon fragments used
     warnings: list = field(default_factory=list)
 
 
@@ -384,10 +398,13 @@ class Organism:
         self._distillery = None  # lazy-loaded to avoid circular imports
         # ── Voice Engine: canon-grounded response generation ──
         self._voice_engine = VoiceEngine()
+        # ── Core Intelligence: the brain — comprehension + canon search + LLM bridge ──
+        self._intelligence = CoreIntelligence()
         # ── Letter Chain (EXP-002): ontology + witness certificates ──
         self._witness_certs_generated = 0
         self._last_sense = None
         self._last_lab = None
+        self._last_intelligence = None
         self._last_pillar_profile = None
         self._last_measurement = None
         self._last_agency = None
@@ -416,19 +433,29 @@ class Organism:
             self._breath.pause(f"Dignity alert: {msg.get('content', 'unknown')[:80]}")
 
     def _on_stress_alert(self, msg):
-        """Handle stress threshold alerts."""
-        pass  # Breath handles auto-pause internally
+        """Handle stress threshold alerts — auto-pause when system is overwhelmed."""
+        content = msg.get("content", "")
+        if not self._breath.is_paused:
+            self._breath.pause(f"Stress alert: {content[:80]}")
+        self._witness_net.witness(
+            "stress_alert", f"System stress detected: {content[:120]}", "organism"
+        )
 
     def _on_sense_crisis(self, msg):
-        """Handle crisis detection from SENSE — Sealed Gate proximity."""
-        # Crisis flag already handled by sealed_gate in process(),
-        # but this allows other modules to react (e.g., shelter pre-warming)
-        pass
+        """Handle crisis detection from SENSE — pre-warm shelter for incoming blocked exchange."""
+        content = msg.get("content", "")
+        self._witness_net.witness(
+            "sense_crisis", f"Crisis proximity: {content[:120]}", "sense"
+        )
+        if not self._breath.is_paused:
+            self._breath.pause(f"Sense crisis: {content[:60]}")
 
     def _on_lab_forge(self, msg):
-        """Handle Probe Forge activation signal from LAB."""
-        # Signal to the system that a probe needs forge sterilization
-        pass
+        """Handle Probe Forge activation — record that a probe needs sterilization."""
+        content = msg.get("content", "")
+        self._witness_net.witness(
+            "lab_forge", f"Probe Forge activated: {content[:120]}", "lab"
+        )
 
     def distill(self, dry_run=False):
         """Run the Distillery to extract essence from all content sources.
@@ -1152,20 +1179,26 @@ class Organism:
                 warnings=self._last_dignity.get("warnings", []) + warnings,
             )
 
-        # 3b. SAY — render output through Voice Engine (canon-grounded)
+        # 3b. SAY — respond through Core Intelligence (comprehend + canon-search + generate)
         # SENSE-aware: if SENSE recommends asking, the question takes priority
-        # Otherwise: Voice Engine speaks from canon (proverbs, narratives, golden utterances)
+        # Otherwise: CoreIntelligence processes input and responds from canon
         if sense_reading.ask_recommended and sense_reading.ask_question:
             response_text = sense_reading.ask_question
+            self._last_intelligence = None
         else:
-            # Voice Engine: respond from canon, register-matched
-            input_register = detect_register(donor_input)
-            voice_response = self._voice_engine.respond(
-                donor_input,
-                dignity=dignity.D,
-                register=input_register,
-            )
-            response_text = voice_response.text
+            # Core Intelligence: comprehend → search canon → generate response
+            intel_result = self._intelligence.process(donor_input, dignity=dignity.D)
+            response_text = intel_result.response_text
+            self._last_intelligence = intel_result
+            # Feed intelligence findings back as warnings/metadata
+            if intel_result.comprehension.get("fields"):
+                top_fields = ", ".join(
+                    f"{k}({v:.2f})" for k, v in
+                    list(intel_result.comprehension["fields"].items())[:3]
+                )
+                warnings.append(f"Intelligence: {intel_result.mode} | fields: {top_fields}")
+            if intel_result.confidence < 0.3:
+                warnings.append(f"Low intelligence confidence: {intel_result.confidence:.2f}")
 
         # LAB-aware: append rigor warnings if science detected
         if lab_reading and lab_reading.active and lab_reading.rigor_warnings:
@@ -1191,10 +1224,34 @@ class Organism:
         # ── Phase 4: POST-PROCESSING ────────────────────────────
 
         # 4a. WITNESS — record exchange on immutable chain (Seed #2)
+        # Full metadata: the witness record carries the complete interaction fingerprint
+        witness_metadata = {
+            "exchange_id": ex_id,
+            "dignity": {"D": dignity.D, "passed": dignity.passed, "components": len(dignity.components)},
+            "patterns_found": len(candidates),
+            "drops_produced": len(drops),
+            "input_length": len(donor_input),
+            "response_length": len(response_text),
+        }
+        if self._last_intelligence:
+            witness_metadata["intelligence"] = {
+                "register": self._last_intelligence.register,
+                "themes": self._last_intelligence.themes[:5],
+                "confidence": round(self._last_intelligence.confidence, 4),
+                "mode": self._last_intelligence.mode,
+                "fields": {
+                    k: round(v, 3)
+                    for k, v in list(self._last_intelligence.comprehension.get("fields", {}).items())[:3]
+                },
+                "canon_sources": self._last_intelligence.canon_sources[:3],
+                "witness_hash": self._last_intelligence.witness_hash,
+            }
+            witness_metadata["conversation"] = self._intelligence.conversation_snapshot
         self._witness_net.witness(
             "exchange",
             f"{ex_id}: D={dignity.D:.1f}, patterns={len(candidates)}, drops={len(drops)}",
             "organism",
+            metadata=witness_metadata,
         )
 
         # 4b. NINTH OPERATOR — the word loop
@@ -1345,6 +1402,13 @@ class Organism:
             lab_forge_needed=lab_reading.forge_needed if lab_reading else False,
             pillar_profile=pillar_profile or {},
             metadata_event_id=metadata_event_id,
+            # ── Core Intelligence v1.0 fields ──
+            intelligence_mode=self._last_intelligence.mode if self._last_intelligence else "",
+            intelligence_register=self._last_intelligence.register if self._last_intelligence else "",
+            intelligence_themes=self._last_intelligence.themes if self._last_intelligence else [],
+            intelligence_confidence=self._last_intelligence.confidence if self._last_intelligence else 0.0,
+            intelligence_fields=self._last_intelligence.comprehension.get("fields", {}) if self._last_intelligence else {},
+            canon_sources=self._last_intelligence.canon_sources if self._last_intelligence else [],
             warnings=warnings,
         )
 
@@ -1500,6 +1564,12 @@ class Organism:
             boot_ritual_passed=self._boot_result.passed,
             boot_ritual_checks=len(self._boot_result.checks),
             boot_ritual_failures=len([c for c in self._boot_result.checks if not c.passed]),
+            # ── Core Intelligence v1.0 ──
+            intelligence_mode=self._intelligence.mode,
+            intelligence_canon_size=self._intelligence.canon_size,
+            intelligence_last_register=self._last_intelligence.register if self._last_intelligence else "",
+            intelligence_last_confidence=self._last_intelligence.confidence if self._last_intelligence else 0.0,
+            intelligence_calls=self._intelligence._call_count,
             timestamp=self._now(),
         )
 
