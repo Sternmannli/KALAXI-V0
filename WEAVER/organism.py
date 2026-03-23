@@ -116,6 +116,8 @@ from FIELD.amendments import PrivacyEnvelope, BaselineDriftDetector, RefusalMap
 from WEAVER.input_ledger import InputLedger, V001, V002
 # ── Boot Ritual: credentials + connectivity + ledger integrity ──
 from WEAVER.boot_ritual import boot_ritual, BootResult
+# ── DNA: system genome — self-verification at Phase -3.5 ──
+from WEAVER.dna import read_dna, verify as dna_verify
 # ── Compass: system orientation engine ──
 from WEAVER.compass import Compass
 # ── Letter Ontology + Chain Validator + Witness Certificate (EXP-002) ──
@@ -370,6 +372,10 @@ class Organism:
         # strict=False so we don't crash the organism in test environments
         # but the result is stored and checked before processing
         self._boot_result = boot_ritual(strict=False)
+        # ── DNA Verify: Phase -3.5 — genome integrity check ──
+        self._dna = read_dna()
+        self._dna_result = dna_verify(self._dna, str(ROOT))
+        self._dna_status = "INTEGRITY_OK" if self._dna_result.passed else "MUTATED"
         # ── Compass: orientation engine (MOVE-001) ──
         self._compass = Compass()
         # ── Distillery: extract essence from all content sources ──
@@ -626,6 +632,11 @@ class Organism:
             medium = TERMINAL
 
         warnings = []
+
+        # ── Phase -3.5: DNA VERIFY — genome integrity check ──
+        # "All the information is in there. One source of truth." — V-001
+        if not self._dna_result.passed:
+            warnings.append(f"DNA MUTATION: {self._dna_result.summary}")
 
         # ── Phase -2: BOOT RITUAL — credentials + connectivity + ledger integrity ──
         # "Never process anything without making sure of both. When not, you stop." — V-001

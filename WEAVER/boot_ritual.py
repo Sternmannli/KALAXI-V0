@@ -505,6 +505,47 @@ def _check_distillery_latest() -> BootCheck:
         )
 
 
+def _check_dna_integrity() -> BootCheck:
+    """Phase 4: DNA INTEGRITY — verify genome against filesystem."""
+    try:
+        from WEAVER.dna import read_dna, verify
+        dna = read_dna()
+        result = verify(dna, str(ROOT))
+        n_mutations = len(result.mutations)
+        n_critical = sum(1 for m in result.mutations if m.severity == "critical")
+        if n_critical > 0:
+            return BootCheck(
+                name="dna_integrity",
+                phase=4,
+                passed=False,
+                message=f"DNA v{dna.version}: {n_mutations} mutations ({n_critical} critical)",
+                critical=False,  # DNA mutations warn but do not halt
+            )
+        if n_mutations > 0:
+            return BootCheck(
+                name="dna_integrity",
+                phase=4,
+                passed=True,
+                message=f"DNA v{dna.version}: {n_mutations} non-critical mutations",
+                critical=False,
+            )
+        return BootCheck(
+            name="dna_integrity",
+            phase=4,
+            passed=True,
+            message=f"DNA v{dna.version}: CLEAN — 0 mutations",
+            critical=False,
+        )
+    except Exception as e:
+        return BootCheck(
+            name="dna_integrity",
+            phase=4,
+            passed=False,
+            message=f"DNA integrity check failed: {e}",
+            critical=False,
+        )
+
+
 # ══════════════════════════════════════════════════════════════════════
 # THE RITUAL
 # ══════════════════════════════════════════════════════════════════════
@@ -543,6 +584,9 @@ def boot_ritual(strict: bool = True) -> BootResult:
     # Phase 3: DISTILLERY STATE (non-critical — warnings only)
     checks.append(_check_distillery_essence())
     checks.append(_check_distillery_latest())
+
+    # Phase 4: DNA INTEGRITY (non-critical — warnings only)
+    checks.append(_check_dna_integrity())
 
     # Evaluate
     critical_failures = [c for c in checks if not c.passed and c.critical]
