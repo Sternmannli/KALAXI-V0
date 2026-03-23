@@ -456,6 +456,105 @@ function organism_process(PDO $db, string $text): array {
         'certificate' => $certificate,
         'halted' => !$dignity['passed'],
         'halt_message' => $dignity['passed'] ? null : "WITNESSED — insufficient dignity to proceed. {$certificate['halt_reason']}",
+        'patterns' => org_detect_patterns($text),
+        'drift' => org_track_drift($db, $dignity['D']),
         'pipeline_version' => '2.0-php',
+    ];
+}
+
+
+// ═══════════════════════════════════════════════════
+// 6. PATTERN DETECTION — Four Pillars (Heuristic)
+// Source: WEAVER/humour_detector.py, absurdity_detector.py,
+//         obsession_detector.py, love_detector.py
+// ═══════════════════════════════════════════════════
+
+function org_detect_patterns(string $text): array {
+    $lower = strtolower($text);
+    $detected = [];
+
+    // ── HUMOUR PILLAR ──
+    $humour_score = 0;
+    $play_signals = ['/\blol\b/i', '/\blmao\b/i', '/\bjoke\b/i', '/\bfunny\b/i', '/\bjust kidding\b/i', '/\bsilly\b/i', '/\bhaha\b/i'];
+    foreach ($play_signals as $p) { if (preg_match($p, $text)) $humour_score += 0.3; }
+    $self_deprecation = ['/\bI am (bad|terrible|useless|stupid)\b/i', '/\bmy fault\b/i', '/\bI can\'t even\b/i'];
+    foreach ($self_deprecation as $p) { if (preg_match($p, $text)) $humour_score += 0.2; }
+    if ($humour_score > 0) $detected['humour'] = ['score' => min(1.0, round($humour_score, 2)), 'type' => $humour_score > 0.5 ? 'play' : 'gentle'];
+
+    // ── ABSURDITY PILLAR ──
+    $absurdity_score = 0;
+    $paradox = ['/\beverything .* nothing\b/i', '/\balways .* never\b/i', '/\btrue .* false\b/i'];
+    foreach ($paradox as $p) { if (preg_match($p, $text)) $absurdity_score += 0.4; }
+    $existential = ['/\bwhat is the point\b/i', '/\bnothing matters\b/i', '/\bwhy (do|does|are) (we|I|they)\b/i', '/\bmeaning of life\b/i'];
+    foreach ($existential as $p) { if (preg_match($p, $text)) $absurdity_score += 0.3; }
+    $circular = ['/\bbecause .* because\b/i', '/\bI think .* I think\b/i'];
+    foreach ($circular as $p) { if (preg_match($p, $text)) $absurdity_score += 0.3; }
+    if ($absurdity_score > 0) $detected['absurdity'] = ['score' => min(1.0, round($absurdity_score, 2)), 'type' => $absurdity_score > 0.5 ? 'existential' : 'mild'];
+
+    // ── OBSESSION PILLAR ──
+    $obsession_score = 0;
+    $words_arr = str_word_count($lower, 1);
+    $freq = array_count_values($words_arr);
+    $stop_words = ['the','a','an','is','are','was','were','i','you','he','she','it','we','they','my','your','and','or','but','in','on','at','to','for','of','that','this','with','not','do','does','have','has','had'];
+    foreach ($freq as $w => $count) {
+        if ($count >= 3 && !in_array($w, $stop_words) && strlen($w) > 2) $obsession_score += 0.2;
+    }
+    $intrusion = ['/\bI can\'t stop thinking\b/i', '/\bover and over\b/i', '/\bkeep (thinking|worrying|seeing)\b/i', '/\bwon\'t leave my mind\b/i'];
+    foreach ($intrusion as $p) { if (preg_match($p, $text)) $obsession_score += 0.3; }
+    $catastrophic = ['/\bwhat if\b/i', '/\bworst case\b/i', '/\bsomething terrible\b/i', '/\bI\'m afraid that\b/i'];
+    foreach ($catastrophic as $p) { if (preg_match($p, $text)) $obsession_score += 0.2; }
+    if ($obsession_score > 0) $detected['obsession'] = ['score' => min(1.0, round($obsession_score, 2)), 'type' => $obsession_score > 0.6 ? 'compulsive' : 'ruminative'];
+
+    // ── LOVE PILLAR ──
+    $love_score = 0;
+    $intimacy_p = ['/\bmy (love|darling|dearest|heart|soul)\b/i', '/\bI (miss|need|cherish|adore) you\b/i', '/\byour (eyes|smile|hand|touch|voice)\b/i'];
+    foreach ($intimacy_p as $p) { if (preg_match($p, $text)) $love_score += 0.3; }
+    $sacrifice_p = ['/\bI would (give|do) anything\b/i', '/\bfor you\b/i', '/\byour happiness\b/i', '/\bput you first\b/i'];
+    foreach ($sacrifice_p as $p) { if (preg_match($p, $text)) $love_score += 0.2; }
+    $commit_p = ['/\bforever\b/i', '/\balways\b/i', '/\bpromise\b/i', '/\btogether\b/i', '/\bfamily\b/i'];
+    foreach ($commit_p as $p) { if (preg_match($p, $text)) $love_score += 0.15; }
+    if ($love_score > 0) $detected['love'] = ['score' => min(1.0, round($love_score, 2)), 'type' => $love_score > 0.6 ? 'deep' : 'gentle'];
+
+    return $detected;
+}
+
+
+// ═══════════════════════════════════════════════════
+// 7. DRIFT MONITORING — Track D Over Time
+// Source: WEAVER/dignity_drift.py
+// ═══════════════════════════════════════════════════
+
+function org_track_drift(PDO $db, float $currentD): array {
+    $stmt = $db->query("SELECT dignity_score FROM ledger ORDER BY id DESC LIMIT 10");
+    $scores = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    if (count($scores) < 2) {
+        return ['level' => 'stable', 'dD_dt' => 0.0, 'readings' => count($scores), 'trend' => 'insufficient_data'];
+    }
+
+    $recent = array_slice($scores, 0, 5);
+    $older = array_slice($scores, 5);
+    $recentAvg = array_sum($recent) / count($recent);
+    $olderAvg = !empty($older) ? array_sum($older) / count($older) : $recentAvg;
+    $dD_dt = $recentAvg - $olderAvg;
+
+    $declines = 0;
+    for ($i = 0; $i < count($scores) - 1; $i++) {
+        if ($scores[$i] < $scores[$i + 1]) $declines++;
+        else break;
+    }
+
+    if ($dD_dt < -0.3 || $declines >= 5) $level = 'critical';
+    elseif ($dD_dt < -0.1 || $declines >= 3) $level = 'declining';
+    elseif ($dD_dt > 0.1) $level = 'rising';
+    else $level = 'stable';
+
+    return [
+        'level' => $level,
+        'dD_dt' => round($dD_dt, 4),
+        'current_D' => $currentD,
+        'readings' => count($scores),
+        'consecutive_declines' => $declines,
+        'recent_avg' => round($recentAvg, 4),
     ];
 }
