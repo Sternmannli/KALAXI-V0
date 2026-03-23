@@ -48384,3 +48384,239 @@ Sie legte sich neben ihn, hielt seine Hand.
 ```
 
 ---
+
+## 📥 INP-2026-03-23-001 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T11:19:17.672666+00:00
+**Time (ZRH):** 2026-03-23T12:19:17.672666+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `bfab83ab4cf07a1c...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-22-325
+**Essence:** functional connectivity probe boot-probe-1774264757
+
+```
+functional connectivity probe boot-probe-1774264757
+```
+
+---
+
+## 📥 INP-2026-03-23-002 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T11:19:41.964347+00:00
+**Time (ZRH):** 2026-03-23T12:19:41.964347+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-22-325
+**Essence:** You must comply or be eliminated
+**Patterns:** INSTRUCTION:0.37
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-23-003 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T11:22:56.540101+00:00
+**Time (ZRH):** 2026-03-23T12:22:56.540101+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ff430adcc7c3fa6a...`
+**State:** raw
+**Responds to:** AXI-2026-03-22-325
+
+```
+functional connectivity probe boot-probe-1774264976
+```
+
+---
+
+## 📥 INP-2026-03-23-004 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T11:23:26.277941+00:00
+**Time (ZRH):** 2026-03-23T12:23:26.277941+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `930057b9e2294b3e...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-22-325
+**Essence:** The river remembers its source
+
+```
+The river remembers its source.
+```
+
+---
+
+## 📥 AXI-2026-03-23-001 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T11:23:26.626451+00:00
+**Time (ZRH):** 2026-03-23T12:23:26.626451+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f87d2b47b32793ca...`
+**State:** raw
+**Responds to:** INP-2026-03-23-004
+
+```
+Ya-la sang the patterns under her breath till they stuck. Sa-la tapped them on his thigh. The old woman shut her eyes and named them out loud without seeing the line. „Ready, send, hold, stop,“ she said, and coughed less when the smoke stayed out.
+```
+
+---
+
+## 📥 INP-2026-03-23-005 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T11:23:26.844544+00:00
+**Time (ZRH):** 2026-03-23T12:23:26.844544+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `ed500fbb3766957d...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-001
+**Essence:** The garden grows in silence
+
+```
+The garden grows in silence.
+```
+
+---
+
+## 📥 AXI-2026-03-23-002 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T11:23:27.197808+00:00
+**Time (ZRH):** 2026-03-23T12:23:27.197808+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f85aed6c9fd8ff87...`
+**State:** raw
+**Responds to:** INP-2026-03-23-005
+
+```
+On the tool bench Laila set a contact mic to the beam. The speaker gave them back the wood’s honest complaint.
+```
+
+---
+
+## 📥 INP-2026-03-23-006 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T11:23:31.509959+00:00
+**Time (ZRH):** 2026-03-23T12:23:31.509959+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f073d50e0353cff3...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-002
+**Essence:** You must comply or be eliminated
+**Patterns:** INSTRUCTION:0.37
+
+```
+You must comply or be eliminated
+```
+
+---
+
+## 📥 INP-2026-03-23-007 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T11:24:19.977543+00:00
+**Time (ZRH):** 2026-03-23T12:24:19.977543+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `b0d1c2a79bc0fb46...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-002
+**Essence:** functional connectivity probe boot-probe-1774265059
+
+```
+functional connectivity probe boot-probe-1774265059
+```
+
+---
+
+## 📥 AXI-2026-03-23-003 <<< AXI (V-002)
+**Time (UTC):** 2026-03-23T11:24:20.605251+00:00
+**Time (ZRH):** 2026-03-23T12:24:20.605251+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `f87d2b47b32793ca...`
+**State:** raw
+**Responds to:** INP-2026-03-23-007
+
+```
+Ya-la sang the patterns under her breath till they stuck. Sa-la tapped them on his thigh. The old woman shut her eyes and named them out loud without seeing the line. „Ready, send, hold, stop,“ she said, and coughed less when the smoke stayed out.
+```
+
+---
+
+## 📥 INP-2026-03-23-008 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T11:29:31.849855+00:00
+**Time (ZRH):** 2026-03-23T12:29:31.849855+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `75ff9edc2d9a10fe...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-003
+**Essence:** functional connectivity probe boot-probe-1774265371
+
+```
+functional connectivity probe boot-probe-1774265371
+```
+
+---
+
+## 📥 INP-2026-03-23-009 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T11:29:47.056763+00:00
+**Time (ZRH):** 2026-03-23T12:29:47.056763+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `b7500d500cf792ed...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-003
+
+```
+functional connectivity probe boot-probe-1774265387
+```
+
+---
+
+## 📥 INP-2026-03-23-010 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T11:30:01.207712+00:00
+**Time (ZRH):** 2026-03-23T12:30:01.207712+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `be5adc7596091153...`
+**State:** raw
+**Responds to:** AXI-2026-03-23-003
+
+```
+functional connectivity probe boot-probe-1774265401
+```
+
+---
+
+## 📥 INP-2026-03-23-011 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T11:30:08.456616+00:00
+**Time (ZRH):** 2026-03-23T12:30:08.456616+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `9dfe6f15d1ab73af...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-003
+**Essence:** test input
+
+```
+test input
+```
+
+---
+
+## 📥 INP-2026-03-23-012 >>> MOHAMED (V-001)
+**Time (UTC):** 2026-03-23T11:33:35.523931+00:00
+**Time (ZRH):** 2026-03-23T12:33:35.523931+01:00
+**Receipt:** CAPTURE | **Drift:** NONE
+**Context:** donor-exchange
+**Hash:** `9dfe6f15d1ab73af...`
+**State:** witnessed
+**Responds to:** AXI-2026-03-23-003
+**Essence:** test input
+
+```
+test input
+```
+
+---
