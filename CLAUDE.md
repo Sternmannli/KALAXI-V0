@@ -529,7 +529,7 @@ Phase 9: GO 9.1-9.5 (narrative — remaining Hakaka, Ashwater, Kinderbuch, Offsp
 | Organism | WEAVER/organism.py |
 | Seed Calendar | MANIFEST/seed_calendar.md |
 | Probe Forge | PROTOCOLS/PROBE_FORGE.md |
-| Stone (Constitution) | R7M/tier1_stone.md |
+| Stone (Constitution) | MANIFEST/metadata/tier1_stone.md |
 | EXP-001 Runner | EXPERIMENTS/EXP-001/run_exp001.py |
 | System Biography | MANIFEST/SYSTEM_BIOGRAPHY.md |
 | Site Audit (2026-03-17) | MANIFEST/SITE_AUDIT_2026-03-17.md |
