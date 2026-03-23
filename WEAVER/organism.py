@@ -839,7 +839,7 @@ class Organism:
         # Default drift_alert for early-return paths (before Phase 3 assigns the real one)
         drift_alert = DriftAlert(
             level=DriftLevel.STABLE, dD_dt=0.0, current_D=dignity.D,
-            window_size=0, trend_readings=0, message="", timestamp=now_utc,
+            window_size=0, trend_readings=0, message="", timestamp="",
             recommended_action="none",
         )
 
