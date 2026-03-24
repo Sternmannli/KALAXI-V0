@@ -1,6 +1,10 @@
 name: Fine-tune AXI Voice (Together AI)
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'TRAINING/FINETUNE_TRIGGER.json'
   workflow_dispatch:
     inputs:
       model_base:
@@ -34,7 +38,28 @@ permissions:
 jobs:
   finetune:
     runs-on: ubuntu-latest
+    env:
+      MODEL_BASE: ${{ inputs.model_base || 'meta-llama/Meta-Llama-3.1-8B-Instruct' }}
+      EPOCHS: ${{ inputs.epochs || '3' }}
+      SUFFIX: ${{ inputs.suffix || 'axi-voice-v1' }}
+      DRY_RUN: ${{ inputs.dry_run || 'false' }}
     steps:
+      - name: Read trigger file config
+        id: trigger
+        if: github.event_name == 'push'
+        run: |
+          if [ -f TRAINING/FINETUNE_TRIGGER.json ]; then
+            echo "Trigger file found — reading config"
+            DRY=$(python3 -c "import json; print(json.load(open('TRAINING/FINETUNE_TRIGGER.json')).get('dry_run','true'))" 2>/dev/null || echo "true")
+            MODEL=$(python3 -c "import json; print(json.load(open('TRAINING/FINETUNE_TRIGGER.json')).get('model','meta-llama/Meta-Llama-3.1-8B-Instruct'))" 2>/dev/null || echo "meta-llama/Meta-Llama-3.1-8B-Instruct")
+            EP=$(python3 -c "import json; print(json.load(open('TRAINING/FINETUNE_TRIGGER.json')).get('epochs','3'))" 2>/dev/null || echo "3")
+            SUF=$(python3 -c "import json; print(json.load(open('TRAINING/FINETUNE_TRIGGER.json')).get('suffix','axi-voice-v1'))" 2>/dev/null || echo "axi-voice-v1")
+            echo "DRY_RUN=$DRY" >> $GITHUB_ENV
+            echo "MODEL_BASE=$MODEL" >> $GITHUB_ENV
+            echo "EPOCHS=$EP" >> $GITHUB_ENV
+            echo "SUFFIX=$SUF" >> $GITHUB_ENV
+          fi
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -76,7 +101,6 @@ jobs:
           from together import Together
           client = Together()
 
-          # Upload the file
           response = client.files.upload(
               file=open('TRAINING/CORPUS_COMPILED.jsonl', 'rb'),
               purpose='fine-tune'
@@ -85,43 +109,40 @@ jobs:
           print(f'Filename: {response.filename}')
           print(f'Bytes: {response.bytes}')
 
-          # Save file ID for next step
           with open('file_id.txt', 'w') as f:
               f.write(response.id)
           "
 
       - name: Start fine-tuning job
-        if: inputs.dry_run == false || inputs.dry_run == 'false'
+        if: env.DRY_RUN == 'false'
         env:
           TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
         run: |
           FILE_ID=$(cat file_id.txt)
-          python3 -c "
-          import sys
+          python3 << PYEOF
           from together import Together
           client = Together()
 
-          file_id = '$FILE_ID'
           response = client.fine_tuning.create(
-              training_file=file_id,
-              model='${{ inputs.model_base }}',
-              n_epochs=int('${{ inputs.epochs }}'),
-              suffix='${{ inputs.suffix }}',
+              training_file='$FILE_ID',
+              model='${{ env.MODEL_BASE }}',
+              n_epochs=int('${{ env.EPOCHS }}'),
+              suffix='${{ env.SUFFIX }}',
               wandb_api_key=None
           )
           print(f'Fine-tune job created: {response.id}')
           print(f'Model: {response.model}')
           print(f'Status: {response.status}')
           print(f'Output model will be: {response.output_name}')
-          "
+          PYEOF
 
       - name: Dry run summary
-        if: inputs.dry_run == true || inputs.dry_run == 'true'
+        if: env.DRY_RUN == 'true'
         run: |
           FILE_ID=$(cat file_id.txt)
           echo "DRY RUN — file uploaded but no training started."
           echo "File ID: $FILE_ID"
-          echo "Base model: ${{ inputs.model_base }}"
-          echo "Epochs: ${{ inputs.epochs }}"
-          echo "Suffix: ${{ inputs.suffix }}"
-          echo "To start training, re-run with dry_run=false."
+          echo "Base model: $MODEL_BASE"
+          echo "Epochs: $EPOCHS"
+          echo "Suffix: $SUFFIX"
+          echo "To start training, update TRAINING/FINETUNE_TRIGGER.json with dry_run=false and push."
