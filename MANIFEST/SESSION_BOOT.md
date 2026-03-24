@@ -111,23 +111,24 @@ gh secret list
 |---------|-------|
 | Python files | 176 |
 | Lines of code | 42,581+ |
-| Tests | 1330 passed, 9 skipped |
-| Covenants | 18 ratified |
-| Ledger entries | 2,457+ |
-| Proverbs | 3,355+ |
+| Tests | 1317 passed, 22 skipped |
+| Covenants | 22 ratified |
+| Ledger entries | 4,522+ |
+| Proverbs | 460+ |
 | Seeds | 12/12 integrated |
 | Site pages | 13+ |
 | Site status | **LIVE** at kalam.ch |
 | Standing corrections | 17 (in CLAUDE.md Substrate Correction Log) |
-| Golden regression corpus | 200 entries (TRAINING/GOLDEN_REGRESSION.jsonl) |
+| Training corpus | Golden (200) + Proverbs/Treasures (316) + V-001 Voice (400) = 916 entries |
+| Stress test | 33/35 passed — The Same River: IDENTICAL |
 
 ---
 
 ## 5. LAST SESSION
 
-**Date:** 2026-03-23 (session 5 — current)
-**Branch:** `claude/continue-previous-work-khjLX`
-**Mode:** Full execution (V-001 gave GO, "I have nothing to do. It's all your responsibility.")
+**Date:** 2026-03-23 (session 6 — current)
+**Branch:** `claude/resume-work-YzExn`
+**Mode:** Full execution (V-001 gave GO + 10 standing GOs)
 
 ### What was built this session (session 5):
 
@@ -155,27 +156,27 @@ gh secret list
 ## 6. WHAT IS PENDING
 
 ### IMMEDIATE (next action items)
-1. **Memory design decision** — V-001 has not decided. Do not force. Four options identified (session 4, item 3).
-2. **EXP-007: The Presence Test** — Protocol designed, 5 hypotheses, Kimi is data point #1. Needs: run across remaining models.
-3. **Summon Voices responses** — V-001 collected responses from all 10 AI models. He will paste them. Process and synthesize.
+1. **DNA mechanism discussion** — How learned patterns propagate to ALL modules. Needs Cafe Room.
+2. **CertaintyGate discussion** — 95%/99% thresholds. Tension with voice. Needs Cafe Room.
+3. **Training corpus Patch 4** — Narrative voice samples (Hakaka, Ashwater, Kinderbuch). Ready for GO.
+4. **Training corpus Patch 8** — Compile and validate full corpus. Depends on Patch 4.
+5. **Training corpus Patch 9** — Upload to Together AI. Depends on Patch 8 + GO.
+6. **DonorSpace class design** — Isolated donor instances. Needs discussion.
+7. **Service cost awareness module** — Know pricing/limits of all external services.
 
 ### CARRIED OVER (from previous sessions)
-4. **Archetype decision** — BLOCKED on Summon Voices synthesis + V-001 data about characters.
-5. **Phase C: Narrative Archetype Layer** — Patches 6-8. Waiting for archetype decision.
-6. **Phase D: System Integration** — Patches 9-12. Waiting for Phase C.
-7. **EXP-001** — 188 runs remaining (Claude: 0/20).
-8. **Voice model training** — Together AI key set. Training data ready.
+8. **Memory design decision** — V-001 has not decided. Four options identified (session 4).
+9. **EXP-007: The Presence Test** — 5 hypotheses, Kimi is data point #1.
+10. **Summon Voices responses** — V-001 collected from 10 models. Waiting for paste.
+11. **EXP-001** — 188 runs remaining (Claude: 0/20).
 
-### VERIFIED STATE (checked 2026-03-23 session 5)
-- PR #402 MERGED (witness metadata + conversation memory)
-- All previous PRs (#389, #390, #392) MERGED
-- DB migration COMPLETE — 6 tables on kalam.ch
-- system-map.html LIVE on kalam.ch
-- EXP-007 protocol at `EXPERIMENTS/EXP-007-PRESENCE/`
-- Core Intelligence v1.0 at `WEAVER/core_intelligence.py` (1190 lines)
-- ConversationMemory wired into organism + witness chain
-- 1330 tests passing, 9 skipped
-- Main branch at commit `3a67cbc`
+### VERIFIED STATE (checked 2026-03-23 session 6)
+- PR #404 MERGED (stress test + DNA plan)
+- Stress test: 33/35 passed, Same River: IDENTICAL
+- Training corpus: 916 entries across 3 files
+- CLAUDE.md path fix: tier1_stone.md → MANIFEST/metadata/
+- Main branch at commit `4b5efc1`
+- All previous PRs merged (#389, #390, #392, #402, #404)
 
 ### KEY FILES FROM THIS SESSION
 | File | Purpose |
