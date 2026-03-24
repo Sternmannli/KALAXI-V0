@@ -125,7 +125,7 @@ jobs:
 
               client = Together()
               response = client.files.upload(
-                  file=open('TRAINING/CORPUS_COMPILED.jsonl', 'rb'),
+                  file='TRAINING/CORPUS_COMPILED.jsonl',
                   purpose='fine-tune'
               )
               file_id = response.id
