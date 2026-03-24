@@ -93,6 +93,23 @@ jobs:
           print('Corpus valid.')
           "
 
+      - name: Verify API key present
+        env:
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+        run: |
+          if [ -z "$TOGETHER_API_KEY" ]; then
+            echo "::error::TOGETHER_API_KEY secret is empty or not set"
+            exit 1
+          fi
+          KEY_LEN=${#TOGETHER_API_KEY}
+          echo "API key length: $KEY_LEN chars"
+          echo "API key prefix: ${TOGETHER_API_KEY:0:8}..."
+          if [ "$KEY_LEN" -lt 40 ]; then
+            echo "::error::TOGETHER_API_KEY appears truncated ($KEY_LEN chars). Expected 64+."
+            exit 1
+          fi
+          echo "Key looks valid (length OK)."
+
       - name: Upload corpus to Together AI
         id: upload
         env:
@@ -100,23 +117,33 @@ jobs:
         run: |
           python3 << 'PYEOF'
           from together import Together
-          import os
-          client = Together()
+          import os, sys, traceback
 
-          response = client.files.upload(
-              file=open('TRAINING/CORPUS_COMPILED.jsonl', 'rb'),
-              purpose='fine-tune'
-          )
-          file_id = response.id
-          print(f'File uploaded: {file_id}')
-          print(f'Filename: {response.filename}')
-          print(f'Bytes: {response.bytes}')
+          try:
+              key = os.environ.get('TOGETHER_API_KEY', '')
+              print(f'Key length: {len(key)}, prefix: {key[:8]}...')
 
-          with open('file_id.txt', 'w') as f:
-              f.write(file_id)
-          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
-              f.write(f'file_id={file_id}\n')
-              f.write(f'file_bytes={response.bytes}\n')
+              client = Together()
+              response = client.files.upload(
+                  file=open('TRAINING/CORPUS_COMPILED.jsonl', 'rb'),
+                  purpose='fine-tune'
+              )
+              file_id = response.id
+              print(f'File uploaded: {file_id}')
+              print(f'Filename: {response.filename}')
+              print(f'Bytes: {response.bytes}')
+
+              with open('file_id.txt', 'w') as f:
+                  f.write(file_id)
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                  f.write(f'file_id={file_id}\n')
+                  f.write(f'file_bytes={response.bytes}\n')
+          except Exception as e:
+              print(f'UPLOAD FAILED: {type(e).__name__}: {e}')
+              traceback.print_exc()
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                  f.write(f'upload_error={type(e).__name__}: {e}\n')
+              sys.exit(1)
           PYEOF
 
       - name: Start fine-tuning job
@@ -158,6 +185,7 @@ jobs:
             const dryRun = '${{ env.DRY_RUN }}';
             const fileId = '${{ steps.upload.outputs.file_id }}' || 'upload failed';
             const fileBytes = '${{ steps.upload.outputs.file_bytes }}' || '?';
+            const uploadError = '${{ steps.upload.outputs.upload_error }}' || '';
             const jobId = '${{ steps.train.outputs.job_id }}' || 'N/A';
             const outputModel = '${{ steps.train.outputs.output_model }}' || 'N/A';
             const trainStatus = '${{ steps.train.outputs.status }}' || 'N/A';
@@ -170,7 +198,9 @@ jobs:
             body += `**Suffix:** ${{ env.SUFFIX }}\n\n`;
             body += `### Upload\n`;
             body += `- File ID: \`${fileId}\`\n`;
-            body += `- Bytes: ${fileBytes}\n\n`;
+            body += `- Bytes: ${fileBytes}\n`;
+            if (uploadError) body += `- **Error:** ${uploadError}\n`;
+            body += `\n`;
 
             if (dryRun === 'false') {
               body += `### Training\n`;
