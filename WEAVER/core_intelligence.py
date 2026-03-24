@@ -971,7 +971,7 @@ def _call_api(
 
     if provider == "together":
         url = "https://api.together.xyz/v1/chat/completions"
-        model = model or "meta-llama/Llama-3-70b-chat-hf"
+        model = model or "kalammasri_29ff/Meta-Llama-3.1-8B-Instruct-Reference-axi-voice-v1-1e105904"
     elif provider == "groq":
         url = "https://api.groq.com/openai/v1/chat/completions"
         model = model or "llama-3.3-70b-versatile"

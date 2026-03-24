@@ -180,7 +180,7 @@ switch ($action) {
             break;
         }
 
-        $default_model = $config['AXI_MODEL'] ?? 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo';
+        $default_model = $config['AXI_MODEL'] ?? 'kalammasri_29ff/Meta-Llama-3.1-8B-Instruct-Reference-axi-voice-v1-1e105904';
         $model = $body['model'] ?? $default_model;
         $messages = $body['messages'] ?? [];
         $max_tokens = min((int) ($body['max_tokens'] ?? 1024), 4096);
@@ -838,7 +838,7 @@ switch ($action) {
             $result = [
                 'ok' => true,
                 'message' => 'No training state yet. Upload a corpus to begin.',
-                'config_model' => $config['AXI_MODEL'] ?? 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo (default)',
+                'config_model' => $config['AXI_MODEL'] ?? 'kalammasri_29ff/Meta-Llama-3.1-8B-Instruct-Reference-axi-voice-v1-1e105904',
             ];
         }
         break;

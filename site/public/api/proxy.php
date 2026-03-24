@@ -146,7 +146,7 @@ function call_gemini(string $prompt, string $api_key): ?array {
  * Call Together.ai API
  */
 function call_together(string $prompt, string $api_key, ?string $axi_model = null): ?array {
-    $model = $axi_model ?: 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo';
+    $model = $axi_model ?: 'kalammasri_29ff/Meta-Llama-3.1-8B-Instruct-Reference-axi-voice-v1-1e105904';
     $payload = json_encode([
         'model' => $model,
         'messages' => [['role' => 'user', 'content' => $prompt]],
