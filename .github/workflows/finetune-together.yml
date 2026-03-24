@@ -10,9 +10,10 @@ on:
       model_base:
         description: 'Base model for fine-tuning'
         required: true
-        default: 'meta-llama/Meta-Llama-3.1-8B-Instruct'
+        default: 'meta-llama/Meta-Llama-3.1-8B-Instruct-Reference'
         type: choice
         options:
+          - meta-llama/Meta-Llama-3.1-8B-Instruct-Reference
           - meta-llama/Meta-Llama-3.1-8B-Instruct
           - meta-llama/Llama-3.3-70B-Instruct-Turbo
           - mistralai/Mistral-7B-Instruct-v0.3
@@ -40,7 +41,7 @@ jobs:
   finetune:
     runs-on: ubuntu-latest
     env:
-      MODEL_BASE: ${{ inputs.model_base || 'meta-llama/Meta-Llama-3.1-8B-Instruct' }}
+      MODEL_BASE: ${{ inputs.model_base || 'meta-llama/Meta-Llama-3.1-8B-Instruct-Reference' }}
       EPOCHS: ${{ inputs.epochs || '3' }}
       SUFFIX: ${{ inputs.suffix || 'axi-voice-v1' }}
       DRY_RUN: ${{ inputs.dry_run || 'false' }}
@@ -141,7 +142,8 @@ jobs:
               client = Together()
               response = client.files.upload(
                   file='TRAINING/corpus_upload.jsonl',
-                  purpose='fine-tune'
+                  purpose='fine-tune',
+                  check=True
               )
               file_id = response.id
               print(f'File uploaded: {file_id}')
