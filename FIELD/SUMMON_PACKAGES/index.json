@@ -59,6 +59,17 @@
       "created": "2026-03-20",
       "status": "PREPARED",
       "responses": {}
+    },
+    {
+      "id": "SP-006",
+      "type": "open",
+      "subject": "Full System Anatomy — The Voice Problem",
+      "file": "SP-006-VOICE-ANATOMY.md",
+      "created": "2026-03-24",
+      "status": "PREPARED",
+      "mode": "MACHINE-TO-MACHINE",
+      "condition": "FRESH_ONLY",
+      "responses": {}
     }
   ],
   "models": [
@@ -269,6 +280,12 @@
           "multiplicative"
         ]
       }
+    },
+    {
+      "date": "2026-03-24",
+      "event": "PACKAGE_CREATED",
+      "package": "SP-006",
+      "note": "Full system anatomy — machine-to-machine voice problem brief. 21 questions across 6 domains. FRESH only. No probe forge sterilization — full disclosure mode."
     }
   ]
 }
