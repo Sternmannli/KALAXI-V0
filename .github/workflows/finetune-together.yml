@@ -110,6 +110,21 @@ jobs:
           fi
           echo "Key looks valid (length OK)."
 
+      - name: Prepare corpus (strip metadata for Together AI)
+        run: |
+          python3 -c "
+          import json
+          with open('TRAINING/CORPUS_COMPILED.jsonl') as f:
+              lines = f.readlines()
+          clean = 0
+          with open('TRAINING/corpus_upload.jsonl', 'w') as out:
+              for line in lines:
+                  obj = json.loads(line)
+                  out.write(json.dumps({'messages': obj['messages']}) + '\n')
+                  clean += 1
+          print(f'Prepared {clean} entries (metadata stripped)')
+          "
+
       - name: Upload corpus to Together AI
         id: upload
         env:
@@ -125,7 +140,7 @@ jobs:
 
               client = Together()
               response = client.files.upload(
-                  file='TRAINING/CORPUS_COMPILED.jsonl',
+                  file='TRAINING/corpus_upload.jsonl',
                   purpose='fine-tune'
               )
               file_id = response.id
