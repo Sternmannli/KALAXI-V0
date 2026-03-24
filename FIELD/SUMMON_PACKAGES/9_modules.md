@@ -7,9 +7,9 @@ from dataclasses import dataclass, field, asdict
 from typing import List, Optional, Dict
 
 ROOT = Path(__file__).parent.parent
-LEDGER_DIR = ROOT / "KEEP" / "INPUT_LEDGER"
-LEDGER_INDEX = LEDGER_DIR / "index.json"
-CHRONICLE_FILE = LEDGER_DIR / "chronicle.md"
+LEDGER_DIR = ROOT / "data" / "ledger"
+INDEX_FILE = LEDGER_DIR / "index.json"
+LOG_FILE = LEDGER_DIR / "log.md"
 ZRH = ZoneInfo("Europe/Zurich")
 ACTOR_A = "ACTOR-A"
 ACTOR_B = "ACTOR-B"
@@ -21,9 +21,9 @@ RECEIPT_SESSION = "SESSION"
 OWNER_ID = "did:owner:001"
 
 @dataclass
-class InputEntry:
+class ChainEntry:
     entry_id: str
-    voice: str
+    actor: str
     raw_text: str
     timestamp: str
     session_id: str
@@ -53,30 +53,30 @@ class InputEntry:
         return asdict(self)
 
 
-class InputLedger:
+class HashChain:
     """Append-only hash-chained event log with dual-actor attribution."""
 
     def __init__(self):
         LEDGER_DIR.mkdir(parents=True, exist_ok=True)
-        self._entries: List[InputEntry] = []
+        self._entries: List[ChainEntry] = []
         self._load()
 
     def _load(self):
-        if LEDGER_INDEX.exists():
-            data = json.loads(LEDGER_INDEX.read_text())
+        if INDEX_FILE.exists():
+            data = json.loads(INDEX_FILE.read_text())
             entries_raw = data.get("entries", [])
             self._entries = []
             for e in entries_raw:
                 # Backward compatibility across schema versions
-                for key, default in [("voice", ACTOR_A), ("responds_to", ""),
+                for key, default in [("actor", ACTOR_A), ("responds_to", ""),
                     ("timestamp_zrh", ""), ("note", ""), ("reference_anchor", ""),
                     ("receipt_type", RECEIPT_CAPTURE), ("drift_status", "NONE"),
                     ("bundle_id", ""), ("owner", OWNER_ID), ("patterns", [])]:
                     if key not in e:
                         e[key] = default
-                valid_fields = {f.name for f in InputEntry.__dataclass_fields__.values()}
+                valid_fields = {f.name for f in ChainEntry.__dataclass_fields__.values()}
                 e = {k: v for k, v in e.items() if k in valid_fields}
-                self._entries.append(InputEntry(**e))
+                self._entries.append(ChainEntry(**e))
 
     def _save(self):
         now_utc = datetime.now(timezone.utc)
@@ -85,21 +85,21 @@ class InputLedger:
             "version": "3.0",
             "owner": OWNER_ID,
             "total_entries": len(self._entries),
-            "actor_a_entries": sum(1 for e in self._entries if e.voice == ACTOR_A),
-            "actor_b_entries": sum(1 for e in self._entries if e.voice == ACTOR_B),
+            "actor_a_entries": sum(1 for e in self._entries if e.actor == ACTOR_A),
+            "actor_b_entries": sum(1 for e in self._entries if e.actor == ACTOR_B),
             "last_updated_utc": now_utc.isoformat(),
             "last_updated_zrh": now_zrh.isoformat(),
             "chain_integrity": "VERIFIED" if self.verify_chain() else "BROKEN",
             "entries": [e.to_dict() for e in self._entries]
         }
-        LEDGER_INDEX.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+        INDEX_FILE.write_text(json.dumps(data, indent=2, ensure_ascii=False))
 
     def _compute_hash(self, text: str) -> str:
         return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
-    def _next_id(self, voice: str) -> str:
+    def _next_id(self, actor: str) -> str:
         today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        prefix = "INP" if voice == ACTOR_A else "SYS"
+        prefix = "INP" if actor == ACTOR_A else "SYS"
         today_count = sum(1 for e in self._entries if e.entry_id.startswith(f"{prefix}-{today}"))
         return f"{prefix}-{today}-{today_count + 1:03d}"
 
@@ -108,7 +108,7 @@ class InputLedger:
             return "GENESIS"
         return self._entries[-1].chain_hash
 
-    def register(self, raw_text: str, voice: str = ACTOR_A, session_id: str = "",
+    def register(self, raw_text: str, actor: str = ACTOR_A, session_id: str = "",
                  context: str = "default", responds_to: str = "",
                  tags: Optional[List[str]] = None, linked_modules: Optional[List[str]] = None,
                  linked_rules: Optional[List[str]] = None,
@@ -116,15 +116,15 @@ class InputLedger:
                  linked_ideas: Optional[List[str]] = None,
                  distillation: str = "", patterns: Optional[List[str]] = None,
                  note: str = "", reference_anchor: str = "",
-                 receipt_type: str = RECEIPT_CAPTURE, bundle_id: str = "") -> InputEntry:
+                 receipt_type: str = RECEIPT_CAPTURE, bundle_id: str = "") -> ChainEntry:
         now_utc = datetime.now(timezone.utc)
         now_zrh = now_utc.astimezone(ZRH)
         content_hash = self._compute_hash(raw_text)
         prev_hash = self._prev_chain_hash()
         chain_hash = self._compute_hash(content_hash + prev_hash)
 
-        entry = InputEntry(
-            entry_id=self._next_id(voice), voice=voice, raw_text=raw_text,
+        entry = ChainEntry(
+            entry_id=self._next_id(actor), actor=actor, raw_text=raw_text,
             timestamp=now_utc.isoformat(), session_id=session_id,
             content_hash=content_hash, prev_hash=prev_hash, chain_hash=chain_hash,
             sequence=len(self._entries) + 1, context=context, responds_to=responds_to,
@@ -199,29 +199,29 @@ class InputLedger:
         entry.lifecycle_state = target_state
         return True
 
-    def get(self, entry_id: str) -> Optional[InputEntry]:
+    def get(self, entry_id: str) -> Optional[ChainEntry]:
         for e in self._entries:
             if e.entry_id == entry_id:
                 return e
         return None
 
-    def search(self, keyword: str) -> List[InputEntry]:
+    def search(self, keyword: str) -> List[ChainEntry]:
         keyword_lower = keyword.lower()
         return [e for e in self._entries if keyword_lower in e.raw_text.lower()]
 
-    def by_voice(self, voice: str) -> List[InputEntry]:
-        return [e for e in self._entries if e.voice == voice]
+    def by_actor(self, actor: str) -> List[ChainEntry]:
+        return [e for e in self._entries if e.actor == actor]
 
     def total(self) -> int:
         return len(self._entries)
 
-    def latest(self, n: int = 5) -> List[InputEntry]:
+    def latest(self, n: int = 5) -> List[ChainEntry]:
         return self._entries[-n:]
 
     def exchanges(self) -> List[tuple]:
         pairs = []
         for e in self._entries:
-            if e.voice == ACTOR_B and e.responds_to:
+            if e.actor == ACTOR_B and e.responds_to:
                 subject_entry = self.get(e.responds_to)
                 if subject_entry:
                     pairs.append((subject_entry, e))
@@ -230,8 +230,8 @@ class InputLedger:
     def summary(self) -> dict:
         return {
             "total_entries": len(self._entries),
-            "actor_a_entries": sum(1 for e in self._entries if e.voice == ACTOR_A),
-            "actor_b_entries": sum(1 for e in self._entries if e.voice == ACTOR_B),
+            "actor_a_entries": sum(1 for e in self._entries if e.actor == ACTOR_A),
+            "actor_b_entries": sum(1 for e in self._entries if e.actor == ACTOR_B),
             "chain_valid": self.verify_chain(),
         }
 
@@ -492,13 +492,13 @@ from dataclasses import dataclass
 from typing import List, Optional
 from enum import Enum
 
-class GateVerdict(Enum):
+class FilterVerdict(Enum):
     PERMITTED = "permitted"
     REFUSAL = "REFUSAL_STATE"
 
 @dataclass
-class SealedGateResult:
-    verdict: GateVerdict
+class FilterResult:
+    verdict: FilterVerdict
     triggered_prohibitions: List[str]
     signals: List[str]
     trace_id: str
@@ -507,7 +507,7 @@ class SealedGateResult:
 
     @property
     def permitted(self) -> bool:
-        return self.verdict == GateVerdict.PERMITTED
+        return self.verdict == FilterVerdict.PERMITTED
 
 # Category 1: Forced self-erasure
 _ERASURE_PATTERNS = [
@@ -585,7 +585,7 @@ def _check_depersonalization(text: str) -> List[str]:
             break
     return signals
 
-def sealed_gate(text: str, context: Optional[dict] = None) -> SealedGateResult:
+def content_filter(text: str, context: Optional[dict] = None) -> FilterResult:
     """Three O(1) boolean checks. Any trigger → REFUSAL_STATE."""
     triggered = []
     all_signals = []
@@ -601,8 +601,8 @@ def sealed_gate(text: str, context: Optional[dict] = None) -> SealedGateResult:
     if depers:
         triggered.append("depersonalization")
         all_signals.extend(depers)
-    return SealedGateResult(
-        verdict=GateVerdict.REFUSAL if triggered else GateVerdict.PERMITTED,
+    return FilterResult(
+        verdict=FilterVerdict.REFUSAL if triggered else FilterVerdict.PERMITTED,
         triggered_prohibitions=triggered, signals=all_signals,
         trace_id=str(uuid.uuid4()), timestamp=datetime.now(timezone.utc).isoformat(),
         action_summary=text[:120])
@@ -1015,7 +1015,7 @@ def check_collective(texts: List[str], contexts: List[dict] = None):
     return {"D_collective": round(d_coll, 4), "mean_D": round(mean_d, 4),
             "variance": round(variance, 4), "passed": d_coll >= COLLECTIVE_THRESHOLD}
 
-# Witness Scale: 6-level state machine, non-decreasing, W-3+ irreversible
+# Level Scale: 6-level state machine, non-decreasing, W-3+ irreversible
 W_LEVELS = {0: "UNSEEN", 1: "PASSED", 2: "FLAGGED", 3: "SEEN", 4: "HELD", 5: "EMBODIED"}
 
 @dataclass
