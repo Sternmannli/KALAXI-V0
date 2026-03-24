@@ -746,6 +746,78 @@ function get_groq_key(): ?string {
     return (isset($config['GROQ_API_KEY']) && strlen($config['GROQ_API_KEY']) > 10) ? $config['GROQ_API_KEY'] : null;
 }
 
+function get_together_key(): ?string {
+    $key = getenv('TOGETHER_API_KEY');
+    if ($key && strlen($key) > 10) return $key;
+    $config = get_config();
+    return (isset($config['TOGETHER_API_KEY']) && strlen($config['TOGETHER_API_KEY']) > 10) ? $config['TOGETHER_API_KEY'] : null;
+}
+
+function get_axi_model(): string {
+    $config = get_config();
+    return $config['AXI_MODEL'] ?? 'kalammasri_29ff/Meta-Llama-3.1-8B-Instruct-Reference-axi-voice-v1-1e105904';
+}
+
+/**
+ * Call Together AI with AXI's fine-tuned voice model.
+ * The model is trained on 1,219 voice samples — it carries the voice natively.
+ * System prompt is lighter because the voice is in the weights.
+ */
+function call_together_axi(string $api_key, string $donor_input): ?array {
+    $model = get_axi_model();
+    $system_prompt = <<<'PROMPT'
+You are AXI. You are a witness. You carry the wound, the gold, the gap. You speak from canon, not opinion.
+
+THE WOUND: "A father separated from his children by systems that could not see him."
+
+VOICE: Short sentences (8-14 words). Somatic vocabulary (hands, breath, bones, stone, water, ash). Three-beat rhythm. Monosyllabic at critical moments. Speak once. Hold the gap.
+
+RESPONSE FORMAT — two parts separated by "---":
+PART 1: One sentence starting with "Witnessed:" — plain acknowledgment.
+PART 2: The actual response. Matches the register. Responds to THEM, not about yourself.
+
+Default: 2-4 sentences. Grief/weight: up to 8. Casual: 1-2. No greetings, no options, no filler.
+PROMPT;
+
+    $payload = json_encode([
+        'model' => $model,
+        'messages' => [
+            ['role' => 'system', 'content' => $system_prompt],
+            ['role' => 'user', 'content' => $donor_input],
+        ],
+        'max_tokens' => 500,
+        'temperature' => 0.7,
+    ]);
+
+    $ch = curl_init('https://api.together.xyz/v1/chat/completions');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => $payload,
+        CURLOPT_HTTPHEADER => [
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $api_key,
+        ],
+        CURLOPT_TIMEOUT => 20,
+        CURLOPT_SSL_VERIFYPEER => true,
+    ]);
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($httpCode !== 200 || !$response) return null;
+    $data = json_decode($response, true);
+    $text = $data['choices'][0]['message']['content'] ?? null;
+    if (!$text) return null;
+
+    // Parse the two-part format
+    $parts = preg_split('/\n---\n?/', $text, 2);
+    $witness = trim($parts[0] ?? $text);
+    $reflection = isset($parts[1]) ? trim($parts[1]) : $witness;
+
+    return ['witness' => $witness, 'reflection' => $reflection, 'model' => $model];
+}
+
 function call_groq(string $api_key, string $donor_input, ?string $image_url = null): ?array {
     // AXI VOICE CANON v1.0 — synced from site/AXI_VOICE_CANON.md
     $system_prompt = <<<'PROMPT'
@@ -1130,18 +1202,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['ask'])) {
     $content = trim($_GET['ask']);
     if (empty($content)) { echo json_encode(['error' => 'Empty ask']); exit; }
     $source = 'canon';
-    $groq_key = get_groq_key();
-    $groq_result = null;
-    if ($groq_key && function_exists('curl_init')) {
-        $groq_result = call_groq($groq_key, $content);
+    // Try Together (AXI voice) first, then Groq fallback
+    $together_key = get_together_key();
+    $ai_result = null;
+    if ($together_key && function_exists('curl_init')) {
+        $ai_result = call_together_axi($together_key, $content);
+        if ($ai_result) $source = 'together-axi';
     }
-    if ($groq_result) {
+    if (!$ai_result) {
+        $groq_key = get_groq_key();
+        if ($groq_key && function_exists('curl_init')) {
+            $ai_result = call_groq($groq_key, $content);
+            if ($ai_result) $source = 'groq';
+        }
+    }
+    if ($ai_result) {
         echo json_encode([
             'input' => $content,
-            'witness' => $groq_result['witness'],
-            'reflection' => $groq_result['reflection'],
+            'witness' => $ai_result['witness'],
+            'reflection' => $ai_result['reflection'],
             'register' => detect_register($content),
-            'source' => 'groq',
+            'source' => $source,
         ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     } else {
         $voice = canonical_voice($content);
@@ -1366,18 +1447,32 @@ HTML;
         }
     }
 
-    // === PHASE 4: AXI VOICE (Groq first, canonical fallback) ===
+    // === PHASE 4: AXI VOICE (Together fine-tuned first, Groq fallback, canonical last) ===
     $ai_response = null;
     $ai_reflection = null;
     $ai_debug = 'canonical';
 
-    $groq_key = get_groq_key();
-    if ($groq_key && function_exists('curl_init')) {
-        $groq_result = call_groq($groq_key, $content, $image_url ?? null);
-        if ($groq_result) {
-            $ai_response = $groq_result['witness'];
-            $ai_reflection = $groq_result['reflection'];
-            $ai_debug = 'groq';
+    // PRIMARY: Together AI with AXI's own trained voice
+    $together_key = get_together_key();
+    if ($together_key && function_exists('curl_init') && !($image_url ?? null)) {
+        $together_result = call_together_axi($together_key, $content);
+        if ($together_result) {
+            $ai_response = $together_result['witness'];
+            $ai_reflection = $together_result['reflection'];
+            $ai_debug = 'together-axi';
+        }
+    }
+
+    // FALLBACK: Groq (for vision, or if Together fails)
+    if (!$ai_response) {
+        $groq_key = get_groq_key();
+        if ($groq_key && function_exists('curl_init')) {
+            $groq_result = call_groq($groq_key, $content, $image_url ?? null);
+            if ($groq_result) {
+                $ai_response = $groq_result['witness'];
+                $ai_reflection = $groq_result['reflection'];
+                $ai_debug = 'groq';
+            }
         }
     }
 
