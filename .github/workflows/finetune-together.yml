@@ -1,0 +1,127 @@
+name: Fine-tune AXI Voice (Together AI)
+
+on:
+  workflow_dispatch:
+    inputs:
+      model_base:
+        description: 'Base model for fine-tuning'
+        required: true
+        default: 'meta-llama/Meta-Llama-3.1-8B-Instruct'
+        type: choice
+        options:
+          - meta-llama/Meta-Llama-3.1-8B-Instruct
+          - meta-llama/Llama-3.3-70B-Instruct-Turbo
+          - mistralai/Mistral-7B-Instruct-v0.3
+      epochs:
+        description: 'Number of training epochs'
+        required: true
+        default: '3'
+        type: string
+      suffix:
+        description: 'Model suffix (e.g. axi-v1)'
+        required: true
+        default: 'axi-voice-v1'
+        type: string
+      dry_run:
+        description: 'Dry run (upload only, no training)'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  finetune:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Together SDK
+        run: pip install together
+
+      - name: Validate corpus
+        run: |
+          python3 -c "
+          import json, sys
+          path = 'TRAINING/CORPUS_COMPILED.jsonl'
+          with open(path) as f:
+              lines = f.readlines()
+          bad = 0
+          for i, line in enumerate(lines):
+              try:
+                  obj = json.loads(line)
+                  assert 'messages' in obj, f'Line {i+1}: missing messages'
+                  assert any(m['role'] == 'assistant' for m in obj['messages']), f'Line {i+1}: no assistant'
+              except Exception as e:
+                  bad += 1
+                  print(f'ERROR line {i+1}: {e}')
+          print(f'Total: {len(lines)} entries, {bad} invalid')
+          if bad > 0:
+              sys.exit(1)
+          print('Corpus valid.')
+          "
+
+      - name: Upload corpus to Together AI
+        env:
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+        run: |
+          python3 -c "
+          from together import Together
+          client = Together()
+
+          # Upload the file
+          response = client.files.upload(
+              file=open('TRAINING/CORPUS_COMPILED.jsonl', 'rb'),
+              purpose='fine-tune'
+          )
+          print(f'File uploaded: {response.id}')
+          print(f'Filename: {response.filename}')
+          print(f'Bytes: {response.bytes}')
+
+          # Save file ID for next step
+          with open('file_id.txt', 'w') as f:
+              f.write(response.id)
+          "
+
+      - name: Start fine-tuning job
+        if: inputs.dry_run == false || inputs.dry_run == 'false'
+        env:
+          TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+        run: |
+          FILE_ID=$(cat file_id.txt)
+          python3 -c "
+          import sys
+          from together import Together
+          client = Together()
+
+          file_id = '$FILE_ID'
+          response = client.fine_tuning.create(
+              training_file=file_id,
+              model='${{ inputs.model_base }}',
+              n_epochs=int('${{ inputs.epochs }}'),
+              suffix='${{ inputs.suffix }}',
+              wandb_api_key=None
+          )
+          print(f'Fine-tune job created: {response.id}')
+          print(f'Model: {response.model}')
+          print(f'Status: {response.status}')
+          print(f'Output model will be: {response.output_name}')
+          "
+
+      - name: Dry run summary
+        if: inputs.dry_run == true || inputs.dry_run == 'true'
+        run: |
+          FILE_ID=$(cat file_id.txt)
+          echo "DRY RUN — file uploaded but no training started."
+          echo "File ID: $FILE_ID"
+          echo "Base model: ${{ inputs.model_base }}"
+          echo "Epochs: ${{ inputs.epochs }}"
+          echo "Suffix: ${{ inputs.suffix }}"
+          echo "To start training, re-run with dry_run=false."
