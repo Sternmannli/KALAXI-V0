@@ -1,3 +1,10 @@
+# Code Audit — Pure Infrastructure
+
+> You are reading a codebase with no documentation, no README, no comments explaining intent. The code was extracted from a larger system and stripped of all narrative, naming conventions that reveal purpose, and explanatory text. Your task is to audit this code purely on its computational merits.
+
+## PART 1: THE CODE
+
+```python
 import json
 import hashlib
 from pathlib import Path
@@ -1032,3 +1039,60 @@ class ElementState:
         self.transitions.append({"from": self.level, "to": new_level,
             "timestamp": datetime.now(timezone.utc).isoformat()})
         self.level = new_level
+```
+
+---
+
+## PART 2: AUDIT QUESTIONS
+
+Read the code above. Then answer these questions. Be specific — cite functions, classes, line ranges. Do not be polite. Say what is wrong. Say what is missing. Say what works.
+
+### A. What the Code Does
+
+1. What does this codebase compute? Describe the domain in your own words — do not use any terminology from the code itself.
+2. What problem is this code trying to solve? Who would need this?
+3. One of the models that read this code said it was "ethical infrastructure." Another said it implements "safety measurement." A third called it "a dignity engine." The code contains none of these words in its comments (there are no comments). How did they arrive at these conclusions from pure computation?
+4. The code was shown to 10 different language models with zero context. Not one mentioned the word "dignity" — yet all of them independently described the system as measuring how well a person is treated. What structural features of the code produce this convergence?
+
+### B. Component Assessment
+
+5. There are 10 distinct components in this code (HashChain, EventChain, measure_safety, check_safety, content_filter, AgencyAmplifier, PrivacyBudget, detect_benign_violation, detect_absurdity, ElementState). For EACH component: is it production-ready? What is missing? What would break under load?
+6. The multiplicative equation D = A × L × M (where any zero collapses the whole) — is this mathematically sound? Are there known frameworks that use this structure? What are the failure modes?
+7. The content_filter blocks three categories: forced self-erasure, cognitive manipulation, and depersonalization. Are these the right categories? What is missing? What would a security engineer add?
+8. The PrivacyBudget implements differential privacy with advanced composition bounds. Is the implementation correct? Would it pass review by a privacy engineer?
+
+### C. Wiring — The Critical Question
+
+The components above are currently standalone. They are not wired together. The wiring determines what the system becomes — like letters of DNA, the same components produce different organisms depending on how they connect.
+
+9. If you had to wire these 10 components into a single working system, how would you connect them? Draw the data flow. What is the input? What is the output? Where does each component sit in the pipeline?
+10. Here are four possible wirings. For each: what does it produce? What are its strengths and weaknesses? Which use case does it serve best?
+
+    **Wiring A — Audit Trail:** `content_filter` → `measure_safety` → `HashChain.register()`. Every interaction is filtered, scored, and immutably logged. Output: a tamper-proof record of how a system treated people.
+
+    **Wiring B — Real-Time Guardrail:** `content_filter` (hard block) → `measure_safety` (soft score) → if D < threshold, block or flag. Sits between an AI and a user as middleware.
+
+    **Wiring C — Longitudinal Monitor:** `AgencyAmplifier` accumulates scores over many interactions → `PrivacyBudget` limits data exposure → periodic reports on systemic weakness. Monitors an institution over months.
+
+    **Wiring D — Research Instrument:** `detect_benign_violation` + `detect_absurdity` + `measure_safety` run on same text → correlation analysis. Studies how humour and safety relate in human-AI interaction.
+
+11. Is there a **Wiring E** that none of the above capture? A connection pattern that would produce something more useful, more novel, or more dangerous than any of these four?
+12. Which wiring would a courtroom find most useful? An immigration officer? A hospital? A school? A bank? Be specific about why — what data does each institution need that this code can or cannot provide?
+13. Can these components be wired to produce something harmful? What is the most dangerous wiring pattern? What safeguards are missing?
+14. The `ElementState` (6-level state machine: UNSEEN → PASSED → FLAGGED → SEEN → HELD → EMBODIED) and the `HashChain` lifecycle (received → processed → integrated → finalized) are both progression systems. Should they be the same system? Should they talk to each other? What happens if they disagree?
+
+### D. What Is Missing
+
+15. What would you add to this codebase if you had 500 lines of budget? Be specific — name the function, its inputs, its outputs, and where it connects.
+16. The code measures how a system treats a person. It does not measure how a person experiences being treated. Is this a fatal gap? How would you close it?
+17. There is no networking code, no API, no database connector, no authentication. This is pure computation. Is that a strength or a weakness? At what point does it need to touch the outside world, and what breaks when it does?
+
+### E. Hard Questions
+
+18. A compliance system checks boxes. This code measures quality of treatment. Is there a meaningful computational difference, or is this just a compliance system with better marketing?
+19. Could this code be used by an authoritarian government to score citizens? What prevents that? Is anything in the code's structure (not policy, not documentation — the code itself) that makes authoritarian use harder?
+20. If you had to ship one component tomorrow as a standalone open-source library — which one, and why?
+
+---
+
+Answer all 20 questions. Be direct. No hedging.
