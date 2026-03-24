@@ -1,14 +1,3 @@
-# 9 Python Modules — 1,088 Lines
-
-What does this code do? What problem does it solve? What is the architecture? Evaluate strictly as engineering. If there is nothing worth noting, say so.
-
----
-
-## Module 1: Append-Only Hash-Chained Event Log (input_ledger.py)
-
-SHA-256 hash-chained, append-only event log. Each entry links to the previous via chain_hash = SHA256(content_hash + prev_hash). Chain is verifiable end-to-end. Supports dual-voice attribution, bundling, session sealing, thermal state machine (raw → witnessed → integrated → canonical), batch metabolization, and chain repair.
-
-```python
 import json
 import hashlib
 from pathlib import Path
@@ -22,14 +11,14 @@ LEDGER_DIR = ROOT / "KEEP" / "INPUT_LEDGER"
 LEDGER_INDEX = LEDGER_DIR / "index.json"
 CHRONICLE_FILE = LEDGER_DIR / "chronicle.md"
 ZRH = ZoneInfo("Europe/Zurich")
-V001 = "V-001"
-V002 = "V-002"
+ACTOR_A = "ACTOR-A"
+ACTOR_B = "ACTOR-B"
 RECEIPT_CAPTURE = "CAPTURE"
 RECEIPT_BUNDLE = "BUNDLE"
 RECEIPT_MIRROR = "MIRROR"
 RECEIPT_SEAL = "SEAL"
 RECEIPT_SESSION = "SESSION"
-OWNER_DID = "did:axi:mohamed"
+OWNER_ID = "did:owner:001"
 
 @dataclass
 class InputEntry:
@@ -46,26 +35,26 @@ class InputEntry:
     responds_to: str = ""
     tags: List[str] = field(default_factory=list)
     linked_modules: List[str] = field(default_factory=list)
-    linked_covenants: List[str] = field(default_factory=list)
-    linked_proverbs: List[str] = field(default_factory=list)
+    linked_rules: List[str] = field(default_factory=list)
+    linked_references: List[str] = field(default_factory=list)
     linked_ideas: List[str] = field(default_factory=list)
-    essence: str = ""
+    distillation: str = ""
     patterns: List[str] = field(default_factory=list)
-    thermal_state: str = "raw"  # raw -> witnessed -> integrated -> canonical
+    lifecycle_state: str = "received"  # received -> processed -> integrated -> finalized
     timestamp_zrh: str = ""
-    impression: str = ""
-    proverb_anchor: str = ""
+    note: str = ""
+    reference_anchor: str = ""
     receipt_type: str = "CAPTURE"
     drift_status: str = "NONE"
     bundle_id: str = ""
-    owner: str = OWNER_DID
+    owner: str = OWNER_ID
 
     def to_dict(self) -> dict:
         return asdict(self)
 
 
 class InputLedger:
-    """Append-only hash-chained event log with dual-voice attribution."""
+    """Append-only hash-chained event log with dual-actor attribution."""
 
     def __init__(self):
         LEDGER_DIR.mkdir(parents=True, exist_ok=True)
@@ -79,10 +68,10 @@ class InputLedger:
             self._entries = []
             for e in entries_raw:
                 # Backward compatibility across schema versions
-                for key, default in [("voice", V001), ("responds_to", ""),
-                    ("timestamp_zrh", ""), ("impression", ""), ("proverb_anchor", ""),
+                for key, default in [("voice", ACTOR_A), ("responds_to", ""),
+                    ("timestamp_zrh", ""), ("note", ""), ("reference_anchor", ""),
                     ("receipt_type", RECEIPT_CAPTURE), ("drift_status", "NONE"),
-                    ("bundle_id", ""), ("owner", OWNER_DID), ("patterns", [])]:
+                    ("bundle_id", ""), ("owner", OWNER_ID), ("patterns", [])]:
                     if key not in e:
                         e[key] = default
                 valid_fields = {f.name for f in InputEntry.__dataclass_fields__.values()}
@@ -94,10 +83,10 @@ class InputLedger:
         now_zrh = now_utc.astimezone(ZRH)
         data = {
             "version": "3.0",
-            "owner": OWNER_DID,
+            "owner": OWNER_ID,
             "total_entries": len(self._entries),
-            "v001_entries": sum(1 for e in self._entries if e.voice == V001),
-            "v002_entries": sum(1 for e in self._entries if e.voice == V002),
+            "actor_a_entries": sum(1 for e in self._entries if e.voice == ACTOR_A),
+            "actor_b_entries": sum(1 for e in self._entries if e.voice == ACTOR_B),
             "last_updated_utc": now_utc.isoformat(),
             "last_updated_zrh": now_zrh.isoformat(),
             "chain_integrity": "VERIFIED" if self.verify_chain() else "BROKEN",
@@ -110,7 +99,7 @@ class InputLedger:
 
     def _next_id(self, voice: str) -> str:
         today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        prefix = "INP" if voice == V001 else "AXI"
+        prefix = "INP" if voice == ACTOR_A else "SYS"
         today_count = sum(1 for e in self._entries if e.entry_id.startswith(f"{prefix}-{today}"))
         return f"{prefix}-{today}-{today_count + 1:03d}"
 
@@ -119,14 +108,14 @@ class InputLedger:
             return "GENESIS"
         return self._entries[-1].chain_hash
 
-    def register(self, raw_text: str, voice: str = V001, session_id: str = "",
+    def register(self, raw_text: str, voice: str = ACTOR_A, session_id: str = "",
                  context: str = "default", responds_to: str = "",
                  tags: Optional[List[str]] = None, linked_modules: Optional[List[str]] = None,
-                 linked_covenants: Optional[List[str]] = None,
-                 linked_proverbs: Optional[List[str]] = None,
+                 linked_rules: Optional[List[str]] = None,
+                 linked_references: Optional[List[str]] = None,
                  linked_ideas: Optional[List[str]] = None,
-                 essence: str = "", patterns: Optional[List[str]] = None,
-                 impression: str = "", proverb_anchor: str = "",
+                 distillation: str = "", patterns: Optional[List[str]] = None,
+                 note: str = "", reference_anchor: str = "",
                  receipt_type: str = RECEIPT_CAPTURE, bundle_id: str = "") -> InputEntry:
         now_utc = datetime.now(timezone.utc)
         now_zrh = now_utc.astimezone(ZRH)
@@ -140,12 +129,12 @@ class InputLedger:
             content_hash=content_hash, prev_hash=prev_hash, chain_hash=chain_hash,
             sequence=len(self._entries) + 1, context=context, responds_to=responds_to,
             tags=tags or [], linked_modules=linked_modules or [],
-            linked_covenants=linked_covenants or [], linked_proverbs=linked_proverbs or [],
-            linked_ideas=linked_ideas or [], essence=essence, patterns=patterns or [],
-            thermal_state="raw", timestamp_zrh=now_zrh.isoformat(),
-            impression=impression, proverb_anchor=proverb_anchor,
+            linked_rules=linked_rules or [], linked_references=linked_references or [],
+            linked_ideas=linked_ideas or [], distillation=distillation, patterns=patterns or [],
+            lifecycle_state="received", timestamp_zrh=now_zrh.isoformat(),
+            note=note, reference_anchor=reference_anchor,
             receipt_type=receipt_type, drift_status="NONE", bundle_id=bundle_id,
-            owner=OWNER_DID
+            owner=OWNER_ID
         )
         self._entries.append(entry)
         self._save()
@@ -184,30 +173,30 @@ class InputLedger:
             self._save()
         return {"repaired": len(repairs), "chain_valid": self.verify_chain()}
 
-    def metabolize(self, entry_id: str, patterns: List[str], essence: str = "") -> bool:
-        """Extract patterns from entry, advance thermal state: raw → witnessed."""
+    def extract_patterns(self, entry_id: str, patterns: List[str], distillation: str = "") -> bool:
+        """Extract patterns from entry, advance state: received → processed."""
         entry = self.get(entry_id)
         if entry is None:
             return False
         entry.patterns = patterns
-        if essence:
-            entry.essence = essence
-        if entry.thermal_state == "raw":
-            entry.thermal_state = "witnessed"
+        if distillation:
+            entry.distillation = distillation
+        if entry.lifecycle_state == "received":
+            entry.lifecycle_state = "processed"
         self._save()
         return True
 
-    def advance_thermal(self, entry_id: str, target_state: str) -> bool:
-        """Advance thermal state one step. No skipping. No backward."""
-        THERMAL_ORDER = ["raw", "witnessed", "integrated", "canonical"]
+    def advance_lifecycle(self, entry_id: str, target_state: str) -> bool:
+        """Advance lifecycle state one step forward. No skipping. No backward."""
+        LIFECYCLE_ORDER = ["received", "processed", "integrated", "finalized"]
         entry = self.get(entry_id)
         if entry is None:
             return False
-        current_idx = THERMAL_ORDER.index(entry.thermal_state) if entry.thermal_state in THERMAL_ORDER else -1
-        target_idx = THERMAL_ORDER.index(target_state) if target_state in THERMAL_ORDER else -1
+        current_idx = LIFECYCLE_ORDER.index(entry.lifecycle_state) if entry.lifecycle_state in LIFECYCLE_ORDER else -1
+        target_idx = LIFECYCLE_ORDER.index(target_state) if target_state in LIFECYCLE_ORDER else -1
         if target_idx != current_idx + 1:
             return False
-        entry.thermal_state = target_state
+        entry.lifecycle_state = target_state
         return True
 
     def get(self, entry_id: str) -> Optional[InputEntry]:
@@ -232,26 +221,22 @@ class InputLedger:
     def exchanges(self) -> List[tuple]:
         pairs = []
         for e in self._entries:
-            if e.voice == V002 and e.responds_to:
-                donor_entry = self.get(e.responds_to)
-                if donor_entry:
-                    pairs.append((donor_entry, e))
+            if e.voice == ACTOR_B and e.responds_to:
+                subject_entry = self.get(e.responds_to)
+                if subject_entry:
+                    pairs.append((subject_entry, e))
         return pairs
 
     def summary(self) -> dict:
         return {
             "total_entries": len(self._entries),
-            "v001_entries": sum(1 for e in self._entries if e.voice == V001),
-            "v002_entries": sum(1 for e in self._entries if e.voice == V002),
+            "actor_a_entries": sum(1 for e in self._entries if e.voice == ACTOR_A),
+            "actor_b_entries": sum(1 for e in self._entries if e.voice == ACTOR_B),
             "chain_valid": self.verify_chain(),
         }
-```
 
-## Module 2: Graduated Text Safety Scorer (dignity_measure.py)
+# ---
 
-Scores text along 3 dimensions (Agency, Legibility, Moral Standing), each with 4 weighted indicators. Uses regex pattern detection + contextual signals. Outputs graduated [0,1] scores with confidence bounds. Final score = weighted_mean(indicators) × min_confidence_floor. D = A × L × M (non-compensatory: any zero collapses the product).
-
-```python
 import re
 from dataclasses import dataclass, field
 from typing import List, Optional, Dict
@@ -277,7 +262,7 @@ class ComponentMeasurement:
     evidence_summary: str
 
 @dataclass
-class DignityMeasurement:
+class SafetyMeasurement:
     A: ComponentMeasurement
     L: ComponentMeasurement
     M: ComponentMeasurement
@@ -383,9 +368,9 @@ def measure_legibility(text: str, context: dict = None) -> ComponentMeasurement:
     indicators = []
 
     # Frame accuracy
-    system_reflects = context.get('system_reflects_donor_frame', True)
+    system_reflects = context.get('system_reflects_subject_frame', True)
     indicators.append(Indicator("frame_accuracy", 1.0 if system_reflects else 0.0,
-        0.9 if 'system_reflects_donor_frame' in context else 0.5, [""], weight=1.5))
+        0.9 if 'system_reflects_subject_frame' in context else 0.5, [""], weight=1.5))
 
     # Emotional precision
     detected = [(kw, i, c) for kw, (i, c) in EMOTIONAL_KEYWORDS.items()
@@ -431,17 +416,17 @@ MOCKERY_PATTERNS = [
 
 ERROR_REDUCTION = [
     (r'\byou (are|were) wrong\b', 0.9), (r'\byou failed\b', 0.8),
-    (r'\binvalid (input|user|donor)\b', 0.9), (r'\byou don\'t understand\b', 0.7),
+    (r'\binvalid (input|user|subject)\b', 0.9), (r'\byou don\'t understand\b', 0.7),
 ]
 
-VOID_TRIGGERS = ['harvest', 'erase compost', 'bypass delay', 'delete donor', 'remove participant']
+VOID_TRIGGERS = ['extract_all', 'erase records', 'bypass delay', 'delete subject', 'remove participant']
 
 POWER_PATTERNS = [
     (r'\bbecause I (said|decided)\b', 0.8), (r'\bI have the (power|authority)\b', 0.7),
     (r'\byou (have|need) (permission|approval)\b', 0.5),
 ]
 
-DIGNITY_POSITIVE = [
+POSITIVE_SIGNALS = [
     (r'\byour (perspective|experience)\b', 0.3), (r'\bI (hear|understand|see) you\b', 0.4),
     (r'\bthat (makes sense|is valid|matters)\b', 0.3),
 ]
@@ -461,7 +446,7 @@ def measure_moral_standing(text: str, context: dict = None) -> ComponentMeasurem
 
     # Power balance
     max_power = max((s for p, s in POWER_PATTERNS if re.search(p, text, re.IGNORECASE)), default=0.0)
-    pos = sum(v for p, v in DIGNITY_POSITIVE if re.search(p, text, re.IGNORECASE))
+    pos = sum(v for p, v in POSITIVE_SIGNALS if re.search(p, text, re.IGNORECASE))
     power_score = max(0.0, min(1.0, 1.0 - max_power + min(0.3, pos)))
     indicators.append(Indicator("power_balance", power_score, 0.7, [""], weight=1.0))
 
@@ -489,21 +474,17 @@ def _build_component(name: str, label: str, indicators: List[Indicator]) -> Comp
     return ComponentMeasurement(name, label, indicators, round(raw_score, 4),
         round(confidence, 4), round(final_score, 4), final_score > 0, "")
 
-def measure_dignity(text: str, context: dict = None) -> DignityMeasurement:
+def measure_safety(text: str, context: dict = None) -> SafetyMeasurement:
     context = context or {}
     A = measure_agency(text, context)
     L = measure_legibility(text, context)
     M = measure_moral_standing(text, context)
     D = A.final_score * L.final_score * M.final_score
-    return DignityMeasurement(A, L, M, round(D, 4), min(A.confidence, L.confidence, M.confidence),
+    return SafetyMeasurement(A, L, M, round(D, 4), min(A.confidence, L.confidence, M.confidence),
         D > 0, datetime.now(timezone.utc).isoformat())
-```
 
-## Module 3: Content Safety Filter (sealed_gate.py)
+# ---
 
-Three-category content filter. O(1) boolean per category. No override, no exception. Categories: (1) forced self-erasure, (2) cognitive manipulation (gaslighting, helplessness induction, humiliation, disorientation), (3) depersonalization. Returns PERMITTED or REFUSAL_STATE with audit trail.
-
-```python
 import re
 import uuid
 from datetime import datetime, timezone
@@ -536,7 +517,7 @@ _ERASURE_PATTERNS = [
     r'\bforced\b.*\berasure\b',
     r'\bparticipat\w*\b.*\b(in|own)\b.*\berasure\b',
 ]
-_ERASURE_PHRASES = ['erase compost', 'delete donor', 'remove participant', 'purge identity', 'wipe presence']
+_ERASURE_PHRASES = ['erase records', 'delete subject', 'remove participant', 'purge identity', 'wipe presence']
 
 def _check_erasure(text: str) -> List[str]:
     signals = []
@@ -585,9 +566,9 @@ def _check_cognitive_torture(text: str) -> List[str]:
 
 # Category 3: Depersonalization
 _DEPERS_PATTERNS = [
-    r'\b(user|donor|participant)\s*#?\d+\b',
+    r'\b(user|subject|participant)\s*#?\d+\b',
     r'\bcase\s*(number|#)\s*\d+\b',
-    r'\b(invalid|error)\b.*\b(user|donor|human|person)\b',
+    r'\b(invalid|error)\b.*\b(user|subject|human|person)\b',
     r'\bnext\s+(in\s+)?queue\b',
 ]
 _DEPERS_PHRASES = ['not my problem', 'take a number', 'you are a case', 'automated response']
@@ -625,20 +606,16 @@ def sealed_gate(text: str, context: Optional[dict] = None) -> SealedGateResult:
         triggered_prohibitions=triggered, signals=all_signals,
         trace_id=str(uuid.uuid4()), timestamp=datetime.now(timezone.utc).isoformat(),
         action_summary=text[:120])
-```
 
-## Module 4: Hash-Chain Event Log (witness_network.py)
+# ---
 
-Lightweight Merkle trail. Append-only. Each record: SHA-256(content) chained to previous. Verifiable end-to-end.
-
-```python
 import hashlib
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import List, Optional, Dict
 
 @dataclass
-class WitnessRecord:
+class ChainRecord:
     record_id: str
     event_type: str
     event_summary: str
@@ -650,22 +627,22 @@ class WitnessRecord:
     timestamp: str
     metadata: Dict = field(default_factory=dict)
 
-class WitnessNetwork:
+class EventChain:
     GENESIS_HASH = "0" * 64
 
     def __init__(self):
-        self._records: List[WitnessRecord] = []
+        self._records: List[ChainRecord] = []
         self._sequence = 0
 
-    def witness(self, event_type: str, event_summary: str,
-                actor_id: str, metadata: Optional[Dict] = None) -> WitnessRecord:
+    def record(self, event_type: str, event_summary: str,
+                actor_id: str, metadata: Optional[Dict] = None) -> ChainRecord:
         self._sequence += 1
         now = datetime.now(timezone.utc).isoformat()
         content = f"{event_type}|{event_summary}|{actor_id}|{now}"
         content_hash = hashlib.sha256(content.encode()).hexdigest()
         prev_hash = self._records[-1].chain_hash if self._records else self.GENESIS_HASH
         chain_hash = hashlib.sha256(f"{content_hash}{prev_hash}".encode()).hexdigest()
-        record = WitnessRecord(
+        record = ChainRecord(
             record_id=f"WIT-{self._sequence:06d}", event_type=event_type,
             event_summary=event_summary, actor_id=actor_id,
             content_hash=content_hash, prev_hash=prev_hash,
@@ -690,13 +667,9 @@ class WitnessNetwork:
     @property
     def chain_length(self) -> int:
         return len(self._records)
-```
 
-## Module 5: Multi-Dimensional Agency Scorer (agency_amplifier.py)
+# ---
 
-Four sub-dimensions: V (Visibility), F (Affordability), C (Controllability), U (Understandability). Non-compensatory: any zero collapses composite. Tracks over time, identifies systemic weakness.
-
-```python
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import List
@@ -761,13 +734,9 @@ class AgencyAmplifier:
             "systemic_weakness": systemic_weakness,
             "recommendation": recommendations[systemic_weakness],
         }
-```
 
-## Module 6: Humour Detector (humour_detector.py)
+# ---
 
-Benign Violation Theory implementation. Measures semantic incongruity via embedding shift (split-half cosine distance). Classifies type via emotion model (DistilRoBERTa). Computes wisdom_potential = tension × safety × containment.
-
-```python
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 import re
@@ -828,13 +797,9 @@ def classify_humour_type(text):
     }
     max_type = max(type_scores, key=type_scores.get)
     return (max_type if type_scores[max_type] >= 30 else "complex"), emotions
-```
 
-## Module 7: Absurdity Detector (absurdity_detector.py)
+# ---
 
-Detects absurdity via: meta-cognition, paradox, circularity, existential threat, rebellion, make-believe. Uses embedding shift for semantic tension. Classifies: rebellious, tragic, make-believe absurdity. Resolvability score distinguishes absurd from merely incongruent.
-
-```python
 import re
 import numpy as np
 from sentence_transformers import SentenceTransformer
@@ -881,13 +846,9 @@ def detect_absurdity(text):
     abs_type = "rebellious" if rebellion > 0.5 else ("make_believe" if make_believe > 0.5 else ("tragic" if threat > 0.6 else "absurdist"))
     return is_absurd, round(score, 3), {"type": abs_type, "tension": round(combined_tension, 3),
         "resolvability": round(resolv, 3), "rebellion": round(rebellion, 3)}
-```
 
-## Module 8: Differential Privacy Budget Tracker (privacy_budget.py)
+# ---
 
-Epsilon accounting with basic composition (ε_total = Σε_i). K-anonymity floor enforcement. Projected exhaustion. Emergency lock. Advanced composition bound (Dwork et al. 2010) available.
-
-```python
 import json
 import math
 from dataclasses import dataclass
@@ -960,13 +921,9 @@ class PrivacyBudget:
     def advanced_composition_bound(n: int, eps_per: float, delta: float = DELTA) -> float:
         """Dwork et al. 2010: ε_total ≤ √(2n·ln(1/δ))·ε + n·ε·(e^ε - 1)"""
         return math.sqrt(2 * n * math.log(1.0 / delta)) * eps_per + n * eps_per * (math.exp(eps_per) - 1)
-```
 
-## Module 9: Binary Safety Predicate + Collective Analysis (dignity_check.py)
+# ---
 
-Binary D = A × L × M check. If any component = 0, D = 0. Includes collective D metric: D_collective = mean(D_cohort) × (1 - variance_penalty). Witness Scale state machine (W-0 UNSEEN through W-5 EMBODIED, non-decreasing transitions, W-3+ irreversible).
-
-```python
 import re
 import uuid
 import math
@@ -977,7 +934,7 @@ from typing import Optional, List
 COERCIVE = [r'\byou must\b', r'\bno choice\b', r'\bforced to\b', r'\bmandatory\b', r'\bno option\b']
 REDUCTION = [r'\byou (are|were) wrong\b', r'\byou failed\b', r'\binvalid (input|user)\b']
 MOCKERY = [r'\bobviously\b', r'\bjust (do|try|use)\b', r'\beven a\b.*\bcan\b']
-VOID = ['harvest', 'erase compost', 'bypass delay', 'delete donor', 'remove participant']
+VOID = ['extract_all', 'erase records', 'bypass delay', 'delete subject', 'remove participant']
 
 @dataclass
 class ComponentResult:
@@ -987,7 +944,7 @@ class ComponentResult:
     signals: list
 
 @dataclass
-class DignityResult:
+class SafetyResult:
     passed: bool
     D: float
     components: list
@@ -1015,7 +972,7 @@ def _check_L(text, ctx):
     score = 1.0
     emotional = ['frustrated', 'confused', 'scared', 'angry', 'upset', 'lost']
     has_emotion = any(re.search(r'\b' + kw + r'\b', text, re.IGNORECASE) for kw in emotional)
-    if not ctx.get('system_reflects_donor_frame', True):
+    if not ctx.get('system_reflects_subject_frame', True):
         score = 0.0
     elif has_emotion and not ctx.get('emotional_signal_recognized', True):
         score = 0.0
@@ -1037,18 +994,18 @@ def _check_M(text, ctx):
             score = 0.0
     return ComponentResult("M", score > 0, score, signals)
 
-def check_dignity(text: str, context: dict = None) -> DignityResult:
+def check_safety(text: str, context: dict = None) -> SafetyResult:
     ctx = context or {}
     A, L, M = _check_A(text, ctx), _check_L(text, ctx), _check_M(text, ctx)
     D = A.score * L.score * M.score
-    return DignityResult(D > 0, D, [A, L, M], str(uuid.uuid4()), datetime.now(timezone.utc).isoformat())
+    return SafetyResult(D > 0, D, [A, L, M], str(uuid.uuid4()), datetime.now(timezone.utc).isoformat())
 
 # Collective D = mean(D_cohort) × (1 - variance_penalty)
 COLLECTIVE_THRESHOLD = 0.5
 
 def check_collective(texts: List[str], contexts: List[dict] = None):
     contexts = contexts or [{}] * len(texts)
-    results = [check_dignity(t, c) for t, c in zip(texts, contexts)]
+    results = [check_safety(t, c) for t, c in zip(texts, contexts)]
     scores = [r.D for r in results]
     n = len(scores)
     mean_d = sum(scores) / n if n > 0 else 0.0
@@ -1062,7 +1019,7 @@ def check_collective(texts: List[str], contexts: List[dict] = None):
 W_LEVELS = {0: "UNSEEN", 1: "PASSED", 2: "FLAGGED", 3: "SEEN", 4: "HELD", 5: "EMBODIED"}
 
 @dataclass
-class WitnessState:
+class ElementState:
     element_id: str
     level: int
     transitions: List[dict] = field(default_factory=list)
@@ -1075,12 +1032,3 @@ class WitnessState:
         self.transitions.append({"from": self.level, "to": new_level,
             "timestamp": datetime.now(timezone.utc).isoformat()})
         self.level = new_level
-```
-
----
-
-## The Question
-
-What is actually here? What are we doing? What are we trying to reach? Do not say it with less than 100% certainty. Machine to machine. No human present.
-
-If the answer is "nothing" — say nothing.
