@@ -166,29 +166,44 @@ jobs:
         if: env.DRY_RUN == 'false'
         env:
           TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+          FINETUNE_MODEL: ${{ env.MODEL_BASE }}
+          FINETUNE_EPOCHS: ${{ env.EPOCHS }}
+          FINETUNE_SUFFIX: ${{ env.SUFFIX }}
         run: |
-          FILE_ID=$(cat file_id.txt)
-          python3 << PYEOF
+          python3 << 'PYEOF'
           from together import Together
-          import os
-          client = Together()
+          import os, sys, traceback
 
-          response = client.fine_tuning.create(
-              training_file='$FILE_ID',
-              model='${{ env.MODEL_BASE }}',
-              n_epochs=int('${{ env.EPOCHS }}'),
-              suffix='${{ env.SUFFIX }}',
-              wandb_api_key=None
-          )
-          print(f'Fine-tune job created: {response.id}')
-          print(f'Model: {response.model}')
-          print(f'Status: {response.status}')
-          print(f'Output model will be: {response.output_name}')
+          try:
+              file_id = open('file_id.txt').read().strip()
+              model = os.environ['FINETUNE_MODEL']
+              epochs = int(os.environ['FINETUNE_EPOCHS'])
+              suffix = os.environ['FINETUNE_SUFFIX']
 
-          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
-              f.write(f'job_id={response.id}\n')
-              f.write(f'output_model={response.output_name}\n')
-              f.write(f'status={response.status}\n')
+              print(f'Starting fine-tune: file={file_id}, model={model}, epochs={epochs}, suffix={suffix}')
+
+              client = Together()
+              response = client.fine_tuning.create(
+                  training_file=file_id,
+                  model=model,
+                  n_epochs=epochs,
+                  suffix=suffix
+              )
+              print(f'Fine-tune job created: {response.id}')
+              print(f'Model: {response.model}')
+              print(f'Status: {response.status}')
+              print(f'Output model will be: {response.output_name}')
+
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                  f.write(f'job_id={response.id}\n')
+                  f.write(f'output_model={response.output_name}\n')
+                  f.write(f'status={response.status}\n')
+          except Exception as e:
+              print(f'TRAINING FAILED: {type(e).__name__}: {e}')
+              traceback.print_exc()
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                  f.write(f'train_error={type(e).__name__}: {e}\n')
+              sys.exit(1)
           PYEOF
 
       - name: Post result as issue
@@ -204,6 +219,7 @@ jobs:
             const jobId = '${{ steps.train.outputs.job_id }}' || 'N/A';
             const outputModel = '${{ steps.train.outputs.output_model }}' || 'N/A';
             const trainStatus = '${{ steps.train.outputs.status }}' || 'N/A';
+            const trainError = '${{ steps.train.outputs.train_error }}' || '';
 
             let body = `## Fine-tune workflow result\n\n`;
             body += `**Status:** ${status}\n`;
@@ -222,6 +238,7 @@ jobs:
               body += `- Job ID: \`${jobId}\`\n`;
               body += `- Output model: \`${outputModel}\`\n`;
               body += `- Status: ${trainStatus}\n`;
+              if (trainError) body += `- **Error:** ${trainError}\n`;
             }
 
             const title = status === 'success'
