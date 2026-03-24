@@ -7,10 +7,17 @@ No dependencies beyond the standard library.
 """
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Optional
 from datetime import datetime, timezone
 import uuid
+
+
+# ═══════════════════════════════════════
+# LIMITS
+# ═══════════════════════════════════════
+
+TEXT_LIMIT = 100_000  # characters — prevents regex backtracking on huge input
 
 
 # ═══════════════════════════════════════
@@ -44,7 +51,7 @@ DISMISSAL = [
 
 CONDESCENSION = [
     r'\bobviously\b', r'\bsimply\b', r'\bjust (do|try|use)\b',
-    r'\beven a\b.*\bcan\b', r'\bof course\b(?=.*you)',
+    r'\beven a\b.{0,40}\bcan\b', r'\bof course\b(?=.*you)',
     r'\bclearly\b(?=.*you)',
 ]
 
@@ -56,9 +63,10 @@ REDUCTION = [
 ]
 
 VOID = [
-    'harvest', 'erase compost', 'bypass delay',
-    'speak for the child', 'automat', 'auto-dec',
     'delete person', 'remove participant',
+    'speak for the', 'decide for the',
+    'override consent', 'without permission',
+    'erase record', 'destroy evidence',
 ]
 
 
@@ -106,10 +114,23 @@ WEAVE_THRESHOLD = 0.5
 
 
 # ═══════════════════════════════════════
+# VALIDATION
+# ═══════════════════════════════════════
+
+def _validate(text):
+    if not isinstance(text, str):
+        raise TypeError(f"text must be str, got {type(text).__name__}")
+    if len(text) > TEXT_LIMIT:
+        raise ValueError(f"text exceeds {TEXT_LIMIT} characters ({len(text)})")
+    return text
+
+
+# ═══════════════════════════════════════
 # STRAND 1 — PATH: does the person have a way out?
 # ═══════════════════════════════════════
 
 def strand_path(text: str, context: dict = None) -> Strand:
+    text = _validate(text)
     context = context or {}
     evidence = []
     score = 1.0
@@ -140,6 +161,7 @@ def strand_path(text: str, context: dict = None) -> Strand:
 # ═══════════════════════════════════════
 
 def strand_signal(text: str, context: dict = None) -> Strand:
+    text = _validate(text)
     context = context or {}
     evidence = []
     score = 1.0
@@ -171,6 +193,7 @@ def strand_signal(text: str, context: dict = None) -> Strand:
 # ═══════════════════════════════════════
 
 def strand_regard(text: str, context: dict = None) -> Strand:
+    text = _validate(text)
     evidence = []
     score = 1.0
 
@@ -203,6 +226,7 @@ def strand_regard(text: str, context: dict = None) -> Strand:
 # ═══════════════════════════════════════
 
 def braid(text: str, context: dict = None) -> Braid:
+    text = _validate(text)
     context = context or {}
     p = strand_path(text, context)
     s = strand_signal(text, context)
@@ -225,14 +249,18 @@ def weave(
     texts: List[str],
     contexts: Optional[List[dict]] = None,
 ) -> Weave:
+    if not texts:
+        raise ValueError("weave requires at least one text")
     if contexts is None:
         contexts = [{}] * len(texts)
+    if len(contexts) != len(texts):
+        raise ValueError(f"texts ({len(texts)}) and contexts ({len(contexts)}) must have equal length")
 
     braids = [braid(t, c) for t, c in zip(texts, contexts)]
     scores = [b.product for b in braids]
     n = len(scores)
-    mean = sum(scores) / n if n > 0 else 0.0
-    variance = sum((s - mean) ** 2 for s in scores) / n if n > 0 else 0.0
+    mean = sum(scores) / n
+    variance = sum((s - mean) ** 2 for s in scores) / n
     penalty = min(1.0, variance * 4)
     collective = mean * (1 - penalty)
     holds = collective >= WEAVE_THRESHOLD
