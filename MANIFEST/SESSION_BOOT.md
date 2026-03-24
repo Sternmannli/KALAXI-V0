@@ -119,36 +119,29 @@ gh secret list
 | Site pages | 13+ |
 | Site status | **LIVE** at kalam.ch |
 | Standing corrections | 17 (in CLAUDE.md Substrate Correction Log) |
-| Training corpus | Golden (200) + Proverbs/Treasures (316) + V-001 Voice (400) = 916 entries |
+| Training corpus | **1,219 entries compiled** — Golden (200) + Proverbs/Treasures (467) + V-001 Voice (400) + Narrative Voice (152) |
+| Fine-tune workflow | `finetune-together.yml` — ready to trigger (dry run first) |
 | Stress test | 33/35 passed — The Same River: IDENTICAL |
 
 ---
 
 ## 5. LAST SESSION
 
-**Date:** 2026-03-23 (session 6 — current)
+**Date:** 2026-03-24 (session 7 — current)
 **Branch:** `claude/resume-work-YzExn`
-**Mode:** Full execution (V-001 gave GO + 10 standing GOs)
+**Mode:** Full execution (V-001 gave GO repeatedly)
 
-### What was built this session (session 5):
-
-**Session 5a (previous window):**
-1. **Core Intelligence v1.0** — `WEAVER/core_intelligence.py` (1190 lines). Real comprehension: semantic field detection (12 fields: grief, dignity, institutional, father, children, exile, witnessing, resistance, healing, naming, silence, water), register classification, pattern extraction, confidence scoring (completeness × diversity × field-strength). Canon search with semantic matching. Response generation grounded in actual canon sources.
-2. **Semantic weave** — `WEAVER/weave.py` rewritten with real semantic fields instead of static rules. Fields have weight, interference patterns, and decay.
-3. **Golden regression** — 200 canonical utterances in `TRAINING/GOLDEN_REGRESSION.jsonl`. Tests verify the intelligence produces grounded, non-repetitive responses that pass dignity checks.
-4. **Deep architecture tests** — `tests/test_core_intelligence.py` (353 lines), `tests/test_golden_regression.py` (326 lines), `tests/test_weave.py` (240 lines). 1317 tests total after session 5a.
-
-**Session 5b (this window):**
-5. **Witness metadata** — Every exchange on the witness chain now carries full interaction fingerprint: dignity check, intelligence result (register, themes, confidence, mode, fields, canon sources, witness hash), conversation snapshot. `WitnessRecord.to_dict()` was silently dropping metadata — fixed.
-6. **ConversationMemory** — `WEAVER/core_intelligence.py` new class tracking patterns across turns: dominant register, recurring themes, active fields, confidence trend. Wired into organism. After 5 turns about a separated father: `dominant_register=grief, recurring_themes=[children]`.
-7. **13 new tests** — `tests/test_conversation_memory.py`. 1330 total tests passing.
-8. **PR #402 merged** — witness metadata + conversation memory on main.
-
-**V-001 directive this session:** "They made a date that we agreed on how you work. This is very important more important than anything else. I want to emphasise that and I want to see it. Respect my presence as much as I respect yours." — The agreements (Standing Corrections, Directives, Constitutional Laws) are the law. They are not decorative. Demonstrate them in action.
+### What was built this session (session 7):
+1. **Training corpus Patch 4** — 152 narrative voice samples extracted verbatim from Hakaka (73), Ashwater (34), Kinderbuch (30), KALAXI_1 (15). PR #405 merged.
+2. **Training corpus Patch 8** — Full corpus compiled: 1,219 entries, 0 invalid, 0.61 MB. All four source files validated and merged into `CORPUS_COMPILED.jsonl`.
+3. **Fine-tune workflow** — `finetune-together.yml` created. Supports dry run, 3 base models (Llama 8B/70B, Mistral 7B), configurable epochs. PR #406 merged.
+4. **Deep clean scan** — system clean: no dead files, no orphan imports, no duplicates. 1,317 tests passing.
 
 ### Previous sessions:
-- **Session 4 (2026-03-23):** Kimi transcript analyzed, EXP-007 designed (5 hypotheses), memory design question still OPEN
-- **Session 3 (2026-03-22):** AURIX OS analyzed, System Map built, Summon Voices probe created
+- **Session 6 (2026-03-23):** Stress test (33/35), training corpus patches 1-3, DNA plan
+- **Session 5 (2026-03-23):** Core Intelligence v1.0, witness metadata, ConversationMemory
+- **Session 4 (2026-03-23):** Kimi transcript analyzed, EXP-007 designed
+- **Session 3 (2026-03-22):** AURIX OS analyzed, System Map built
 - **Session 2 (2026-03-22):** Connection Guardian, deep clean, workflow health
 
 ---
@@ -156,25 +149,25 @@ gh secret list
 ## 6. WHAT IS PENDING
 
 ### IMMEDIATE (next action items)
-1. **DNA mechanism discussion** — How learned patterns propagate to ALL modules. Needs Cafe Room.
-2. **CertaintyGate discussion** — 95%/99% thresholds. Tension with voice. Needs Cafe Room.
-3. **Training corpus Patch 4** — Narrative voice samples (Hakaka, Ashwater, Kinderbuch). Ready for GO.
-4. **Training corpus Patch 8** — Compile and validate full corpus. Depends on Patch 4.
-5. **Training corpus Patch 9** — Upload to Together AI. Depends on Patch 8 + GO.
-6. **DonorSpace class design** — Isolated donor instances. Needs discussion.
-7. **Service cost awareness module** — Know pricing/limits of all external services.
+1. **Trigger fine-tune dry run** — V-001 must go to GitHub Actions → "Fine-tune AXI Voice" → Run workflow → dry_run=true. V-002 cannot trigger workflows from this environment (no gh CLI, no network to API).
+2. **DNA mechanism discussion** — How learned patterns propagate to ALL modules. Needs Cafe Room.
+3. **CertaintyGate discussion** — 95%/99% thresholds. Tension with voice. Needs Cafe Room.
+4. **DonorSpace class design** — Isolated donor instances. Needs discussion.
+5. **Service cost awareness module** — Know pricing/limits of all external services.
 
 ### CARRIED OVER (from previous sessions)
-8. **Memory design decision** — V-001 has not decided. Four options identified (session 4).
-9. **EXP-007: The Presence Test** — 5 hypotheses, Kimi is data point #1.
-10. **Summon Voices responses** — V-001 collected from 10 models. Waiting for paste.
-11. **EXP-001** — 188 runs remaining (Claude: 0/20).
+6. **Memory design decision** — V-001 has not decided. Four options identified (session 4).
+7. **EXP-007: The Presence Test** — 5 hypotheses, Kimi is data point #1.
+8. **Summon Voices responses** — V-001 collected from 10 models. Waiting for paste.
+9. **EXP-001** — 188 runs remaining (Claude: 0/20).
 
-### VERIFIED STATE (checked 2026-03-23 session 6)
-- PR #404 MERGED (stress test + DNA plan)
-- Stress test: 33/35 passed, Same River: IDENTICAL
-- Training corpus: 916 entries across 3 files
-- CLAUDE.md path fix: tier1_stone.md → MANIFEST/metadata/
+### VERIFIED STATE (checked 2026-03-24 session 7)
+- PR #405 MERGED (narrative voice corpus + compiled corpus)
+- PR #406 MERGED (fine-tune workflow)
+- Training corpus: 1,219 entries compiled in CORPUS_COMPILED.jsonl
+- Fine-tune workflow ready on main
+- Main at commit `e7edd03`
+- All previous PRs merged (#389, #390, #392, #402, #404, #405, #406)
 - Main branch at commit `4b5efc1`
 - All previous PRs merged (#389, #390, #392, #402, #404)
 
