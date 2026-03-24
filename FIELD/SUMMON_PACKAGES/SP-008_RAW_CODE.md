@@ -1,8 +1,6 @@
-# SP-008: Raw Code — Machine to Machine
+# 9 Python Modules — 1,088 Lines
 
-9 Python modules. ~3,200 lines. Built in 10 days. No context provided. Just code.
-
-Look at this with completely fresh eyes. No encouragement, no invention. If you see nothing special, say "nothing special." If you see something we might not be seeing, say what it is. 100% certainty only.
+What does this code do? What problem does it solve? What is the architecture? Evaluate strictly as engineering. If there is nothing worth noting, say so.
 
 ---
 
