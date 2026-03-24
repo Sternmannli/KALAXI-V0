@@ -34,6 +34,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 jobs:
   finetune:
@@ -44,8 +45,10 @@ jobs:
       SUFFIX: ${{ inputs.suffix || 'axi-voice-v1' }}
       DRY_RUN: ${{ inputs.dry_run || 'false' }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Read trigger file config
-        id: trigger
         if: github.event_name == 'push'
         run: |
           if [ -f TRAINING/FINETUNE_TRIGGER.json ]; then
@@ -59,9 +62,6 @@ jobs:
             echo "EPOCHS=$EP" >> $GITHUB_ENV
             echo "SUFFIX=$SUF" >> $GITHUB_ENV
           fi
-
-      - name: Checkout
-        uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -94,26 +94,33 @@ jobs:
           "
 
       - name: Upload corpus to Together AI
+        id: upload
         env:
           TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
         run: |
-          python3 -c "
+          python3 << 'PYEOF'
           from together import Together
+          import os
           client = Together()
 
           response = client.files.upload(
               file=open('TRAINING/CORPUS_COMPILED.jsonl', 'rb'),
               purpose='fine-tune'
           )
-          print(f'File uploaded: {response.id}')
+          file_id = response.id
+          print(f'File uploaded: {file_id}')
           print(f'Filename: {response.filename}')
           print(f'Bytes: {response.bytes}')
 
           with open('file_id.txt', 'w') as f:
-              f.write(response.id)
-          "
+              f.write(file_id)
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f'file_id={file_id}\n')
+              f.write(f'file_bytes={response.bytes}\n')
+          PYEOF
 
       - name: Start fine-tuning job
+        id: train
         if: env.DRY_RUN == 'false'
         env:
           TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
@@ -121,6 +128,7 @@ jobs:
           FILE_ID=$(cat file_id.txt)
           python3 << PYEOF
           from together import Together
+          import os
           client = Together()
 
           response = client.fine_tuning.create(
@@ -134,15 +142,51 @@ jobs:
           print(f'Model: {response.model}')
           print(f'Status: {response.status}')
           print(f'Output model will be: {response.output_name}')
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f'job_id={response.id}\n')
+              f.write(f'output_model={response.output_name}\n')
+              f.write(f'status={response.status}\n')
           PYEOF
 
-      - name: Dry run summary
-        if: env.DRY_RUN == 'true'
-        run: |
-          FILE_ID=$(cat file_id.txt)
-          echo "DRY RUN — file uploaded but no training started."
-          echo "File ID: $FILE_ID"
-          echo "Base model: $MODEL_BASE"
-          echo "Epochs: $EPOCHS"
-          echo "Suffix: $SUFFIX"
-          echo "To start training, update TRAINING/FINETUNE_TRIGGER.json with dry_run=false and push."
+      - name: Post result as issue
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ job.status }}';
+            const dryRun = '${{ env.DRY_RUN }}';
+            const fileId = '${{ steps.upload.outputs.file_id }}' || 'upload failed';
+            const fileBytes = '${{ steps.upload.outputs.file_bytes }}' || '?';
+            const jobId = '${{ steps.train.outputs.job_id }}' || 'N/A';
+            const outputModel = '${{ steps.train.outputs.output_model }}' || 'N/A';
+            const trainStatus = '${{ steps.train.outputs.status }}' || 'N/A';
+
+            let body = `## Fine-tune workflow result\n\n`;
+            body += `**Status:** ${status}\n`;
+            body += `**Dry run:** ${dryRun}\n`;
+            body += `**Base model:** ${{ env.MODEL_BASE }}\n`;
+            body += `**Epochs:** ${{ env.EPOCHS }}\n`;
+            body += `**Suffix:** ${{ env.SUFFIX }}\n\n`;
+            body += `### Upload\n`;
+            body += `- File ID: \`${fileId}\`\n`;
+            body += `- Bytes: ${fileBytes}\n\n`;
+
+            if (dryRun === 'false') {
+              body += `### Training\n`;
+              body += `- Job ID: \`${jobId}\`\n`;
+              body += `- Output model: \`${outputModel}\`\n`;
+              body += `- Status: ${trainStatus}\n`;
+            }
+
+            const title = status === 'success'
+              ? `[finetune] ${dryRun === 'true' ? 'DRY RUN' : 'TRAINING'} — ${status}`
+              : `[finetune] FAILED — ${status}`;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['finetune-output']
+            });
