@@ -152,7 +152,10 @@ if score == 0:
     letter-spacing: 0.1em;
     opacity: 0.5;
     display: block;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.3rem;
+  }
+  .chat-msg .text {
+    display: block;
   }
   .chat-form {
     display: flex;
@@ -199,7 +202,7 @@ if score == 0:
       // Show user message
       const userMsg = document.createElement('div');
       userMsg.className = 'chat-msg user';
-      userMsg.innerHTML = '<span class="label">you</span>' + escapeHtml(text);
+      userMsg.innerHTML = '<span class="label">you</span><span class="text">' + escapeHtml(text) + '</span>';
       messages.appendChild(userMsg);
       input.value = '';
       btn.disabled = true;
@@ -223,13 +226,13 @@ if score == 0:
         const axiMsg = document.createElement('div');
         axiMsg.className = 'chat-msg axi';
         const response = data.reflection || data.mark || 'No response.';
-        axiMsg.innerHTML = '<span class="label">axi</span>' + escapeHtml(response);
+        axiMsg.innerHTML = '<span class="label">axi</span><span class="text">' + escapeHtml(response) + '</span>';
         messages.appendChild(axiMsg);
       } catch (err) {
         loading.remove();
         const errMsg = document.createElement('div');
         errMsg.className = 'chat-msg axi';
-        errMsg.innerHTML = '<span class="label">axi</span>Could not connect.';
+        errMsg.innerHTML = '<span class="label">axi</span><span class="text">Could not connect.</span>';
         messages.appendChild(errMsg);
       }
 
