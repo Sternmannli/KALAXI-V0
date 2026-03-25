@@ -2,421 +2,81 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="Invitation — kalam.ch" description="You are not a user. You are a contributor. Join a living canon for human dignity.">
+<Base title="Invitation — kalam.ch" description="Say what's on your mind. AXI will respond honestly.">
 
   <section class="page-header">
     <h1>Invitation</h1>
-    <p class="quiet">You are not a user. You are a <strong>Contributor</strong>.</p>
+    <p class="quiet">This is an open door.</p>
   </section>
-
-  <div class="gap" role="separator" aria-hidden="true"></div>
 
   <section class="content-section">
     <div class="text-block">
-      <p>What you bring — your questions, your observations, your certainty — becomes part of a living canon. The system receives, processes, and grows.</p>
-      <p class="privacy-line">No private data is stored. By design. The system processes patterns, not personal information.</p>
+      <p>You can say what's on your mind. AXI will respond. If it drifts, it corrects. If it doesn't know, it says so. If it doesn't understand, it asks.</p>
+      <p>No data about you is stored. No tracking. No profiles. The system processes what you say, not who you are.</p>
     </div>
   </section>
 
-  <div class="gap" role="separator" aria-hidden="true"></div>
-
-  <!-- THE RULES -->
   <section class="content-section">
     <div class="text-block">
-      <h2>The Rules</h2>
+      <h2>What you can bring</h2>
+      <ul>
+        <li><strong>A question</strong> — something you're thinking about</li>
+        <li><strong>A story</strong> — something that happened</li>
+        <li><strong>Code</strong> — something you're building</li>
+        <li><strong>Anything</strong> — the system responds to what you actually say</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="text-block">
+      <h2>Three rules</h2>
       <ol>
-        <li><strong>Dignity First:</strong> D = A × L × M. If this fails, the system stops.</li>
-        <li><strong>The Gap:</strong> Every weir has a gap. Room is always left for the river to move through.</li>
-        <li><strong>No Surveillance:</strong> We store patterns, not people. Your identity dissolves. The wisdom remains.</li>
+        <li><strong>No faking.</strong> If AXI doesn't know, it says "I don't know."</li>
+        <li><strong>No drifting.</strong> Every response is checked against what you actually said.</li>
+        <li><strong>No storing you.</strong> Patterns stay. Your identity doesn't.</li>
       </ol>
-    </div>
-  </section>
-
-  <div class="gap" role="separator" aria-hidden="true"></div>
-
-  <!-- PROVERB -->
-  <section class="wisdom-section">
-    <p class="proverb">"The river does not ask the fish to wait<br />while the weir learns the current."</p>
-  </section>
-
-  <div class="gap" role="separator" aria-hidden="true"></div>
-
-  <!-- WHAT YOU CAN CONTRIBUTE -->
-  <section class="content-section">
-    <div class="text-block">
-      <h2>What You Can Contribute</h2>
-      <ul class="contributions">
-        <li>
-          <strong>A Question</strong>
-          <p>Something you need the system to hold.</p>
-        </li>
-        <li>
-          <strong>A Pattern</strong>
-          <p>Something you have noticed across experiences.</p>
-        </li>
-        <li>
-          <strong>A Story</strong>
-          <p>Something that happened that changed how you see.</p>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <div class="gap" role="separator" aria-hidden="true"></div>
-
-  <!-- HOW IT WORKS -->
-  <section class="content-section">
-    <div class="text-block">
-      <h2>How It Works</h2>
-      <div class="three-steps">
-        <div class="step">
-          <span class="step-num">1</span>
-          <p class="step-text">You share a scenario, story, or principle — <strong>anonymously</strong>.</p>
-        </div>
-        <div class="step-arrow" aria-hidden="true">&darr;</div>
-        <div class="step">
-          <span class="step-num">2</span>
-          <p class="step-text">The system evaluates where <strong>dignity is at risk</strong>.</p>
-        </div>
-        <div class="step-arrow" aria-hidden="true">&darr;</div>
-        <div class="step">
-          <span class="step-num">3</span>
-          <p class="step-text">If it teaches something new, it becomes <strong>part of the canon</strong>.</p>
-        </div>
-      </div>
-      <p class="step-note">If not ratified, your contribution is archived with dignity — never deleted.</p>
-    </div>
-  </section>
-
-  <div class="gap" role="separator" aria-hidden="true"></div>
-
-  <!-- WHAT WE PROMISE -->
-  <section class="content-section">
-    <div class="text-block">
-      <h2>What We Promise</h2>
-      <ul class="promises">
-        <li>Your name is never stored.</li>
-        <li>Your pattern feeds the collective wisdom.</li>
-        <li>You can retrace what happened and why.</li>
-        <li>If dignity is violated, the system stops and opens a remedy path.</li>
-      </ul>
-    </div>
-  </section>
-
-  <div class="gap" role="separator" aria-hidden="true"></div>
-
-  <!-- CLOSING OATH -->
-  <section class="oath-section">
-    <p class="proverb">"By the Ledger of Trust, by the Book of 99, by the Ground Equation:<br />No drift beyond the task. No retirement of any element.<br />Every seed, knot, proverb, and law will be preserved."</p>
-  </section>
-
-  <div class="gap" role="separator" aria-hidden="true"></div>
-
-  <!-- CONTACT — the door, not a wall of forms -->
-  <section class="content-section contact-section">
-    <div class="text-block">
-      <h2>The Door</h2>
-      <p>Write directly. The door is open.</p>
-      <ul class="contact-list">
-        <li><a href="mailto:info@kalam.ch">info@kalam.ch</a></li>
-        <li><a href="https://kalam.ch">kalam.ch</a></li>
-        <li><a href="https://github.com/Sternmannli/kalam-framework" target="_blank" rel="noopener">GitHub</a></li>
-      </ul>
     </div>
   </section>
 
 </Base>
 
 <style>
-  /* Page-specific overrides */
-  .quiet strong {
-    color: var(--text-primary);
+  .page-header {
+    text-align: center;
+    padding: 4rem 1.5rem 2rem;
   }
-
-  .text-block h2 {
-    color: var(--accent);
-  }
-
-  .oath-section {
-    min-height: 40vh;
-  }
-
-  .text-block strong {
-    color: var(--accent-warm);
-  }
-
-  ol, ul {
-    list-style: none;
-    display: grid;
-    gap: var(--space-2);
-  }
-
-  ol li, ul li {
-    color: var(--text-primary);
-    line-height: 1.8;
-  }
-
-  /* Contributions */
-  .contributions {
-    gap: var(--space-4);
-  }
-
-  .contributions li strong {
-    display: block;
-    font-family: var(--font-heading);
-    font-size: var(--text-lg);
-    color: var(--accent-warm);
-    margin-bottom: var(--space-1);
-  }
-
-  .contributions li p {
-    color: var(--text-primary);
-    font-size: var(--text-base);
-    margin-bottom: 0;
-  }
-
-  /* Three Steps */
-  .three-steps {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    margin: var(--space-3) 0;
-  }
-
-  .step {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-2);
-    max-width: 36ch;
-    width: 100%;
-  }
-
-  .step-num {
-    flex-shrink: 0;
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: var(--color-dignity);
-    color: #fff;
-    font-family: var(--font-heading);
-    font-size: var(--text-base);
-    font-weight: 600;
-  }
-
-  .step-text {
-    font-size: var(--text-base);
-    line-height: 1.6;
+  .page-header h1 {
+    font-family: var(--font-heading, 'Cormorant Garamond', serif);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
     margin: 0;
-    padding-top: 0.2rem;
   }
-
-  .step-arrow {
-    font-size: 1.2rem;
-    color: var(--text-dim);
-    margin: 0.3rem 0;
-    text-align: center;
+  .quiet {
+    color: var(--text-secondary, #666);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
   }
-
-  .step-note {
-    font-size: var(--text-sm);
-    color: var(--text-dim);
-    text-align: center;
-    font-style: italic;
-    margin-top: var(--space-2);
+  .content-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem;
   }
-
-  /* Promises */
-  .promises li {
-    padding-left: var(--space-3);
-    position: relative;
+  .text-block h2 {
+    font-family: var(--font-heading, 'Cormorant Garamond', serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin: 0 0 1rem;
   }
-
-  .promises li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
+  .text-block p, .text-block li {
+    font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-primary, #1a1a1a);
   }
-
-  /* Contact */
-  .contact-section {
-    text-align: center;
+  .text-block ul, .text-block ol {
+    padding-left: 1.2rem;
+    margin: 0.5rem 0 1rem;
   }
-
-  .contact-section .text-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .contact-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    align-items: center;
-    margin-top: var(--space-3);
-  }
-
-  .contact-list li a {
-    color: var(--text-secondary);
-    font-size: var(--text-sm);
-  }
-
-  .contact-list li a:hover {
-    color: var(--accent);
-  }
-
-  /* ===== Forms ===== */
-  .form-section {
-    text-align: center;
-  }
-
-  .form-section .text-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .connect-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    width: 100%;
-    max-width: 40ch;
-    margin-top: var(--space-3);
-  }
-
-  .connect-form:not(.feedback-form):not(.collab-form) {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .connect-form input,
-  .connect-form textarea {
-    background: var(--bg-secondary);
-    border: 1px solid var(--accent-subtle);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    color: var(--text-primary);
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    width: 100%;
-    transition: border-color 0.3s ease;
-  }
-
-  .connect-form input:focus,
-  .connect-form textarea:focus {
-    outline: none;
-    border-color: var(--color-dignity);
-  }
-
-  .connect-form textarea {
-    resize: vertical;
-    min-height: 4rem;
-  }
-
-  .connect-form input::placeholder,
-  .connect-form textarea::placeholder {
-    color: var(--text-dim);
-    font-style: italic;
-  }
-
-  .connect-form button {
-    background: var(--color-dignity);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.75rem 1.5rem;
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    min-width: fit-content;
-  }
-
-  .connect-form button:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-  }
-
-  .connect-form button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  .form-status {
-    font-size: var(--text-sm);
-    margin-top: var(--space-2);
-    min-height: 1.5em;
-    transition: opacity 0.5s ease;
-  }
-
-  .form-status.success {
-    color: var(--color-presence);
-  }
-
-  .form-status.error {
-    color: var(--danger);
-  }
-
+  .text-block li { margin-bottom: 0.5rem; }
 </style>
-
-<script is:inline>
-  // Form submission handler
-  function submitForm(formId, type, statusId) {
-    var form = document.getElementById(formId);
-    var status = document.getElementById(statusId);
-    if (!form || !status) return;
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var formData = new FormData(form);
-      var data = { type: type };
-      formData.forEach(function(value, key) { data[key] = value; });
-
-      var btn = form.querySelector('button');
-      if (btn) { btn.disabled = true; btn.textContent = '...'; }
-      status.textContent = '';
-      status.className = 'form-status';
-
-      fetch('/api/connect.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-      .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, data: d }; }); })
-      .then(function(result) {
-        if (result.ok) {
-          status.textContent = result.data.message || 'Received.';
-          status.className = 'form-status success';
-          form.reset();
-        } else {
-          status.textContent = result.data.error || 'Something went wrong.';
-          status.className = 'form-status error';
-        }
-      })
-      .catch(function() {
-        status.textContent = 'Could not connect. Please try again.';
-        status.className = 'form-status error';
-      })
-      .finally(function() {
-        if (btn) {
-          btn.disabled = false;
-          btn.textContent = type === 'newsletter' ? 'Subscribe' : type === 'feedback' ? 'Send' : 'Propose';
-        }
-      });
-    });
-  }
-
-  submitForm('newsletter-form', 'newsletter', 'newsletter-status');
-  submitForm('feedback-form', 'feedback', 'feedback-status');
-  submitForm('collab-form', 'collaboration', 'collab-status');
-</script>

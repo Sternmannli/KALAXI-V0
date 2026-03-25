@@ -7,7 +7,7 @@ interface Props {
 
 const {
   title = 'kalam.ch — The Word',
-  description = 'A living canon for human dignity. Patterns, not people.',
+  description = 'Stories, code, and a voice that self-corrects.',
   hideFooter = false,
 } = Astro.props;
 
@@ -49,7 +49,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "@type": "Organization",
       "name": "Kalam",
       "url": "https://kalam.ch",
-      "description": "A constitutional framework where human dignity is the first technical requirement. D = A × L × M.",
+      "description": "Stories, code, and a voice that self-corrects. By Mohamed Farag.",
       "founder": {
         "@type": "Person",
         "name": "Mohamed Farag"
@@ -97,22 +97,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <span class="nav-toggle-bar"></span>
       </button>
       <div class="nav-links" id="nav-links">
-        <a href="/about">about</a>
         <a href="/about-axi">axi</a>
-        <a href="/canon">canon</a>
         <a href="/hakaka">hakaka</a>
         <a href="/ashwater">ashwater</a>
         <a href="/kinderbuch">kinderbuch</a>
         <a href="/kalaxi1">the same river</a>
-        <a href="/r7m">r7m</a>
-        <a href="/zakaka">zakaka</a>
-        <a href="/organ">organ</a>
-        <a href="/tools">tools</a>
-        <a href="/spine">spine</a>
-        <a href="/science">science</a>
-        <a href="/compass">compass</a>
-        <a href="/workings">workings</a>
-        <a href="/museum">museum</a>
         <a href="/invitation">invitation</a>
         <a href="/silence">silence</a>
         <a href="/sustain" class="nav-sustain">sustain</a>
@@ -134,19 +123,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <footer class="site-footer" role="contentinfo">
         <nav class="footer-links" aria-label="Site navigation">
           <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/canon">Canon</a>
+          <a href="/about-axi">AXI</a>
           <a href="/hakaka">Hakaka</a>
           <a href="/ashwater">Ashwater</a>
           <a href="/kinderbuch">Kinderbuch</a>
           <a href="/kalaxi1">The Same River</a>
-          <a href="/r7m">R7M</a>
-          <a href="/zakaka">ZAKAKA</a>
-          <a href="/organ">ORGAN</a>
-          <a href="/tools">Tools</a>
-          <a href="/spine">Spine</a>
-          <a href="/science">Science</a>
-          <a href="/museum">Museum</a>
           <a href="/invitation">Invitation</a>
           <a href="/silence">Silence</a>
           <a href="/sustain" class="footer-sustain">Sustain</a>
