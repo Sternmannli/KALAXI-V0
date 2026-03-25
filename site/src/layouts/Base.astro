@@ -150,7 +150,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     )}
     <script is:inline>
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js');
+        navigator.serviceWorker.getRegistrations().then(function(regs) {
+          regs.forEach(function(r) { r.unregister(); });
+        });
+        caches.keys().then(function(names) {
+          names.forEach(function(n) { caches.delete(n); });
+        });
       }
     </script>
   </body>
