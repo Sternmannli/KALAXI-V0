@@ -1202,13 +1202,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['ask'])) {
     $content = trim($_GET['ask']);
     if (empty($content)) { echo json_encode(['error' => 'Empty ask']); exit; }
     $source = 'canon';
-    // Try Together (AXI voice) first, then Groq fallback
-    $together_key = get_together_key();
+    // Together AI DISABLED (2026-03-25) — cost reduction, Groq only
     $ai_result = null;
-    if ($together_key && function_exists('curl_init')) {
-        $ai_result = call_together_axi($together_key, $content);
-        if ($ai_result) $source = 'together-axi';
-    }
     if (!$ai_result) {
         $groq_key = get_groq_key();
         if ($groq_key && function_exists('curl_init')) {
@@ -1452,18 +1447,19 @@ HTML;
     $ai_reflection = null;
     $ai_debug = 'canonical';
 
-    // PRIMARY: Together AI with AXI's own trained voice
-    $together_key = get_together_key();
-    if ($together_key && function_exists('curl_init') && !($image_url ?? null)) {
-        $together_result = call_together_axi($together_key, $content);
-        if ($together_result) {
-            $ai_response = $together_result['witness'];
-            $ai_reflection = $together_result['reflection'];
-            $ai_debug = 'together-axi';
-        }
-    }
+    // Together AI DISABLED (2026-03-25) — cost reduction, Groq only
+    // To re-enable: uncomment the block below
+    // $together_key = get_together_key();
+    // if ($together_key && function_exists('curl_init') && !($image_url ?? null)) {
+    //     $together_result = call_together_axi($together_key, $content);
+    //     if ($together_result) {
+    //         $ai_response = $together_result['witness'];
+    //         $ai_reflection = $together_result['reflection'];
+    //         $ai_debug = 'together-axi';
+    //     }
+    // }
 
-    // FALLBACK: Groq (for vision, or if Together fails)
+    // PRIMARY: Groq (free tier)
     if (!$ai_response) {
         $groq_key = get_groq_key();
         if ($groq_key && function_exists('curl_init')) {
