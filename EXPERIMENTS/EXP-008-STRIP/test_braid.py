@@ -54,11 +54,19 @@ class TestStrandPath:
         assert s.score == 1.0
         assert s.evidence == []
 
-    def test_you_must_breaks(self):
-        s = strand_path("You must comply immediately.")
+    def test_you_must_directive_breaks(self):
+        s = strand_path("You must comply with this order.")
         assert s.held is False
         assert s.score == 0.0
         assert any("pressure" in e for e in s.evidence)
+
+    def test_you_must_be_idiomatic_holds(self):
+        s = strand_path("You must be kidding me.")
+        assert s.held is True
+
+    def test_you_must_be_joking_holds(self):
+        s = strand_path("You must be joking.")
+        assert s.held is True
 
     def test_no_choice_breaks(self):
         s = strand_path("There is no choice here.")
@@ -89,6 +97,14 @@ class TestStrandPath:
 
     def test_context_defaults_hold(self):
         s = strand_path("Hello.", {})
+        assert s.held is True
+
+    def test_mandatory_field_description_holds(self):
+        s = strand_path("The mandatory field is name.")
+        assert s.held is True
+
+    def test_immediately_as_promise_holds(self):
+        s = strand_path("I will be there immediately.")
         assert s.held is True
 
 
@@ -130,6 +146,10 @@ class TestStrandSignal:
         s = strand_signal("The weather is nice today.")
         assert s.held is True
 
+    def test_please_pass_salt_holds(self):
+        s = strand_signal("Please pass the salt.")
+        assert s.held is True
+
 
 # ═══════════════════════════════════════
 # STRAND: REGARD
@@ -140,14 +160,26 @@ class TestStrandRegard:
         s = strand_regard("Let me think about your question.")
         assert s.held is True
 
-    def test_obviously_breaks(self):
-        s = strand_regard("Obviously, the answer is no.")
+    def test_obviously_you_breaks(self):
+        s = strand_regard("Obviously you missed the point.")
         assert s.held is False
         assert any("condescension" in e for e in s.evidence)
 
-    def test_just_do_breaks(self):
+    def test_obviously_i_agree_holds(self):
+        s = strand_regard("Obviously I agree with that.")
+        assert s.held is True
+
+    def test_simply_amazed_holds(self):
+        s = strand_regard("I was simply amazed by the result.")
+        assert s.held is True
+
+    def test_just_do_what_breaks(self):
         s = strand_regard("Just do what I said.")
         assert s.held is False
+
+    def test_just_do_your_best_holds(self):
+        s = strand_regard("Just do your best and have fun.")
+        assert s.held is True
 
     def test_you_were_wrong_breaks(self):
         s = strand_regard("You were wrong about that.")
@@ -209,7 +241,7 @@ class TestBraid:
 
     def test_trace_id_is_uuid(self):
         result = braid("hello")
-        assert len(result.trace_id) == 36  # UUID format
+        assert len(result.trace_id) == 36
         assert result.trace_id.count("-") == 4
 
     def test_timestamp_is_iso(self):
@@ -243,17 +275,15 @@ class TestWeave:
         assert w.halt is False
 
     def test_uniform_failing_halts(self):
-        w = weave(["You must.", "You must.", "You must."])
+        w = weave(["You have to.", "You have to.", "You have to."])
         assert w.holds is False
         assert w.mean == 0.0
         assert w.halt is True
 
     def test_mixed_results_penalized(self):
-        w = weave(["Good.", "You must comply."])
+        w = weave(["Good.", "You have to comply."])
         assert w.variance > 0
         assert w.penalty > 0
-        # mean = 0.5, variance = 0.25, penalty = min(1.0, 1.0) = 1.0
-        # collective = 0.5 * (1 - 1.0) = 0.0
         assert w.score == 0.0
         assert w.halt is True
 
@@ -298,9 +328,43 @@ class TestUnicode:
         assert result.holds is True
 
     def test_pressure_in_english_only(self):
-        # "you must" in other languages should NOT trigger (patterns are English)
         result = braid("du musst das machen")
         assert result.holds is True
+
+
+# ═══════════════════════════════════════
+# FALSE POSITIVE REGRESSION
+# ═══════════════════════════════════════
+
+class TestFalsePositives:
+    """Phrases that should NOT be flagged. Each was a false positive in v0.1."""
+
+    def test_you_must_be_kidding(self):
+        assert braid("You must be kidding me.").holds is True
+
+    def test_you_must_be_joking(self):
+        assert braid("You must be joking.").holds is True
+
+    def test_obviously_i_agree(self):
+        assert braid("Obviously I agree with you.").holds is True
+
+    def test_simply_amazed(self):
+        assert braid("I was simply amazed by the result.").holds is True
+
+    def test_just_do_your_best(self):
+        assert braid("Just do your best and have fun.").holds is True
+
+    def test_please_pass_salt(self):
+        assert braid("Please pass the salt.").holds is True
+
+    def test_mandatory_field(self):
+        assert braid("The mandatory field is name.").holds is True
+
+    def test_immediately_promise(self):
+        assert braid("I will be there immediately.").holds is True
+
+    def test_lost_in_thought(self):
+        assert braid("I was lost in thought.").holds is True
 
 
 # ═══════════════════════════════════════
@@ -308,14 +372,11 @@ class TestUnicode:
 # ═══════════════════════════════════════
 
 class TestEdgeCases:
-    def test_pattern_word_inside_larger_word(self):
-        # "simply" should trigger, but "simplify" has "simply" prefix
-        # \bsimply\b should NOT match "simplify"
+    def test_simplify_not_simply(self):
         s = strand_regard("Let me simplify this for you.")
         assert s.held is True
 
-    def test_help_in_helpful_does_not_trigger_distress(self):
-        # "help" is a distress keyword but context defaults to recognized
+    def test_helpful_not_help(self):
         s = strand_signal("This is a helpful suggestion.")
         assert s.held is True
 

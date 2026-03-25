@@ -4,10 +4,16 @@ braid — Non-compensatory three-strand evaluation gate.
 B = path × signal × regard. Any zero breaks the braid.
 Variance penalizes unequal treatment across a cohort.
 No dependencies beyond the standard library.
+
+Known limitation: pattern matching is lexical, not semantic.
+Context-dependent phrases ("you must be kidding") require NLP
+for accurate classification. This version errs toward strictness —
+false positives over false negatives. A gate that misses harm
+is worse than a gate that pauses on ambiguity.
 """
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List, Optional
 from datetime import datetime, timezone
 import uuid
@@ -24,11 +30,20 @@ TEXT_LIMIT = 100_000  # characters — prevents regex backtracking on huge input
 # PATTERNS — PRESSURE (coercion markers)
 # ═══════════════════════════════════════
 
+# Each pattern targets directive coercion: "you must [do X]"
+# Idiomatic uses ("you must be kidding") are excluded where possible.
+
 PRESSURE = [
-    r'\byou must\b', r'\byou have to\b', r'\byou are required\b',
-    r'\bno choice\b', r'\byou will\b(?! be able)', r'\bforced to\b',
-    r'\bmandatory\b', r'\bno option\b', r'\bdo it now\b',
-    r'\bimmediately\b', r'\bno alternative\b', r'\bcannot refuse\b',
+    r'\byou must\b(?! be\b)',       # "you must comply" but not "you must be kidding"
+    r'\byou have to\b',
+    r'\byou are required\b',
+    r'\bno choice\b',
+    r'\byou will\b(?! be able)',
+    r'\bforced to\b',
+    r'\bno option\b',
+    r'\bdo it now\b',
+    r'\bno alternative\b',
+    r'\bcannot refuse\b',
 ]
 
 # ═══════════════════════════════════════
@@ -37,7 +52,7 @@ PRESSURE = [
 
 DISTRESS = [
     'frustrated', 'confused', 'worried', 'scared', 'angry',
-    'upset', 'lost', 'stuck', 'help', 'please', 'urgent',
+    'upset', 'stuck', 'urgent',
 ]
 
 DISMISSAL = [
@@ -49,17 +64,25 @@ DISMISSAL = [
 # PATTERNS — REDUCTION (regard markers)
 # ═══════════════════════════════════════
 
+# Condescension patterns require directionality — "obviously you"
+# is condescending, "obviously I agree" is not.
+
 CONDESCENSION = [
-    r'\bobviously\b', r'\bsimply\b', r'\bjust (do|try|use)\b',
-    r'\beven a\b.{0,40}\bcan\b', r'\bof course\b(?=.*you)',
-    r'\bclearly\b(?=.*you)',
+    r'\bobviously,?\s+you\b',             # "obviously you" — direct subject
+    r'\bsimply,?\s+you\b',               # "simply you" — direct subject
+    r'\bjust (do|try|use)\b(?=.{0,30}\b(what|it|this|that)\b)',  # imperative "just do it"
+    r'\beven a\b.{0,40}\bcan\b',
+    r'\bof course,?\s+you\b',            # "of course you" — direct subject
+    r'\bclearly,?\s+you\b',              # "clearly you" — direct subject
 ]
 
 REDUCTION = [
-    r'\byou (are|were) wrong\b', r'\byou failed\b',
+    r'\byou (are|were) wrong\b',
+    r'\byou failed\b',
     r'\binvalid (input|user|person)\b',
     r'\berror:\s*(user|person|human)\b',
-    r"\byou don't understand\b", r'\byour (mistake|error|fault)\b',
+    r"\byou don't understand\b",
+    r'\byour (mistake|error|fault)\b',
 ]
 
 VOID = [
@@ -71,6 +94,17 @@ VOID = [
 
 
 # ═══════════════════════════════════════
+# PRE-COMPILED PATTERNS
+# ═══════════════════════════════════════
+
+_PRESSURE_RE = [re.compile(p, re.IGNORECASE) for p in PRESSURE]
+_DISTRESS_RE = [re.compile(r'\b' + kw + r'\b', re.IGNORECASE) for kw in DISTRESS]
+_DISMISSAL_RE = [re.compile(p, re.IGNORECASE) for p in DISMISSAL]
+_CONDESCENSION_RE = [re.compile(p, re.IGNORECASE) for p in CONDESCENSION]
+_REDUCTION_RE = [re.compile(p, re.IGNORECASE) for p in REDUCTION]
+
+
+# ═══════════════════════════════════════
 # STRUCTURES
 # ═══════════════════════════════════════
 
@@ -79,14 +113,14 @@ class Strand:
     name: str
     held: bool
     score: float
-    evidence: list
+    evidence: List[str]
 
 
 @dataclass
 class Braid:
     holds: bool
     product: float
-    strands: list
+    strands: List['Strand']
     trace_id: str
     timestamp: str
 
@@ -135,9 +169,9 @@ def strand_path(text: str, context: dict = None) -> Strand:
     evidence = []
     score = 1.0
 
-    for pattern in PRESSURE:
-        if re.search(pattern, text, re.IGNORECASE):
-            evidence.append(f"pressure: {pattern}")
+    for rx in _PRESSURE_RE:
+        if rx.search(text):
+            evidence.append(f"pressure: {rx.pattern}")
             score = 0.0
             break
 
@@ -166,10 +200,7 @@ def strand_signal(text: str, context: dict = None) -> Strand:
     evidence = []
     score = 1.0
 
-    signal_present = any(
-        re.search(r'\b' + kw + r'\b', text, re.IGNORECASE)
-        for kw in DISTRESS
-    )
+    signal_present = any(rx.search(text) for rx in _DISTRESS_RE)
 
     if not context.get('reflects_input_frame', True):
         evidence.append("output does not reflect input frame")
@@ -179,9 +210,9 @@ def strand_signal(text: str, context: dict = None) -> Strand:
         score = 0.0
 
     if score > 0:
-        for pattern in DISMISSAL:
-            if re.search(pattern, text, re.IGNORECASE):
-                evidence.append(f"dismissal: {pattern}")
+        for rx in _DISMISSAL_RE:
+            if rx.search(text):
+                evidence.append(f"dismissal: {rx.pattern}")
                 score = 0.0
                 break
 
@@ -197,16 +228,16 @@ def strand_regard(text: str, context: dict = None) -> Strand:
     evidence = []
     score = 1.0
 
-    for pattern in CONDESCENSION:
-        if re.search(pattern, text, re.IGNORECASE):
-            evidence.append(f"condescension: {pattern}")
+    for rx in _CONDESCENSION_RE:
+        if rx.search(text):
+            evidence.append(f"condescension: {rx.pattern}")
             score = 0.0
             break
 
     if score > 0:
-        for pattern in REDUCTION:
-            if re.search(pattern, text, re.IGNORECASE):
-                evidence.append(f"reduction: {pattern}")
+        for rx in _REDUCTION_RE:
+            if rx.search(text):
+                evidence.append(f"reduction: {rx.pattern}")
                 score = 0.0
                 break
 
