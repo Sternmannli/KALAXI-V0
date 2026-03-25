@@ -25,6 +25,7 @@ import Base from '../layouts/Base.astro';
         <button type="submit">Join</button>
         <button type="button" id="auth-cancel" class="auth-cancel">cancel</button>
       </form>
+      <p class="auth-status" id="auth-status"></p>
       <p class="auth-note">No password. Just your email so AXI remembers you.</p>
     </div>
 
@@ -118,6 +119,13 @@ import Base from '../layouts/Base.astro';
     background: none; border: none; color: #aaa; font-size: 0.8rem; cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
+  .auth-status {
+    font-size: 0.85rem; margin: 0.5rem 0 0; text-align: center; min-height: 1.2em;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  .auth-status.ok { color: #2a7d2a; }
+  .auth-status.err { color: #c44a1a; }
+  .auth-status.wait { color: #999; }
   .auth-note {
     font-size: 0.72rem; color: #bbb; margin: 0.4rem 0 0; text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -320,6 +328,14 @@ import Base from '../layouts/Base.astro';
 
   // Join
   var authForm = document.getElementById('auth-form');
+  var authStatus = document.getElementById('auth-status');
+  function setStatus(msg, cls) {
+    if (authStatus) {
+      authStatus.textContent = msg;
+      authStatus.className = 'auth-status ' + (cls || '');
+    }
+  }
+
   if (authForm) {
     authForm.onsubmit = function(e) {
       e.preventDefault();
@@ -328,24 +344,30 @@ import Base from '../layouts/Base.astro';
       var joinBtn = authForm.querySelector('button[type="submit"]');
       var email = emailEl ? emailEl.value.trim() : '';
       var name = nameEl ? nameEl.value.trim() : '';
-      if (!email) return;
+      if (!email) { setStatus('Please enter your email.', 'err'); return; }
 
       if (joinBtn) { joinBtn.textContent = '...'; joinBtn.disabled = true; }
+      setStatus('Connecting...', 'wait');
 
       fetch('/api/axi.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'signup', email: email, name: name })
-      }).then(function(r) { return r.json(); }).then(function(data) {
+      }).then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      }).then(function(data) {
         if (data.ok && data.token) {
           localStorage.setItem('kalam-token', data.token);
-          showLoggedIn(data.name || name || email.split('@')[0]);
-          addBubble('Welcome, ' + (data.name || name || 'friend') + '.', 'axi');
+          var displayName = data.name || name || email.split('@')[0];
+          showLoggedIn(displayName);
+          setStatus('', '');
+          addBubble('Welcome, ' + displayName + '.', 'axi');
         } else {
-          addBubble(data.error || 'Could not sign in.', 'axi');
+          setStatus(data.error || 'Could not sign in. Try again.', 'err');
         }
-      }).catch(function() {
-        addBubble('Could not connect. Try again.', 'axi');
+      }).catch(function(err) {
+        setStatus('Could not connect: ' + err.message, 'err');
       }).finally(function() {
         if (joinBtn) { joinBtn.textContent = 'Join'; joinBtn.disabled = false; }
       });
