@@ -266,129 +266,138 @@ import Base from '../layouts/Base.astro';
   }
 </style>
 
-<script>
-  // === AUTH ===
-  const authBar = document.getElementById('auth-bar')!;
-  const authLoggedOut = document.getElementById('auth-logged-out')!;
-  const authLoggedIn = document.getElementById('auth-logged-in')!;
-  const authShowForm = document.getElementById('auth-show-form')!;
-  const authFormWrap = document.getElementById('auth-form-wrap')!;
-  const authForm = document.getElementById('auth-form') as HTMLFormElement;
-  const authCancel = document.getElementById('auth-cancel')!;
-  const authNameEl = document.getElementById('auth-name')!;
-  const authLogout = document.getElementById('auth-logout')!;
+<script is:inline>
+(function() {
+  var msgs = document.getElementById('messages');
 
-  function showLoggedIn(name: string) {
-    authLoggedOut.hidden = true;
-    authLoggedIn.hidden = false;
-    authFormWrap.hidden = true;
-    authNameEl.textContent = name || 'signed in';
-  }
-
-  function showLoggedOut() {
-    authLoggedOut.hidden = false;
-    authLoggedIn.hidden = true;
-    authFormWrap.hidden = true;
-  }
-
-  // Check if already logged in (token in localStorage)
-  const savedToken = localStorage.getItem('kalam-token');
-  if (savedToken) {
-    fetch('/api/axi.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'login', token: savedToken }),
-    }).then(r => r.json()).then(d => {
-      if (d.ok || d.logged_in) showLoggedIn(d.name);
-      else { localStorage.removeItem('kalam-token'); showLoggedOut(); }
-    }).catch(() => showLoggedOut());
-  }
-
-  authShowForm.addEventListener('click', () => { authFormWrap.hidden = false; });
-  authCancel.addEventListener('click', () => { authFormWrap.hidden = true; });
-
-  authForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const emailEl = document.getElementById('auth-email') as HTMLInputElement;
-    const nameEl = document.getElementById('auth-name-input') as HTMLInputElement;
-    const joinBtn = authForm.querySelector('button[type="submit"]') as HTMLButtonElement;
-    const email = emailEl.value.trim();
-    const name = nameEl.value.trim();
-    if (!email) return;
-
-    joinBtn.textContent = '...';
-    joinBtn.disabled = true;
-
-    try {
-      const res = await fetch('/api/axi.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'signup', email, name }),
-      });
-      const data = await res.json();
-      if (data.ok && data.token) {
-        localStorage.setItem('kalam-token', data.token);
-        showLoggedIn(data.name || name || email.split('@')[0]);
-        addBubble('Welcome, ' + (data.name || name || 'friend') + '.', 'axi');
-      } else {
-        addBubble(data.error || 'Could not sign in. Try again.', 'axi');
-      }
-    } catch (err) {
-      addBubble('Could not connect. Try again.', 'axi');
-    }
-    joinBtn.textContent = 'Join';
-    joinBtn.disabled = false;
-  });
-
-  authLogout.addEventListener('click', async () => {
-    localStorage.removeItem('kalam-token');
-    try { await fetch('/api/axi.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'logout' }) }); } catch(e) {}
-    showLoggedOut();
-  });
-
-  // === CHAT ===
-  const form = document.getElementById('chat-form');
-  const input = document.getElementById('chat-input') as HTMLInputElement;
-  const messages = document.getElementById('messages');
-  const btn = document.getElementById('chat-send') as HTMLButtonElement;
-
-  function addBubble(text: string, who: 'user' | 'axi' | 'loading'): HTMLElement {
-    const el = document.createElement('div');
+  function addBubble(text, who) {
+    var el = document.createElement('div');
     el.className = 'bubble ' + who;
     el.textContent = text;
-    messages?.appendChild(el);
-    messages!.scrollTop = messages!.scrollHeight;
+    if (msgs) { msgs.appendChild(el); msgs.scrollTop = msgs.scrollHeight; }
     return el;
   }
 
-  if (form && input && messages) {
-    form.addEventListener('submit', async (e) => {
+  function showLoggedIn(name) {
+    var lo = document.getElementById('auth-logged-out');
+    var li = document.getElementById('auth-logged-in');
+    var fw = document.getElementById('auth-form-wrap');
+    var nm = document.getElementById('auth-name');
+    if (lo) lo.hidden = true;
+    if (li) li.removeAttribute('hidden');
+    if (fw) fw.hidden = true;
+    if (nm) nm.textContent = name || 'signed in';
+  }
+
+  function showLoggedOut() {
+    var lo = document.getElementById('auth-logged-out');
+    var li = document.getElementById('auth-logged-in');
+    var fw = document.getElementById('auth-form-wrap');
+    if (lo) lo.hidden = false;
+    if (li) li.setAttribute('hidden', '');
+    if (fw) fw.hidden = true;
+  }
+
+  // Auto-login from saved token
+  var token = localStorage.getItem('kalam-token');
+  if (token) {
+    fetch('/api/axi.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'login', token: token })
+    }).then(function(r) { return r.json(); }).then(function(d) {
+      if (d.ok) showLoggedIn(d.name);
+      else { localStorage.removeItem('kalam-token'); showLoggedOut(); }
+    }).catch(function() { showLoggedOut(); });
+  }
+
+  // Show/hide sign-in form
+  var showBtn = document.getElementById('auth-show-form');
+  var cancelBtn = document.getElementById('auth-cancel');
+  var formWrap = document.getElementById('auth-form-wrap');
+  if (showBtn) showBtn.onclick = function() { if (formWrap) formWrap.hidden = false; };
+  if (cancelBtn) cancelBtn.onclick = function() { if (formWrap) formWrap.hidden = true; };
+
+  // Join
+  var authForm = document.getElementById('auth-form');
+  if (authForm) {
+    authForm.onsubmit = function(e) {
       e.preventDefault();
-      const text = input.value.trim();
+      var emailEl = document.getElementById('auth-email');
+      var nameEl = document.getElementById('auth-name-input');
+      var joinBtn = authForm.querySelector('button[type="submit"]');
+      var email = emailEl ? emailEl.value.trim() : '';
+      var name = nameEl ? nameEl.value.trim() : '';
+      if (!email) return;
+
+      if (joinBtn) { joinBtn.textContent = '...'; joinBtn.disabled = true; }
+
+      fetch('/api/axi.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'signup', email: email, name: name })
+      }).then(function(r) { return r.json(); }).then(function(data) {
+        if (data.ok && data.token) {
+          localStorage.setItem('kalam-token', data.token);
+          showLoggedIn(data.name || name || email.split('@')[0]);
+          addBubble('Welcome, ' + (data.name || name || 'friend') + '.', 'axi');
+        } else {
+          addBubble(data.error || 'Could not sign in.', 'axi');
+        }
+      }).catch(function() {
+        addBubble('Could not connect. Try again.', 'axi');
+      }).finally(function() {
+        if (joinBtn) { joinBtn.textContent = 'Join'; joinBtn.disabled = false; }
+      });
+    };
+  }
+
+  // Logout
+  var logoutBtn = document.getElementById('auth-logout');
+  if (logoutBtn) {
+    logoutBtn.onclick = function() {
+      localStorage.removeItem('kalam-token');
+      fetch('/api/axi.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'logout' })
+      }).catch(function() {});
+      showLoggedOut();
+    };
+  }
+
+  // Chat
+  var chatForm = document.getElementById('chat-form');
+  var chatInput = document.getElementById('chat-input');
+  var sendBtn = document.getElementById('chat-send');
+
+  if (chatForm && chatInput) {
+    chatForm.onsubmit = function(e) {
+      e.preventDefault();
+      var text = chatInput.value.trim();
       if (!text) return;
 
       addBubble(text, 'user');
-      input.value = '';
-      btn.disabled = true;
+      chatInput.value = '';
+      if (sendBtn) sendBtn.disabled = true;
 
-      const loading = addBubble('···', 'loading');
+      var loading = addBubble('···', 'loading');
 
-      try {
-        const res = await fetch('/api/axi.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: text }),
-        });
-        const data = await res.json();
+      fetch('/api/axi.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: text })
+      }).then(function(r) { return r.json(); }).then(function(data) {
         loading.remove();
         addBubble(data.reflection || data.mark || 'No response.', 'axi');
-      } catch (err) {
+      }).catch(function() {
         loading.remove();
         addBubble('Could not connect.', 'axi');
-      }
-
-      btn.disabled = false;
-      input.focus();
-    });
+      }).finally(function() {
+        if (sendBtn) sendBtn.disabled = false;
+        chatInput.focus();
+      });
+    };
   }
+})();
 </script>
