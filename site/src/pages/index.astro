@@ -215,7 +215,7 @@ if score == 0:
         const res = await fetch('/api/axi.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text }),
+          body: JSON.stringify({ content: text }),
         });
         const data = await res.json();
         loading.remove();
