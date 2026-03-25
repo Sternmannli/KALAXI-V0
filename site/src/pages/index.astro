@@ -77,7 +77,8 @@ import Base from '../layouts/Base.astro';
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 0.82rem; color: #2c2c2e; margin-right: 0.5rem;
   }
-  #auth-logged-in { display: flex; align-items: center; }
+  #auth-logged-in { align-items: center; }
+  #auth-logged-in:not([hidden]) { display: flex; }
 
   .auth-form-wrap {
     padding: 1rem;
@@ -308,9 +309,15 @@ import Base from '../layouts/Base.astro';
 
   authForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = (document.getElementById('auth-email') as HTMLInputElement).value.trim();
-    const name = (document.getElementById('auth-name-input') as HTMLInputElement).value.trim();
+    const emailEl = document.getElementById('auth-email') as HTMLInputElement;
+    const nameEl = document.getElementById('auth-name-input') as HTMLInputElement;
+    const joinBtn = authForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const email = emailEl.value.trim();
+    const name = nameEl.value.trim();
     if (!email) return;
+
+    joinBtn.textContent = '...';
+    joinBtn.disabled = true;
 
     try {
       const res = await fetch('/api/axi.php', {
@@ -321,9 +328,16 @@ import Base from '../layouts/Base.astro';
       const data = await res.json();
       if (data.ok && data.token) {
         localStorage.setItem('kalam-token', data.token);
-        showLoggedIn(data.name || email.split('@')[0]);
+        showLoggedIn(data.name || name || email.split('@')[0]);
+        addBubble('Welcome, ' + (data.name || name || 'friend') + '.', 'axi');
+      } else {
+        addBubble(data.error || 'Could not sign in. Try again.', 'axi');
       }
-    } catch (err) { /* silent */ }
+    } catch (err) {
+      addBubble('Could not connect. Try again.', 'axi');
+    }
+    joinBtn.textContent = 'Join';
+    joinBtn.disabled = false;
   });
 
   authLogout.addEventListener('click', async () => {
