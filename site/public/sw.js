@@ -1,5 +1,5 @@
 // kalam.ch Service Worker — The system breathes even offline.
-const CACHE_NAME = 'kalam-v2';
+const CACHE_NAME = 'kalam-v3';
 const PRECACHE = [
   '/',
   '/about/',
