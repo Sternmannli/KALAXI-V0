@@ -6,12 +6,10 @@ import Base from '../layouts/Base.astro';
 
   <main class="app" id="main-content">
 
-    <!-- Messages area -->
     <div class="messages" id="messages">
-      <div class="bubble axi">Hi. Say what's on your mind.</div>
+      <div class="bubble axi">Hi. What's on your mind?</div>
     </div>
 
-    <!-- Input bar — fixed at bottom like a real app -->
     <form class="input-bar" id="chat-form">
       <input type="text" id="chat-input" placeholder="say something..." maxlength="2000" autocomplete="off" enterkeyhint="send" />
       <button type="submit" id="chat-send" aria-label="Send">
@@ -19,7 +17,6 @@ import Base from '../layouts/Base.astro';
       </button>
     </form>
 
-    <!-- Reading paths — above input bar -->
     <nav class="paths" aria-label="Reading paths">
       <a href="/hakaka">hakaka</a>
       <a href="/ashwater">ashwater</a>
@@ -33,120 +30,127 @@ import Base from '../layouts/Base.astro';
 
 </Base>
 
-<style>
+<style is:global>
+  /* Override everything — this page is the app */
   .app {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 50px);
-    height: calc(100dvh - 50px);
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 0;
-    overflow: hidden;
+    display: flex !important;
+    flex-direction: column !important;
+    height: calc(100vh - 50px) !important;
+    height: calc(100dvh - 50px) !important;
+    max-width: 600px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #fafaf8 !important;
   }
 
-  /* Messages area — scrollable, takes remaining space */
   .messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 1rem 0.8rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+    flex: 1 !important;
+    overflow-y: auto !important;
+    padding: 1.2rem 1rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
     -webkit-overflow-scrolling: touch;
+    background: #fafaf8 !important;
   }
 
-  /* Chat bubbles */
+  /* ---- Bubbles ---- */
   .bubble {
-    max-width: 80%;
-    padding: 0.6rem 1rem;
-    border-radius: 18px;
-    font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
+    max-width: 82%;
+    padding: 0.75rem 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'IBM Plex Sans', sans-serif;
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: 1.55;
     word-wrap: break-word;
-    animation: fadeIn 0.2s ease;
+    animation: bubbleIn 0.25s ease;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
+  @keyframes bubbleIn {
+    from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
   .bubble.user {
-    align-self: flex-end;
-    background: #1a1a1a;
-    color: #fff;
-    border-bottom-right-radius: 4px;
+    align-self: flex-end !important;
+    background: #2c2c2e !important;
+    color: #fff !important;
+    border-radius: 20px 20px 4px 20px !important;
   }
 
   .bubble.axi {
-    align-self: flex-start;
-    background: #f0f0f0;
-    color: #1a1a1a;
-    border-bottom-left-radius: 4px;
+    align-self: flex-start !important;
+    background: #fff !important;
+    color: #1a1a1a !important;
+    border-radius: 20px 20px 20px 4px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
   }
 
   .bubble.loading {
-    align-self: flex-start;
-    background: #f0f0f0;
-    color: #999;
-    font-style: italic;
+    align-self: flex-start !important;
+    background: #fff !important;
+    color: #bbb !important;
+    border-radius: 20px 20px 20px 4px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+    font-size: 1.2rem;
+    letter-spacing: 0.2em;
   }
 
-  /* Reading paths */
+  /* ---- Paths ---- */
   .paths {
     display: flex;
     gap: 0.8rem;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 0.6rem 1rem;
+    padding: 0.5rem 1rem;
     border-top: 1px solid #eee;
     background: #fff;
+    flex-shrink: 0;
   }
-
   .paths a {
-    font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
-    font-size: 0.75rem;
-    color: #999;
-    letter-spacing: 0.06em;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.72rem;
+    color: #aaa;
+    letter-spacing: 0.05em;
     text-decoration: none;
     text-transform: lowercase;
   }
   .paths a:hover { color: #1a1a1a; }
 
-  /* Input bar — fixed at bottom */
+  /* ---- Input bar ---- */
   .input-bar {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.8rem;
-    border-top: 1px solid #eee;
-    background: #fff;
-    flex-shrink: 0;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding: 0.6rem 0.8rem !important;
+    border-top: 1px solid #eee !important;
+    background: #fff !important;
+    flex-shrink: 0 !important;
   }
 
   #chat-input {
     flex: 1;
-    border: 1px solid #e0e0e0;
-    border-radius: 20px;
-    padding: 0.6rem 1rem;
-    font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
+    border: 1.5px solid #e0e0e0;
+    border-radius: 22px;
+    padding: 0.65rem 1.1rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 1rem;
     outline: none;
-    background: #fafafa;
+    background: #f5f5f5;
     -webkit-appearance: none;
+    transition: border-color 0.2s, background 0.2s;
   }
   #chat-input:focus {
-    border-color: #999;
+    border-color: #aaa;
     background: #fff;
   }
+  #chat-input::placeholder { color: #c0c0c0; }
 
   #chat-send {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     border: none;
-    background: #1a1a1a;
+    background: #2c2c2e;
     color: #fff;
     border-radius: 50%;
     display: flex;
@@ -154,19 +158,19 @@ import Base from '../layouts/Base.astro';
     justify-content: center;
     cursor: pointer;
     flex-shrink: 0;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.1s;
   }
-  #chat-send:hover { background: #333; }
-  #chat-send:disabled { background: #ccc; cursor: default; }
+  #chat-send:hover { background: #444; }
+  #chat-send:active { transform: scale(0.95); }
+  #chat-send:disabled { background: #d0d0d0; cursor: default; }
 
-  /* Mobile: make it truly full-screen app-like */
   @media (max-width: 600px) {
     .app {
-      height: calc(100vh - 44px);
-      height: calc(100dvh - 44px);
+      height: calc(100vh - 44px) !important;
+      height: calc(100dvh - 44px) !important;
     }
-    .bubble { font-size: 0.9rem; }
-    #chat-input { font-size: 16px; /* prevents iOS zoom */ }
+    .bubble { font-size: 0.92rem; }
+    #chat-input { font-size: 16px; }
   }
 </style>
 
@@ -185,10 +189,6 @@ import Base from '../layouts/Base.astro';
     return el;
   }
 
-  function escapeAndSet(el: HTMLElement, text: string) {
-    el.textContent = text;
-  }
-
   if (form && input && messages) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -199,7 +199,7 @@ import Base from '../layouts/Base.astro';
       input.value = '';
       btn.disabled = true;
 
-      const loading = addBubble('...', 'loading');
+      const loading = addBubble('···', 'loading');
 
       try {
         const res = await fetch('/api/axi.php', {
