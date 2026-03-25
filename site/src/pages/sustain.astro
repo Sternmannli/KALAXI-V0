@@ -113,9 +113,15 @@ import QRCode from '../components/QRCode.astro';
         <button class="freq-btn" data-freq="monthly" id="freq-monthly">Monthly</button>
       </div>
 
-      <!-- Payment methods -->
+      <!-- Card payment (Stripe) -->
+      <div class="card-payment">
+        <button id="pay-card-btn" class="pay-card-btn">Pay with card</button>
+        <p class="card-note">Secure payment via Stripe. CHF, EUR, or USD.</p>
+      </div>
+
+      <!-- Other payment methods -->
       <div class="alt-methods">
-        <p class="alt-title">Choose how to sustain:</p>
+        <p class="alt-title">Or choose another way:</p>
         <div class="alt-grid">
           <a href="https://paypal.me/MohamedFarag102" target="_blank" rel="noopener" class="alt-method">
             <div class="alt-method-inner">
@@ -255,6 +261,32 @@ import QRCode from '../components/QRCode.astro';
   .cost-period { color: var(--text-dim); font-size: var(--text-sm); }
   .cost-volunteer { color: var(--color-presence); font-style: italic; font-family: var(--font-body); }
   .cost-note { font-style: italic; margin-top: var(--space-2); }
+
+  /* Card payment button */
+  .card-payment {
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+  .pay-card-btn {
+    background: #2c2c2e;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.85rem 2.5rem;
+    font-size: 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.02em;
+  }
+  .pay-card-btn:hover { background: #444; }
+  .pay-card-btn:active { transform: scale(0.98); }
+  .pay-card-btn:disabled { background: #999; cursor: wait; }
+  .card-note {
+    font-size: 0.72rem;
+    color: #aaa;
+    margin-top: 0.5rem;
+  }
 
   /* Amount selector */
   .amount-selector {
@@ -475,8 +507,40 @@ import QRCode from '../components/QRCode.astro';
     });
   });
 
-  // ── Stripe checkout (reserved for Phase 1 when STRIPE_SECRET_KEY is set) ──
-  // Currently: PayPal, TWINT, and bank transfer are the active methods.
+  // ── Stripe checkout ──
+  // "Pay with card" button triggers Stripe Checkout redirect
+  const cardBtn = document.getElementById('pay-card-btn');
+  if (cardBtn) {
+    cardBtn.addEventListener('click', async () => {
+      const btn = cardBtn as HTMLButtonElement;
+      btn.textContent = 'Connecting...';
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/stripe.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: selectedAmount, currency: 'chf', frequency }),
+        });
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          btn.textContent = data.error || 'Not available yet';
+          setTimeout(() => { btn.textContent = 'Pay with card'; btn.disabled = false; }, 3000);
+        }
+      } catch (e) {
+        btn.textContent = 'Connection failed';
+        setTimeout(() => { btn.textContent = 'Pay with card'; btn.disabled = false; }, 3000);
+      }
+    });
+  }
+
+  // Show thanks if returning from successful payment
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('thanks') === '1') {
+    const thanksEl = document.getElementById('sustain-thanks');
+    if (thanksEl) thanksEl.hidden = false;
+  }
 
   // ── TWINT copy button ──
   const twintCopyBtn = document.getElementById('twint-copy');
