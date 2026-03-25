@@ -1004,6 +1004,31 @@ function get_mysql(): ?PDO {
             $config['DB_USER'] ?? '', $config['DB_PASS'] ?? '',
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
         );
+
+        // Auto-create tables
+        $pdo->exec('CREATE TABLE IF NOT EXISTS donors (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            email VARCHAR(255) NOT NULL UNIQUE,
+            display_name VARCHAR(100) DEFAULT NULL,
+            auth_token VARCHAR(64) NOT NULL,
+            interaction_count INT DEFAULT 0,
+            pattern_json TEXT DEFAULT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4');
+
+        $pdo->exec('CREATE TABLE IF NOT EXISTS interactions (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            donor_id INT NOT NULL,
+            input_text TEXT NOT NULL,
+            axi_response TEXT DEFAULT NULL,
+            register VARCHAR(30) DEFAULT NULL,
+            witness_mark TEXT DEFAULT NULL,
+            content_hash VARCHAR(64) DEFAULT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (donor_id) REFERENCES donors(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4');
+
         return $pdo;
     } catch (PDOException $e) {
         return null;
@@ -1240,6 +1265,102 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
     echo json_encode(['count' => $count]);
     exit;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SECTION 11 — USER AUTH (email-based, no password)
+// ═══════════════════════════════════════════════════════════════════
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $ct = $_SERVER['CONTENT_TYPE'] ?? '';
+    $raw = file_get_contents('php://input');
+    $body = (strpos($ct, 'application/json') !== false) ? json_decode($raw, true) : null;
+    $auth_type = $body['type'] ?? '';
+
+    // --- Sign up ---
+    if ($auth_type === 'signup') {
+        $email = trim($body['email'] ?? '');
+        $name = trim($body['name'] ?? '');
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            http_response_code(400); echo json_encode(['error' => 'Valid email required']); exit;
+        }
+        $db = get_mysql();
+        if (!$db) { http_response_code(500); echo json_encode(['error' => 'Database unavailable']); exit; }
+
+        // Check if exists
+        $stmt = $db->prepare('SELECT id, auth_token, display_name FROM donors WHERE email = ?');
+        $stmt->execute([$email]);
+        $existing = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($existing) {
+            // Already registered — log them in
+            session_start();
+            $_SESSION['donor_id'] = $existing['id'];
+            $_SESSION['donor_token'] = $existing['auth_token'];
+            echo json_encode(['ok' => true, 'name' => $existing['display_name'] ?? '', 'token' => $existing['auth_token'], 'message' => 'Welcome back.']);
+            exit;
+        }
+
+        // New user
+        $token = bin2hex(random_bytes(32));
+        $stmt = $db->prepare('INSERT INTO donors (email, display_name, auth_token) VALUES (?, ?, ?)');
+        $stmt->execute([$email, $name ?: null, $token]);
+        $donor_id = $db->lastInsertId();
+
+        session_start();
+        $_SESSION['donor_id'] = $donor_id;
+        $_SESSION['donor_token'] = $token;
+
+        echo json_encode(['ok' => true, 'name' => $name, 'token' => $token, 'message' => 'Welcome.']);
+        exit;
+    }
+
+    // --- Login (by token stored in localStorage) ---
+    if ($auth_type === 'login') {
+        $token = trim($body['token'] ?? '');
+        if (empty($token)) { http_response_code(400); echo json_encode(['error' => 'Token required']); exit; }
+
+        $db = get_mysql();
+        if (!$db) { http_response_code(500); echo json_encode(['error' => 'Database unavailable']); exit; }
+
+        $stmt = $db->prepare('SELECT id, display_name, interaction_count FROM donors WHERE auth_token = ?');
+        $stmt->execute([$token]);
+        $donor = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$donor) { http_response_code(401); echo json_encode(['error' => 'Invalid token']); exit; }
+
+        session_start();
+        $_SESSION['donor_id'] = $donor['id'];
+        $_SESSION['donor_token'] = $token;
+
+        echo json_encode(['ok' => true, 'name' => $donor['display_name'] ?? '', 'interactions' => (int) $donor['interaction_count']]);
+        exit;
+    }
+
+    // --- Profile ---
+    if ($auth_type === 'profile') {
+        session_start();
+        if (empty($_SESSION['donor_id'])) { echo json_encode(['logged_in' => false]); exit; }
+
+        $db = get_mysql();
+        if (!$db) { echo json_encode(['logged_in' => false]); exit; }
+
+        $stmt = $db->prepare('SELECT display_name, interaction_count, created_at FROM donors WHERE id = ?');
+        $stmt->execute([$_SESSION['donor_id']]);
+        $donor = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$donor) { echo json_encode(['logged_in' => false]); exit; }
+        echo json_encode(['logged_in' => true, 'name' => $donor['display_name'] ?? '', 'interactions' => (int) $donor['interaction_count'], 'since' => $donor['created_at']]);
+        exit;
+    }
+
+    // --- Logout ---
+    if ($auth_type === 'logout') {
+        session_start();
+        session_destroy();
+        echo json_encode(['ok' => true]);
+        exit;
+    }
 }
 
 // --- POST: The living pipeline ---
