@@ -7,9 +7,9 @@ Computes first and second derivatives. Classifies trend. Persists to disk.
 
 import json
 import os
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import List, Optional, Dict
+from typing import List, Dict
 from enum import Enum
 
 
@@ -101,9 +101,9 @@ class DriftDetector:
         for c in self._components:
             vals = [r.components[c] for r in win if c in r.components]
             comp_rates[c] = self._rate(vals)
-        level = self._classify(rate, accel, cur)
+        level = self._classify(rate, accel, cur, self._consec)
         for c in self._components:
-            cl = self._classify(comp_rates.get(c, 0), 0, cur)
+            cl = self._classify(comp_rates.get(c, 0), 0, cur, self._comp_consec.get(c, 0))
             if cl == Level.CRITICAL and level == Level.STABLE:
                 level = Level.DECLINING
         return Alert(level, round(rate, 4), round(accel, 4), cur,
@@ -120,7 +120,7 @@ class DriftDetector:
         mid = len(vals) // 2
         return self._rate(vals[mid:]) - self._rate(vals[:mid])
 
-    def _classify(self, rate: float, accel: float, current: float) -> Level:
+    def _classify(self, rate: float, accel: float, current: float, consec: int = 0) -> Level:
         if current <= self._floor and rate < 0:
             return Level.CRITICAL
         if rate <= self._critical_threshold:
@@ -129,9 +129,9 @@ class DriftDetector:
             return Level.CRITICAL
         if rate <= self._decline_threshold:
             return Level.DECLINING
-        if self._consec >= self._consec_crit:
+        if consec >= self._consec_crit:
             return Level.CRITICAL
-        if self._consec >= self._consec_warn:
+        if consec >= self._consec_warn:
             return Level.DECLINING
         return Level.STABLE
 
