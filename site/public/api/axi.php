@@ -1268,19 +1268,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 // ═══════════════════════════════════════════════════════════════════
+// READ BODY ONCE — shared across all POST handlers
+// ═══════════════════════════════════════════════════════════════════
+$_KALAM_RAW_BODY = null;
+$_KALAM_JSON = null;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $_KALAM_RAW_BODY = file_get_contents('php://input');
+    $ct = $_SERVER['CONTENT_TYPE'] ?? '';
+    if (strpos($ct, 'application/json') !== false) {
+        $_KALAM_JSON = json_decode($_KALAM_RAW_BODY, true);
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════════
 // SECTION 11 — USER AUTH (email-based, no password)
 // ═══════════════════════════════════════════════════════════════════
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $ct = $_SERVER['CONTENT_TYPE'] ?? '';
-    $raw = file_get_contents('php://input');
-    $body = (strpos($ct, 'application/json') !== false) ? json_decode($raw, true) : null;
-    $auth_type = $body['type'] ?? '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_KALAM_JSON) {
+    $auth_type = $_KALAM_JSON['type'] ?? '';
 
     // --- Sign up ---
     if ($auth_type === 'signup') {
-        $email = trim($body['email'] ?? '');
-        $name = trim($body['name'] ?? '');
+        $email = trim($_KALAM_JSON['email'] ?? '');
+        $name = trim($_KALAM_JSON['name'] ?? '');
         if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             http_response_code(400); echo json_encode(['error' => 'Valid email required']); exit;
         }
@@ -1317,7 +1327,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // --- Login (by token stored in localStorage) ---
     if ($auth_type === 'login') {
-        $token = trim($body['token'] ?? '');
+        $token = trim($_KALAM_JSON['token'] ?? '');
         if (empty($token)) { http_response_code(400); echo json_encode(['error' => 'Token required']); exit; }
 
         $db = get_mysql();
@@ -1377,8 +1387,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $file_data = null;
         $donor_mood = 'witness';
     } else {
-        $raw_body = file_get_contents('php://input');
-        $input = json_decode($raw_body, true);
+        $input = $_KALAM_JSON;
 
         // Route connect requests
         if (isset($input['type']) && in_array($input['type'], ['newsletter', 'feedback', 'collaboration'])) {
