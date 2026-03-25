@@ -6,6 +6,28 @@ import Base from '../layouts/Base.astro';
 
   <main class="app" id="main-content">
 
+    <!-- Auth bar -->
+    <div class="auth-bar" id="auth-bar">
+      <div id="auth-logged-out">
+        <button id="auth-show-form" class="auth-link">Sign in</button>
+      </div>
+      <div id="auth-logged-in" hidden>
+        <span id="auth-name" class="auth-name"></span>
+        <button id="auth-logout" class="auth-link auth-dim">sign out</button>
+      </div>
+    </div>
+
+    <!-- Sign-in form (hidden by default) -->
+    <div class="auth-form-wrap" id="auth-form-wrap" hidden>
+      <form id="auth-form" class="auth-form">
+        <input type="email" id="auth-email" placeholder="your email" required autocomplete="email" />
+        <input type="text" id="auth-name-input" placeholder="your name (optional)" autocomplete="name" />
+        <button type="submit">Join</button>
+        <button type="button" id="auth-cancel" class="auth-cancel">cancel</button>
+      </form>
+      <p class="auth-note">No password. Just your email so AXI remembers you.</p>
+    </div>
+
     <div class="messages" id="messages">
       <div class="bubble axi">Hi. What's on your mind?</div>
     </div>
@@ -31,6 +53,75 @@ import Base from '../layouts/Base.astro';
 </Base>
 
 <style is:global>
+  /* Auth bar */
+  .auth-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.4rem 1rem;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+    min-height: 36px;
+  }
+  .auth-link {
+    background: none; border: none; cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.8rem; color: #2c2c2e; padding: 0.3rem 0.7rem;
+    border-radius: 14px; background: #f0f0f0; transition: background 0.2s;
+  }
+  .auth-link:hover { background: #e0e0e0; }
+  .auth-dim { background: none; color: #aaa; font-size: 0.7rem; }
+  .auth-dim:hover { color: #666; background: none; }
+  .auth-name {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.82rem; color: #2c2c2e; margin-right: 0.5rem;
+  }
+  #auth-logged-in { display: flex; align-items: center; }
+
+  .auth-form-wrap {
+    padding: 1rem;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+  }
+  .auth-form {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .auth-form input {
+    flex: 1;
+    min-width: 140px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    outline: none;
+    -webkit-appearance: none;
+  }
+  .auth-form input:focus { border-color: #999; }
+  .auth-form button[type="submit"] {
+    background: #2c2c2e;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  .auth-form button[type="submit"]:hover { background: #444; }
+  .auth-cancel {
+    background: none; border: none; color: #aaa; font-size: 0.8rem; cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  .auth-note {
+    font-size: 0.72rem; color: #bbb; margin: 0.4rem 0 0; text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
   /* Override everything — this page is the app */
   .app {
     display: flex !important;
@@ -175,6 +266,73 @@ import Base from '../layouts/Base.astro';
 </style>
 
 <script>
+  // === AUTH ===
+  const authBar = document.getElementById('auth-bar')!;
+  const authLoggedOut = document.getElementById('auth-logged-out')!;
+  const authLoggedIn = document.getElementById('auth-logged-in')!;
+  const authShowForm = document.getElementById('auth-show-form')!;
+  const authFormWrap = document.getElementById('auth-form-wrap')!;
+  const authForm = document.getElementById('auth-form') as HTMLFormElement;
+  const authCancel = document.getElementById('auth-cancel')!;
+  const authNameEl = document.getElementById('auth-name')!;
+  const authLogout = document.getElementById('auth-logout')!;
+
+  function showLoggedIn(name: string) {
+    authLoggedOut.hidden = true;
+    authLoggedIn.hidden = false;
+    authFormWrap.hidden = true;
+    authNameEl.textContent = name || 'signed in';
+  }
+
+  function showLoggedOut() {
+    authLoggedOut.hidden = false;
+    authLoggedIn.hidden = true;
+    authFormWrap.hidden = true;
+  }
+
+  // Check if already logged in (token in localStorage)
+  const savedToken = localStorage.getItem('kalam-token');
+  if (savedToken) {
+    fetch('/api/axi.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'login', token: savedToken }),
+    }).then(r => r.json()).then(d => {
+      if (d.ok || d.logged_in) showLoggedIn(d.name);
+      else { localStorage.removeItem('kalam-token'); showLoggedOut(); }
+    }).catch(() => showLoggedOut());
+  }
+
+  authShowForm.addEventListener('click', () => { authFormWrap.hidden = false; });
+  authCancel.addEventListener('click', () => { authFormWrap.hidden = true; });
+
+  authForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = (document.getElementById('auth-email') as HTMLInputElement).value.trim();
+    const name = (document.getElementById('auth-name-input') as HTMLInputElement).value.trim();
+    if (!email) return;
+
+    try {
+      const res = await fetch('/api/axi.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'signup', email, name }),
+      });
+      const data = await res.json();
+      if (data.ok && data.token) {
+        localStorage.setItem('kalam-token', data.token);
+        showLoggedIn(data.name || email.split('@')[0]);
+      }
+    } catch (err) { /* silent */ }
+  });
+
+  authLogout.addEventListener('click', async () => {
+    localStorage.removeItem('kalam-token');
+    try { await fetch('/api/axi.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'logout' }) }); } catch(e) {}
+    showLoggedOut();
+  });
+
+  // === CHAT ===
   const form = document.getElementById('chat-form');
   const input = document.getElementById('chat-input') as HTMLInputElement;
   const messages = document.getElementById('messages');
