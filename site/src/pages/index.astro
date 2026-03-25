@@ -2,116 +2,38 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="kalam.ch — The Word" description="A constitutional framework where human dignity is the first technical requirement. No private data stored. By design.">
+<Base title="kalam.ch" description="Stories, code, and a voice that self-corrects.">
 
-  <!-- Dedication overlay — proverb with hold-to-enter -->
-  <div id="dedication" class="dedication-overlay">
-    <p class="ded-proverb" id="ded-proverb">Three threads cross the river.<br>The knot holds.</p>
-    <div class="ded-hold" id="ded-hold">
-      <svg class="ded-ring" width="40" height="40" viewBox="0 0 40 40">
-        <circle cx="20" cy="20" r="16" fill="none" stroke="rgba(201,169,110,0.2)" stroke-width="2" />
-        <circle class="ded-ring-fill" cx="20" cy="20" r="16" fill="none" stroke="var(--color-dignity, #c44a1a)" stroke-width="2"
-          stroke-dasharray="100.53" stroke-dashoffset="100.53" transform="rotate(-90 20 20)" />
-      </svg>
-      <span class="ded-hold-text">hold to enter</span>
-    </div>
-    <div class="origin-flags">
-      <span class="flag-icon">🇪🇬</span>
-      <span class="flag-divider">&middot;</span>
-      <span class="flag-icon">🇨🇭</span>
-    </div>
-  </div>
+  <main class="home" id="main-content">
 
-  <!-- The face — without the mouth -->
-  <main class="threshold" id="main-content">
+    <h1 class="site-title">kalam</h1>
 
-    <!-- The equation -->
-    <p class="equation">D = A &times; L &times; M</p>
+    <p class="site-desc">Three checks before every response:<br>
+      Am I drifting? Am I making things up? Do I understand you?</p>
 
-    <!-- The declaration -->
-    <p class="declaration">Human dignity is a technical requirement.</p>
+    <pre class="the-code"><code>score = A * L * M
+if score == 0:
+    fix(whichever_is_zero)
+    # zero is not the end — it's where the work begins</code></pre>
 
-    <!-- The hint — the voice is coming -->
-    <p class="voice-hint">The voice is being forged.<br>What comes will not be borrowed.</p>
+    <p class="code-explain">A = staying on track. L = saying true things. M = understanding what you mean.<br>
+      If any drops to zero, the system catches itself and keeps going.</p>
 
-    <!-- Reading paths -->
     <nav class="reading-paths" aria-label="Reading paths">
-      <a href="/canon">canon</a>
       <a href="/hakaka">hakaka</a>
       <a href="/ashwater">ashwater</a>
       <a href="/kinderbuch">kinderbuch</a>
       <a href="/kalaxi1">the same river</a>
-      <a href="/r7m">the womb</a>
-      <a href="/science">science</a>
-      <a href="/compass">compass</a>
-      <a href="/about">about</a>
+      <a href="/about-axi">axi</a>
       <a href="/sustain">sustain</a>
     </nav>
-
-    <!-- Ledger count — quiet presence -->
-    <p id="ledger-count" class="ledger-count" aria-live="polite"></p>
 
   </main>
 
 </Base>
 
 <style>
-  /* ===== Dedication Overlay ===== */
-  .dedication-overlay {
-    position: fixed; inset: 0; z-index: 9999;
-    background: var(--bg-primary, #fafaf8);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    cursor: pointer; transition: opacity 2s ease;
-  }
-  .ded-proverb {
-    font-family: var(--font-proverb, var(--font-heading));
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    color: var(--text-primary);
-    text-align: center;
-    letter-spacing: 0.06em;
-    line-height: 2;
-    font-style: italic;
-    font-weight: 300;
-    opacity: 0;
-    animation: dedFadeIn 3s ease 0.5s forwards;
-    max-width: 30ch;
-    padding: 0 1.5rem;
-  }
-  @keyframes dedFadeIn { from { opacity: 0; } to { opacity: 0.8; } }
-
-  .ded-hold {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
-    opacity: 0;
-    animation: dedFadeIn 2s ease 3s forwards;
-  }
-  .ded-ring { cursor: pointer; }
-  .ded-ring-fill { transition: stroke-dashoffset 0.05s linear; }
-  .ded-hold-text {
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    color: var(--text-dim, #999);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  .origin-flags {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    opacity: 0;
-    animation: dedFadeIn 2s ease 4s forwards;
-  }
-  .flag-icon { font-size: 1.4rem; line-height: 1; }
-  .flag-divider { color: var(--text-dim, #999); font-size: 0.7rem; opacity: 0.5; }
-
-  /* ===== THRESHOLD — centered, full-viewport ===== */
-  .threshold {
+  .home {
     min-height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
@@ -119,63 +41,57 @@ import Base from '../layouts/Base.astro';
     justify-content: center;
     text-align: center;
     padding: 2rem 1.5rem;
-    position: relative;
   }
 
-  /* ===== The Equation ===== */
-  .equation {
+  .site-title {
     font-family: var(--font-heading, 'Cormorant Garamond', serif);
-    font-size: clamp(1.8rem, 5vw, 3rem);
-    color: var(--color-dignity, #c44a1a);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
     letter-spacing: 0.08em;
-    font-weight: 300;
-    margin: 0 0 1.5rem;
-    opacity: 0;
-    animation: contentFadeIn 2s ease 0.3s forwards;
-  }
-
-  /* ===== The Declaration ===== */
-  .declaration {
-    font-family: var(--font-heading, 'Cormorant Garamond', serif);
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
     color: var(--text-primary, #1a1a1a);
-    letter-spacing: 0.04em;
-    font-weight: 400;
-    margin: 0 0 3rem;
-    max-width: 30ch;
-    opacity: 0;
-    animation: contentFadeIn 2s ease 0.8s forwards;
+    margin: 0 0 1.5rem;
   }
 
-  /* ===== The Hint ===== */
-  .voice-hint {
-    font-family: var(--font-heading, 'Cormorant Garamond', serif);
-    font-size: clamp(0.95rem, 2vw, 1.15rem);
+  .site-desc {
+    font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
     color: var(--text-secondary, #666);
-    font-style: italic;
-    font-weight: 300;
-    line-height: 2;
-    letter-spacing: 0.04em;
-    max-width: 28ch;
-    margin: 0 0 4rem;
-    opacity: 0;
-    animation: contentFadeIn 3s ease 1.5s forwards;
+    line-height: 1.8;
+    max-width: 36ch;
+    margin: 0 0 2.5rem;
   }
 
-  @keyframes contentFadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+  .the-code {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 1.5rem 2rem;
+    border-radius: 6px;
+    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+    line-height: 1.7;
+    text-align: left;
+    max-width: 42ch;
+    margin: 0 0 1.5rem;
+    overflow-x: auto;
+  }
+  .the-code code {
+    font-family: 'IBM Plex Mono', 'Menlo', monospace;
   }
 
-  /* ===== Reading Paths ===== */
+  .code-explain {
+    font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
+    font-size: 0.85rem;
+    color: var(--text-dim, #999);
+    line-height: 1.8;
+    max-width: 44ch;
+    margin: 0 0 3rem;
+  }
+
   .reading-paths {
     display: flex;
     gap: 1.2rem;
     flex-wrap: wrap;
     justify-content: center;
     max-width: 40ch;
-    opacity: 0;
-    animation: contentFadeIn 2s ease 2.5s forwards;
   }
 
   .reading-paths a {
@@ -191,156 +107,8 @@ import Base from '../layouts/Base.astro';
   }
 
   .reading-paths a:hover {
-    color: var(--color-dignity, #c44a1a);
-    border-bottom-color: var(--color-dignity, #c44a1a);
-  }
-
-  /* ===== Ledger Count ===== */
-  .ledger-count {
-    position: fixed;
-    bottom: 1.5rem;
-    left: 1.5rem;
-    font-family: var(--font-heading, 'Cormorant Garamond', serif);
-    font-size: 0.8rem;
-    color: var(--color-presence, #c9a96e);
-    letter-spacing: 0.1em;
-    opacity: 0;
-    transition: opacity 2s ease;
-    z-index: 10;
-  }
-  .ledger-count.visible { opacity: 0.5; }
-
-  /* ===== Mycelium — ambient glow ===== */
-  :root { --mycelium-intensity: 0; }
-  body::after {
-    content: ''; position: fixed; inset: 0;
-    pointer-events: none; z-index: 0;
-    background: radial-gradient(ellipse at 50% 60%, rgba(196, 74, 26, 0.04) 0%, rgba(10, 123, 98, 0.02) 40%, transparent 70%);
-    opacity: calc(var(--mycelium-intensity) * 0.01);
-    transition: opacity 2s ease;
-  }
-
-  /* ===== Reduced motion ===== */
-  @media (prefers-reduced-motion: reduce) {
-    .ded-proverb, .ded-hold, .origin-flags,
-    .equation, .declaration, .voice-hint, .reading-paths {
-      animation: none;
-      opacity: 1;
-    }
+    color: var(--text-primary, #1a1a1a);
+    border-bottom-color: var(--text-primary, #1a1a1a);
   }
 </style>
 
-<script is:inline>
-// === DEDICATION — proverb with hold-to-enter ===
-(function(){
-  var ded = document.getElementById('dedication');
-  if (!ded) return;
-
-  var isReturn = localStorage.getItem('kalam-visited');
-  if (sessionStorage.getItem('ded-seen')) {
-    ded.remove();
-    return;
-  }
-
-  function dismiss() {
-    sessionStorage.setItem('ded-seen', '1');
-    localStorage.setItem('kalam-visited', '1');
-    ded.classList.add('dismissed');
-    ded.style.opacity = '0';
-    document.removeEventListener('keydown', dedKeyDown);
-    document.removeEventListener('keyup', dedKeyUp);
-    setTimeout(function(){ ded.remove(); }, 2000);
-  }
-
-  // Return visitors: fast auto-dismiss (1.5s)
-  if (isReturn) {
-    setTimeout(dismiss, 1500);
-    ded.addEventListener('click', dismiss);
-    return;
-  }
-
-  // First visit: hold-to-enter (2 seconds) with progress ring
-  var ringFill = ded.querySelector('.ded-ring-fill');
-  var HOLD_MS = 2000;
-  var CIRCUMFERENCE = 100.53;
-  var holdStart = 0;
-  var holdTimer = null;
-
-  function startHold() {
-    holdStart = Date.now();
-    holdTimer = setInterval(function() {
-      var elapsed = Date.now() - holdStart;
-      var progress = Math.min(elapsed / HOLD_MS, 1);
-      if (ringFill) ringFill.style.strokeDashoffset = String(CIRCUMFERENCE * (1 - progress));
-      if (progress >= 1) {
-        clearInterval(holdTimer);
-        if (navigator.vibrate) navigator.vibrate(10);
-        dismiss();
-      }
-    }, 16);
-  }
-
-  function stopHold() {
-    if (holdTimer) clearInterval(holdTimer);
-    holdStart = 0;
-    if (ringFill) ringFill.style.strokeDashoffset = String(CIRCUMFERENCE);
-  }
-
-  ded.addEventListener('mousedown', startHold);
-  ded.addEventListener('mouseup', stopHold);
-  ded.addEventListener('mouseleave', stopHold);
-  ded.addEventListener('touchstart', function(e) { e.preventDefault(); startHold(); }, {passive: false});
-  ded.addEventListener('touchend', stopHold);
-  ded.addEventListener('touchcancel', stopHold);
-
-  function dedKeyDown(e) {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      if (!holdStart) startHold();
-    }
-  }
-  function dedKeyUp(e) {
-    if (e.key === 'Enter' || e.key === ' ') stopHold();
-  }
-  document.addEventListener('keydown', dedKeyDown);
-  document.addEventListener('keyup', dedKeyUp);
-
-  // Accessibility fallback: auto-dismiss after 8 seconds
-  setTimeout(dismiss, 8000);
-})();
-</script>
-
-<script>
-  // === LEDGER COUNT — fetch witness marks ===
-  (async function() {
-    const el = document.getElementById('ledger-count');
-    if (!el) return;
-    try {
-      const res = await fetch('/api/axi.php?count');
-      if (res.ok) {
-        const data = await res.json();
-        const count = data.count || 0;
-        if (count > 0) {
-          el.textContent = count + ' witness marks';
-          el.classList.add('visible');
-          // Mycelium intensity grows with global witness count
-          // The site breathes with accumulated presence — all visitors, not just this device
-          const intensity = Math.min(count * 2, 100);
-          document.documentElement.style.setProperty('--mycelium-intensity', String(intensity));
-        }
-      }
-    } catch(e) {
-      // Silent — the count is a quiet presence, not a requirement
-      // Fallback: use local exchanges if server unreachable
-      try {
-        const stored = localStorage.getItem('kalam-exchanges');
-        if (stored) {
-          const n = parseInt(stored, 10);
-          if (n > 0) {
-            document.documentElement.style.setProperty('--mycelium-intensity', String(Math.min(n * 5, 100)));
-          }
-        }
-      } catch(e2) {}
-    }
-  })();
-</script>
