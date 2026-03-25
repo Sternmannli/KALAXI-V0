@@ -4,31 +4,23 @@ import Base from '../layouts/Base.astro';
 
 <Base title="kalam.ch" description="Stories, code, and a voice that self-corrects.">
 
-  <main class="home" id="main-content">
+  <main class="app" id="main-content">
 
-    <h1 class="site-title">kalam</h1>
-
-    <p class="site-desc">Three checks before every response:<br>
-      Am I drifting? Am I making things up? Do I understand you?</p>
-
-    <pre class="the-code"><code>score = A * L * M
-if score == 0:
-    fix(whichever_is_zero)
-    # zero is not the end — it's where the work begins</code></pre>
-
-    <p class="code-explain">A = staying on track. L = saying true things. M = understanding what you mean.<br>
-      If any drops to zero, the system catches itself and keeps going.</p>
-
-    <!-- Chat -->
-    <div class="chat-box" id="chat-box">
-      <div class="chat-messages" id="chat-messages"></div>
-      <form class="chat-form" id="chat-form">
-        <input type="text" id="chat-input" placeholder="say something" maxlength="2000" autocomplete="off" />
-        <button type="submit" id="chat-send" aria-label="Send">&#8593;</button>
-      </form>
+    <!-- Messages area -->
+    <div class="messages" id="messages">
+      <div class="bubble axi">Hi. Say what's on your mind.</div>
     </div>
 
-    <nav class="reading-paths" aria-label="Reading paths">
+    <!-- Input bar — fixed at bottom like a real app -->
+    <form class="input-bar" id="chat-form">
+      <input type="text" id="chat-input" placeholder="say something..." maxlength="2000" autocomplete="off" enterkeyhint="send" />
+      <button type="submit" id="chat-send" aria-label="Send">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      </button>
+    </form>
+
+    <!-- Reading paths — above input bar -->
+    <nav class="paths" aria-label="Reading paths">
       <a href="/hakaka">hakaka</a>
       <a href="/ashwater">ashwater</a>
       <a href="/kinderbuch">kinderbuch</a>
@@ -42,156 +34,160 @@ if score == 0:
 </Base>
 
 <style>
-  .home {
-    min-height: calc(100vh - 60px);
+  .app {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem 1.5rem;
+    height: calc(100vh - 50px);
+    height: calc(100dvh - 50px);
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
   }
 
-  .site-title {
-    font-family: var(--font-heading, 'Cormorant Garamond', serif);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    color: var(--text-primary, #1a1a1a);
-    margin: 0 0 1.5rem;
-  }
-
-  .site-desc {
-    font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
-    font-size: clamp(0.95rem, 2vw, 1.1rem);
-    color: var(--text-secondary, #666);
-    line-height: 1.8;
-    max-width: 36ch;
-    margin: 0 0 2.5rem;
-  }
-
-  .the-code {
-    background: #1a1a1a;
-    color: #e0e0e0;
-    padding: 1.5rem 2rem;
-    border-radius: 6px;
-    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
-    line-height: 1.7;
-    text-align: left;
-    max-width: 42ch;
-    margin: 0 0 1.5rem;
-    overflow-x: auto;
-  }
-  .the-code code {
-    font-family: 'IBM Plex Mono', 'Menlo', monospace;
-  }
-
-  .code-explain {
-    font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
-    font-size: 0.85rem;
-    color: var(--text-dim, #999);
-    line-height: 1.8;
-    max-width: 44ch;
-    margin: 0 0 3rem;
-  }
-
-  .reading-paths {
+  /* Messages area — scrollable, takes remaining space */
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 0.8rem;
     display: flex;
-    gap: 1.2rem;
+    flex-direction: column;
+    gap: 0.6rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Chat bubbles */
+  .bubble {
+    max-width: 80%;
+    padding: 0.6rem 1rem;
+    border-radius: 18px;
+    font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+    animation: fadeIn 0.2s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .bubble.user {
+    align-self: flex-end;
+    background: #1a1a1a;
+    color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+
+  .bubble.axi {
+    align-self: flex-start;
+    background: #f0f0f0;
+    color: #1a1a1a;
+    border-bottom-left-radius: 4px;
+  }
+
+  .bubble.loading {
+    align-self: flex-start;
+    background: #f0f0f0;
+    color: #999;
+    font-style: italic;
+  }
+
+  /* Reading paths */
+  .paths {
+    display: flex;
+    gap: 0.8rem;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 40ch;
-  }
-
-  .reading-paths a {
-    font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
-    font-size: 0.85rem;
-    color: var(--text-dim, #999);
-    letter-spacing: 0.08em;
-    text-decoration: none;
-    text-transform: lowercase;
-    border-bottom: 1px solid transparent;
-    transition: all 0.3s ease;
-    padding-bottom: 2px;
-  }
-
-  .reading-paths a:hover {
-    color: var(--text-primary, #1a1a1a);
-    border-bottom-color: var(--text-primary, #1a1a1a);
-  }
-
-  /* Chat */
-  .chat-box {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 0 3rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
+    padding: 0.6rem 1rem;
+    border-top: 1px solid #eee;
     background: #fff;
   }
-  .chat-messages {
-    min-height: 60px;
-    max-height: 300px;
-    overflow-y: auto;
-    padding: 1rem;
+
+  .paths a {
     font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--text-primary, #1a1a1a);
+    font-size: 0.75rem;
+    color: #999;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    text-transform: lowercase;
   }
-  .chat-messages:empty::before {
-    content: '';
-  }
-  .chat-msg { margin-bottom: 0.8rem; }
-  .chat-msg.user { color: var(--text-dim, #999); }
-  .chat-msg.axi { color: var(--text-primary, #1a1a1a); }
-  .chat-msg .label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    opacity: 0.5;
-    display: block;
-    margin-bottom: 0.3rem;
-  }
-  .chat-msg .text {
-    display: block;
-  }
-  .chat-form {
+  .paths a:hover { color: #1a1a1a; }
+
+  /* Input bar — fixed at bottom */
+  .input-bar {
     display: flex;
-    border-top: 1px solid #e0e0e0;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.8rem;
+    border-top: 1px solid #eee;
+    background: #fff;
+    flex-shrink: 0;
   }
+
   #chat-input {
     flex: 1;
-    border: none;
-    padding: 0.8rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    padding: 0.6rem 1rem;
     font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
-    font-size: 0.9rem;
+    font-size: 1rem;
     outline: none;
-    background: transparent;
+    background: #fafafa;
+    -webkit-appearance: none;
   }
+  #chat-input:focus {
+    border-color: #999;
+    background: #fff;
+  }
+
   #chat-send {
+    width: 40px;
+    height: 40px;
     border: none;
     background: #1a1a1a;
     color: #fff;
-    padding: 0.8rem 1.2rem;
-    font-size: 1.1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    flex-shrink: 0;
     transition: background 0.2s;
   }
   #chat-send:hover { background: #333; }
-  .chat-loading {
-    color: var(--text-dim, #999);
-    font-style: italic;
-    font-size: 0.85rem;
+  #chat-send:disabled { background: #ccc; cursor: default; }
+
+  /* Mobile: make it truly full-screen app-like */
+  @media (max-width: 600px) {
+    .app {
+      height: calc(100vh - 44px);
+      height: calc(100dvh - 44px);
+    }
+    .bubble { font-size: 0.9rem; }
+    #chat-input { font-size: 16px; /* prevents iOS zoom */ }
   }
 </style>
 
 <script>
   const form = document.getElementById('chat-form');
   const input = document.getElementById('chat-input') as HTMLInputElement;
-  const messages = document.getElementById('chat-messages');
+  const messages = document.getElementById('messages');
   const btn = document.getElementById('chat-send') as HTMLButtonElement;
+
+  function addBubble(text: string, who: 'user' | 'axi' | 'loading'): HTMLElement {
+    const el = document.createElement('div');
+    el.className = 'bubble ' + who;
+    el.textContent = text;
+    messages?.appendChild(el);
+    messages!.scrollTop = messages!.scrollHeight;
+    return el;
+  }
+
+  function escapeAndSet(el: HTMLElement, text: string) {
+    el.textContent = text;
+  }
 
   if (form && input && messages) {
     form.addEventListener('submit', async (e) => {
@@ -199,20 +195,11 @@ if score == 0:
       const text = input.value.trim();
       if (!text) return;
 
-      // Show user message
-      const userMsg = document.createElement('div');
-      userMsg.className = 'chat-msg user';
-      userMsg.innerHTML = '<span class="label">you</span><span class="text">' + escapeHtml(text) + '</span>';
-      messages.appendChild(userMsg);
+      addBubble(text, 'user');
       input.value = '';
       btn.disabled = true;
 
-      // Show loading
-      const loading = document.createElement('div');
-      loading.className = 'chat-loading';
-      loading.textContent = '...';
-      messages.appendChild(loading);
-      messages.scrollTop = messages.scrollHeight;
+      const loading = addBubble('...', 'loading');
 
       try {
         const res = await fetch('/api/axi.php', {
@@ -222,30 +209,14 @@ if score == 0:
         });
         const data = await res.json();
         loading.remove();
-
-        const axiMsg = document.createElement('div');
-        axiMsg.className = 'chat-msg axi';
-        const response = data.reflection || data.mark || 'No response.';
-        axiMsg.innerHTML = '<span class="label">axi</span><span class="text">' + escapeHtml(response) + '</span>';
-        messages.appendChild(axiMsg);
+        addBubble(data.reflection || data.mark || 'No response.', 'axi');
       } catch (err) {
         loading.remove();
-        const errMsg = document.createElement('div');
-        errMsg.className = 'chat-msg axi';
-        errMsg.innerHTML = '<span class="label">axi</span><span class="text">Could not connect.</span>';
-        messages.appendChild(errMsg);
+        addBubble('Could not connect.', 'axi');
       }
 
       btn.disabled = false;
-      messages.scrollTop = messages.scrollHeight;
       input.focus();
     });
   }
-
-  function escapeHtml(str: string): string {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
 </script>
-
