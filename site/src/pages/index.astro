@@ -19,8 +19,8 @@ import Base from '../layouts/Base.astro';
 
     <!-- Sign-in form (hidden by default) -->
     <div class="auth-form-wrap" id="auth-form-wrap" hidden>
-      <form id="auth-form" class="auth-form">
-        <input type="email" id="auth-email" placeholder="your email" required autocomplete="email" />
+      <form id="auth-form" class="auth-form" novalidate>
+        <input type="text" id="auth-email" placeholder="your email" inputmode="email" autocomplete="email" />
         <input type="text" id="auth-name-input" placeholder="your name (optional)" autocomplete="name" />
         <button type="submit">Join</button>
         <button type="button" id="auth-cancel" class="auth-cancel">cancel</button>
