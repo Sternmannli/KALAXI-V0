@@ -740,17 +740,13 @@ function get_config(): array {
 }
 
 function get_groq_key(): ?string {
-    $key = getenv('GROQ_API_KEY');
-    if ($key && strlen($key) > 10) return $key;
-    $config = get_config();
-    return (isset($config['GROQ_API_KEY']) && strlen($config['GROQ_API_KEY']) > 10) ? $config['GROQ_API_KEY'] : null;
+    // KILLED 2026-03-28 by V-001 directive. No external LLM API calls.
+    return null;
 }
 
 function get_together_key(): ?string {
-    $key = getenv('TOGETHER_API_KEY');
-    if ($key && strlen($key) > 10) return $key;
-    $config = get_config();
-    return (isset($config['TOGETHER_API_KEY']) && strlen($config['TOGETHER_API_KEY']) > 10) ? $config['TOGETHER_API_KEY'] : null;
+    // KILLED 2026-03-28 by V-001 directive. No external LLM API calls.
+    return null;
 }
 
 function get_axi_model(): string {
