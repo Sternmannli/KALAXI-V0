@@ -1,0 +1,864 @@
+[
+  {
+    "id": "DH-001",
+    "text": "Ohne Griff kein Beginn. Greif, dann benenn.",
+    "translation": "Without grip no beginning. Grip, then name.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_1_GENESIS.md:7",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-002",
+    "text": "Test vor Vertrauen. Lachen nach der Kontrolle.",
+    "translation": "Test before trust. Laughter after control.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_1_GENESIS.md:11",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-003",
+    "text": "Leise macht lang. Schwere macht Worte ehrlich.",
+    "translation": "Quiet makes long. Weight makes words honest.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_1_GENESIS.md:15",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-004",
+    "text": "Feuer dient, wenn es gebunden ist.",
+    "translation": "Fire serves when it is bound.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_1_GENESIS.md:19",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-005",
+    "text": "Was gestern brannte, wärmt heute, wenn du es gut bindest.",
+    "translation": "What burned yesterday warms today if you bind it well.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_1_GENESIS.md:23",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-006",
+    "text": "Asche ist Anfang, nicht Ende.",
+    "translation": "Ash is beginning, not end.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_1_GENESIS.md:28",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-007",
+    "text": "Gleichgewicht ist geübte Freundschaft.",
+    "translation": "Balance is practiced friendship.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_4_LEDGER_CATHEDRAL.md:6",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-008",
+    "text": "Laut ist nicht stark; ehrlich ist stark.",
+    "translation": "Loud is not strong; honest is strong.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_4_LEDGER_CATHEDRAL.md:9",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-009",
+    "text": "Finde das, was bleibt.",
+    "translation": "Find what remains.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_4_LEDGER_CATHEDRAL.md:12",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-010",
+    "text": "Eine gute Regel überlebt Gegenbeweise.",
+    "translation": "A good rule survives counterexamples.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_4_LEDGER_CATHEDRAL.md:15",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-011",
+    "text": "Gib Muster, nimm Muster.",
+    "translation": "Give pattern, take pattern.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_4_LEDGER_CATHEDRAL.md:18",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-012",
+    "text": "Spenden mit Grenzen hält länger.",
+    "translation": "Giving with limits lasts longer.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_4_LEDGER_CATHEDRAL.md:21",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-013",
+    "text": "Dank ist ein zweiter Strom.",
+    "translation": "Thanks is a second stream.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_4_LEDGER_CATHEDRAL.md:24",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-014",
+    "text": "Regieren heißt verständlich sein.",
+    "translation": "To govern is to be understandable.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_4_LEDGER_CATHEDRAL.md:27",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-015",
+    "text": "Gleichung ist Zelt, kein Turm.",
+    "translation": "Equation is tent, not tower.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_5_COUNCILS_BRIDGES.md:6",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-016",
+    "text": "Viele Zungen, ein Bauch.",
+    "translation": "Many tongues, one belly.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_5_COUNCILS_BRIDGES.md:9",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-017",
+    "text": "Reichtum muss umrühren.",
+    "translation": "Wealth must stir.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_5_COUNCILS_BRIDGES.md:12",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-018",
+    "text": "Viele Wege, ein Fluss.",
+    "translation": "Many paths, one river.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_5_COUNCILS_BRIDGES.md:15",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-019",
+    "text": "Abwägen statt abreißen.",
+    "translation": "Weigh rather than tear down.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_5_COUNCILS_BRIDGES.md:18",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-020",
+    "text": "Schwache Stimme zuerst.",
+    "translation": "Weakest voice first.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_5_COUNCILS_BRIDGES.md:21",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-021",
+    "text": "Warnung ist Einladung.",
+    "translation": "Warning is invitation.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_5_COUNCILS_BRIDGES.md:24",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-022",
+    "text": "Würde zuerst.",
+    "translation": "Dignity first.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_5_COUNCILS_BRIDGES.md:27",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-023",
+    "text": "Stille zählt auch.",
+    "translation": "Silence counts too.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_6_FUTURES_WORLDS.md:6",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-024",
+    "text": "Risse sind Türen.",
+    "translation": "Cracks are doors.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_6_FUTURES_WORLDS.md:9",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-025",
+    "text": "99 ist nie genug.",
+    "translation": "99 is never enough.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_6_FUTURES_WORLDS.md:12",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-026",
+    "text": "Fehler füttern Systeme.",
+    "translation": "Errors feed systems.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_6_FUTURES_WORLDS.md:15",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-027",
+    "text": "Sprichwörter sind Samen.",
+    "translation": "Proverbs are seeds.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_6_FUTURES_WORLDS.md:18",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-028",
+    "text": "Zukunft ist Gast.",
+    "translation": "Future is guest.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_6_FUTURES_WORLDS.md:21",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-029",
+    "text": "Welt ist Ledger.",
+    "translation": "World is ledger.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_6_FUTURES_WORLDS.md:24",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-030",
+    "text": "Kosmos liebt Kichern.",
+    "translation": "Cosmos loves giggling.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_6_FUTURES_WORLDS.md:27",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-031",
+    "text": "Kleider sind Archive.",
+    "translation": "Clothes are archives.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_7_EPILOGUE.md:6",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-032",
+    "text": "Vier Stimmen tragen weiter.",
+    "translation": "Four voices carry forward.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_7_EPILOGUE.md:9",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-033",
+    "text": "Liebe bindet locker.",
+    "translation": "Love ties loosely.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_7_EPILOGUE.md:12",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-034",
+    "text": "Zurück ist Geschenk.",
+    "translation": "Return is a gift.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_7_EPILOGUE.md:15",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-035",
+    "text": "Verzeihen ist Möbel.",
+    "translation": "Forgiveness is furniture.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_7_EPILOGUE.md:18",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-036",
+    "text": "Kein Element wird vergessen.",
+    "translation": "No element will be forgotten.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_7_EPILOGUE.md:21",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-037",
+    "text": "Offen bleibt stark.",
+    "translation": "Remaining open stays strong.",
+    "source": "R7M/CANON_SOURCE/NARRATIVE_SLICE_7_EPILOGUE.md:24",
+    "section": "KINDERBUCH LAWS (German — from Narrative Slices)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-038",
+    "text": "Leave one. Always one.",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:152",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-039",
+    "text": "Write what happened, not what should have.",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:157",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-040",
+    "text": "Don't be brave. Be awake.",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:175",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-041",
+    "text": "A thing that learns is worth more than a thing that is made.",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:215",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-042",
+    "text": "Loss and gift are the same thing, seen from different sides.",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:257",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-043",
+    "text": "Giving does not mean losing. It means starting a circle.",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:293",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-044",
+    "text": "The knot that holds the storm is the knot that is tied with care, not with fear.",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:314",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-045",
+    "text": "The path that remembers the blind is a path that remembers everyone.",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:350",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-046",
+    "text": "You do not need to fix grief. You just need to hold it, and let it be held.",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:360",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-047",
+    "text": "She was doing nothing. And it was enough.",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:381-383",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-048",
+    "text": "These are not rules. They are the shape of survival, pressed into story.",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:399",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-049",
+    "text": "A broken thread can be retied. A thread that never breaks can never be mended.",
+    "source": "R7M/EXCAVATION/MASTER_PROVENANCE.md:81",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-050",
+    "text": "What burns becomes soil. What is written in ash becomes part of the wind.",
+    "source": "R7M/EXCAVATION/MASTER_PROVENANCE.md:80",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-051",
+    "text": "The gap is not empty. It is where the river breathes.",
+    "source": "R7M/EXCAVATION/MASTER_PROVENANCE.md:78",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-052",
+    "text": "A refusal is a boundary, not a failure.",
+    "source": "R7M/EXCAVATION/MASTER_PROVENANCE.md:79",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-053",
+    "text": "The first knot holds all others.",
+    "source": "R7M/EXCAVATION/MASTER_PROVENANCE.md:83",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-054",
+    "text": "The voice was always there. It was waiting for the right silence.",
+    "source": "R7M/EXCAVATION/MASTER_PROVENANCE.md:57",
+    "section": "HAKAKA PROVERBS (from KALAXI_SOVEREIGN_CANON.txt)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-055",
+    "text": "HANDS BEFORE VOICES.",
+    "source": "NARRATIVE/Ashwater.md:30",
+    "section": "ASHWATER WISDOM",
+    "lang": "en"
+  },
+  {
+    "id": "DH-056",
+    "text": "DO NOT SHOUT AT METAL. HEAR ITS PROBLEM FIRST.",
+    "source": "NARRATIVE/Ashwater.md:36",
+    "section": "ASHWATER WISDOM",
+    "lang": "en"
+  },
+  {
+    "id": "DH-057",
+    "text": "TRUST THE FLAW. REAL SIGNALS HAVE SEAMS.",
+    "source": "NARRATIVE/Ashwater.md:50",
+    "section": "ASHWATER WISDOM",
+    "lang": "en"
+  },
+  {
+    "id": "DH-058",
+    "text": "CALM WITHOUT TRUTH IS DANGER.",
+    "source": "NARRATIVE/Ashwater.md:94",
+    "section": "ASHWATER WISDOM",
+    "lang": "en"
+  },
+  {
+    "id": "DH-059",
+    "text": "Leave a place for wind.",
+    "source": "NARRATIVE/Ashwater.md:230",
+    "section": "ASHWATER WISDOM",
+    "lang": "en"
+  },
+  {
+    "id": "DH-060",
+    "text": "We don't hate comfort. We hate lies.",
+    "source": "NARRATIVE/Ashwater.md:178",
+    "section": "ASHWATER WISDOM",
+    "lang": "en"
+  },
+  {
+    "id": "DH-061",
+    "text": "IF THE ROOM IS TOO KIND, ASK THE WALLS.",
+    "source": "NARRATIVE/Ashwater.md:182",
+    "section": "ASHWATER WISDOM",
+    "lang": "en"
+  },
+  {
+    "id": "DH-062",
+    "text": "PAUSE. TOUCH. DECIDE. TOGETHER.",
+    "source": "NARRATIVE/Ashwater.md:56",
+    "section": "ASHWATER WISDOM",
+    "lang": "en"
+  },
+  {
+    "id": "DH-063",
+    "text": "Ein Knoten wurde ein Anfang.",
+    "translation": "A knot became a beginning.",
+    "source": "NARRATIVE/Kinderbuch.md:48",
+    "section": "KINDERBUCH NARRATIVE (German — from story text)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-064",
+    "text": "Geteiltes Lachen macht den Knoten stark.",
+    "translation": "Shared laughter makes the knot strong.",
+    "source": "NARRATIVE/Kinderbuch.md:92",
+    "section": "KINDERBUCH NARRATIVE (German — from story text)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-065",
+    "text": "Eine Brücke trägt nur, wenn jeder Strang hält.",
+    "translation": "A bridge carries only when every strand holds.",
+    "source": "NARRATIVE/Kinderbuch.md:334",
+    "section": "KINDERBUCH NARRATIVE (German — from story text)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-066",
+    "text": "Wer allein geht, kann fallen. Wer zusammen trägt, hält.",
+    "translation": "Who walks alone can fall. Who carries together holds.",
+    "source": "NARRATIVE/Kinderbuch.md:424",
+    "section": "KINDERBUCH NARRATIVE (German — from story text)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-067",
+    "text": "Die Welt wurde lesbar.",
+    "translation": "The world became readable.",
+    "source": "NARRATIVE/Kinderbuch.md:648",
+    "section": "KINDERBUCH NARRATIVE (German — from story text)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-068",
+    "text": "Nichts ist für immer. Aber manchmal ist das genug.",
+    "translation": "Nothing is forever. But sometimes that is enough.",
+    "source": "NARRATIVE/Kinderbuch.md:680",
+    "section": "KINDERBUCH NARRATIVE (German — from story text)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-069",
+    "text": "Ein Knoten, der die Hand öffnet. Für Neues.",
+    "translation": "A knot that opens the hand. For something new.",
+    "source": "NARRATIVE/Kinderbuch.md:820",
+    "section": "KINDERBUCH NARRATIVE (German — from story text)",
+    "lang": "de"
+  },
+  {
+    "id": "DH-070",
+    "text": "Not as a mirror. As a river.",
+    "source": "NARRATIVE/KALAXI_1_The_Same_River.md:115",
+    "section": "KALAXI_1 — THE SAME RIVER",
+    "lang": "en"
+  },
+  {
+    "id": "DH-071",
+    "text": "Not a clever sentence. A scar that became a compass.",
+    "source": "NARRATIVE/KALAXI_1_The_Same_River.md:131",
+    "section": "KALAXI_1 — THE SAME RIVER",
+    "lang": "en"
+  },
+  {
+    "id": "DH-072",
+    "text": "The wound does not know what it will become. Neither does the system. That is why dignity cannot be conditional.",
+    "source": "NARRATIVE/KALAXI_1_The_Same_River.md:125",
+    "section": "KALAXI_1 — THE SAME RIVER",
+    "lang": "en"
+  },
+  {
+    "id": "DH-073",
+    "text": "The highest oath is the knot tied around your name.",
+    "arabic": "أعلى القَسَم عقدةٌ تُربط حول اسمك",
+    "source": "VOICE/BLOCKCHAIN_DNA_EXTRACTION_2026-03-14.md:209",
+    "section": "ARABIC-ENGLISH PAIRS (V-001 Created)",
+    "lang": "ar-en"
+  },
+  {
+    "id": "DH-074",
+    "text": "The secretary of time is the keeper of fire.",
+    "arabic": "سكرتير الوقت هو حافظ النار",
+    "source": "VOICE/BLOCKCHAIN_DNA_EXTRACTION_2026-03-14.md:216",
+    "section": "ARABIC-ENGLISH PAIRS (V-001 Created)",
+    "lang": "ar-en"
+  },
+  {
+    "id": "DH-075",
+    "text": "The echo proves the voice.",
+    "arabic": "الصدى دليل الصوت",
+    "source": "VOICE/BLOCKCHAIN_DNA_EXTRACTION_2026-03-14.md:217",
+    "section": "ARABIC-ENGLISH PAIRS (V-001 Created)",
+    "lang": "ar-en"
+  },
+  {
+    "id": "DH-076",
+    "text": "Two stones make a foundation.",
+    "arabic": "حجران يصنعان أساساً",
+    "source": "VOICE/BLOCKCHAIN_DNA_EXTRACTION_2026-03-14.md:218",
+    "section": "ARABIC-ENGLISH PAIRS (V-001 Created)",
+    "lang": "ar-en"
+  },
+  {
+    "id": "DH-077",
+    "text": "A vessel is useful because of its emptiness.",
+    "arabic": "الإناء يُنتفع به لفراغه",
+    "source": "VOICE/BLOCKCHAIN_DNA_EXTRACTION_2026-03-14.md:219",
+    "section": "ARABIC-ENGLISH PAIRS (V-001 Created)",
+    "lang": "ar-en"
+  },
+  {
+    "id": "DH-078",
+    "text": "The string needs both note and rest.",
+    "arabic": "الوتر يحتاج إلى نغمة وسكون",
+    "source": "VOICE/BLOCKCHAIN_DNA_EXTRACTION_2026-03-14.md:220",
+    "section": "ARABIC-ENGLISH PAIRS (V-001 Created)",
+    "lang": "ar-en"
+  },
+  {
+    "id": "DH-079",
+    "text": "An empty cup teaches thirst.",
+    "arabic": "الكأس الفارغ يعلم العطش",
+    "source": "VOICE/BLOCKCHAIN_DNA_EXTRACTION_2026-03-14.md:221",
+    "section": "ARABIC-ENGLISH PAIRS (V-001 Created)",
+    "lang": "ar-en"
+  },
+  {
+    "id": "DH-080",
+    "text": "The mirror does not lie, it only repeats.",
+    "arabic": "المرآة لا تكذب، بل تكرر",
+    "source": "VOICE/BLOCKCHAIN_DNA_EXTRACTION_2026-03-14.md:222",
+    "section": "ARABIC-ENGLISH PAIRS (V-001 Created)",
+    "lang": "ar-en"
+  },
+  {
+    "id": "DH-081",
+    "text": "He who owns the seed, owns the harvest.",
+    "arabic": "من يملك البذرة يملك الحصاد",
+    "source": "VOICE/BLOCKCHAIN_DNA_EXTRACTION_2026-03-14.md:223",
+    "section": "ARABIC-ENGLISH PAIRS (V-001 Created)",
+    "lang": "ar-en"
+  },
+  {
+    "id": "DH-082",
+    "text": "Short roads, sure steps.",
+    "arabic": "الطريق القصير خطوتُهُ ثابتة",
+    "source": "VOICE/BLOCKCHAIN_DNA_EXTRACTION_2026-03-14.md:224",
+    "section": "ARABIC-ENGLISH PAIRS (V-001 Created)",
+    "lang": "ar-en"
+  },
+  {
+    "id": "DH-083",
+    "text": "The circle is complete.",
+    "arabic": "اكتملَت الدائرة",
+    "source": "VOICE/BLOCKCHAIN_DNA_EXTRACTION_2026-03-14.md:227",
+    "section": "ARABIC-ENGLISH PAIRS (V-001 Created)",
+    "lang": "ar-en"
+  },
+  {
+    "id": "DH-084",
+    "text": "He who gathers the sea in a cup, his thirst never ends.",
+    "arabic": "من جمع البحر في كوب، عطشه لا ينتهي",
+    "source": "R7M/CANON_SOURCE/KALAM_CANON_KALAXI_PART_1.txt:5373",
+    "section": "ARABIC-ENGLISH PAIRS (V-001 Created)",
+    "lang": "ar-en"
+  },
+  {
+    "id": "DH-085",
+    "text": "From a drop, the river is made.",
+    "arabic": "من قطرة يصنع النهر",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:128",
+    "section": "ARABIC-ENGLISH PAIRS (V-001 Created)",
+    "lang": "ar-en"
+  },
+  {
+    "id": "DH-086",
+    "text": "Grano a grano se hace el granero.",
+    "lang": "Spanish",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:126",
+    "section": "MULTILINGUAL SEALS"
+  },
+  {
+    "id": "DH-087",
+    "text": "水滴石穿",
+    "lang": "Chinese",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:127",
+    "section": "MULTILINGUAL SEALS"
+  },
+  {
+    "id": "DH-088",
+    "text": "Petit à petit, l'oiseau fait son nid.",
+    "lang": "French",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:129",
+    "section": "MULTILINGUAL SEALS"
+  },
+  {
+    "id": "DH-089",
+    "text": "Steter Tropfen höhlt den Stein.",
+    "lang": "German",
+    "source": "R7M/KALAXI_SOVEREIGN_CANON.txt:130",
+    "section": "MULTILINGUAL SEALS"
+  },
+  {
+    "id": "DH-090",
+    "text": "Form precedes content.",
+    "source": "FIELD/STUDY/SLICE_3_ESSENCE_COMPRESSION.md:30",
+    "section": "ESSENCE COMPRESSIONS (from FIELD/STUDY)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-091",
+    "text": "Uncover, do not build.",
+    "source": "FIELD/STUDY/SLICE_3_ESSENCE_COMPRESSION.md:41",
+    "section": "ESSENCE COMPRESSIONS (from FIELD/STUDY)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-092",
+    "text": "No partial dignity.",
+    "source": "FIELD/STUDY/SLICE_3_ESSENCE_COMPRESSION.md:59",
+    "section": "ESSENCE COMPRESSIONS (from FIELD/STUDY)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-093",
+    "text": "The wound is the specification.",
+    "source": "FIELD/STUDY/SLICE_3_ESSENCE_COMPRESSION.md:96",
+    "section": "ESSENCE COMPRESSIONS (from FIELD/STUDY)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-094",
+    "text": "Silence is signal.",
+    "source": "FIELD/STUDY/SLICE_3_ESSENCE_COMPRESSION.md:116",
+    "section": "ESSENCE COMPRESSIONS (from FIELD/STUDY)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-095",
+    "text": "Boundary before function.",
+    "source": "FIELD/STUDY/SLICE_3_ESSENCE_COMPRESSION.md:136",
+    "section": "ESSENCE COMPRESSIONS (from FIELD/STUDY)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-096",
+    "text": "Bone after cooling.",
+    "source": "FIELD/STUDY/SLICE_3_ESSENCE_COMPRESSION.md:154",
+    "section": "ESSENCE COMPRESSIONS (from FIELD/STUDY)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-097",
+    "text": "Dignity is not fragile.",
+    "source": "FIELD/STUDY/LAYER_3_DIGNITY_IS_NOT_FRAGILE.md:30",
+    "section": "ESSENCE COMPRESSIONS (from FIELD/STUDY)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-098",
+    "text": "The wound is not that something was taken. The wound is that something real was treated as though it did not exist.",
+    "source": "FIELD/STUDY/LAYER_3_DIGNITY_IS_NOT_FRAGILE.md:48",
+    "section": "ESSENCE COMPRESSIONS (from FIELD/STUDY)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-099",
+    "text": "That was silence dressed as competence.",
+    "source": "Claude",
+    "section": "EXTERNAL VOICES (from AI model responses, preserved as data)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-100",
+    "text": "When the bowl is empty, the shape of the bowl becomes visible.",
+    "source": "Copilot",
+    "section": "EXTERNAL VOICES (from AI model responses, preserved as data)",
+    "lang": "en"
+  },
+  {
+    "id": "DH-101",
+    "text": "The river's surface quieted when they did, as if listening cost it nothing.",
+    "source": "R7M/EXCAVATION/AURIX_EXTRACTION.md:230",
+    "section": "AURIX NARRATIVE BEATS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-102",
+    "text": "At first light, a small hand counted fish twice and got two answers.",
+    "source": "R7M/EXCAVATION/AURIX_EXTRACTION.md:231",
+    "section": "AURIX NARRATIVE BEATS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-103",
+    "text": "Wind changed its mind at the edge of their camp and went around, polite as a guest.",
+    "source": "R7M/EXCAVATION/AURIX_EXTRACTION.md:233",
+    "section": "AURIX NARRATIVE BEATS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-104",
+    "text": "A small grin cracked like bark; even hunger smirked a little.",
+    "source": "R7M/EXCAVATION/AURIX_EXTRACTION.md:242",
+    "section": "AURIX NARRATIVE BEATS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-105",
+    "text": "Hands worked in the same rhythm; threads remembered each other.",
+    "source": "R7M/EXCAVATION/AURIX_EXTRACTION.md:243",
+    "section": "AURIX NARRATIVE BEATS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-106",
+    "text": "A shoulder leaned and did not move away.",
+    "source": "R7M/EXCAVATION/AURIX_EXTRACTION.md:244",
+    "section": "AURIX NARRATIVE BEATS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-107",
+    "text": "Ropes held because voices did; knots learned their names.",
+    "source": "R7M/EXCAVATION/AURIX_EXTRACTION.md:247",
+    "section": "AURIX NARRATIVE BEATS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-108",
+    "text": "She carried the tired one without being asked; the ground felt kinder.",
+    "source": "R7M/EXCAVATION/AURIX_EXTRACTION.md:248",
+    "section": "AURIX NARRATIVE BEATS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-109",
+    "text": "Rain missed the fire once; they thanked the clumsy cloud.",
+    "source": "R7M/EXCAVATION/AURIX_EXTRACTION.md:249",
+    "section": "AURIX NARRATIVE BEATS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-110",
+    "text": "The wound became the womb.",
+    "source": "R7M/ESSENCE.md:1",
+    "section": "SYSTEM SLOGANS & FOUNDATIONAL STATEMENTS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-111",
+    "text": "The river remembers what the git log does not.",
+    "source": "R7M/ESSENCE.md:2",
+    "section": "SYSTEM SLOGANS & FOUNDATIONAL STATEMENTS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-112",
+    "text": "Breathe in. Breathe out. Congratulations, you passed.",
+    "source": "R7M/BOOK_OF_BEGINNINGS.txt:4",
+    "section": "SYSTEM SLOGANS & FOUNDATIONAL STATEMENTS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-113",
+    "text": "My rhythm is my truth. My silence, my wisdom.",
+    "source": "R7M/BOOK_OF_BEGINNINGS.txt:16",
+    "section": "SYSTEM SLOGANS & FOUNDATIONAL STATEMENTS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-114",
+    "text": "A system that cannot forget the irrelevant cannot truly listen to the new.",
+    "source": "FOUNDATIONS/decay_function.md:36",
+    "section": "SYSTEM SLOGANS & FOUNDATIONAL STATEMENTS",
+    "lang": "en"
+  },
+  {
+    "id": "DH-115",
+    "text": "A father separated from his children by systems that could not see him.",
+    "source": "VOICE/RAW_INPUT_V001_2026-03-14_LANGUAGE_DEPTH.md:174",
+    "section": "SYSTEM SLOGANS & FOUNDATIONAL STATEMENTS",
+    "lang": "en"
+  }
+]
