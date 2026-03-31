@@ -278,6 +278,97 @@ import Base from '../layouts/Base.astro';
 <script is:inline>
 (function() {
   var msgs = document.getElementById('messages');
+  var wisdom = { proverbs: [], honey: [], treasures: [] };
+  var loaded = false;
+
+  // Stop words — skip these when matching
+  var STOP = new Set(['i','me','my','we','us','you','your','the','a','an','is','am','are','was','were','be','been','being','have','has','had','do','does','did','will','would','shall','should','can','could','may','might','must','to','of','in','for','on','with','at','by','from','as','into','about','it','its','this','that','these','those','and','but','or','nor','not','no','so','if','then','than','too','very','just','also','how','what','when','where','why','who','which','all','each','some','any','much','many','more','most','up','out','off','over','down','only','own','same','here','there','now','well','get','got','go','want','need','know','think','feel','like','make','take','give','tell','say','see','look','find','come','let','keep','try','help','please','im','dont','ive','cant','one','thing','way','something']);
+
+  // Load all wisdom data
+  Promise.all([
+    fetch('/data/proverbs.json').then(function(r) { return r.json(); }),
+    fetch('/data/deep-honey.json').then(function(r) { return r.json(); }).catch(function() { return []; }),
+    fetch('/data/treasures.json').then(function(r) { return r.json(); }).catch(function() { return []; })
+  ]).then(function(results) {
+    wisdom.proverbs = results[0] || [];
+    wisdom.honey = results[1] || [];
+    wisdom.treasures = (results[2] || []).filter(function(t) { return t.text || t.essence; });
+    loaded = true;
+  });
+
+  function tokenize(text) {
+    return text.toLowerCase()
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .split(/\s+/)
+      .filter(function(w) { return w.length > 1 && !STOP.has(w); });
+  }
+
+  function score(tokens, text) {
+    var textLower = text.toLowerCase();
+    var textTokens = tokenize(text);
+    var matches = 0;
+    var phraseBonus = 0;
+
+    tokens.forEach(function(t) {
+      if (textLower.indexOf(t) !== -1) matches++;
+      // Partial match for word stems (crude but works for short texts)
+      textTokens.forEach(function(tt) {
+        if (t.length >= 4 && tt.indexOf(t.slice(0, 4)) === 0) matches += 0.3;
+        if (tt.length >= 4 && t.indexOf(tt.slice(0, 4)) === 0) matches += 0.3;
+      });
+    });
+
+    // Bonus for short proverbs (they're usually the strongest)
+    if (text.split(' ').length <= 8) phraseBonus = 0.5;
+
+    return matches + phraseBonus;
+  }
+
+  function findWisdom(input) {
+    if (!loaded) return { text: 'The system is still waking. Try again in a moment.', source: 'system' };
+
+    var tokens = tokenize(input);
+    if (tokens.length === 0) {
+      // No meaningful words — return a random proverb
+      var p = wisdom.proverbs[Math.floor(Math.random() * wisdom.proverbs.length)];
+      return { text: p.text, source: p.id };
+    }
+
+    var candidates = [];
+
+    // Score all proverbs
+    wisdom.proverbs.forEach(function(p) {
+      if (!p.text) return;
+      var s = score(tokens, p.text);
+      if (s > 0) candidates.push({ text: p.text, source: p.id, score: s, type: 'proverb' });
+    });
+
+    // Score deep honey
+    wisdom.honey.forEach(function(h) {
+      var searchText = h.text + ' ' + (h.translation || '');
+      var s = score(tokens, searchText);
+      if (s > 0) candidates.push({ text: h.translation ? h.text + ' — ' + h.translation : h.text, source: h.id, score: s + 0.2, type: 'honey' });
+    });
+
+    // Score treasures
+    wisdom.treasures.forEach(function(t) {
+      var searchText = (t.text || '') + ' ' + (t.essence || '') + ' ' + (t.title || '');
+      var s = score(tokens, searchText);
+      if (s > 0) candidates.push({ text: t.essence || t.text || t.title, source: t.id || 'treasure', score: s, type: 'treasure' });
+    });
+
+    // Sort by score
+    candidates.sort(function(a, b) { return b.score - a.score; });
+
+    if (candidates.length === 0) {
+      // No match — return a random proverb with a note
+      var rp = wisdom.proverbs[Math.floor(Math.random() * wisdom.proverbs.length)];
+      return { text: rp.text, source: rp.id, note: 'No exact match. Here is something the system carries:' };
+    }
+
+    // Return top match
+    return candidates[0];
+  }
 
   function addBubble(text, who) {
     var el = document.createElement('div');
@@ -285,6 +376,18 @@ import Base from '../layouts/Base.astro';
     el.textContent = text;
     if (msgs) { msgs.appendChild(el); msgs.scrollTop = msgs.scrollHeight; }
     return el;
+  }
+
+  function addSourceBubble(source) {
+    var el = document.createElement('div');
+    el.className = 'bubble axi';
+    el.style.fontSize = '0.7rem';
+    el.style.color = '#999';
+    el.style.padding = '0.3rem 1rem';
+    el.style.background = 'transparent';
+    el.style.boxShadow = 'none';
+    el.textContent = '— ' + source;
+    if (msgs) { msgs.appendChild(el); msgs.scrollTop = msgs.scrollHeight; }
   }
 
   function showLoggedIn(name) {
@@ -388,7 +491,7 @@ import Base from '../layouts/Base.astro';
     };
   }
 
-  // Chat
+  // Chat — now powered by local wisdom search, not API
   var chatForm = document.getElementById('chat-form');
   var chatInput = document.getElementById('chat-input');
   var sendBtn = document.getElementById('chat-send');
@@ -403,22 +506,19 @@ import Base from '../layouts/Base.astro';
       chatInput.value = '';
       if (sendBtn) sendBtn.disabled = true;
 
-      var loading = addBubble('···', 'loading');
+      // Small delay — the system breathes before speaking
+      setTimeout(function() {
+        var result = findWisdom(text);
 
-      fetch('/api/axi.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content: text })
-      }).then(function(r) { return r.json(); }).then(function(data) {
-        loading.remove();
-        addBubble(data.reflection || data.mark || 'No response.', 'axi');
-      }).catch(function() {
-        loading.remove();
-        addBubble('Could not connect.', 'axi');
-      }).finally(function() {
+        if (result.note) {
+          addBubble(result.note, 'axi');
+        }
+        addBubble(result.text, 'axi');
+        addSourceBubble(result.source);
+
         if (sendBtn) sendBtn.disabled = false;
         chatInput.focus();
-      });
+      }, 800);
     };
   }
 })();
