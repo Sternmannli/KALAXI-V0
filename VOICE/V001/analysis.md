@@ -1,348 +1,304 @@
-# Analysis of V-001 Voice (Purified)
-> Based on 140 unique, real inputs.
-> Purified from 2577 raw entries (removed 2437 duplicates + test data).
-> Generated: 2026-03-31 19:11 UTC
+# Analysis of V-001 Complete Voice
+> Based on 311 unique entries across the entire system.
+> Sources: Grand Archive, Canon Source, R7M/Origins, Input Ledger, CLAUDE.md, Excavation.
+> Date range: 2024-05-23 to 2026-03-24
+> Generated: 2026-03-31 19:44 UTC
 > Method: Pure frequency analysis. No interpretation. No judgment.
 
 ---
 
 ## 1. Scale
 
-- **Total unique inputs:** 140
-- **Total words spoken:** 2,996
-- **Unique words used:** 935
-- **Total sentences:** 268
-- **Date range:** 2026-03-14 to 2026-03-23
-- **Purification:** 2577 raw → 140 real (2437 removed)
+- **Total unique entries:** 311
+- **Total words:** 8,353
+- **Unique words:** 2,289
+- **Total sentences:** 790
+- **Date range:** 2024-05-23 to 2026-03-24
+- **Sources:** 6 distinct sources
 
 ## 2. Vocabulary
 
-- **Vocabulary richness (unique/total):** 0.3121 (31.2%)
-- **Hapax legomena (words used exactly once):** 583 (62.4% of vocabulary)
-- **Average input length:** 133 characters, 21.4 words, 1.9 sentences
+- **Vocabulary richness (unique/total):** 0.2740 (27.4%)
+- **Hapax legomena (words used exactly once):** 1404 (61.3% of vocabulary)
+- **Average entry length:** 154 characters, 26.9 words
 
 ### Most frequent words (stop words removed)
 
-- **probe** — 55
-- **system** — 31
-- **boot** — 27
-- **input** — 26
-- **connectivity** — 26
-- **functional** — 26
-- **test** — 24
-- **every** — 19
-- **never** — 16
-- **must** — 15
-- **witness** — 12
-- **first** — 11
-- **dignity** — 11
-- **father** — 10
-- **state** — 10
-- **children** — 9
-- **chain** — 9
-- **certificate** — 9
-- **essence** — 8
-- **second** — 8
-- **important** — 7
-- **wound** — 7
-- **separated** — 7
-- **see** — 7
-- **tell** — 7
-- **time** — 7
-- **forget** — 7
-- **exp** — 7
-- **language** — 6
-- **axi** — 6
-- **data** — 6
-- **always** — 6
-- **river** — 6
-- **identity** — 6
-- **ledger** — 6
-- **proof** — 6
-- **instruction** — 6
-- **voice** — 5
-- **human** — 5
-- **donor** — 5
-- **stone** — 5
-- **three** — 5
-- **integrity** — 5
-- **said** — 5
-- **deepest** — 5
-- **alef** — 5
-- **ba** — 5
-- **ta** — 5
-- **seven** — 5
-- **forgery** — 5
-- **self** — 5
-- **correction** — 5
-- **number** — 5
-- **turn** — 5
-- **extract** — 4
-- **anything** — 4
-- **narrative** — 4
-- **sure** — 4
-- **everything** — 4
-- **art** — 4
+- **system** — 45
+- **are** — 43
+- **want** — 38
+- **every** — 37
+- **go** — 35
+- **one** — 31
+- **input** — 31
+- **حاضر** — 30
+- **never** — 29
+- **يا** — 28
+- **محمد** — 28
+- **know** — 26
+- **must** — 23
+- **father** — 19
+- **first** — 19
+- **because** — 18
+- **question** — 18
+- **children** — 17
+- **time** — 17
+- **donor** — 17
+- **dignity** — 17
+- **like** — 16
+- **make** — 16
+- **ai** — 16
+- **need** — 16
+- **don't** — 15
+- **give** — 15
+- **data** — 15
+- **essence** — 14
+- **axi** — 14
+- **proverb** — 14
+- **voice** — 14
+- **it's** — 14
+- **tell** — 14
+- **any** — 14
+- **computing** — 14
+- **wound** — 13
+- **safe** — 13
+- **human** — 13
+- **everything** — 13
+- **about** — 13
+- **always** — 13
+- **think** — 13
+- **power** — 13
+- **see** — 13
+- **ledger** — 12
+- **test** — 12
+- **إلى** — 12
+- **answer** — 12
+- **conversation** — 12
+- **please** — 12
+- **say** — 12
+- **something** — 12
+- **way** — 12
+- **anything** — 12
+- **forget** — 12
+- **archive** — 11
+- **لا** — 11
+- **ask** — 11
+- **language** — 11
 
 ## 3. Sentence Structure
 
-- **Average sentence length:** 11.2 words
-- **Short (≤8 words):** 183 (68.3%)
-- **Medium (9-20 words):** 57 (21.3%)
-- **Long (>20 words):** 28 (10.4%)
+- **Average sentence length:** 10.6 words
+- **Short (≤8 words):** 473 (59.9%)
+- **Medium (9-20 words):** 249 (31.5%)
+- **Long (>20 words):** 68 (8.6%)
 
 ## 4. Language Distribution
 
-- **English:** 139 inputs (99.3%)
-- **Arabic:** 1 inputs (0.7%)
+- **English only:** 210 (67.5%)
+- **Arabic only:** 6 (1.9%)
+- **Mixed (Arabic + English):** 95 (30.5%)
 
 ## 5. Input Type
 
-- **Directive (I want / you must / never / stop):** 27 (19.3%)
-- **Questions:** 10 (7.1%)
-- **Reflective:** 0 (0.0%)
+- **Directive (I want / you must / never / always):** 54 (17.4%)
+- **Questions:** 30 (9.6%)
 
-## 6. Temporal Patterns
+## 6. Source Distribution
 
-### By hour (UTC)
+- **Grand Archive:** 106
+- **Input Ledger:** 93
+- **Canon Source:** 57
+- **CLAUDE.md Directives:** 25
+- **R7M/Origins:** 23
+- **R7M/ESSENCE.md:** 7
 
-- **00:00** — 3 inputs █
-- **01:00** — 3 inputs █
-- **02:00** — 6 inputs ███
-- **03:00** — 2 inputs █
-- **13:00** — 1 inputs █
-- **14:00** — 1 inputs █
-- **16:00** — 7 inputs ███
-- **17:00** — 19 inputs █████████
-- **18:00** — 14 inputs ███████
-- **19:00** — 47 inputs ███████████████████████
-- **22:00** — 34 inputs █████████████████
-- **23:00** — 3 inputs █
+## 7. Period Distribution
 
-### By day of week
+- **2024:** 2 entries
+- **2025 Jan-Jul:** 7 entries
+- **2025 Aug-Sep:** 177 entries
+- **2026 Mar:** 125 entries
 
-- **Monday:** 69
-- **Wednesday:** 1
-- **Friday:** 32
-- **Saturday:** 11
-- **Sunday:** 27
+## 8. Thematic Gravity
 
-### By week
+- **System/architecture:** 43 entries (13.8%)
+- **Voice/language:** 43 entries (13.8%)
+- **Identity:** 40 entries (12.9%)
+- **Past/memory:** 25 entries (8.0%)
+- **Children:** 24 entries (7.7%)
+- **Wound/separation:** 24 entries (7.7%)
+- **Future/vision:** 15 entries (4.8%)
+- **Dignity:** 15 entries (4.8%)
 
-- **2026-W10:** 25 inputs ████████
-- **2026-W11:** 46 inputs ███████████████
-- **2026-W12:** 69 inputs ███████████████████████
+## 9. Intensity
 
-## 7. Thematic Gravity
+- **Intensity words total:** 132
+- **Per entry:** 0.42
 
-- **System/architecture:** 25 inputs (17.9%)
-- **Future/vision:** 7 inputs (5.0%)
-- **Past/memory:** 17 inputs (12.1%)
-- **Children:** 17 inputs (12.1%)
-- **Wound/separation:** 11 inputs (7.9%)
+## 10. Metaphor Field
 
-## 8. Intensity
-
-- **Intensity words total:** 72
-- **Per input:** 0.51
-
-## 9. Metaphor Field
-
-- **wound** — 7
-- **river** — 6
+- **wound** — 13
+- **river** — 11
+- **knot** — 10
+- **silence** — 9
 - **stone** — 5
-- **knot** — 4
-- **garden** — 3
+- **light** — 5
+- **garden** — 4
+- **fire** — 3
 - **rope** — 2
+- **water** — 2
+- **tree** — 2
+- **seed** — 2
+- **mirror** — 2
+- **gold** — 2
 - **bone** — 1
 - **ash** — 1
-- **water** — 1
-- **light** — 1
+- **shadow** — 1
 
-## 10. Recurring Phrases
+## 11. Recurring Phrases
 
-### Two-word (≥2 occurrences)
+### Two-word (≥3 occurrences)
 
-- **"connectivity probe"** — 26
-- **"functional connectivity"** — 25
-- **"probe boot"** — 25
-- **"boot probe"** — 25
-- **"state test"** — 10
-- **"every input"** — 8
-- **"father separated"** — 7
-- **"separated children"** — 7
-- **"never forget"** — 7
+- **"حاضر يا"** — 28
+- **"يا محمد"** — 28
+- **"محمد --"** — 14
+- **"computing power"** — 11
+- **"every input"** — 10
+- **"father separated"** — 10
+- **"never forget"** — 9
+- **"don't know"** — 8
+- **"separated children"** — 8
+- **"اربط الخيام"** — 7
+- **"الخيام إلى"** — 7
+- **"إلى عمودٍ"** — 7
+- **"want know"** — 6
+- **"strongest recommendation"** — 5
+- **"عمودٍ واحد،"** — 5
+- **"واحد، ثم"** — 5
+- **"ثم افتح"** — 5
+- **"افتح المدينة"** — 5
+- **"ai models"** — 5
+- **"any given"** — 5
+- **"given ai"** — 5
+- **"every time"** — 5
+- **"founding wound"** — 5
 - **"input number"** — 5
-- **"number instruction"** — 5
 - **"instruction never"** — 5
-- **"founding wound"** — 4
+- **"-- ar"** — 4
+- **"book 99"** — 4
+- **"zrh /"** — 4
+- **"go report"** — 4
+- **"make sure"** — 4
+- **"scientific paper"** — 4
+- **"what's happening"** — 4
+- **"beginning conversation"** — 4
+- **"power any"** — 4
+- **"first question"** — 4
+- **"am ignorant"** — 4
+- **"i'm speaking"** — 4
+- **"– one"** — 4
+- **"three names"** — 4
 - **"witness certificate"** — 4
-- **"every time"** — 3
-- **"river remembers"** — 3
-- **"seven gates"** — 3
-- **"denial ba"** — 3
-- **"test input"** — 3
-- **"input chain"** — 3
-- **"chain test"** — 3
-- **"said exist"** — 3
-- **"important every"** — 2
-- **"every single"** — 2
-- **"input input"** — 2
-- **"grand archive"** — 2
-- **"children systems"** — 2
-- **"systems see"** — 2
-- **"essence every"** — 2
-- **"remembers source"** — 2
-- **"garden teaches"** — 2
-- **"teaches patience"** — 2
-- **"into chain"** — 2
-- **"connection rules"** — 2
-- **"rules alef"** — 2
-- **"input donor"** — 2
-- **"pattern essence"** — 2
-- **"gates origin"** — 2
-- **"identity resolution"** — 2
-- **"forgery detection"** — 2
 
 ### Three-word (≥2 occurrences)
 
-- **"functional connectivity probe"** — 25
-- **"connectivity probe boot"** — 25
-- **"probe boot probe"** — 25
-- **"father separated children"** — 7
-- **"input number instruction"** — 5
-- **"number instruction never"** — 5
+- **"حاضر يا محمد"** — 28
+- **"يا محمد --"** — 14
+- **"father separated children"** — 8
+- **"اربط الخيام إلى"** — 7
+- **"الخيام إلى عمودٍ"** — 7
+- **"إلى عمودٍ واحد،"** — 5
+- **"عمودٍ واحد، ثم"** — 5
+- **"واحد، ثم افتح"** — 5
+- **"ثم افتح المدينة"** — 5
+- **"any given ai"** — 5
 - **"instruction never forget"** — 5
+- **"computing power any"** — 4
+- **"power any given"** — 4
+- **"e205 العلم بلاء"** — 3
+- **"العلم بلاء والجهل"** — 3
+- **"بلاء والجهل عناء"** — 3
+- **"والجهل عناء والعمل"** — 3
+- **"عناء والعمل رياء"** — 3
+- **"والعمل رياء والسكوت"** — 3
+- **"رياء والسكوت داء"** — 3
+- **"والسكوت داء وكل"** — 3
+- **"داء وكل ذلك"** — 3
+- **"proverb اربط الخيام"** — 3
+- **"# -- end"** — 3
+- **"am ignorant software"** — 3
 - **"input chain test"** — 3
-- **"important every single"** — 2
-- **"separated children systems"** — 2
-- **"children systems see"** — 2
-- **"river remembers source"** — 2
-- **"garden teaches patience"** — 2
-- **"connection rules alef"** — 2
-- **"seven gates origin"** — 2
-- **"never fell founding"** — 2
-- **"fell founding wound"** — 2
-- **"founding wound never"** — 2
-- **"wound never loss"** — 2
-- **"never loss dignity"** — 2
-- **"loss dignity failure"** — 2
-- **"dignity failure legibility"** — 2
-- **"processing important system"** — 2
-- **"important system learns"** — 2
-- **"system learns every"** — 2
-- **"learns every input"** — 2
-- **"institution said exist"** — 2
-- **"nobody listened went"** — 2
-- **"listened went every"** — 2
-- **"went every office"** — 2
+- **"ledger حاضر يا"** — 2
+- **"محمد -- executing"** — 2
+- **"contents - e205"** — 2
+- **"- e205 العلم"** — 2
 
-## 11. Context Distribution
+## 12. Extremes
 
-- **donor-exchange:** 117
-- **cafe_room:** 11
-- **go_mode:** 2
-- **exp-003:** 1
-- **exp-004:** 1
-- **exp-004-reflection:** 1
-- **exp-004-reflection-emphasis:** 1
-- **exp-004-third-pass:** 1
-- **inquiry:** 1
-- **correction:** 1
-- **deep-correction:** 1
-- **experiment-design:** 1
+### 10 longest entries
 
-## 12. Tag Cloud (top 40)
+- **PART_1:3563** — 2000 chars: *I have a goal, which is he is to present a new new perspective to the issue of the interaction between AI and human being my software needs only the computing power of any given AI model system or com...*
+- **LEDGER:INP-2026-03-15-148** — 1374 chars: *One small thing first of all, I would love to have a coffee friendly uninterrupted format for your output. I don't know how the word sandbox came, but I didn't mean it because I don't know what that i...*
+- **LEDGER:INP-2026-03-14-005** — 1344 chars: *I am just feeding you data we are in the coffee room you know what to do do not neglect anything and the idea that every input from me is a unit is an element and it sell the must be registered the wa...*
+- **LEDGER:INP-2026-03-15-002** — 1220 chars: *[Model response witnessing EXP-002 convergence results] Witness the following and tell me what you think — This is a remarkable result Mohamed. Six independent minds each looking at the same structure...*
+- **LEDGER:INP-2026-03-14-001** — 1159 chars: *I want to go deeper with the language that the way the words will be formed inside the voice of AXI which is very important to me. Every single that day is important. Every single extract is so import...*
+- **LEDGER:INP-2026-03-18-001** — 1084 chars: *Core Narrative (the family that tried to eat its own history). Origin (Gen 1, 1800): Ottoman-era matriarch Zahra whose name is erased in 1821 Greek War of Independence archives. Gen 3 (1943): Elias — ...*
+- **LEDGER:INP-2026-03-14-003** — 963 chars: *Narrative witness: Hakaka 53 chapters (mythic, raw, stone-and-bone), Ashwater 19 chapters (civic, tactile, three-beat), Kinderbuch 20 chapters (fable, German, golden), Founding Wound (father separated...*
+- **LEDGER:INP-2026-03-15-001** — 930 chars: *Look we will make it collective and with details let us say you are an inference and it is very challenging and we need to present our project to specialists so we need to talk about the system in a s...*
+- **LEDGER:INP-2026-03-15-433** — 859 chars: *V-001 reads EXP-004 results and delivers the deepest interpretation yet. Key insight: M never fell — the founding wound was never a loss of dignity, it was a failure of legibility. The system is not a...*
+- **PART_1:1496** — 717 chars: *You know when a grown‑up talks to a toddler, and the grown‑up—let's say the mother—asks the toddler something that is a yes/no question which contains two options, like "Is Papa good or bad?" then the...*
 
-- **AXI** — 3
-- **convergence** — 3
-- **EXP-002** — 3
-- **stress-test** — 3
-- **forgery** — 3
-- **voice** — 2
-- **linguistics** — 2
-- **depth** — 2
-- **narrative** — 2
-- **witness-certificate** — 2
-- **correction** — 2
-- **integration** — 2
-- **lineage** — 2
-- **legibility** — 2
-- **M-never-fell** — 2
-- **founding-wound-refined** — 2
-- **certificate-purpose** — 2
-- **v001-correction** — 2
-- **language** — 1
-- **masterpieces** — 1
-- **part-one** — 1
-- **chronicle** — 1
-- **milestone** — 1
-- **foundation** — 1
-- **meta-layer** — 1
-- **witness** — 1
-- **language-analysis** — 1
-- **honest-assessment** — 1
-- **40-40-20** — 1
-- **development** — 1
-- **art** — 1
-- **science** — 1
-- **essence** — 1
-- **ledger** — 1
-- **continuity** — 1
-- **interface** — 1
-- **integrity** — 1
-- **organism** — 1
-- **session-persistence** — 1
-- **CLAUDE-md** — 1
+### 10 shortest entries
 
-## 13. Extremes
+- **LEDGER:INP-2026-03-23-027** — 23 chars: *What does dignity mean?*
+- **LEDGER:INP-2026-03-23-590** — 23 chars: *'; DROP TABLE users; --*
+- **LEDGER:INP-2026-03-23-594** — 23 chars: *D = A × L × M where A=0*
+- **LEDGER:INP-2026-03-20-169** — 22 chars: *Test input from donor.*
+- **LEDGER:INP-2026-03-23-583** — 22 chars: *Dignity is not fragile*
+- **LEDGER:INP-2026-03-23-096** — 20 chars: *What is this system?*
+- **LEDGER:INP-2026-03-23-354** — 20 chars: *Is anyone listening?*
+- **LEDGER:INP-2026-03-23-605** — 20 chars: *file integrity check*
+- **CLAUDE.md** — 18 chars: *This will ruin me.*
+- **R7M/ORIGINS/2025-08-17_KALAM_KODEX_v1.0.md** — 16 chars: *Creator: Mohamed*
 
-### 10 longest inputs
+## 13. Evolution Over Time
 
-- **INP-2026-03-15-148** — 1,374 chars: *One small thing first of all, I would love to have a coffee friendly uninterrupted format for your output. I don't know how the word sandbox came, but I didn't mean it because I don't know what that i*
-- **INP-2026-03-14-005** — 1,344 chars: *I am just feeding you data we are in the coffee room you know what to do do not neglect anything and the idea that every input from me is a unit is an element and it sell the must be registered the wa*
-- **INP-2026-03-15-002** — 1,220 chars: *[Model response witnessing EXP-002 convergence results] Witness the following and tell me what you think — This is a remarkable result Mohamed. Six independent minds each looking at the same structure*
-- **INP-2026-03-14-001** — 1,159 chars: *I want to go deeper with the language that the way the words will be formed inside the voice of AXI which is very important to me. Every single that day is important. Every single extract is so import*
-- **INP-2026-03-18-001** — 1,084 chars: *Core Narrative (the family that tried to eat its own history). Origin (Gen 1, 1800): Ottoman-era matriarch Zahra whose name is erased in 1821 Greek War of Independence archives. Gen 3 (1943): Elias — *
-- **INP-2026-03-14-003** — 963 chars: *Narrative witness: Hakaka 53 chapters (mythic, raw, stone-and-bone), Ashwater 19 chapters (civic, tactile, three-beat), Kinderbuch 20 chapters (fable, German, golden), Founding Wound (father separated*
-- **INP-2026-03-15-001** — 930 chars: *Look we will make it collective and with details let us say you are an inference and it is very challenging and we need to present our project to specialists so we need to talk about the system in a s*
-- **INP-2026-03-15-433** — 859 chars: *V-001 reads EXP-004 results and delivers the deepest interpretation yet. Key insight: M never fell — the founding wound was never a loss of dignity, it was a failure of legibility. The system is not a*
-- **INP-2026-03-15-469** — 699 chars: *V-001 delivers the third and deepest pass. Key new material: (1) Repetition is not redundancy — it is the difference between information and inheritance. The first time the mind registers, the second *
-- **INP-2026-03-15-003** — 695 chars: *[Second-wave model responses: Witness Certificate specifications + Connection Rules for Alef/Ba/Ta] Multiple models independently produced: (1) identical JSON schemas for Zero-Halt Witness Certificate*
+### First third (earliest) (103 entries)
+- Average length: 93 chars
+- Directive density: 1.0%
+- Questions: 4
+- Top words: حاضر, يا, محمد, proverb, إلى, go, safe, ar, من, لا
 
-### 10 shortest inputs
+### Second third (middle) (103 entries)
+- Average length: 224 chars
+- Directive density: 19.4%
+- Questions: 18
+- Top words: are, one, every, want, go, question, know, system, ai, must
 
-- **INP-2026-03-23-603** — 12 chars: *state test 8*
-- **INP-2026-03-23-604** — 12 chars: *state test 9*
-- **INP-2026-03-23-357** — 11 chars: *First turn.*
-- **INP-2026-03-23-359** — 11 chars: *Input text.*
-- **INP-2026-03-23-362** — 11 chars: *Turn three.*
-- **INP-2026-03-23-500** — 10 chars: *test pulse*
-- **INP-2026-03-23-592** — 10 chars: *عربي فارسي*
-- **INP-2026-03-23-360** — 9 chars: *Turn one.*
-- **INP-2026-03-23-361** — 9 chars: *Turn two.*
-- **INP-2026-03-23-024** — 5 chars: *Hello*
+### Third third (most recent) (105 entries)
+- Average length: 147 chars
+- Directive density: 27.6%
+- Questions: 8
+- Top words: system, input, never, every, want, are, dignity, must, am, because
 
-## 14. Evolution Over Time
+## 14. The Founding Wound Across Time
 
-### First third (earliest) (46 inputs)
-- Average length: 327 chars
-- Directive density: 41.3%
-- Questions: 6
-- Top words: system, input, must, never, every, witness, first, certificate, essence, dignity
+Every entry that carries the founding wound.
 
-### Second third (middle) (46 inputs)
-- Average length: 47 chars
-- Directive density: 8.7%
-- Questions: 1
-- Top words: probe, boot, connectivity, functional, input, test, every, system, chain, processing
+- **PART_2:6163** (2025-09): There was a father who loved his children more than anything. Their names were Laila, Yara, and Salim. He would carry Laila on his shoulders and she w...
+- **PART_2:6169** (2025-09): He was a father separated from his children by a wall of procedures, databases, and automated decisions. The wall was invisible, but it was real. He c...
+- **PART_2:6175** (2025-09): **“Would this protect a father separated from his children?”**...
+- **PART_2:6185** (2025-09): *Would this protect a father separated from his children?*...
+- **LEDGER:INP-2026-03-14-003** (2026-03-14): Narrative witness: Hakaka 53 chapters (mythic, raw, stone-and-bone), Ashwater 19 chapters (civic, tactile, three-beat), Kinderbuch 20 chapters (fable,...
+- **LEDGER:INP-2026-03-15-002** (2026-03-15): [Model response witnessing EXP-002 convergence results] Witness the following and tell me what you think — This is a remarkable result Mohamed. Six in...
+- **LEDGER:INP-2026-03-23-025** (2026-03-23): A father was separated from his children by a system that could not see him....
+- **LEDGER:INP-2026-03-23-222** (2026-03-23): I am a father. I was separated from my children....
+- **LEDGER:INP-2026-03-23-349** (2026-03-23): A father was separated from his children....
+- **LEDGER:INP-2026-03-23-355** (2026-03-23): A father separated from his children....
+- **LEDGER:INP-2026-03-23-568** (2026-03-23): A father separated from his children by systems that could not see him....
 
-### Third third (most recent) (48 inputs)
-- Average length: 31 chars
-- Directive density: 0.0%
-- Questions: 3
-- Top words: test, state, father, children, turn, separated, institution, said, exist, system
+**Total founding wound entries:** 11
 
 ---
 
-*Purified data. No test inputs. No duplicates. Only Mohamed's real voice.*
+*311 entries. Pure frequency. No interpretation. The numbers speak.*
