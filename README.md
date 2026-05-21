@@ -1,3 +1,4 @@
+> **⚠️ LEGAL NOTICE** – Experimental project. All rights reserved by Sternmannli. See [LICENSE](LICENSE).
 # Kalaxi
 
 A living canon for human dignity.
